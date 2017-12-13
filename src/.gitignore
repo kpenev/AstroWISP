@@ -1,0 +1,9 @@
+*.o
+*.d
+*.d-e
+tags
+.gradle
+build
+.*.swp
+*.outerr
+*.txt

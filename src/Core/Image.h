@@ -1,0 +1,338 @@
+/**\file
+ *
+ * \brief Declares a base class for images to be processed.
+ *
+ * \ingroup Core
+ */
+
+#ifndef __IMAGE_H
+#define __IMAGE_H
+
+#include "Typedefs.h"
+#include "Error.h"
+#include <cstddef>
+#include <cstring>
+#include <cassert>
+#include <iostream>
+
+namespace Core {
+
+    const char MASK_OK              = 0x00; /* everything is ok...      */
+    const char MASK_CLEAR           = MASK_OK;  /* alias                */
+
+    const char MASK_FAULT           = 0x01;	/* faulty pixel             */
+    const char MASK_HOT             = 0x02; /* hot (nonlinear) pixel    */
+    const char MASK_COSMIC          = 0x04; /* hit by a cosmic particle */
+    const char MASK_OUTER           = 0x08; /* outer pixel		        */
+    const char MASK_OVERSATURATED   = 0x10; /* oversaturated            */
+    const char MASK_LEAKED          = 0x20; /* leaked (during readout)  */
+    const char MASK_SATURATED = (MASK_OVERSATURATED|MASK_LEAKED);
+    const char MASK_INTERPOLATED    = 0x40; /* interpolated (not real)  */
+
+    const char MASK_BAD             = 0x7F; /* any error                */
+    const char MASK_ALL             = MASK_BAD;
+
+    const char MASK_NAN             = MASK_FAULT;
+
+    ///Declare the minimum functionality expected from input images.
+    template<typename DATA_TYPE>
+        class Image {
+        private:
+            ///\brief The pixel values in the image. See values argument of
+            ///Image::Image()
+            DATA_TYPE *__values;
+
+            ///\brief The quality flags of the image pixels. See mask
+            ///argument of Image::Image()
+            char *__mask;
+
+            unsigned long 
+                ///The x resolutions of the image.
+                __x_resolution,
+
+                ///The y resolutions of the image.
+                __y_resolution;
+
+            bool __wrapped;
+
+        protected:
+            inline unsigned long index(unsigned long x,
+                                       unsigned long y) const
+            {
+                assert(x < __x_resolution);
+                assert(y < __y_resolution);
+                return y * __x_resolution + x;
+            }
+
+            ///The pixel quality flag at the specified position.
+            virtual char mask(unsigned long x, unsigned long y) const;
+
+        public:
+            ///See init_from_copy().
+            Image(
+                ///The pixel values in the image. The x coordinate changes
+                ///faster than the y with successive entries. The image uses
+                //a copy of this data.
+                const DATA_TYPE *values = NULL,
+                
+                ///Quality flags for the image pixels in the same order as
+                ///values. See comments for values argument.
+                const char *mask = NULL,
+
+                ///The number of pixels along the x direction in the image.
+                unsigned long x_resolution = 0,
+
+                ///The number of pixels along the y direction in the image.
+                unsigned long y_resolution = 0
+            ) :
+                __values(NULL),
+                __mask(NULL),
+                __x_resolution(0),
+                __y_resolution(0),
+                __wrapped(false)
+            {
+                if(values != NULL && x_resolution > 0 && y_resolution > 0)
+                    init_from_copy(values, mask, x_resolution, y_resolution);
+            }
+
+            ///\brief Create a new image containing a copy of the data of the
+            ///given image.
+            Image(const Image<DATA_TYPE> &image) :
+                __values(NULL),
+                __mask(NULL),
+                __x_resolution(0),
+                __y_resolution(0),
+                __wrapped(false)
+            {
+                if(image.__x_resolution > 0 && image.__y_resolution > 0) {
+                    assert(image.__values);
+                    init_from_copy(image.__values,
+                                   image.__mask,
+                                   image.__x_resolution,
+                                   image.__y_resolution);
+                } else assert(false);
+            }
+
+            ///Initialize this image with a copy of the given data.
+            void init_from_copy(
+                ///The pixel values in the image. The x coordinate changes
+                ///faster than the y with successive entries. The image uses
+                //a copy of this data.
+                const DATA_TYPE *orig_values,
+                
+                ///Quality flags for the image pixels in the same order as
+                ///values. See comments for values argument. If no bad pixel
+                //mask should be used, set this to NULL.
+                const char *orig_mask,
+
+                ///The number of pixels along the x direction in the image.
+                unsigned long orig_x_resolution,
+
+                ///The number of pixels along the y direction in the image.
+                unsigned long orig_y_resolution
+            )
+            {
+                assert(__values == NULL);
+                assert(__mask == NULL);
+                __values = new DATA_TYPE[orig_x_resolution
+                                         *
+                                         orig_y_resolution];
+                __x_resolution = orig_x_resolution;
+                __y_resolution = orig_y_resolution;
+                std::memcpy(
+                    __values,
+                    orig_values,
+                    orig_x_resolution * orig_y_resolution * sizeof(DATA_TYPE)
+                );
+
+                if(orig_mask) {
+                    __mask = new char[orig_x_resolution * orig_y_resolution];
+                    std::memcpy(__mask,
+                                orig_mask,
+                                orig_x_resolution * orig_y_resolution);
+                } else
+                    __mask = NULL;
+            }
+
+            ///\brief Wrap the given data in an image.
+            void wrap(
+                ///The pixel values in the image. The x coordinate changes
+                ///faster than the y with successive entries. The data is
+                ///used directly rather than copying, so it must not be
+                ///destroyed while this object is still in use and my be
+                ///modified through this object. To force copying the data,
+                ///use the constructor with const arguments.
+                DATA_TYPE *values,
+                
+                ///Quality flags for the image pixels in the same order as
+                ///values. See comments for values argument.
+                char *mask,
+
+                ///The number of pixels along the x direction in the image.
+                unsigned long x_resolution,
+
+                ///The number of pixels along the y direction in the image.
+                unsigned long y_resolution
+            )
+            {
+                assert(__values == NULL);
+                assert(__mask == NULL);
+                __values = values;
+                __mask = mask;
+                __x_resolution = x_resolution;
+                __y_resolution = y_resolution;
+                __wrapped = true;
+            }
+
+            ///Make this image an alias of the input image.
+            void wrap(Image<DATA_TYPE> &image)
+            {
+                wrap(image.__values,
+                     image.__mask,
+                     image.__x_resolution,
+                     image.__y_resolution);
+            }
+
+            ///\brief A place-holder for future development where each pixel
+            ///may have an error estimate.
+            bool has_errors() const {return false;}
+
+            ///\brief A place-holder for future development where each pixel
+            ///may have an error estimate.
+            DATA_TYPE &error(double, double)
+            {
+                throw Error::NotImplemented(
+                    "Per-pixel error estimate not implemented yet!"
+                );
+            }
+
+            ///\brief A place-holder for future development where each pixel
+            ///may have an error estimate.
+            DATA_TYPE error(
+                ///The x coordinate of the pixel whose error to return.
+                double ,
+
+                ///The y coordinate of the pixel whose error to return.
+                double ) const
+            {
+                throw Error::NotImplemented(
+                    "Per-pixel error estimate not implemented yet!"
+                );
+            }
+
+            ///The number of pixels in the x direction.
+            unsigned long x_resolution() const {return __x_resolution;}
+
+            ///The number of pixels in the y direction.
+            unsigned long y_resolution() const {return __y_resolution;}
+
+            ///Get the pixel value at the specified position.
+            DATA_TYPE operator()(unsigned long x, unsigned long y) const
+            {return __values[index(x, y)];}
+
+            ///Reference to the pixel value at the specified position.
+            DATA_TYPE &operator()(unsigned long x, unsigned long y)
+            {
+                return __values[index(x, y)];
+            }
+
+            ///True if the given pixel has no mask flags set.
+            virtual bool good(unsigned long x, unsigned long y) const
+            {return mask(x, y) == MASK_CLEAR;}
+
+            ///True if the given pixel is flagged as faulty in the mask.
+            virtual bool fault(unsigned long x, unsigned long y) const
+            {return mask(x, y) & MASK_FAULT;}
+
+            ///True if the given pixel is flagged as hot in the mask.
+            virtual bool hot(unsigned long x, unsigned long y) const
+            {return mask(x, y) & MASK_HOT;}
+
+            ///True iff the given pixel is flagged as hit by a cosmic ray.
+            virtual bool cosmic(unsigned long x, unsigned long y) const
+            {return mask(x, y) & MASK_COSMIC;}
+
+            ///\brief True if the given pixel is flagged as coming from 
+            ///outside the image.
+            ///TODO: this flag is never set
+            virtual bool outside(unsigned long x, unsigned long y) const
+            {return mask(x, y) & MASK_OUTER;}
+
+            ///True if the given pixel is flagged as oversaturated.
+            virtual bool oversaturated(unsigned long x,
+                                       unsigned long y) const
+            {return mask(x, y) & MASK_OVERSATURATED;}
+
+            ///True if the given pixel is flagged as being leaked to.
+            virtual bool leaked(unsigned long x, unsigned long y) const
+            {return mask(x, y) & MASK_LEAKED;}
+
+            ///True if the given pixel is oversaturated or leaked to.
+            virtual bool saturated(unsigned long x, unsigned long y) const
+            {return mask(x, y) & MASK_SATURATED;}
+
+            ///\brief True iff the given pixel is flagged having its value 
+            ///interpolated (rather than really read out).
+            virtual bool interpolated(unsigned long x, unsigned long y) const
+            {return mask(x,y) & MASK_INTERPOLATED;}
+
+            ///True if any flag is set in the mask for the given pixel.
+            virtual bool bad(unsigned long x, unsigned long y) const
+            {return mask(x, y) & MASK_BAD;}
+
+            ///\brief Return the photometry quality flag to assign to results
+            ///involving the given pixel.
+            virtual Core::PhotometryFlag photometry_flag(
+                unsigned long x,
+                unsigned long y
+            ) const;
+
+            ~Image()
+            {
+                if(!__wrapped) {
+                    if(__values) delete[] __values;
+                    if(__mask) delete[] __mask;
+                }
+            }
+        };
+
+    template<typename DATA_TYPE>
+        char Image<DATA_TYPE>::mask(unsigned long x, unsigned long y) const
+        {
+            if(__mask == NULL)
+                return MASK_CLEAR;
+            else if(
+                x < 0 || y < 0 || x > x_resolution() || y > y_resolution()
+            )
+                return MASK_OUTER;
+            else
+                return __mask[index(x, y)];
+        }
+
+    template<typename DATA_TYPE>
+        Core::PhotometryFlag Image<DATA_TYPE>::photometry_flag(
+            unsigned long x,
+            unsigned long y
+        ) const
+        {
+            if(
+                fault(x, y)
+                ||
+                hot(x, y)
+                ||
+                cosmic(x, y)
+                ||
+                interpolated(x, y)
+                ||
+                outside(x, y)
+            )
+                return Core::BAD;
+            else if(saturated(x, y))
+                return Core::SATURATED;
+            else {
+                assert(good(x, y));
+                return Core::GOOD;
+            }
+        }
+} //End Core namespace.
+#endif

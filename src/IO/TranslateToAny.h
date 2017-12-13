@@ -1,0 +1,54 @@
+/**\file
+ *
+ * \brief Defines a class that allows placing inhomogeneous types data in
+ * property trees.
+ *
+ * \ingroup IO
+ */
+
+#ifndef __TRANSLATE_TO_ANY_H
+#define __TRANSLATE_TO_ANY_H
+
+#include <boost/any.hpp>
+#include <string>
+
+namespace IO {
+
+    ///\brief Translator that works with boost::any for use with boost 
+    ///property trees
+    ///
+    ///If a value to translate is passed by reference, it is copied (good for
+    ///small values). If instead a pointer is passed, the pointer is stored, 
+    ///but when the value is recovered the pointer is derereferenced. This 
+    ///avoids copying the object, but means that the object must not be 
+    ///destroyed (by e.g. going out of scope) before it is used.
+    ///
+    ///\ingroup IO
+    template <typename DATA_TYPE>
+        class TranslateToAny
+        {
+        public:
+            TranslateToAny() {}
+
+            const DATA_TYPE &get_value(const boost::any &value) const
+            {
+                if(value.type()==typeid(DATA_TYPE))
+                    return boost::any_cast< const DATA_TYPE& >(value);
+                else return *boost::any_cast< const DATA_TYPE* >(value);
+            }
+
+            boost::any put_value(const DATA_TYPE& value) const
+            {return value;}
+
+            boost::any put_value(const DATA_TYPE* value) const
+            {return value;}
+        };
+
+    const TranslateToAny<int> translate_int;
+    const TranslateToAny<unsigned> translate_unsigned;
+    const TranslateToAny<double> translate_double;
+    const TranslateToAny<std::string> translate_string;
+
+} //End IO namespace.
+
+#endif

@@ -1,0 +1,62 @@
+/**\file
+ *
+ * \brief Defines a class containing the configuration with which to run
+ * subpixphot.
+ *
+ * \ingroup SubPixPhot
+ */
+
+#ifndef __SUB_PIX_PHOT_CONFIG_H
+#define __SUB_PIX_PHOT_CONFIG_H
+
+#include "../IO/CommandLineConfig.h"
+
+namespace SubPixPhot {
+
+    ///\brief Default configuration from file but overwritten by command line 
+    ///options.
+    class Config : public IO::CommandLineConfig {
+    private:
+        ///Describes the available command line options.
+        void describe_options();
+
+        ///The part of the help describing the usage and purpose (no options).
+        std::string usage_help(const std::string &prog_name) const;
+
+        ///Uses io.sources instead of io.psfmap or io.output, if not specified.
+        void apply_fallbacks();
+
+        ///\brief Checks for consistency between the command line options.
+        ///
+        ///Throws an exception if some inconsistency is detected.
+        void check_consistency();
+
+    public:
+        ///Parse the command line.
+        Config(
+            ///The number of arguments on the command line
+            ///(+1 for the executable)
+            int argc,
+
+            ///A C style array of the actual command line arguments.
+            char **argv
+        )
+        {
+            parse(argc, argv);
+            if(count("help")==0) {
+                apply_fallbacks();
+                check_consistency();
+            }
+            PSF::EllipticalGaussian::set_default_precision(
+                operator[]("psf.sdk.rel-int-precision").as<double>(),
+                operator[]("psf.sdk.abs-int-precision").as<double>()
+            );
+            PSF::EllipticalGaussian::set_default_max_exp_coef(
+                operator[]("psf.sdk.max-exp-coef").as<double>()
+            );
+        }
+    };
+
+} //End SubPixPhot namespace.
+
+#endif
