@@ -1,0 +1,6 @@
+.gradle
+build
+.*.swp
+*.outerr
+*.txt
+a.out
