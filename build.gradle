@@ -67,7 +67,7 @@ model {
             sources.cpp {
                 source {}
                 exportedHeaders {
-                    srcDir "third_party_libs/Eigen"
+                    srcDir "src/third_party_libs/Eigen"
                 }
             }
         }
@@ -75,15 +75,15 @@ model {
             sources.cpp {
                 lib library: "eigen"
                 source {
-                    srcDir "Background"
+                    srcDir "src/Background"
                     include "**/*.cpp"
                 }
                 source {
-                    srcDir "Core"
+                    srcDir "src/Core"
                     include "**/*.cpp"
                 }
                 exportedHeaders {
-                    srcDir "Background/"
+                    srcDir "src/Background/"
                 }
             }
         }
@@ -91,15 +91,15 @@ model {
             sources.cpp {
                 lib library: "eigen"
                 source {
-                    srcDir "PSF"
+                    srcDir "src/PSF"
                     include "**/*.cpp"
                 }
                 source {
-                    srcDir "Core"
+                    srcDir "src/Core"
                     include "**/*.cpp"
                 }
                 exportedHeaders {
-                    srcDir "PSF/"
+                    srcDir "src/PSF/"
                 }
             }
         }
@@ -109,11 +109,11 @@ model {
                 lib library: "background"
                 lib library: "psf"
                 source {
-                    srcDir "IO"
+                    srcDir "src/IO"
                     include "**/*.cpp"
                 }
                 exportedHeaders {
-                    srcDir "IO/"
+                    srcDir "src/IO/"
                 }
             }
         }
@@ -124,7 +124,7 @@ model {
                 lib library: "psf"
                 lib library: "io"
                 source {
-                    srcDir "SubPixPhot"
+                    srcDir "src/SubPixPhot"
                     include "**/*.cpp"
                 }
             }
@@ -136,7 +136,7 @@ model {
                 lib library: "psf"
                 lib library: "io"
                 source {
-                    srcDir "FitPSF"
+                    srcDir "src/FitPSF"
                     include "**/*.cpp"
                     exclude "**/*SDK*.cpp"
                 }
