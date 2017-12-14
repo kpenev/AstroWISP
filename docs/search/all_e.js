@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['name',['name',['../classCore_1_1SubPixelMap.html#acf1b1e3e3013a7f398070287d5e9bfac',1,'Core::SubPixelMap']]],
+  ['nan',['NaN',['../namespaceCore.html#a5074e38fbccbd4067c3f16bd62b4d648',1,'Core']]],
+  ['nan_2eh',['NaN.h',['../NaN_8h.html',1,'']]],
+  ['nan_5fvalue',['nan_value',['../namespaceIO.html#a7e3d8557f125528664bd968bef5025ae',1,'IO']]],
+  ['native',['native',['../classIO_1_1H5DefaultDataType.html#a98e12f89a9e979966e9ef66222f13543',1,'IO::H5DefaultDataType::native()'],['../classIO_1_1H5DefaultDataType.html#a71c725474a5b9e8b6ee2c8437e6179ad',1,'IO::H5DefaultDataType::native'],['../classIO_1_1H5DefaultDataType.html#a584adfd6b3ddf24b8c878648ba048c4f',1,'IO::H5DefaultDataType::native'],['../classIO_1_1H5DefaultDataType.html#a704a4a79f1ac959a68e763876b3f68d1',1,'IO::H5DefaultDataType::native'],['../classIO_1_1H5DefaultDataType.html#a650890ee08b8836e6a458d8f65a84d8a',1,'IO::H5DefaultDataType::native'],['../classIO_1_1H5DefaultDataType.html#a2fe2409980da635dd505752b9c9a683b',1,'IO::H5DefaultDataType::native'],['../classIO_1_1H5DefaultDataType.html#aeb4b06c0b987917232b6a726d6b12d69',1,'IO::H5DefaultDataType::native'],['../classIO_1_1H5DefaultDataType.html#a0bfe2b465ec2fb22765def880ff7d746',1,'IO::H5DefaultDataType::native'],['../classIO_1_1H5DefaultDataType.html#aac957899fc1c83fff7dc748b97c2d0c6',1,'IO::H5DefaultDataType::native'],['../classIO_1_1H5DefaultDataType.html#a20d52d6dff6e0c09b1ed873847aa1af3',1,'IO::H5DefaultDataType::native']]],
+  ['nbgpix',['nbgpix',['../namespacePhot.html#afd335f0316f5f0113818bf99d5f6d6b5ad8ac351e993e75760327de293d4fc1de',1,'Phot']]],
+  ['newtonraphson',['NewtonRaphson',['../FitSubpixCommandLineOptions_8h.html#aa35fd7002d193bdde037e04ae3a24524afc4cddde737af6909f67a6e0ed30e639',1,'FitSubpixCommandLineOptions.h']]],
+  ['next_5fpixel',['next_pixel',['../classFitPSF_1_1OverlapSource.html#af635dcf216c6ebf84a6e0ba76fc46eec',1,'FitPSF::OverlapSource::next_pixel()'],['../classFitPSF_1_1SDKSource.html#ac7500f60802b90cca347f2b782391915',1,'FitPSF::SDKSource::next_pixel()']]],
+  ['next_5fsource',['next_source',['../classBackground_1_1Measure.html#ab0bc9cbcffc43dc36103dd38a030e11b',1,'Background::Measure::next_source()'],['../classBackground_1_1MeasureExcludingSources.html#a2c6c0da54ca6387fbc869edf359d1ca0',1,'Background::MeasureExcludingSources::next_source()'],['../classBackground_1_1MeasureExcludingSources.html#a2c6c0da54ca6387fbc869edf359d1ca0',1,'Background::MeasureExcludingSources::next_source()'],['../classBackground_1_1Zero.html#ac5ebfae60ce81aee1599a60a5d4a8406',1,'Background::Zero::next_source()']]],
+  ['non_5fpoint_5fsource',['NON_POINT_SOURCE',['../group__FitPSF.html#ggaf322f512b63bfe334b817be88e6c7820a66fe89ee58e07202f19000046a2a0a7b',1,'FitPSF']]],
+  ['not_5fdropped',['NOT_DROPPED',['../group__FitPSF.html#ggaf322f512b63bfe334b817be88e6c7820a7e5d682d2cee5bfa3b378fcb4f73e9dc',1,'FitPSF']]],
+  ['notimplemented',['NotImplemented',['../classError_1_1NotImplemented.html',1,'Error::NotImplemented'],['../classError_1_1NotImplemented.html#a7b5267675d2e5ccd23a6567018c8cca7',1,'Error::NotImplemented::NotImplemented()']]],
+  ['npix',['npix',['../namespacePhot.html#afd335f0316f5f0113818bf99d5f6d6b5a673babef30060656f74be261c13a537c',1,'Phot']]],
+  ['nr_5ffit',['nr_fit',['../classFitPSF_1_1PolynomialSDK.html#ada471d41ad81dd12d0bb7747471674f7',1,'FitPSF::PolynomialSDK']]],
+  ['nr_5ffitting_2ecpp',['NR_fitting.cpp',['../NR__fitting_8cpp.html',1,'']]],
+  ['nr_5ffitting_2eh',['NR_fitting.h',['../NR__fitting_8h.html',1,'']]],
+  ['nr_5fstep',['nr_step',['../classFitPSF_1_1PolynomialSDK.html#aff9fd2191f9ae0ab9d139ede1ee8f329',1,'FitPSF::PolynomialSDK']]],
+  ['ntries',['NTRIES',['../FitSubpixCommandLineOptions_8h.html#aa5581a81b2f53f283f016dc7ff777305af586e51483d8992a70d2e7cc71ffe568',1,'FitSubpixCommandLineOptions.h']]],
+  ['num_5fdrop_5freasons',['NUM_DROP_REASONS',['../group__FitPSF.html#ggaf322f512b63bfe334b817be88e6c7820a5c9becf693d8a26c091e0cd2befe8574',1,'FitPSF']]],
+  ['num_5fpieces',['num_pieces',['../classPSF_1_1Split.html#a639d5322af25d1bd08e92be8d4b0207d',1,'PSF::Split']]],
+  ['num_5frecognized_5fcolumns',['num_recognized_columns',['../namespacePhot.html#afd335f0316f5f0113818bf99d5f6d6b5ac98d2e4e943c38ba4a0c1cb20ea63a44',1,'Phot']]],
+  ['num_5fterms',['num_terms',['../classPSF_1_1Map.html#addcb28d43dcf0fd40e82b525324f0265',1,'PSF::Map']]],
+  ['number_5fapertures',['number_apertures',['../classCore_1_1SubPixelCorrectedFlux.html#acebcf94088d90a46fd9125222f3cf2b4',1,'Core::SubPixelCorrectedFlux']]]
+];

@@ -1,0 +1,25 @@
+var classVariance =
+[
+    [ "Variance", "classVariance.html#a045cd64e2cb374cc6f66c8c221e02585", null ],
+    [ "Variance", "classVariance.html#ac3fa7077141dc1e2e8271bcdf20531b5", null ],
+    [ "calculate", "classVariance.html#a39c273f8632dc7efe5d371153ef347ae", null ],
+    [ "calculate_lambda", "classVariance.html#a801a657dca3388542128f1e2b939400b", null ],
+    [ "calculate_omega", "classVariance.html#abcfc34dc34212dd7559cd8ccdbf59621", null ],
+    [ "calculate_q", "classVariance.html#a9d162d5999542662148057a2c3e9e17f", null ],
+    [ "calculate_wb", "classVariance.html#a91e1ea92fe890cb6bfee5b9f253624d0", null ],
+    [ "calculate_ws_inverse_f", "classVariance.html#acddcfa4794a9953bb8a70248250b9a8e", null ],
+    [ "calculate_xi", "classVariance.html#a190bd4b86920ee18d509454acc346500", null ],
+    [ "d2variance", "classVariance.html#a41508fbdc5d64e9c133e5941977e2805", null ],
+    [ "fill_image_w", "classVariance.html#a4838a4710877e4e901afb070d4e50fb7", null ],
+    [ "grad_variance", "classVariance.html#a928cf330387db47b5f95e961b5c4235b", null ],
+    [ "initialize", "classVariance.html#ac73c09ce7c6ebce2ce6ff5ea64785693", null ],
+    [ "variance", "classVariance.html#a1bae78a019f343ee2b8b0254a41ad4c4", null ],
+    [ "__f", "classVariance.html#a412bc8f0fa3f4ead673445f7672bdf6a", null ],
+    [ "__max_exp_coef", "classVariance.html#ac1b8c9c988f36db2e0d94a1f8a254298", null ],
+    [ "__num_x_subpix", "classVariance.html#a92c2b320a084c04e366ffe88015ad6db", null ],
+    [ "__num_y_subpix", "classVariance.html#afe4d763ceacbec5d2dea80bf1e0cb27b", null ],
+    [ "__q", "classVariance.html#a8517e98d9b6d5cc10dbfd629860b54af", null ],
+    [ "__w", "classVariance.html#a9dea8231367f99f841f790179bcb5c66", null ],
+    [ "__ws_inverse", "classVariance.html#a24363b778cc1bcd12fcdd1022ae230f4", null ],
+    [ "__xi", "classVariance.html#a8f6ef6e71bb1afa3bb15fe4427fc7998", null ]
+];

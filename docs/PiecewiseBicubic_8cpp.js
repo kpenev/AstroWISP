@@ -1,0 +1,27 @@
+var PiecewiseBicubic_8cpp =
+[
+    [ "convert_flux_to_adu", "PiecewiseBicubic_8cpp.html#a5141488c910279d60ad23a02ade44c76", null ],
+    [ "count_pixels", "PiecewiseBicubic_8cpp.html#a93bf63d0d8e13ea15d918206170fe40f", null ],
+    [ "discard_outlier_pixels", "PiecewiseBicubic_8cpp.html#ad9b8be19532f89b97362b0ff8cc1ce96", null ],
+    [ "discard_sources", "PiecewiseBicubic_8cpp.html#a91af761d270a247a93d51ed94cbc7c38", null ],
+    [ "discard_zero_flux_pixels", "PiecewiseBicubic_8cpp.html#afa849194c7af21245496723061678a40", null ],
+    [ "estimate_initial_amplitudes", "PiecewiseBicubic_8cpp.html#af2e42c5b5ff1a7c36e795b2242dd6807", null ],
+    [ "estimate_initial_amplitudes", "PiecewiseBicubic_8cpp.html#a0bf42ddc644cbcc55c500d743a70faaa", null ],
+    [ "estimate_initial_amplitudes", "PiecewiseBicubic_8cpp.html#a9d904a383fb6d35de62d39883c1bccab", null ],
+    [ "fill_basis_parameter_sets", "PiecewiseBicubic_8cpp.html#a2e92ac9b9868ace721ba3d7036f300a6", null ],
+    [ "fill_flux_scaled_modified_rhs", "PiecewiseBicubic_8cpp.html#afb89760d4d1bd6820c36cc689e1ff9ba", null ],
+    [ "fill_matrix_to_invert", "PiecewiseBicubic_8cpp.html#a511e38793bcbb76ae9169e68c4b6fe28", null ],
+    [ "fill_parameter_sets", "PiecewiseBicubic_8cpp.html#a7a062f745b675e9335e22b3382e42ab7", null ],
+    [ "fill_poly_coef_matrix", "PiecewiseBicubic_8cpp.html#a9859ecb79a38ac8f4d34f970d969e582", null ],
+    [ "fit_dropped_sources", "PiecewiseBicubic_8cpp.html#acb1266d210b43b12e5f0592f0003dafa", null ],
+    [ "fit_piecewise_bicubic_psf", "PiecewiseBicubic_8cpp.html#a6bc2dd51f12b4325651053a096fd42a1", null ],
+    [ "fit_piecewise_bicubic_psf", "PiecewiseBicubic_8cpp.html#a6d65b65c032e461478c899c4ccaabbb8", null ],
+    [ "fit_piecewise_bicubic_psf", "PiecewiseBicubic_8cpp.html#a6c74af3ec47c1d56716bf5204f94fbc0", null ],
+    [ "fit_piecewise_bicubic_psf_step", "PiecewiseBicubic_8cpp.html#a89390a0e2ecfbbe9438a8d182c6fca4d", null ],
+    [ "output_best_fit_psf", "PiecewiseBicubic_8cpp.html#a008c331b311e00a6149bdbc24462fae1", null ],
+    [ "prepare_linear_regression", "PiecewiseBicubic_8cpp.html#ad0ae581b7498385b4fb9af2533fa8e38", null ],
+    [ "select_basis_vectors", "PiecewiseBicubic_8cpp.html#ac6d6f675c42304b4f29c992d7931db7e", null ],
+    [ "time_this", "PiecewiseBicubic_8cpp.html#a8d5ccac2a762d6fd4092924b94bf062b", null ],
+    [ "transform_best_fit_to_direct_parameters", "PiecewiseBicubic_8cpp.html#a878eba39338b4d82656546daf36ec835", null ],
+    [ "update_fluxes", "PiecewiseBicubic_8cpp.html#af1b981e70ab8623bff27f8fff1b482be", null ]
+];
