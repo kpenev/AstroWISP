@@ -4,6 +4,8 @@ SuperPhot
 
 A tool for obsessive photometry from night sky images.
 
+[Full documentation](https://kpenev.github.io/SuperPhot/)
+
 Currently the following photometry methods are supported, and in the future we
 plan to add Image Subtraction:
 
