@@ -1,0 +1,102 @@
+\documentclass{article}
+\author{Kaloyan Penev}
+\title{Fitting for the PSF in an image}
+\begin{document}
+\maketitle
+\section{Selecting Image Pixels for the Fit}
+
+The goal is to select a set of pixels the values of which will be used to fit
+for the PSF in an image. We would like to select a set of pixels belonging to
+isolated sources and which contain significant amount of light from the
+source they are assigned to.
+
+Some definitions:
+\begin{itemize}
+	\item[$m_p$] The measured electron counts of pixel $p$
+	\item[$(x_n,y_n)$] The position of the $n$-th source on the image
+	\item[$B_n, b_n$] The background and its standard variance as estimated
+		for the $n$-th source.
+	\item[$\alpha$] A tunable parameter setting how far above the standard
+		deviation a pixel value should be in order for the pixel to be
+		included in the fit for a source PSF.
+	\item[$P$] A tunable parameter selecting how many pixel at minimum a
+		source must include in order to be included in the PSF fit.
+\end{itemize}
+
+We will assume that we start with a list of source positions $(x_n, y_n)$,
+backgrounds $(B_n)$ and background variances $(b_n)$. Fit pixels are then
+selected following these steps for each source:
+
+\begin{enumerate}
+	\item Starting from the pixel which contains the source center, move in
+		the positive and negative y direction until the condition
+		$m_p^2>B_n+\alpha\left(m_p+b_n\right)$ is no longer satisfied, adding all
+		pixels to the list of pixels belonging to source $n$.
+	\item For each of the previously selected pixels perform the same
+		procedure, but moving in the positive and negative x directions.
+	\item If a pixel is included in the pixel lists for more than one source
+		eliminate all sources containing that pixel from the fit.
+	\item Eliminate bad pixels
+	\item Mark saturated pixels
+	\item Eliminate sources for which the number of pixels is less than $P$
+\end{enumerate}
+
+\section{Fitting a Fixed PSF Model}
+
+We assume that some model containing some (small) number of free parameters
+is available for individual source background subtracted PSFs which only
+depends on the position of the source on the image, and that changing the
+brightness of a source only changes the overall scaling of the PSF.
+
+Given some values for the model parameters, the quantity to minimize ($R$) is
+calculated using the following steps:
+
+\begin{enumerate}
+	\item For each source ($n$), using local polynomial approximation to each
+		PSF we calculate the integral over each selected pixel ($f_{ni}$) to
+		a fractional precision of $0.01(m_p+b_n)/(m_p-B_n)$.
+	\item The amplitude for the model PSF of each source is estimated as:
+		\begin{displaymath}
+			A_n\equiv\frac{\sum_p \frac{(m_p-B_n) f_{np}}{m_p+b_n}}{
+			\sum\frac{f_{np}^2}{m_p+b_n}}
+		\end{displaymath}
+	\item For each saturated pixel where $A_nf_{np}$ is more than $m_p$, replace
+		$m_p$ with $A_nf_{np}$.
+	\item 
+		\begin{displaymath}
+			R\equiv\sum_n \sum_p\frac{\left(m_p-B_n-A_nf_{np}\right)^2}{m_p+b_n}
+		\end{displaymath}
+\end{enumerate}
+
+Two modes of PSF fitting are supported:
+%
+\begin{itemize}
+%
+	\item[Source by source:] the PSF parameters for each source are derived
+		independently
+%
+	\item[Ensemble:] the PSF parameters are assumed to vary smoothly accross
+		the image. A low order polynomial is used to represent each parameter
+		and the fit is done on the coefficients of all polynomials such that
+		the combined residuals from all source pixels are minimized
+		simultaneously. Fitting is initially done with constant PSF
+		parameters, once the best fit for those is found, linear terms are
+		added and so on, until the prescribed polynomial order is reached.
+\end{itemize}
+
+The minimization is done by the Newton-Raphson method, using analytic
+first and second derivatives of the residual with respect to the source
+parameters in source by source mode or the polynomial expansion
+coefficients is ensemble mode. This means that a nearby local minimum of
+the residuals is found, so a reasonable initial guess for the PSF
+parameters is of some importance.
+
+\section{Calculating Flux}
+In order to calculate the flux from amplitude and PSF parameters:
+\begin{equation}
+	\int_{-\infty}^\infty \int_{-\infty}^\infty
+	\exp\left\{-\frac{1}{2}\left[S(x^2+y^2)+D(x^2-y^2)+2Kxy\right]\right\}
+	dx dy = \frac{2\pi A}{\sqrt{S^2-D^2-K^2}}
+\end{equation}
+Under the conditinos that $S^2>D^2+K^2$ and $S+D>0$.
+\end{document}

@@ -1,0 +1,571 @@
+\documentclass{article}
+\author{Kaloyan Penev}
+\title{Subdividing Pixels to Achieve Desired Precision of PSF Integrals}
+\begin{document}
+\section{Second Order Approximation}
+The following approximation is used when calculating integrals 
+(secord order Taylor expansion):
+\begin{eqnarray}
+	Psf(x,y)&\equiv&
+	\exp\left\{-\frac{1}{2}\left[S(x^2+y^2)+D(x^2-y^2)+2Kxy\right]\right\}
+	\approx\nonumber\\
+	&\approx&
+	k_{20}x^2 + k_{11}xy + k_{02}y^2 + k_{10}x + k_{01}y + k_{00}
+\end{eqnarray}
+Where for (x', y') being some point inside the region we will integrate over:
+\begin{eqnarray}
+	k_{20}&\equiv&\frac{f_0}{2}\left\{\left[(S+D)x' + Ky'\right]^2 -
+		\left[S+D\right]\right\} \\
+	k_{11}&\equiv&f_0\left\{\left[(S+D)x' + Ky'\right]
+		\left[(S-D)y' + Kx'\right] - K\right\}\\
+	k_{02}&\equiv&\frac{f_0}{2}\left\{\left[(S-D)y' + Kx'\right]^2 - 
+		\left[S-D\right]\right\}\\
+	k_{10}&\equiv&-f_0\left[(S+D)x' + Ky'\right]\\
+	k_{01}&\equiv&-f_0\left[(S-D)y' + Kx'\right]\\
+	k_{00}&\equiv&f_0\\
+	f_0&\equiv&\exp\left\{-S(x'^2+y'^2)-D(x'^2-y'^2)-Kx'y'\right\}
+\end{eqnarray}
+\section{General Polynomial Expansion}
+A general expression can be derived for the polynomial coefficients in the
+Taylor expansion of the PSF function:
+\begin{eqnarray}
+	\frac{Psf(x+\delta x, y+\delta y)}{Psf(x,y)} &=&
+		\exp\Bigg\{-\frac{1}{2}\Big[(S+D)(2x\delta x+\delta x^2)
+		+(S-D)(2y\delta y + \delta y^2) + \nonumber\\
+		&&\quad\quad 
+		2K(x\delta y + y \delta x + \delta x\delta y)\Big]\Bigg\}\\
+		&=&\sum_{n=0}^{\infty} \frac{(-1)^n}{2^n n!}
+		\Big[
+			(S+D)(2x\delta x+\delta x^2) + \nonumber\\
+			&&\quad\quad\quad + (S-D)(2y\delta y+\delta y^2) + \nonumber\\
+			&&\quad\quad\quad + 2K(x\delta y + y\delta x + \delta x\delta y)
+		\Big]^n\\
+		&=&\sum_{i,j,k,l,m=0}^{\infty} \frac{(-1)^n}{2^n i!j!k!l!m!}
+		C_{20}^i C_{11}^j C_{02}^k C_{10}^l C_{01}^m 
+		\delta x^{2i+j+l} \delta y^{2k+j+m}
+		\label{eq: full expansion}
+\end{eqnarray}
+Where: $n=i+j+k+l+m$ and:
+\begin{eqnarray}
+	C_{20}&\equiv&S+D\\
+	C_{11}&\equiv&2K\\
+	C_{02}&\equiv&S-D\\
+	C_{10}&\equiv&2\left[(S+D)x+Ky\right]\\
+	C_{01}&\equiv&2\left[(S-D)y+Kx\right]
+\end{eqnarray}
+\section{Imposing Limits on the Error in PSF Integrals}
+\subsection{Constraining the Fractional Error in the Expansion}
+\label{sec: expansion error}
+Let the difference between the approximation and the exact expression be 
+denoted by $\Delta_2$. Since a second order approximation is used, all terms
+satisfying $2(i+j+k)+l+m=<2$ from Equation \ref{eq: full expansion} are not
+present in $\Delta_2$, while everything else remains. The following splitting
+is useful:
+\begin{eqnarray}
+	\frac{\Delta_2}{Psf}&=&\sum_{2(j+k)+l+m>2}^{\infty}\frac{(-1)^n}{2^n j!k!l!m!}
+	C_{11}^j C_{02}^k C_{10}^l C_{01}^m \delta x^{j+l} \delta y^{2k+j+m}-
+	\nonumber\\
+	&&{}-\frac{C_{20}\delta x^2}{2}\sum_{2(j+k)+l+m>0}^{\infty}
+	\frac{(-1)^n}{2^n j!k!l!m!}
+		C_{11}^j C_{02}^k C_{10}^l C_{01}^m 
+		\delta x^{j+l} \delta y^{2k+j+m}\Big)+\nonumber\\
+	&&{}+\frac{\Delta_{i\ge2}}{Psf}\\
+%
+	&=&\sum_{2k+l+m>2}^{\infty}\frac{(-1)^n}{2^n k!l!m!}
+	C_{02}^k C_{10}^l C_{01}^m \delta x^l \delta y^{2k+m}-
+	\nonumber\\
+	&&{}-\frac{C_{11}\delta x\delta y}{2}
+	\sum_{2k+l+m>0}^{\infty}\frac{(-1)^n}{2^n k!l!m!}
+	C_{02}^k C_{10}^l C_{01}^m \delta x^l \delta y^{2k+m}+\nonumber\\
+	&&{}+\frac{\Delta_{j\ge2}}{Psf}-
+	\nonumber\\
+	&&{}-\frac{C_{20}\delta x^2}{2}\sum_{2k+l+m>0}^{\infty}
+	\frac{(-1)^n}{2^n k!l!m!} C_{02}^k C_{10}^l C_{01}^m 
+		\delta x^l \delta y^{2k+m}\Big)+\nonumber\\
+	&&{}-\frac{C_{20}\delta x^2}{2}\frac{\Delta_{j\ge1}}{Psf} 
+	+\frac{\Delta_{i\ge2}}{Psf}\\
+%
+	&=&\sum_{l+m>2}^{\infty}\frac{(-1)^n}{2^n l!m!}
+	C_{10}^l C_{01}^m \delta x^l \delta y^m+
+	\nonumber\\
+	&&-\frac{C_{02}\delta y^2}{2}\sum_{l+m>0}^{\infty}
+	\frac{(-1)^n}{2^n l!m!} C_{10}^l C_{01}^m \delta x^l \delta y^m+
+	\frac{\Delta_{k\ge2}}{Psf}-\nonumber\\
+	&&{}-\frac{C_{11}\delta x\delta y+C_{20}\delta x^2}{2}
+	\sum_{l+m>0}^{\infty}\frac{(-1)^n}{2^n l!m!}
+	C_{10}^l C_{01}^m \delta x^l \delta y^m-\nonumber\\
+	&&-\frac{C_{11}\delta x\delta y+C_{20}\delta x^2}{2}
+	\frac{\Delta_{k\ge1}}{Psf}+\frac{\Delta_{j\ge2}}{Psf}-
+	\frac{C_{20}\delta x^2}{2}\frac{\Delta_{j\ge1}}{Psf} 
+	+\frac{\Delta_{i\ge2}}{Psf}\\
+%
+	&=&\frac{\Delta_{m\ge3}}{Psf}-
+	\frac{C_{10}\delta x}{2}\frac{\Delta_{m\ge2}}{Psf}+
+	\frac{C_{10}^2\delta x^2}{8}\frac{\Delta_{m\ge1}}{Psf}+
+	\frac{\Delta_{l\ge3}}{Psf}
+	\nonumber\\
+	&&-\frac{C_{02}\delta y^2}{2}\frac{\Delta_{m\ge1}}{Psf}
+	-\frac{C_{02}\delta y^2}{2}\frac{\Delta_{l\ge1}}{Psf}+
+	\frac{\Delta_{k\ge2}}{Psf}
+	\nonumber\\
+	&&{}-\frac{C_{11}\delta x\delta y+C_{20}\delta x^2}{2}
+	\frac{\Delta_{m\ge1}}{Psf}
+	-\frac{C_{11}\delta x\delta y+C_{20}\delta x^2}{2}
+	\frac{\Delta_{l\ge1}}{Psf}
+	-\nonumber\\
+	&&-\frac{C_{11}\delta x\delta y+C_{20}\delta x^2}{2}
+	\frac{\Delta_{k\ge1}}{Psf}+\frac{\Delta_{j\ge2}}{Psf}-
+	\frac{C_{20}\delta x^2}{2}\frac{\Delta_{j\ge1}}{Psf} 
+	+\frac{\Delta_{i\ge2}}{Psf}\\
+%
+	&=&\frac{\Delta_{m\ge3}}{Psf}-
+	\frac{C_{10}\delta x}{2}\frac{\Delta_{m\ge2}}{Psf}+
+	\nonumber\\
+	&&+\left(\frac{C_{10}^2\delta x^2}{8}
+		-\frac{C_{02}\delta y^2}{2}
+		-\frac{C_{11}\delta x\delta y+C_{20}\delta x^2}{2}
+	\right)\frac{\Delta_{m\ge1}}{Psf}+
+	\nonumber\\
+	&&-\left(\frac{C_{02}\delta y^2
+		+C_{11}\delta x\delta y+C_{20}\delta x^2}{2}
+	\right)\frac{\Delta_{l\ge1}}{Psf}
+	+\frac{\Delta_{l\ge3}}{Psf}-
+	\nonumber\\
+	&&+\frac{\Delta_{k\ge2}}{Psf}
+	-\frac{C_{11}\delta x\delta y+C_{20}\delta x^2}{2}
+	\frac{\Delta_{k\ge1}}{Psf}+\frac{\Delta_{j\ge2}}{Psf}-
+	\frac{C_{20}\delta x^2}{2}\frac{\Delta_{j\ge1}}{Psf}+
+	\nonumber\\
+	&&+\frac{\Delta_{i\ge2}}{Psf}
+\end{eqnarray}
+Where:
+\begin{eqnarray}
+	\frac{\Delta_{i\ge2}}{Psf}&\equiv&
+	\sum_{i=2}^{\infty}\sum_{j,k,l,m=0}^{\infty} \frac{(-1)^n}{2^n i!j!k!l!m!}
+	C_{20}^i C_{11}^j C_{02}^k C_{10}^l C_{01}^m 
+	\delta x^{2i+j+l} \delta y^{2k+j+m}\label{eq: Delta_i}\\
+%
+	\frac{\Delta_{j\ge\mu}}{Psf}&\equiv&
+	\sum_{j=\mu}^{\infty}\sum_{k,l,m=0}^{\infty} \frac{(-1)^n}{2^n j!k!l!m!}
+	C_{11}^j C_{02}^k C_{10}^l C_{01}^m 
+	\delta x^{j+l} \delta y^{2k+j+m} \label{eq: Delta_j} \\
+%
+	\frac{\Delta_{k\ge\mu}}{Psf}&\equiv&
+	\sum_{k=\mu}^{\infty}\sum_{l,m=0}^{\infty} \frac{(-1)^n}{2^n k!l!m!}
+	C_{02}^k C_{10}^l C_{01}^m 
+	\delta x^{l} \delta y^{2k+m} \label{eq: Delta_k} \\
+%
+	\frac{\Delta_{l\ge\mu}}{Psf}&\equiv&
+	\sum_{l=\mu}^{\infty}\sum_{m=0}^{\infty} \frac{(-1)^n}{2^n l!m!}
+	C_{10}^l C_{01}^m \delta x^l \delta y^m \label{eq: Delta_l} \\
+%
+	\frac{\Delta_{m\ge\mu}}{Psf}&\equiv&
+	\sum_{m=\mu}^{\infty} \frac{(-1)^m}{2^m m!} C_{01}^m \delta y^m
+	\label{eq: Delta_l} \\
+\end{eqnarray}
+Considering each term separately:
+\begin{eqnarray}
+	\left|\frac{\Delta_{i\ge2}}{Psf}\right|&=&\left|\frac{C_{20}^2\delta x^4}{4}
+	\sum_{i,j,k,l,m=0}^{\infty} \frac{(-1)^n}{2^n (i+2)!j!k!l!m!}
+	C_{20}^i C_{11}^j C_{02}^k C_{10}^l C_{01}^m 
+	\delta x^{2i+j+l} \delta y^{2k+j+m}\right|\nonumber\\
+%
+	&=&\frac{C_{20}^2\delta x^4}{4}\exp\left\{-\frac{1}{2}
+	\left[C_{11}\delta x\delta y + C_{02}\delta y^2 + C_{10}\delta x +
+	C_{01} \delta y\right] \right\}
+	\left|\sum_{i=0}^\infty \frac{(-1)^i}{2^i(i+2)!}C_{20}^2 \delta x^{2i}
+	\right|\nonumber\\
+%
+	&\le&\frac{C_{20}^2\delta x^4}{4}\exp\left\{-\frac{1}{2}
+	\left[C_{11}\delta x\delta y + C_{02}\delta y^2 + C_{10}\delta x +
+	C_{01} \delta y\right] \right\}
+	\sum_{i=0}^\infty \frac{C_{20}^2 \delta x^{2i}}{2^i(i+2)!}
+	\nonumber\\
+%
+	&<&\left|\frac{C_{20}^2\delta x^4}{8}\right|\exp\left\{\frac{1}{2}
+	\left[C_{02}\delta x^2 - C_{11}\delta x\delta y - C_{02}\delta y^2 - 
+	C_{10}\delta x - C_{01} \delta y\right] \right\}
+\end{eqnarray}
+Where $\delta x$ and $\delta y$ can be positive or negative.
+Similarly for the other terms, getting:
+\begin{eqnarray}
+	\frac{\Delta_{i\ge\mu}}{Psf}&<&
+	\left|\frac{C_{20}^\mu\delta x^{2\mu}}{2^\mu\mu!}\right|
+	\zeta_{20}\zeta_{10}
+\\
+	\frac{\Delta_{j\ge\mu}}{Psf}&<&
+	\left|\frac{C_{11}^\mu\delta x^\mu\delta y^\mu}{2^\mu\mu!}\right|
+	\zeta_{11}\zeta_{10}
+\\
+	\frac{\Delta_{k\ge\mu}}{Psf}&<&
+	\left|\frac{C_{02}^\mu\delta y^{2\mu}}{2^\mu\mu!}\right|
+	\zeta_{02}\zeta_{10}
+\\
+	\frac{\Delta_{l\ge\mu}}{Psf}&<&
+	\left|\frac{C_{10}^\mu\delta x^{\mu}}{2^\mu\mu!}\right|\zeta_{10}
+\\
+	\frac{\Delta_{m\ge\mu}}{Psf}&<&
+	\left|\frac{C_{01}^\mu\delta y^{\mu}}{2^\mu\mu!}\right|\zeta_{01}
+\end{eqnarray}
+Where:
+\begin{eqnarray}
+	\zeta_{01}&\equiv&\exp\left\{\frac{|C_{01}\delta y|}{2}\right\}
+\\
+	\zeta_{10}&\equiv&
+	\exp\left\{\frac{|C_{10}\delta x|}{2}\right\}\zeta_{01}
+\\
+	\zeta_{02}&\equiv&
+	\exp\left\{\frac{|C_{02}\delta y^2|}{2}\right\}
+\\
+	\zeta_{11}&\equiv&
+	\exp\left\{\frac{|C_{11}\delta x\delta y|}{2}\right\}\frac{1}{\zeta_{02}}
+\\
+	\zeta_{20}&\equiv&
+	\exp\left\{\frac{|C_{20}\delta x^2|}{2}\right\}\zeta_{11}
+\end{eqnarray}
+So finally we have:
+\begin{eqnarray}
+	\frac{|\Delta_2|}{Psf}&<&
+%
+	\Bigg\{\frac{\left|C_{01}^3\delta y^3\right|}{48}+
+		\frac{\left|C_{10}C_{01}^2\delta x\delta y^2\right|}{16}+
+	\nonumber\\&&\quad\quad
+		{}+\left|\frac{C_{10}^2\delta x^2}{4} - C_{02}\delta y^2
+			-\left(C_{11}\delta x\delta y+C_{20}\delta x^2\right)
+		\right|\left|\frac{C_{01}\delta y}{4}\right|\Bigg\}\zeta_{01}+
+%
+	\nonumber\\&&
+	\Bigg\{
+		\frac{\left|C_{02}\delta y^2 + C_{11}\delta x\delta y +
+		C_{20}\delta x^2\right|\left|C_{10}\delta x\right|}{4}+
+		\frac{\left|C_{10}^3\delta x^3\right|}{48}
+	\Bigg\}\zeta_{10}+
+%
+	\nonumber\\&&
+	+\left\{\frac{\left|C_{02}\delta y^2\right|
+	\left|C_{11}\delta x\delta y+C_{20}\delta x^2\right|}{4}+
+	\frac{C_{02}^2\delta y^4}{8}
+	\right\}\zeta_{02}\zeta_{10}+
+%
+	\nonumber\\&&
+	+\left\{\frac{\left|C_{11}^2\delta x^2 \delta y^2\right|}{8}+
+	\frac{\left|C_{20}C_{11}\delta x^3 \delta y\right|}{4}\right\}
+	\zeta_{11}\zeta_{10}
+	+\frac{\left|C_{20}^2\delta x^4\right|}{8}\zeta_{20}\zeta_{10}
+\end{eqnarray}
+
+\subsection{Subdividing Pixels in Order to Achieve a Desired Precision in the
+Integral}
+
+In order to figure out how finely to subdivide a pixel in order to achive a 
+prescribed precision, we will assume that the same number of subdividions 
+($n$) will be performed in the x as in the y direction.
+
+If the actual integral of the PSF over a pixel is denoted by $I\equiv\int PSF
+dA$, we wish to split a pixel into enough parts that the overall
+approximation of the integral $Q$ be within the less restrictive of some
+maximal fractional error $\epsilon_f$ and some maximal absolute error
+$\epsilon_a$ of $I$.
+
+Since:
+
+\begin{equation}
+	Error(\int PSF dA)= \int\Delta dA = \int \frac{\Delta}{PSF} PSF dA
+	\le \max\left|\frac{\Delta}{PSF}\right| I
+\end{equation}
+
+Imposing a fractional error limit just means $\gamma<\epsilon_f$. Imposing an
+absolute error means that the sum of all absolute errors of each subdivision
+must be less than $\epsilon_a$. One simple and not terribly bad way of
+achieving this is simply to require that the absolute error in each
+subdivision be no larger than $\epsilon_a/n^2$.
+
+Letting $\gamma\equiv\max\left|\frac{\Delta}{PSF}\right|$, we know
+\begin{displaymath}
+	(1-\gamma)I<Q<(1+\gamma)I\quad \Longrightarrow\quad
+	\frac{Q}{1+\gamma}<I<\frac{Q}{1-\gamma}
+\end{displaymath}
+So requiring that the absolute error in a particular subdivision be no larger
+than $\epsilon_a/n^2$ translates to:
+\begin{displaymath}
+	\frac{\gamma}{1-\gamma} <\frac{\epsilon_a}{n^2Q} \Longrightarrow
+	\gamma < \frac{\frac{\epsilon_a}{n^2Q}}{1+\frac{\epsilon_a}{n^2Q}}
+\end{displaymath}
+Where $Q$ is the approximated integral in a subdivision.
+
+From Section \ref{sec: expansion error}, an upper limit as a function of the
+number of subdivisions can be written as:
+\begin{equation}
+	\gamma<\frac{\alpha_1^{1/n}\alpha_2^{1/n^2}}{n^4}+
+	\frac{\beta^{1/n}}{n^3}
+	\label{eq: error n scaling}
+\end{equation}
+With:
+\begin{eqnarray}
+	\beta&\equiv&
+	\Bigg\{\frac{\left|C_{01}^3\delta y^3\right|}{48}+
+		\frac{\left|C_{10}C_{01}^2\delta x\delta y^2\right|}{16}+
+	\nonumber\\&&\quad\quad
+		{}+\left|\frac{C_{10}^2\delta x^2}{4} - C_{02}\delta y^2
+			-\left(C_{11}\delta x\delta y+C_{20}\delta x^2\right)
+		\right|\left|\frac{C_{01}\delta y}{4}\right|\Bigg\}\zeta_{01}+
+	\nonumber\\&&
+	\Bigg\{
+		\frac{\left|C_{02}\delta y^2 + C_{11}\delta x\delta y +
+		C_{20}\delta x^2\right|\left|C_{10}\delta x\right|}{4}+
+		\frac{\left|C_{10}^3\delta x^3\right|}{48}
+	\Bigg\}\zeta_{10}\\
+%
+	\alpha_1&\equiv&
+	\left\{\frac{\left|C_{02}\delta y^2\right|
+	\left|C_{11}\delta x\delta y+C_{20}\delta x^2\right|}{4}+
+	\frac{C_{02}^2\delta y^4}{8}
+	+\frac{\left|C_{11}^2\delta x^2 \delta y^2\right|}{8}+
+	\right.\nonumber\\&&
+	\quad\quad\left.
+	\frac{\left|C_{20}C_{11}\delta x^3 \delta y\right|}{4}
+	+\frac{\left|C_{20}^2\delta x^4\right|}{8}\right\}\zeta_{10}\\
+%
+	\alpha_2&\equiv&
+	\left\{\frac{\left|C_{02}\delta y^2\right|
+	\left|C_{11}\delta x\delta y+C_{20}\delta x^2\right|}{4}+
+	\frac{C_{02}^2\delta y^4}{8}
+	\right\}\zeta_{02}+
+	\nonumber\\&&
+	+\left\{\frac{\left|C_{11}^2\delta x^2 \delta y^2\right|}{8}+
+	\frac{\left|C_{20}C_{11}\delta x^3 \delta y\right|}{4}\right\}
+	\zeta_{11}
+	+\frac{\left|C_{20}^2\delta x^4\right|}{8}\zeta_{20}
+\end{eqnarray}
+
+Since subdividing a pixel into too many pieces at once will tend to severely
+overestimate the error, it is better to limit the number of subdivisions to
+some small number ($n_{max}$) and if more than that are required to consider
+each of them separately as a pixel and estimate how much furth to subdivide.
+
+This leads to a simple scheme of starting with $n=1$ and incrementing $n$ by
+one until Eq. \ref{eq: error n scaling} produces an upper limit less than
+$\max\left[\epsilon_f,
+\left(\frac{\epsilon_a}{n^2Q}\right)/\left(1+\frac{\epsilon_a}{n^2Q}\right)
+\right]$, or $n_{max}$ is reached. If the first condition is met, then the
+integral is directly calculated on each subdivision, if the first condition
+is still not satisfied by $n=n_{max}$ the pixel is subdividid into
+$n_{max}\times n_{max}$ pieces and each piece is treated like a pixel,
+leading to further subdivisions.
+
+\subsection{Increasing the Expansion Order in order to Achieve a Desired
+Precision in the Integral}
+
+From Equation \ref{eq: full expansion} we have:
+\begin{equation}
+	\frac{Psf(x+\delta x, y+\delta y)}{Psf(x,y)}=
+	\exp\left(-\frac{C_{20}\delta x^2}{2}\right)
+	\exp\left(-\frac{C_{11}\delta x\delta y}{2}\right)
+	\exp\left(-\frac{C_{02}\delta y^2}{2}\right)
+	\exp\left(-\frac{C_{10}\delta x}{2}\right)
+	\exp\left(-\frac{C_{01}\delta y}{2}\right)
+\end{equation}
+If each of the terms above is split into some finite order polynomial
+approximation ($S$) and all remaining terms ($\Delta$) we have:
+\begin{equation}
+	\frac{Psf(x+\delta x, y+\delta y)}{Psf(x,y)}=(S_{20}+\Delta_{20})
+	(S_{11}+\Delta_{11})(S_{02}+\Delta_{02})(S_{10}+\Delta_{10})
+	(S_{01}+\Delta_{01})
+\end{equation}
+Where:
+\begin{eqnarray}
+	S_{20}\equiv \sum_{i=0}^I \frac{(-1)^i C_{20}^i \delta x^{2i}}{2^i i!}
+	&,&
+	\Delta_{20}\equiv \sum_{i=I+1}^\infty
+	\frac{(-1)^i C_{20}^i \delta x^{2i}}{2^i i!}\\
+%
+	S_{11}\equiv \sum_{j=0}^J \frac{(-1)^j C_{11}^j \delta x^j \delta y^j}
+	{2^j j!}
+	&,&
+	\Delta_{11}\equiv \sum_{j=J+1}^\infty \frac{(-1)^j C_{11}^j \delta x^j
+	\delta y^j}{2^j j!}\\
+%
+	S_{02}\equiv \sum_{k=0}^K \frac{(-1)^k C_{02}^k \delta y^{2k}}{2^k k!}
+	&,&
+	\Delta_{02}\equiv \sum_{k=K+1}^\infty
+	\frac{(-1)^k C_{02}^k \delta y^{2k}}{2^k k!}\\
+%
+	S_{10}\equiv \sum_{l=0}^L \frac{(-1)^l C_{10}^l \delta x^l}{2^l l!}
+	&,&
+	\Delta_{10}\equiv \sum_{l=L+1}^\infty
+	\frac{(-1)^l C_{10}^l \delta x^l}{2^l l!}\\
+%
+	S_{01}\equiv \sum_{m=0}^M \frac{(-1)^m C_{01}^m \delta y^m}{2^m m!}
+	&,&
+	\Delta_{01}\equiv \sum_{m=M+1}^\infty
+	\frac{(-1)^m C_{01}^m \delta y^m}{2^m m!}\\
+\end{eqnarray}
+
+Since all the quantities approximated by the various $S$ expansions are
+positive, with sufficiently high order approximation, all $S$ expansions will
+also be positive. From this it follows that that the error in the PSF
+approximation ($\Delta_{IJKLM}$) satisfies:
+\begin{eqnarray}
+	\frac{\Delta_{IJKLM}}{PSF}&\le&
+	(S_{20}+|\Delta_{20}|)(S_{11}+|\Delta_{11}|)(S_{02}+|\Delta_{02}|)
+	(S_{10}+|\Delta_{10}|)(S_{01}+|\Delta_{01}|) - {} \nonumber\\
+	&& {} - S_{20}S_{11}S_{02}S_{10}S_{01}
+\end{eqnarray}
+
+So in order to derive an upper limit to the error in the PSF approximation we
+need only derive upper limits to each $\Delta$ quantity.
+
+\begin{eqnarray}
+	|\Delta_{20}|&=&\left|\sum_{i=I+1}^\infty
+	\frac{(-1)^i C_{20}^i \delta x^{2i}}{2^i i!}\right|\nonumber\\
+	&=&\frac{C_{20}^{I+1}\delta x^{2I+2}}{2^{I+1}}\left|
+	\sum_{i=0}^\infty \frac{(-1)^i C_{20}^i \delta x^{2i}}{2^i (i+I+1)!}
+	\right|
+\end{eqnarray}	
+We will now require that the expansion be of high enough order to satisfy:
+$2I+2>C_{20}\delta x^2$. Under this condition, the terms of the sum are
+monotonically decreasing. This means that if we substitute $(i+I+1)!$ with
+$(I+1)! i!$, the value of the sum will increase since even (positive) terms
+will be increased more than the subsequent odd (negative) terms. So we end up
+with:
+\begin{eqnarray}
+	|\Delta_{20}|&<&\frac{C_{20}^{I+1}\delta x^{2I+2}}{2^{I+1}(I+1)!}\left|
+	\sum_{i=0}^\infty \frac{(-1)^i C_{20}^i \delta x^{2i}}{2^i i!}
+	\right|\nonumber\\
+	&<&\frac{C_{20}^{I+1}\delta x^{2I+2}}{2^{I+1}(I+1)!}
+	\exp\left(-\frac{C_{20}\delta x^2}{2}\right)
+\end{eqnarray}
+Similarly it follows:
+\begin{eqnarray}
+	|\Delta_{11}|&<&\left|\frac{C_{11}\delta x\delta y}{2}\right|^{J+1}
+	\frac{1}{(J+1)!}
+	\exp\left|\frac{C_{11}\delta x\delta y}{2}\right|\\
+%
+	|\Delta_{02}|&<&\frac{C_{02}^{K+1}\delta y^{2K+2}}{2^{K+1}(K+1)!}
+	\exp\left(-\frac{C_{02}\delta y^2}{2}\right)\\
+%
+	|\Delta_{10}|&<&\left|\frac{C_{10}\delta x}{2}\right|^{L+1}
+	\frac{1}{(L+1)!}
+	\exp\left|\frac{C_{10}\delta x}{2}\right|\\
+%
+	|\Delta_{01}|&<&\left|\frac{C_{01}\delta y}{2}\right|^{M+1}
+	\frac{1}{(M+1)!}
+	\exp\left|\frac{C_{01}\delta y}{2}\right|
+\end{eqnarray}
+
+The quantities $\Delta_{20}$ and $\Delta_{02}$ due to the required minimum
+expansion order are increasing functions of $\delta x$ and $\delta y$
+respectively. The rest clearly are also. So a strict upper limit for the
+error in the integral can be found by using the largest by absolute value
+$\delta x$ and $\delta y$ in the $\Delta$ quantities and integrating the
+remaining $S$ quantities in the expression for the error in the PSF
+estimation.
+
+The expansion above is not a fixed order polynomial. Rather it independently
+controls the order of each term in the expansion, which might be somewhat
+inefficient, but otherwise the $\Delta$ and $S$ quantities couple and strict
+limits to the integral are hard to derive in general.
+
+\section{The Following Most Probably Contains Many Errors}
+By similar logic to Section \label{sec: expansion error} the error in a
+polynomial expansion of order up to $N$ of the $PSF$ satisfies:
+\begin{eqnarray}
+	\frac{\Delta_N}{PSF} &=& \frac{\Delta_{i>\frac{N}{2}}}{PSF} + {}\nonumber\\
+	&& {} + \sum_{i=0}^\frac{N}{2} \frac{(-1)^i C_{20}^i \delta x^{2i}}
+	{2^i i!} \frac{\Delta_{j>\frac{N}{2}-i}}{PSF} + {}\nonumber\\
+	&& {} + \sum_{i=0}^\frac{N}{2} \frac{(-1)^i C_{20}^i \delta x^{2i}}
+	{2^i i!} \sum_{j=0}^{\frac{N}{2}-i} \frac{(-1)^j C_{11}^j \delta x^j
+	\delta y^j}{2^j j!} \frac{\Delta_{k>\frac{N}{2}-i-j}}{PSF} + {}\nonumber\\
+	&& {} + \sum_{i=0}^\frac{N}{2} \frac{(-1)^i C_{20}^i \delta x^{2i}}
+	{2^i i!} \sum_{j=0}^{\frac{N}{2}-i} \frac{(-1)^j C_{11}^j \delta x^j
+	\delta y^j}{2^j j!} \sum_{k=0}^{\frac{N}{2}-i-j} \frac{(-1)^k C_{02}^k
+	\delta y^{2k}}{2^k k!} \frac{\Delta_{l>N-2i-2j-2k}}{PSF} + {}\nonumber\\
+	&& {} + \sum_{i=0}^\frac{N}{2} \frac{(-1)^i C_{20}^i \delta x^{2i}}
+	{2^i i!} \sum_{j=0}^{\frac{N}{2}-i} \frac{(-1)^j C_{11}^j \delta x^j
+	\delta y^j}{2^j j!} \sum_{k=0}^{\frac{N}{2}-i-j} \frac{(-1)^k C_{02}^k
+	\delta y^{2k}}{2^k k!} \times {} \nonumber\\
+	&& \quad\quad\quad\quad\quad\quad
+	{} \times \sum_{l=0}^{N-2(i+j+k)} \frac{(-1)^l C_{10}^l
+	\delta x^l}{2^l l!} \frac{\Delta_{m>N-2(i+j+k)-l}}{PSF}
+\end{eqnarray}
+
+Actually a more stringent limit can be derived by writing directly the
+expansion of the integral over the range $x-\delta x<x<x+\delta x$, $y-\delta
+y< y < y+\delta y$:
+\begin{equation}
+	I=4f_0\delta x\delta
+	y\sum_{\begin{array}{c}j+l:\mathrm{even}\\j+m:\mathrm{even}\end{array}}
+	\frac{(-1)^n C_20^i C_{11}^j C_{02}^k C_{10}^l C_{01}^m}{2^n i!j!k!l!m!}
+	\frac{\delta x^{2i+j+l} \delta y^{2k+j+m}}{(2i+j+l+1)(2k+j+m+1)}
+\end{equation}
+If we estimate the sum by only including $i<=I$, $j<=J$, $k<=K$, $l<=L$ and
+$m<=M$, the following quantities can be used to calculate a strict upper
+limit on the error made in the estimation:
+\begin{eqnarray}
+	S_p & \equiv & \sum_{i=0}^{p_0 I} \sum_{j=0}^{p_1 J} \sum_{k=0}^{p_2 K}
+	\sum_{l=0}^{p_3 L} \sum_{m=0}^{p_4 M}
+	\frac{(-1)^n C_20^i C_{11}^j C_{02}^k C_{10}^l C_{01}^m}{2^n i!j!k!l!m!}
+	\delta x^{2i+j+l} \delta y^{2k+j+m} R_1 R_2\\
+	\Delta_0 & \equiv &
+	\frac{C_{20}^{I+1} \delta x^{2I+2}}{2^{I+1} (2I+3)(I+1)!}
+	\exp\left\{ \frac{C_{20}\delta x^2}{2} \right\} \\
+	\Delta_1 & \equiv & \frac{\left|C_{11}^{J+1}\right|
+		\delta x^{J+1}\delta y^{J+1}}{2^{J+1} (J+2)(J+2)!}
+	\exp\left\{ \frac{\left|C_{11}\right|\delta x\delta y}{2} \right\} \\
+	\Delta_2 & \equiv &
+	\frac{C_{02}^{K+1} \delta y^{2K+2}}{2^{K+1} (2K+3)(K+1)!}
+	\exp\left\{ \frac{C_{02}\delta y^2}{2} \right\} \\
+	\Delta_3 & \equiv &  \frac{\left|C_{10}^{L+1}\delta x^{L+1}\right|}
+	{2^{L+1} (L+2)!} \exp\left\{ \frac{C_{10}\delta x}{2} \right\} \\
+	\Delta_4 & \equiv &  \frac{\left|C_{01}^{M+1} \delta y^{M+1}\right|}
+	{2^{M+1} (M+2)!} \exp\left\{ \frac{C_{01}\delta y}{2} \right\} 
+\end{eqnarray}
+with:
+\begin{eqnarray}
+	R_1 & \equiv & \left\{ \begin{array}{l@{\quad}l}
+		\frac{1-(j+l) \% 2}{(2i+j+l+1)} &
+			\mathrm{if} \quad p_0=p_1=p_3=1\\
+		1 & \mathrm{otherwise}
+	\end{array}\right.\\
+	R_2 & \equiv & \left\{ \begin{array}{l@{\quad}l}
+		\frac{1-(j+m) \% 2}{(2k+j+m+1)} &
+		\mathrm{if} \quad p_1=p_2=p_4=1\\
+		1 & \quad \mathrm{otherwise}
+	\end{array}\right.
+\end{eqnarray}
+
+Above $p$ is a vector of 5 values each of which can be either 0 or 1.
+
+A strict upper limit to the error made by estimating the value of the
+integral by only including the specified terms is given by:
+\begin{equation}
+	\Delta I < 4 f_0 \delta x \delta y \sum_{p\ne\overrightarrow{1}}
+	S_p \prod_{n=0}^4 (\Delta_n)^{1-p_n}
+\end{equation}
+And the above sum with $p=\overrightarrow{1}$ is the estimate for $I$.
+
+If instead of imposing independent limits on each index we wish to impose a
+limit on the overall order (2N), the error in the integral satisfies:
+\begin{eqnarray}
+	\Delta I < 4 f_0 \delta x \delta y \Bigg(&&
+	\Delta_0(N+1)\Delta_1(0)\Delta_2(0)\Delta_3(0)\Delta_4(0) +
+	\nonumber\\
+%
+	&&\sum_{i=0}^N \frac{(-1)^i C_{20}^i\delta x^{2i}}{2^i i!}
+	\Delta_1(N-i+1)\Delta_2(0)\Delta_3(0)\Delta_4(0)+
+	\nonumber\\
+%
+	&&\sum_{i=0}^N \sum_{j=0}^{N-i}
+	\frac{(-1)^{i+j} C_{20}^i C_{11}^j \delta x^{2i+j} \delta y^j}{2^{i+j}
+	i!j!}\Delta_2(N-i-j+1)\Delta_3(0)\Delta_4(0)+\nonumber\\
+%
+	&&\sum_{i=0}^N \sum_{j=0}^{N-i} \sum_{k=0}^{N-i-j}
+	\frac{(-1)^{i+j+k} C_{20}^i C_{11}^j C_{20}^k \delta x^{2i+j} \delta
+	y^{2k+j}}{2^{i+j+k} i!j!k!}\Delta_3(N-i-j-k+1)\Delta_4(0)+\nonumber\\
+%
+	&&\sum_{i=0}^N \sum_{j=0}^{N-i} \sum_{k=0}^{N-i-j} \sum_{l=0}^{N-i-j-k}
+	\frac{(-1)^{i+k} C_{20}^i C_{11}^j C_{20}^k \delta x^{2i+j} \delta
+	y^{2k+j}}{2^{i+j+k} i!j!k!}\Delta_3(N-i-j-k+1)\Delta_4(0)+\nonumber\\
+	\Bigg)
+\end{eqnarray}
+\end{document}
