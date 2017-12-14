@@ -1,7 +1,6 @@
 var searchData=
 [
   ['sub_2dpixel_20photometry',['Sub-Pixel Photometry',['../index.html',1,'']]],
-  ['superphot',['SuperPhot',['../md_README.html',1,'']]],
   ['s',['s',['../classPSF_1_1EllipticalGaussian.html#a1b1ef7b0a38c5a37fa103e53438eac63',1,'PSF::EllipticalGaussian::s()'],['../namespacePhot.html#afd335f0316f5f0113818bf99d5f6d6b5aaa5c61a1a6051a5916fd62f23397c02d',1,'Phot::S()']]],
   ['s_5fto_5fx',['s_to_x',['../FittingUtil_8h.html#a06a31cfcefb22c1f529496b2e442549d',1,'FittingUtil.h']]],
   ['saturated',['saturated',['../classCore_1_1Image.html#a98eccef536671ba5657aed6d6ec5f620',1,'Core::Image::saturated()'],['../namespaceCore.html#a0284392b810d69336f74bd704daa5de8ad7c9cd36cbc2cb7a8d335f90eb474e49',1,'Core::SATURATED()']]],

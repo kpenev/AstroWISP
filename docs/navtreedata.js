@@ -1,6 +1,7 @@
 var NAVTREE =
 [
-  [ "Sub-Pixel Photometry", "index.html", [
+  [ "SuperPhot", "index.html", [
+    [ "Sub-Pixel Photometry", "index.html", null ],
     [ "SubPixPhot", "SubPixPhot_main_page.html", null ],
     [ "FitSubpix", "FitSubpix_main_page.html", null ],
     [ "Outpu File Formats", "hdf5fileformat_main_page.html", null ],

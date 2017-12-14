@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sub-Pixel Photometry: PSF::WedgeIntegral Class Reference</title>
+<title>SuperPhot: PSF::WedgeIntegral Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -31,7 +31,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Sub-Pixel Photometry
+   <div id="projectname">SuperPhot
+   &#160;<span id="projectnumber">unspecified</span>
    </div>
   </td>
    <td>        <div id="MSearchBox" class="MSearchBoxInactive">
@@ -116,10 +117,10 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:ad08401d4b248e7128eb5a930ab8e2f5c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPSF_1_1WedgeIntegral.html#ad08401d4b248e7128eb5a930ab8e2f5c">fill_p_even</a> (<a class="el" href="namespaceCore.html#a285a47e008b3a371dddad36b58c18810">Core::vector_size_type</a> max_n)</td></tr>
-<tr class="memdesc:ad08401d4b248e7128eb5a930ab8e2f5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes all <img class="formulaInl" alt="$P^{even}_n$" src="form_157.png"/> for n&lt;max_n and stores them in __q[0].  <a href="#ad08401d4b248e7128eb5a930ab8e2f5c">More...</a><br /></td></tr>
+<tr class="memdesc:ad08401d4b248e7128eb5a930ab8e2f5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes all <img class="formulaInl" alt="$P^{even}_n$" src="form_37.png"/> for n&lt;max_n and stores them in __q[0].  <a href="#ad08401d4b248e7128eb5a930ab8e2f5c">More...</a><br /></td></tr>
 <tr class="separator:ad08401d4b248e7128eb5a930ab8e2f5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a18129b0a7197cc0f37708c2a5da23942"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPSF_1_1WedgeIntegral.html#a18129b0a7197cc0f37708c2a5da23942">fill_p_odd</a> (<a class="el" href="namespaceCore.html#a285a47e008b3a371dddad36b58c18810">Core::vector_size_type</a> max_n)</td></tr>
-<tr class="memdesc:a18129b0a7197cc0f37708c2a5da23942"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes all <img class="formulaInl" alt="$P^{odd}_n$" src="form_158.png"/> for n&lt;max_n and stores them in __q[1].  <a href="#a18129b0a7197cc0f37708c2a5da23942">More...</a><br /></td></tr>
+<tr class="memdesc:a18129b0a7197cc0f37708c2a5da23942"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes all <img class="formulaInl" alt="$P^{odd}_n$" src="form_38.png"/> for n&lt;max_n and stores them in __q[1].  <a href="#a18129b0a7197cc0f37708c2a5da23942">More...</a><br /></td></tr>
 <tr class="separator:a18129b0a7197cc0f37708c2a5da23942"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc45d75c046f267b6fab32b64d2c91b0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPSF_1_1WedgeIntegral.html#acc45d75c046f267b6fab32b64d2c91b0">fill_q_diagonal</a> (<a class="el" href="namespaceCore.html#a285a47e008b3a371dddad36b58c18810">Core::vector_size_type</a> m, <a class="el" href="namespaceCore.html#a285a47e008b3a371dddad36b58c18810">Core::vector_size_type</a> n)</td></tr>
 <tr class="memdesc:acc45d75c046f267b6fab32b64d2c91b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fills in a diagonal of __q with indices that sum up to (m+n) and the first of which has the same parity as m, up to (m, n), assuming all earlier diagonals are filled.  <a href="#acc45d75c046f267b6fab32b64d2c91b0">More...</a><br /></td></tr>
@@ -146,16 +147,16 @@ Private Attributes</h2></td></tr>
 <tr class="memdesc:ad5e95d2c7a5b7be98afec4d1b3f84794"><td class="mdescLeft">&#160;</td><td class="mdescRight">2*__y0  <a href="#ad5e95d2c7a5b7be98afec4d1b3f84794">More...</a><br /></td></tr>
 <tr class="separator:ad5e95d2c7a5b7be98afec4d1b3f84794"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a629954ed12be875f288b81ab77d3d3ca"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPSF_1_1WedgeIntegral.html#a629954ed12be875f288b81ab77d3d3ca">__deltax</a></td></tr>
-<tr class="memdesc:a629954ed12be875f288b81ab77d3d3ca"><td class="mdescLeft">&#160;</td><td class="mdescRight"><img class="formulaInl" alt="$\Delta x$" src="form_133.png"/>  <a href="#a629954ed12be875f288b81ab77d3d3ca">More...</a><br /></td></tr>
+<tr class="memdesc:a629954ed12be875f288b81ab77d3d3ca"><td class="mdescLeft">&#160;</td><td class="mdescRight"><img class="formulaInl" alt="$\Delta x$" src="form_53.png"/>  <a href="#a629954ed12be875f288b81ab77d3d3ca">More...</a><br /></td></tr>
 <tr class="separator:a629954ed12be875f288b81ab77d3d3ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acfa192f686e3c9f6b9b2ed52782a0ee5"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPSF_1_1WedgeIntegral.html#acfa192f686e3c9f6b9b2ed52782a0ee5">__deltay</a></td></tr>
-<tr class="memdesc:acfa192f686e3c9f6b9b2ed52782a0ee5"><td class="mdescLeft">&#160;</td><td class="mdescRight"><img class="formulaInl" alt="$\Delta y$" src="form_134.png"/>  <a href="#acfa192f686e3c9f6b9b2ed52782a0ee5">More...</a><br /></td></tr>
+<tr class="memdesc:acfa192f686e3c9f6b9b2ed52782a0ee5"><td class="mdescLeft">&#160;</td><td class="mdescRight"><img class="formulaInl" alt="$\Delta y$" src="form_54.png"/>  <a href="#acfa192f686e3c9f6b9b2ed52782a0ee5">More...</a><br /></td></tr>
 <tr class="separator:acfa192f686e3c9f6b9b2ed52782a0ee5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1c5830ae580b11a4cae09741944ade38"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPSF_1_1WedgeIntegral.html#a1c5830ae580b11a4cae09741944ade38">__r2</a></td></tr>
 <tr class="memdesc:a1c5830ae580b11a4cae09741944ade38"><td class="mdescLeft">&#160;</td><td class="mdescRight">The square of the circle radius.  <a href="#a1c5830ae580b11a4cae09741944ade38">More...</a><br /></td></tr>
 <tr class="separator:a1c5830ae580b11a4cae09741944ade38"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23040685ce6b79ba2d9340b71aa34fb8"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPSF_1_1WedgeIntegral.html#a23040685ce6b79ba2d9340b71aa34fb8">__r2_m_y02</a></td></tr>
-<tr class="memdesc:a23040685ce6b79ba2d9340b71aa34fb8"><td class="mdescLeft">&#160;</td><td class="mdescRight"><img class="formulaInl" alt="$r^2-y_0^2$" src="form_321.png"/>.  <a href="#a23040685ce6b79ba2d9340b71aa34fb8">More...</a><br /></td></tr>
+<tr class="memdesc:a23040685ce6b79ba2d9340b71aa34fb8"><td class="mdescLeft">&#160;</td><td class="mdescRight"><img class="formulaInl" alt="$r^2-y_0^2$" src="form_55.png"/>.  <a href="#a23040685ce6b79ba2d9340b71aa34fb8">More...</a><br /></td></tr>
 <tr class="separator:a23040685ce6b79ba2d9340b71aa34fb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acfe01b953b163ee1719985114d8afbe3"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPSF_1_1WedgeIntegral.html#acfe01b953b163ee1719985114d8afbe3">__x_min</a></td></tr>
 <tr class="memdesc:acfe01b953b163ee1719985114d8afbe3"><td class="mdescLeft">&#160;</td><td class="mdescRight">The smallest distance to the circle center in x.  <a href="#acfe01b953b163ee1719985114d8afbe3">More...</a><br /></td></tr>
@@ -170,10 +171,10 @@ Private Attributes</h2></td></tr>
 <tr class="memdesc:add5db525632e20ccfac0d143c9263b6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The largest distance to the circle center in y.  <a href="#add5db525632e20ccfac0d143c9263b6f">More...</a><br /></td></tr>
 <tr class="separator:add5db525632e20ccfac0d143c9263b6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7e1f37d25f3ed4fc44c53de61a5f40ad"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPSF_1_1WedgeIntegral.html#a7e1f37d25f3ed4fc44c53de61a5f40ad">__p_odd_free_term_mult_even</a></td></tr>
-<tr class="memdesc:a7e1f37d25f3ed4fc44c53de61a5f40ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">The n independent part of the term from the recursive relation for <img class="formulaInl" alt="$P^odd$" src="form_322.png"/> which does not depend on previous <img class="formulaInl" alt="$P^odd$" src="form_322.png"/> for even n.  <a href="#a7e1f37d25f3ed4fc44c53de61a5f40ad">More...</a><br /></td></tr>
+<tr class="memdesc:a7e1f37d25f3ed4fc44c53de61a5f40ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">The n independent part of the term from the recursive relation for <img class="formulaInl" alt="$P^odd$" src="form_56.png"/> which does not depend on previous <img class="formulaInl" alt="$P^odd$" src="form_56.png"/> for even n.  <a href="#a7e1f37d25f3ed4fc44c53de61a5f40ad">More...</a><br /></td></tr>
 <tr class="separator:a7e1f37d25f3ed4fc44c53de61a5f40ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1358df2e4a34b9a689ec6a6e77af7ac"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPSF_1_1WedgeIntegral.html#ac1358df2e4a34b9a689ec6a6e77af7ac">__p_odd_free_term_mult_odd</a></td></tr>
-<tr class="memdesc:ac1358df2e4a34b9a689ec6a6e77af7ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">The n independent part of the term from the recursive relation for <img class="formulaInl" alt="$P^odd$" src="form_322.png"/> which does not depend on previous <img class="formulaInl" alt="$P^odd$" src="form_322.png"/> for odd n.  <a href="#ac1358df2e4a34b9a689ec6a6e77af7ac">More...</a><br /></td></tr>
+<tr class="memdesc:ac1358df2e4a34b9a689ec6a6e77af7ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">The n independent part of the term from the recursive relation for <img class="formulaInl" alt="$P^odd$" src="form_56.png"/> which does not depend on previous <img class="formulaInl" alt="$P^odd$" src="form_56.png"/> for odd n.  <a href="#ac1358df2e4a34b9a689ec6a6e77af7ac">More...</a><br /></td></tr>
 <tr class="separator:ac1358df2e4a34b9a689ec6a6e77af7ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af3636cb2a8346bddd58cbd862f5ce620"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::vector&lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPSF_1_1WedgeIntegral.html#af3636cb2a8346bddd58cbd862f5ce620">__values</a></td></tr>
 <tr class="memdesc:af3636cb2a8346bddd58cbd862f5ce620"><td class="mdescLeft">&#160;</td><td class="mdescRight">All previously computed values of the integral.  <a href="#af3636cb2a8346bddd58cbd862f5ce620">More...</a><br /></td></tr>
@@ -181,10 +182,10 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:abb78e0d93e22536907fee6528d02c968"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::vector&lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPSF_1_1WedgeIntegral.html#abb78e0d93e22536907fee6528d02c968">__q</a></td></tr>
 <tr class="separator:abb78e0d93e22536907fee6528d02c968"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae4c0bf4a1c137fec1a5b2a68bd01e70e"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPSF_1_1WedgeIntegral.html#ae4c0bf4a1c137fec1a5b2a68bd01e70e">__deltax_pow</a></td></tr>
-<tr class="memdesc:ae4c0bf4a1c137fec1a5b2a68bd01e70e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Various powers of <img class="formulaInl" alt="$\Delta x$" src="form_133.png"/>.  <a href="#ae4c0bf4a1c137fec1a5b2a68bd01e70e">More...</a><br /></td></tr>
+<tr class="memdesc:ae4c0bf4a1c137fec1a5b2a68bd01e70e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Various powers of <img class="formulaInl" alt="$\Delta x$" src="form_53.png"/>.  <a href="#ae4c0bf4a1c137fec1a5b2a68bd01e70e">More...</a><br /></td></tr>
 <tr class="separator:ae4c0bf4a1c137fec1a5b2a68bd01e70e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5759a8c4d005aed875a6ef8a4030f4eb"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPSF_1_1WedgeIntegral.html#a5759a8c4d005aed875a6ef8a4030f4eb">__deltay_pow</a></td></tr>
-<tr class="memdesc:a5759a8c4d005aed875a6ef8a4030f4eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Various powers of <img class="formulaInl" alt="$\Delta y$" src="form_134.png"/>.  <a href="#a5759a8c4d005aed875a6ef8a4030f4eb">More...</a><br /></td></tr>
+<tr class="memdesc:a5759a8c4d005aed875a6ef8a4030f4eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Various powers of <img class="formulaInl" alt="$\Delta y$" src="form_54.png"/>.  <a href="#a5759a8c4d005aed875a6ef8a4030f4eb">More...</a><br /></td></tr>
 <tr class="separator:a5759a8c4d005aed875a6ef8a4030f4eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae98fa459765076261d706fb355d0725"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPSF_1_1WedgeIntegral.html#aae98fa459765076261d706fb355d0725">__x0_pow</a></td></tr>
 <tr class="memdesc:aae98fa459765076261d706fb355d0725"><td class="mdescLeft">&#160;</td><td class="mdescRight">Previously computed powers of __y0.  <a href="#aae98fa459765076261d706fb355d0725">More...</a><br /></td></tr>
@@ -197,7 +198,7 @@ Static Private Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A class that implements the integral of x^my^n over a circle wedge. </p>
-<p>The wedge is defined by r, <img class="formulaInl" alt="$x_0$" src="form_131.png"/> and <img class="formulaInl" alt="$y_0$" src="form_132.png"/> as in the following diagram:</p>
+<p>The wedge is defined by r, <img class="formulaInl" alt="$x_0$" src="form_51.png"/> and <img class="formulaInl" alt="$y_0$" src="form_52.png"/> as in the following diagram:</p>
 <div class="image">
 <img src="circle_wedge.png" alt="circle_wedge.png"/>
 </div>
@@ -340,7 +341,7 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Computes all <img class="formulaInl" alt="$P^{even}_n$" src="form_157.png"/> for n&lt;max_n and stores them in __q[0]. </p>
+<p>Computes all <img class="formulaInl" alt="$P^{even}_n$" src="form_37.png"/> for n&lt;max_n and stores them in __q[0]. </p>
 
 </div>
 </div>
@@ -368,7 +369,7 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Computes all <img class="formulaInl" alt="$P^{odd}_n$" src="form_158.png"/> for n&lt;max_n and stores them in __q[1]. </p>
+<p>Computes all <img class="formulaInl" alt="$P^{odd}_n$" src="form_38.png"/> for n&lt;max_n and stores them in __q[1]. </p>
 
 </div>
 </div>
@@ -461,7 +462,7 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p><img class="formulaInl" alt="$\Delta x$" src="form_133.png"/> </p>
+<p><img class="formulaInl" alt="$\Delta x$" src="form_53.png"/> </p>
 
 </div>
 </div>
@@ -485,7 +486,7 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Various powers of <img class="formulaInl" alt="$\Delta x$" src="form_133.png"/>. </p>
+<p>Various powers of <img class="formulaInl" alt="$\Delta x$" src="form_53.png"/>. </p>
 
 </div>
 </div>
@@ -509,7 +510,7 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p><img class="formulaInl" alt="$\Delta y$" src="form_134.png"/> </p>
+<p><img class="formulaInl" alt="$\Delta y$" src="form_54.png"/> </p>
 
 </div>
 </div>
@@ -533,7 +534,7 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Various powers of <img class="formulaInl" alt="$\Delta y$" src="form_134.png"/>. </p>
+<p>Various powers of <img class="formulaInl" alt="$\Delta y$" src="form_54.png"/>. </p>
 
 </div>
 </div>
@@ -579,7 +580,7 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>The n independent part of the term from the recursive relation for <img class="formulaInl" alt="$P^odd$" src="form_322.png"/> which does not depend on previous <img class="formulaInl" alt="$P^odd$" src="form_322.png"/> for even n. </p>
+<p>The n independent part of the term from the recursive relation for <img class="formulaInl" alt="$P^odd$" src="form_56.png"/> which does not depend on previous <img class="formulaInl" alt="$P^odd$" src="form_56.png"/> for even n. </p>
 
 </div>
 </div>
@@ -603,7 +604,7 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>The n independent part of the term from the recursive relation for <img class="formulaInl" alt="$P^odd$" src="form_322.png"/> which does not depend on previous <img class="formulaInl" alt="$P^odd$" src="form_322.png"/> for odd n. </p>
+<p>The n independent part of the term from the recursive relation for <img class="formulaInl" alt="$P^odd$" src="form_56.png"/> which does not depend on previous <img class="formulaInl" alt="$P^odd$" src="form_56.png"/> for odd n. </p>
 
 </div>
 </div>
@@ -626,8 +627,8 @@ Static Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>All previously computed <img class="formulaInl" alt="$Q_{m,n}$" src="form_104.png"/> values.</p>
-<p>The first (outer) index is m and the second (inner) is n. This way __q[0] is <img class="formulaInl" alt="$P^{even}$" src="form_304.png"/> and __q[1] is <img class="formulaInl" alt="$P^{odd}$" src="form_305.png"/>. </p>
+<p>All previously computed <img class="formulaInl" alt="$Q_{m,n}$" src="form_31.png"/> values.</p>
+<p>The first (outer) index is m and the second (inner) is n. This way __q[0] is <img class="formulaInl" alt="$P^{even}$" src="form_32.png"/> and __q[1] is <img class="formulaInl" alt="$P^{odd}$" src="form_33.png"/>. </p>
 
 </div>
 </div>
@@ -675,7 +676,7 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p><img class="formulaInl" alt="$r^2-y_0^2$" src="form_321.png"/>. </p>
+<p><img class="formulaInl" alt="$r^2-y_0^2$" src="form_55.png"/>. </p>
 
 </div>
 </div>
@@ -929,7 +930,7 @@ Static Private Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacePSF.html">PSF</a></li><li class="navelem"><a class="el" href="classPSF_1_1WedgeIntegral.html">WedgeIntegral</a></li>
-    <li class="footer">Generated on Wed Dec 13 2017 23:08:33 for Sub-Pixel Photometry by
+    <li class="footer">Generated on Thu Dec 14 2017 00:23:04 for SuperPhot by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
   </ul>

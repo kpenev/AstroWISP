@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sub-Pixel Photometry: Variance Class Reference</title>
+<title>SuperPhot: Variance Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -31,7 +31,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Sub-Pixel Photometry
+   <div id="projectname">SuperPhot
+   &#160;<span id="projectnumber">unspecified</span>
    </div>
   </td>
    <td>        <div id="MSearchBox" class="MSearchBoxInactive">
@@ -137,23 +138,23 @@ Private Member Functions</h2></td></tr>
 <tr class="memdesc:a4838a4710877e4e901afb070d4e50fb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fills a slice of __w corresponding to a single image.  <a href="#a4838a4710877e4e901afb070d4e50fb7">More...</a><br /></td></tr>
 <tr class="separator:a4838a4710877e4e901afb070d4e50fb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a91e1ea92fe890cb6bfee5b9f253624d0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVariance.html#a91e1ea92fe890cb6bfee5b9f253624d0">calculate_wb</a> (const StringList &amp;frame_fnames, const StringList &amp;source_fnames, double aperture)</td></tr>
-<tr class="memdesc:a91e1ea92fe890cb6bfee5b9f253624d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the <img class="formulaInl" alt="$w$" src="form_286.png"/> and <img class="formulaInl" alt="$b$" src="form_287.png"/> matrices and the <img class="formulaInl" alt="$\bar{b}$" src="form_288.png"/> vector.  <a href="#a91e1ea92fe890cb6bfee5b9f253624d0">More...</a><br /></td></tr>
+<tr class="memdesc:a91e1ea92fe890cb6bfee5b9f253624d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the <img class="formulaInl" alt="$w$" src="form_11.png"/> and <img class="formulaInl" alt="$b$" src="form_12.png"/> matrices and the <img class="formulaInl" alt="$\bar{b}$" src="form_13.png"/> vector.  <a href="#a91e1ea92fe890cb6bfee5b9f253624d0">More...</a><br /></td></tr>
 <tr class="separator:a91e1ea92fe890cb6bfee5b9f253624d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d162d5999542662148057a2c3e9e17f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVariance.html#a9d162d5999542662148057a2c3e9e17f">calculate_q</a> ()</td></tr>
-<tr class="memdesc:a9d162d5999542662148057a2c3e9e17f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the weight of each image ( <img class="formulaInl" alt="$q$" src="form_289.png"/>).  <a href="#a9d162d5999542662148057a2c3e9e17f">More...</a><br /></td></tr>
+<tr class="memdesc:a9d162d5999542662148057a2c3e9e17f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the weight of each image ( <img class="formulaInl" alt="$q$" src="form_14.png"/>).  <a href="#a9d162d5999542662148057a2c3e9e17f">More...</a><br /></td></tr>
 <tr class="separator:a9d162d5999542662148057a2c3e9e17f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a190bd4b86920ee18d509454acc346500"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVariance.html#a190bd4b86920ee18d509454acc346500">calculate_xi</a> ()</td></tr>
-<tr class="memdesc:a190bd4b86920ee18d509454acc346500"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the weight of each source in each image ( <img class="formulaInl" alt="$\xi$" src="form_290.png"/>).  <a href="#a190bd4b86920ee18d509454acc346500">More...</a><br /></td></tr>
+<tr class="memdesc:a190bd4b86920ee18d509454acc346500"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the weight of each source in each image ( <img class="formulaInl" alt="$\xi$" src="form_15.png"/>).  <a href="#a190bd4b86920ee18d509454acc346500">More...</a><br /></td></tr>
 <tr class="separator:a190bd4b86920ee18d509454acc346500"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acddcfa4794a9953bb8a70248250b9a8e"><td class="memTemplParams" colspan="2">template&lt;typename EIGEN_TP &gt; </td></tr>
 <tr class="memitem:acddcfa4794a9953bb8a70248250b9a8e"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVariance.html#acddcfa4794a9953bb8a70248250b9a8e">calculate_ws_inverse_f</a> (const Eigen::MatrixBase&lt; EIGEN_TP &gt; &amp;s)</td></tr>
 <tr class="memdesc:acddcfa4794a9953bb8a70248250b9a8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fills <a class="el" href="classVariance.html#a24363b778cc1bcd12fcdd1022ae230f4" title="Each entry is the inverse of the corresponding entry in the  vector for each observation of each star...">__ws_inverse</a> and <a class="el" href="classVariance.html#a412bc8f0fa3f4ead673445f7672bdf6a" title="Rows are the fluxes of a source on all frames corrected with the sub-pixel structure. ">__f</a> with the appropriate values.  <a href="#acddcfa4794a9953bb8a70248250b9a8e">More...</a><br /></td></tr>
 <tr class="separator:acddcfa4794a9953bb8a70248250b9a8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a801a657dca3388542128f1e2b939400b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVariance.html#a801a657dca3388542128f1e2b939400b">calculate_lambda</a> (std::valarray&lt; Eigen::ArrayXXd &gt; &amp;lambda, std::valarray&lt; Eigen::ArrayXd &gt; &amp;lambda_bar, unsigned num_subpix)</td></tr>
-<tr class="memdesc:a801a657dca3388542128f1e2b939400b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates all <img class="formulaInl" alt="$\Lambda$" src="form_291.png"/> matrices.  <a href="#a801a657dca3388542128f1e2b939400b">More...</a><br /></td></tr>
+<tr class="memdesc:a801a657dca3388542128f1e2b939400b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates all <img class="formulaInl" alt="$\Lambda$" src="form_16.png"/> matrices.  <a href="#a801a657dca3388542128f1e2b939400b">More...</a><br /></td></tr>
 <tr class="separator:a801a657dca3388542128f1e2b939400b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abcfc34dc34212dd7559cd8ccdbf59621"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVariance.html#abcfc34dc34212dd7559cd8ccdbf59621">calculate_omega</a> (Eigen::ArrayXXd &amp;omega, unsigned k, unsigned l)</td></tr>
-<tr class="memdesc:abcfc34dc34212dd7559cd8ccdbf59621"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the <img class="formulaInl" alt="$\Omega_{kl}$" src="form_292.png"/> matrix.  <a href="#abcfc34dc34212dd7559cd8ccdbf59621">More...</a><br /></td></tr>
+<tr class="memdesc:abcfc34dc34212dd7559cd8ccdbf59621"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the <img class="formulaInl" alt="$\Omega_{kl}$" src="form_17.png"/> matrix.  <a href="#abcfc34dc34212dd7559cd8ccdbf59621">More...</a><br /></td></tr>
 <tr class="separator:abcfc34dc34212dd7559cd8ccdbf59621"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
@@ -168,7 +169,7 @@ Private Attributes</h2></td></tr>
 <tr class="memdesc:a9dea8231367f99f841f790179bcb5c66"><td class="mdescLeft">&#160;</td><td class="mdescRight">The sub-pixel independent scaling matrices used to compute fluxes for a given subpixel map.  <a href="#a9dea8231367f99f841f790179bcb5c66">More...</a><br /></td></tr>
 <tr class="separator:a9dea8231367f99f841f790179bcb5c66"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a24363b778cc1bcd12fcdd1022ae230f4"><td class="memItemLeft" align="right" valign="top">std::valarray&lt; std::valarray&lt; Eigen::VectorXd &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVariance.html#a24363b778cc1bcd12fcdd1022ae230f4">__ws_inverse</a></td></tr>
-<tr class="memdesc:a24363b778cc1bcd12fcdd1022ae230f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Each entry is the inverse of the corresponding entry in the <img class="formulaInl" alt="$ w \cdot s $" src="form_285.png"/> vector for each observation of each star.  <a href="#a24363b778cc1bcd12fcdd1022ae230f4">More...</a><br /></td></tr>
+<tr class="memdesc:a24363b778cc1bcd12fcdd1022ae230f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Each entry is the inverse of the corresponding entry in the <img class="formulaInl" alt="$ w \cdot s $" src="form_10.png"/> vector for each observation of each star.  <a href="#a24363b778cc1bcd12fcdd1022ae230f4">More...</a><br /></td></tr>
 <tr class="separator:a24363b778cc1bcd12fcdd1022ae230f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a412bc8f0fa3f4ead673445f7672bdf6a"><td class="memItemLeft" align="right" valign="top">Eigen::MatrixXd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVariance.html#a412bc8f0fa3f4ead673445f7672bdf6a">__f</a></td></tr>
 <tr class="memdesc:a412bc8f0fa3f4ead673445f7672bdf6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rows are the fluxes of a source on all frames corrected with the sub-pixel structure.  <a href="#a412bc8f0fa3f4ead673445f7672bdf6a">More...</a><br /></td></tr>
@@ -375,7 +376,7 @@ template&lt;typename EIGEN_TP &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Calculates all <img class="formulaInl" alt="$\Lambda$" src="form_291.png"/> matrices. </p>
+<p>Calculates all <img class="formulaInl" alt="$\Lambda$" src="form_16.png"/> matrices. </p>
 <p>The array should have the correct size but the matrices are properly resized. </p>
 
 </div>
@@ -420,7 +421,7 @@ template&lt;typename EIGEN_TP &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Calculates the <img class="formulaInl" alt="$\Omega_{kl}$" src="form_292.png"/> matrix. </p>
+<p>Calculates the <img class="formulaInl" alt="$\Omega_{kl}$" src="form_17.png"/> matrix. </p>
 
 </div>
 </div>
@@ -447,8 +448,8 @@ template&lt;typename EIGEN_TP &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Calculates the weight of each image ( <img class="formulaInl" alt="$q$" src="form_289.png"/>). </p>
-<p>The <img class="formulaInl" alt="$w$" src="form_286.png"/> matrices must already be initialized. </p>
+<p>Calculates the weight of each image ( <img class="formulaInl" alt="$q$" src="form_14.png"/>). </p>
+<p>The <img class="formulaInl" alt="$w$" src="form_11.png"/> matrices must already be initialized. </p>
 
 </div>
 </div>
@@ -492,7 +493,7 @@ template&lt;typename EIGEN_TP &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Calculates the <img class="formulaInl" alt="$w$" src="form_286.png"/> and <img class="formulaInl" alt="$b$" src="form_287.png"/> matrices and the <img class="formulaInl" alt="$\bar{b}$" src="form_288.png"/> vector. </p>
+<p>Calculates the <img class="formulaInl" alt="$w$" src="form_11.png"/> and <img class="formulaInl" alt="$b$" src="form_12.png"/> matrices and the <img class="formulaInl" alt="$\bar{b}$" src="form_13.png"/> vector. </p>
 
 </div>
 </div>
@@ -549,8 +550,8 @@ template&lt;typename EIGEN_TP &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Calculates the weight of each source in each image ( <img class="formulaInl" alt="$\xi$" src="form_290.png"/>). </p>
-<p>The <img class="formulaInl" alt="$w$" src="form_286.png"/> matrices must already be initialized. </p>
+<p>Calculates the weight of each source in each image ( <img class="formulaInl" alt="$\xi$" src="form_15.png"/>). </p>
+<p>The <img class="formulaInl" alt="$w$" src="form_11.png"/> matrices must already be initialized. </p>
 
 </div>
 </div>
@@ -928,7 +929,7 @@ template&lt;typename EIGEN_TP &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Each entry is the inverse of the corresponding entry in the <img class="formulaInl" alt="$ w \cdot s $" src="form_285.png"/> vector for each observation of each star. </p>
+<p>Each entry is the inverse of the corresponding entry in the <img class="formulaInl" alt="$ w \cdot s $" src="form_10.png"/> vector for each observation of each star. </p>
 
 </div>
 </div>
@@ -966,7 +967,7 @@ template&lt;typename EIGEN_TP &gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classVariance.html">Variance</a></li>
-    <li class="footer">Generated on Wed Dec 13 2017 23:08:32 for Sub-Pixel Photometry by
+    <li class="footer">Generated on Thu Dec 14 2017 00:23:04 for SuperPhot by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
   </ul>

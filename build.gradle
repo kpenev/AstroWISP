@@ -1,5 +1,6 @@
 plugins {
     id 'cpp'
+    id "org.ysb33r.doxygen" version "0.4"
 }
 
 import org.gradle.internal.os.OperatingSystem;
@@ -143,6 +144,25 @@ model {
             }
         }
     }
+}
+
+doxygen {
+    generate_html true
+    template "doxygen/Doxyfile"
+    source "src/Background"
+    source "src/Core"
+    source "src/FitPSF"
+    source "src/FitSubpix"
+    source "src/IO"
+    source "src/PSF"
+    source "src/SubPixPhot"
+    source "src/SubtractPSF"
+    source "src/VisualizePSFMap"
+    source "doxygen"
+    include "**/*.h"
+    include "**/*.cpp"
+    include "**/*.py"
+    include "**/*.md"
 }
 
 def findLibraryLinux(String libNameStart)
