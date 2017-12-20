@@ -111,8 +111,8 @@ namespace Background {
         ///Move one source back. Returns true iff the new source exists.
         inline virtual bool previous_source() 
         {
-                if(__source_iter==_sources.begin()) return false; 
-                else {--__source_iter; return true;}
+            if(__source_iter==_sources.begin()) return false; 
+            else {--__source_iter; return true;}
         }
 
         ///Restart iteration over sources from the beginning.
