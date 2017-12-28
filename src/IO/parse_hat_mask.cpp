@@ -10,14 +10,13 @@
 
 namespace IO {
 
-    char *parse_hat_mask(const char *mask_string,
-                         long x_resolution,
-                         long y_resolution)
+    void parse_hat_mask(const char *mask_string,
+                        long x_resolution,
+                        long y_resolution,
+                        char *mask)
     {
         const char FITS_MASK_MAX = 0x7F;
         const char FITS_MASK_DEF = 0x01;
-
-        char *mask = new char[x_resolution * y_resolution]();
 
         const char *next_term;
         static int xprev = 0,
@@ -87,8 +86,6 @@ namespace IO {
             while (*next_term && *next_term != ' ') ++next_term;
             while (*next_term == ' ') ++next_term;
         }
-
-        return mask;
     }
 
 }//End IO namespace.

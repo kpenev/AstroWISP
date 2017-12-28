@@ -8,10 +8,22 @@
 #include "../Core/SharedLibraryExportMacros.h"
 
 namespace IO {
-    ///\brief Return a newly allocated array with resolution of (x_resolution x
-    ///y_resolution) containing the parsed mask.
-    LIB_PUBLIC char *parse_hat_mask(const char *mask_string,
-                                    long x_resolution,
-                                    long y_resolution);
+    ///\brief Fill a pre-allocated array with resolution of (x_resolution x
+    ///y_resolution) with the parsed mask.
+    LIB_PUBLIC void parse_hat_mask(
+        ///The concatenated MASKINFO entries from the header.
+        const char *mask_string,
+
+        ///The horizontal resolution of the image.
+        long x_resolution,
+
+        ///The vertical resolution of the image.
+        long y_resolution,
+
+        ///The array to write the mask to. Only the masked entries are updated
+        ///using logical or, thus calling this function with different 
+        ///mask_string values but the same mask array combines all masks.
+        char *mask
+    );
 
 } //End IO namespace.

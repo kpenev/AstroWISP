@@ -12,8 +12,9 @@
 extern "C" {
 
     ///C-binding alias for IO::parse_hat_mask.
-    LIB_PUBLIC char *parse_hat_mask(const char *mask_string,
-                                    long x_resolution,
-                                    long y_resolution);
+    LIB_PUBLIC void parse_hat_mask(const char *mask_string,
+                                   long x_resolution,
+                                   long y_resolution,
+                                   char *mask);
 
 } //End Extern "C".

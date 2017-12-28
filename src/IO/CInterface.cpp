@@ -8,9 +8,10 @@
 #define BUILDING_LIBRARY
 #include "CInterface.h"
 
-char *parse_hat_mask(const char *mask_string,
-                     long x_resolution,
-                     long y_resolution)
+void parse_hat_mask(const char *mask_string,
+                    long x_resolution,
+                    long y_resolution,
+                    char *mask)
 {
-    return IO::parse_hat_mask(mask_string, x_resolution, y_resolution);
+    return IO::parse_hat_mask(mask_string, x_resolution, y_resolution, mask);
 }

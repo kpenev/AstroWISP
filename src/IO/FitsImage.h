@@ -55,9 +55,11 @@ namespace IO {
                 long y_resolution
             ) {
                 if(__mask) delete[] __mask;
-                __mask = parse_hat_mask(mask_string,
-                                        x_resolution,
-                                        y_resolution);
+                __mask = new char[x_resolution * y_resolution]();
+                parse_hat_mask(mask_string,
+                               x_resolution,
+                               y_resolution,
+                               __mask);
             }
 
 
