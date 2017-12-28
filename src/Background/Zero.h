@@ -17,7 +17,7 @@ namespace Background {
 
     ///\brief The background is assumed already subtracted from the input 
     ///image.
-    LIB_PUBLIC class Zero : public Measure {
+    class LIB_LOCAL Zero : public Measure {
     private:
         ///How many sources have been added so far.
         unsigned __number_sources;

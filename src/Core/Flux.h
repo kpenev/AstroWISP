@@ -15,7 +15,7 @@ namespace Core {
 
     ///\brief A class representing the flux measurement for a source, 
     ///including an error estimate and a flag.
-    LIB_PUBLIC class Flux {
+    class LIB_PUBLIC Flux {
     private:
         double __value, ///< The estimate of the flux.
                __error; ///< An estimate of the error.

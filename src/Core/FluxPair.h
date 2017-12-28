@@ -17,7 +17,7 @@ namespace Core {
     ///corrected for subpixel sensitivity variations and partially being
     ///within the aperture and the full flux over a pixel from the assumed
     ///PSF.
-    LIB_LOCAL class FluxPair {
+    class LIB_LOCAL FluxPair {
     private:
         double
             ///The simple integral of the PSF over a pixel.

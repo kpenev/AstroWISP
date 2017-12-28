@@ -36,7 +36,7 @@ namespace Core {
 
     ///Declare the minimum functionality expected from input images.
     template<typename DATA_TYPE>
-        LIB_PUBLIC class Image {
+        class LIB_LOCAL Image {
         private:
             ///\brief The pixel values in the image. See values argument of
             ///Image::Image()

@@ -2,7 +2,11 @@
 
 namespace FitPSF {
 
-    void time_this(const std::string message="")
+    void time_this(const std::string 
+#ifdef TRACK_PROGRESS
+                   message
+#endif
+                   = "")
     {
 #ifdef TRACK_PROGRESS
         static clock_t previous_time;

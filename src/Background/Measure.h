@@ -15,7 +15,7 @@
 namespace Background {
 
     ///The minimum requirements for a Background extractor class.
-    LIB_LOCAL class Measure {
+    class LIB_LOCAL Measure {
     public:
         ///@{
         ///\brief Notify the background extractor of (another) source

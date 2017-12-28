@@ -17,7 +17,7 @@
 namespace Core {
 
     ///The minimum requirements for objects specifying where a source is.
-    LIB_PUBLIC class SourceLocation : public Point<double> {
+    class LIB_LOCAL SourceLocation : public Point<double> {
     private:
         ///An identifying string for the source.
         SourceID __id;

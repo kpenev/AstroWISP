@@ -22,7 +22,7 @@
 namespace Background {
 
     ///The base class for the backgnound under a source.
-    LIB_PUBLIC class Source {
+    class LIB_LOCAL Source {
     private:
         double __value, ///< An estimate of the background for the source
                __error; ///< An estimate of the uncertainty in the value.
