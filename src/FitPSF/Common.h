@@ -8,6 +8,7 @@
 #ifndef __PSF_FITTING_H
 #define __PSF_FITTING_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "../Background/Source.h"
 #include "../Background/Measure.h"
 #include "../Core/SourceLocation.h"
@@ -36,7 +37,7 @@ namespace FitPSF {
      *
      * \ingroup FitPSF
      */
-    enum SourceDropReason {
+    enum LIB_PUBLIC SourceDropReason {
         FEW_PIXELS,       ///< Too few pixels were assigned to this source
         MANY_PIXELS,      ///< Too many pixels were assigned to this source
         TOO_BIG,          ///< Contains pixels too far from the source center
@@ -56,8 +57,8 @@ namespace FitPSF {
     };
 
     ///Human readable output of the reasons to drop sources.
-    std::ostream &operator<<(std::ostream &os,
-                             const SourceDropReason &reason);
+    LIB_LOCAL std::ostream &operator<<(std::ostream &os,
+                                       const SourceDropReason &reason);
 
     typedef Core::SubPixelMap GSLSubPixType;
 
@@ -65,7 +66,7 @@ namespace FitPSF {
     ///
     ///See get_fit_sources for a description of the arguments.
     template<class SOURCE_TYPE>
-        void check_fit_source(
+        LIB_LOCAL void check_fit_source(
             SOURCE_TYPE&              last_source,
             const Background::Source& srcbg,
             double                    max_saturated_fraction,
@@ -115,7 +116,7 @@ namespace FitPSF {
     ///\brief Actually discard sources flagged as unsuitable during pixel
     ///selection.
     template<class FIT_SOURCE_TYPE>
-        void drop_unsuitable_fit_sources(
+        LIB_LOCAL void drop_unsuitable_fit_sources(
             ///The list of sources to check.
             std::list< FIT_SOURCE_TYPE * > &psf_fit_sources,
 
@@ -169,7 +170,7 @@ namespace FitPSF {
     ///
     ///See get_fit_sources for a description of the arguments.
     template<class FIT_SOURCE_TYPE>
-        void trim_fit_sources(
+        LIB_LOCAL void trim_fit_sources(
             std::list< FIT_SOURCE_TYPE * >     &psf_fit_sources,
             unsigned                            max_sources,
             std::list< FIT_SOURCE_TYPE * >     &dropped_sources
@@ -208,7 +209,7 @@ namespace FitPSF {
     ///\brief Add a newly constructed PiecewiseBidcubic source to a list.
     ///
     ///See get_fit_sources for descrption of undocumented arguments.
-    void add_new_source(
+    LIB_LOCAL void add_new_source(
             Image<LinearSource>                     &image,
             const Core::SubPixelMap                 *subpix_map,
             const PSF::PiecewiseBicubic             &psf,
@@ -232,7 +233,7 @@ namespace FitPSF {
 
     ///Select the sources to use for PSF fitting.
     template<class FIT_SOURCE_TYPE, class PSF_TYPE>
-        void get_fit_sources(
+        LIB_PUBLIC void get_fit_sources(
             ///The image being processed. Should be a reference to the exact
             ///same variable for all sources in a single image!
             Image<FIT_SOURCE_TYPE>                        &image,

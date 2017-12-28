@@ -6,6 +6,7 @@
 #ifndef __DISPLAY_PSF_MAP_H
 #define __DISPLAY_PSF_MAP_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "FitsImage.h"
 #include "PiecewiseBicubicPSFMap.h"
 #include "EllipticalGaussianPSFMap.h"
@@ -22,7 +23,7 @@
 #include <cstdio>
 #include <fstream>
 
-class VisualizePSFMapConfig : public CommandLineConfig {
+class LIB_PUBLIC VisualizePSFMapConfig : public CommandLineConfig {
 private:
 	///Describes the available command line options.
 	void describe_options();

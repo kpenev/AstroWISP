@@ -9,6 +9,7 @@
 #ifndef __PSF_FIT_PIXEL_H
 #define __PSF_FIT_PIXEL_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "../Background/Source.h"
 #include "../Core/Typedefs.h"
 #include <set>
@@ -21,7 +22,7 @@ namespace FitPSF {
      * \ingroup FitPSF
      */
     template<class SOURCE_TYPE>
-        class Pixel {
+        class LIB_LOCAL Pixel {
         private:
             typedef std::set< SOURCE_TYPE* > SourceSet;
             unsigned long

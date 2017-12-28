@@ -8,6 +8,7 @@
  * \ingroup FitSubpix
  */
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "PhotColumns.h"
 #include "CommandLineUtil.h"
 #include "SubPixelMap.h"
@@ -18,18 +19,28 @@
 #include <gsl/gsl_vector.h>
 
 ///Tags for the fitting methods available.
-enum FIT_METHOD {MultiNest, GSL_simplex, NewtonRaphson,
-	GSL_simulated_annealing};
+enum LIB_LOCAL FIT_METHOD {
+    MultiNest, 
+    GSL_simplex, 
+    NewtonRaphson,
+	GSL_simulated_annealing
+};
 
 ///Tags for the various simulated annealing options.
-enum SIMAN_OPTION {NTRIES, MAX_STEP, BOLTZMAN_K, START_TEMPERATURE,
-	COOLING_RATE, MIN_TEMPERATURE};
+enum LIB_LOCAL SIMAN_OPTION {
+    NTRIES,
+    MAX_STEP,
+    BOLTZMAN_K,
+    START_TEMPERATURE,
+	COOLING_RATE,
+    MIN_TEMPERATURE
+};
 
 ///\brief Everything defined through the command line is accessible as a
 ///method.
 ///
 ///\ingroup FitSubpix
-class FitSubpixCommandLineOptions {
+class LIB_LOCAL FitSubpixCommandLineOptions {
 private:
 	///The input fits frame filenames
 	std::vector<std::string> __frames;

@@ -11,6 +11,7 @@
  * \brief Declares Input/Output interface for the FitPSF tool.
  */
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "../PSF/Typedefs.h"
 #include "../Core/SourceLocation.h"
 #include "../Core/Typedefs.h"
@@ -33,7 +34,7 @@ namespace FitPSF {
     ///At least three columns must be included: ID, x and y.
     ///
     ///White space is ignored (and hence not allowed in filenames).
-    class IOSources {
+    class LIB_LOCAL IOSources {
         private:
             ///The locations of the sources for PSF fitting.
             std::list<Core::SourceLocation> __locations;

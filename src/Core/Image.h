@@ -17,26 +17,26 @@
 
 namespace Core {
 
-    const char MASK_OK              = 0x00; /* everything is ok...      */
-    const char MASK_CLEAR           = MASK_OK;  /* alias                */
+    LIB_PUBLIC const char MASK_OK              = 0x00; /* everything is ok... */
+    LIB_PUBLIC const char MASK_CLEAR           = MASK_OK;  /* alias           */
 
-    const char MASK_FAULT           = 0x01;	/* faulty pixel             */
-    const char MASK_HOT             = 0x02; /* hot (nonlinear) pixel    */
-    const char MASK_COSMIC          = 0x04; /* hit by a cosmic particle */
-    const char MASK_OUTER           = 0x08; /* outer pixel		        */
-    const char MASK_OVERSATURATED   = 0x10; /* oversaturated            */
-    const char MASK_LEAKED          = 0x20; /* leaked (during readout)  */
-    const char MASK_SATURATED = (MASK_OVERSATURATED|MASK_LEAKED);
-    const char MASK_INTERPOLATED    = 0x40; /* interpolated (not real)  */
+    LIB_PUBLIC const char MASK_FAULT           = 0x01;/* faulty pixel         */
+    LIB_PUBLIC const char MASK_HOT             = 0x02;/* hot (nonlinear) pixel*/
+    LIB_PUBLIC const char MASK_COSMIC          = 0x04; /* hit by a cosmic ray */
+    LIB_PUBLIC const char MASK_OUTER           = 0x08; /* outer pixel		  */
+    LIB_PUBLIC const char MASK_OVERSATURATED   = 0x10; /* oversaturated       */
+    LIB_PUBLIC const char MASK_LEAKED          = 0x20; /*leaked during readout*/
+    LIB_PUBLIC const char MASK_SATURATED = (MASK_OVERSATURATED|MASK_LEAKED);
+    LIB_PUBLIC const char MASK_INTERPOLATED    = 0x40; /*interpolated-not real*/
 
-    const char MASK_BAD             = 0x7F; /* any error                */
-    const char MASK_ALL             = MASK_BAD;
+    LIB_PUBLIC const char MASK_BAD             = 0x7F; /* any error           */
+    LIB_PUBLIC const char MASK_ALL             = MASK_BAD;
 
-    const char MASK_NAN             = MASK_FAULT;
+    LIB_PUBLIC const char MASK_NAN             = MASK_FAULT;
 
     ///Declare the minimum functionality expected from input images.
     template<typename DATA_TYPE>
-        class Image {
+        LIB_PUBLIC class Image {
         private:
             ///\brief The pixel values in the image. See values argument of
             ///Image::Image()

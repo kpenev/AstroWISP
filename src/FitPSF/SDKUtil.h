@@ -8,6 +8,7 @@
 #ifndef __SDK_UTIL_H
 #define __SDK_UTIL_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "SDKSource.h"
 #include <gsl/gsl_vector.h>
 
@@ -17,7 +18,7 @@ namespace FitPSF {
 
     ///The \f$\chi^2\f$ that corresponds to a sequence of sources.
     template<class SOURCE_ITERATOR>
-        double calculate_chi2(
+        double LIB_LOCAL calculate_chi2(
             ///A source iterator pointing to the first source in the
             ///sequence.
             SOURCE_ITERATOR first_source,
@@ -34,12 +35,12 @@ namespace FitPSF {
     ///\brief The function to pass to the GSL simplex minimizer, forced to 
     ///assume SOURCE_ITERATOR = GSLSourceIteratorType
     ///and SUBPIX_TYPE = GSLSubPixType
-    double gsl_minimization_function(const gsl_vector *poly_coef,
+    LIB_LOCAL double gsl_minimization_function(const gsl_vector *poly_coef,
                                      void *params);
 
     ///\brief The function to pass to the GSL brent minimizer for finding an 
     ///initial frame S.
-    double gsl_s_minimization_function(double s, void *params);
+    LIB_LOCAL double gsl_s_minimization_function(double s, void *params);
 
 } //End FitPSF namespace.
 

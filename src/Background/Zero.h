@@ -9,6 +9,7 @@
 #ifndef __ZERO_BACKGROUND_H
 #define __ZERO_BACKGROUND_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "../Core/Point.h"
 #include "Measure.h"
 
@@ -16,7 +17,7 @@ namespace Background {
 
     ///\brief The background is assumed already subtracted from the input 
     ///image.
-    class Zero : public Measure {
+    LIB_PUBLIC class Zero : public Measure {
     private:
         ///How many sources have been added so far.
         unsigned __number_sources;

@@ -8,12 +8,13 @@
 #ifndef __PIXEL_ORDER_H
 #define __PIXEL_ORDER_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "Pixel.h"
 
 namespace FitPSF {
 
     ///\brief Pixel comparison predicate.
-    class PixelOrder
+    class LIB_LOCAL PixelOrder
     {
     private:
         double

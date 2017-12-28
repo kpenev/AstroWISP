@@ -8,6 +8,7 @@
  * \ingroup FitSubpix
  */
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "PhotColumns.h"
 #include "CommandLineUtil.h"
 #include "SubPixelMap.h"
@@ -18,7 +19,7 @@
 #include <gsl/gsl_vector.h>
 
 ///Default configuration from file but overwritten by command line options.
-class FitSubPixConfig : public CommandLineConfig {
+class LIB_LOCAL FitSubPixConfig : public CommandLineConfig {
 private:
 	///Describes the available command line options.
 	void describe_options();

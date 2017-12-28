@@ -8,6 +8,7 @@
 #ifndef __PSF_MAP_SOURCE_H
 #define __PSF_MAP_SOURCE_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "TermCalculator.h"
 #include "../IO/H5IODataTree.h"
 #include "../Core/Source.h"
@@ -16,7 +17,7 @@
 
 namespace PSF {
 
-    class MapSource : public Core::Source {
+    class LIB_PUBLIC MapSource : public Core::Source {
     private:
         ///The values of the terms participating in the PSF map.
         Eigen::VectorXd __expansion_terms;

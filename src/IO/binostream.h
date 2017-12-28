@@ -15,7 +15,7 @@
 
 namespace IO {
     ///Performs binary output of column of integer or double values
-    class binostream : virtual public std::ostream {
+    class LIB_PUBLIC binostream : virtual public std::ostream {
     private:
         ///\brief The next set of values to pack to the output stream, 
         ///already converted to properly scaled and offset integers.

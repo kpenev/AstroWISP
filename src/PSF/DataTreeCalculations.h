@@ -9,6 +9,7 @@
 #ifndef __DATA_TREE_CALCULATIONS_H
 #define __DATA_TREE_CALCULATIONS_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "../IO/H5IODataTree.h"
 #include "../IO/OutputArray.h"
 #include "../PSF/EllipticalGaussianMap.h"
@@ -20,7 +21,7 @@ namespace PSF {
     ///
     ///If the fluxes are not directly available, magnitudes and magnitude
     ///zero points must be.
-    void fill_psf_fluxes(IO::H5IODataTree &data);
+    LIB_PUBLIC void fill_psf_fluxes(IO::H5IODataTree &data);
 
     ///\brief Fill The PSF amplitudes in a data tree (computed if necessary).
     ///
@@ -28,7 +29,7 @@ namespace PSF {
     ///information should be and some form of flux information: fluxes or
     ///magnitudes + magnitude zero point. If fluxes are not available (as
     ///well as amplitudes) they will also be filled.
-    void fill_psf_amplitudes(IO::H5IODataTree &data);
+    LIB_PUBLIC void fill_psf_amplitudes(IO::H5IODataTree &data);
 
 } //End IO namespace.
 

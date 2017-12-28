@@ -8,6 +8,7 @@
 #ifndef __FITPSF_SOURCE_H
 #define __FITPSF_SOURCE_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "AmplitudeSaturatedPixel.h"
 #include "Common.h"
 #include "../PSF/EllipticalGaussian.h"
@@ -38,7 +39,7 @@ namespace FitPSF {
      * \ingroup FitPSF
      */
     template<class PSF_TYPE>
-        class Source : public PSF::MapSource {
+        class LIB_LOCAL Source : public PSF::MapSource {
         private:
 
             double

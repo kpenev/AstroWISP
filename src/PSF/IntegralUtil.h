@@ -10,6 +10,7 @@
 #ifndef __INTEGRAL_UTIL_H
 #define __INTEGRAL_UTIL_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "../Core/Typedefs.h"
 #include <vector>
 
@@ -17,11 +18,11 @@ namespace PSF {
 
     ///\brief Fills in the y array with powers up to max_pow, assuming it
     ///already contains some.
-    void fill_powers(std::vector<double> &powers,
-                     Core::vector_size_type max_pow);
+    LIB_LOCAL void fill_powers(std::vector<double> &powers,
+                               Core::vector_size_type max_pow);
 
     ///Initializes a vector of powers.
-    void initialize_powers(
+    LIB_LOCAL void initialize_powers(
             ///The vector to initialize.
             std::vector<double> &powers,
 

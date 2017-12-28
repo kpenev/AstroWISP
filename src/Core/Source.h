@@ -8,6 +8,7 @@
 #ifndef __SOURCE_H
 #define __SOURCE_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "SourceLocation.h"
 #include "Flux.h"
 #include "../Background/Source.h"
@@ -18,7 +19,7 @@
 
 namespace Core {
 
-    class Source : public SourceLocation {
+    class LIB_PUBLIC Source : public SourceLocation {
     private:
         ///Is the source enabled (should it be processed?).
         bool __enabled;

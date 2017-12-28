@@ -6,6 +6,7 @@
 #ifndef __PSFGRID_H
 #define __PSFGRID_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "../Core/ParseCSV.h"
 #include <string>
 #include <vector>
@@ -14,7 +15,7 @@
 
 namespace PSF {
 
-    class Grid {
+    class LIB_PUBLIC Grid {
     public:
         ///Default constructor (grid with no cells).
         Grid() {}

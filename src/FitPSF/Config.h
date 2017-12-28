@@ -8,6 +8,7 @@
 #ifndef __CONFIG_H
 #define __CONFIG_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "../PSF/Grid.h"
 #include "../PSF/Typedefs.h"
 #include "../PSF/TermCalculator.h"
@@ -25,7 +26,7 @@ namespace FitPSF {
     ///options.
     ///
     ///\ingroup FitPSF
-    class Config : public IO::CommandLineConfig {
+    class LIB_PUBLIC Config : public IO::CommandLineConfig {
     private:
         ///Describes the available command line options.
         void describe_options();

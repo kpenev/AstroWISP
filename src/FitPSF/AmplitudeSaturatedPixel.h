@@ -9,6 +9,7 @@
 #ifndef __AMPLITUDE_SATURATED_PIXEL_H
 #define __AMPLITUDE_SATURATED_PIXEL_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "../PSF/EllipticalGaussianIntegralByOrder.h"
 #include <valarray>
 
@@ -20,7 +21,7 @@ namespace FitPSF {
      *
      * \ingroup FitPSF
      */
-    class AmplitudeSaturatedPixel {
+    class LIB_LOCAL AmplitudeSaturatedPixel {
     private:
         double __measured; ///<The measured value of the saturated pixel
 

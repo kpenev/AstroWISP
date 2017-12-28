@@ -9,6 +9,7 @@
 #ifndef __PHOT_COLUMNS_H
 #define __PHOT_COLUMNS_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include <cmath>
 #include <vector>
 #include <string>
@@ -22,7 +23,7 @@
 namespace Phot {
 	///\brief constants to denote the various columns that can be input or 
 	///output by the SubPixPhot tool
-	enum Columns{
+	enum LIB_PUBLIC Columns{
 		id,			///< The HAT-id.
 		x,			///< The x coordinate in the input fits image.
 		y,			///< The y coordinate in the input fits image.
@@ -53,7 +54,7 @@ namespace Phot {
 		num_recognized_columns
 	};
 
-	class ColumnNamesVector : public std::vector<std::string> {
+	class LIB_LOCAL ColumnNamesVector : public std::vector<std::string> {
 	public:
 		ColumnNamesVector() : 
 			std::vector<std::string>(num_recognized_columns)
@@ -85,15 +86,15 @@ namespace Phot {
 		}
 	};
 
-	const ColumnNamesVector column_name;
+	const LIB_LOCAL ColumnNamesVector column_name;
 }
 
-inline double magnitude(double flux, double mag_1adu)
+inline LIB_LOCAL double magnitude(double flux, double mag_1adu)
 {
 	return mag_1adu-2.5*log10(flux);
 }
 
-inline double magnitude_error(double flux, double flux_error)
+inline LIB_LOCAL double magnitude_error(double flux, double flux_error)
 {
 	return -2.5*log10(1.0-flux_error/flux);
 }

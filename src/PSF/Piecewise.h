@@ -5,6 +5,7 @@
 #ifndef __PIECEWISE_PSF_H
 #define __PIECEWISE_PSF_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "PiecewiseCell.h"
 #include "PSF.h"
 #include "../Core/Typedefs.h"
@@ -18,7 +19,7 @@ namespace PSF {
     /**\brief A PSF model consisting of a grid of rectangles each with a 
      * separate intensity function.
      */
-    class Piecewise : public PSF {
+    class LIB_PUBLIC Piecewise : public PSF {
     private:
         std::vector<double>
             ///The horizontal boundaries of the PSF grid cells.

@@ -9,6 +9,7 @@
 #ifndef __MULTI_NEST_FIT_H
 #define __MULTI_NEST_FIT_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "SubPixelMap.h"
 #include "FittingUtil.h"
 
@@ -23,7 +24,7 @@ namespace MultiNestFit {
 	 *
 	 * \ingroup FitSubpix
 	 */
-	class MultiNestSubPixelMap : public SubPixelMap {
+	class LIB_LOCAL MultiNestSubPixelMap : public SubPixelMap {
 	public:
 		///Just name the map, resultion must be set later.
 		MultiNestSubPixelMap() : SubPixelMap("MultiNest sub pixel map") {}
@@ -47,7 +48,7 @@ namespace MultiNestFit {
 
 
 	///The actual function to be maximized by MultiNest: -Log(Chi2).
-	void log_likelihood(
+	LIB_LOCAL void log_likelihood(
 				///\brief On input: the ndim parameters in unit-hypercube
 				///On output: all sensitivities, including the last one.
 				double *Cube,
@@ -64,7 +65,7 @@ namespace MultiNestFit {
 				double &lnew);
 
 	///Perform the actual fitting.
-    void fit(
+    LIB_LOCAL void fit(
         const int&          x_split,
         const int&          y_split,
         const StringList&   frame_filenames,
@@ -76,7 +77,7 @@ namespace MultiNestFit {
 	///
 	///MultiNest doesn not need to the user to do anything. User can use the
 	///arguments in whichever way he/she wants
-	void dumper(
+	LIB_LOCAL void dumper(
 		///Total number of samples in posterior distribution.
 		int &nSamples, 
 

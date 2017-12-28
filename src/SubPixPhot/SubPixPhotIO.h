@@ -8,6 +8,7 @@
 #ifndef __SUBPIX_PHOT_IO_H
 #define __SUBPIX_PHOT_IO_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "SourceInput.h"
 #include "../Core/Source.h"
 #include "../Core/PhotColumns.h"
@@ -21,7 +22,7 @@
 namespace SubPixPhot {
 
     ///Outputs the sources to stdout
-    void output_to_stdout(
+    LIB_LOCAL void output_to_stdout(
         const std::list<IO::OutputSDKSource>&   sources,
         const std::list<Phot::Columns>&         columns,
         double                                  mag_1ADU,
@@ -37,16 +38,18 @@ namespace SubPixPhot {
     ///the  command line with which the command was invoked if argc is 
     ///non-zero, in which case argc and argv should be the same arguments 
     ///that main() received.
-    void write_header(std::ostream      &os,
-                      int               argc = 0,
-                      char**            argv = NULL,
-                      const std::string &version_string = "");
+    LIB_LOCAL void write_header(std::ostream      &os,
+                                int               argc = 0,
+                                char**            argv = NULL,
+                                const std::string &version_string = "");
 
     ///\brief Reads the next source from source_input into the last element 
     ///of sources performing all necessary checks.
     template<class SOURCE_TYPE>
-        static void checked_read_last_source(SourceInput &source_input,
-                                             std::list<SOURCE_TYPE> &sources)
+        LIB_LOCAL static void checked_read_last_source(
+            SourceInput &source_input,
+            std::list<SOURCE_TYPE> &sources
+        )
         {
             source_input >> sources.back();
             if(!source_input) { 
@@ -64,9 +67,10 @@ namespace SubPixPhot {
     ///stream initialized suitably for photometry with the given number of 
     ///apertures. 
     template<class SOURCE_TYPE>
-        void read_sources(
+        LIB_PUBLIC void read_sources(
             SourceInput &source_input,
-            std::list<SOURCE_TYPE> &sources, unsigned num_apertures
+            std::list<SOURCE_TYPE> &sources, 
+            unsigned num_apertures
         )
         {
             while(!source_input.eof()) {
@@ -86,8 +90,8 @@ namespace SubPixPhot {
     ///\brief Fills the source list with the sources contained in the given 
     ///stream, SOURCE_TYPE must have a default constructor.
     template<class SOURCE_TYPE>
-        void read_sources(SourceInput &source_input,
-                          std::list<SOURCE_TYPE> &sources)
+        LIB_PUBLIC void read_sources(SourceInput &source_input,
+                                     std::list<SOURCE_TYPE> &sources)
         {
             while(!source_input.eof()) {
 #ifdef TRACK_PROGRESS
@@ -102,7 +106,7 @@ namespace SubPixPhot {
         }
 
     ///Reads in polynomial expansion coefficients of S,D, K from a file.
-    std::list<double> read_sdk_coef(const std::string &fname);
+    std::list<double> LIB_PUBLIC read_sdk_coef(const std::string &fname);
 
 } //End SubPixPhot namespace.
 

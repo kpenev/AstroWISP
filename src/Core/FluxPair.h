@@ -9,13 +9,15 @@
 #ifndef __FLUX_PAIR_H
 #define __FLUX_PAIR_H
 
+#include "../Core/SharedLibraryExportMacros.h"
+
 namespace Core {
 
     ///\brief A class with two flux components corresponding to the flux
     ///corrected for subpixel sensitivity variations and partially being
     ///within the aperture and the full flux over a pixel from the assumed
     ///PSF.
-    class FluxPair {
+    LIB_LOCAL class FluxPair {
     private:
         double
             ///The simple integral of the PSF over a pixel.

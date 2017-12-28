@@ -12,6 +12,7 @@
 #ifndef __SOURCE_BACKGROUND_H
 #define __SOURCE_BACKGROUND_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "../Core/Image.h"
 #include "../Core/Point.h"
 #include "../Core/NaN.h"
@@ -21,7 +22,7 @@
 namespace Background {
 
     ///The base class for the backgnound under a source.
-    class Source {
+    LIB_PUBLIC class Source {
     private:
         double __value, ///< An estimate of the background for the source
                __error; ///< An estimate of the uncertainty in the value.

@@ -8,6 +8,7 @@
 #ifndef __PSF_FIT_PIXEL_IMAGE_H
 #define __PSF_FIT_PIXEL_IMAGE_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "Pixel.h"
 #include "Source.h"
 #include "Image.h"
@@ -23,7 +24,7 @@ namespace FitPSF {
      * \ingroup FitPSF
      */
     template <class SOURCE_TYPE>
-        class Image : public IO::FitsImage<double> {
+        class LIB_PUBLIC Image : public IO::FitsImage<double> {
         private:
             typedef std::vector< Pixel<SOURCE_TYPE>* > PixelVector;
 
@@ -130,7 +131,7 @@ namespace FitPSF {
             ) const;
 
         //Intentionally hide IO::FitsImage::open, but disable clang warning.
-#ifdef CLANG
+#ifdef TOOLCHAIN_CLANG
     #pragma clang diagnostic push
     #pragma clang diagnostic ignored "-Woverloaded-virtual"
 #endif
@@ -156,7 +157,7 @@ namespace FitPSF {
             virtual ~Image() {delete_allocated_pixels();}
         }; //End Image class.
 
-#ifdef CLANG
+#ifdef TOOLCHAIN_CLANG
     #pragma clang diagnostic pop
 #endif
 

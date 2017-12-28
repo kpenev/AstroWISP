@@ -8,6 +8,7 @@
 #ifndef __OUTPUT_SDK_SOURCE_H
 #define __OUTPUT_SDK_SOURCE_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "../Core/SDKSource.h"
 
 namespace IO {
@@ -18,7 +19,7 @@ namespace IO {
     /// 1. Is the source enabled (for whatever)
     /// 2. The reduced chi2 assigned to this source by some fitting method
     /// 3. The number of pixels assigned to this source in an image
-    class OutputSDKSource : public Core::SDKSource {
+    class LIB_PUBLIC OutputSDKSource : public Core::SDKSource {
     private:
         ///The reduced \f$\chi^2\f$ for the source after PSF fitting.
         double __reduced_chi2,

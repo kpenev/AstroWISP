@@ -8,6 +8,7 @@
 #ifndef __OUTPUT_ARRAY_H
 #define __OUTPUT_ARRAY_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "TranslateToAny.h"
 #include "../Core/Typedefs.h"
 #include "Eigen/Dense"
@@ -24,7 +25,7 @@ namespace IO {
     ///boost::bad_any_cast is thrown. The original data should have been 
     ///either a std::vector<UNIT_TYPE> or an std::valarray<UNIT_TYPE>.
     template<typename UNIT_TYPE>
-        class OutputArray {
+        class LIB_PUBLIC OutputArray {
         private:
             hsize_t __size;				///< The size of the array.
             const UNIT_TYPE *__data;	///< The first element.

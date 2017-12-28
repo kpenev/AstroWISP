@@ -29,7 +29,7 @@
 ///there.
 ///
 ///\ingroup FitSubpix
-class Variance {
+class LIB_LOCAL Variance {
 private:
 	///A vector of the relative weights of the various images.
 	Eigen::RowVectorXd __q;

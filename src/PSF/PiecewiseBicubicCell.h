@@ -2,6 +2,7 @@
  * \brief Defines a PSF cell with intensity given by a bi-cubic polynomial.
  */
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "PiecewiseCell.h"
 #include "CirclePieceIntegral.h"
 #include "../Core/Typedefs.h"
@@ -12,7 +13,7 @@ namespace PSF {
 
     ///\brief A class for Piecewise cells over which the intensity is 
     ///given by a bi-cubic polynomial.
-    class PiecewiseBicubicCell : public PiecewiseCell {
+    class LIB_PUBLIC PiecewiseBicubicCell : public PiecewiseCell {
     private:
         ///The sets of polynomial coefficients.
         ///

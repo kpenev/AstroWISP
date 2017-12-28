@@ -8,6 +8,7 @@
 #ifndef __OVERLAP_GROUPS_H
 #define __OVERLAP_GROUPS_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "Pixel.h"
 #include <set>
 
@@ -15,7 +16,7 @@ namespace FitPSF {
 
     ///Class representing a group of overlapping sources.
     template<class SOURCE_TYPE, class PSF_TYPE>
-        class OverlapGroup {
+        class LIB_LOCAL OverlapGroup {
         private:
             typedef typename std::list< SOURCE_TYPE* > SourceList;
 

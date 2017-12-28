@@ -5,6 +5,7 @@
  * \ingroup PSF
  */
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "MapSource.h"
 #include "../IO/H5IODataTree.h"
 #include "../IO/OutputArray.h"
@@ -13,7 +14,7 @@
 namespace PSF {
 
     ///A container full of MapSource objects.
-    class MapSourceContainer : public std::vector<MapSource> {
+    class LIB_PUBLIC MapSourceContainer : public std::vector<MapSource> {
     public:
         ///Create an empty container.
         MapSourceContainer() {}

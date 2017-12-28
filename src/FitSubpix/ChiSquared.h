@@ -9,6 +9,7 @@
  * \brief Contains the declaration of the ChiSquared class.
  */
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "FitsImage.h"
 #include "Source.h"
 #include "PhotColumns.h"
@@ -25,7 +26,7 @@
 ///
 ///This class is almost obsolete. It is only used by the simplex fitting
 ///method, which itself is obsolete.
-class ChiSquared {
+class LIB_LOCAL ChiSquared {
 private:
 	///The fits frames to use for photometry.
 	std::vector< FitsImage<double> > __images;

@@ -9,6 +9,7 @@
 #ifndef __LINEAR_SOURCE_H
 #define __LINEAR_SOURCE_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "OverlapSource.h"
 #include "../PSF/PiecewiseBicubic.h"
 #include "../Background/Source.h"
@@ -23,7 +24,7 @@ namespace FitPSF {
 
     ///\brief A class for PSF fitting sources whose flux distribution depends
     ///linearly on the PSF paramaters (for a fixed amplitude).
-    class LinearSource :
+    class LIB_PUBLIC LinearSource :
         public OverlapSource<LinearSource, PSF::PiecewiseBicubic> {
     private:
 

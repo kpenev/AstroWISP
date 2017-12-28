@@ -1,6 +1,7 @@
 #ifndef __SDK_PSF_FITTING_H
 #define __SDK_PSF_FITTING_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "SDKSourceBase.h"
 #include "Common.h"
 #include "Source.h"
@@ -16,7 +17,7 @@ namespace FitPSF {
      * \ingroup FitPSF
      */
     template<class SUBPIX_TYPE>
-        class SDKSource : public SDKSourceBase {
+        class LIB_LOCAL SDKSource : public SDKSourceBase {
         private:
             ///\brief The integral of the normalized PSF over all pixels 
             ///belonging to the source

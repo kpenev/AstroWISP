@@ -8,6 +8,7 @@
 #ifndef __PSF_TYPEDEFS_H
 #define __PSF_TYPEDEFS_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include <utility>
 #include <string>
 #include <valarray>
@@ -22,7 +23,7 @@ namespace PSF {
     typedef std::list<MapVariableType> MapVarListType;
 
     ///The allowed PSF/PRF models.
-    enum ModelType {SDK, BICUBIC, ZERO};
+    enum LIB_PUBLIC ModelType {SDK, BICUBIC, ZERO};
 
 }
 

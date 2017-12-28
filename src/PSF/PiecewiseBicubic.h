@@ -7,6 +7,7 @@
 #ifndef __BICUBIC_PIECEWISE_PSF_H
 #define __BICUBIC_PIECEWISE_PSF_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "Piecewise.h"
 #include "PiecewiseBicubicCell.h"
 #include <iostream>
@@ -17,7 +18,7 @@ namespace PSF {
      * where at each grid point the value, the x and y derivatives and the
      * cross-derivative are specified.
      */
-    class PiecewiseBicubic : public Piecewise {
+    class LIB_PUBLIC PiecewiseBicubic : public Piecewise {
     private:
         Core::vector_size_type
             ///The number of cell in the horizontal direction.

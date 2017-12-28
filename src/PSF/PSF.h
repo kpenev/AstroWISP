@@ -8,13 +8,14 @@
 #ifndef __PSF_H
 #define __PSF_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "../Core/Error.h"
 #include <valarray>
 
 namespace PSF {
 
     ///An abstract parent class for all PSF models.
-    class PSF {
+    class LIB_PUBLIC PSF {
     private:
         ///Returns the points at which the line segment betwenn (x1, y) and 
         ///(x2, y) intersects the circle centered at (0,0) with a radius r.

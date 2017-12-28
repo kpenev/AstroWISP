@@ -8,6 +8,7 @@
 #ifndef __SUBPIXEL_MAP_H
 #define __SUBPIXEL_MAP_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "fitsio.h"
 #include "Error.h"
 #include <valarray>
@@ -18,7 +19,7 @@ namespace Core {
     ///\brief The base class for all sub-pixel maps.
     ///
     ///\ingroup Core
-    class SubPixelMap {
+    class LIB_PUBLIC SubPixelMap {
     private:
         std::valarray<double> __sensitivities;
         unsigned __x_res, __y_res;

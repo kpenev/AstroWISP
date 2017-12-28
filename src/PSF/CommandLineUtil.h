@@ -8,6 +8,7 @@
 #ifndef __PSF_COMMAND_LINE_UTIL_H
 #define __PSF_COMMAND_LINE_UTIL_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "EllipticalGaussian.h"
 #include "Grid.h"
 #include "Typedefs.h"
@@ -18,7 +19,7 @@ namespace opt = boost::program_options;
 namespace PSF {
 
     ///Parse a string defining a grid over which piecewise PSFs are defined.
-    void validate(
+    void LIB_PUBLIC validate(
         ///The value to parse into.
         boost::any& value,
 
@@ -33,7 +34,7 @@ namespace PSF {
     );
 
     ///Parse a string identifying a PSF model to use.
-    void validate(
+    void LIB_PUBLIC validate(
         ///The value to parse into.
         boost::any& value,
 

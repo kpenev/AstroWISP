@@ -8,6 +8,7 @@
 #ifndef __HDF5_IO_H
 #define __HDF5_IO_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "TranslateToAny.h"
 #include "H5IODataTree.h"
 #include "OutputArray.h"
@@ -29,7 +30,7 @@ namespace IO {
      *
      * \ingroup IO
      */
-    class SubPixHDF5File : public H5::H5File {
+    class LIB_PUBLIC SubPixHDF5File : public H5::H5File {
     private:
         ///Identifiers for the various HDF5 components.
         enum __H5COMPONENT{
@@ -462,14 +463,14 @@ namespace IO {
     }; //End SubPixHDF5File class.
 
     ///Present a uniform reading function for attributes and datasets.
-    void simple_read_from_h5(const H5::DataSet &dataset,
-                             const H5::DataType &memory_type,
-                             void *destination);
+    LIB_PUBLIC void simple_read_from_h5(const H5::DataSet &dataset,
+                                        const H5::DataType &memory_type,
+                                        void *destination);
 
     ///Present a uniform reading function for attributes and datasets.
-    void simple_read_from_h5(const H5::Attribute &attribute,
-                             const H5::DataType &memory_type,
-                             void *destination);
+    LIB_PUBLIC void simple_read_from_h5(const H5::Attribute &attribute,
+                                        const H5::DataType &memory_type,
+                                        void *destination);
 
     template<class DSET_ATTR, typename UNIT_TYPE>
         void SubPixHDF5File::read_1d(const DSET_ATTR &source,

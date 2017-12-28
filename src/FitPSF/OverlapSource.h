@@ -8,6 +8,7 @@
 #ifndef __OVERLAP_SOURCE_H
 #define __OVERLAP_SOURCE_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "Source.h"
 #include "PixelOrder.h"
 #include "Image.h"
@@ -15,7 +16,7 @@
 namespace FitPSF {
 
     template<class FIT_SOURCE_TYPE, class PSF_TYPE>
-        class OverlapSource : public Source<PSF_TYPE> {
+        class LIB_LOCAL OverlapSource : public Source<PSF_TYPE> {
         private:
 
             typedef std::set< FIT_SOURCE_TYPE* > SourceSet;

@@ -9,6 +9,7 @@
 #ifndef __MEASURE_EXCLUDING_SOURCES_H
 #define __MEASURE_EXCLUDING_SOURCES_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "Measure.h"
 #include "../Core/Image.h"
 #include "../Core/Point.h"
@@ -29,7 +30,7 @@ namespace Background {
     ///within the specified aperture of at least one source. This masked array
     ///can then be used by a non-abstract child class to derive a background 
     ///value and uncertainty.
-    class MeasureExcludingSources : public Measure {
+    class LIB_PUBLIC MeasureExcludingSources : public Measure {
     private:
         ///The radius of the exclusion area around each source.
         double __aperture;

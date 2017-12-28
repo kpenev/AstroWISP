@@ -9,6 +9,7 @@
 #ifndef __ELLIPTICAL_GAUSSIAN_INTEGRAL_WEDGE_H
 #define __ELLIPTICAL_GAUSSIAN_INTEGRAL_WEDGE_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "EllipticalGaussianIntegralByOrder.h"
 
 namespace PSF {
@@ -17,7 +18,7 @@ namespace PSF {
     ///a circle.
     ///
     ///\ingroup PSF
-    class EllipticalGaussianIntegralWedge :
+    class LIB_PUBLIC EllipticalGaussianIntegralWedge :
         public EllipticalGaussianIntegralByOrder {
     private:
         ///The value of the PSF at the midpoint of the wedge chord.

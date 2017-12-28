@@ -8,6 +8,7 @@
 #ifndef __BACKGROUND_COMMAND_LINE_UTIL_H
 #define __BACKGROUND_COMMAND_LINE_UTIL_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "Annulus.h"
 #include "../Core/ParseCSV.h"
 #include "../Core/Error.h"
@@ -23,7 +24,7 @@ namespace opt = boost::program_options;
 namespace Background {
 
     ///Parse a background annulus option
-    void validate(
+    LIB_PUBLIC void validate(
         ///The value to parse into.
         boost::any& value,
 

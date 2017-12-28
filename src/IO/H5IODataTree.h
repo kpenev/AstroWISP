@@ -8,6 +8,7 @@
 #ifndef __H5_OUTPUT_DATA_TREE
 #define __H5_OUTPUT_DATA_TREE
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "CommandLineConfig.h"
 #include "TranslateToAny.h"
 #include "../Background/Annulus.h"
@@ -32,7 +33,7 @@ namespace IO {
 
     ///\brief A property tree to hold all datasets, attributes and links to
     ///output.
-    class H5IODataTree : public IOTreeBase {
+    class LIB_PUBLIC H5IODataTree : public IOTreeBase {
     private:
         ///Tags for the various tools that can fill this tree with data.
         enum TOOL {
@@ -114,7 +115,8 @@ namespace IO {
         );
     }; //End H5IODataTree class.
 
-    std::ostream &operator<<(std::ostream &os, const IOTreeBase &tree);
+    LIB_PUBLIC std::ostream &operator<<(std::ostream &os,
+                                        const IOTreeBase &tree);
 
 } //End IO namespace.
 

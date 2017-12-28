@@ -8,6 +8,7 @@
 #ifndef __SOURCE_INPUT_H
 #define __SOURCE_INPUT_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "../Core/PhotColumns.h"
 #include "../Core/SDKSource.h"
 #include "../IO/OutputSDKSource.h"
@@ -17,7 +18,7 @@
 namespace SubPixPhot {
 
     ///A class that behaves as an input stream for sources
-    class SourceInput {
+    class LIB_PUBLIC SourceInput {
     private:
         ///The stream from which input will be done
         std::istream *__instream;

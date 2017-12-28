@@ -8,11 +8,13 @@
 #ifndef __POINT_H
 #define __POINT_H
 
+#include "../Core/SharedLibraryExportMacros.h"
+
 namespace Core {
 
     ///\brief Representing a 2D point with real valued cartesian coordinates.
     template <class COORD_TYPE>
-        class Point {
+        class LIB_PUBLIC Point {
         private:
             COORD_TYPE
                 ///The abscissa coordinate of the point.

@@ -9,6 +9,7 @@
 #ifndef __ELLIPTICAL_GAUSSIAN_INTEGRAL_BY_ORDER_H
 #define __ELLIPTICAL_GAUSSIAN_INTEGRAL_BY_ORDER_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "WedgeIntegral.h"
 #include <valarray>
 
@@ -16,7 +17,7 @@ namespace PSF {
 
     ///\brief Tags for derivatives of integrals of EllipticalGaussianPSF with
     ///respect to the shape parameters.
-    enum SDKDerivative {
+    enum LIB_PUBLIC SDKDerivative {
         NO_DERIV,	///< The value of the integral
         S_DERIV, 	///< First derivative with respect to S
         D_DERIV,	///< First derivative with respect to D
@@ -37,7 +38,7 @@ namespace PSF {
     ///<a href="SubPixPhot.pdf">description</a> to apply.
     ///
     /// \ingroup PSF
-    class EllipticalGaussianIntegralByOrder {
+    class LIB_PUBLIC EllipticalGaussianIntegralByOrder {
     private:
         ///The tightest upper limit to the error in the integral estimate.
         double __error;

@@ -9,6 +9,7 @@
 #ifndef __SUB_PIXEL_CORRECTED_FLUX_H
 #define __SUB_PIXEL_CORRECTED_FLUX_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "FluxPair.h"
 #include "../Core/Image.h"
 #include "../Core/SubPixelMap.h"
@@ -29,7 +30,7 @@ namespace Core {
     ///
     ///\ingroup SubPixPhot
     template<class SUBPIX_TYPE>
-    class SubPixelCorrectedFlux {
+    class LIB_PUBLIC SubPixelCorrectedFlux {
     private:
         ///The apertures over which to sum up the flux for each source.
         std::list<double> __apertures;

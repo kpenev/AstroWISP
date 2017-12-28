@@ -9,6 +9,7 @@
 #ifndef __CIRCLE_PIECE_INTEGRAL_H
 #define __CIRCLE_PIECE_INTEGRAL_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "IntegralUtil.h"
 #include "../Core/Typedefs.h"
 #include "../Core/Error.h"
@@ -29,7 +30,7 @@ namespace PSF {
      *
      * \ingroup PSF
      */
-    class CirclePieceIntegral {
+    class LIB_LOCAL CirclePieceIntegral {
     private:
         double 
             ///Circle center y coordinate (\f$y_c^2\f$) (see diagram).

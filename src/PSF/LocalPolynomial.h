@@ -8,13 +8,14 @@
 #ifndef LOCAL_POLYNOMIAL_PSF_H
 #define LOCAL_POLYNOMIAL_PSF_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "PSF.h"
 
 namespace PSF {
 
     ///A base class for PSF models which are locally approximated by a polynomial
     ///of up to some degree defined at construction.
-    class LocalPolynomial : public PSF {
+    class LIB_PUBLIC LocalPolynomial : public PSF {
     private:
         ///The minimum order of polynomial coefficients to consider.
         unsigned __min_poly_degree,

@@ -23,6 +23,7 @@
 #ifndef __ELLIPTICAL_GAUSSIAN_PSF_H
 #define __ELLIPTICAL_GAUSSIAN_PSF_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "EllipticalGaussianIntegralRectangle.h"
 #include "EllipticalGaussianIntegralWedge.h"
 #include "PSF.h"
@@ -38,7 +39,7 @@ namespace PSF {
     ///normalized to 1.
     ///
     /// \ingroup PSF
-    class EllipticalGaussian : public PSF {
+    class LIB_PUBLIC EllipticalGaussian : public PSF {
     private:
         static double
             ///Default for __abs_precision

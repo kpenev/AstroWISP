@@ -6,6 +6,7 @@
 #ifndef __PSF_MAP_H
 #define __PSF_MAP_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "PSF.h"
 #include "MapSource.h"
 #include "../Core/Point.h"
@@ -16,7 +17,7 @@
 
 namespace PSF {
 
-    class Map {
+    class LIB_PUBLIC Map {
     private:
         ///The number of terms that the map depends on.
         unsigned __num_terms;

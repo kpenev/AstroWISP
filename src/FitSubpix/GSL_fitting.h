@@ -20,7 +20,7 @@
 #include <iomanip>
 
 ///A subpixel map that sets its sensitivities from a GSL vector.
-class GSLSubPixelMap : public SubPixelMap {
+class LIB_LOCAL GSLSubPixelMap : public SubPixelMap {
 public:
 	///Construct a map with the given resolution.
 	GSLSubPixelMap(unsigned long x_split, unsigned long y_split) :
@@ -38,16 +38,18 @@ public:
 ///
 ///Minimizes the variance of a list of  sources over a set of frames by
 ///varying the subpixel structure used when extracting the fluxes.
-void fit_using_GSL_simplex(const FitSubPixConfig &options);
+LIB_LOCAL void fit_using_GSL_simplex(const FitSubPixConfig &options);
 
 ///\brief Fit for the supixel structure using simulated annealing.
 ///
 ///Minimizes the variance of a list of sources over a set of frames by
 ///varying the subpixel structure used when extracting the fluxes.
-void fit_using_GSL_simulated_annealing(const FitSubPixConfig &options);
+LIB_LOCAL void fit_using_GSL_simulated_annealing(
+    const FitSubPixConfig &options
+);
 
 ///Outputs the subpixel map currently in the given minimizer.
-std::ostream &operator<<(std::ostream &os, 
-				gsl_multimin_fminimizer *minimizer);
+LIB_LOCAL std::ostream &operator<<(std::ostream &os, 
+                                   gsl_multimin_fminimizer *minimizer);
 
 #endif

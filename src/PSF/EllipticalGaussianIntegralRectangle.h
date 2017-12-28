@@ -9,6 +9,7 @@
 #ifndef __ELLIPTICAL_GAUSSIAN_INTEGRAL_RECTANGLE_H
 #define __ELLIPTICAL_GAUSSIAN_INTEGRAL_RECTANGLE_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "EllipticalGaussianIntegralByOrder.h"
 
 namespace PSF {
@@ -17,7 +18,7 @@ namespace PSF {
     ///rectangle.
     ///
     ///\ingroup PSF
-    class EllipticalGaussianIntegralRectangle :
+    class LIB_PUBLIC EllipticalGaussianIntegralRectangle :
         public EllipticalGaussianIntegralByOrder {
     protected:
         ///\brief Use one order higher in the given index estimates of the

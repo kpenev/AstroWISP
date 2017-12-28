@@ -9,15 +9,17 @@
 #ifndef __FITS_IMAGE_H
 #define __FITS_IMAGE_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "../Core/Image.h"
 #include "FitsHeader.h"
 #include "fitsio.h"
+#include "parse_hat_mask.h"
 #include <typeinfo>
 
 namespace IO {
 
     template<typename DATA_TYPE>
-        class FitsImage : public Core::Image<DATA_TYPE> {
+        class LIB_PUBLIC FitsImage : public Core::Image<DATA_TYPE> {
         private:
             ///The value of each pixel. See values argument of Image::Image.
             DATA_TYPE *__pixel_values;
@@ -51,7 +53,13 @@ namespace IO {
 
                 ///The vertical resolution of the image.
                 long y_resolution
-            );
+            ) {
+                if(__mask) delete[] __mask;
+                __mask = parse_hat_mask(mask_string,
+                                        x_resolution,
+                                        y_resolution);
+            }
+
 
         public:
             ///\brief Reads the data in the given fits image(s).
@@ -152,90 +160,6 @@ namespace IO {
                 std::ostringstream msg;
                 msg << "Failed to close " << filename;
                 throw Error::Fits(msg.str().c_str());
-            }
-        }
-
-    template<class DATA_TYPE>
-        void FitsImage<DATA_TYPE>::parse_mask_string(const char *mask_string,
-                                                     long x_resolution,
-                                                     long y_resolution)
-        {
-
-            const char FITS_MASK_MAX = 0x7F;
-            const char FITS_MASK_DEF = 0x01;
-
-            if(__mask) delete[] __mask;
-            __mask = new char[x_resolution * y_resolution]();
-
-            const char *next_term;
-            static int xprev = 0,
-                       yprev = 0,
-                       use_diff = 0,
-                       data = FITS_MASK_DEF;
-
-            next_term = mask_string;
-            while(*next_term) {
-                int x, y, lx, ly;
-                int num_scanned = sscanf(next_term,
-                                         "%d,%d:%d,%d",
-                                         &x, &y, &lx, &ly);
-                if(num_scanned == 0)
-                    x = y = lx = ly = 0;
-                else if(num_scanned == 1) {
-                    if(x > 0) use_diff = 1;
-                    else if(x<0) data=((-x) & FITS_MASK_MAX);
-                    else use_diff = 0;
-                    x = y = lx = ly = 0;
-                } else if(num_scanned == 2)
-                    lx = ly = 1;
-                else if(num_scanned == 3)
-                {
-                    if(lx > 1)
-                        ly = 1;
-                    else if(lx < -1) {
-                        ly = -lx;
-                        lx = 1;
-                    } else
-                        lx = ly = 1;
-                }
-
-                if(lx > 0 && ly > 0)
-                {
-                    if(use_diff) {
-                        x += xprev;
-                        y += yprev;
-                    }
-                    if(x < 0) {
-                        lx += x;
-                        x = 0;
-                    }
-                    if(y < 0) {
-                        ly += y;
-                        y = 0;
-                    }
-                    if( x + lx >= static_cast<int>(x_resolution) ) {
-                        lx = x_resolution - x;
-                    }
-                    if( y + ly >= static_cast<int>(y_resolution) ) {
-                        ly = y_resolution - y;
-                    }
-                    xprev = x;
-                    yprev = y;
-                    for( ; ly > 0 && lx > 0 ; y++, ly-- )
-                    {	
-                        if( y < 0 || y >= static_cast<int>(y_resolution) )
-                            continue;
-                        char *to_update = (
-                            __mask + Core::Image<DATA_TYPE>::index(x, y)
-                        );
-                        for(int l = 0; l < lx; ++l) {
-                            (*to_update) |= data;
-                            ++to_update;
-                        }
-                    }
-                }
-                while (*next_term && *next_term != ' ') ++next_term;
-                while (*next_term == ' ') ++next_term;
             }
         }
 

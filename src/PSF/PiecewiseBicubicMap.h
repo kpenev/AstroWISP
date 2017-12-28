@@ -7,6 +7,7 @@
 #ifndef __PIECEWISE_BICUBIC_PSF_MAP_H
 #define __PIECEWISE_BICUBIC_PSF_MAP_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "PiecewiseBicubic.h"
 #include "Map.h"
 #include "Eigen/Dense"
@@ -23,7 +24,7 @@ namespace PSF {
                                             Eigen::RowMajor> > RowMajorMap;
 
     ///Smoothly varying over an image piecewise bicubic PSF.
-    class PiecewiseBicubicMap : public Map {
+    class LIB_PUBLIC PiecewiseBicubicMap : public Map {
     private:
         std::vector<double> 
             ///The horizontal boundaries between PSF grid cells.

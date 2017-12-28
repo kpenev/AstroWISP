@@ -10,6 +10,7 @@
 #ifndef __WEDGE_INTEGRAL_H
 #define __WEDGE_INTEGRAL_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "IntegralUtil.h"
 #include "../Core/Typedefs.h"
 #include <cmath>
@@ -38,7 +39,7 @@ namespace PSF {
      * \ingroup FitSubpix
      * \ingroup FitPSF
      */
-    class WedgeIntegral {
+    class LIB_LOCAL WedgeIntegral {
     private:
         static const Core::vector_size_type __initial_storage = 30;
 

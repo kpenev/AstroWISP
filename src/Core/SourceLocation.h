@@ -9,6 +9,7 @@
 #ifndef __SOURCE_LOCATION_H
 #define __SOURCE_LOCATION_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "SourceID.h"
 #include "Point.h"
 #include "NaN.h"
@@ -16,7 +17,7 @@
 namespace Core {
 
     ///The minimum requirements for objects specifying where a source is.
-    class SourceLocation : public Point<double> {
+    LIB_PUBLIC class SourceLocation : public Point<double> {
     private:
         ///An identifying string for the source.
         SourceID __id;

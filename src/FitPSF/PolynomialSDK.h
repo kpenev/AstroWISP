@@ -9,6 +9,7 @@
 #ifndef __POLYNOMIAL_SDK_H
 #define __POLYNOMIAL_SDK_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "SDKUtil.h"
 #include "../PSF/EllipticalGaussian.h"
 #include "../PSF/MapSource.h"
@@ -23,7 +24,7 @@ namespace FitPSF {
     ///those parameters are low order polynomials of the image position and 
     ///fits for the coefficients of the polynomials.
     template< class SUBPIX_TYPE >
-        class PolynomialSDK {
+        class LIB_LOCAL PolynomialSDK {
         private:
             double
                 ///Lower limit for the initial search of PSF scale

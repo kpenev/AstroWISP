@@ -9,13 +9,14 @@
 #ifndef __SUB_PIX_PHOT_CONFIG_H
 #define __SUB_PIX_PHOT_CONFIG_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "../IO/CommandLineConfig.h"
 
 namespace SubPixPhot {
 
     ///\brief Default configuration from file but overwritten by command line 
     ///options.
-    class Config : public IO::CommandLineConfig {
+    class LIB_PUBLIC Config : public IO::CommandLineConfig {
     private:
         ///Describes the available command line options.
         void describe_options();

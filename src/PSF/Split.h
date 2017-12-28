@@ -6,13 +6,15 @@
  * \ingroup PSF
  */
 
+#include "../Core/SharedLibraryExportMacros.h"
+
 namespace PSF {
 
     ///\brief Describes a splitting of a rectangular area into smaller 
     ///pieces.
     ///
     ///\ingroup PSF
-    class Split {
+    class LIB_LOCAL Split {
     private:
         int __x_split,///< The number of pieces to split the area in along x.
             __y_split;///< The number of pieces to split the area in along y.

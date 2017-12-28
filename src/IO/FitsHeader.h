@@ -8,6 +8,7 @@
 #ifndef __FITS_HEADER_H
 #define __FITS_HEADER_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "../Core/Error.h"
 #include "fitsio.h"
 #include <list>
@@ -19,7 +20,7 @@ namespace IO {
     ///\brief A structure representing the header of a fits file.
     ///
     ///\ingroup IO
-    class FitsHeader {
+    class LIB_PUBLIC FitsHeader {
     private:
         ///The keywords found in the header.
         std::list<std::string> __keywords;

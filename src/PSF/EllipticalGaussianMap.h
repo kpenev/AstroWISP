@@ -7,6 +7,7 @@
 #ifndef __SDK_PSF_MAP_H
 #define __SDK_PSF_MAP_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "EllipticalGaussian.h"
 #include "Map.h"
 #include "../IO/H5IODataTree.h"
@@ -16,7 +17,7 @@
 namespace PSF {
 
     ///Smoothly varying over the image elliptical Gaussian PSF.
-    class EllipticalGaussianMap : public Map {
+    class LIB_PUBLIC EllipticalGaussianMap : public Map {
     private:
         ///Simplify statements requiring this type.
         typedef Eigen::Map<

@@ -8,13 +8,14 @@
 #ifndef __FLUX_H
 #define __FLUX_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "Typedefs.h"
 
 namespace Core {
 
     ///\brief A class representing the flux measurement for a source, 
     ///including an error estimate and a flag.
-    class Flux {
+    LIB_PUBLIC class Flux {
     private:
         double __value, ///< The estimate of the flux.
                __error; ///< An estimate of the error.

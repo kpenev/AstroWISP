@@ -14,6 +14,7 @@
 #ifndef __ERROR_H
 #define __ERROR_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "fitsio.h"
 #include <sstream>
 #include <iostream>
@@ -29,7 +30,7 @@ namespace Error {
 	///\ingroup SubPixPhot
 	///\ingroup FitSubpix
 	///\ingroup FitPSF
-	class General : public std::exception {
+	class LIB_PUBLIC General : public std::exception {
 	private:
 		std::string message;
 	public:
@@ -51,7 +52,7 @@ namespace Error {
 	///\ingroup SubPixPhot
 	///\ingroup FitSubpix
 	///\ingroup FitPSF
-    class NotImplemented : public General {
+    class LIB_PUBLIC NotImplemented : public General {
     public:
         NotImplemented(const std::string &error_message="")
             : General(error_message)
@@ -63,7 +64,7 @@ namespace Error {
 	///\ingroup SubPixPhot
 	///\ingroup FitSubpix
 	///\ingroup FitPSF
-	class Fits : public General {
+	class LIB_PUBLIC Fits : public General {
 	public:
 		Fits(const std::string &error_message="") : General(error_message) {}
 		virtual const char *what() const throw() {return "Fits file error";}
@@ -73,7 +74,7 @@ namespace Error {
 	///\ingroup SubPixPhot
 	///\ingroup FitSubpix
 	///\ingroup FitPSF
-	class FitsImage : public Fits {
+	class LIB_PUBLIC FitsImage : public Fits {
 	public:
 		FitsImage(const std::string &error_message="") : Fits(error_message) {}
 		virtual const char *what() const throw () {return "Fits image error";}
@@ -83,7 +84,7 @@ namespace Error {
 	///\ingroup SubPixPhot
 	///\ingroup FitSubpix
 	///\ingroup FitPSF
-	class FitsImageOutside : public FitsImage {
+	class LIB_PUBLIC FitsImageOutside : public FitsImage {
 	public:
 		FitsImageOutside(unsigned long x, unsigned long y, unsigned long xres,
 				unsigned long yres, 
@@ -105,7 +106,7 @@ namespace Error {
 	///\ingroup SubPixPhot
 	///\ingroup FitSubpix
 	///\ingroup FitPSF
-	class Runtime : public General {
+	class LIB_PUBLIC Runtime : public General {
 	public:
 		Runtime(const std::string &error_message="") : General(error_message) {}
 		virtual const char *what() const throw() {return "Runtime error";}
@@ -115,7 +116,7 @@ namespace Error {
 	///\ingroup SubPixPhot
 	///\ingroup FitSubpix
 	///\ingroup FitPSF
-	class Type : public Runtime {
+	class LIB_PUBLIC Type : public Runtime {
 	public:
 		Type(const std::string &error_message="") : Runtime(error_message) {}
 		virtual const char *what() const throw()
@@ -126,7 +127,7 @@ namespace Error {
 	///\ingroup SubPixPhot
 	///\ingroup FitSubpix
 	///\ingroup FitPSF
-	class InvalidArgument : public Runtime {
+	class LIB_PUBLIC InvalidArgument : public Runtime {
 	public:
 		InvalidArgument(
 				///Name of the function that received the invalid argument.
@@ -159,7 +160,7 @@ namespace Error {
 	///\ingroup SubPixPhot
 	///\ingroup FitSubpix
 	///\ingroup FitPSF
-	class CommandLine : public Runtime {
+	class LIB_PUBLIC CommandLine : public Runtime {
 	public:
 		CommandLine(const std::string &error_message="") : 
 				Runtime(error_message) {}
@@ -171,7 +172,7 @@ namespace Error {
 	///\ingroup SubPixPhot
 	///\ingroup FitSubpix
 	///\ingroup FitPSF
-    class ParsingError : public Runtime {
+    class LIB_PUBLIC ParsingError : public Runtime {
     public:
         ParsingError(const std::string &error_message = "") :
             Runtime(error_message) {}
@@ -182,7 +183,7 @@ namespace Error {
 	///\ingroup SubPixPhot
 	///\ingroup FitSubpix
 	///\ingroup FitPSF
-	class IO : public Runtime {
+	class LIB_PUBLIC IO : public Runtime {
 	public:
 		IO(const std::string &error_message="") : 
 				Runtime(error_message) {}
@@ -191,7 +192,7 @@ namespace Error {
 	};
 
 	///\brief Input/Output error with an HDF5 file.
-	class HDF5 : public IO {
+	class LIB_PUBLIC HDF5 : public IO {
 	private:
 		std::string __path, __message;
 	public:
@@ -221,7 +222,7 @@ namespace Error {
 	};
 
 	///Signal that an expected component does not exist.
-	class HDF5NotFound : public HDF5 {
+	class LIB_PUBLIC HDF5NotFound : public HDF5 {
 	public:
 		HDF5NotFound(
 				///The path (including the filename) where the error
@@ -245,7 +246,7 @@ namespace Error {
 	///\ingroup SubPixPhot
 	///\ingroup FitSubpix
 	///\ingroup FitPSF
-	class GSLError : public Runtime {
+	class LIB_PUBLIC GSLError : public Runtime {
 	public:
 		GSLError(const std::string &error_message="") :
 			Runtime(error_message) {}
@@ -258,7 +259,7 @@ namespace Error {
 	///\ingroup SubPixPhot
 	///\ingroup FitSubpix
 	///\ingroup FitPSF
-	class CFITSIO : public Runtime {
+	class LIB_PUBLIC CFITSIO : public Runtime {
 	public:
 		CFITSIO(int cfitsio_error_code,
 				const std::string &error_message="")
@@ -279,7 +280,7 @@ namespace Error {
 	///\ingroup SubPixPhot
 	///\ingroup FitSubpix
 	///\ingroup FitPSF
-	class Fitting : public Runtime {
+	class LIB_PUBLIC Fitting : public Runtime {
 	public:
 		Fitting(const std::string &error_message="") :
 			Runtime(error_message) {}

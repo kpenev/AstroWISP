@@ -9,6 +9,7 @@
 #ifndef __BACKGROUND_ANNULUS
 #define __BACKGROUND_ANNULUS
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "../Core/NaN.h"
 #include <string>
 #include <sstream>
@@ -16,7 +17,7 @@
 namespace Background {
 
     ///\brief The annulus used to measure the background under a source.
-    class Annulus {
+    class LIB_PUBLIC Annulus {
     private:
         double __inner_radius, ///< The radius of the inside boundary
                __width; ///< Outer radius=width+inner radius

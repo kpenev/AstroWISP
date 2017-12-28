@@ -9,6 +9,7 @@
 #ifndef __COMMAND_LINE_CONFIG_H
 #define __COMMAND_LINE_CONFIG_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "CommandLineUtil.h"
 #include <boost/program_options.hpp>
 #include "../PSF/EllipticalGaussian.h"
@@ -19,7 +20,7 @@ namespace opt = boost::program_options;
 namespace IO {
 
     ///A base class for configuration of tools using the command line.
-    class CommandLineConfig : public opt::variables_map {
+    class LIB_PUBLIC CommandLineConfig : public opt::variables_map {
     private:
         ///Whether the parsing was successful.
         bool __parsed_ok;

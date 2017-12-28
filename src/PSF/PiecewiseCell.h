@@ -5,13 +5,14 @@
 #ifndef __PIECEWISE_PSF_CELL_H
 #define __PIECEWISE_PSF_CELL_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include <cmath>
 #include <valarray>
 
 namespace PSF {
 
     ///\brief An abstract base class for all cell of a Piecesiwe.
-    class PiecewiseCell {
+    class LIB_LOCAL PiecewiseCell {
     private:
         ///The horizontal size of the cell.
         double __horizontal_size,

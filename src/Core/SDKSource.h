@@ -14,7 +14,7 @@
 namespace Core {
 
     ///Represents a source with a PSF described by an elliptical gaussian.
-    class SDKSource : public Source {
+    class LIB_PUBLIC SDKSource : public Source {
     private:
         double __s,///< The coefficient in front of (x^2+y^2) in the exponent
                __d,///< The coefficient in front of (x^2-y^2) in the exponent

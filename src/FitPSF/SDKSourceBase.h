@@ -8,6 +8,7 @@
 #ifndef __SDK_SOURCE_BASE_H
 #define __SDK_SOURCE_BASE_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "AmplitudeSaturatedPixel.h"
 #include "Source.h"
 #include "../PSF/EllipticalGaussianIntegralByOrder.h"
@@ -25,7 +26,7 @@ namespace FitPSF {
      *
      * \ingroup FitPSF
      */
-    class SDKSourceBase : public Source< PSF::EllipticalGaussian > {
+    class LIB_LOCAL SDKSourceBase : public Source< PSF::EllipticalGaussian > {
     private:
         ///\brief Should first order S,D,K derivatives of the amplitude and
         /// \f$\chi^2\f$ be calculated

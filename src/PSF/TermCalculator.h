@@ -1,6 +1,7 @@
 #ifndef __TERM_CALCULATOR_H
 #define __TERM_CALCULATOR_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "../Core/Typedefs.h"
 #include "../Core/Error.h"
 
@@ -25,7 +26,7 @@ namespace PSF {
 
     ///\brief Same as valarray<double> but on assignment resizes result as 
     ///necessary.
-    class TermValarray : public std::valarray<double> {
+    class LIB_PUBLIC TermValarray : public std::valarray<double> {
         private:
             static unsigned __max_id;
 #ifdef VERBOSE

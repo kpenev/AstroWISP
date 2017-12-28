@@ -8,6 +8,7 @@
 #ifndef __DEFAULT_HDF5_DATA_TYPE
 #define __DEFAULT_HDF5_DATA_TYPE
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "../Core/Error.h"
 #include <H5Cpp.h>
 #include <vector>
@@ -19,7 +20,7 @@
 namespace IO {
 
     template<typename SCALAR>
-        class H5DefaultDataType {
+        class LIB_PUBLIC H5DefaultDataType {
         public:
             static const H5::PredType &native;
             inline static const H5::PredType &file(
@@ -29,7 +30,7 @@ namespace IO {
 
     ///Less than comparison working on the absolute values.
     template<typename T>
-        bool less_than_abs(const T& a, const T &b)
+        LIB_LOCAL bool less_than_abs(const T& a, const T &b)
         {return std::abs(a) < std::abs(b);}
 
     template<>

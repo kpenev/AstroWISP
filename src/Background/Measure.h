@@ -8,13 +8,14 @@
 #ifndef __MEASURE_BACKGROUND_H
 #define __MEASURE_BACKGROUND_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "Source.h"
 #include "../Core/Point.h"
 
 namespace Background {
 
     ///The minimum requirements for a Background extractor class.
-    class Measure {
+    LIB_LOCAL class Measure {
     public:
         ///@{
         ///\brief Notify the background extractor of (another) source

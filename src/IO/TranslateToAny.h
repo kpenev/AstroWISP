@@ -9,6 +9,7 @@
 #ifndef __TRANSLATE_TO_ANY_H
 #define __TRANSLATE_TO_ANY_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include <boost/any.hpp>
 #include <string>
 
@@ -25,7 +26,7 @@ namespace IO {
     ///
     ///\ingroup IO
     template <typename DATA_TYPE>
-        class TranslateToAny
+        class LIB_LOCAL TranslateToAny
         {
         public:
             TranslateToAny() {}

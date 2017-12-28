@@ -8,6 +8,7 @@
 #ifndef __BINARY_SOURCE_OUTPUT_H
 #define __BINARY_SOURCE_OUTPUT_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "../Core/PhotColumns.h"
 #include "../IO/OutputSDKSource.h"
 #include "../IO/binostream.h"
@@ -16,7 +17,7 @@ namespace SubPixPhot {
 
     ///\brief A class that behaves as output stream for sources resulting in 
     ///binary photometry file.
-    class BinarySourceOutput {
+    class LIB_LOCAL BinarySourceOutput {
     private:
         ///The stream where output will be written
         IO::binostream *__outstream;

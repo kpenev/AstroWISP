@@ -47,14 +47,14 @@ namespace Core {
         return true;
     }
 
-    std::istream& operator>>( std::istream& is, SourceID& id )
+    std::istream& operator>>( std::istream& is, SourceID& id)
     {
         is >> id.__id;
         id.__is_hatid=id.parse_hatid();
         return is;
     }
 
-    std::ostream& operator<<( std::ostream& os, const SourceID& id )
+    std::ostream& operator<<( std::ostream& os, const SourceID& id)
     {
         os << id.__id;
         return os;

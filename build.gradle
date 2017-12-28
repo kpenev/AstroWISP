@@ -24,10 +24,12 @@ model {
             }
 
             if (toolChain in Gcc || toolChain in Clang) {
-                if (toolChain in Clang) {
-                    cppCompiler.define "CLANG"
-                }
-                cppCompiler.args "-W", "-Wall"
+                if (toolChain in Gcc)
+                    cppCompiler.define "TOOLCHAIN_GCC"
+                else
+                    cppCompiler.define "TOOLCHAIN_CLANG"
+
+                cppCompiler.args "-W", "-Wall", "-fvisibility=hidden"
 
                 getGSLLinkerArgs().each{linker.args it}
                 linker.args "-l" + ensureLibraryVersion(

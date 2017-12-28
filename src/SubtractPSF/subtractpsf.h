@@ -1,6 +1,7 @@
 #ifndef SUBTRACT_PSF_H__
 #define SUBTRACT_PSF_H__
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "CommandLineUtil.h"
 #include "H5IODataTree.h"
 #include "../IO/SubPixHDF5File.h"
@@ -9,7 +10,7 @@
 #include "H5Cpp.h"
 #include "PiecewiseBicubicPSFMap.h"
 
-class SubtractPSFCfg : public CommandLineConfig {
+class LIB_PUBLIC SubtractPSFCfg : public CommandLineConfig {
 private:
 	///Describes the available command line options.
 	void describe_options();

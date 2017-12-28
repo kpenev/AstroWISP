@@ -9,6 +9,7 @@
 #ifndef __MEASURE_ANNULUS_H
 #define __MEASURE_ANNULUS_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "MeasureExcludingSources.h"
 #include <valarray>
 
@@ -25,7 +26,7 @@ namespace Background {
     ///Pixels within the annulus for a given source are not included in the
     ///background determination if they fall inside the exclusion radius of
     ///another source.
-    class MeasureAnnulus : public MeasureExcludingSources {
+    class LIB_PUBLIC MeasureAnnulus : public MeasureExcludingSources {
     private:
         ///The inner and outer radii of the region around a source used to
         ///deterime the background.

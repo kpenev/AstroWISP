@@ -5,6 +5,7 @@
  * \brief The declaration of the SourceID class.
  */
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "Error.h"
 #include <string>
 #include <cstdio>
@@ -15,7 +16,7 @@
 namespace Core {
 
     ///The two components of the HAT i.d. (primary filed and source number)
-    class SourceID {
+    class LIB_PUBLIC SourceID {
     private:
         ///The string representation of the ID.
         std::string __id;
@@ -105,13 +106,18 @@ namespace Core {
             return __source;
         }
 
-        ///Output the ID to the given stream.
         friend std::istream& operator>>( std::istream& is, SourceID& id );
 
-        ///Read the ID from the given stream.
+        
         friend std::ostream& operator<<(std::ostream& os,
                                         const SourceID& id);
     }; //End SourceID class.
+
+    ///Output the ID to the given stream.
+    LIB_PUBLIC std::ostream& operator<<( std::ostream& os, const SourceID& id);
+
+    ///Read the ID from the given stream.
+    LIB_PUBLIC std::istream& operator>>( std::istream& is, SourceID& id);
 
 } //End Core namespace.
 

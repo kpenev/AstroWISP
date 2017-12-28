@@ -1,6 +1,7 @@
 #ifndef __PIECEWISE_BICUBIC_PSF_SMOOTHING_H
 #define __PIECEWISE_BICUBIC_PSF_SMOOTHING_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "LinearSource.h"
 #include "Eigen/Dense"
 #include <vector>
@@ -9,7 +10,7 @@
 
 namespace FitPSF {
 
-    class PiecewiseBicubicPSFSmoothing {
+    class LIB_LOCAL PiecewiseBicubicPSFSmoothing {
     private:
 
         Eigen::MatrixXd 

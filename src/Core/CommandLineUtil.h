@@ -8,6 +8,7 @@
 #ifndef __CORE_COMMAND_LINE_UTIL_H
 #define __CORE_COMMAND_LINE_UTIL_H
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "ParseCSV.h"
 #include "Typedefs.h"
 #include "Error.h"
@@ -21,7 +22,7 @@ namespace opt = boost::program_options;
 namespace Core {
 
     ///Parse a commas separated list of real values to RealList.
-    void validate(
+    LIB_PUBLIC void validate(
         ///The value to parse into.
         boost::any& value,
 
@@ -36,7 +37,7 @@ namespace Core {
     );
 
     ///Parse a commas separated list of strings to StringList.
-    void validate(
+    LIB_PUBLIC void validate(
         ///The value to parse into.
         boost::any& value,
 
@@ -51,7 +52,7 @@ namespace Core {
     );
 
     ///Parse a list of column names option
-    void validate(
+    LIB_PUBLIC void validate(
         ///The value to parse into.
         boost::any& value,
 

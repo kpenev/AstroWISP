@@ -22,6 +22,7 @@
  * \ingroup FitPSF
  */
 
+#include "../Core/SharedLibraryExportMacros.h"
 #include "Common.h"
 #include "LinearSource.h"
 #include "OverlapGroup.h"
@@ -53,7 +54,7 @@ namespace FitPSF {
 
     ///\brief Generates the vector of bicubic cell parameter sets
     ///corresponding to single PSF parameter=1 while all others=0.
-    void fill_parameter_sets(
+    void LIB_LOCAL fill_parameter_sets(
         ///The vertical grid boundaries defining the PSF cells.
         const std::vector<double> &x_grid,
 
@@ -66,7 +67,7 @@ namespace FitPSF {
 
     ///\brief Selects basis vectors in which the PSF will be decomposed, as
     ///well as the full PSF integral vector.
-    void select_basis_vectors(
+    void LIB_LOCAL select_basis_vectors(
         ///The sets of parameters returned by fill_parameter_sets().
         const std::vector< std::valarray<double> > &parameter_sets,
 
@@ -80,7 +81,7 @@ namespace FitPSF {
 
     ///\brief Generates parameter sets which correspond to the basis vectors
     ///(and full PSF integral vector) instead of to single parameters.
-    void fill_basis_paramater_sets(
+    void LIB_LOCAL fill_basis_paramater_sets(
         ///The sets of parameters returned by fill_parameter_sets().
         const std::vector< std::valarray<double> > &parameter_sets,
 
@@ -94,7 +95,7 @@ namespace FitPSF {
     );
 
     ///Fills in the 3 output matrices and the output vector as appropriate.
-    void prepare_linear_regression(
+    void LIB_LOCAL prepare_linear_regression(
         ///The input list of sources. Modified because of pixel iterations.
         LinearSourceList &fit_sources,
 
@@ -130,7 +131,7 @@ namespace FitPSF {
 
     ///\brief Fills a stack of matrices, containing the outer product of the
     ///PSF terms for each source.
-    void fill_poly_coef_matrix(
+    void LIB_LOCAL fill_poly_coef_matrix(
         ///The input list of sources.
         const LinearSourceList &fit_sources,
 
@@ -141,7 +142,7 @@ namespace FitPSF {
 
     ///\brief Fills the matrix defining the equations of the linear regression
     ///for the full psf expansion.
-    void fill_matrix_to_invert(
+    void LIB_LOCAL fill_matrix_to_invert(
         ///The input list of sources.
         const LinearSourceList &fit_sources,
 
@@ -158,7 +159,7 @@ namespace FitPSF {
 
     ///\brief Creates the RHS vector for the PSF fitting from the pixel
     ///values of the fit sources.
-    void fill_pixel_excesses(
+    void LIB_LOCAL fill_pixel_excesses(
         ///The input list of sources. Modified due to pixel iterations.
         LinearSourceList &fit_sources,
 
@@ -173,7 +174,7 @@ namespace FitPSF {
 
     ///\brief Fills a vector with the final RHS that should be used for the
     ///linear regression of the PSF parameter expansion fit.
-    void fill_flux_scaled_modified_rhs(
+    void LIB_LOCAL fill_flux_scaled_modified_rhs(
         ///The input list of sources.
         const LinearSourceList &fit_sources,
 
@@ -192,7 +193,7 @@ namespace FitPSF {
     ///sources.
     ///
     ///Amplitudes are estimated by summing up all pixel values.
-    void estimate_initial_amplitudes(
+    void LIB_LOCAL estimate_initial_amplitudes(
         ///The input list of sources. On output has the amplitudes set to
         ///their estimated values.
         LinearSourceList &fit_sources,
@@ -206,7 +207,7 @@ namespace FitPSF {
     ///
     ///Amplitudes are estimated by aperture photometry with a flat PSF but the
     ///actual sub-pixel map.
-    void estimate_initial_amplitudes(
+    void LIB_LOCAL estimate_initial_amplitudes(
         ///The input list of sources. On output has the amplitudes set to
         ///their estimated values.
         LinearSourceList &fit_sources,
@@ -228,7 +229,7 @@ namespace FitPSF {
     ///derived by fitting each source's background excesses.
     ///
     ///Returns the root sum square change of the fluxes.
-    double update_fluxes(
+    double LIB_LOCAL update_fluxes(
         ///The list of sources for which to update the flux.
         LinearSourceList &fit_sources,
 
@@ -239,7 +240,7 @@ namespace FitPSF {
 
     ///\brief Performs a single PSF parameter fit, amplitude fit iteration and
     ///returns the sum root square change of the source fluxes.
-    double fit_piecewise_bicubic_psf_step(
+    double LIB_LOCAL fit_piecewise_bicubic_psf_step(
         ///The list of sources to fit. On output their fluxes are updated to
         ///the new best fit value.
         LinearSourceList &fit_sources,
@@ -276,7 +277,7 @@ namespace FitPSF {
 
     ///\brief Counts the total number of shape fitting pixels in all the
     ///given sources.
-    size_t count_pixels(
+    size_t LIB_LOCAL count_pixels(
         ///The list of sources whose pixel counts should be summed up.
         const LinearSourceList &fit_sources,
 
@@ -289,7 +290,7 @@ namespace FitPSF {
     ///\brief Fits for the polynomials giving the values, x, y and xy
     ///derivatives describing a piecewise bicubic PSF smoothly varying over
     ///the image.
-    bool fit_piecewise_bicubic_psf(
+    bool LIB_LOCAL fit_piecewise_bicubic_psf(
         ///The input list of sources (need to be modified to perform the
         ///fit) and on output has the amplitudes set correctly for the best
         ///fit.
@@ -348,7 +349,7 @@ namespace FitPSF {
 
     ///\brief Same as above, but uses an initial PSF map to derive initial
     ///flux estimates.
-    bool fit_piecewise_bicubic_psf(
+    bool LIB_LOCAL fit_piecewise_bicubic_psf(
         ///The input list of sources (need to be modified to perform the
         ///fit) and on output has the amplitudes set correctly for the best
         ///fit.
@@ -409,7 +410,7 @@ namespace FitPSF {
     );
 
     ///Performs the combined amplitude fitting for a group of sources.
-    void fit_group(
+    void LIB_LOCAL fit_group(
         ///The group to fit.
         OverlapGroup<LinearSource, PSF::PiecewiseBicubic> &group,
 
@@ -424,7 +425,7 @@ namespace FitPSF {
     ///fitting.
     ///
     ///Fills in the flux, its error estimate and \f$\chi^2\f$.
-    void fit_dropped_sources(
+    void LIB_LOCAL fit_dropped_sources(
         ///The list of dropped sources.
         LinearSourceList &dropped_sources,
 
@@ -435,7 +436,7 @@ namespace FitPSF {
 
     ///\brief Generates a file containing all the information necessary in
     ///order to reproduce the best fit PSF for any image position.
-    void output_best_fit_psf(
+    void LIB_LOCAL output_best_fit_psf(
         ///The best fit polynomial coefficients giving the expansion of all
         ///PSF parameters as a function of image position.
         const Eigen::VectorXd &best_fit_poly_coef,
