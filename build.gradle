@@ -74,7 +74,7 @@ model {
                 }
             }
         }
-        background(NativeLibrarySpec) {
+        superphotbackground(NativeLibrarySpec) {
             sources.cpp {
                 lib library: "eigen"
                 source {
@@ -90,7 +90,7 @@ model {
                 }
             }
         }
-        psf(NativeLibrarySpec) {
+        superphotpsf(NativeLibrarySpec) {
             sources.cpp {
                 lib library: "eigen"
                 source {
@@ -106,11 +106,11 @@ model {
                 }
             }
         }
-        io(NativeLibrarySpec) {
+        superphotio(NativeLibrarySpec) {
             sources.cpp {
                 lib library: "eigen"
-                lib library: "background"
-                lib library: "psf"
+                lib library: "superphotbackground"
+                lib library: "superphotpsf"
                 source {
                     srcDir "src/IO"
                     include "**/*.cpp"
@@ -123,9 +123,9 @@ model {
         subpixphot(NativeExecutableSpec) {
             sources.cpp {
                 lib library: "eigen"
-                lib library: "background"
-                lib library: "psf"
-                lib library: "io"
+                lib library: "superphotbackground"
+                lib library: "superphotpsf"
+                lib library: "superphotio"
                 source {
                     srcDir "src/SubPixPhot"
                     include "**/*.cpp"
@@ -135,9 +135,9 @@ model {
         fitpsf(NativeExecutableSpec) {
             sources.cpp {
                 lib library: "eigen"
-                lib library: "background"
-                lib library: "psf"
-                lib library: "io"
+                lib library: "superphotbackground"
+                lib library: "superphotpsf"
+                lib library: "superphotio"
                 source {
                     srcDir "src/FitPSF"
                     include "**/*.cpp"
