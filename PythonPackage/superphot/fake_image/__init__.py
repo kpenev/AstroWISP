@@ -1,3 +1,5 @@
+"""Module for creating  fake imagess with stars of various PSFs."""
+
 from glob import glob
 import os.path
 
