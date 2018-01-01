@@ -1,0 +1,221 @@
+<?xml version="1.0" ?>
+<DataReduction type="group" version="0">
+	<PSFFit type="group">
+		<CommandLine type="attribute" value="psffit.cmdline"/>
+		<Background type="link" value="psffit.background"/>
+		<InitialPSFMapGuessFilename type="attribute" value="psffit.initial_guess"/>
+		<CoverGridWithPixels type="attribute" value="psffit.srcpix_cover_bicubic_grid"/>
+		<Magnitude compression="gzip:9" type="dataset" value="psffit.mag"/>
+		<Model type="attribute" value="psffit.model"/>
+        <BicubicSmoothing type="attribute" value="psf.bicubic.smoothing"/>
+		<ImageFileName type="attribute" value="psffit.image"/>
+		<MinConvergenceRate type="attribute" value="psffit.min_convergence_rate"/>
+		<SourceX type="link" value="psffit.source_x"/>
+		<GlobalReducedChi2 type="attribute" value="psffit.global_chi2"/>
+		<Magnitude1ADU type="attribute" value="psffit.magnitude_1adu"/>
+		<S compression="gzip:9" type="dataset" value="psffit.s"/>
+		<Version type="attribute" value="psffit.version"/>
+		<D compression="gzip:9" type="dataset" value="psffit.d"/>
+		<Tool type="attribute" value="psffit.tool"/>
+		<K compression="gzip:9" type="dataset" value="psffit.k"/>
+		<SourceListFileName type="attribute" value="psffit.source_list"/>
+		<SingleReferenceFittedMagnitude compression="gzip:9" type="dataset" value="psffit.sprmagfit">
+			<FitResidual type="attribute" value="psffit.sprmagfit_residual"/>
+			<NumberSources type="attribute" value="psffit.sprmagfit_all_src"/>
+			<NumberFitSources type="attribute" value="psffit.sprmagfit_fit_src"/>
+		</SingleReferenceFittedMagnitude>
+		<SourceY type="link" value="psffit.source_y"/>
+		<MaxReducedChiSquared type="attribute" value="psffit.max_chi2"/>
+		<MinS type="attribute" value="psffit.minS"/>
+		<MaxS type="attribute" value="psffit.maxS"/>
+		<Flux compression="gzip:9" type="dataset" value="psffit.flux"/>
+		<MagnitudeError compression="gzip:9" type="dataset" value="psffit.mag_err"/>
+		<SourceID type="link" value="psffit.source_id"/>
+		<Amplitude compression="gzip:9" type="dataset" value="psffit.amplitude"/>
+		<MinBackgroundPixels type="attribute" value="psffit.min_bg_pix"/>
+		<AssumedImageGain type="attribute" value="psffit.gain"/>
+		<SpatialOrder type="attribute" value="psffit.spatial_order"/>
+		<UseSimplexMethod type="attribute" value="psffit.use_simplex"/>
+		<MinSourceSignalToNoise type="attribute" value="psffit.srcpix_min_signal_to_noise"/>
+		<MaxSourceSaturationFraction type="attribute" value="psffit.srcpix_max_sat_frac"/>
+        <Map type="group">
+            <Terms type="attribute" value="psffit.terms"/>
+            <Variables type="dataset" value="psffit.variables">
+                <Names type="attribute" value="psffit.varnames">
+                </Names>
+            </Variables>
+            <Coefficients type="dataset" value="psffit.psfmap"/>
+        </Map>
+		<AmplitudeError compression="gzip:9" type="dataset" value="psffit.amplitude_err"/>
+		<SubPixelMap type="dataset" value="psffit.subpixmap"/>
+		<FluxError compression="gzip:9" type="dataset" value="psffit.flux_err"/>
+		<MinSourcePixels type="attribute" value="psffit.srcpix_min_pix"/>
+		<MasterReferenceFittedMagnitude compression="gzip:9" type="dataset" value="psffit.mprmagfit">
+			<NumberSources type="attribute" value="psffit.mprmagfit_all_src"/>
+			<FitResidual type="attribute" value="psffit.mprmagfit_residual"/>
+			<NumberFitSources type="attribute" value="psffit.mprmagfit_fit_src"/>
+		</MasterReferenceFittedMagnitude>
+		<FitTolerance type="attribute" value="psffit.tolerance"/>
+		<BackgroundError type="link" value="psffit.background_err"/>
+		<SignalToNoise compression="gzip:9" type="dataset" value="psffit.sigtonoise"/>
+		<MaxSourceSize type="attribute" value="psffit.srcpix_max_aperture"/>
+		<Grid type="attribute" value="psffit.grid"/>
+		<MaxExponentArguments type="attribute" value="psffit.max_exp_coef"/>
+		<MaxAbsoluteAmplitudeChange type="attribute" value="psffit.max_abs_amplitude_change"/>
+		<MaxFitSources type="attribute" value="psffit.srcpix_max_count"/>
+		<MaxSourcePixels type="attribute" value="psffit.srcpix_max_pix"/>
+		<PixelRejectionThreshold type="attribute" value="psffit.pixrej"/>
+		<Chi2 compression="gzip:9" type="dataset" value="psffit.chi2"/>
+		<NumberPixels compression="gzip:9;shuffle" type="dataset" value="psffit.npix"/>
+		<MaxFitIterations type="attribute" value="psffit.max_iterations"/>
+		<InitialAmplitudeAperture type="attribute" value="psffit.initial_aperture"/>
+		<QualityFlag compression="gzip:9;shuffle" type="dataset" value="psffit.quality"/>
+		<MaxRelativeAmplitudeChange type="attribute" value="psffit.max_rel_amplitude_change"/>
+	</PSFFit>
+	<SingleReferenceFittingConfiguration type="group">
+		<ErrorAveraging type="attribute" value="spr_config.error_avg"/>
+		<FunctionType type="attribute" value="spr_config.func_type"/>
+		<RejectionLevel type="attribute" value="spr_config.rej_level"/>
+		<NoiseOffset type="attribute" value="spr_config.noise_offset"/>
+		<MaxMagnitudeError type="attribute" value="spr_config.max_mag_err"/>
+		<Filter type="attribute" value="spr_config.filter"/>
+		<MaxStars type="attribute" value="spr_config.stars"/>
+		<MaxRejectionIterations type="attribute" value="spr_config.rej_iter"/>
+		<NumberMeasurementsWeightingPower type="attribute" value="spr_config.count_weight"/>
+		<Function type="attribute" value="spr_config.func"/>
+	</SingleReferenceFittingConfiguration>
+	<AperturePhotometry type="group">
+		<AssumedImageGain type="attribute" value="apphot.gain"/>
+		<Version type="attribute" value="apphot.version"/>
+		<Background type="link" value="apphot.background"/>
+		<Tool type="attribute" value="apphot.tool"/>
+		<SubPixelMap type="dataset" value="apphot.subpixmap"/>
+		<BackgroundError type="link" value="apphot.background_err"/>
+		<Aperture_%(ap_ind)03d type="group">
+			<RawMagnitudeError compression="gzip:9" type="dataset" value="apphot.mag_err"/>
+			<Size type="attribute" value="apphot.aperture"/>
+			<MasterReferenceFittedMagnitude compression="gzip:9" type="dataset" value="apphot.mprmagfit">
+				<NumberFitSources type="attribute" value="apphot.mprmagfit_fit_src"/>
+				<FitResidual type="attribute" value="apphot.mprmagfit_residual"/>
+				<NumberSources type="attribute" value="apphot.mprmagfit_all_src"/>
+			</MasterReferenceFittedMagnitude>
+			<SingleReferenceFittedMagnitude compression="gzip:9" type="dataset" value="apphot.sprmagfit">
+				<NumberFitSources type="attribute" value="apphot.sprmagfit_fit_src"/>
+				<NumberSources type="attribute" value="apphot.sprmagfit_all_src"/>
+				<FitResidual type="attribute" value="apphot.sprmagfit_residual"/>
+			</SingleReferenceFittedMagnitude>
+			<RawMagnitude compression="gzip:9" type="dataset" value="apphot.mag"/>
+			<QualityFlag compression="gzip:9;shuffle" type="dataset" value="apphot.quality"/>
+		</Aperture_%(ap_ind)03d>
+		<SourceY type="link" value="apphot.source_y"/>
+		<SourceX type="link" value="apphot.source_x"/>
+		<CommandLine type="attribute" value="apphot.cmdline"/>
+		<PSFMap type="link" value="apphot.psfmap"/>
+		<SourceID type="link" value="apphot.source_id"/>
+		<ExtraError type="attribute" value="apphot.const_error"/>
+	</AperturePhotometry>
+	<Background type="group">
+		<Version type="attribute" value="bg.version"/>
+		<NumberPixels compression="gzip:9;shuffle" type="dataset" value="bg.npix"/>
+		<MinPixels type="attribute" value="bg.min_pix"/>
+		<ImageFileName type="attribute" value="bg.image"/>
+		<Error compression="gzip:9" type="dataset" value="bg.error"/>
+		<Tool type="attribute" value="bg.tool"/>
+		<Annulus type="attribute" value="bg.annulus"/>
+		<CommandLine type="attribute" value="bg.cmdline"/>
+		<SourceID type="link" value="bg.source_id"/>
+		<SourceListFileName type="attribute" value="bg.source_list"/>
+		<Value compression="gzip:9" type="dataset" value="bg.value"/>
+		<Model type="attribute" value="bg.model"/>
+		<SourceX type="link" value="bg.source_x"/>
+		<SourceY type="link" value="bg.source_y"/>
+	</Background>
+	<SkyToFrameTransformations type="group">
+		<full_strans compression="gzip:9" type="dataset" value="skytoframe.full_summary"/>
+		<shrunk_trans compression="gzip:9" type="dataset" value="skytoframe.shrunk">
+			<CatalogueEpoch type="attribute" value="skytoframe.shrunk_catalogue_epoch"/>
+			<Tool type="attribute" value="skytoframe.shrunk_tool"/>
+			<Catalogue type="attribute" value="skytoframe.shrunk_catalogue"/>
+			<CatalogueQuerryVersion type="attribute" value="skytoframe.shrunk_catalogue_version"/>
+			<CatalogueCommandLine type="attribute" value="skytoframe.shrunk_catalogue_cmdline"/>
+			<CatalogueQuerryTool type="attribute" value="skytoframe.shrunk_catalogue_tool"/>
+			<CommandLine type="attribute" value="skytoframe.shrunk_cmdline"/>
+			<CatalogueFilter type="attribute" value="skytoframe.shrunk_catalogue_filter"/>
+			<Version type="attribute" value="skytoframe.shrunk_version"/>
+			<SkyProjection type="attribute" value="skytoframe.shrunk_sky_projection"/>
+		</shrunk_trans>
+		<full_match compression="gzip:9" type="dataset" value="skytoframe.full_matched"/>
+		<full_trans compression="gzip:9" type="dataset" value="skytoframe.full">
+			<CatalogueFilter type="attribute" value="skytoframe.full_catalogue_filter"/>
+			<Tool type="attribute" value="skytoframe.full_tool"/>
+			<CommandLine type="attribute" value="skytoframe.full_cmdline"/>
+			<Version type="attribute" value="skytoframe.full_version"/>
+			<CatalogueQuerryVersion type="attribute" value="skytoframe.full_catalogue_version"/>
+			<CatalogueEpoch type="attribute" value="skytoframe.full_catalogue_epoch"/>
+			<CatalogueCommandLine type="attribute" value="skytoframe.full_catalogue_cmdline"/>
+			<Catalogue type="attribute" value="skytoframe.full_catalogue"/>
+			<CatalogueQuerryTool type="attribute" value="skytoframe.full_catalogue_tool"/>
+			<SkyProjection type="attribute" value="skytoframe.full_sky_projection"/>
+		</full_trans>
+		<nomatch type="link" value="skytoframe.chosen_unmatched"/>
+		<match type="link" value="skytoframe.chosen_matched"/>
+		<strans type="link" value="skytoframe.chosen_summary"/>
+		<shrunk_nomatch compression="gzip:9" type="dataset" value="skytoframe.shrunk_unmatched"/>
+		<trans type="link" value="skytoframe.chosen"/>
+		<full_nomatch compression="gzip:9" type="dataset" value="skytoframe.full_unmatched"/>
+		<shrunk_strans compression="gzip:9" type="dataset" value="skytoframe.shrunk_summary"/>
+		<shrunk_match compression="gzip:9" type="dataset" value="skytoframe.shrunk_matched"/>
+	</SkyToFrameTransformations>
+	<FITSHeader compression="gzip:9" type="dataset" value="fitsheader"/>
+	<MasterReferenceFittingConfiguration type="group">
+		<Filter type="attribute" value="mpr_config.filter"/>
+		<MaxMagnitudeError type="attribute" value="mpr_config.max_mag_err"/>
+		<ErrorAveraging type="attribute" value="mpr_config.error_avg"/>
+		<RejectionLevel type="attribute" value="mpr_config.rej_level"/>
+		<NoiseOffset type="attribute" value="mpr_config.noise_offset"/>
+		<NumberMeasurementsWeightingPower type="attribute" value="mpr_config.count_weight"/>
+		<Function type="attribute" value="mpr_config.func"/>
+		<MaxRejectionIterations type="attribute" value="mpr_config.rej_iter"/>
+		<FunctionType type="attribute" value="mpr_config.func_type"/>
+		<MaxStars type="attribute" value="mpr_config.stars"/>
+	</MasterReferenceFittingConfiguration>
+	<ProjectedSources type="group">
+		<Catalogue type="attribute" value="projsrc.catalogue"/>
+		<Version type="attribute" value="projsrc.version"/>
+		<Transformation type="link" value="projsrc.transformation"/>
+		<X compression="gzip:9" type="dataset" value="projsrc.x"/>
+		<Y compression="gzip:9" type="dataset" value="projsrc.y"/>
+		<CommandLine type="attribute" value="projsrc.cmdline"/>
+		<SourceID compression="gzip:9;shuffle" type="dataset" value="projsrc.srcid"/>
+		<CatalogueQuerryVersion type="attribute" value="projsrc.catalogue_version"/>
+		<CatalogueQuerryTool type="attribute" value="projsrc.catalogue_tool"/>
+		<Tool type="attribute" value="projsrc.tool"/>
+		<CatalogueEpoch type="attribute" value="projsrc.catalogue_epoch"/>
+		<CatalogueFilter type="attribute" value="projsrc.catalogue_filter"/>
+		<CatalogueCommandLine type="attribute" value="projsrc.catalogue_cmdline"/>
+	</ProjectedSources>
+	<ExtractedSources type="group">
+		<FistarPSFMap type="group">
+			<CommandLine type="attribute" value="srcfind.psfmap_cmdline"/>
+			<Model type="attribute" value="srcfind.psfmap_model"/>
+			<MapCoefficients type="dataset" value="srcfind.psfmap_coef">
+				<Scale type="attribute" value="srcfind.psfmap_scale"/>
+				<Offset type="attribute" value="srcfind.psfmap_offset"/>
+			</MapCoefficients>
+			<Tool type="attribute" value="srcfind.psfmap_tool"/>
+			<Version type="attribute" value="srcfind.psfmap_version"/>
+			<sdkfit compression="gzip:9" type="dataset" value="srcfind.psfmap_transdump"/>
+		</FistarPSFMap>
+		<full_fistar compression="gzip:9" type="dataset" value="srcfind.full">
+			<Version type="attribute" value="srcfind.full_version"/>
+			<Tool type="attribute" value="srcfind.full_tool"/>
+			<CommandLine type="attribute" value="srcfind.full_cmdline"/>
+		</full_fistar>
+		<fistar type="link" value="srcfind.chosen"/>
+		<shrunk_fistar compression="gzip:9" type="dataset" value="srcfind.shrunk">
+			<CommandLine type="attribute" value="srcfind.shrunk_cmdline"/>
+			<Tool type="attribute" value="srcfind.shrunk_tool"/>
+			<Version type="attribute" value="srcfind.shrunk_version"/>
+		</shrunk_fistar>
+	</ExtractedSources>
+</DataReduction>
