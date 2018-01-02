@@ -12,11 +12,13 @@ import numpy
 import h5py
 import pyfits
 
+module_path = os.path.abspath(os.path.dirname(__file__))
+
 sys.path.insert(
     0,
     os.path.abspath(
         os.path.join(
-            os.path.dirname(__file__),
+            module_path,
             '..',
             '..'
         )
@@ -34,8 +36,19 @@ from tests.fitpsf.utils import make_image_and_source_list
 class TestPiecewiseBicubic(unittest.TestCase):
     """Test piecewise bicubic PSF fitting on noiseless images."""
 
-    fitpsf_executable = '../../src/build/exe/fitpsf/release/fitpsf'
-
+    fitpsf_executable = os.path.abspath(
+        os.path.join(
+            module_path,
+            '..',
+            '..',
+            '..',
+            'build',
+            'exe',
+            'fitpsf',
+            'release',
+            'fitpsf'
+        )
+    )
 
     #TODO: consider splitting into several functions
     #pylint: disable=too-many-locals
@@ -156,6 +169,8 @@ class TestPiecewiseBicubic(unittest.TestCase):
 
             return ','.join(str(b) for b in boundaries)
 
+        if extra_variables is None:
+            extra_variables = []
         for subpix_map in [numpy.ones((1, 1)),
                            numpy.ones((2, 2)),
                            numpy.array([[1.99, 0.01], [0.01, 1.99]]),
@@ -163,7 +178,9 @@ class TestPiecewiseBicubic(unittest.TestCase):
                            numpy.array([[1.9], [0.1]]),
                            numpy.array([[2.0, 0.0], [0.0, 2.0]]),
                            numpy.array([[0.0, 0.0], [0.0, 4.0]])]:
-            fname_start = 'test_data/noiseless_bicubic_psf.'
+            fname_start = os.path.join(module_path,
+                                       'test_data',
+                                       'noiseless_bicubic_psf.')
             filenames = dict(
                 source_list=(fname_start + 'srclist'),
             )
@@ -184,13 +201,14 @@ class TestPiecewiseBicubic(unittest.TestCase):
                                         str(image_index)
                                         +
                                         '.hdf5')
+                print('Image sources:\n' + repr(image_sources))
                 make_image_and_source_list(
                     sources=[dict(x=src['x'],
                                   y=src['y'],
                                   psf=PiecewiseBicubicPSF(**src['psf_args']),
                                   **{var: src[var] for var in extra_variables})
                              for src in image_sources],
-                    extra_variables=(extra_variables or []),
+                    extra_variables=extra_variables,
                     subpix_map=subpix_map,
                     filenames=filenames
                 )
@@ -211,8 +229,10 @@ class TestPiecewiseBicubic(unittest.TestCase):
             files_to_cleanup.append(subpix_fname)
 
             with open(fname_start + 'cfg', 'w') as config:
-                with open('test_data/config_template.cfg', 'r') as\
-                        config_template:
+                with open(
+                    os.path.join(module_path, 'test_data', 'config_template.cfg'),
+                    'r'
+                ) as config_template:
                     config.write(
                         config_template.read()
                         %
@@ -221,11 +241,11 @@ class TestPiecewiseBicubic(unittest.TestCase):
                             input_columns=','.join(['ID', 'x', 'y'] + extra_variables),
                             terms=psffit_terms,
                             grid=(
-                                grid_boundary_str(sources[0][0]['psf_args']['x_boundaries'])
+                                grid_boundary_str(sources[0][0]['psf_args']['boundaries']['x'])
                                 +
                                 ';'
                                 +
-                                grid_boundary_str(sources[0][0]['psf_args']['y_boundaries'])
+                                grid_boundary_str(sources[0][0]['psf_args']['boundaries']['y'])
                             ),
                             subpix_fname=subpix_fname
                         )
@@ -371,41 +391,50 @@ class TestPiecewiseBicubic(unittest.TestCase):
     def test_four_overlapping_sources(self):
         """Test fitting an image containing 4 overlapping sources."""
 
-        psf_args = dict(values=numpy.zeros((3, 3)),
-                        d_dx=numpy.zeros((3, 3)),
-                        d_dy=numpy.zeros((3, 3)),
-                        d2_dxdy=numpy.zeros((3, 3)),
-                        x_boundaries=numpy.array([-2.2, 0.0, 2.2]),
-                        y_boundaries=numpy.array([-1.4, 0.0, 1.4]))
+        psf_parameters = dict(
+            values=numpy.zeros((3, 3)),
+            d_dx=numpy.zeros((3, 3)),
+            d_dy=numpy.zeros((3, 3)),
+            d2_dxdy=numpy.zeros((3, 3))
+        )
 
-        psf_args['values'][1, 1] = 1.0
+        boundaries = dict(
+            x=numpy.array([-2.2, 0.0, 2.2]),
+            y=numpy.array([-1.4, 0.0, 1.4])
+        )
+
+        psf_parameters['values'][1, 1] = 1.0
 
         sources = [dict(x=12.5,
                         y=13.5,
-                        psf_args=dict(psf_args))]
+                        psf_args=dict(psf_parameters=psf_parameters,
+                                      boundaries=boundaries))]
 
 
-        psf_args['d_dx'] = numpy.zeros((3, 3))
-        psf_args['d_dy'] = numpy.zeros((3, 3))
-        psf_args['d_dx'][1, 1] = 1.0
+        psf_parameters['d_dx'] = numpy.zeros((3, 3))
+        psf_parameters['d_dy'] = numpy.zeros((3, 3))
+        psf_parameters['d_dx'][1, 1] = 1.0
         sources.append(dict(x=16.5,
                             y=13.5,
-                            psf_args=dict(psf_args)))
+                            psf_args=dict(psf_parameters=psf_parameters,
+                                          boundaries=boundaries)))
 
-        psf_args['d_dx'] = numpy.zeros((3, 3))
-        psf_args['d_dy'] = numpy.zeros((3, 3))
-        psf_args['d_dy'][1, 1] = 1.0
+        psf_parameters['d_dx'] = numpy.zeros((3, 3))
+        psf_parameters['d_dy'] = numpy.zeros((3, 3))
+        psf_parameters['d_dy'][1, 1] = 1.0
         sources.append(dict(x=12.5,
                             y=15.5,
-                            psf_args=dict(psf_args)))
+                            psf_args=dict(psf_parameters=psf_parameters,
+                                          boundaries=boundaries)))
 
-        psf_args['d_dx'] = numpy.zeros((3, 3))
-        psf_args['d_dy'] = numpy.zeros((3, 3))
-        psf_args['d_dx'][1, 1] = 1.0
-        psf_args['d_dy'][1, 1] = 1.0
+        psf_parameters['d_dx'] = numpy.zeros((3, 3))
+        psf_parameters['d_dy'] = numpy.zeros((3, 3))
+        psf_parameters['d_dx'][1, 1] = 1.0
+        psf_parameters['d_dy'][1, 1] = 1.0
         sources.append(dict(x=16.5,
                             y=15.5,
-                            psf_args=dict(psf_args)))
+                            psf_args=dict(psf_parameters=psf_parameters,
+                                          boundaries=boundaries)))
 
         self.run_test(sources=[sources], psffit_terms='{1, x*x, y*y}')
 
