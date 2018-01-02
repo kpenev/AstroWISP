@@ -49,6 +49,7 @@ class TestPiecewiseBicubic(unittest.TestCase):
             'fitpsf'
         )
     )
+    fitpsf_executable = '/home/kpenev/projects/svn/HATpipe/source/subpixel_sensitivity/src/build/exe/fitpsf/debug/fitpsf'
 
     #TODO: consider splitting into several functions
     #pylint: disable=too-many-locals
@@ -80,8 +81,8 @@ class TestPiecewiseBicubic(unittest.TestCase):
         assert psffit_terms[-1] == '}'
 
         num_sources = len(sources)
-        num_x_boundaries = len(sources[0]['psf_args']['x_boundaries']) - 2
-        num_y_boundaries = len(sources[0]['psf_args']['y_boundaries']) - 2
+        num_x_boundaries = len(sources[0]['psf_args']['boundaries']['x']) - 2
+        num_y_boundaries = len(sources[0]['psf_args']['boundaries']['y']) - 2
 
         #Using eval here is perfectly reasonable.
         #pylint: disable=eval-used
@@ -120,7 +121,7 @@ class TestPiecewiseBicubic(unittest.TestCase):
                                                 'd_dy',
                                                 'd2_dxdy']):
                 expected_params[src_ind, var_ind, :, :] = (
-                    src['psf_args'][var_name][1:-1, 1:-1]
+                    src['psf_args']['psf_parameters'][var_name][1:-1, 1:-1]
                 )
 
         plus = (expected_params + fit_params)
@@ -281,12 +282,14 @@ class TestPiecewiseBicubic(unittest.TestCase):
                     x=15.0,
                     y=15.0,
                     psf_args=dict(
-                        values=values,
-                        d_dx=d_dx,
-                        d_dy=d_dy,
-                        d2_dxdy=d2_dxdy,
-                        x_boundaries=numpy.array([-2.0, 0.0, 2.0]),
-                        y_boundaries=numpy.array([-1.0, 0.0, 1.0])
+                        psf_parameters=dict(
+                            values=values,
+                            d_dx=d_dx,
+                            d_dy=d_dy,
+                            d2_dxdy=d2_dxdy
+                        ),
+                        boundaries=dict(x=numpy.array([-2.0, 0.0, 2.0]),
+                                        y=numpy.array([-1.0, 0.0, 1.0]))
                     )
                 )
             ]],
@@ -296,74 +299,82 @@ class TestPiecewiseBicubic(unittest.TestCase):
     def test_isolated_sources(self):
         """Test fitting an image containing 8 well isolated sources."""
 
-        psf_args = dict(values=numpy.zeros((3, 3)),
-                        d_dx=numpy.zeros((3, 3)),
-                        d_dy=numpy.zeros((3, 3)),
-                        d2_dxdy=numpy.zeros((3, 3)),
-                        x_boundaries=numpy.array([-2.0, 0.0, 2.0]),
-                        y_boundaries=numpy.array([-1.4, 0.0, 1.4]))
+        psf_parameters = dict(values=numpy.zeros((3, 3)),
+                              d_dx=numpy.zeros((3, 3)),
+                              d_dy=numpy.zeros((3, 3)),
+                              d2_dxdy=numpy.zeros((3, 3)))
+        boundaries=dict(x=numpy.array([-2.0, 0.0, 2.0]),
+                        y=numpy.array([-1.4, 0.0, 1.4]))
 
         sources = []
 
-        psf_args['values'][1, 1] = 1.0
+        psf_parameters['values'][1, 1] = 1.0
         sources.append(dict(x=15.0,
                             y=15.0,
-                            psf_args=dict(psf_args)))
-        psf_args['d_dx'] = numpy.zeros((3, 3))
+                            psf_args=dict(psf_parameters=dict(psf_parameters),
+                                          boundaries=boundaries)))
+        psf_parameters['d_dx'] = numpy.zeros((3, 3))
 
-        psf_args['d_dx'][1, 1] = 1.0
+        psf_parameters['d_dx'][1, 1] = 1.0
         sources.append(dict(x=45.0,
                             y=15.0,
-                            psf_args=dict(psf_args)))
-        psf_args['d_dx'] = numpy.zeros((3, 3))
-        psf_args['d_dy'] = numpy.zeros((3, 3))
+                            psf_args=dict(psf_parameters=dict(psf_parameters),
+                                          boundaries=boundaries)))
+        psf_parameters['d_dx'] = numpy.zeros((3, 3))
+        psf_parameters['d_dy'] = numpy.zeros((3, 3))
 
-        psf_args['d_dy'][1, 1] = 1.0
+        psf_parameters['d_dy'][1, 1] = 1.0
         sources.append(dict(x=15.0,
                             y=45.0,
-                            psf_args=dict(psf_args)))
-        psf_args['d_dx'] = numpy.zeros((3, 3))
-        psf_args['d_dy'] = numpy.zeros((3, 3))
+                            psf_args=dict(psf_parameters=dict(psf_parameters),
+                                          boundaries=boundaries)))
+        psf_parameters['d_dx'] = numpy.zeros((3, 3))
+        psf_parameters['d_dy'] = numpy.zeros((3, 3))
 
-        psf_args['d_dx'][1, 1] = 0.75
-        psf_args['d_dy'][1, 1] = 1.00
+        psf_parameters['d_dx'][1, 1] = 0.75
+        psf_parameters['d_dy'][1, 1] = 1.00
         sources.append(dict(x=37.5,
                             y=45.0,
-                            psf_args=dict(psf_args)))
-        psf_args['d_dx'] = numpy.zeros((3, 3))
-        psf_args['d_dy'] = numpy.zeros((3, 3))
+                            psf_args=dict(psf_parameters=dict(psf_parameters),
+                                          boundaries=boundaries)))
+        psf_parameters['d_dx'] = numpy.zeros((3, 3))
+        psf_parameters['d_dy'] = numpy.zeros((3, 3))
 
-        psf_args['d_dx'][1, 1] = 0.5
-        psf_args['d_dy'][1, 1] = 0.0
+        psf_parameters['d_dx'][1, 1] = 0.5
+        psf_parameters['d_dy'][1, 1] = 0.0
         sources.append(dict(x=30.0,
                             y=15.0,
-                            psf_args=dict(psf_args)))
-        psf_args['d_dx'] = numpy.zeros((3, 3))
-        psf_args['d_dy'] = numpy.zeros((3, 3))
+                            psf_args=dict(psf_parameters=dict(psf_parameters),
+                                          boundaries=boundaries)))
+        psf_parameters['d_dx'] = numpy.zeros((3, 3))
+        psf_parameters['d_dy'] = numpy.zeros((3, 3))
 
-        psf_args['d_dx'][1, 1] = 0.0
-        psf_args['d_dy'][1, 1] = 0.5
+        psf_parameters['d_dx'][1, 1] = 0.0
+        psf_parameters['d_dy'][1, 1] = 0.5
         sources.append(dict(x=15.0,
                             y=30.0,
-                            psf_args=dict(psf_args)))
-        psf_args['d_dx'] = numpy.zeros((3, 3))
-        psf_args['d_dy'] = numpy.zeros((3, 3))
+                            psf_args=dict(psf_parameters=dict(psf_parameters),
+                                          boundaries=boundaries)))
+        psf_parameters['d_dx'] = numpy.zeros((3, 3))
+        psf_parameters['d_dy'] = numpy.zeros((3, 3))
 
-        psf_args['d_dx'][1, 1] = 0.5
-        psf_args['d_dy'][1, 1] = 1.0
+        psf_parameters['d_dx'][1, 1] = 0.5
+        psf_parameters['d_dy'][1, 1] = 1.0
         sources.append(dict(x=30.0,
                             y=45.0,
-                            psf_args=dict(psf_args)))
-        psf_args['d_dx'] = numpy.zeros((3, 3))
-        psf_args['d_dy'] = numpy.zeros((3, 3))
+                            psf_args=dict(psf_parameters=dict(psf_parameters),
+                                          boundaries=boundaries)))
+        psf_parameters['d_dx'] = numpy.zeros((3, 3))
+        psf_parameters['d_dy'] = numpy.zeros((3, 3))
 
-        psf_args['d_dx'][1, 1] = 1.0
-        psf_args['d_dy'][1, 1] = 0.5
+        psf_parameters['d_dx'][1, 1] = 1.0
+        psf_parameters['d_dy'][1, 1] = 0.5
         sources.append(dict(x=45.0,
                             y=30.0,
-                            psf_args=dict(psf_args)))
-        psf_args['d_dx'] = numpy.zeros((3, 3))
-        psf_args['d_dy'] = numpy.zeros((3, 3))
+                            psf_args=dict(psf_parameters=dict(psf_parameters),
+                                          boundaries=boundaries)))
+        psf_parameters['d_dx'] = numpy.zeros((3, 3))
+        psf_parameters['d_dy'] = numpy.zeros((3, 3))
 
         self.run_test(sources=[sources],
                       psffit_terms='{1, x, y}')
@@ -371,14 +382,14 @@ class TestPiecewiseBicubic(unittest.TestCase):
     def test_two_overlapping_sources(self):
         """Test fitting an image containing 2 sources all overlapping."""
 
-        psf_args = dict(values=numpy.zeros((3, 3)),
-                        d_dx=numpy.zeros((3, 3)),
-                        d_dy=numpy.zeros((3, 3)),
-                        d2_dxdy=numpy.zeros((3, 3)),
-                        x_boundaries=numpy.array([-1.0, 0.0, 1.0]),
-                        y_boundaries=numpy.array([-1.4, 0.0, 1.4]))
+        psf_args = dict(psf_parameters=dict(values=numpy.zeros((3, 3)),
+                                            d_dx=numpy.zeros((3, 3)),
+                                            d_dy=numpy.zeros((3, 3)),
+                                            d2_dxdy=numpy.zeros((3, 3))),
+                        boundaries=dict(x=numpy.array([-1.0, 0.0, 1.0]),
+                                        y=numpy.array([-1.4, 0.0, 1.4])))
 
-        psf_args['values'][1, 1] = 1.0
+        psf_args['psf_parameters']['values'][1, 1] = 1.0
 
         sources = [dict(x=14.53,
                         y=14.02,
@@ -407,7 +418,7 @@ class TestPiecewiseBicubic(unittest.TestCase):
 
         sources = [dict(x=12.5,
                         y=13.5,
-                        psf_args=dict(psf_parameters=psf_parameters,
+                        psf_args=dict(psf_parameters=dict(psf_parameters),
                                       boundaries=boundaries))]
 
 
@@ -416,7 +427,7 @@ class TestPiecewiseBicubic(unittest.TestCase):
         psf_parameters['d_dx'][1, 1] = 1.0
         sources.append(dict(x=16.5,
                             y=13.5,
-                            psf_args=dict(psf_parameters=psf_parameters,
+                            psf_args=dict(psf_parameters=dict(psf_parameters),
                                           boundaries=boundaries)))
 
         psf_parameters['d_dx'] = numpy.zeros((3, 3))
@@ -424,7 +435,7 @@ class TestPiecewiseBicubic(unittest.TestCase):
         psf_parameters['d_dy'][1, 1] = 1.0
         sources.append(dict(x=12.5,
                             y=15.5,
-                            psf_args=dict(psf_parameters=psf_parameters,
+                            psf_args=dict(psf_parameters=dict(psf_parameters),
                                           boundaries=boundaries)))
 
         psf_parameters['d_dx'] = numpy.zeros((3, 3))
@@ -433,7 +444,7 @@ class TestPiecewiseBicubic(unittest.TestCase):
         psf_parameters['d_dy'][1, 1] = 1.0
         sources.append(dict(x=16.5,
                             y=15.5,
-                            psf_args=dict(psf_parameters=psf_parameters,
+                            psf_args=dict(psf_parameters=dict(psf_parameters),
                                           boundaries=boundaries)))
 
         self.run_test(sources=[sources], psffit_terms='{1, x*x, y*y}')
@@ -441,8 +452,8 @@ class TestPiecewiseBicubic(unittest.TestCase):
     def test_multi_image_with_extra_var(self):
         """Test fitting a series of 5 images and non-position variables."""
 
-        x_boundaries = numpy.array([-3.02, 0.0, 3.02])
-        y_boundaries = numpy.array([-2.04, 0.0, 2.04])
+        boundaries = dict(x=numpy.array([-3.02, 0.0, 3.02]),
+                          y=numpy.array([-2.04, 0.0, 2.04]))
 
         #t & z are arbitrary and dx and dy seem reasonable
         #pylint: disable=invalid-name
@@ -472,12 +483,13 @@ class TestPiecewiseBicubic(unittest.TestCase):
                         t=t,
                         flux_backup=flux_backup,
                         psf_args=dict(
-                            values=numpy.copy(values),
-                            d_dx=numpy.copy(d_dx),
-                            d_dy=numpy.copy(d_dy),
-                            d2_dxdy=numpy.copy(d2_dxdy),
-                            x_boundaries=x_boundaries,
-                            y_boundaries=y_boundaries
+                            psf_parameters=dict(
+                                values=numpy.copy(values),
+                                d_dx=numpy.copy(d_dx),
+                                d_dy=numpy.copy(d_dy),
+                                d2_dxdy=numpy.copy(d2_dxdy),
+                            ),
+                            boundaries=boundaries
                         )
                     )
                 )
@@ -541,7 +553,9 @@ class TestPiecewiseBicubic(unittest.TestCase):
                                 dy < -12.5
                                 or
                                 dy > 12.5
-                            ) else 10.0 * x_boundaries[-1] * y_boundaries[-1]
+                            ) else (
+                                10.0 * boundaries['x'][-1] * boundaries['y'][-1]
+                            )
                         )
                     )
                     for dx in [-20.2, -15.3, -10.4, -5.5, 0.6, 5.7, 10.8,

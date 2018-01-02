@@ -10,13 +10,12 @@ import sys
 import unittest
 import numpy
 
-from tests.utilities import FloatTestCase
-
 sys.path.insert(0,
                 os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 #Needs to be after os.path and sys to allow adding the seach path.
 #pylint: disable=wrong-import-position
+from tests.utilities import FloatTestCase
 from superphot.fake_image.image import Image
 from superphot.fake_image.piecewise_bicubic_psf import PiecewiseBicubicPSF
 #pylint: enable=wrong-import-position
