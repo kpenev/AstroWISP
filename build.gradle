@@ -160,6 +160,7 @@ doxygen {
     source "src/SubPixPhot"
     source "src/SubtractPSF"
     source "src/VisualizePSFMap"
+    source "PythonPackage"
     source "doxygen"
     include "**/*.h"
     include "**/*.cpp"

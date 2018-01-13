@@ -88,7 +88,7 @@ namespace PSF {
         inline double exp_argument(double x, double y) const
         {return -0.5*(__spd*x*x+__smd*y*y+2.0*__k*x*y);}
 
-        ///\breaf Updates __integral_values and __integral_error according to 
+        ///\brief Updates __integral_values and __integral_error according to
         ///the latest state of __pieces
         void update_values() const;
 

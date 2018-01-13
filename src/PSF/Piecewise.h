@@ -1,5 +1,5 @@
 /**\file
- * \brief Defines the #PiecewisePSF PSF model.
+ * \brief Defines the #PSF::Piecewise PSF model.
  */
 
 #ifndef __PIECEWISE_PSF_H
