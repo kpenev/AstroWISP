@@ -4,5 +4,5 @@ var classSubPixPhot_1_1Config =
     [ "apply_fallbacks", "classSubPixPhot_1_1Config.html#a8e948e2584ce8ae242fe9536cbb9d7a6", null ],
     [ "check_consistency", "classSubPixPhot_1_1Config.html#a16f42b85839c07e567734bf13ce708a7", null ],
     [ "describe_options", "classSubPixPhot_1_1Config.html#a3f3123db6180327105d184da513412a6", null ],
-    [ "usage_help", "classSubPixPhot_1_1Config.html#a9d1113e5ac3aada0d8f9bb3dc720b1a8", null ]
+    [ "usage_help", "classSubPixPhot_1_1Config.html#aa7ed5f7c41d1172c471abdfead764fa1", null ]
 ];

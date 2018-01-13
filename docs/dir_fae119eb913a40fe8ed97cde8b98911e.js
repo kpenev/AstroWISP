@@ -8,6 +8,8 @@ var dir_fae119eb913a40fe8ed97cde8b98911e =
     [ "binostream.h", "binostream_8h.html", [
       [ "binostream", "classIO_1_1binostream.html", "classIO_1_1binostream" ]
     ] ],
+    [ "CInterface.cpp", "IO_2CInterface_8cpp.html", "IO_2CInterface_8cpp" ],
+    [ "CInterface.h", "IO_2CInterface_8h.html", "IO_2CInterface_8h" ],
     [ "CommandLineConfig.cpp", "CommandLineConfig_8cpp.html", null ],
     [ "CommandLineConfig.h", "CommandLineConfig_8h.html", [
       [ "CommandLineConfig", "classIO_1_1CommandLineConfig.html", "classIO_1_1CommandLineConfig" ]
@@ -32,6 +34,8 @@ var dir_fae119eb913a40fe8ed97cde8b98911e =
     [ "OutputSDKSource.h", "OutputSDKSource_8h.html", [
       [ "OutputSDKSource", "classIO_1_1OutputSDKSource.html", "classIO_1_1OutputSDKSource" ]
     ] ],
+    [ "parse_hat_mask.cpp", "parse__hat__mask_8cpp.html", "parse__hat__mask_8cpp" ],
+    [ "parse_hat_mask.h", "parse__hat__mask_8h.html", "parse__hat__mask_8h" ],
     [ "SubPixHDF5File.cpp", "SubPixHDF5File_8cpp.html", "SubPixHDF5File_8cpp" ],
     [ "SubPixHDF5File.h", "SubPixHDF5File_8h.html", "SubPixHDF5File_8h" ],
     [ "TranslateToAny.h", "TranslateToAny_8h.html", "TranslateToAny_8h" ]

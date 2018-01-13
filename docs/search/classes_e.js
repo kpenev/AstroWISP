@@ -1,8 +1,11 @@
 var searchData=
 [
-  ['sdksource',['SDKSource',['../classCore_1_1SDKSource.html',1,'Core::SDKSource'],['../classFitPSF_1_1SDKSource.html',1,'FitPSF::SDKSource&lt; SUBPIX_TYPE &gt;']]],
+  ['sdksource',['SDKSource',['../classFitPSF_1_1SDKSource.html',1,'FitPSF']]],
+  ['sdksource',['SDKSource',['../classCore_1_1SDKSource.html',1,'Core']]],
   ['sdksourcebase',['SDKSourceBase',['../classFitPSF_1_1SDKSourceBase.html',1,'FitPSF']]],
-  ['source',['Source',['../classBackground_1_1Source.html',1,'Background::Source'],['../classCore_1_1Source.html',1,'Core::Source'],['../classFitPSF_1_1Source.html',1,'FitPSF::Source&lt; PSF_TYPE &gt;']]],
+  ['source',['Source',['../classCore_1_1Source.html',1,'Core']]],
+  ['source',['Source',['../classBackground_1_1Source.html',1,'Background']]],
+  ['source',['Source',['../classFitPSF_1_1Source.html',1,'FitPSF']]],
   ['source_3c_20psf_3a_3aellipticalgaussian_20_3e',['Source&lt; PSF::EllipticalGaussian &gt;',['../classFitPSF_1_1Source.html',1,'FitPSF']]],
   ['source_3c_20psf_3a_3apiecewisebicubic_20_3e',['Source&lt; PSF::PiecewiseBicubic &gt;',['../classFitPSF_1_1Source.html',1,'FitPSF']]],
   ['sourceid',['SourceID',['../classCore_1_1SourceID.html',1,'Core']]],

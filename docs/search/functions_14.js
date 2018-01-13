@@ -1,9 +1,26 @@
 var searchData=
 [
-  ['union_5fset',['union_set',['../classPSF_1_1TermGenerator_1_1Grammar.html#adc699c406852625a089e88ffccf74422',1,'PSF::TermGenerator::Grammar']]],
-  ['update_5festimates',['update_estimates',['../classPSF_1_1EllipticalGaussianIntegralRectangle.html#a381e619fddb14b2ef4a62c8fd4f30f07',1,'PSF::EllipticalGaussianIntegralRectangle::update_estimates()'],['../classPSF_1_1EllipticalGaussianIntegralWedge.html#ac812ce3954a39ba01143ee0e8593bb6a',1,'PSF::EllipticalGaussianIntegralWedge::update_estimates()']]],
-  ['update_5ffluxes',['update_fluxes',['../namespaceFitPSF.html#af1b981e70ab8623bff27f8fff1b482be',1,'FitPSF']]],
-  ['update_5fvalues',['update_values',['../classPSF_1_1EllipticalGaussian.html#ae57aac42bd426284ed05c67755d4defb',1,'PSF::EllipticalGaussian']]],
-  ['update_5fx',['update_x',['../NR__fitting_8cpp.html#a35e74da7629d4929a8993072c74a6ec8',1,'NR_fitting.cpp']]],
-  ['usage_5fhelp',['usage_help',['../classFitPSF_1_1Config.html#a03b94c2ee40c844b0f3270d01f034370',1,'FitPSF::Config::usage_help()'],['../classFitSubPixConfig.html#a47bcdc3933e253cb945e3058d9e464ad',1,'FitSubPixConfig::usage_help()'],['../classIO_1_1CommandLineConfig.html#a5ad926e7afb6e46fdd588b66a15fe488',1,'IO::CommandLineConfig::usage_help()'],['../classSubPixPhot_1_1Config.html#a9d1113e5ac3aada0d8f9bb3dc720b1a8',1,'SubPixPhot::Config::usage_help()'],['../classSubtractPSFCfg.html#aa5dd8e6189786bd643dbc3adffef4f99',1,'SubtractPSFCfg::usage_help()']]]
+  ['take_5fpixel',['take_pixel',['../classFitPSF_1_1OverlapSource.html#ac578df0273496ad355e760dcc3cb10a1',1,'FitPSF::OverlapSource']]],
+  ['tan',['tan',['../classPSF_1_1TermCalculator_1_1Grammar.html#add5cd0ab1b5d0c3d627bd872f2dbf412',1,'PSF::TermCalculator::Grammar']]],
+  ['tanh',['tanh',['../classPSF_1_1TermCalculator_1_1Grammar.html#a65f45fe2e1e41f08d9ebecb324cd78be',1,'PSF::TermCalculator::Grammar']]],
+  ['termvalarray',['TermValarray',['../classPSF_1_1TermValarray.html#a0ed3c5ec6801fc242fb71524118204f8',1,'PSF::TermValarray::TermValarray(size_t size=0)'],['../classPSF_1_1TermValarray.html#a046025170bb11ddfd1bcb66147540d14',1,'PSF::TermValarray::TermValarray(double value, size_t size)'],['../classPSF_1_1TermValarray.html#a4e1496338d035c10bab8c77ad9a01ba2',1,'PSF::TermValarray::TermValarray(const std::valarray&lt; double &gt; &amp;orig)'],['../classPSF_1_1TermValarray.html#a54dd06e65a63dcb7b033766dae58db9b',1,'PSF::TermValarray::TermValarray(const double *data, size_t data_size)']]],
+  ['test_5ffour_5foverlapping_5fsources',['test_four_overlapping_sources',['../classtests_1_1fitpsf_1_1noiseless__tests_1_1TestPiecewiseBicubic.html#af894ac5139f4f5b783c6cd6bcdabc5b0',1,'tests::fitpsf::noiseless_tests::TestPiecewiseBicubic']]],
+  ['test_5fisolated_5fsources',['test_isolated_sources',['../classtests_1_1fitpsf_1_1noiseless__tests_1_1TestPiecewiseBicubic.html#a3f9a3d6e92e50e0df1d52da9c975ab10',1,'tests::fitpsf::noiseless_tests::TestPiecewiseBicubic']]],
+  ['test_5flinear',['test_linear',['../classtests_1_1test__piecewise__bicubic__psf_1_1TestPiecewiseBicubicPSF.html#a789ffcbd764381907108c3c4152bb481',1,'tests::test_piecewise_bicubic_psf::TestPiecewiseBicubicPSF']]],
+  ['test_5fmisaligned_5fsource',['test_misaligned_source',['../classtests_1_1test__fake__image_1_1TestImage.html#a3c8ba9f97da323e6f32a5ab9d5388b43',1,'tests::test_fake_image::TestImage']]],
+  ['test_5fmulti_5fimage_5fwith_5fextra_5fvar',['test_multi_image_with_extra_var',['../classtests_1_1fitpsf_1_1noiseless__tests_1_1TestPiecewiseBicubic.html#af1d9f14e6b923c2272b6fb1bd48c644d',1,'tests::fitpsf::noiseless_tests::TestPiecewiseBicubic']]],
+  ['test_5fno_5fsource',['test_no_source',['../classtests_1_1test__fake__image_1_1TestImage.html#a9919469760e5a8bfd8be7e4f1a9770b6',1,'tests::test_fake_image::TestImage']]],
+  ['test_5fone',['test_one',['../classtests_1_1test__piecewise__bicubic__psf_1_1TestPiecewiseBicubicPSF.html#ac1af7263d31d5f493711aa33b6d9dbc0',1,'tests::test_piecewise_bicubic_psf::TestPiecewiseBicubicPSF']]],
+  ['test_5fpi',['test_pi',['../classtests_1_1test__piecewise__bicubic__psf_1_1TestPiecewiseBicubicPSF.html#a2ab56f5978e3a3a3419d85eda9431ae6',1,'tests::test_piecewise_bicubic_psf::TestPiecewiseBicubicPSF']]],
+  ['test_5fpix_5faligned_5fsource',['test_pix_aligned_source',['../classtests_1_1test__fake__image_1_1TestImage.html#a9197ced90812f886e8ee3353032da028',1,'tests::test_fake_image::TestImage']]],
+  ['test_5frandom_5fsingle_5fpatch',['test_random_single_patch',['../classtests_1_1test__piecewise__bicubic__psf_1_1TestPiecewiseBicubicPSF.html#ae5fb471c32c8a3c2dbbddc94c754862c',1,'tests::test_piecewise_bicubic_psf::TestPiecewiseBicubicPSF']]],
+  ['test_5fsingle_5fsource',['test_single_source',['../classtests_1_1fitpsf_1_1noiseless__tests_1_1TestPiecewiseBicubic.html#a067aa0207509746d0ebd218a7b014a38',1,'tests::fitpsf::noiseless_tests::TestPiecewiseBicubic']]],
+  ['test_5ftwo_5foverlapping_5fsources',['test_two_overlapping_sources',['../classtests_1_1fitpsf_1_1noiseless__tests_1_1TestPiecewiseBicubic.html#a43922423a8a5b9a5e12a211cc9377995',1,'tests::fitpsf::noiseless_tests::TestPiecewiseBicubic']]],
+  ['test_5fzero',['test_zero',['../classtests_1_1test__piecewise__bicubic__psf_1_1TestPiecewiseBicubicPSF.html#ad7fe86d0b4409d256a2e8c276f456b3c',1,'tests::test_piecewise_bicubic_psf::TestPiecewiseBicubicPSF']]],
+  ['time_5fthis',['time_this',['../namespaceFitPSF.html#a87e185ed617d2648d7a1dcdfc2b3ae2f',1,'FitPSF']]],
+  ['transform_5fbest_5ffit_5fto_5fdirect_5fparameters',['transform_best_fit_to_direct_parameters',['../namespaceFitPSF.html#a878eba39338b4d82656546daf36ec835',1,'FitPSF']]],
+  ['translatetoany',['TranslateToAny',['../classIO_1_1TranslateToAny.html#a24177ab3f5c6b61761f802bde5f22d56',1,'IO::TranslateToAny']]],
+  ['trim',['trim',['../namespaceIO.html#a59dd5ff007daf0021a2333028db29602',1,'IO']]],
+  ['trim_5ffit_5fsources',['trim_fit_sources',['../namespaceFitPSF.html#a93d32d30b1b788f8c3defccfbe70032b',1,'FitPSF']]],
+  ['type',['Type',['../classError_1_1Type.html#acdc7bc83c0c8c4bb8e82e277a3499189',1,'Error::Type']]]
 ];

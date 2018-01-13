@@ -1,5 +1,6 @@
 var dir_a2f0e5642e47e7ed59fe0f0829eafb5f =
 [
+    [ "CInterface.h", "Core_2CInterface_8h.html", null ],
     [ "CommandLineUtil.cpp", "Core_2CommandLineUtil_8cpp.html", "Core_2CommandLineUtil_8cpp" ],
     [ "CommandLineUtil.h", "Core_2CommandLineUtil_8h.html", "Core_2CommandLineUtil_8h" ],
     [ "Error.h", "Error_8h.html", [
@@ -22,13 +23,12 @@ var dir_a2f0e5642e47e7ed59fe0f0829eafb5f =
     ] ],
     [ "SDKSource.cpp", "SDKSource_8cpp.html", "SDKSource_8cpp" ],
     [ "SDKSource.h", "Core_2SDKSource_8h.html", "Core_2SDKSource_8h" ],
+    [ "SharedLibraryExportMacros.h", "SharedLibraryExportMacros_8h.html", null ],
     [ "Source.h", "Core_2Source_8h.html", [
       [ "Source", "classCore_1_1Source.html", "classCore_1_1Source" ]
     ] ],
     [ "SourceID.cpp", "SourceID_8cpp.html", "SourceID_8cpp" ],
-    [ "SourceID.h", "SourceID_8h.html", [
-      [ "SourceID", "classCore_1_1SourceID.html", "classCore_1_1SourceID" ]
-    ] ],
+    [ "SourceID.h", "SourceID_8h.html", "SourceID_8h" ],
     [ "SourceLocation.h", "SourceLocation_8h.html", [
       [ "SourceLocation", "classCore_1_1SourceLocation.html", "classCore_1_1SourceLocation" ]
     ] ],

@@ -2,10 +2,10 @@ var classChiSquared =
 [
     [ "ChiSquared", "classChiSquared.html#a3c2520c074b34adeb207f6054214138a", null ],
     [ "ChiSquared", "classChiSquared.html#ab1d32218edc3479d21a1bd88b23ec97e", null ],
-    [ "chi2", "classChiSquared.html#aa0c0c879e3a560659e19470a11a0ef03", null ],
+    [ "chi2", "classChiSquared.html#a3d760575ada9866076f3388a33b9e09c", null ],
     [ "initialize", "classChiSquared.html#a02b71838abf45c403b8278534d08201c", null ],
     [ "measure_image_fluxes", "classChiSquared.html#a84415167ab3fba07658f3f1dc5902307", null ],
-    [ "operator()", "classChiSquared.html#afbb56b01f49a2854f8ab183fab6fd1ae", null ],
+    [ "operator()", "classChiSquared.html#a7b5b6eaf9756cbd936fa32daff17c706", null ],
     [ "read_psf_file", "classChiSquared.html#a5ce92b6e4227880b031ccd4a2f501259", null ],
     [ "verify_sources", "classChiSquared.html#ab02eb7869e00b0c423470167a1a58e9b", null ],
     [ "__aperture", "classChiSquared.html#a884690e8ad08af1c034b174e892d1c21", null ],

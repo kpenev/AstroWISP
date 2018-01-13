@@ -1,8 +1,8 @@
 var dir_795e566c362551991cbe02665b20a180 =
 [
     [ "AmplitudeSaturatedPixel.h", "AmplitudeSaturatedPixel_8h.html", null ],
-    [ "CInterface.cpp", "CInterface_8cpp.html", null ],
-    [ "CInterface.h", "CInterface_8h.html", null ],
+    [ "CInterface.cpp", "FitPSF_2CInterface_8cpp.html", null ],
+    [ "CInterface.h", "FitPSF_2CInterface_8h.html", null ],
     [ "Common.cpp", "Common_8cpp.html", "Common_8cpp" ],
     [ "Common.h", "Common_8h.html", "Common_8h" ],
     [ "Config.cpp", "Config_8cpp.html", null ],

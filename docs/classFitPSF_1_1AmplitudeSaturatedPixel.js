@@ -1,12 +1,12 @@
 var classFitPSF_1_1AmplitudeSaturatedPixel =
 [
     [ "AmplitudeSaturatedPixel", "classFitPSF_1_1AmplitudeSaturatedPixel.html#af6b652868f6e5c7afdb19c87a68f27dc", null ],
-    [ "critical_amplitude", "classFitPSF_1_1AmplitudeSaturatedPixel.html#a5b40ad4fbc27e8a35be540c873a472cf", null ],
-    [ "measured", "classFitPSF_1_1AmplitudeSaturatedPixel.html#af0451a2c047ed2a9fd57f9cd069778d1", null ],
-    [ "operator<", "classFitPSF_1_1AmplitudeSaturatedPixel.html#a18634c1054af12d144c4c2840ff7b5f2", null ],
-    [ "psf_integral", "classFitPSF_1_1AmplitudeSaturatedPixel.html#a05ea9bdb351dabb3b159d5deaed3d154", null ],
-    [ "psf_integral", "classFitPSF_1_1AmplitudeSaturatedPixel.html#a19de170c6975b62dbd26cab7d921e0a4", null ],
-    [ "variance", "classFitPSF_1_1AmplitudeSaturatedPixel.html#a1e26ac57af5acfc786795cd0c5c19939", null ],
+    [ "critical_amplitude", "classFitPSF_1_1AmplitudeSaturatedPixel.html#aada0dbc06644bbf374d235ffe8ed354d", null ],
+    [ "measured", "classFitPSF_1_1AmplitudeSaturatedPixel.html#a179e54a7e4e770c5b941b65d8ed16a75", null ],
+    [ "operator<", "classFitPSF_1_1AmplitudeSaturatedPixel.html#a5a53f170a1971a6ff66ee3b11a7dd2d9", null ],
+    [ "psf_integral", "classFitPSF_1_1AmplitudeSaturatedPixel.html#aafc3ec4fd81bbc751a3207adca724273", null ],
+    [ "psf_integral", "classFitPSF_1_1AmplitudeSaturatedPixel.html#a379b389a07c481ebe2a22ee0663ed088", null ],
+    [ "variance", "classFitPSF_1_1AmplitudeSaturatedPixel.html#a71a0ef5c8c33b44a79d8916c1453db7b", null ],
     [ "__measured", "classFitPSF_1_1AmplitudeSaturatedPixel.html#a84dc135ef749f6d3a3c2a2866b382534", null ],
     [ "__psf_integral", "classFitPSF_1_1AmplitudeSaturatedPixel.html#a87026313b4ca58321817dfe0f3770066", null ],
     [ "__variance", "classFitPSF_1_1AmplitudeSaturatedPixel.html#a799a7bdab01e13320e72f87e89fdd443", null ]

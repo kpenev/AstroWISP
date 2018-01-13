@@ -4,7 +4,7 @@ var classSubPixPhot_1_1BinarySourceOutput =
     [ "aperture_dep_format", "classSubPixPhot_1_1BinarySourceOutput.html#ac86c15743e7364af75be0606c55d43cd", null ],
     [ "aperture_indep_format", "classSubPixPhot_1_1BinarySourceOutput.html#a6e6ad99401907f9cbb1fcf1022be42c5", null ],
     [ "operator()", "classSubPixPhot_1_1BinarySourceOutput.html#a8c6609db24a87d7e3f8bdaabb6f50c18", null ],
-    [ "precision", "classSubPixPhot_1_1BinarySourceOutput.html#abf56aba5568d3de45197cd059fe23622", null ],
+    [ "precision", "classSubPixPhot_1_1BinarySourceOutput.html#ae9b08c2a70662c9be9bb3b2a26c6899b", null ],
     [ "precision", "classSubPixPhot_1_1BinarySourceOutput.html#aaebb305e29eccd55baab29d293b5e4ea", null ],
     [ "set_columns", "classSubPixPhot_1_1BinarySourceOutput.html#a13dc61e18e56baf8303fcfe9db3c073f", null ],
     [ "set_required_columns", "classSubPixPhot_1_1BinarySourceOutput.html#a92c79bdc08ec5a28b38e58038f17468e", null ],

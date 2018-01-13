@@ -3,7 +3,7 @@ var classIO_1_1FitsHeader =
     [ "FitsHeader", "classIO_1_1FitsHeader.html#a23f69c494a1022bf0cda9af2f59f8d22", null ],
     [ "FitsHeader", "classIO_1_1FitsHeader.html#accdcdaac422543677604006f2b1b829f", null ],
     [ "get_comment", "classIO_1_1FitsHeader.html#a38ba0f4134eb803bc93e349d4be20d09", null ],
-    [ "get_keywords", "classIO_1_1FitsHeader.html#ac4d9c3cda54ad690b7c699b2bb75d260", null ],
+    [ "get_keywords", "classIO_1_1FitsHeader.html#a7927fb2df209a8305b7c27915442bac8", null ],
     [ "get_value", "classIO_1_1FitsHeader.html#ae121c1a3dbd698da04325f8e40eefa7d", null ],
     [ "operator=", "classIO_1_1FitsHeader.html#ad7478cf8ab364228a45ad3aa1fbab16d", null ],
     [ "operator[]", "classIO_1_1FitsHeader.html#acfa36f107746ee98cb027ef5a5d3dd46", null ],

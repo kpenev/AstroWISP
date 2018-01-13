@@ -4,6 +4,8 @@ var dir_9fcfb789ecabade8749ffa7f9106c60f =
     [ "Annulus.h", "Annulus_8h.html", [
       [ "Annulus", "classBackground_1_1Annulus.html", "classBackground_1_1Annulus" ]
     ] ],
+    [ "CInterface.cpp", "Background_2CInterface_8cpp.html", "Background_2CInterface_8cpp" ],
+    [ "CInterface.h", "Background_2CInterface_8h.html", "Background_2CInterface_8h" ],
     [ "CommandLineUtil.cpp", "Background_2CommandLineUtil_8cpp.html", "Background_2CommandLineUtil_8cpp" ],
     [ "CommandLineUtil.h", "Background_2CommandLineUtil_8h.html", "Background_2CommandLineUtil_8h" ],
     [ "Measure.h", "Measure_8h.html", [

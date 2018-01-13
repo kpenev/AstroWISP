@@ -9,6 +9,8 @@ var annotated_dup =
     [ "Phot", "namespacePhot.html", "namespacePhot" ],
     [ "PSF", "namespacePSF.html", "namespacePSF" ],
     [ "SubPixPhot", "namespaceSubPixPhot.html", "namespaceSubPixPhot" ],
+    [ "superphot", "namespacesuperphot.html", "namespacesuperphot" ],
+    [ "tests", "namespacetests.html", "namespacetests" ],
     [ "ChiSquared", "classChiSquared.html", "classChiSquared" ],
     [ "FitSubpixCommandLineOptions", "classFitSubpixCommandLineOptions.html", "classFitSubpixCommandLineOptions" ],
     [ "FitSubPixConfig", "classFitSubPixConfig.html", "classFitSubPixConfig" ],

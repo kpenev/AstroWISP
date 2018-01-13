@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['y',['y',['../classCore_1_1Point.html#aa5376c40e6fbd29c525b67329dd94e79',1,'Core::Point::y() const'],['../classCore_1_1Point.html#ad0c07d0f6d21b4058acaf0dafea4a3e7',1,'Core::Point::y()'],['../classFitPSF_1_1Pixel.html#af3cdb3442458f4ff293c8bb72bbaac32',1,'FitPSF::Pixel::y()'],['../namespacePhot.html#afd335f0316f5f0113818bf99d5f6d6b5ab6b09e0eeba818d3c00951c9de879af7',1,'Phot::y()']]],
-  ['y_5fgrid',['y_grid',['../classPSF_1_1Grid.html#a61c8336587514678daffc595e2224c30',1,'PSF::Grid::y_grid()'],['../classPSF_1_1PiecewiseBicubicMap.html#ad753632837a6c2a4fd6dc1d60d50c107',1,'PSF::PiecewiseBicubicMap::y_grid()']]],
-  ['y_5fresolution',['y_resolution',['../classCore_1_1Image.html#a65aa28ca509966bacb18a1a0ce122971',1,'Core::Image::y_resolution()'],['../classCore_1_1SubPixelMap.html#a0a5883a7af234de9afaa1691e80ddb32',1,'Core::SubPixelMap::y_resolution()']]],
-  ['y_5fsplit',['y_split',['../classFitSubpixCommandLineOptions.html#abce879ae7efe77fcdeb42eb2f3f68eac',1,'FitSubpixCommandLineOptions::y_split()'],['../classPSF_1_1Split.html#ae4481112512bf5bf0a782a9256470df4',1,'PSF::Split::y_split()']]]
+  ['y',['y',['../classCore_1_1Point.html#a4f860ac2fafe48d27e5a2ebaa13848bf',1,'Core::Point::y() const '],['../classCore_1_1Point.html#ad0c07d0f6d21b4058acaf0dafea4a3e7',1,'Core::Point::y()'],['../classFitPSF_1_1Pixel.html#a905a5a1bb10c715bcdfae31c1a906b2f',1,'FitPSF::Pixel::y()'],['../PhotColumns_8h.html#a2fb1c5cf58867b5bbc9a1b145a86f3a0',1,'y():&#160;PhotColumns.h']]],
+  ['y_5fgrid',['y_grid',['../classPSF_1_1Grid.html#a61c8336587514678daffc595e2224c30',1,'PSF::Grid::y_grid()'],['../classPSF_1_1PiecewiseBicubicMap.html#a6f1f38057ec3c219517e8c9c0a2704cd',1,'PSF::PiecewiseBicubicMap::y_grid()']]],
+  ['y_5fresolution',['y_resolution',['../classCore_1_1SubPixelMap.html#a26a38e2d40324b15abfb3e203c61fcb9',1,'Core::SubPixelMap::y_resolution()'],['../classCore_1_1Image.html#a11697a659239b2458765d4a06f1ed60a',1,'Core::Image::y_resolution()']]],
+  ['y_5fsplit',['y_split',['../classFitSubpixCommandLineOptions.html#a5e1c196ec08a6c534ccf5b310dd6ae24',1,'FitSubpixCommandLineOptions::y_split()'],['../classPSF_1_1Split.html#ae4481112512bf5bf0a782a9256470df4',1,'PSF::Split::y_split()']]]
 ];

@@ -1,5 +1,26 @@
 var searchData=
 [
-  ['var',['var',['../namespaceMultiNestFit.html#abb2073603370ed8d6cf0e044290a1f17',1,'MultiNestFit']]],
-  ['varlen_5fstr_5ftype',['VARLEN_STR_TYPE',['../classIO_1_1SubPixHDF5File.html#a685a43a265d629098a57aef1eab4bf67',1,'IO::SubPixHDF5File']]]
+  ['m_5foutstream',['m_outstream',['../classIO_1_1binofstream.html#a15e9ce5ff51d192e445c2aa3e731b778',1,'IO::binofstream']]],
+  ['mag',['mag',['../PhotColumns_8h.html#a5db9aa3c52c5422c292664b1183daf0d',1,'PhotColumns.h']]],
+  ['mag_5ferr',['mag_err',['../PhotColumns_8h.html#a7e4390e73fddfcb13b7545bd5f7c2c3f',1,'PhotColumns.h']]],
+  ['many_5fpixels',['MANY_PIXELS',['../Common_8h.html#ad5bb58b33c3c35e9016dfad65bd1ab15',1,'Common.h']]],
+  ['many_5fsaturated',['MANY_SATURATED',['../Common_8h.html#aea8892f0b86dafaaddf427c2a2d38145',1,'Common.h']]],
+  ['mask_5fall',['MASK_ALL',['../namespaceCore.html#a26d797e741481077dc6dcf524d8bfc80',1,'Core::MASK_ALL()'],['../IO_2CInterface_8h.html#a5ebb54b22bdfcb62f194c85978d6a742',1,'MASK_ALL():&#160;Image.h'],['../IO_2CInterface_8cpp.html#a899ec8ae1bd8ba7e54893d298af2b393',1,'MASK_ALL():&#160;CInterface.cpp']]],
+  ['mask_5fbad',['MASK_BAD',['../namespaceCore.html#a090a31270c5a50bf551d0f9345de410c',1,'Core::MASK_BAD()'],['../IO_2CInterface_8h.html#a514dfb97fb294b592eb604b1d483d06e',1,'MASK_BAD():&#160;Image.h'],['../IO_2CInterface_8cpp.html#a246b9d10513e441bd7554292da690ef6',1,'MASK_BAD():&#160;CInterface.cpp']]],
+  ['mask_5fclear',['MASK_CLEAR',['../namespaceCore.html#a0f85b01edcdb8613e413b0a96dd5a689',1,'Core::MASK_CLEAR()'],['../IO_2CInterface_8h.html#a7e299accef24cd329fda4625eab8f2d4',1,'MASK_CLEAR():&#160;Image.h'],['../IO_2CInterface_8cpp.html#ad66cd75dfe1e7e142ebe1b25dfc03de5',1,'MASK_CLEAR():&#160;CInterface.cpp']]],
+  ['mask_5fcosmic',['MASK_COSMIC',['../namespaceCore.html#aadbea5e75ee981b46bf37ec6dd865dee',1,'Core::MASK_COSMIC()'],['../IO_2CInterface_8h.html#a07316589d680190629eab9aee71e4fe9',1,'MASK_COSMIC():&#160;Image.h'],['../IO_2CInterface_8cpp.html#a21bfdf0e2dfbaf3b54d55b6d7753ff3b',1,'MASK_COSMIC():&#160;CInterface.cpp']]],
+  ['mask_5ffault',['MASK_FAULT',['../namespaceCore.html#ab4b7153b8ed0311aba146640f843d574',1,'Core::MASK_FAULT()'],['../IO_2CInterface_8h.html#a5f3900b60444f956668f8fda8af1bfd7',1,'MASK_FAULT():&#160;Image.h'],['../IO_2CInterface_8cpp.html#a723d3acde94006c66690f1ad61b15300',1,'MASK_FAULT():&#160;CInterface.cpp']]],
+  ['mask_5fhot',['MASK_HOT',['../namespaceCore.html#a4994bebb830a22757a86d2f37429f9d7',1,'Core::MASK_HOT()'],['../IO_2CInterface_8h.html#a39289e2c9a67ed311c94b2f1b72cde2f',1,'MASK_HOT():&#160;Image.h'],['../IO_2CInterface_8cpp.html#a26f3f469a9dfdce0e98eeb78cfa8ad3c',1,'MASK_HOT():&#160;CInterface.cpp']]],
+  ['mask_5finterpolated',['MASK_INTERPOLATED',['../namespaceCore.html#a37aa6c62aa3e1b3378dbba23214a12cb',1,'Core::MASK_INTERPOLATED()'],['../IO_2CInterface_8h.html#a193cdce86e03c252e6d2fd99dad11088',1,'MASK_INTERPOLATED():&#160;Image.h'],['../IO_2CInterface_8cpp.html#aa7b364671556215dcc64113fc028b016',1,'MASK_INTERPOLATED():&#160;CInterface.cpp']]],
+  ['mask_5fleaked',['MASK_LEAKED',['../namespaceCore.html#acbcfd2daec351c09913db0804d1ff2a1',1,'Core::MASK_LEAKED()'],['../IO_2CInterface_8h.html#a061fbee50e79ceadc65b48a59e401723',1,'MASK_LEAKED():&#160;Image.h'],['../IO_2CInterface_8cpp.html#a433b9ead55a8db78ae2b94248cbf2b51',1,'MASK_LEAKED():&#160;CInterface.cpp']]],
+  ['mask_5fnan',['MASK_NAN',['../namespaceCore.html#acd0aff6b48bc9fa7d93a926bd4f2a528',1,'Core::MASK_NAN()'],['../IO_2CInterface_8h.html#aaf4596346e7423cc6b7d2ee8c66a5fba',1,'MASK_NAN():&#160;Image.h'],['../IO_2CInterface_8cpp.html#a784ae5ef522f037793b8562b2edaeb7a',1,'MASK_NAN():&#160;CInterface.cpp']]],
+  ['mask_5fok',['MASK_OK',['../namespaceCore.html#ad3d37b7fad1e63008bf10c7fd7373f73',1,'Core::MASK_OK()'],['../IO_2CInterface_8h.html#a45b20399ef80d5bcd6cfb1f0e8007bdc',1,'MASK_OK():&#160;Image.h'],['../IO_2CInterface_8cpp.html#a14c0f248e71bbb781656070d2bba98ad',1,'MASK_OK():&#160;CInterface.cpp']]],
+  ['mask_5fouter',['MASK_OUTER',['../namespaceCore.html#a16b8ea31be5c498d1987858a305ba2fd',1,'Core::MASK_OUTER()'],['../IO_2CInterface_8h.html#a93f0bba255d1354a65396289a3d6fd9a',1,'MASK_OUTER():&#160;Image.h'],['../IO_2CInterface_8cpp.html#a0e30822c37ab168dea7232a6811bafea',1,'MASK_OUTER():&#160;CInterface.cpp']]],
+  ['mask_5foversaturated',['MASK_OVERSATURATED',['../namespaceCore.html#aa68968530acce5c95d1096bc80e61d1f',1,'Core::MASK_OVERSATURATED()'],['../IO_2CInterface_8h.html#aa8acedc109cf809f9c4139b3a52b63a8',1,'MASK_OVERSATURATED():&#160;Image.h'],['../IO_2CInterface_8cpp.html#a93cb32ad0325e55f03e0aa0c4c7a2697',1,'MASK_OVERSATURATED():&#160;CInterface.cpp']]],
+  ['mask_5fsaturated',['MASK_SATURATED',['../namespaceCore.html#aef430d42d85e01b0c8fe1bf080b9f84d',1,'Core::MASK_SATURATED()'],['../IO_2CInterface_8h.html#a4d2165cfc0bccf8132edb349acc2abe1',1,'MASK_SATURATED():&#160;Image.h'],['../IO_2CInterface_8cpp.html#a055e978026b98debf9f84b6ed8f5abcc',1,'MASK_SATURATED():&#160;CInterface.cpp']]],
+  ['max_5forder',['max_order',['../structPSF_1_1TermGenerator_1_1PolyOrderSpec.html#a1f4aa37b74785f9db64d70aa7b76d495',1,'PSF::TermGenerator::PolyOrderSpec']]],
+  ['max_5fstep',['MAX_STEP',['../FitSubpixCommandLineOptions_8h.html#a88f1f68297e91c0ad7c99ef169a1538d',1,'FitSubpixCommandLineOptions.h']]],
+  ['message',['message',['../classError_1_1General.html#a84c7f5e1996910e43d440494741dd039',1,'Error::General']]],
+  ['module_5fpath',['module_path',['../namespacetests_1_1fitpsf_1_1noiseless__tests.html#a4ca25b63a0896b72c61aee27f24b729b',1,'tests::fitpsf::noiseless_tests']]],
+  ['multinest',['MultiNest',['../FitSubpixCommandLineOptions_8h.html#afa7554614bbf30a44fa4c231f2c0dbcc',1,'FitSubpixCommandLineOptions.h']]]
 ];

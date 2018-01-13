@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['column_5fname',['column_name',['../namespacePhot.html#af8771873c7f52f39c4cd5e5fc2191661',1,'Phot']]]
+  ['a',['A',['../PhotColumns_8h.html#a3b98e2dffc6cb06a89dcb0d5c60a0206',1,'PhotColumns.h']]]
 ];

@@ -1,30 +1,4 @@
 var searchData=
 [
-  ['raw_5fflux',['raw_flux',['../classCore_1_1FluxPair.html#ab7e62359444594442da4e0040a24818c',1,'Core::FluxPair::raw_flux() const'],['../classCore_1_1FluxPair.html#a43ce650b6f565fa9e137dad986fcfe6f',1,'Core::FluxPair::raw_flux()']]],
-  ['read',['read',['../classIO_1_1FitsHeader.html#a6bff63803ef579455e379e58e254fabe',1,'IO::FitsHeader::read()'],['../classIO_1_1SubPixHDF5File.html#ada5e4f7904b24a216457c0bc257f0921',1,'IO::SubPixHDF5File::read()']]],
-  ['read_5f1d',['read_1d',['../classIO_1_1SubPixHDF5File.html#a7c9e3655ee6c7293d81e505bbb2df612',1,'IO::SubPixHDF5File']]],
-  ['read_5f1d_5fstring',['read_1d_string',['../classIO_1_1SubPixHDF5File.html#a6c2c831384c7cdcb875d4845aaca6a5a',1,'IO::SubPixHDF5File']]],
-  ['read_5fcolumn_5fdata',['read_column_data',['../group__FitPSF.html#gaa2a64a29ca9138387b105170abd6c9bc',1,'FitPSF::IOSources']]],
-  ['read_5ffilenames',['read_filenames',['../group__FitPSF.html#ga36970cb77c2cb2dc24857caa33617afa',1,'FitPSF::IOSources']]],
-  ['read_5finput_5fsources',['read_input_sources',['../namespaceSubPixPhot.html#a87f570f8391763620e76ed2b15841fee',1,'SubPixPhot']]],
-  ['read_5fpair_5fattribute',['read_pair_attribute',['../classIO_1_1SubPixHDF5File.html#a4f000f1a94dd8d914f522b8fedb46cc3',1,'IO::SubPixHDF5File']]],
-  ['read_5fpsf_5ffile',['read_psf_file',['../classChiSquared.html#a5ce92b6e4227880b031ccd4a2f501259',1,'ChiSquared']]],
-  ['read_5fpsfmap',['read_psfmap',['../classIO_1_1SubPixHDF5File.html#a7fdd2eb96d54651671e924172488e4d6',1,'IO::SubPixHDF5File']]],
-  ['read_5fpsfmap_5fvariables',['read_psfmap_variables',['../classIO_1_1SubPixHDF5File.html#a6822efab7d428cfe4fc7a4e914341e26',1,'IO::SubPixHDF5File']]],
-  ['read_5fscalar',['read_scalar',['../classIO_1_1SubPixHDF5File.html#a3ec9739d701d457ff4d80dcbf6e41057',1,'IO::SubPixHDF5File']]],
-  ['read_5fsdk_5fcoef',['read_sdk_coef',['../namespaceSubPixPhot.html#addd32fa3ceab18162cc4c59f0b146883',1,'SubPixPhot']]],
-  ['read_5fsource',['read_source',['../classSubPixPhot_1_1SourceInput.html#a59c329552bf754762619395afd69fb77',1,'SubPixPhot::SourceInput']]],
-  ['read_5fsources',['read_sources',['../namespaceSubPixPhot.html#a728db76f26cd4daddc34696ecea6557c',1,'SubPixPhot::read_sources(SourceInput &amp;source_input, std::list&lt; SOURCE_TYPE &gt; &amp;sources, unsigned num_apertures)'],['../namespaceSubPixPhot.html#affa5265394b35f8e3fe09a8a1aa7d9b2',1,'SubPixPhot::read_sources(SourceInput &amp;source_input, std::list&lt; SOURCE_TYPE &gt; &amp;sources)']]],
-  ['ready_5fto_5ffit',['ready_to_fit',['../classFitPSF_1_1LinearSource.html#a6c8553d077d159cef0d0fe344bbef80a',1,'FitPSF::LinearSource::ready_to_fit()'],['../classFitPSF_1_1OverlapSource.html#a3e8b8d88c00f4b103c92d77f896bf2b8',1,'FitPSF::OverlapSource::ready_to_fit()'],['../classFitPSF_1_1Source.html#a2984d5e2950a253812df473166664961',1,'FitPSF::Source::ready_to_fit()']]],
-  ['reduced_5fchi2',['reduced_chi2',['../classCore_1_1Source.html#a775ceb68868708e91ec6e630b29ab43f',1,'Core::Source::reduced_chi2() const'],['../classCore_1_1Source.html#aeb7358c8d4a101b961b629fdfb05b813',1,'Core::Source::reduced_chi2()'],['../classFitPSF_1_1Source.html#a6a5509962948ad343b0413026bc97450',1,'FitPSF::Source::reduced_chi2()'],['../classIO_1_1OutputSDKSource.html#af34996f32c0c344ebb7c831cc5f544a6',1,'IO::OutputSDKSource::reduced_chi2()']]],
-  ['refine',['refine',['../classPSF_1_1EllipticalGaussian.html#ab75064932dba6660356aa950f320b64c',1,'PSF::EllipticalGaussian']]],
-  ['reject_5fpixels_5ffrom_5ffit',['reject_pixels_from_fit',['../classFitPSF_1_1OverlapSource.html#a9d9840e3465bc319e477887a4d544547',1,'FitPSF::OverlapSource']]],
-  ['reorder_5fflux_5ffit_5fcolumn',['reorder_flux_fit_column',['../classFitPSF_1_1LinearSource.html#a7358c4bcf29ea15c34e10bbf20be1547',1,'FitPSF::LinearSource']]],
-  ['replace_5fpixels',['replace_pixels',['../classFitPSF_1_1OverlapSource.html#aa1be8727bb6c3cbaeadb63de7ce248d9',1,'FitPSF::OverlapSource']]],
-  ['replicate_5flast',['replicate_last',['../namespaceCore.html#ab37ad041e1eab2b71b9f3001ce65965b',1,'Core']]],
-  ['required_5fdata_5ftree_5fquantities',['required_data_tree_quantities',['../classPSF_1_1EllipticalGaussianMap.html#aad07aeb314393f38fbf75ca680c6b814',1,'PSF::EllipticalGaussianMap::required_data_tree_quantities()'],['../classPSF_1_1Map.html#a79360d359d9bf8fa22a7efe3130de179',1,'PSF::Map::required_data_tree_quantities()'],['../classPSF_1_1MapSourceContainer.html#a2dbeba4bd0ea6bde0325430a48463ef5',1,'PSF::MapSourceContainer::required_data_tree_quantities()'],['../classPSF_1_1PiecewiseBicubicMap.html#a8a454178ce2ea12618360a0bb3071460',1,'PSF::PiecewiseBicubicMap::required_data_tree_quantities()']]],
-  ['restart_5fpixel_5fiteration',['restart_pixel_iteration',['../classFitPSF_1_1OverlapSource.html#a114dc6c243fa5b59769eb39dd897d045',1,'FitPSF::OverlapSource::restart_pixel_iteration()'],['../classFitPSF_1_1SDKSource.html#af017d030364929ad145fcd855e4b6371',1,'FitPSF::SDKSource::restart_pixel_iteration()']]],
-  ['restricted_5fgsl_5ffit',['restricted_gsl_fit',['../classFitPSF_1_1PolynomialSDK.html#a49d090b95832c05fe05025d09ce57f76',1,'FitPSF::PolynomialSDK']]],
-  ['rhs_5fcorrection',['rhs_correction',['../classFitPSF_1_1PiecewiseBicubicPSFSmoothing.html#af3284e6c3e3695164327c7a2665842c6',1,'FitPSF::PiecewiseBicubicPSFSmoothing']]],
-  ['runtime',['Runtime',['../classError_1_1Runtime.html#a2d6b298c060d13fcd734e9aafc588ae0',1,'Error::Runtime']]]
+  ['quality_5fflag',['quality_flag',['../classFitPSF_1_1OverlapSource.html#a962886e0989ec2e471e0f31084f6b9dc',1,'FitPSF::OverlapSource::quality_flag()'],['../classFitPSF_1_1Source.html#a0d92fee231a89bb5f920e3af435379fe',1,'FitPSF::Source::quality_flag()']]]
 ];

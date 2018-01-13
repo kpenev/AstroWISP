@@ -6,10 +6,7 @@ var Core_2Typedefs_8h =
     [ "DoubleImageMatrix", "Core_2Typedefs_8h.html#a56150491fa2dd494b416141c5f793655", null ],
     [ "IntImageMatrix", "Core_2Typedefs_8h.html#a3878af9caac1f5b7c5849c1dbd4bd065", null ],
     [ "vector_size_type", "Core_2Typedefs_8h.html#a285a47e008b3a371dddad36b58c18810", null ],
-    [ "PhotometryFlag", "Core_2Typedefs_8h.html#a0284392b810d69336f74bd704daa5de8", [
-      [ "UNDEFINED", "Core_2Typedefs_8h.html#a0284392b810d69336f74bd704daa5de8a184de68a0931048cfddd7d14bcd01b3a", null ],
-      [ "GOOD", "Core_2Typedefs_8h.html#a0284392b810d69336f74bd704daa5de8ac45fe6ee2449f108749fdc87d80a2851", null ],
-      [ "SATURATED", "Core_2Typedefs_8h.html#a0284392b810d69336f74bd704daa5de8ad7c9cd36cbc2cb7a8d335f90eb474e49", null ],
-      [ "BAD", "Core_2Typedefs_8h.html#a0284392b810d69336f74bd704daa5de8a58c7c656ad590f681f096baf6c95b507", null ]
-    ] ]
+    [ "GOOD", "Core_2Typedefs_8h.html#acbcf8ca7dd1dc27867b15e67a53fa0b2", null ],
+    [ "SATURATED", "Core_2Typedefs_8h.html#a2d0506969de417169f5686939e76a5c5", null ],
+    [ "UNDEFINED", "Core_2Typedefs_8h.html#a93cb8dbe7a79de0dc281e43f0ea6dd80", null ]
 ];

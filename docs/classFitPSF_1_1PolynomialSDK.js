@@ -6,7 +6,7 @@ var classFitPSF_1_1PolynomialSDK =
     [ "find_max_expansion_terms", "classFitPSF_1_1PolynomialSDK.html#a4db1d543076912756972f9c0198376c7", null ],
     [ "find_mid_S", "classFitPSF_1_1PolynomialSDK.html#aed34dabcb4f312cc0b4156c1f489c1bb", null ],
     [ "fit_initial_S", "classFitPSF_1_1PolynomialSDK.html#ac87c2947d5a02515f87d87481cf4b6a1", null ],
-    [ "get_coefficients", "classFitPSF_1_1PolynomialSDK.html#a92e01370e9d0f529494dfc93e58dbfd8", null ],
+    [ "get_coefficients", "classFitPSF_1_1PolynomialSDK.html#aed4c7b61554a95b5247a35a9c1808f2b", null ],
     [ "gsl_fit", "classFitPSF_1_1PolynomialSDK.html#afe86be3b812bd7d7c4a87b7b27b56419", null ],
     [ "initial_poly", "classFitPSF_1_1PolynomialSDK.html#ab4ebf861e8c71a34e2aec539b5da3b13", null ],
     [ "nr_fit", "classFitPSF_1_1PolynomialSDK.html#ada471d41ad81dd12d0bb7747471674f7", null ],

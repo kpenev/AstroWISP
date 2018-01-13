@@ -1,5 +1,5 @@
 var IntegralUtil_8cpp =
 [
-    [ "fill_powers", "IntegralUtil_8cpp.html#a2725053abf77c71025d14d56e76a5259", null ],
-    [ "initialize_powers", "IntegralUtil_8cpp.html#a3b6fb8c547eca013d8daedb3f3d6c6e8", null ]
+    [ "fill_powers", "IntegralUtil_8cpp.html#af54076a419382f356ebbb11e09585cf4", null ],
+    [ "initialize_powers", "IntegralUtil_8cpp.html#aef126133b3022d602f40d5f0fb24ae59", null ]
 ];

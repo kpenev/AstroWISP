@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['k',['k',['../classPSF_1_1EllipticalGaussian.html#ac2261badb343ef37562f1cbc4349f21f',1,'PSF::EllipticalGaussian::k()'],['../namespacePhot.html#afd335f0316f5f0113818bf99d5f6d6b5abad215413118dd7d206c6b244061b24f',1,'Phot::K()']]]
+  ['k',['k',['../classPSF_1_1EllipticalGaussian.html#adf62cc3fd50df390265c2aae70c0398c',1,'PSF::EllipticalGaussian::k()'],['../PhotColumns_8h.html#a16e4ef534cec559430e07e05eb71c719',1,'K():&#160;PhotColumns.h']]]
 ];
