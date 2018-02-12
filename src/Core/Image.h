@@ -17,22 +17,22 @@
 
 namespace Core {
 
-    LIB_PUBLIC const char MASK_OK              = 0x00; /* everything is ok... */
-    LIB_PUBLIC const char MASK_CLEAR           = MASK_OK;  /* alias           */
+    const char MASK_OK              = 0x00; /* everything is ok... */
+    const char MASK_CLEAR           = MASK_OK;  /* alias           */
 
-    LIB_PUBLIC const char MASK_FAULT           = 0x01;/* faulty pixel         */
-    LIB_PUBLIC const char MASK_HOT             = 0x02;/* hot (nonlinear) pixel*/
-    LIB_PUBLIC const char MASK_COSMIC          = 0x04; /* hit by a cosmic ray */
-    LIB_PUBLIC const char MASK_OUTER           = 0x08; /* outer pixel		  */
-    LIB_PUBLIC const char MASK_OVERSATURATED   = 0x10; /* oversaturated       */
-    LIB_PUBLIC const char MASK_LEAKED          = 0x20; /*leaked during readout*/
-    LIB_PUBLIC const char MASK_SATURATED = (MASK_OVERSATURATED|MASK_LEAKED);
-    LIB_PUBLIC const char MASK_INTERPOLATED    = 0x40; /*interpolated-not real*/
+    const char MASK_FAULT           = 0x01;/* faulty pixel         */
+    const char MASK_HOT             = 0x02;/* hot (nonlinear) pixel*/
+    const char MASK_COSMIC          = 0x04; /* hit by a cosmic ray */
+    const char MASK_OUTER           = 0x08; /* outer pixel		  */
+    const char MASK_OVERSATURATED   = 0x10; /* oversaturated       */
+    const char MASK_LEAKED          = 0x20; /*leaked during readout*/
+    const char MASK_SATURATED = (MASK_OVERSATURATED|MASK_LEAKED);
+    const char MASK_INTERPOLATED    = 0x40; /*interpolated-not real*/
 
-    LIB_PUBLIC const char MASK_BAD             = 0x7F; /* any error           */
-    LIB_PUBLIC const char MASK_ALL             = MASK_BAD;
+    const char MASK_BAD             = 0x7F; /* any error           */
+    const char MASK_ALL             = MASK_BAD;
 
-    LIB_PUBLIC const char MASK_NAN             = MASK_FAULT;
+    const char MASK_NAN             = MASK_FAULT;
 
     ///Declare the minimum functionality expected from input images.
     template<typename DATA_TYPE>
@@ -41,6 +41,10 @@ namespace Core {
             ///\brief The pixel values in the image. See values argument of
             ///Image::Image()
             DATA_TYPE *__values;
+
+            ///\brief Error estimates for __values. See errors argument of
+            ///Image::Image()
+            DATA_TYPE *__errors;
 
             ///\brief The quality flags of the image pixels. See mask
             ///argument of Image::Image()
@@ -83,22 +87,31 @@ namespace Core {
                 unsigned long x_resolution = 0,
 
                 ///The number of pixels along the y direction in the image.
-                unsigned long y_resolution = 0
+                unsigned long y_resolution = 0,
+
+                ///Error estimates for the image pixels.
+                const DATA_TYPE *errors = NULL
             ) :
                 __values(NULL),
+                __errors(NULL),
                 __mask(NULL),
                 __x_resolution(0),
                 __y_resolution(0),
                 __wrapped(false)
             {
                 if(values != NULL && x_resolution > 0 && y_resolution > 0)
-                    init_from_copy(values, mask, x_resolution, y_resolution);
+                    init_from_copy(values,
+                                   mask,
+                                   x_resolution,
+                                   y_resolution,
+                                   errors);
             }
 
             ///\brief Create a new image containing a copy of the data of the
             ///given image.
             Image(const Image<DATA_TYPE> &image) :
                 __values(NULL),
+                __errors(NULL),
                 __mask(NULL),
                 __x_resolution(0),
                 __y_resolution(0),
@@ -109,7 +122,8 @@ namespace Core {
                     init_from_copy(image.__values,
                                    image.__mask,
                                    image.__x_resolution,
-                                   image.__y_resolution);
+                                   image.__y_resolution,
+                                   image.__errors);
                 } else assert(false);
             }
 
@@ -129,10 +143,14 @@ namespace Core {
                 unsigned long orig_x_resolution,
 
                 ///The number of pixels along the y direction in the image.
-                unsigned long orig_y_resolution
+                unsigned long orig_y_resolution,
+
+                ///The error estimates.
+                const DATA_TYPE *orig_errors
             )
             {
                 assert(__values == NULL);
+                assert(__errors == NULL);
                 assert(__mask == NULL);
                 __values = new DATA_TYPE[orig_x_resolution
                                          *
@@ -152,6 +170,24 @@ namespace Core {
                                 orig_x_resolution * orig_y_resolution);
                 } else
                     __mask = NULL;
+
+                if(orig_errors) {
+                    __errors = new DATA_TYPE[orig_x_resolution
+                                             *
+                                             orig_y_resolution];
+                    std::memcpy(
+                        __errors,
+                        orig_errors,
+                        (
+                            orig_x_resolution
+                            *
+                            orig_y_resolution
+                            *
+                            sizeof(DATA_TYPE)
+                        )
+                    );
+                } else
+                    __errors = NULL;
             }
 
             ///\brief Wrap the given data in an image.
@@ -172,12 +208,18 @@ namespace Core {
                 unsigned long x_resolution,
 
                 ///The number of pixels along the y direction in the image.
-                unsigned long y_resolution
+                unsigned long y_resolution,
+
+                ///Error estimates of the entries in values. If NULL, any query
+                ///to the error results in an exception.
+                DATA_TYPE *errors = NULL
             )
             {
                 assert(__values == NULL);
                 assert(__mask == NULL);
+                assert(__errors == NULL);
                 __values = values;
+                __errors = errors;
                 __mask = mask;
                 __x_resolution = x_resolution;
                 __y_resolution = y_resolution;
@@ -190,34 +232,32 @@ namespace Core {
                 wrap(image.__values,
                      image.__mask,
                      image.__x_resolution,
-                     image.__y_resolution);
+                     image.__y_resolution,
+                     image.__errors);
             }
 
-            ///\brief A place-holder for future development where each pixel
-            ///may have an error estimate.
-            bool has_errors() const {return false;}
+            ///\brief Was an error estimate provided for this image.
+            bool has_errors() const {return __errors != NULL;}
 
             ///\brief A place-holder for future development where each pixel
             ///may have an error estimate.
-            DATA_TYPE &error(double, double)
+            DATA_TYPE &error(unsigned long x, unsigned long y)
             {
-                throw Error::NotImplemented(
-                    "Per-pixel error estimate not implemented yet!"
-                );
+                assert(__errors != NULL);
+                return __errors[index(x, y)];
             }
 
             ///\brief A place-holder for future development where each pixel
             ///may have an error estimate.
             DATA_TYPE error(
                 ///The x coordinate of the pixel whose error to return.
-                double ,
+                unsigned long x,
 
                 ///The y coordinate of the pixel whose error to return.
-                double ) const
+                unsigned long y) const
             {
-                throw Error::NotImplemented(
-                    "Per-pixel error estimate not implemented yet!"
-                );
+                assert(__errors != NULL);
+                return __errors[index(x, y)];
             }
 
             ///The number of pixels in the x direction.

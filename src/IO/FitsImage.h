@@ -24,6 +24,9 @@ namespace IO {
             ///The value of each pixel. See values argument of Image::Image.
             DATA_TYPE *__pixel_values;
 
+            ///Error estimateof each pixel. See errors argument of Image::Image.
+            DATA_TYPE *__pixel_errors;
+
             ///The bad pixel mask. See mask argument of Image::Image.
             char *__mask;
 
@@ -46,7 +49,7 @@ namespace IO {
             ///the header.
             void parse_mask_string(
                 ///The mask string to parse.
-                const char *mask_string,
+                const std::string &mask_string,
 
                 ///The horizontal resolution of the image.
                 long x_resolution,
@@ -56,12 +59,28 @@ namespace IO {
             ) {
                 if(__mask) delete[] __mask;
                 __mask = new char[x_resolution * y_resolution]();
-                parse_hat_mask(mask_string,
-                               x_resolution,
-                               y_resolution,
-                               __mask);
+                if(!mask_string.empty())
+                    parse_hat_mask(mask_string.c_str(),
+                                   x_resolution,
+                                   y_resolution,
+                                   __mask);
             }
 
+            ///\brief Read pixel data from an HDU in a FITS file.
+            void input_image(
+                ///The open fits file from which to read.
+                fitsfile *fptr,
+
+                ///The number of pixels to read from the image.
+                long num_pixels, 
+
+                ///The memory location where to place the data.
+                DATA_TYPE *destination,
+
+                ///The HDU to read from. If zero, the currently selected HDU in
+                ///fptr is read.
+                unsigned read_hdu = 0
+            );
 
         public:
             ///\brief Reads the data in the given fits image(s).
@@ -75,17 +94,25 @@ namespace IO {
                 const std::string &filename = "",
 
 
-                ///The HDU number to containing the required image.
-                unsigned hdu_number = 1,
+                ///The HDU number to containing the required image. If,
+                ///zero, the first non-trivial image HDU is used.
+                unsigned values_hdu = 0,
 
                 ///Should rounding real valued images to integer be allowed.
                 ///Rounding is only performed if DATA_TYPE is integer and the
                 ///input image contains floating point vaules.
-                bool allow_rounding = false
+                bool allow_rounding = false,
+
+                ///The HDU number of the extension containing error estimates
+                ///for the pixel values. If zero, no error estimate is read-in.
+                unsigned errors_hdu = 0
             ) :
                 __pixel_values(NULL),
                 __mask(NULL)
-            {if(filename.size()) open(filename, hdu_number, allow_rounding);}
+            {
+                if(filename.size())
+                    open(filename, values_hdu, allow_rounding, errors_hdu);
+            }
 
             ///Copies orig to *this.
             FitsImage(const FitsImage &orig)
@@ -101,13 +128,17 @@ namespace IO {
                  ///The name of the file to open. Only used in error messages.
                 const std::string &fits_filename,
 
-                ///The HDU number to containing the required image.
-                unsigned hdu_number = 1,
+                ///The HDU number to containing the pixel values.
+                unsigned values_hdu = 0,
 
                 ///Should rounding real valued images to integer be allowed.
                 ///Rounding is only performed if DATA_TYPE is integer and the
                 ///input image contains floating point vaules.
-                bool allow_rounding = false
+                bool allow_rounding = false,
+
+                ///The HDU number to containing the estimated pixel errors. If
+                ///zero, no error image is read.
+                unsigned errors_hdu = 0
             );
 
             ///Returns immutable reference to the image header.
@@ -166,49 +197,13 @@ namespace IO {
         }
 
     template<class DATA_TYPE>
-        void FitsImage<DATA_TYPE>::open(
-            const std::string &fits_filename,
-            unsigned hdu_number,
-            bool allow_rounding
-        )
+        void FitsImage<DATA_TYPE>::input_image(fitsfile *fptr,
+                                               long num_pixels,
+                                               DATA_TYPE *destination,
+                                               unsigned read_hdu)
         {
-            fitsfile *fptr = open_fits(fits_filename);
-            __header.read(fptr);
-
-            int dimensions, fits_status = 0, bitpix;
-            long naxes[2];
-            fits_get_img_param(fptr,
-                               2,
-                               &bitpix,
-                               &dimensions,
-                               naxes,
-                               &fits_status);
-
-            parse_mask_string(__header["MASKINFO"].c_str(),
-                              naxes[0],
-                              naxes[1]);
-
-
-            if(fits_status)
-                throw Error::Fits("Failed to read image parameters in "
-                                  "FitsImageData::read.");
-            if(dimensions!=2) 
-                throw Error::Fits(
-                    "Only 2D image are supported at this time."
-                );
-
-            if(
-                std::numeric_limits<DATA_TYPE>::is_integer
-                &&
-                bitpix < 0 
-                &&
-                !allow_rounding
-            )
-                throw Error::Fits("Non-rounding integer FitsImage attached "
-                                  "to a real valued image.");
-
             long start_pixel[2]={1, 1};
-            int data_type, has_nan;
+            int data_type, has_nan, fits_status = 0;
             void *undefined_value=NULL;
             DATA_TYPE nan;
             if(std::numeric_limits<DATA_TYPE>::has_quiet_NaN) {
@@ -239,32 +234,115 @@ namespace IO {
                 "Unsupported DATA_TYPE for FitsImageData."
             );
 
-            if(__pixel_values) delete[] __pixel_values;
-            __pixel_values = new DATA_TYPE[naxes[0] * naxes[1]];
-
-            fits_movabs_hdu(fptr, hdu_number, NULL, &fits_status);
+            if(read_hdu > 0)
+                fits_movabs_hdu(fptr, read_hdu, NULL, &fits_status);
             if(fits_status) {
                 std::ostringstream msg;
-                msg << "Failed to move to HDU #" << hdu_number
-                    << " in FitsImageData::read.";
+                msg << "Failed to move to HDU #" << read_hdu
+                    << " in FitsImageData::input_image.";
                 throw Error::Fits(msg.str());
             }
             fits_read_pix(fptr,
                           data_type,
                           start_pixel,
-                          naxes[0] * naxes[1],
+                          num_pixels,
                           undefined_value,
-                          __pixel_values,
+                          destination,
                           &has_nan,
                           &fits_status);
-            if(fits_status) throw Error::Fits("Failed to read image data "
-                                              "in FitsImageData::read.");
-            __filename=fits_filename;
+
+            std::ostringstream error_message;
+            error_message
+                << "Failed to read image data in FitsImageData::read HDU #"
+                << read_hdu
+                << "!"
+                << std::endl;
+            if(fits_status) throw Error::Fits(error_message.str());
+
+        }
+
+    template<class DATA_TYPE>
+        void FitsImage<DATA_TYPE>::open(
+            const std::string &fits_filename,
+            unsigned values_hdu,
+            bool allow_rounding,
+            unsigned errors_hdu
+        )
+        {
+            __filename = fits_filename;
+            std::cerr << "Set image name to " << __filename << std::endl;
+
+            fitsfile *fptr = open_fits(fits_filename);
+
+            int dimensions, fits_status = 0, bitpix, hdu_type = IMAGE_HDU;
+            long naxes[2];
+            for(
+                ; 
+                fits_status == 0;
+                fits_movrel_hdu(fptr, 1, &hdu_type, &fits_status)
+            ) {
+                fits_get_img_param(fptr,
+                                   2,
+                                   &bitpix,
+                                   &dimensions,
+                                   naxes,
+                                   &fits_status);
+                if(dimensions != 0 && hdu_type == IMAGE_HDU) break;
+            }
+
+#ifndef NDEBUG
+            std::cerr << "Found primary image with resolution "
+                      << naxes[0] << "x" << naxes[1]
+                      << std::endl;
+#endif
+
+            assert(fits_status == 0);
+
+            __header.read(fptr);
+
+            parse_mask_string(__header["MASKINFO"],
+                              naxes[0],
+                              naxes[1]);
+
+
+            if(fits_status)
+                throw Error::Fits("Failed to read image parameters in "
+                                  "FitsImageData::read.");
+            if(dimensions!=2) 
+                throw Error::Fits(
+                    "Only 2D image are supported at this time."
+                );
+
+            if(
+                std::numeric_limits<DATA_TYPE>::is_integer
+                &&
+                bitpix < 0 
+                &&
+                !allow_rounding
+            )
+                throw Error::Fits("Non-rounding integer FitsImage attached "
+                                  "to a real valued image.");
+
+            if(__pixel_values) delete[] __pixel_values;
+            __pixel_values = new DATA_TYPE[naxes[0] * naxes[1]];
+
+            input_image(fptr, naxes[0] * naxes[1], __pixel_values, values_hdu);
+
+            if(errors_hdu > 0) {
+                __pixel_errors = new DATA_TYPE[naxes[0] * naxes[1]];
+                input_image(fptr,
+                            naxes[0] * naxes[1],
+                            __pixel_errors,
+                            errors_hdu);
+            } else
+                __pixel_errors = NULL;
+
             close_fits(fptr, fits_filename);
             Core::Image<DATA_TYPE>::wrap(__pixel_values,
                                          __mask,
                                          naxes[0],
-                                         naxes[1]);
+                                         naxes[1],
+                                         __pixel_errors);
         }
 
 } //End IO namespace.

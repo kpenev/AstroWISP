@@ -676,13 +676,29 @@ namespace FitPSF {
                     options["io.input-columns"].as<Core::StringList>()
                 );
 
-                IO::FitsImage<double> fits_image(source_list.fits_fname());
-
-                FitPSF::Image<FIT_SOURCE_TYPE> *image =
-                    new FitPSF::Image<FIT_SOURCE_TYPE>(
-                        fits_image,
+                FitPSF::Image<FIT_SOURCE_TYPE> *image;
+                
+                if(options["io.expect-error-hdu"].as<unsigned>() > 0) {
+                    image = new FitPSF::Image<FIT_SOURCE_TYPE>(
+                        source_list.fits_fname(),
+                        0,
+                        options["io.expect-error-hdu"].as<unsigned>()
+                    );
+#ifdef DEBUG
+                    std::cerr << "Read image with error HDU." << std::endl;
+#endif
+                    assert(image->has_errors());
+                } else {
+                    image = new FitPSF::Image<FIT_SOURCE_TYPE>(
+                        source_list.fits_fname(),
+                        0,
                         options["gain"].as<double>()
                     );
+#ifdef DEBUG
+                    std::cerr << "Read image without error HDU." << std::endl;
+#endif
+                    assert(!image->has_errors());
+                }
 
                 if(x_resolution == 0 && y_resolution == 0) {
                     x_resolution = image->x_resolution();
@@ -1127,13 +1143,17 @@ int main(int argc, char *argv[])
         FitPSF::fill_subpix_map(options, subpix_map);
 
 #ifdef TRACK_PROGRESS
-		std::cerr << "Read input sources." << std::endl;
+		std::cerr << "Created sub-pixel map." << std::endl;
 #endif
 
         IO::H5IODataTree output_data_tree(argc,
                                           argv,
                                           FIT_PSF_VERSION,
                                           options);
+
+#ifdef TRACK_PROGRESS
+		std::cerr << "Constructed output data tree." << std::endl;
+#endif
 
 		bool converged;
         if (options["psf.model"].as<PSF::ModelType>() == PSF::ZERO)

@@ -16,10 +16,10 @@
 namespace Core {
 
     ///Not-a-number.
-    LIB_PUBLIC const double NaN = std::numeric_limits<double>::quiet_NaN();
+    const double NaN = std::numeric_limits<double>::quiet_NaN();
 
     ///Positive infinity
-    LIB_PUBLIC const double Inf = std::numeric_limits<double>::infinity();
+    const double Inf = std::numeric_limits<double>::infinity();
 
     LIB_LOCAL inline void silence_unused_nan_warning(double =NaN) {};
     LIB_LOCAL inline void silence_unused_inf_warning(double =Inf) {};

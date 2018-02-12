@@ -39,11 +39,10 @@ namespace FitPSF {
             )
             (
                 "io.expect-error-hdu",
-                opt::value<bool>(),
-                "If this option is enabled, the input images are expected to"
-                " have an extension in addition to the primary HDU which "
-                "holds the estimated errors in the pixel values of the "
-                "primary image." 
+                opt::value<unsigned>(),
+                "If this option is non-zero, estimated errors in the pixel "
+                "values of the primary image are assumed to be contained in the"
+                " HDU with the given number."
             )
             (
                 "io.error-image",

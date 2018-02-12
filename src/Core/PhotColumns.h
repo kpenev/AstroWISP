@@ -86,7 +86,7 @@ namespace Phot {
 		}
 	};
 
-	const LIB_LOCAL ColumnNamesVector column_name;
+	const ColumnNamesVector column_name;
 }
 
 inline LIB_LOCAL double magnitude(double flux, double mag_1adu)

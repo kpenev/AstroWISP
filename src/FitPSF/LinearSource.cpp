@@ -16,7 +16,7 @@ namespace FitPSF {
         std::valarray<double> &pixel_integrals
     )
     {
-        assert(pixel_integrals.size() == parameter_sets.size());
+        assert(16 * pixel_integrals.size() == parameter_sets[0].size());
         if (
             subpix_map().x_resolution() == 0
             &&
@@ -75,6 +75,10 @@ namespace FitPSF {
         assert(shape_fit_offset.size()
                ==
                static_cast<int>(shape_fit_pixel_count()));
+
+        assert(basis_parameter_sets[0].size()
+               ==
+               16 * static_cast<int>(shape_fit_integral_matrix.cols() + 1));
 
 #ifdef VERBOSE_DEBUG
         std::cerr << "Basis parameter sets:" << std::endl;

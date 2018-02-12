@@ -50,6 +50,41 @@ namespace FitPSF {
 
         public:
             ///\brief Create a fit pixel manager for the given image.
+            Image(
+                ///The filename of the image to fit.
+                const std::string &filename = "",
+
+                ///The HDU number to containing the required image. If,
+                ///zero, the first non-trivial image HDU is used.
+                unsigned hdu_number = 0,
+
+                ///The gain to assume for the image.
+                double gain = 1.0
+            ) :
+                IO::FitsImage<double>(filename, hdu_number),
+                __fit_pixels(x_resolution() * y_resolution(), NULL),
+                __gain(gain)
+            {}
+
+            ///\brief Create a fit pixel manager for the given image.
+            Image(
+                ///The filename of the image to fit.
+                const std::string &filename,
+
+                ///The HDU number to containing the image of pixel values. If,
+                ///zero, the first non-trivial image HDU is used.
+                unsigned values_hdu,
+
+                ///The HDU containing the estimated standard deviation of each
+                ///pixel.
+                unsigned errors_hdu
+            ) :
+                IO::FitsImage<double>(filename, values_hdu, false, errors_hdu),
+                __fit_pixels(x_resolution() * y_resolution(), NULL),
+                __gain(1.0)
+            {}
+
+            ///\brief Create a fit pixel manager for the given image.
             ///
             ///The newly constructed objects holds an alias of the image
             ///data, so the input image should not be destructed before this
@@ -226,6 +261,16 @@ namespace FitPSF {
         ) const
         {
             double value = Core::Image<double>::operator()(x, y) * __gain;
+#ifdef VERBOSE_DEBUG
+            if(has_errors())
+                std::cerr << "Variance from separate image = "
+                          << std::pow(error(x, y) * __gain, 2)
+                          << std::endl;
+            else
+                std::cerr << "Variance from poission statistics = "
+                          << std::abs(value)
+                          << std::endl;
+#endif
             return std::pair<double, double>(
                 value,
                 (
@@ -278,13 +323,18 @@ namespace FitPSF {
 
     template<class SOURCE_TYPE>
         void Image<SOURCE_TYPE>::open(double               gain,
-                                   const std::string    &filename,
-                                   unsigned             hdu_number,
-                                   bool                 allow_rounding)
+                                      const std::string    &filename,
+                                      unsigned             hdu_number,
+                                      bool                 allow_rounding)
         {
             IO::FitsImage<double>::open(filename,
                                         hdu_number,
                                         allow_rounding);
+#ifdef VERBOSE_DEBUG
+            std::cerr << "Fit image: "
+                      << IO::FitsImage<double>::filename()
+                      << std::endl;
+#endif
             delete_allocated_pixels();
             __fit_pixels.assign(x_resolution() * y_resolution(),
                                 NULL);

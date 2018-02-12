@@ -94,7 +94,7 @@ namespace FitPSF {
                 __flag(flag),
                 __shape_fit(true),
                 __flux_fit_index(flux_fit_index)
-            {add_to_source(source);}
+            {assert(__variance > 0); add_to_source(source);}
 
             ///Add this pixel to another source.
             void add_to_source(SOURCE_TYPE *source)
