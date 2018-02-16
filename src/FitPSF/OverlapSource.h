@@ -791,7 +791,7 @@ namespace FitPSF {
         __const_current_pixel(__pixels.begin()),
         __const_first_flux_fit_pixel(__pixels.end()),
         __const_first_excluded_pixel(__pixels.end()),
-        __quality_flag(Core::UNDEFINED),
+        __quality_flag(Core::GOOD),
         __merit(0),
         __max_circular_aperture2(max_circular_aperture > 0
                                  ? std::pow(max_circular_aperture, 2)
@@ -856,7 +856,7 @@ namespace FitPSF {
         __const_current_pixel(__pixels.begin()),
         __const_first_flux_fit_pixel(__pixels.end()),
         __const_first_excluded_pixel(__pixels.end()),
-        __quality_flag(Core::UNDEFINED),
+        __quality_flag(Core::GOOD),
         __merit(0),
         __saturated_pixel_count(0),
         __shape_fit_pixel_count(0),

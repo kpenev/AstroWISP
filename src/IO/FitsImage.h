@@ -58,7 +58,8 @@ namespace IO {
                 long y_resolution
             ) {
                 if(__mask) delete[] __mask;
-                __mask = new char[x_resolution * y_resolution]();
+                __mask = new char[x_resolution * y_resolution];
+                memset(__mask, 0, x_resolution * y_resolution);
                 if(!mask_string.empty())
                     parse_hat_mask(mask_string.c_str(),
                                    x_resolution,

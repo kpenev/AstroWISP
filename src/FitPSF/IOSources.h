@@ -48,7 +48,7 @@ namespace FitPSF {
 
                 ///The name of the output file to use for the given sources.
                 __output_fname,
-                
+
                 ///The name of the file to save source assignemnt info to.
                 __source_assignment_fname;
 
