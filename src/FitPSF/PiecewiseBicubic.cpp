@@ -1216,7 +1216,13 @@ namespace FitPSF {
             std::cerr << "After discarding: " << discarded_pixels
                       << " pixels and " << num_discarded_sources
                       << " sources, " << fit_sources.size()
-                      << " sources remain." << std::endl;
+                      << " sources remain:" << std::endl;
+            for(
+                LinearSourceList::iterator src_i = fit_sources.begin();
+                src_i != fit_sources.end();
+                ++src_i
+            )
+                std::cerr << "\t" << (*src_i)->id() << std::endl;
 #endif
             size_t num_psf_params = ((x_grid.size() - 2)
                                      *

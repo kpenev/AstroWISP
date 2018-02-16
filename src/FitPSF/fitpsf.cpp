@@ -640,8 +640,34 @@ namespace FitPSF {
                 options["psf.model"].as<PSF::ModelType>() == PSF::ZERO
             );
 
-            delete backgrounds;
+            const PSF::MapVarListType &psfmap_variables = source_list.columns();
+            const std::valarray<double> *enabled = NULL;
+            for(
+                PSF::MapVarListType::const_iterator
+                    var_i = psfmap_variables.begin();
+                (var_i != psfmap_variables.end() && enabled==NULL);
+                ++var_i
+            )
+                if(var_i->first == "enabled")
+                    enabled = &(var_i->second);
 
+            if(enabled != NULL)
+                for(
+                    typename std::list<FIT_SOURCE_TYPE *>::iterator
+                    src_i = fit_sources.begin();
+                    src_i != fit_sources.end();
+                ) {
+                    typename std::list<FIT_SOURCE_TYPE *>::iterator
+                        drop_iter = src_i++;
+                    if(!(*enabled)[(*drop_iter)->source_assignment_id() - 1]) {
+                        (*drop_iter)->exclude_from_shape_fit();
+                        dropped_sources.splice(dropped_sources.end(),
+                                               fit_sources,
+                                               drop_iter);
+                    }
+                }
+
+            delete backgrounds;
         }
 
     ///Find the sources on which PSF fitting will be performed.
