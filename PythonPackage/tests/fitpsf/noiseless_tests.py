@@ -45,11 +45,14 @@ class TestPiecewiseBicubic(unittest.TestCase):
             'build',
             'exe',
             'fitpsf',
-            'release',
+            'debug',
             'fitpsf'
         )
     )
-    fitpsf_executable = '/home/kpenev/projects/svn/HATpipe/source/subpixel_sensitivity/src/build/exe/fitpsf/debug/fitpsf'
+#    fitpsf_executable = (
+#        '/home/kpenev/projects/svn/HATpipe/source/'
+#        'subpixel_sensitivity/src/build/exe/fitpsf/debug/fitpsf'
+#    )
 
     #TODO: consider splitting into several functions
     #pylint: disable=too-many-locals
@@ -64,14 +67,23 @@ class TestPiecewiseBicubic(unittest.TestCase):
             sources:    The sources argument used to generate the image that was
                 fit. See same name argument of run_test.
 
+            extra_variables:    A list of the names of any variables in addition
+                to `x` and `y` which participate in the PSF fit.
+
         Returns:
             None
         """
 
+        if 'enabled' in extra_variables:
+            enabled_sources = numpy.array([src['enabled'] for src in sources],
+                                          dtype=bool)
+        else:
+            enabled_sources = numpy.full(len(sources), True, dtype=bool)
+
         psf_fit_file = h5py.File(psf_fit_fname, 'r')
         map_group = psf_fit_file['PSFFit/Map']
         variables = {
-            var: val
+            var: val[enabled_sources]
             for var, val in zip(['x', 'y'] + extra_variables,
                                 map_group['Variables'][:])
         }
@@ -80,7 +92,7 @@ class TestPiecewiseBicubic(unittest.TestCase):
         assert psffit_terms[0] == '{'
         assert psffit_terms[-1] == '}'
 
-        num_sources = len(sources)
+        num_sources = variables['x'].size
         num_x_boundaries = len(sources[0]['psf_args']['boundaries']['x']) - 2
         num_y_boundaries = len(sources[0]['psf_args']['boundaries']['y']) - 2
 
@@ -106,16 +118,25 @@ class TestPiecewiseBicubic(unittest.TestCase):
 
         assert len(sources) == len(fluxes)
         for src_ind, src in enumerate(sources):
+            if 'enabled' in extra_variables and not src['enabled']:
+                continue
+
             if 'flux_backup' in src and src['flux_backup'] is not None:
                 self.assertEqual(fluxes[src_ind], 0)
                 fluxes[src_ind] = src['flux_backup']
             else:
                 self.assertNotEqual(fluxes[src_ind], 0)
 
+        print('fluxes before = ' + repr(fluxes))
+        fluxes = fluxes[enabled_sources]
+        print('fluxes after = ' + repr(fluxes))
+
         fit_params *= fluxes[:, numpy.newaxis, numpy.newaxis, numpy.newaxis]
 
         expected_params = numpy.empty(fit_params.shape)
         for src_ind, src in enumerate(sources):
+            if 'enabled' in extra_variables and not src['enabled']:
+                continue
             for var_ind, var_name in enumerate(['values',
                                                 'd_dx',
                                                 'd_dy',
@@ -239,14 +260,20 @@ class TestPiecewiseBicubic(unittest.TestCase):
                         %
                         dict(
                             source_list_fname=filenames['source_list'],
-                            input_columns=','.join(['ID', 'x', 'y'] + extra_variables),
+                            input_columns=','.join(['ID', 'x', 'y']
+                                                   +
+                                                   extra_variables),
                             terms=psffit_terms,
                             grid=(
-                                grid_boundary_str(sources[0][0]['psf_args']['boundaries']['x'])
+                                grid_boundary_str(
+                                    sources[0][0]['psf_args']['boundaries']['x']
+                                )
                                 +
                                 ';'
                                 +
-                                grid_boundary_str(sources[0][0]['psf_args']['boundaries']['y'])
+                                grid_boundary_str(
+                                    sources[0][0]['psf_args']['boundaries']['y']
+                                )
                             ),
                             subpix_fname=subpix_fname
                         )
@@ -303,8 +330,8 @@ class TestPiecewiseBicubic(unittest.TestCase):
                               d_dx=numpy.zeros((3, 3)),
                               d_dy=numpy.zeros((3, 3)),
                               d2_dxdy=numpy.zeros((3, 3)))
-        boundaries=dict(x=numpy.array([-2.0, 0.0, 2.0]),
-                        y=numpy.array([-1.4, 0.0, 1.4]))
+        boundaries = dict(x=numpy.array([-2.0, 0.0, 2.0]),
+                          y=numpy.array([-1.4, 0.0, 1.4]))
 
         sources = []
 
@@ -448,6 +475,28 @@ class TestPiecewiseBicubic(unittest.TestCase):
                                           boundaries=boundaries)))
 
         self.run_test(sources=[sources], psffit_terms='{1, x*x, y*y}')
+
+        for src in sources:
+            src['enabled'] = 1
+        psf_parameters['d_dx'] = numpy.zeros((3, 3))
+        psf_parameters['d_dy'] = numpy.zeros((3, 3))
+        psf_parameters['d2_dxdy'] = numpy.zeros((3, 3))
+        psf_parameters['d_dx'][1, 1] = 1.0
+        psf_parameters['d_dy'][1, 1] = 2.0
+        psf_parameters['d2_dxdy'][1, 1] = 3.0
+        sources.append(dict(x=4.0,
+                            y=4.0,
+                            enabled=0,
+                            psf_args=dict(psf_parameters=dict(psf_parameters),
+                                          boundaries=boundaries)))
+        sources.append(dict(x=25.0,
+                            y=25.0,
+                            enabled=0,
+                            psf_args=dict(psf_parameters=dict(psf_parameters),
+                                          boundaries=boundaries)))
+        self.run_test(sources=[sources],
+                      psffit_terms='{1, x*x, y*y}',
+                      extra_variables=['enabled'])
 
     def test_multi_image_with_extra_var(self):
         """Test fitting a series of 5 images and non-position variables."""
