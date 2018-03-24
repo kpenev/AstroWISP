@@ -1035,7 +1035,7 @@ namespace IO {
                         if(new_name==element_name)
                             last_node_aperture=aperture_index;
                         else current_ap_ind=std::max(current_ap_ind, 0);
-                        write_node(data, 
+                        write_node(data,
                                    destination,
                                    new_name,
                                    node->second,
@@ -1107,6 +1107,18 @@ namespace IO {
                                           "path to the PSF map!");
         std::vector<std::string> terms(1, "psffit.terms");
         read(terms.begin(), terms.end(), data);
+
+        if(
+            data.get<std::string>("psffit.model", "", translate_string)
+            ==
+            "zero"
+        ) {
+            assert(!H5::H5File::nameExists(path));
+            data.put("psffit.psfmap",
+                     std::vector<double>(),
+                     TranslateToAny< std::vector<double> >());
+            return;
+        }
 
         H5::DataSet coef_dataset = H5::H5File::openDataSet(path);
         assert(coef_dataset.getTypeClass() == H5T_FLOAT);
@@ -1181,7 +1193,7 @@ namespace IO {
             );
             variable_start += num_sources;
         }
-        data.put("psffit.variables." + getFileName(),
+        data.put("psffit.variables",
                  variables,
                  TranslateToAny<PSF::MapVarListType>());
     }

@@ -161,6 +161,7 @@ namespace FitPSF {
                                   sourceid_not_hat)
                           ==
                           fit_result.end());
+            hat_ids = false;
 
             typedef std::pair< std::string, std::vector<double>* > 
                 DoubleKeyValue;

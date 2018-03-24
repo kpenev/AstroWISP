@@ -12,49 +12,22 @@ namespace IO {
                 return;
             }
             if(value.type() == typeid(Core::RealList)) {
-                const Core::RealList &list = 
-                    TranslateToAny< Core::RealList >().get_value(value);
-                __allocated_data = new double[list.size()];
-                unsigned index = 0;
-                for(
-                    Core::RealList::const_iterator i = list.begin();
-                    i != list.end();
-                    ++i
-                )
-                    __allocated_data[index++] = *i;
-                __size = list.size();
-                __data = __allocated_data;
+                if(!try_container_type< Core::RealList >(value))
+                    throw boost::bad_any_cast();
                 return;
             }
-            try {
-                const std::vector<double>& vector =
-                    TranslateToAny< std::vector<double> >().get_value(value);
-                __size = vector.size();
-                __data = &(vector[0]);
-                return;
-            } catch(boost::bad_any_cast) {}
-            try {
-                const std::valarray<double>& valarray =
-                    TranslateToAny< std::valarray<double> >().get_value(
-                        value
-                    );
-                __size = valarray.size();
-                __data = &(valarray[0]);
-                return;
-            } catch(boost::bad_any_cast) {}
-            try {
-                const Eigen::VectorXd& 
-                    vector = TranslateToAny< Eigen::VectorXd >().get_value(
-                        value
-                    );
-                __size = vector.size();
-                __data = vector.data();
-                return;
-            } catch(boost::bad_any_cast) {}
-            const Eigen::ArrayXd& 
-                array = TranslateToAny< Eigen::ArrayXd >().get_value(value);
-            __size = array.size();
-            __data = array.data();
+            if(
+                !(
+                    try_container_type< std::vector<double> >(value)
+                    ||
+                    try_array_type< std::valarray<double> >(value)
+                    ||
+                    try_array_type< Eigen::VectorXd >(value)
+                    ||
+                    try_array_type< Eigen::ArrayXd >(value)
+                )
+            )
+                throw boost::bad_any_cast();
         }
 
 }

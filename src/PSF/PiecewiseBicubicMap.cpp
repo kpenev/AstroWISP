@@ -39,7 +39,13 @@ namespace PSF {
                                    *
                                    (__y_grid.size() - 2));
 
-        set_num_terms(coefficient_vector.size() / 4 / expansion_rows);
+        if(expansion_rows == 0) {
+            assert(coefficient_vector.size() == 0);
+            set_num_terms(0);
+            return;
+        } else {
+            set_num_terms(coefficient_vector.size() / 4 / expansion_rows);
+        }
         unsigned matrix_step = coefficient_vector.size() / 4;
         assert(coefficient_vector.size() == 4 * matrix_step);
 
@@ -70,11 +76,22 @@ namespace PSF {
                                              double min_psf_span) :
         __coefficients(NULL)
     {
-        Grid grid(data.get<std::string>("psffit.grid",
-                                        "",
-                                        IO::translate_string));
-        __x_grid=grid.x_grid;
-        __y_grid=grid.y_grid;
+        if(
+            data.get<std::string>("psffit.model", 
+                                  "",
+                                  IO::translate_string) == "zero"
+        ) {
+            __x_grid.resize(2);
+            __y_grid.resize(2);
+            __x_grid[0] = __y_grid[0] = -min_psf_span;
+            __x_grid[1] = __y_grid[1] = min_psf_span;
+        } else {
+            Grid grid(data.get<std::string>("psffit.grid",
+                                            "",
+                                            IO::translate_string));
+            __x_grid=grid.x_grid;
+            __y_grid=grid.y_grid;
+        }
 
         fill_coefficients(
                 data.get< std::vector<double> >(

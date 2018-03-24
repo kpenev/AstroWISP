@@ -16,6 +16,7 @@
 #include <boost/property_tree/ptree.hpp>
 #include <vector>
 #include <valarray>
+#include <algorithm>
 
 namespace IO {
 
@@ -30,6 +31,17 @@ namespace IO {
             hsize_t __size;				///< The size of the array.
             const UNIT_TYPE *__data;	///< The first element.
             UNIT_TYPE *__allocated_data;
+
+            ///\brief Try reading the input data assuming it is in some type of
+            ///container providing beging() and end() const_iterators
+            template<class INPUT_ARRAY_TYPE>
+                bool try_container_type(const boost::any &value);
+
+            ///\brief Try reading the input data assuming it is in some type of
+            ///container where entries are stored contigously in memory.
+            template<class INPUT_ARRAY_TYPE>
+                bool try_array_type(const boost::any &value);
+
         public:
             ///To be filled later using parse().
             OutputArray() : __allocated_data(NULL) {};
@@ -60,28 +72,66 @@ namespace IO {
         };
 
     template<typename UNIT_TYPE>
-        void OutputArray<UNIT_TYPE>::parse(const boost::any &value)
+        template<class INPUT_ARRAY_TYPE>
+        bool OutputArray<UNIT_TYPE>::try_container_type(const boost::any &value)
         {
             try {
-                const std::vector<UNIT_TYPE>& vector =
-                    TranslateToAny< std::vector<UNIT_TYPE> >().get_value(value);
-                __size = vector.size();
-                __data = &(vector[0]);
-                return;
-            } catch(boost::bad_any_cast) {}
-            try {
-                const std::valarray<UNIT_TYPE>& valarray =
-                    TranslateToAny< std::valarray<UNIT_TYPE> >().get_value(value);
-                __size = valarray.size();
-                __data = &(valarray[0]);
-                return;
-            } catch(boost::bad_any_cast) {}
-            typedef Eigen::Matrix<UNIT_TYPE, Eigen::Dynamic, 1> vector_eigen;
-            const vector_eigen& 
-                vector = TranslateToAny< vector_eigen >().get_value(value);
-            __size = vector.size();
-            __data = vector.data();
+                const INPUT_ARRAY_TYPE &
+                    input_array = TranslateToAny<INPUT_ARRAY_TYPE>().get_value(
+                        value
+                    );
+                __allocated_data = new UNIT_TYPE[input_array.size()];
+                std::copy(input_array.begin(),
+                          input_array.end(),
+                          __allocated_data);
+                __size = input_array.size();
+                __data = __allocated_data;
+                return true;
+            } catch(boost::bad_any_cast) {
+                return false;
+            }
         }
+
+    template<typename UNIT_TYPE>
+        template<class INPUT_ARRAY_TYPE>
+        bool OutputArray<UNIT_TYPE>::try_array_type(const boost::any &value)
+        {
+            try {
+                const INPUT_ARRAY_TYPE &
+                    input_array = TranslateToAny<INPUT_ARRAY_TYPE>().get_value(
+                        value
+                    );
+                __allocated_data = new UNIT_TYPE[input_array.size()];
+                const UNIT_TYPE *start = &(input_array[0]);
+                __size = input_array.size();
+                __data = __allocated_data;
+
+                std::copy(start, start + __size, __allocated_data);
+                return true;
+            } catch(boost::bad_any_cast) {
+                return false;
+            }
+        }
+
+    template<typename UNIT_TYPE>
+        void OutputArray<UNIT_TYPE>::parse(const boost::any &value)
+        {
+
+            typedef Eigen::Matrix<UNIT_TYPE, Eigen::Dynamic, 1> vector_eigen;
+
+            if(
+                !(
+                    try_container_type< std::vector<UNIT_TYPE> >(value)
+                    ||
+                    try_array_type< std::valarray<UNIT_TYPE> >(value)
+                    ||
+                    try_array_type< vector_eigen >(value)
+                )
+            )
+                throw boost::bad_any_cast();
+        }
+
+    template<> void OutputArray<double>::parse(const boost::any &value);
 
     template<typename UNIT_TYPE>
         bool OutputArray<UNIT_TYPE>::operator==(const OutputArray &rhs)

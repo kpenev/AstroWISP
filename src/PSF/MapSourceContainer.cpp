@@ -27,26 +27,25 @@ namespace PSF {
             amplitude(data_tree.get<boost::any>("psffit.amplitude")),
             background(data_tree.get<boost::any>("bg.value")),
             background_error(data_tree.get<boost::any>("bg.error"));
-        IO::OutputArray<std::string>
+        IO::OutputArray<char*>
             source_name(data_tree.get<boost::any>("projsrc.srcid.name"));
         IO::OutputArray<unsigned>
-            source_field(data_tree.get<boost::any>("projsrc.srcid.field")),
-            source_source(data_tree.get<boost::any>("projsrc.srcid.source")),
             background_npix(data_tree.get<boost::any>("bg.npix"));
 
         unsigned num_sources = expansion_term_values[0].size(),
                  num_terms = expansion_term_values.size();
+        if(data_tree.get<std::string>("psffit.model",
+                                      "",
+                                      IO::translate_string) == "zero")
+            num_terms = 0;
         reserve(num_sources);
 
         for(unsigned src_index = 0; src_index < num_sources; ++src_index) {
+            std::cerr << "source " << src_index
+                      << ": " << source_name[src_index] << std::endl;
             push_back(
                 MapSource(
-                    (
-                        source_source.size() == 0 
-                        ? Core::SourceID(source_name[src_index], true)
-                        : Core::SourceID(source_field[src_index],
-                                         source_source[src_index])
-                    ),
+                    Core::SourceID(source_name[src_index], true),
                     num_apertures,
                     x[src_index],
                     y[src_index],
@@ -68,7 +67,7 @@ namespace PSF {
         MapSourceContainer::required_data_tree_quantities()
     {
         const std::string additional_required_data_tree_quantities[] = {
-            "projsrc.srcid",
+            "projsrc.srcid.name",
             "projsrc.x",
             "projsrc.y",
             "bg.value",
@@ -76,7 +75,8 @@ namespace PSF {
             "bg.npix",
             "psffit.amplitude",
             "psffit.variables",
-            "psffit.terms"
+            "psffit.terms",
+            "psffit.model"
         };
 
         static const std::set<std::string> required_quantities(
