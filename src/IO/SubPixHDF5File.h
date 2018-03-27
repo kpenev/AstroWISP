@@ -213,6 +213,18 @@ namespace IO {
             const H5IODataTree& data
         );
 
+        template<typename DATA_TYPE>
+            H5::DataSet add_1d_dataset(
+                const std::string& dataset_name,
+                H5::Group& destination,
+                const H5::DataType &memory_data_type,
+                const H5::DataType &output_data_type,
+                bool floating_point_data,
+                const boost::any &any_array,
+                const boost::property_tree::ptree& structure_node,
+                bool overwrite
+            );
+
         ///\brief Creates (or overwrites) a dataset other than the PSF map and
         ///PSF map variables.
         H5::DataSet add_generic_dataset(
@@ -471,6 +483,58 @@ namespace IO {
     LIB_PUBLIC void simple_read_from_h5(const H5::Attribute &attribute,
                                         const H5::DataType &memory_type,
                                         void *destination);
+
+    template<typename DATA_TYPE>
+        H5::DataSet SubPixHDF5File::add_1d_dataset(
+            const std::string& dataset_name,
+            H5::Group& destination,
+            const H5::DataType &memory_data_type,
+            const H5::DataType &output_data_type,
+            bool floating_point_data,
+            const boost::any &any_array,
+            const boost::property_tree::ptree& structure_node,
+            bool overwrite
+        )
+        {
+            std::string compression = structure_node.get<std::string>(
+                    "<xmlattr>.compression",
+                    ""
+            );
+            OutputArray<DATA_TYPE> array(any_array);
+#ifdef DEBUG
+            std::cerr << "Writing array of size = "
+                      << array.size() << std::endl
+                      << "first 3 entries: "
+                      << std::endl
+                      << array[0] << std::endl
+                      << array[1] << std::endl
+                      << array[2] << std::endl;
+#endif
+            const void *array_data = array.data();
+            H5::DataSpace dataspace = H5::DataSpace(1, &array.size());
+            H5::DSetCreatPropList creation_properties = compression_proplist(
+                compression,
+                floating_point_data,
+                array.size()
+            );
+#ifdef DEBUG
+            std::cerr << "Creating " << dataset_name << " dataset with " 
+                      << dataspace.getSimpleExtentNpoints() << " points!" 
+                      << std::endl;
+#endif
+            if(overwrite) {
+                try {destination.unlink(dataset_name);}
+                catch(...) {}
+            }
+            H5::DataSet dataset = destination.createDataSet(
+                dataset_name,
+                output_data_type,
+                dataspace,
+                creation_properties
+            );
+            dataset.write(array_data, memory_data_type);
+            return dataset;
+        }
 
     template<class DSET_ATTR, typename UNIT_TYPE>
         void SubPixHDF5File::read_1d(const DSET_ATTR &source,

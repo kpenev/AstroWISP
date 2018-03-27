@@ -26,7 +26,7 @@ namespace IO {
             put("bg.cmdline", command_line.str(), translate_string);
             put("bg.version", version, translate_string);
             put("bg.model", "annulus", translate_string);
-            put("bg.source_id", "projsrc.srcid", translate_string);
+            put("bg.source_id", "projsrc.srcid.name", translate_string);
             put("bg.source_x", "projsrc.x", translate_string);
             put("bg.source_y", "projsrc.y", translate_string);
         } else if(executable == "subpixphot") {
@@ -40,7 +40,7 @@ namespace IO {
         put(__prefix + "tool", executable, translate_string);
         put(__prefix + "cmdline", command_line.str(), translate_string);
         put(__prefix + "version", version, translate_string);
-        put(__prefix + "source_id", "projsrc.srcid", translate_string);
+        put(__prefix + "source_id", "projsrc.srcid.name", translate_string);
         put(__prefix + "source_x", "projsrc.x", translate_string);
         put(__prefix + "source_y", "projsrc.y", translate_string);
         put(__prefix + "background", "bg.value", translate_string);

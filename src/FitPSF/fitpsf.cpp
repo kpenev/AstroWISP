@@ -795,16 +795,16 @@ namespace FitPSF {
         std::cerr << "Extracting source pixels for zero PSF fitting."
                   << std::endl;
 #endif
-/*        const PSF::Grid &options_grid = (
+        const PSF::Grid &options_grid = (
             options["psf.bicubic.grid"].as<PSF::Grid>()
-        );*/
+        );
         PSF::Grid grid;
         grid.x_grid.resize(2, 0.0);
         grid.y_grid.resize(2, 0.0);
-/*        grid.x_grid[0] = options_grid.x_grid.front();
+        grid.x_grid[0] = options_grid.x_grid.front();
         grid.x_grid[1] = options_grid.x_grid.back();
         grid.y_grid[0] = options_grid.y_grid.front();
-        grid.y_grid[1] = options_grid.y_grid.back();*/
+        grid.y_grid[1] = options_grid.y_grid.back();
 
         PSF::PiecewiseBicubic psf(grid.x_grid.begin(),
                                   grid.x_grid.end(),
@@ -855,9 +855,9 @@ namespace FitPSF {
                              IO::translate_string);
 
         Eigen::VectorXd best_fit_coef;
-        output_data_tree.put("psffit.psfmap",
+/*        output_data_tree.put("psffit.psfmap",
                              best_fit_coef,
-                             IO::TranslateToAny<Eigen::VectorXd>());
+                             IO::TranslateToAny<Eigen::VectorXd>());*/
 
         for(
             std::list< FitPSF::Image<LinearSource>* >::iterator

@@ -769,78 +769,55 @@ namespace IO {
             bool overwrite
     )
     {
-        std::string compression = structure_node.get<std::string>(
-                "<xmlattr>.compression",
-                ""
-        );
-        const H5::DataType* memory_data_type = NULL;
-        const void *array_data = NULL;
-        H5::DataSpace dataspace;
-        H5::DSetCreatPropList creation_properties;
         if(
                 output_data_type == H5::PredType::STD_U8LE
                 || output_data_type == H5::PredType::STD_U16LE
                 || output_data_type == H5::PredType::STD_U32LE
         ) {
-            OutputArray<unsigned> array(any_array);
-            array_data = array.data();
-            dataspace = H5::DataSpace(1, &array.size());
-            creation_properties = compression_proplist(compression,
-                                                       false,
-                                                       array.size());
-            memory_data_type = &H5::PredType::NATIVE_UINT;
+            return add_1d_dataset<unsigned>(dataset_name,
+                                            destination,
+                                            H5::PredType::NATIVE_UINT,
+                                            output_data_type,
+                                            false,
+                                            any_array,
+                                            structure_node,
+                                            overwrite);
         } else if(
                 output_data_type == H5::PredType::STD_I8LE
                 || output_data_type == H5::PredType::STD_I16LE
                 || output_data_type == H5::PredType::STD_I32LE
         ) {
-            OutputArray<int> array(any_array);
-            array_data = array.data();
-            dataspace = H5::DataSpace(1, &array.size());
-            creation_properties = compression_proplist(compression,
-                                                       false,
-                                                       array.size());
-            memory_data_type = &H5::PredType::NATIVE_INT;
+            return add_1d_dataset<int>(dataset_name,
+                                       destination,
+                                       H5::PredType::NATIVE_INT,
+                                       output_data_type,
+                                       false,
+                                       any_array,
+                                       structure_node,
+                                       overwrite);
         } else if(
                 output_data_type == H5::PredType::IEEE_F32LE
                 || output_data_type == H5::PredType::IEEE_F64LE
         ) {
-            OutputArray<double> array(any_array);
-            array_data = array.data();
-            dataspace = H5::DataSpace(1, &array.size());
-            creation_properties = compression_proplist(compression,
-                                                       true,
-                                                       array.size());
-            memory_data_type = &H5::PredType::NATIVE_DOUBLE;
+            return add_1d_dataset<double>(dataset_name,
+                                          destination,
+                                          H5::PredType::NATIVE_DOUBLE,
+                                          output_data_type,
+                                          true,
+                                          any_array,
+                                          structure_node,
+                                          overwrite);
         } else if(output_data_type == VARLEN_STR_TYPE) {
-            OutputArray<char*> array(any_array);
-            array_data = array.data();
-            dataspace = H5::DataSpace(1, &array.size());
-            creation_properties = compression_proplist(compression,
-                                                       false,
-                                                       array.size());
-            memory_data_type = &VARLEN_STR_TYPE;
+            return add_1d_dataset<char*>(dataset_name,
+                                         destination,
+                                         VARLEN_STR_TYPE,
+                                         output_data_type,
+                                         false,
+                                         any_array,
+                                         structure_node,
+                                         overwrite);
         }
-        if(array_data) {
-#ifdef DEBUG
-            std::cerr << "Creating " << dataset_name << " dataset with " 
-                      << dataspace.getSimpleExtentNpoints() << " points!" 
-                      << std::endl;
-#endif
-            if(overwrite) {
-                try {destination.unlink(dataset_name);}
-                catch(...) {}
-            }
-            H5::DataSet dataset = destination.createDataSet(
-                dataset_name,
-                output_data_type,
-                dataspace,
-                creation_properties
-            );
-            dataset.write(array_data, *memory_data_type);
-            return dataset;
-        } else assert(false);
-        return H5::DataSet();
+        assert(false);
     }
 
     void SubPixHDF5File::add_dataset(
@@ -922,6 +899,13 @@ namespace IO {
                     "On object named '" + link_name
                     + "' already exists and is not a soft link!");
         } catch(H5::GroupIException) {}
+#ifndef NDEBUG
+        std::cerr << "Creating link: " << link_name
+                  << " -> "
+                  << target_path
+                  << " (" << dataset_to_link_id << ")"
+                  << std::endl;
+#endif
         destination.link(H5L_TYPE_SOFT, target_path, link_name);
     }
 
