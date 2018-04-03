@@ -259,7 +259,6 @@ namespace FitPSF {
             si != fit_sources.end();
             ++si
         ) {
-            (*si)->finalize_pixels();
             unsigned source_pixels = (*si)->shape_fit_pixel_count();
 #ifdef VERBOSE_DEBUG
             std::cerr << "Preparing source at ("
@@ -322,6 +321,7 @@ namespace FitPSF {
 
             ++source_ind;
         }
+        assert(total_pix_ind == pixel_integral_matrix.rows());
 
         for(
             LinearSourceList::iterator si = dropped_sources.begin();
@@ -697,14 +697,30 @@ namespace FitPSF {
             si != fit_sources.end();
             ++si
         )
-            if((*si)->overlaps().size() == 0)
+            if((*si)->overlaps().size() == 0) {
                 result += std::pow((*si)->fit_flux(best_fit), 2);
+#ifdef VERBOSE_DEBUG
+                if(std::isnan(result))
+                    std::cout << "NaN flux for Source(x = " << (*si)->x()
+                              << ", y = " << (*si)->y()
+                              << "): flux=" << (*si)->flux(0).value()
+                              << ", shape fit pixel count="
+                              << (*si)->shape_fit_pixel_count()
+                              << ", flux fit pixel count="
+                              << (*si)->flux_fit_pixel_count()
+                              << ", chi2="
+                              << (*si)->chi2()
+                              << std::endl;
+#endif
+                assert(!std::isnan(result));
+            }
         for(
             OverlapGroupList::iterator gi = overlap_groups.begin();
             gi != overlap_groups.end();
             ++gi
-        )
+        ) {
             result += gi->fit_fluxes(best_fit);
+        }
 
         return std::sqrt(result);
     }
@@ -732,12 +748,14 @@ namespace FitPSF {
                               symmetrized_pix_integral_matrix,
                               poly_coef_matrix,
                               matrix_to_invert);
+        assert(!std::isnan(matrix_to_invert.sum()));
         time_this("Creating matrix to invert");
 
         fill_flux_scaled_modified_rhs(fit_sources,
                                       modified_pixel_excesses,
                                       modified_rhs_offset,
                                       flux_scaled_modified_rhs);
+        assert(!std::isnan(flux_scaled_modified_rhs.sum()));
         time_this("Filling the final RHS");
 
         if(smoothing) {
@@ -762,6 +780,7 @@ namespace FitPSF {
         time_this("Deriving the decomposition");
 
         best_fit = decomposition.solve(flux_scaled_modified_rhs);
+        assert(!std::isnan(best_fit.sum()));
 #ifdef VERBOSE_DEBUG
         std::cerr << "Best fit: " << best_fit << std::endl;
 #endif
@@ -786,6 +805,7 @@ namespace FitPSF {
             si != fit_sources.end();
             ++si
         ) {
+            (*si)->finalize_pixels();
             num_pixels += (*si)->shape_fit_pixel_count();
             if(max_source_pixels)
                 *max_source_pixels=std::max((*si)->shape_fit_pixel_count(),
@@ -958,16 +978,16 @@ namespace FitPSF {
         const PSF::PiecewiseBicubic &psf
     )
     {
-        if(subpix_map.min() > 0 && subpix_map.x_resolution() != 0) return 0;
+        if(subpix_map.x_resolution() != 0 && subpix_map.min() > 0) return 0;
 #ifdef DEBUG
         assert(
-                subpix_map.min() == 0
-                ||
                 (
                     subpix_map.x_resolution() == 0
                     &&
                     subpix_map.y_resolution() == 0
                 )
+                ||
+                subpix_map.min() == 0
         );
 #endif
         unsigned result = 0;
@@ -1247,6 +1267,15 @@ namespace FitPSF {
                         fit_sources.size() * num_poly_terms,
                         num_poly_terms
                 );
+#ifndef NDEBUG
+            pixel_excesses.setConstant(Core::NaN);
+            rhs_offset.setConstant(Core::NaN);
+            modified_pixel_excesses.setConstant(Core::NaN);
+            modified_rhs_offset.setConstant(Core::NaN);
+            pixel_integral_matrix.setConstant(Core::NaN);
+            symmetrized_pix_integral_matrix.setConstant(Core::NaN);
+            poly_coef_matrix.setConstant(Core::NaN);
+#endif
             prepare_linear_regression(fit_sources,
                                       dropped_sources,
                                       basis_parameter_sets,

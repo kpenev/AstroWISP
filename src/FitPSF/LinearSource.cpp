@@ -76,9 +76,11 @@ namespace FitPSF {
                ==
                static_cast<int>(shape_fit_pixel_count()));
 
-        assert(basis_parameter_sets[0].size()
-               ==
-               16 * static_cast<int>(shape_fit_integral_matrix.cols() + 1));
+        assert(
+            basis_parameter_sets[0].size()
+            ==
+            16 * static_cast<unsigned>(shape_fit_integral_matrix.cols() + 1)
+        );
 
 #ifdef VERBOSE_DEBUG
         std::cerr << "Basis parameter sets:" << std::endl;

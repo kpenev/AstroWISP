@@ -181,6 +181,8 @@ namespace FitPSF {
             double background_variance
         )
         {
+            assert(!std::isnan(background));
+            assert(!std::isnan(background_variance));
             __background_excesses.resize(__pixel_count);
             unsigned pix_index = 0;
             for(
@@ -228,6 +230,26 @@ namespace FitPSF {
                         background,
                         background_variance
                     );
+#ifndef NDEBUG
+                    if(std::isnan(__background_excesses[pix_index])) {
+                        std::cerr << "Group pixel ("
+                                  << *pix_i
+                                  << ") at ("
+                                  << (*pix_i)->x()
+                                  << ", "
+                                  << (*pix_i)->y()
+                                  << ") is "
+                                  << ((*pix_i)->shared() ? "" : "not ")
+                                  << "shared and will "
+                                  << ((*pix_i)->shape_fit() ? "" : "not ")
+                                  << "participate in shape fitting with index "
+                                  << (*pix_i)->flux_fit_index()
+                                  << " value = " << (*pix_i)->measured()
+                                  << " var = " << (*pix_i)->variance()
+                                  << std::endl;
+                    }
+                    assert(!std::isnan(__background_excesses[pix_index]));
+#endif
                     ++pix_index;
                 }
 #ifndef NDEBUG
@@ -249,6 +271,13 @@ namespace FitPSF {
                    **pix_i,
                    background,
                    background_variance
+                );
+                assert(
+                    !std::isnan(
+                        __background_excesses[
+                            pix_index + (*pix_i)->flux_fit_index()
+                        ]
+                    )
                 );
             }
         }
@@ -380,11 +409,24 @@ namespace FitPSF {
                     ||
                     std::isnan((*source_i)->background_electrons_variance())
                 ) {
+#ifdef VERBOSE_DEBUG
+                    std::cerr << "Discarding group source ("
+                              << *source_i
+                              << ") at ("
+                              << (*source_i)->x()
+                              << ", "
+                              << (*source_i)->y()
+                              << ") having "
+                              << (*source_i)->shape_fit_pixel_count()
+                              << " shape fit and "
+                              << (*source_i)->flux_fit_pixel_count()
+                              << "flux fit pixels, due to bad background!"
+                              << std::endl;
+#endif
                     assert((*source_i)->shape_fit_pixel_count() == 0);
-                    assert((*source_i)->flux_fit_pixel_count() == 0);
                     continue;
                 }
-                double bg_weight = (*source_i)->background_pixels();
+                double bg_weight = 1.0;
 
                 if((*source_i)->background_electrons_variance()) {
                     if(zero_variance)
@@ -395,11 +437,31 @@ namespace FitPSF {
                 } else zero_variance = true;
 
                 background += (*source_i)->background_electrons() * bg_weight;
+                assert(!std::isnan(background));
+
+#ifdef VERBOSE_DEBUG
+                if(background_norm > 1e10) {
+                    std::cerr << "Group source ("
+                              << *source_i
+                              << ") at ("
+                              << (*source_i)->x()
+                              << ", "
+                              << (*source_i)->y()
+                              << ") has BG based on "
+                              << (*source_i)->background_pixels()
+                              << " pixels, with variance = "
+                              << (*source_i)->background_electrons_variance()
+                              << std::endl;
+                }
+#endif
+
                 background_variance += (
                     (*source_i)->background_electrons_variance()
                     *
                     std::pow(bg_weight, 2)
                 );
+                assert(!std::isnan(background_variance));
+
                 background_norm += bg_weight;
                 __shape_fit_pixel_count +=
                     (*source_i)->shape_fit_pixel_count();
@@ -411,11 +473,22 @@ namespace FitPSF {
                 )
                     shared_pixels.insert(*pix_i);
             }
+            assert(background_norm != 0);
 
             __pixel_count = __shape_fit_pixel_count + shared_pixels.size();
 
             background /= background_norm;
+            assert(!std::isnan(background));
+            assert(!std::isnan(background_variance));
             background_variance /= std::pow(background_norm, 2);
+#ifdef VERBOSE_DEBUG
+            if(std::isnan(background_variance)) {
+                std::cerr << "NaN background variaence, from norm = "
+                          << background_norm
+                          << std::endl;
+            }
+#endif
+            assert(!std::isnan(background_variance));
 
             for(
                 SourceSetIterator source_i = __sources.begin();
@@ -475,6 +548,7 @@ namespace FitPSF {
                 Eigen::MatrixXd estimated_excess_matrix;
                 fill_estimated_excess_matrix(psf_info,
                                              estimated_excess_matrix);
+                assert(!std::isnan(estimated_excess_matrix.sum()));
 
 #ifdef VERBOSE_DEBUG
                 std::cerr << "Estimated excess matrix:"
@@ -489,7 +563,9 @@ namespace FitPSF {
                           << std::endl;
 #endif
                 svd.compute(estimated_excess_matrix);
+                assert(!std::isnan(__background_excesses.sum()));
                 amplitudes = svd.solve(__background_excesses);
+                assert(!std::isnan(amplitudes.sum()));
                 chi2 = (__background_excesses
                         -
                         estimated_excess_matrix * amplitudes).squaredNorm();

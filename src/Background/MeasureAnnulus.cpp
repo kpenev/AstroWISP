@@ -77,7 +77,9 @@ namespace Background {
             errorbg -= 0.5 * (bg_range[-1] + bg_range[0]);
         else
             errorbg -= bg_range[0];
-        Source result(medbg, errorbg, num_bg_values);
+        Source result(medbg,
+                      errorbg * std::sqrt(M_PI / (2.0 * (num_bg_values - 1))),
+                      num_bg_values);
 #ifdef VERBOSE_DEBUG
         std::cerr << "BG(" << x << ", " << y << "): " << result << std::endl;
 #endif

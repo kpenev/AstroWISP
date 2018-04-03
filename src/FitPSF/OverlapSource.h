@@ -686,6 +686,10 @@ namespace FitPSF {
                     (*pix_i)->shared()
                     ||
                     (*pix_i)->flag() != Core::GOOD
+                    ||
+                    std::isnan(this->background_electrons())
+                    ||
+                    std::isnan(this->background_electrons_variance())
                 )
                     (*pix_i)->exclude_from_shape_fit();
             }
