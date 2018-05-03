@@ -79,9 +79,6 @@ var hierarchy =
       [ "Background::MeasureExcludingSources", "classBackground_1_1MeasureExcludingSources.html", null ],
       [ "Background::Zero", "classBackground_1_1Zero.html", null ]
     ] ],
-    [ "ndarray", null, [
-      [ "superphot.fake_image.image.Image", "classsuperphot_1_1fake__image_1_1image_1_1Image.html", null ]
-    ] ],
     [ "ostream", null, [
       [ "IO::binostream", "classIO_1_1binostream.html", [
         [ "IO::binofstream", "classIO_1_1binofstream.html", null ]
@@ -134,20 +131,13 @@ var hierarchy =
     [ "SubPixPhot::SourceInput", "classSubPixPhot_1_1SourceInput.html", null ],
     [ "PSF::Split", "classPSF_1_1Split.html", null ],
     [ "Core::SubPixelCorrectedFlux< SUBPIX_TYPE >", "classCore_1_1SubPixelCorrectedFlux.html", null ],
+    [ "Core::SubPixelMap", "classCore_1_1SubPixelMap.html", null ],
     [ "SubPixelMap", null, [
       [ "GSLSubPixelMap", "classGSLSubPixelMap.html", null ],
       [ "MultiNestFit::MultiNestSubPixelMap", "classMultiNestFit_1_1MultiNestSubPixelMap.html", null ]
     ] ],
-    [ "Core::SubPixelMap", "classCore_1_1SubPixelMap.html", null ],
     [ "symbols", null, [
       [ "PSF::TermCalculator::Variables< ResultType >", "classPSF_1_1TermCalculator_1_1Variables.html", null ]
-    ] ],
-    [ "TestCase", null, [
-      [ "tests.fitpsf.noiseless_tests.TestPiecewiseBicubic", "classtests_1_1fitpsf_1_1noiseless__tests_1_1TestPiecewiseBicubic.html", null ],
-      [ "tests.utilities.FloatTestCase", "classtests_1_1utilities_1_1FloatTestCase.html", [
-        [ "tests.test_fake_image.TestImage", "classtests_1_1test__fake__image_1_1TestImage.html", null ],
-        [ "tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF", "classtests_1_1test__piecewise__bicubic__psf_1_1TestPiecewiseBicubicPSF.html", null ]
-      ] ]
     ] ],
     [ "IO::TranslateToAny< DATA_TYPE >", "classIO_1_1TranslateToAny.html", null ],
     [ "valarray", null, [
@@ -164,15 +154,5 @@ var hierarchy =
       [ "Phot::ColumnNamesVector", "classPhot_1_1ColumnNamesVector.html", null ],
       [ "PSF::MapSourceContainer", "classPSF_1_1MapSourceContainer.html", null ]
     ] ],
-    [ "PSF::WedgeIntegral", "classPSF_1_1WedgeIntegral.html", null ],
-    [ "ABC", null, [
-      [ "superphot.fake_image.psf_base.PSFBase", "classsuperphot_1_1fake__image_1_1psf__base_1_1PSFBase.html", [
-        [ "superphot.fake_image.piecewise_psf.PiecewisePSF", "classsuperphot_1_1fake__image_1_1piecewise__psf_1_1PiecewisePSF.html", [
-          [ "superphot.fake_image.piecewise_bicubic_psf.PiecewiseBicubicPSF", "classsuperphot_1_1fake__image_1_1piecewise__bicubic__psf_1_1PiecewiseBicubicPSF.html", null ]
-        ] ]
-      ] ],
-      [ "superphot.fake_image.psf_piece.PSFPiece", "classsuperphot_1_1fake__image_1_1psf__piece_1_1PSFPiece.html", [
-        [ "superphot.fake_image.bipolynomial_psf_piece.BipolynomialPSFPiece", "classsuperphot_1_1fake__image_1_1bipolynomial__psf__piece_1_1BipolynomialPSFPiece.html", null ]
-      ] ]
-    ] ]
+    [ "PSF::WedgeIntegral", "classPSF_1_1WedgeIntegral.html", null ]
 ];

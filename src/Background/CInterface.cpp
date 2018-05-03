@@ -11,7 +11,7 @@ BackgroundMeasureAnnulus *create_background_extractor(
     double inner_radius,
     double outer_radius, 
     double exclude_aperture,
-    const Image *image,
+    const CoreImage *image,
     double error_confidence
 )
 {

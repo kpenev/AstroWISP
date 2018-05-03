@@ -150,7 +150,7 @@ model {
 
 doxygen {
     generate_html true
-    template "doxygen/Doxyfile"
+    template "documentation/doxygen/Doxyfile"
     source "src/Background"
     source "src/Core"
     source "src/FitPSF"
@@ -160,8 +160,7 @@ doxygen {
     source "src/SubPixPhot"
     source "src/SubtractPSF"
     source "src/VisualizePSFMap"
-    source "PythonPackage"
-    source "doxygen"
+    source "documentation/doxygen"
     include "**/*.h"
     include "**/*.cpp"
     include "**/*.py"

@@ -87,7 +87,7 @@ namespace IO {
         ///Substitutes the aperture index in a string.
         std::string substitute_ap_ind(
             ///The string to substitute in. It may or may not contain
-            ///%(ap_ind)<format> style substitution.
+            ///%(ap_ind)\<format\> style substitution.
             const std::string &format_string,
 
             ///The aperture index to assume.
@@ -143,8 +143,8 @@ namespace IO {
         ///compression.
         H5::DSetCreatPropList compression_proplist(
             ///What compression to use (if any) for a dataset. Can be a
-            ///combination of: 'gzip:<level>', 'shuffle' and
-            ///'scaleoffset:<precision>', separated by ';'. The precision for
+            ///combination of: 'gzip:\<level\>', 'shuffle' and
+            ///'scaleoffset:\<precision\>', separated by ';'. The precision for
             ///scale offset filters and the level of the gzip filter are
             ///defined the same as for the corresponding HDF5 filters.
             const std::string &compression_string,

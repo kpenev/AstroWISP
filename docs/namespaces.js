@@ -8,7 +8,5 @@ var namespaces =
     [ "MultiNestFit", "namespaceMultiNestFit.html", null ],
     [ "Phot", "namespacePhot.html", null ],
     [ "PSF", "namespacePSF.html", "namespacePSF" ],
-    [ "SubPixPhot", "namespaceSubPixPhot.html", null ],
-    [ "superphot", "namespacesuperphot.html", "namespacesuperphot" ],
-    [ "tests", "namespacetests.html", "namespacetests" ]
+    [ "SubPixPhot", "namespaceSubPixPhot.html", null ]
 ];

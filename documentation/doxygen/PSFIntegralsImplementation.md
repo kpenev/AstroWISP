@@ -137,7 +137,7 @@ First, note that we start only requiring \f$\mathcal{I}_{0,0}\f$ and hence
 \f$Q_{0,0}\f$. And at any step, we increase one of the \f$I\f$, \f$J\f$,
 \f$K\f$, \f$L\f$ or \f$M\f$ indices by one, so for any new term we request,
 we will have already requested all its prerequisites according to the
-recursion relation outlined [here](@ref PSFIntegrals_page), as long as the
+recursion relation outlined [here](@ref PSF_integrals_page), as long as the
 summation is done with \f$M\f$ nested within \f$K\f$, nested within \f$L\f$,
 nested within \f$J\f$ nested within \f$I\f$.
 

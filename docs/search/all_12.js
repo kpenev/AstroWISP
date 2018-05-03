@@ -29,7 +29,6 @@ var searchData=
   ['restricted_5fgsl_5ffit',['restricted_gsl_fit',['../classFitPSF_1_1PolynomialSDK.html#a49d090b95832c05fe05025d09ce57f76',1,'FitPSF::PolynomialSDK']]],
   ['rhs_5fcorrection',['rhs_correction',['../classFitPSF_1_1PiecewiseBicubicPSFSmoothing.html#a5795e895d3a3316755318c7a6a67afaa',1,'FitPSF::PiecewiseBicubicPSFSmoothing']]],
   ['rowmajormap',['RowMajorMap',['../classPSF_1_1EllipticalGaussianMap.html#a310e651cd3407764cc199b7f8ec16ec1',1,'PSF::EllipticalGaussianMap::RowMajorMap()'],['../namespacePSF.html#a77dd421690e3de79efcb2a360708ca03',1,'PSF::RowMajorMap()']]],
-  ['run_5ftest',['run_test',['../classtests_1_1fitpsf_1_1noiseless__tests_1_1TestPiecewiseBicubic.html#a6ec3b64d4d5fd933d9790f8e3c28d5fc',1,'tests::fitpsf::noiseless_tests::TestPiecewiseBicubic']]],
-  ['runtime',['Runtime',['../classError_1_1Runtime.html#a2d6b298c060d13fcd734e9aafc588ae0',1,'Error::Runtime']]],
-  ['runtime',['Runtime',['../classError_1_1Runtime.html',1,'Error']]]
+  ['runtime',['Runtime',['../classError_1_1Runtime.html',1,'Error']]],
+  ['runtime',['Runtime',['../classError_1_1Runtime.html#a2d6b298c060d13fcd734e9aafc588ae0',1,'Error::Runtime']]]
 ];

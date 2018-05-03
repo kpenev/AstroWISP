@@ -1,14 +1,17 @@
 var searchData=
 [
-  ['ellipticalgaussian_2ecpp',['EllipticalGaussian.cpp',['../EllipticalGaussian_8cpp.html',1,'']]],
-  ['ellipticalgaussian_2eh',['EllipticalGaussian.h',['../EllipticalGaussian_8h.html',1,'']]],
-  ['ellipticalgaussianintegralbyorder_2ecpp',['EllipticalGaussianIntegralByOrder.cpp',['../EllipticalGaussianIntegralByOrder_8cpp.html',1,'']]],
-  ['ellipticalgaussianintegralbyorder_2eh',['EllipticalGaussianIntegralByOrder.h',['../EllipticalGaussianIntegralByOrder_8h.html',1,'']]],
-  ['ellipticalgaussianintegralrectangle_2ecpp',['EllipticalGaussianIntegralRectangle.cpp',['../EllipticalGaussianIntegralRectangle_8cpp.html',1,'']]],
-  ['ellipticalgaussianintegralrectangle_2eh',['EllipticalGaussianIntegralRectangle.h',['../EllipticalGaussianIntegralRectangle_8h.html',1,'']]],
-  ['ellipticalgaussianintegralwedge_2ecpp',['EllipticalGaussianIntegralWedge.cpp',['../EllipticalGaussianIntegralWedge_8cpp.html',1,'']]],
-  ['ellipticalgaussianintegralwedge_2eh',['EllipticalGaussianIntegralWedge.h',['../EllipticalGaussianIntegralWedge_8h.html',1,'']]],
-  ['ellipticalgaussianmap_2ecpp',['EllipticalGaussianMap.cpp',['../EllipticalGaussianMap_8cpp.html',1,'']]],
-  ['ellipticalgaussianmap_2eh',['EllipticalGaussianMap.h',['../EllipticalGaussianMap_8h.html',1,'']]],
-  ['error_2eh',['Error.h',['../Error_8h.html',1,'']]]
+  ['fitpsf_2ecpp',['fitpsf.cpp',['../fitpsf_8cpp.html',1,'']]],
+  ['fitpsf_2emd',['FitPSF.md',['../FitPSF_8md.html',1,'']]],
+  ['fitsheader_2ecpp',['FitsHeader.cpp',['../FitsHeader_8cpp.html',1,'']]],
+  ['fitsheader_2eh',['FitsHeader.h',['../FitsHeader_8h.html',1,'']]],
+  ['fitsimage_2eh',['FitsImage.h',['../FitsImage_8h.html',1,'']]],
+  ['fitsubpix_2ecpp',['FitSubpix.cpp',['../FitSubpix_8cpp.html',1,'']]],
+  ['fitsubpix_2eh',['FitSubpix.h',['../FitSubpix_8h.html',1,'']]],
+  ['fitsubpix_2emd',['FitSubpix.md',['../FitSubpix_8md.html',1,'']]],
+  ['fitsubpixcommandlineoptions_2ecpp',['FitSubpixCommandLineOptions.cpp',['../FitSubpixCommandLineOptions_8cpp.html',1,'']]],
+  ['fitsubpixcommandlineoptions_2eh',['FitSubpixCommandLineOptions.h',['../FitSubpixCommandLineOptions_8h.html',1,'']]],
+  ['fittingutil_2ecpp',['FittingUtil.cpp',['../FittingUtil_8cpp.html',1,'']]],
+  ['fittingutil_2eh',['FittingUtil.h',['../FittingUtil_8h.html',1,'']]],
+  ['flux_2eh',['Flux.h',['../Flux_8h.html',1,'']]],
+  ['fluxpair_2eh',['FluxPair.h',['../FluxPair_8h.html',1,'']]]
 ];

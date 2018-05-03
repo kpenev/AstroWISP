@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['utilities_2epy',['utilities.py',['../utilities_8py.html',1,'']]],
-  ['utils_2epy',['utils.py',['../utils_8py.html',1,'']]]
+  ['wedgeintegral_2ecpp',['WedgeIntegral.cpp',['../WedgeIntegral_8cpp.html',1,'']]],
+  ['wedgeintegral_2eh',['WedgeIntegral.h',['../WedgeIntegral_8h.html',1,'']]]
 ];

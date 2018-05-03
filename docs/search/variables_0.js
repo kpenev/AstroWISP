@@ -1,7 +1,6 @@
 var searchData=
 [
   ['_5f_5fabs_5fprecision',['__abs_precision',['../classPSF_1_1EllipticalGaussian.html#aee368ec193489d1f1b77404e25b54f0a',1,'PSF::EllipticalGaussian']]],
-  ['_5f_5fall_5f_5f',['__all__',['../namespacesuperphot_1_1fake__image.html#a9b5966257d5c413b5737e9dbd0372061',1,'superphot::fake_image']]],
   ['_5f_5fallocated_5fdata',['__allocated_data',['../classIO_1_1OutputArray.html#ad502fdd3e83c6eedafffc86efa69ed32',1,'IO::OutputArray']]],
   ['_5f_5famp',['__amp',['../classCore_1_1SDKSource.html#a330f868a0ddcfc9030d670a75eb8598e',1,'Core::SDKSource']]],
   ['_5f_5famp_5fcol',['__amp_col',['../classSubPixPhot_1_1SourceInput.html#a6ef6e9c86b3b52f78647367d765c628c',1,'SubPixPhot::SourceInput']]],
@@ -23,7 +22,7 @@ var searchData=
   ['_5f_5fchunk_5fsize',['__chunk_size',['../classIO_1_1SubPixHDF5File.html#a88390c6df5e4ee105ac8985b7077ea67',1,'IO::SubPixHDF5File']]],
   ['_5f_5fcloned_5fcell',['__cloned_cell',['../classPSF_1_1Piecewise.html#a5291b7ceaddc2d8834b9fcf4af242d47',1,'PSF::Piecewise']]],
   ['_5f_5fcoef',['__coef',['../classPSF_1_1PiecewiseBicubicCell.html#adb31daeec75ed8b6146dd256bb0f210b',1,'PSF::PiecewiseBicubicCell']]],
-  ['_5f_5fcoefficients',['__coefficients',['../classPSF_1_1PiecewiseBicubicMap.html#a34c8eeb61b0e2ebcf52b013df592f45f',1,'PSF::PiecewiseBicubicMap::__coefficients()'],['../classsuperphot_1_1fake__image_1_1bipolynomial__psf__piece_1_1BipolynomialPSFPiece.html#ae52a52928b61a5ea945f3eb20d198389',1,'superphot.fake_image.bipolynomial_psf_piece.BipolynomialPSFPiece.__coefficients()']]],
+  ['_5f_5fcoefficients',['__coefficients',['../classPSF_1_1PiecewiseBicubicMap.html#a34c8eeb61b0e2ebcf52b013df592f45f',1,'PSF::PiecewiseBicubicMap']]],
   ['_5f_5fcol_5fnum',['__col_num',['../classSubPixPhot_1_1SourceInput.html#a3e0ecd87042430f40589f99b895f4b88',1,'SubPixPhot::SourceInput']]],
   ['_5f_5fcolumns',['__columns',['../group__FitPSF.html#ga5708062d649f8e0d4b7811ddf854b14a',1,'FitPSF::IOSources::__columns()'],['../classSubPixPhot_1_1BinarySourceOutput.html#a95f1f37fe2398a9318555c1b87adb65e',1,'SubPixPhot::BinarySourceOutput::__columns()']]],
   ['_5f_5fcomments',['__comments',['../classIO_1_1FitsHeader.html#a224bfaa4a851e2d47a040ab0ae983f21',1,'IO::FitsHeader']]],
@@ -52,6 +51,7 @@ var searchData=
   ['_5f_5feof',['__eof',['../classSubPixPhot_1_1SourceInput.html#a39a5201eec5b702ff178f038e92159e0',1,'SubPixPhot::SourceInput']]],
   ['_5f_5ferror',['__error',['../classBackground_1_1Source.html#a815975fb8c4670bb7f2d67eb10e6e6a2',1,'Background::Source::__error()'],['../classCore_1_1Flux.html#a24cfd0f53abd5b4960c42e820dc0c8e5',1,'Core::Flux::__error()']]],
   ['_5f_5ferror_5fconfidence',['__error_confidence',['../classBackground_1_1MeasureAnnulus.html#a5e750e3be73d14dd7c8219fdc189ac6f',1,'Background::MeasureAnnulus']]],
+  ['_5f_5ferrors',['__errors',['../classCore_1_1Image.html#ae066ff13c332102f62286130369bd10b',1,'Core::Image']]],
   ['_5f_5fexecutable',['__executable',['../classIO_1_1CommandLineConfig.html#a4f58bc0d1b077ee6fe75b2fea07cd39d',1,'IO::CommandLineConfig']]],
   ['_5f_5fexpanded_5fdown',['__expanded_down',['../classPSF_1_1PiecewiseBicubicMap.html#a1b6eac6fcc57c1e1debf5ea0d87dbaba',1,'PSF::PiecewiseBicubicMap']]],
   ['_5f_5fexpanded_5fleft',['__expanded_left',['../classPSF_1_1PiecewiseBicubicMap.html#a84900f0a07ce88191971e9c44ef5ea50',1,'PSF::PiecewiseBicubicMap']]],
@@ -149,6 +149,7 @@ var searchData=
   ['_5f_5fphoton_5fnoise',['__photon_noise',['../classCore_1_1SubPixelCorrectedFlux.html#a5d4097784c6499a564aaf9241bcb5940',1,'Core::SubPixelCorrectedFlux']]],
   ['_5f_5fpieces',['__pieces',['../classPSF_1_1EllipticalGaussian.html#acda6c643c63e3ff5bf15f45ac1bb4f52',1,'PSF::EllipticalGaussian']]],
   ['_5f_5fpixel_5fcount',['__pixel_count',['../classFitPSF_1_1OverlapGroup.html#a5988f7ad1df568de01e22fcc7c4a556c',1,'FitPSF::OverlapGroup']]],
+  ['_5f_5fpixel_5ferrors',['__pixel_errors',['../classIO_1_1FitsImage.html#ae7cf7601b48c8ca6c3de153b712d3289',1,'IO::FitsImage']]],
   ['_5f_5fpixel_5fvalues',['__pixel_values',['../classIO_1_1FitsImage.html#a26d97ba534f5f388dedc68b479fb1ec3',1,'IO::FitsImage']]],
   ['_5f_5fpixels',['__pixels',['../classBackground_1_1Source.html#af0ddfc8b5cd00dc33f7f2bdaa3bc9cb2',1,'Background::Source::__pixels()'],['../classFitPSF_1_1OverlapSource.html#a30303a92462e637d8ad1766ba5926352',1,'FitPSF::OverlapSource::__pixels()']]],
   ['_5f_5fpoly_5fcoef',['__poly_coef',['../classFitPSF_1_1PolynomialSDK.html#a05a2188c4f1e261cc0af1d603b1c6bbc',1,'FitPSF::PolynomialSDK']]],
@@ -265,14 +266,10 @@ var searchData=
   ['_5f_5fymin_5fm_5fyc',['__ymin_m_yc',['../classPSF_1_1CirclePieceIntegral.html#adfbc1b4c5b5232b389a8fc39eb99a8e7',1,'PSF::CirclePieceIntegral']]],
   ['_5f_5fymin_5fpow',['__ymin_pow',['../classPSF_1_1CirclePieceIntegral.html#a0d738ed82df1397e55e902609ed6aa8f',1,'PSF::CirclePieceIntegral']]],
   ['_5fbg_5fvalues',['_bg_values',['../classBackground_1_1MeasureExcludingSources.html#a7e41e7e8610c09b2088b4abed472fd92',1,'Background::MeasureExcludingSources::_bg_values()'],['../classBackground_1_1MeasureExcludingSources.html#abde4fc244295c1927f50780188af3589',1,'Background::MeasureExcludingSources::_bg_values()']]],
-  ['_5fboundaries',['_boundaries',['../classsuperphot_1_1fake__image_1_1piecewise__psf_1_1PiecewisePSF.html#a8d22bc67e59ce1b25a0dcec9d46a4d9a',1,'superphot::fake_image::piecewise_psf::PiecewisePSF']]],
   ['_5fcmdline_5fconfig',['_cmdline_config',['../classIO_1_1CommandLineConfig.html#a8e3abce6cccedcab50facc9bf1dd3390',1,'IO::CommandLineConfig']]],
   ['_5fcmdline_5fonly',['_cmdline_only',['../classIO_1_1CommandLineConfig.html#abb2f9358885ac2bf71a4247a89985a10',1,'IO::CommandLineConfig']]],
-  ['_5fgrids',['_grids',['../classtests_1_1test__piecewise__bicubic__psf_1_1TestPiecewiseBicubicPSF.html#a1ed56c6ee2cc47f0ca5fde7b2bc6ecba',1,'tests::test_piecewise_bicubic_psf::TestPiecewiseBicubicPSF']]],
   ['_5fhidden',['_hidden',['../classIO_1_1CommandLineConfig.html#a412212d4c5afe7db9f41e259c137e4d6',1,'IO::CommandLineConfig']]],
-  ['_5fpieces',['_pieces',['../classsuperphot_1_1fake__image_1_1piecewise__psf_1_1PiecewisePSF.html#a050700807aca41a31646c41fa2183243',1,'superphot::fake_image::piecewise_psf::PiecewisePSF']]],
   ['_5fpositional',['_positional',['../classIO_1_1CommandLineConfig.html#a8d11b8e10a4ac310587a1f226e57e518',1,'IO::CommandLineConfig']]],
   ['_5fsaturated_5fpixels',['_saturated_pixels',['../classFitPSF_1_1Source.html#a0a782e0369f7cddf89e2ff5ed7f57e59',1,'FitPSF::Source']]],
-  ['_5fsources',['_sources',['../classBackground_1_1MeasureExcludingSources.html#a75b9c58379e55600f4463ca177e4e765',1,'Background::MeasureExcludingSources::_sources()'],['../classBackground_1_1MeasureExcludingSources.html#ad5e2b1b72fd7a7c4cec50015bdcc0382',1,'Background::MeasureExcludingSources::_sources()']]],
-  ['_5ftest_5fpoints',['_test_points',['../classtests_1_1test__piecewise__bicubic__psf_1_1TestPiecewiseBicubicPSF.html#ad2f54c48b529d904641b4373f9c1a36d',1,'tests::test_piecewise_bicubic_psf::TestPiecewiseBicubicPSF']]]
+  ['_5fsources',['_sources',['../classBackground_1_1MeasureExcludingSources.html#a75b9c58379e55600f4463ca177e4e765',1,'Background::MeasureExcludingSources::_sources()'],['../classBackground_1_1MeasureExcludingSources.html#ad5e2b1b72fd7a7c4cec50015bdcc0382',1,'Background::MeasureExcludingSources::_sources()']]]
 ];

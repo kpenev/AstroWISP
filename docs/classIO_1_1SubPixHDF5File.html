@@ -185,6 +185,9 @@ Private Member Functions</h2></td></tr>
 <tr class="memitem:a1b858426232bac64b02822320761b423"><td class="memItemLeft" align="right" valign="top">IOTreeBase::const_assoc_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIO_1_1SubPixHDF5File.html#a1b858426232bac64b02822320761b423">find_dataset_data</a> (const std::string &amp;dataset_id, int aperture_index, const <a class="el" href="classIO_1_1H5IODataTree.html">H5IODataTree</a> &amp;data)</td></tr>
 <tr class="memdesc:a1b858426232bac64b02822320761b423"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return an iterator to the node containing the data for a dataset.  <a href="#a1b858426232bac64b02822320761b423">More...</a><br /></td></tr>
 <tr class="separator:a1b858426232bac64b02822320761b423"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac899eafae94358334b8128e050d3c169"><td class="memTemplParams" colspan="2">template&lt;typename DATA_TYPE &gt; </td></tr>
+<tr class="memitem:ac899eafae94358334b8128e050d3c169"><td class="memTemplItemLeft" align="right" valign="top">H5::DataSet&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classIO_1_1SubPixHDF5File.html#ac899eafae94358334b8128e050d3c169">add_1d_dataset</a> (const std::string &amp;dataset_name, H5::Group &amp;destination, const H5::DataType &amp;memory_data_type, const H5::DataType &amp;output_data_type, bool floating_point_data, const boost::any &amp;any_array, const boost::property_tree::ptree &amp;structure_node, bool overwrite)</td></tr>
+<tr class="separator:ac899eafae94358334b8128e050d3c169"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9461eeaaa292b97059ad2d4c8f9674bb"><td class="memItemLeft" align="right" valign="top">H5::DataSet&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIO_1_1SubPixHDF5File.html#a9461eeaaa292b97059ad2d4c8f9674bb">add_generic_dataset</a> (const std::string &amp;dataset_name, H5::Group &amp;destination, const H5::DataType &amp;output_data_type, const boost::any &amp;any_array, const boost::property_tree::ptree &amp;structure_node, bool overwrite)</td></tr>
 <tr class="memdesc:a9461eeaaa292b97059ad2d4c8f9674bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates (or overwrites) a dataset other than the <a class="el" href="namespacePSF.html">PSF</a> map and <a class="el" href="namespacePSF.html">PSF</a> map variables.  <a href="#a9461eeaaa292b97059ad2d4c8f9674bb">More...</a><br /></td></tr>
 <tr class="separator:a9461eeaaa292b97059ad2d4c8f9674bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -356,6 +359,78 @@ Static Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="ac899eafae94358334b8128e050d3c169"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename DATA_TYPE &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">H5::DataSet IO::SubPixHDF5File::add_1d_dataset </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>dataset_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">H5::Group &amp;&#160;</td>
+          <td class="paramname"><em>destination</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const H5::DataType &amp;&#160;</td>
+          <td class="paramname"><em>memory_data_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const H5::DataType &amp;&#160;</td>
+          <td class="paramname"><em>output_data_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>floating_point_data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::any &amp;&#160;</td>
+          <td class="paramname"><em>any_array</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::property_tree::ptree &amp;&#160;</td>
+          <td class="paramname"><em>structure_node</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>overwrite</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a3a1069e81296c0e07cb4f02b8eacc9b5"></a>
 <div class="memitem">
 <div class="memproto">
@@ -1813,7 +1888,7 @@ template&lt;class DSET_ATTR &gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceIO.html">IO</a></li><li class="navelem"><a class="el" href="classIO_1_1SubPixHDF5File.html">SubPixHDF5File</a></li>
-    <li class="footer">Generated on Tue Jan 2 2018 17:31:30 for SuperPhot by
+    <li class="footer">Generated on Thu May 3 2018 17:25:12 for SuperPhot by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

@@ -16,7 +16,7 @@ namespace IO {
     ///A binary output stream connected to a file.
     class LIB_PUBLIC binofstream : public binostream {
     public:
-        ///\brie Make a binary output stream that will be bound to a file 
+        ///\brief Make a binary output stream that will be bound to a file
         ///later using the open method inherited from std::ofstream
         binofstream() {}
 

@@ -210,12 +210,25 @@ namespace FitPSF {
     ///
     ///See get_fit_sources for descrption of undocumented arguments.
     LIB_LOCAL void add_new_source(
+            ///See same name argument to get_fit_sources().
             Image<LinearSource>                     &image,
+
+            ///See same name argument to get_fit_sources().
             const Core::SubPixelMap                 *subpix_map,
+
+            ///See same name argument to get_fit_sources().
             const PSF::PiecewiseBicubic             &psf,
+
+            ///See same name argument to get_fit_sources().
             double                                   alpha,
+
+            ///See same name argument to get_fit_sources().
             double                                   max_circular_aperture,
+
+            ///See same name argument to get_fit_sources().
             const std::string                       &output_fname,
+
+            ///See same name argument to get_fit_sources().
             bool                                     cover_psf,
 
             ///The location of the source to add.

@@ -139,25 +139,25 @@ $(document).ready(function(){initNavTree('hdf5fileformat_main_page.html','');});
 <tr>
 <th>Dataset Name </th><th>Dataset Data Type </th><th>Output Column Name  </th></tr>
 <tr>
-<td>ID </td><td>&lt;string&gt; or &lt;H5T_STD_I16LE&gt;,&lt;H5T_STD_I32LE&gt; </td><td>id </td></tr>
+<td>ID </td><td><code>string</code> or <code>H5T_STD_I16LE</code>,<code>H5T_STD_I32LE</code> </td><td>id </td></tr>
 <tr>
-<td>x </td><td>&lt;H5T_IEEE_F32LE&gt; </td><td>x </td></tr>
+<td>x </td><td><code>H5T_IEEE_F32LE</code> </td><td>x </td></tr>
 <tr>
-<td>y </td><td>&lt;H5T_IEEE_F32LE&gt; </td><td>y </td></tr>
+<td>y </td><td><code>H5T_IEEE_F32LE</code> </td><td>y </td></tr>
 <tr>
-<td>Flux </td><td>&lt;H5T_IEEE_F32LE&gt; </td><td>flux </td></tr>
+<td>Flux </td><td><code>H5T_IEEE_F32LE</code> </td><td>flux </td></tr>
 <tr>
-<td>FluxErr </td><td>&lt;H5T_IEEE_F32LE&gt; </td><td>flux_err </td></tr>
+<td>FluxErr </td><td><code>H5T_IEEE_F32LE</code> </td><td>flux_err </td></tr>
 <tr>
-<td>Magnitude </td><td>&lt;H5T_IEEE_F32LE&gt; </td><td>mag </td></tr>
+<td>Magnitude </td><td><code>H5T_IEEE_F32LE</code> </td><td>mag </td></tr>
 <tr>
-<td>MagnitudeErr </td><td>&lt;H5T_IEEE_F32LE&gt; </td><td>mag_err </td></tr>
+<td>MagnitudeErr </td><td><code>H5T_IEEE_F32LE</code> </td><td>mag_err </td></tr>
 <tr>
-<td>QualityFlag </td><td>&lt;H5T_C_S1&gt; </td><td>flag </td></tr>
+<td>QualityFlag </td><td><code>H5T_C_S1</code> </td><td>flag </td></tr>
 <tr>
-<td><a class="el" href="namespaceBackground.html">Background</a> </td><td>&lt;H5T_IEEE_F32LE&gt; </td><td>bg </td></tr>
+<td><a class="el" href="namespaceBackground.html">Background</a> </td><td><code>H5T_IEEE_F32LE</code> </td><td>bg </td></tr>
 <tr>
-<td>BackgroundErr </td><td>&lt;H5T_IEEE_F32LE&gt; </td><td>bg_err </td></tr>
+<td>BackgroundErr </td><td><code>H5T_IEEE_F32LE</code> </td><td>bg_err </td></tr>
 <tr>
 <td>BackgroundNPix </td><td>Smallest little endian signed int that fits </td><td>nbgpix </td></tr>
 </table>
@@ -166,19 +166,19 @@ $(document).ready(function(){initNavTree('hdf5fileformat_main_page.html','');});
 <tr>
 <th>Dataset Name </th><th>Dataset Data Type </th><th>Output Column Name  </th></tr>
 <tr>
-<td>S (only SDK psf) </td><td>&lt;H5T_IEEE_F32LE&gt; </td><td>S </td></tr>
+<td>S (only SDK psf) </td><td><code>H5T_IEEE_F32LE</code> </td><td>S </td></tr>
 <tr>
-<td>D (only SDK psf) </td><td>&lt;H5T_IEEE_F32LE&gt; </td><td>D </td></tr>
+<td>D (only SDK psf) </td><td><code>H5T_IEEE_F32LE</code> </td><td>D </td></tr>
 <tr>
-<td>K (only SDK psf) </td><td>&lt;H5T_IEEE_F32LE&gt; </td><td>K </td></tr>
+<td>K (only SDK psf) </td><td><code>H5T_IEEE_F32LE</code> </td><td>K </td></tr>
 <tr>
-<td>Amplitude </td><td>&lt;H5T_IEEE_F32LE&gt; </td><td>A or amp </td></tr>
+<td>Amplitude </td><td><code>H5T_IEEE_F32LE</code> </td><td>A or amp </td></tr>
 <tr>
-<td>SignalToNoise </td><td>&lt;H5T_IEEE_F32LE&gt; </td><td>sn </td></tr>
+<td>SignalToNoise </td><td><code>H5T_IEEE_F32LE</code> </td><td>sn </td></tr>
 <tr>
-<td>NFitPixels </td><td>&lt;H5T_STD_I16LE&gt; </td><td>npix </td></tr>
+<td>NFitPixels </td><td><code>H5T_STD_I16LE</code> </td><td>npix </td></tr>
 <tr>
-<td>ReducedChi2 </td><td>&lt;H5T_IEEE_F32LE&gt; </td><td>chi2 </td></tr>
+<td>ReducedChi2 </td><td><code>H5T_IEEE_F32LE</code> </td><td>chi2 </td></tr>
 </table>
 <h2>The <code>PSFMap</code> group </h2>
 <h2>Attributes:</h2>
@@ -236,13 +236,13 @@ $(document).ready(function(){initNavTree('hdf5fileformat_main_page.html','');});
 <tr>
 <td>YScale </td><td>Scaling of the source y value before evaluating the polynomial </td></tr>
 </table>
-<p>The <code>PSFMap</code> group contains only a single dataset (named Coefficients) with the datatype being an array of &lt;H5T_IEEE_F32LE&gt;. Each array contains the polynomial expansion coefficients of a single <a class="el" href="namespacePSF.html">PSF</a> parameter. Thus, the dataset length is 3 for elliptical Gaussian <a class="el" href="namespacePSF.html">PSF</a> models and 4 times the number of interior grid intersections for piecewise bicubic <a class="el" href="namespacePSF.html">PSF</a> models. </p>
+<p>The <code>PSFMap</code> group contains only a single dataset (named Coefficients) with the datatype being an array of <code>H5T_IEEE_F32LE</code>. Each array contains the polynomial expansion coefficients of a single <a class="el" href="namespacePSF.html">PSF</a> parameter. Thus, the dataset length is 3 for elliptical Gaussian <a class="el" href="namespacePSF.html">PSF</a> models and 4 times the number of interior grid intersections for piecewise bicubic <a class="el" href="namespacePSF.html">PSF</a> models. </p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Jan 2 2018 17:31:30 for SuperPhot by
+    <li class="footer">Generated on Thu May 3 2018 17:25:12 for SuperPhot by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

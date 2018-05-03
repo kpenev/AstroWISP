@@ -2,7 +2,7 @@ var searchData=
 [
   ['ofstream_20_26',['ofstream &amp;',['../classIO_1_1binofstream.html#a3d8b3d4b36a12677f75f867e3271364d',1,'IO::binofstream']]],
   ['ofstream_20_26',['ofstream &amp;',['../classIO_1_1binofstream.html#aa174052dd4002e37c330a857543d9552',1,'IO::binofstream']]],
-  ['open',['open',['../classFitPSF_1_1Image.html#a5d9b1b90ba789273a6700f7172e6c31e',1,'FitPSF::Image::open()'],['../classIO_1_1FitsImage.html#a23cd30e64685ddb9216db7519827b5d5',1,'IO::FitsImage::open()']]],
+  ['open',['open',['../classFitPSF_1_1Image.html#a5d9b1b90ba789273a6700f7172e6c31e',1,'FitPSF::Image::open()'],['../classIO_1_1FitsImage.html#a5581363eef56d2c7df21dbffa2e0689e',1,'IO::FitsImage::open()']]],
   ['open_5ffits',['open_fits',['../classIO_1_1FitsImage.html#ae2b8f283e55e00abfaa83cc7241fe077',1,'IO::FitsImage']]],
   ['openattribute',['openAttribute',['../classIO_1_1SubPixHDF5File.html#a03631378065c306724a431053b5a961e',1,'IO::SubPixHDF5File']]],
   ['opendataset',['openDataSet',['../classIO_1_1SubPixHDF5File.html#a083c4102516ed77bf34b94508366e880',1,'IO::SubPixHDF5File']]],

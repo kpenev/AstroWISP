@@ -162,15 +162,34 @@ namespace FitPSF {
             ///this object is in use.
             const PSF::PiecewiseBicubic &psf,
 
+            ///See OverlapSource::OverlapSource()
             const Core::SourceID &id,
+
+            ///See OverlapSource::OverlapSource()
             double x0, 
+
+            ///See OverlapSource::OverlapSource()
             double y0,
+
+            ///See OverlapSource::OverlapSource()
             const Background::Source &background,
+
+            ///See OverlapSource::OverlapSource()
             Image<LinearSource> &psffit_image,
+
+            ///See OverlapSource::OverlapSource()
             double alpha,
+
+            ///See OverlapSource::OverlapSource()
             int source_assignment_id,
+
+            ///See OverlapSource::OverlapSource()
             const Core::SubPixelMap *subpix_map,
+
+            ///See OverlapSource::OverlapSource()
             double max_circular_aperture,
+
+            ///See OverlapSource::OverlapSource()
             const std::string &output_fname
         ) :
             OverlapSource<LinearSource, PSF::PiecewiseBicubic>(
@@ -204,17 +223,40 @@ namespace FitPSF {
             ///this object is in use.
             const PSF::PiecewiseBicubic &psf,
 
+            ///See OverlapSource::OverlapSource()
             const Core::SourceID &id,
+
+            ///See OverlapSource::OverlapSource()
             double x0, 
+
+            ///See OverlapSource::OverlapSource()
             double y0,
+
+            ///See OverlapSource::OverlapSource()
             const Background::Source& background,
+
+            ///See OverlapSource::OverlapSource()
             Image<LinearSource> &psffit_image,
+
+            ///See OverlapSource::OverlapSource()
             int source_assignment_id,
+
+            ///See OverlapSource::OverlapSource()
             const Core::SubPixelMap *subpix_map,
+
+            ///See OverlapSource::OverlapSource()
             double left,
+
+            ///See OverlapSource::OverlapSource()
             double right,
+
+            ///See OverlapSource::OverlapSource()
             double bottom,
+
+            ///See OverlapSource::OverlapSource()
             double top,
+
+            ///See OverlapSource::OverlapSource()
             const std::string &output_fname
         ) :
             OverlapSource<LinearSource, PSF::PiecewiseBicubic>(

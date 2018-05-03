@@ -71,8 +71,13 @@ namespace FitPSF {
         ///Create a source for fitting an elliptical gaussian PSF model.
         template<class EIGEN_MATRIX>
             SDKSourceBase(
+                ///See Source::Source()
                 const Core::SourceID &id,
+
+                ///See Source::Source()
                 double x0,
+
+                ///See Source::Source()
                 double y0,
 
                 ///The background under the pixel (in ADU)

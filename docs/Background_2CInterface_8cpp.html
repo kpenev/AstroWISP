@@ -102,9 +102,9 @@ $(document).ready(function(){initNavTree('Background_2CInterface_8cpp.html','');
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a465c35b2a08bc2d1ad117c59e244a279"><td class="memItemLeft" align="right" valign="top">BackgroundMeasureAnnulus *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Background_2CInterface_8cpp.html#a465c35b2a08bc2d1ad117c59e244a279">create_background_extractor</a> (double inner_radius, double outer_radius, double exclude_aperture, const Image *image, double error_confidence)</td></tr>
-<tr class="memdesc:a465c35b2a08bc2d1ad117c59e244a279"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an object for measuring the background in an annulus around each source.  <a href="#a465c35b2a08bc2d1ad117c59e244a279">More...</a><br /></td></tr>
-<tr class="separator:a465c35b2a08bc2d1ad117c59e244a279"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41563c302312b2b9c12e4f1a56d1aa5b"><td class="memItemLeft" align="right" valign="top">BackgroundMeasureAnnulus *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Background_2CInterface_8cpp.html#a41563c302312b2b9c12e4f1a56d1aa5b">create_background_extractor</a> (double inner_radius, double outer_radius, double exclude_aperture, const CoreImage *image, double error_confidence)</td></tr>
+<tr class="memdesc:a41563c302312b2b9c12e4f1a56d1aa5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an object for measuring the background in an annulus around each source.  <a href="#a41563c302312b2b9c12e4f1a56d1aa5b">More...</a><br /></td></tr>
+<tr class="separator:a41563c302312b2b9c12e4f1a56d1aa5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9677f5b44da96dad70d2a7825f55cabb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Background_2CInterface_8cpp.html#a9677f5b44da96dad70d2a7825f55cabb">destroy_background_extractor</a> (BackgroundMeasureAnnulus *extractor)</td></tr>
 <tr class="memdesc:a9677f5b44da96dad70d2a7825f55cabb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy a previously created background extractor.  <a href="#a9677f5b44da96dad70d2a7825f55cabb">More...</a><br /></td></tr>
 <tr class="separator:a9677f5b44da96dad70d2a7825f55cabb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -156,7 +156,7 @@ Functions</h2></td></tr>
 <p>Register another source around which to exclude pixels from background estimation. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">extractor</td><td>The background extractor to add the source to. Must have been created using <a class="el" href="Background_2CInterface_8h.html#a465c35b2a08bc2d1ad117c59e244a279" title="Create an object for measuring the background in an annulus around each source. ">create_background_extractor()</a>. </td></tr>
+    <tr><td class="paramname">extractor</td><td>The background extractor to add the source to. Must have been created using <a class="el" href="Background_2CInterface_8h.html#a41563c302312b2b9c12e4f1a56d1aa5b" title="Create an object for measuring the background in an annulus around each source. ">create_background_extractor()</a>. </td></tr>
     <tr><td class="paramname">x</td><td>The x coordinate (within the image) of the source to add. </td></tr>
     <tr><td class="paramname">y</td><td>The y coordinate (within the image) of the source to add. </td></tr>
   </table>
@@ -165,7 +165,7 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a465c35b2a08bc2d1ad117c59e244a279"></a>
+<a class="anchor" id="a41563c302312b2b9c12e4f1a56d1aa5b"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -190,7 +190,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const Image *&#160;</td>
+          <td class="paramtype">const CoreImage *&#160;</td>
           <td class="paramname"><em>image</em>, </td>
         </tr>
         <tr>
@@ -238,7 +238,7 @@ Functions</h2></td></tr>
 <p>Destroy a previously created background extractor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">extractor</td><td>The background extractor to destroy. Must have been created using <a class="el" href="Background_2CInterface_8h.html#a465c35b2a08bc2d1ad117c59e244a279" title="Create an object for measuring the background in an annulus around each source. ">create_background_extractor()</a>. </td></tr>
+    <tr><td class="paramname">extractor</td><td>The background extractor to destroy. Must have been created using <a class="el" href="Background_2CInterface_8h.html#a41563c302312b2b9c12e4f1a56d1aa5b" title="Create an object for measuring the background in an annulus around each source. ">create_background_extractor()</a>. </td></tr>
   </table>
   </dd>
 </dl>
@@ -375,7 +375,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_9fcfb789ecabade8749ffa7f9106c60f.html">Background</a></li><li class="navelem"><a class="el" href="Background_2CInterface_8cpp.html">CInterface.cpp</a></li>
-    <li class="footer">Generated on Tue Jan 2 2018 17:31:30 for SuperPhot by
+    <li class="footer">Generated on Thu May 3 2018 17:25:12 for SuperPhot by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

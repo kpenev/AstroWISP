@@ -127,7 +127,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a6e9d5faa0caeae5abe434e96c511f8dc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCore_1_1SubPixelCorrectedFlux.html#a6e9d5faa0caeae5abe434e96c511f8dc">set_image</a> (const <a class="el" href="classCore_1_1Image.html">Core::Image</a>&lt; double &gt; &amp;<a class="el" href="classCore_1_1SubPixelCorrectedFlux.html#a4e53256dc9cca1557cb104736adeaf64">image</a>)</td></tr>
 <tr class="memdesc:a6e9d5faa0caeae5abe434e96c511f8dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specifies the image over which photometry will be performed.  <a href="#a6e9d5faa0caeae5abe434e96c511f8dc">More...</a><br /></td></tr>
 <tr class="separator:a6e9d5faa0caeae5abe434e96c511f8dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a946d0c821fff67bd6f4badfcd2c73d0b"><td class="memItemLeft" align="right" valign="top">std::valarray&lt; <a class="el" href="classCore_1_1Flux.html">Core::Flux</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCore_1_1SubPixelCorrectedFlux.html#a946d0c821fff67bd6f4badfcd2c73d0b">operator()</a> (double <a class="el" href="PhotColumns_8h.html#a9336ebf25087d91c818ee6e9ec29f8c1">x</a>, double <a class="el" href="PhotColumns_8h.html#a2fb1c5cf58867b5bbc9a1b145a86f3a0">y</a>, const <a class="el" href="classPSF_1_1PSF.html">PSF::PSF</a> &amp;psf, double background=<a class="el" href="namespaceCore.html#ad97181b3941c3ab371c134a2d4b8fbd1">Core::NaN</a>, double background_error=<a class="el" href="namespaceCore.html#ad97181b3941c3ab371c134a2d4b8fbd1">Core::NaN</a>, bool prepare_subpix_scaling=false)</td></tr>
+<tr class="memitem:a946d0c821fff67bd6f4badfcd2c73d0b"><td class="memItemLeft" align="right" valign="top">std::valarray&lt; <a class="el" href="classCore_1_1Flux.html">Core::Flux</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCore_1_1SubPixelCorrectedFlux.html#a946d0c821fff67bd6f4badfcd2c73d0b">operator()</a> (double <a class="el" href="PhotColumns_8h.html#a9336ebf25087d91c818ee6e9ec29f8c1">x</a>, double <a class="el" href="PhotColumns_8h.html#a2fb1c5cf58867b5bbc9a1b145a86f3a0">y</a>, const <a class="el" href="classPSF_1_1PSF.html">PSF::PSF</a> &amp;psf, double background=<a class="el" href="namespaceCore.html#a5074e38fbccbd4067c3f16bd62b4d648">Core::NaN</a>, double background_error=<a class="el" href="namespaceCore.html#a5074e38fbccbd4067c3f16bd62b4d648">Core::NaN</a>, bool prepare_subpix_scaling=false)</td></tr>
 <tr class="memdesc:a946d0c821fff67bd6f4badfcd2c73d0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actually measure the flux in the current set of apertures centered on the given coordinates.  <a href="#a946d0c821fff67bd6f4badfcd2c73d0b">More...</a><br /></td></tr>
 <tr class="separator:a946d0c821fff67bd6f4badfcd2c73d0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac6a353dddefcb944ea9d55be1a6d2639"><td class="memItemLeft" align="right" valign="top">const Eigen::MatrixXd &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCore_1_1SubPixelCorrectedFlux.html#ac6a353dddefcb944ea9d55be1a6d2639">get_subpix_scaling</a> (size_t aperture_ind)</td></tr>
@@ -142,7 +142,7 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
-<tr class="memitem:a9b231f38fd3373d34733e3bbb7010914"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCore_1_1FluxPair.html">FluxPair</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCore_1_1SubPixelCorrectedFlux.html#a9b231f38fd3373d34733e3bbb7010914">pixel_fluxes</a> (double <a class="el" href="PhotColumns_8h.html#a9336ebf25087d91c818ee6e9ec29f8c1">x</a>, double <a class="el" href="PhotColumns_8h.html#a2fb1c5cf58867b5bbc9a1b145a86f3a0">y</a>, const <a class="el" href="classPSF_1_1PSF.html">PSF::PSF</a> &amp;psf, double r=<a class="el" href="namespaceCore.html#ad97181b3941c3ab371c134a2d4b8fbd1">Core::NaN</a>, int fill_scaling=-1)</td></tr>
+<tr class="memitem:a9b231f38fd3373d34733e3bbb7010914"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCore_1_1FluxPair.html">FluxPair</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCore_1_1SubPixelCorrectedFlux.html#a9b231f38fd3373d34733e3bbb7010914">pixel_fluxes</a> (double <a class="el" href="PhotColumns_8h.html#a9336ebf25087d91c818ee6e9ec29f8c1">x</a>, double <a class="el" href="PhotColumns_8h.html#a2fb1c5cf58867b5bbc9a1b145a86f3a0">y</a>, const <a class="el" href="classPSF_1_1PSF.html">PSF::PSF</a> &amp;psf, double r=<a class="el" href="namespaceCore.html#a5074e38fbccbd4067c3f16bd62b4d648">Core::NaN</a>, int fill_scaling=-1)</td></tr>
 <tr class="memdesc:a9b231f38fd3373d34733e3bbb7010914"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the sum of the integrals of the <a class="el" href="namespacePSF.html">PSF</a> over each subpixel weighted and not weighted by the subpixel sensitivity.  <a href="#a9b231f38fd3373d34733e3bbb7010914">More...</a><br /></td></tr>
 <tr class="separator:a9b231f38fd3373d34733e3bbb7010914"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adad299abeb32fb42224dc2b7786f6d95"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCore_1_1SubPixelCorrectedFlux.html#adad299abeb32fb42224dc2b7786f6d95">classify_pixel</a> (double <a class="el" href="PhotColumns_8h.html#a9336ebf25087d91c818ee6e9ec29f8c1">x</a>, double <a class="el" href="PhotColumns_8h.html#a2fb1c5cf58867b5bbc9a1b145a86f3a0">y</a>, double aperture) const </td></tr>
@@ -608,13 +608,13 @@ template&lt;class SUBPIX_TYPE &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>background</em> = <code><a class="el" href="namespaceCore.html#ad97181b3941c3ab371c134a2d4b8fbd1">Core::NaN</a></code>, </td>
+          <td class="paramname"><em>background</em> = <code><a class="el" href="namespaceCore.html#a5074e38fbccbd4067c3f16bd62b4d648">Core::NaN</a></code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>background_error</em> = <code><a class="el" href="namespaceCore.html#ad97181b3941c3ab371c134a2d4b8fbd1">Core::NaN</a></code>, </td>
+          <td class="paramname"><em>background_error</em> = <code><a class="el" href="namespaceCore.html#a5074e38fbccbd4067c3f16bd62b4d648">Core::NaN</a></code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -676,7 +676,7 @@ template&lt;class SUBPIX_TYPE &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>r</em> = <code><a class="el" href="namespaceCore.html#ad97181b3941c3ab371c134a2d4b8fbd1">Core::NaN</a></code>, </td>
+          <td class="paramname"><em>r</em> = <code><a class="el" href="namespaceCore.html#a5074e38fbccbd4067c3f16bd62b4d648">Core::NaN</a></code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -1034,7 +1034,7 @@ template&lt;class SUBPIX_TYPE &gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceCore.html">Core</a></li><li class="navelem"><a class="el" href="classCore_1_1SubPixelCorrectedFlux.html">SubPixelCorrectedFlux</a></li>
-    <li class="footer">Generated on Tue Jan 2 2018 17:31:30 for SuperPhot by
+    <li class="footer">Generated on Thu May 3 2018 17:25:12 for SuperPhot by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

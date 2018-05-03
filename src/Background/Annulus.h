@@ -46,7 +46,7 @@ namespace Background {
         ///The difference between the radi of the inside and outside boundaries
         double &width() {return __width;}
 
-        ///Represent the annulus as a string: '<inner>:<width>'.
+        ///Represent the annulus as a string: '\<inner\>:\<width\>'.
         operator std::string() const;
     }; //End Annulus class.
 

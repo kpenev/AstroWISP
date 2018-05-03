@@ -5,3 +5,5 @@
  *
  * \ingroup FitPSF
  */
+
+#include "../Core/CInterface.h"

@@ -168,7 +168,6 @@ $(document).ready(function(){initNavTree('functions_vars.html','');});
 </li>
 <li>__coefficients
 : <a class="el" href="classPSF_1_1PiecewiseBicubicMap.html#a34c8eeb61b0e2ebcf52b013df592f45f">PSF::PiecewiseBicubicMap</a>
-, <a class="el" href="classsuperphot_1_1fake__image_1_1bipolynomial__psf__piece_1_1BipolynomialPSFPiece.html#ae52a52928b61a5ea945f3eb20d198389">superphot.fake_image.bipolynomial_psf_piece.BipolynomialPSFPiece</a>
 </li>
 <li>__col_num
 : <a class="el" href="classSubPixPhot_1_1SourceInput.html#a3e0ecd87042430f40589f99b895f4b88">SubPixPhot::SourceInput</a>
@@ -255,6 +254,9 @@ $(document).ready(function(){initNavTree('functions_vars.html','');});
 </li>
 <li>__error_confidence
 : <a class="el" href="classBackground_1_1MeasureAnnulus.html#a5e750e3be73d14dd7c8219fdc189ac6f">Background::MeasureAnnulus</a>
+</li>
+<li>__errors
+: <a class="el" href="classCore_1_1Image.html#ae066ff13c332102f62286130369bd10b">Core::Image&lt; DATA_TYPE &gt;</a>
 </li>
 <li>__executable
 : <a class="el" href="classIO_1_1CommandLineConfig.html#a4f58bc0d1b077ee6fe75b2fea07cd39d">IO::CommandLineConfig</a>
@@ -565,6 +567,9 @@ $(document).ready(function(){initNavTree('functions_vars.html','');});
 </li>
 <li>__pixel_count
 : <a class="el" href="classFitPSF_1_1OverlapGroup.html#a5988f7ad1df568de01e22fcc7c4a556c">FitPSF::OverlapGroup&lt; SOURCE_TYPE, PSF_TYPE &gt;</a>
+</li>
+<li>__pixel_errors
+: <a class="el" href="classIO_1_1FitsImage.html#ae7cf7601b48c8ca6c3de153b712d3289">IO::FitsImage&lt; DATA_TYPE &gt;</a>
 </li>
 <li>__pixel_values
 : <a class="el" href="classIO_1_1FitsImage.html#a26d97ba534f5f388dedc68b479fb1ec3">IO::FitsImage&lt; DATA_TYPE &gt;</a>
@@ -936,23 +941,14 @@ $(document).ready(function(){initNavTree('functions_vars.html','');});
 <li>_bg_values
 : <a class="el" href="classBackground_1_1MeasureExcludingSources.html#abde4fc244295c1927f50780188af3589">Background::MeasureExcludingSources</a>
 </li>
-<li>_boundaries
-: <a class="el" href="classsuperphot_1_1fake__image_1_1piecewise__psf_1_1PiecewisePSF.html#a8d22bc67e59ce1b25a0dcec9d46a4d9a">superphot.fake_image.piecewise_psf.PiecewisePSF</a>
-</li>
 <li>_cmdline_config
 : <a class="el" href="classIO_1_1CommandLineConfig.html#a8e3abce6cccedcab50facc9bf1dd3390">IO::CommandLineConfig</a>
 </li>
 <li>_cmdline_only
 : <a class="el" href="classIO_1_1CommandLineConfig.html#abb2f9358885ac2bf71a4247a89985a10">IO::CommandLineConfig</a>
 </li>
-<li>_grids
-: <a class="el" href="classtests_1_1test__piecewise__bicubic__psf_1_1TestPiecewiseBicubicPSF.html#a1ed56c6ee2cc47f0ca5fde7b2bc6ecba">tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF</a>
-</li>
 <li>_hidden
 : <a class="el" href="classIO_1_1CommandLineConfig.html#a412212d4c5afe7db9f41e259c137e4d6">IO::CommandLineConfig</a>
-</li>
-<li>_pieces
-: <a class="el" href="classsuperphot_1_1fake__image_1_1piecewise__psf_1_1PiecewisePSF.html#a050700807aca41a31646c41fa2183243">superphot.fake_image.piecewise_psf.PiecewisePSF</a>
 </li>
 <li>_positional
 : <a class="el" href="classIO_1_1CommandLineConfig.html#a8d11b8e10a4ac310587a1f226e57e518">IO::CommandLineConfig</a>
@@ -961,10 +957,7 @@ $(document).ready(function(){initNavTree('functions_vars.html','');});
 : <a class="el" href="classFitPSF_1_1Source.html#a0a782e0369f7cddf89e2ff5ed7f57e59">FitPSF::Source&lt; PSF_TYPE &gt;</a>
 </li>
 <li>_sources
-: <a class="el" href="classBackground_1_1MeasureExcludingSources.html#ad5e2b1b72fd7a7c4cec50015bdcc0382">Background::MeasureExcludingSources</a>
-</li>
-<li>_test_points
-: <a class="el" href="classtests_1_1test__piecewise__bicubic__psf_1_1TestPiecewiseBicubicPSF.html#ad2f54c48b529d904641b4373f9c1a36d">tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF</a>
+: <a class="el" href="classBackground_1_1MeasureExcludingSources.html#a75b9c58379e55600f4463ca177e4e765">Background::MeasureExcludingSources</a>
 </li>
 </ul>
 </div><!-- contents -->
@@ -972,7 +965,7 @@ $(document).ready(function(){initNavTree('functions_vars.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Jan 2 2018 17:31:30 for SuperPhot by
+    <li class="footer">Generated on Thu May 3 2018 17:25:12 for SuperPhot by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

@@ -8,6 +8,7 @@ var classIO_1_1SubPixHDF5File =
     ] ],
     [ "SubPixHDF5File", "classIO_1_1SubPixHDF5File.html#acb587e53c5d775ea9db4a9cca42ca0ed", null ],
     [ "SubPixHDF5File", "classIO_1_1SubPixHDF5File.html#a1422f864771db7a3697d3ff17fe15a3c", null ],
+    [ "add_1d_dataset", "classIO_1_1SubPixHDF5File.html#ac899eafae94358334b8128e050d3c169", null ],
     [ "add_attributes", "classIO_1_1SubPixHDF5File.html#a3a1069e81296c0e07cb4f02b8eacc9b5", null ],
     [ "add_dataset", "classIO_1_1SubPixHDF5File.html#a326183af5624f31f9e86e06d2c576f16", null ],
     [ "add_generic_dataset", "classIO_1_1SubPixHDF5File.html#a9461eeaaa292b97059ad2d4c8f9674bb", null ],

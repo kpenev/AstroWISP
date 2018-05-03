@@ -9,7 +9,6 @@ var searchData=
   ['fitsubpixcommandlineoptions',['FitSubpixCommandLineOptions',['../classFitSubpixCommandLineOptions.html',1,'']]],
   ['fitsubpixconfig',['FitSubPixConfig',['../classFitSubPixConfig.html',1,'']]],
   ['fitting',['Fitting',['../classError_1_1Fitting.html',1,'Error']]],
-  ['floattestcase',['FloatTestCase',['../classtests_1_1utilities_1_1FloatTestCase.html',1,'tests::utilities']]],
   ['flux',['Flux',['../classCore_1_1Flux.html',1,'Core']]],
   ['fluxpair',['FluxPair',['../classCore_1_1FluxPair.html',1,'Core']]]
 ];

@@ -1,6 +1,8 @@
 var classFitPSF_1_1Image =
 [
     [ "PixelVector", "classFitPSF_1_1Image.html#ad53d27e91c63ce6453cd8571d8d5361e", null ],
+    [ "Image", "classFitPSF_1_1Image.html#a9b71bb4204426ebbaf2e7e018b28308f", null ],
+    [ "Image", "classFitPSF_1_1Image.html#ad7567189c8af6e611996b23e2f962f69", null ],
     [ "Image", "classFitPSF_1_1Image.html#accf464ce9d38b1091729322630af3207", null ],
     [ "~Image", "classFitPSF_1_1Image.html#a347ebc291c6a2b751a909e61b39104c7", null ],
     [ "assign_to_source", "classFitPSF_1_1Image.html#aa7ded3ac273bcda4dabd6b25be85cc6b", null ],

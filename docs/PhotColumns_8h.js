@@ -7,7 +7,7 @@ var PhotColumns_8h =
     [ "bg", "PhotColumns_8h.html#a5fef7fc88df7ec49fc9494801ceb0faa", null ],
     [ "bg_err", "PhotColumns_8h.html#a4fa1b770ce6c9b09506de97f642a9bd9", null ],
     [ "chi2", "PhotColumns_8h.html#a7a7386b8044055e14b58efd949326489", null ],
-    [ "column_name", "PhotColumns_8h.html#a847f1f550b1a8e8c95579c117e069df1", null ],
+    [ "column_name", "PhotColumns_8h.html#af8771873c7f52f39c4cd5e5fc2191661", null ],
     [ "D", "PhotColumns_8h.html#a350bfcb1e3cfb28ddff48ce525d4f139", null ],
     [ "enabled", "PhotColumns_8h.html#a91b39549c797bd5646357c8b6eecad0f", null ],
     [ "FIRST_INT_COLUMN", "PhotColumns_8h.html#a12bc9d50381adc9800c04a392eaa57ee", null ],

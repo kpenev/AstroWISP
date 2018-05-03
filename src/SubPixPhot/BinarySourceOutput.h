@@ -2,7 +2,7 @@
  *
  * \brief Declare a class for adding sources to a binary photometry file.
  *
- * \ingroup SubPixPhot.
+ * \ingroup SubPixPhot
  */
 
 #ifndef __BINARY_SOURCE_OUTPUT_H

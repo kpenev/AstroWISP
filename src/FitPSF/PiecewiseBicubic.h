@@ -7,7 +7,7 @@
  * bicubic PSFs.
  *
  * The following variable names are used for the quentities defined in the
- * [description of the algorithm](@ref PiecewiseBicubicFitPSF).
+ * [description of the algorithm](@ref PiecewiseBicubicFitPSF_main_page).
  *   - \f$\mathbf{\tilde{M}^i}\f$ - pix_integral_matrix
  *   - The stack of \f$(\mathbf{\kappa}^i)^T\,\mathbf{\kappa}\f$ -
        poly_coef_matrix

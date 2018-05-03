@@ -1,9 +1,9 @@
 /**\file
  *
- * \brief Defines the methods of the EllipticalGaussianIntegralRectangle
- * class.
+ * \brief Defines the methods of the
+ * EllipticalGaussianIntegralRectangle class.
  *
- * \ingroup PSF.
+ * \ingroup PSF
  */
 
 #include "EllipticalGaussianIntegralRectangle.h"

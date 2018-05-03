@@ -95,10 +95,10 @@ $(document).ready(function(){initNavTree('PSF_integrals_page.html','');});
 <div class="contents">
 <div class="textblock"><p>In this package, integrals of the <a class="el" href="namespacePSF.html">PSF</a> are performed by using a local polynomial approximation:</p>
 <p class="formulaDsp">
-<img class="formulaDsp" alt="\[ \int dy \int dx PSF(x_0+x, y_0+y) dx dy \approx \int dy \int dx \sum_{m=0}^{m=M} \sum_{n=0}^{n=N} f_{m,n} x^m y^n \]" src="form_150.png"/>
+<img class="formulaDsp" alt="\[ \int dy \int dx PSF(x_0+x, y_0+y) dx dy \approx \int dy \int dx \sum_{m=0}^{m=M} \sum_{n=0}^{n=N} f_{m,n} x^m y^n \]" src="form_132.png"/>
 </p>
-<p> where <img class="formulaInl" alt="$f_{m,n}$" src="form_151.png"/> could, but need not be the taylor expansion coefficients around <img class="formulaInl" alt="$(x_0, y_0)$" src="form_152.png"/>.</p>
-<p>As a result, all that is necessary is calculating integrals of <img class="formulaInl" alt="$x^my^n$" src="form_18.png"/> for non-negative integer <img class="formulaInl" alt="$m$" src="form_153.png"/> and <img class="formulaInl" alt="$n$" src="form_154.png"/>.</p>
+<p> where <img class="formulaInl" alt="$f_{m,n}$" src="form_133.png"/> could, but need not be the taylor expansion coefficients around <img class="formulaInl" alt="$(x_0, y_0)$" src="form_134.png"/>.</p>
+<p>As a result, all that is necessary is calculating integrals of <img class="formulaInl" alt="$x^my^n$" src="form_31.png"/> for non-negative integer <img class="formulaInl" alt="$m$" src="form_90.png"/> and <img class="formulaInl" alt="$n$" src="form_135.png"/>.</p>
 <p><a class="el" href="namespacePSF.html">PSF</a> fitting and aperture photometry, correcting for the subpixel structure requires calculating the integral of the <a class="el" href="namespacePSF.html">PSF</a> over rectangles and over pieces of a circle.</p>
 <h2>Integrating rectangles </h2>
 <p>It is necessary to calculate integrals over rectangles defined as follows: </p><div class="image">
@@ -106,7 +106,7 @@ $(document).ready(function(){initNavTree('PSF_integrals_page.html','');});
 <div class="caption">
 Aperture photometry and PSF fitting need to calculate integrals over the shaded rectangle.</div></div>
 <p> The integral over a rectangle is obviously given by: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{equation} I^{rect}_{m,n}\equiv \int_{-\Delta y}^{\Delta y} dy \int_{-\Delta x}^{\Delta x} dx x^m y^n = \left\{ \begin{array}{l@{\quad}l} 0 &amp; \mathrm{if}\ m\ \mathrm{is\ odd\ or}\ n\ \mathrm{is\ odd}\\ \frac{4\Delta x^{m+1} \Delta y^{n+1}}{(m+1)(n+1)} &amp; \mathrm{otherwise} \end{array} \right. \end{equation}" src="form_155.png"/>
+<img class="formulaDsp" alt="\begin{equation} I^{rect}_{m,n}\equiv \int_{-\Delta y}^{\Delta y} dy \int_{-\Delta x}^{\Delta x} dx x^m y^n = \left\{ \begin{array}{l@{\quad}l} 0 &amp; \mathrm{if}\ m\ \mathrm{is\ odd\ or}\ n\ \mathrm{is\ odd}\\ \frac{4\Delta x^{m+1} \Delta y^{n+1}}{(m+1)(n+1)} &amp; \mathrm{otherwise} \end{array} \right. \end{equation}" src="form_136.png"/>
 </p>
 <h2>Integrating circle wedges </h2>
 <div class="image">
@@ -115,80 +115,80 @@ Aperture photometry and PSF fitting need to calculate integrals over the shaded 
 We need to calculate integrals of the PSF over the shaded piece of the circle with x and y relative to the point (x_0, y_0).</div></div>
 <p> Since we are using a local polynomial approximation only the following integral needs to be computed:</p>
 <p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{equation} I^{circ}_{m,n}\equiv \int_{-\Delta y}^{\Delta y} dy \int_{-\Delta x}^{\sqrt{r^2-y_0^2-y^2-2y_0y}-x_0} dx x^m y^n \end{equation}" src="form_156.png"/>
+<img class="formulaDsp" alt="\begin{equation} I^{circ}_{m,n}\equiv \int_{-\Delta y}^{\Delta y} dy \int_{-\Delta x}^{\sqrt{r^2-y_0^2-y^2-2y_0y}-x_0} dx x^m y^n \end{equation}" src="form_137.png"/>
 </p>
 <h3>The solution:</h3>
 <p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray} I^{circ}_{m,n} &amp;=&amp; \frac{1}{m+1}\Bigg\{ \sum_{i=0}^{m+1} \binom{m+1}{i} Q_{i,n} (-x_0)^{m+1-i} \nonumber\\&amp;&amp;{}+ (-1)^m\frac{\Delta x^{m+1} \Delta y^{n+1}}{n+1}\left[1+(-1)^n\right] \Bigg\}\\ Q_{m,n} &amp;=&amp; (r^2-y_0^2)Q_{m-2,n} - 2y_0Q_{m-2,n+1} - Q_{m-2,n+2}\\ Q_{0,n}=P_n^{even} &amp;=&amp;\frac{2}{n+1}\left\{ \begin{array}{ll} 0 &amp;, \quad n-\mathrm{odd}\\ \Delta y^{n+1} &amp;, \quad n-\mathrm{even}\\ \end{array} \right.\\ Q_{1,n}=P_n^{odd}&amp;=&amp; \frac{n-1}{n+2}(r^2-y_0^2)P_{n-2}^{odd} - \frac{2n+1}{n+2}y_0P_{n-1}^{odd}+\nonumber\\ &amp;&amp;{}+\frac{2\Delta y^{n-1}}{n+2}\times \left\{\begin{array}{l@{,}l} -x_0^3-3x_0\Delta x^2 &amp; \quad n-\mathrm{even}\\ 3x_0^2\Delta x + \Delta x^3 &amp; \quad n-\mathrm{odd}\\ \end{array}\right.\\ P_0^{odd} &amp;=&amp; \frac{1}{2}\left[ (y_0+\Delta y)(x_0-\Delta x) - (y_0-\Delta y)(x_0+\Delta x) \right]\nonumber\\ &amp;&amp;{}+ \frac{r^2}{2}\left[ \tan^{-1} \frac{x_0+\Delta x}{y_0-\Delta y} - \tan^{-1} \frac{x_0-\Delta x}{y_0+\Delta y} \right]\\ P_1^{odd} &amp;=&amp; \frac{y_0}{2}\left[ (x_0+\Delta x)(y_0-\Delta y) - (x_0-\Delta x)(y_0+\Delta y) \right]\nonumber\\ &amp;&amp;{}+ \frac{(x_0+\Delta x)^3 - (x_0-\Delta x)^3}{3}\nonumber\\ &amp;&amp;{}- \frac{1}{2} y_0r^2 \left( \tan^{-1} \frac{x_0+\Delta x}{y_0 - \Delta y} - \tan^{-1} \frac{x_0-\Delta x}{y_0 + \Delta y} \right) \end{eqnarray}" src="form_157.png"/>
+<img class="formulaDsp" alt="\begin{eqnarray} I^{circ}_{m,n} &amp;=&amp; \frac{1}{m+1}\Bigg\{ \sum_{i=0}^{m+1} \binom{m+1}{i} Q_{i,n} (-x_0)^{m+1-i} \nonumber\\&amp;&amp;{}+ (-1)^m\frac{\Delta x^{m+1} \Delta y^{n+1}}{n+1}\left[1+(-1)^n\right] \Bigg\}\\ Q_{m,n} &amp;=&amp; (r^2-y_0^2)Q_{m-2,n} - 2y_0Q_{m-2,n+1} - Q_{m-2,n+2}\\ Q_{0,n}=P_n^{even} &amp;=&amp;\frac{2}{n+1}\left\{ \begin{array}{ll} 0 &amp;, \quad n-\mathrm{odd}\\ \Delta y^{n+1} &amp;, \quad n-\mathrm{even}\\ \end{array} \right.\\ Q_{1,n}=P_n^{odd}&amp;=&amp; \frac{n-1}{n+2}(r^2-y_0^2)P_{n-2}^{odd} - \frac{2n+1}{n+2}y_0P_{n-1}^{odd}+\nonumber\\ &amp;&amp;{}+\frac{2\Delta y^{n-1}}{n+2}\times \left\{\begin{array}{l@{,}l} -x_0^3-3x_0\Delta x^2 &amp; \quad n-\mathrm{even}\\ 3x_0^2\Delta x + \Delta x^3 &amp; \quad n-\mathrm{odd}\\ \end{array}\right.\\ P_0^{odd} &amp;=&amp; \frac{1}{2}\left[ (y_0+\Delta y)(x_0-\Delta x) - (y_0-\Delta y)(x_0+\Delta x) \right]\nonumber\\ &amp;&amp;{}+ \frac{r^2}{2}\left[ \tan^{-1} \frac{x_0+\Delta x}{y_0-\Delta y} - \tan^{-1} \frac{x_0-\Delta x}{y_0+\Delta y} \right]\\ P_1^{odd} &amp;=&amp; \frac{y_0}{2}\left[ (x_0+\Delta x)(y_0-\Delta y) - (x_0-\Delta x)(y_0+\Delta y) \right]\nonumber\\ &amp;&amp;{}+ \frac{(x_0+\Delta x)^3 - (x_0-\Delta x)^3}{3}\nonumber\\ &amp;&amp;{}- \frac{1}{2} y_0r^2 \left( \tan^{-1} \frac{x_0+\Delta x}{y_0 - \Delta y} - \tan^{-1} \frac{x_0-\Delta x}{y_0 + \Delta y} \right) \end{eqnarray}" src="form_138.png"/>
 </p>
 <h3>Derivation of the solution:</h3>
 <p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray} I^{circ}_{m,n} &amp;=&amp; \frac{1}{m+1}\int_{-\Delta y}^{\Delta y} dy y^n\left[(\sqrt{r^2-y_0^2-y^2-2y_0y}-x_0)^{m+1} - (-\Delta x)^{m+1}\right]\nonumber\\ &amp;=&amp; \frac{1}{m+1}\Bigg\{ \sum_{i=0}^{m+1} \binom{m+1}{i} Q_{i,n} (-x_0)^{m+1-i} \nonumber\\&amp;&amp;{}+ (-1)^m\frac{\Delta x^{m+1} \Delta y^{n+1}}{n+1}\left[1+(-1)^n\right] \Bigg\} \end{eqnarray}" src="form_158.png"/>
+<img class="formulaDsp" alt="\begin{eqnarray} I^{circ}_{m,n} &amp;=&amp; \frac{1}{m+1}\int_{-\Delta y}^{\Delta y} dy y^n\left[(\sqrt{r^2-y_0^2-y^2-2y_0y}-x_0)^{m+1} - (-\Delta x)^{m+1}\right]\nonumber\\ &amp;=&amp; \frac{1}{m+1}\Bigg\{ \sum_{i=0}^{m+1} \binom{m+1}{i} Q_{i,n} (-x_0)^{m+1-i} \nonumber\\&amp;&amp;{}+ (-1)^m\frac{\Delta x^{m+1} \Delta y^{n+1}}{n+1}\left[1+(-1)^n\right] \Bigg\} \end{eqnarray}" src="form_139.png"/>
 </p>
 <p> Where: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{equation} Q_{m,n}\equiv \int_{-\Delta y}^{\Delta y} y^n (r^2-y_0^2-y^2-2y_0y)^{m/2} dy \end{equation}" src="form_159.png"/>
+<img class="formulaDsp" alt="\begin{equation} Q_{m,n}\equiv \int_{-\Delta y}^{\Delta y} y^n (r^2-y_0^2-y^2-2y_0y)^{m/2} dy \end{equation}" src="form_140.png"/>
 </p>
-<p>The <img class="formulaInl" alt="$Q_{m,n}$" src="form_31.png"/> quantities clearly obey the following recursion relation: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{equation} Q_{m,n}=(r^2-y_0^2)Q_{m-2,n} - 2y_0Q_{m-2,n+1} - Q_{m-2,n+2} \end{equation}" src="form_160.png"/>
+<p>The <img class="formulaInl" alt="$Q_{m,n}$" src="form_25.png"/> quantities clearly obey the following recursion relation: </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\begin{equation} Q_{m,n}=(r^2-y_0^2)Q_{m-2,n} - 2y_0Q_{m-2,n+1} - Q_{m-2,n+2} \end{equation}" src="form_141.png"/>
 </p>
-<p>So a general solution only requires us to be able to calculate <img class="formulaInl" alt="$Q_{0,n}$" src="form_161.png"/> and <img class="formulaInl" alt="$Q_{1,n}$" src="form_162.png"/>.</p>
-<p><img class="formulaInl" alt="$Q_{0,n}$" src="form_161.png"/> is easy: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray} Q_{0,n}=P_n^{even}&amp;=&amp; \int_{-\Delta y}^{\Delta y} y^n dy\\ &amp;=&amp;\frac{2}{n+1}\left\{ \begin{array}{ll} 0 &amp;, \quad n-\mathrm{odd}\\ \Delta y^{n+1} &amp;, \quad n-\mathrm{even}\\ \end{array} \right. \end{eqnarray}" src="form_163.png"/>
+<p>So a general solution only requires us to be able to calculate <img class="formulaInl" alt="$Q_{0,n}$" src="form_142.png"/> and <img class="formulaInl" alt="$Q_{1,n}$" src="form_143.png"/>.</p>
+<p><img class="formulaInl" alt="$Q_{0,n}$" src="form_142.png"/> is easy: </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\begin{eqnarray} Q_{0,n}=P_n^{even}&amp;=&amp; \int_{-\Delta y}^{\Delta y} y^n dy\\ &amp;=&amp;\frac{2}{n+1}\left\{ \begin{array}{ll} 0 &amp;, \quad n-\mathrm{odd}\\ \Delta y^{n+1} &amp;, \quad n-\mathrm{even}\\ \end{array} \right. \end{eqnarray}" src="form_144.png"/>
 </p>
 <p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{equation} Q_{1,n}=P_n^{odd}= \int_{-\Delta y}^{\Delta y} y^n \sqrt{r^2-y_0^2-y^2-2y_0y} dy\\ \end{equation}" src="form_164.png"/>
+<img class="formulaDsp" alt="\begin{equation} Q_{1,n}=P_n^{odd}= \int_{-\Delta y}^{\Delta y} y^n \sqrt{r^2-y_0^2-y^2-2y_0y} dy\\ \end{equation}" src="form_145.png"/>
 </p>
 <p>Consider the following combination: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray*} y_0 P_{n-1}^{odd} + P_n^{odd} &amp;=&amp; \frac{1}{2} \int y^{n-1}2(y_0+y)\sqrt{r^2-y_0^2-y^2-2y_0y} dy\\ &amp;=&amp; -\frac{1}{2} \int y^{n-1}\sqrt{r^2-y_0^2-y^2-2y_0y} d(r^2-y_0^2-y^2-2y_0y)\\ &amp;=&amp; -\frac{1}{3} \int y^{n-1}d(r^2-y_0^2-y^2-2y_0y)^{3/2}\\ &amp;=&amp; -\frac{1}{3} \left[y^{n-1}\Lambda(y)\right]_{-\Delta y}^{\Delta y} +\frac{n-1}{3} \int y^{n-2}(r^2-y_0^2-y^2-2y_0y)^{3/2}dy\\ &amp;=&amp; -\frac{1}{3} \Delta y^{n-1}\left[\Lambda(\Delta y) + (-1)^n \Lambda(-\Delta y)\right] +\frac{n-1}{3} \left[ (r^2-y_0^2)P_{n-2}^{odd} - P_n^{odd} - 2y_0P_{n-1}^{odd} \right]\\ \Rightarrow (n+2)P_{n}^{odd} &amp;=&amp; -\Delta y^{n-1}\left[\Lambda^3(\Delta y) + (-1)^n \Lambda^3(-\Delta y)\right] + (n-1)(r^2-y_0^2)P_{n-2}^{odd} - (2n+1)y_0P_{n-1}^{odd} \end{eqnarray*}" src="form_165.png"/>
+<img class="formulaDsp" alt="\begin{eqnarray*} y_0 P_{n-1}^{odd} + P_n^{odd} &amp;=&amp; \frac{1}{2} \int y^{n-1}2(y_0+y)\sqrt{r^2-y_0^2-y^2-2y_0y} dy\\ &amp;=&amp; -\frac{1}{2} \int y^{n-1}\sqrt{r^2-y_0^2-y^2-2y_0y} d(r^2-y_0^2-y^2-2y_0y)\\ &amp;=&amp; -\frac{1}{3} \int y^{n-1}d(r^2-y_0^2-y^2-2y_0y)^{3/2}\\ &amp;=&amp; -\frac{1}{3} \left[y^{n-1}\Lambda(y)\right]_{-\Delta y}^{\Delta y} +\frac{n-1}{3} \int y^{n-2}(r^2-y_0^2-y^2-2y_0y)^{3/2}dy\\ &amp;=&amp; -\frac{1}{3} \Delta y^{n-1}\left[\Lambda(\Delta y) + (-1)^n \Lambda(-\Delta y)\right] +\frac{n-1}{3} \left[ (r^2-y_0^2)P_{n-2}^{odd} - P_n^{odd} - 2y_0P_{n-1}^{odd} \right]\\ \Rightarrow (n+2)P_{n}^{odd} &amp;=&amp; -\Delta y^{n-1}\left[\Lambda^3(\Delta y) + (-1)^n \Lambda^3(-\Delta y)\right] + (n-1)(r^2-y_0^2)P_{n-2}^{odd} - (2n+1)y_0P_{n-1}^{odd} \end{eqnarray*}" src="form_146.png"/>
 </p>
-<p>Where <img class="formulaInl" alt="$\Lambda(y)\equiv \sqrt{r^2-y_0^2-y^2-2y_0y}$" src="form_166.png"/>.</p>
-<p>So finally all we need is <img class="formulaInl" alt="$P_0^{odd}$" src="form_167.png"/> and <img class="formulaInl" alt="$P_1^{odd}$" src="form_168.png"/>. From an online integrals table:</p>
+<p>Where <img class="formulaInl" alt="$\Lambda(y)\equiv \sqrt{r^2-y_0^2-y^2-2y_0y}$" src="form_147.png"/>.</p>
+<p>So finally all we need is <img class="formulaInl" alt="$P_0^{odd}$" src="form_148.png"/> and <img class="formulaInl" alt="$P_1^{odd}$" src="form_149.png"/>. From an online integrals table:</p>
 <p class="formulaDsp">
-<img class="formulaDsp" alt="\[ \int \sqrt{a x^2 + b x + c}\ dx = \frac{b+2ax}{4a}\sqrt{ax^2+bx+c} + \frac{4ac-b^2}{8a^{3/2}}\ln \left| 2ax + b + 2\sqrt{a(ax^2+bx+c)}\right | \]" src="form_169.png"/>
+<img class="formulaDsp" alt="\[ \int \sqrt{a x^2 + b x + c}\ dx = \frac{b+2ax}{4a}\sqrt{ax^2+bx+c} + \frac{4ac-b^2}{8a^{3/2}}\ln \left| 2ax + b + 2\sqrt{a(ax^2+bx+c)}\right | \]" src="form_150.png"/>
 </p>
 <p>Therefore: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray*} P_0^{odd} &amp;=&amp; \int_{-\Delta y}^{\Delta y} \sqrt{r^2-y_0^2-y^2-2y_0y} dy\\ &amp;=&amp; \left\{\frac{y_0+y}{2}\sqrt{r^2-y_0^2-y^2-2y_0y} - \frac{i r^2}{2} \ln 2\left| y + y_0 - i\sqrt{r^2-y_0^2-y^2-2y_0y}\right| \right\}_{-\Delta y}^{\Delta y}\\ &amp;=&amp; \left\{\frac{y_0+y}{2}\sqrt{r^2-y_0^2-y^2-2y_0y} - \frac{i r^2}{2}\left[\ln 2 + \ln r - i \tan^{-1} \frac{\sqrt{r^2-y_0^2-y^2-2y_0y}}{y_0+y} \right] \right\}_{-\Delta y}^{\Delta y}\\ &amp;=&amp; \left[\frac{y_0+y}{2}\Lambda(y) - \frac{r^2}{2}\tan^{-1} \frac{\Lambda(y)}{y_0+y} \right]_{-\Delta y}^{\Delta y}\\ &amp;=&amp; \frac{y_0+\Delta y}{2}\Lambda(\Delta y) - \frac{y_0-\Delta y}{2}\Lambda(-\Delta y) +\frac{r^2}{2}\tan^{-1} \frac{\Lambda(-\Delta y)}{y_0-\Delta y} -\frac{r^2}{2}\tan^{-1} \frac{\Lambda(\Delta y)}{y_0+\Delta y} \end{eqnarray*}" src="form_170.png"/>
+<img class="formulaDsp" alt="\begin{eqnarray*} P_0^{odd} &amp;=&amp; \int_{-\Delta y}^{\Delta y} \sqrt{r^2-y_0^2-y^2-2y_0y} dy\\ &amp;=&amp; \left\{\frac{y_0+y}{2}\sqrt{r^2-y_0^2-y^2-2y_0y} - \frac{i r^2}{2} \ln 2\left| y + y_0 - i\sqrt{r^2-y_0^2-y^2-2y_0y}\right| \right\}_{-\Delta y}^{\Delta y}\\ &amp;=&amp; \left\{\frac{y_0+y}{2}\sqrt{r^2-y_0^2-y^2-2y_0y} - \frac{i r^2}{2}\left[\ln 2 + \ln r - i \tan^{-1} \frac{\sqrt{r^2-y_0^2-y^2-2y_0y}}{y_0+y} \right] \right\}_{-\Delta y}^{\Delta y}\\ &amp;=&amp; \left[\frac{y_0+y}{2}\Lambda(y) - \frac{r^2}{2}\tan^{-1} \frac{\Lambda(y)}{y_0+y} \right]_{-\Delta y}^{\Delta y}\\ &amp;=&amp; \frac{y_0+\Delta y}{2}\Lambda(\Delta y) - \frac{y_0-\Delta y}{2}\Lambda(-\Delta y) +\frac{r^2}{2}\tan^{-1} \frac{\Lambda(-\Delta y)}{y_0-\Delta y} -\frac{r^2}{2}\tan^{-1} \frac{\Lambda(\Delta y)}{y_0+\Delta y} \end{eqnarray*}" src="form_151.png"/>
 </p>
 <p>From the same online integral table: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{equation} \begin{split} \int &amp;x \sqrt{a x^2 + bx + c}\ dx = \frac{1}{48a^{5/2}}\left ( 2 \sqrt{a} \sqrt{ax^2+bx+c} \right . \left( - 3b^2 + 2 abx + 8 a(c+ax^2) \right) \\ &amp; \left. + 3(b^3-4abc)\ln \left|b + 2ax + 2\sqrt{a}\sqrt{ax^2+bx+c} \right| \right) \end{split} \end{equation}" src="form_171.png"/>
+<img class="formulaDsp" alt="\begin{equation} \begin{split} \int &amp;x \sqrt{a x^2 + bx + c}\ dx = \frac{1}{48a^{5/2}}\left ( 2 \sqrt{a} \sqrt{ax^2+bx+c} \right . \left( - 3b^2 + 2 abx + 8 a(c+ax^2) \right) \\ &amp; \left. + 3(b^3-4abc)\ln \left|b + 2ax + 2\sqrt{a}\sqrt{ax^2+bx+c} \right| \right) \end{split} \end{equation}" src="form_152.png"/>
 </p>
 <p>Therefore (dropping constants as we go): </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray*} P_1^{odd} &amp;=&amp; \int_{-\Delta y}^{\Delta y} y\sqrt{r^2-y_0^2-y^2-2y_0y} dy\\ &amp;=&amp; -\frac{i}{48}\Bigg\{ 2i\Lambda(y) \left[ -12y_0(y+y_0) - 8\Lambda^2(y)\right] - 24y_0r^2 \ln \left| y_0 + y - i\Lambda(y)\right| \Bigg\}_{-\Delta y}^{\Delta y}\\ &amp;=&amp; -\frac{i}{48}\Bigg\{ 2i\Lambda(y) \left[ -12y_0(y+y_0) - 8\Lambda^2(y)\right] + 24i y_0r^2 \tan^{-1} \frac{\Lambda(y)}{y_0 + y} \Bigg\}_{-\Delta y}^{\Delta y}\\ &amp;=&amp; \left\{ \frac{1}{2} y_0r^2 \tan^{-1} \frac{\Lambda(y)}{y_0 + y} -\frac{1}{6}\Lambda(y) \left[ 3y_0(y+y_0) + 2\Lambda^2(y)\right] \right\}_{-\Delta y}^{\Delta y} \end{eqnarray*}" src="form_172.png"/>
+<img class="formulaDsp" alt="\begin{eqnarray*} P_1^{odd} &amp;=&amp; \int_{-\Delta y}^{\Delta y} y\sqrt{r^2-y_0^2-y^2-2y_0y} dy\\ &amp;=&amp; -\frac{i}{48}\Bigg\{ 2i\Lambda(y) \left[ -12y_0(y+y_0) - 8\Lambda^2(y)\right] - 24y_0r^2 \ln \left| y_0 + y - i\Lambda(y)\right| \Bigg\}_{-\Delta y}^{\Delta y}\\ &amp;=&amp; -\frac{i}{48}\Bigg\{ 2i\Lambda(y) \left[ -12y_0(y+y_0) - 8\Lambda^2(y)\right] + 24i y_0r^2 \tan^{-1} \frac{\Lambda(y)}{y_0 + y} \Bigg\}_{-\Delta y}^{\Delta y}\\ &amp;=&amp; \left\{ \frac{1}{2} y_0r^2 \tan^{-1} \frac{\Lambda(y)}{y_0 + y} -\frac{1}{6}\Lambda(y) \left[ 3y_0(y+y_0) + 2\Lambda^2(y)\right] \right\}_{-\Delta y}^{\Delta y} \end{eqnarray*}" src="form_153.png"/>
 </p>
-<p>Finally, note that from the drawing <img class="formulaInl" alt="$\Lambda(\Delta y)=x-\Delta x$" src="form_173.png"/> and <img class="formulaInl" alt="$\Lambda(-\Delta y)=x+\Delta x$" src="form_174.png"/>, so:</p>
+<p>Finally, note that from the drawing <img class="formulaInl" alt="$\Lambda(\Delta y)=x-\Delta x$" src="form_154.png"/> and <img class="formulaInl" alt="$\Lambda(-\Delta y)=x+\Delta x$" src="form_155.png"/>, so:</p>
 <p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray} P_n^{odd} &amp;=&amp; \frac{n-1}{n+2}(r^2-y_0^2)P_{n-2}^{even} - \frac{2n+1}{n+2}y_0P_{n-1}^{even}+\nonumber\\ &amp;&amp;{}+\frac{2\Delta y^{n-1}}{n+2}\times \left\{\begin{array}{l@{,}l} -x_0^3-3x_0\Delta x^2 &amp; \quad n-\mathrm{even}\\ 3x_0^2\Delta x + \Delta x^3 &amp; \quad n-\mathrm{odd}\\ \end{array}\right.\\ P_0^{odd} &amp;=&amp; \frac{1}{2}\left[ (y_0+\Delta y)(x-\Delta x) - (y_0-\Delta y)(x+\Delta y) \right]\nonumber\\ &amp;&amp;{}+ \frac{r^2}{2}\left[ \tan^{-1} \frac{x+\Delta x}{y_0-\Delta y} - \tan^{-1} \frac{x-\Delta x}{y_0+\Delta y} \right]\\ P_1^{odd} &amp;=&amp; \frac{y_0}{2}\left[ (x_0+\Delta x)(y_0-\Delta y) - (x_0-\Delta x)(y_0+\Delta y) \right]\nonumber\\ &amp;&amp;{}+ \frac{(x_0+\Delta x)^3 - (x_0-\Delta x)^3}{3}\nonumber\\ &amp;&amp;{}- \frac{1}{2} y_0r^2 \left( \tan^{-1} \frac{x_0+\Delta x}{y_0 - \Delta y} - \tan^{-1} \frac{x_0-\Delta x}{y_0 + \Delta y} \right) \end{eqnarray}" src="form_175.png"/>
+<img class="formulaDsp" alt="\begin{eqnarray} P_n^{odd} &amp;=&amp; \frac{n-1}{n+2}(r^2-y_0^2)P_{n-2}^{even} - \frac{2n+1}{n+2}y_0P_{n-1}^{even}+\nonumber\\ &amp;&amp;{}+\frac{2\Delta y^{n-1}}{n+2}\times \left\{\begin{array}{l@{,}l} -x_0^3-3x_0\Delta x^2 &amp; \quad n-\mathrm{even}\\ 3x_0^2\Delta x + \Delta x^3 &amp; \quad n-\mathrm{odd}\\ \end{array}\right.\\ P_0^{odd} &amp;=&amp; \frac{1}{2}\left[ (y_0+\Delta y)(x-\Delta x) - (y_0-\Delta y)(x+\Delta y) \right]\nonumber\\ &amp;&amp;{}+ \frac{r^2}{2}\left[ \tan^{-1} \frac{x+\Delta x}{y_0-\Delta y} - \tan^{-1} \frac{x-\Delta x}{y_0+\Delta y} \right]\\ P_1^{odd} &amp;=&amp; \frac{y_0}{2}\left[ (x_0+\Delta x)(y_0-\Delta y) - (x_0-\Delta x)(y_0+\Delta y) \right]\nonumber\\ &amp;&amp;{}+ \frac{(x_0+\Delta x)^3 - (x_0-\Delta x)^3}{3}\nonumber\\ &amp;&amp;{}- \frac{1}{2} y_0r^2 \left( \tan^{-1} \frac{x_0+\Delta x}{y_0 - \Delta y} - \tan^{-1} \frac{x_0-\Delta x}{y_0 + \Delta y} \right) \end{eqnarray}" src="form_156.png"/>
 </p>
 <h3>Checking the solution:</h3>
-<p>Checking this solution is much uglier, so we will only check the terms with <img class="formulaInl" alt="$m+n&lt;=2$" src="form_176.png"/>, since those we already have from the integrals local polynomial PSFs, which have been extensively debugged.</p>
+<p>Checking this solution is much uglier, so we will only check the terms with <img class="formulaInl" alt="$m+n&lt;=2$" src="form_157.png"/>, since those we already have from the integrals local polynomial PSFs, which have been extensively debugged.</p>
 <h4>m=n=0</h4>
 <p>Extracting from the code: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray*} I_{0,0}^{circ} &amp;=&amp; \frac{1}{2}\left[ r^2\gamma - 2(y_0-\Delta y)\Delta x - 2(x_0-\Delta x)\Delta y \right]\\ &amp;=&amp; \frac{r^2}{2}\gamma + 2 \Delta x \Delta y - y_0 \Delta x - x_0 \Delta y \end{eqnarray*}" src="form_177.png"/>
+<img class="formulaDsp" alt="\begin{eqnarray*} I_{0,0}^{circ} &amp;=&amp; \frac{1}{2}\left[ r^2\gamma - 2(y_0-\Delta y)\Delta x - 2(x_0-\Delta x)\Delta y \right]\\ &amp;=&amp; \frac{r^2}{2}\gamma + 2 \Delta x \Delta y - y_0 \Delta x - x_0 \Delta y \end{eqnarray*}" src="form_158.png"/>
 </p>
-<p> Where <img class="formulaInl" alt="$\gamma\equiv\tan^{-1} \frac{x_0+\Delta x}{y_0 - \Delta y} - \tan^{-1} \frac{x_0-\Delta x}{y_0 + \Delta y}$" src="form_178.png"/></p>
+<p> Where <img class="formulaInl" alt="$\gamma\equiv\tan^{-1} \frac{x_0+\Delta x}{y_0 - \Delta y} - \tan^{-1} \frac{x_0-\Delta x}{y_0 + \Delta y}$" src="form_159.png"/></p>
 <p>And from the solution: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray*} I_{0,0}^{circ} &amp;=&amp; -x_0 Q_{0,0} + Q_{1,0} + 2 \Delta x \Delta y\\ &amp;=&amp; -2x_0\Delta y + \frac{1}{2}\left[ (y_0+\Delta y)(x_0-\Delta x) - (y_0-\Delta y)(x_0+\Delta x) \right] + \frac{r^2}{2}\gamma + 2\Delta x \Delta y\\ &amp;=&amp; -2x_0\Delta y + \frac{1}{2}\left[ x_0 y_0 - y_0\Delta x + x_0\Delta y - \Delta x \Delta y - x_0 y_0 - y_0\Delta x + x_0 \Delta y + \Delta x\Delta y \right] + 2\Delta x \Delta y + \frac{r^2}{2}\gamma\\ &amp;=&amp; -2 x_0\Delta y - y_0 \Delta x + x_0\Delta y + 2\Delta x \Delta y + \frac{r^2}{2}\gamma\\ &amp;=&amp; \frac{r^2}{2}\gamma + 2 \Delta x \Delta y - y_0 \Delta x - x_0 \Delta y \end{eqnarray*}" src="form_179.png"/>
+<img class="formulaDsp" alt="\begin{eqnarray*} I_{0,0}^{circ} &amp;=&amp; -x_0 Q_{0,0} + Q_{1,0} + 2 \Delta x \Delta y\\ &amp;=&amp; -2x_0\Delta y + \frac{1}{2}\left[ (y_0+\Delta y)(x_0-\Delta x) - (y_0-\Delta y)(x_0+\Delta x) \right] + \frac{r^2}{2}\gamma + 2\Delta x \Delta y\\ &amp;=&amp; -2x_0\Delta y + \frac{1}{2}\left[ x_0 y_0 - y_0\Delta x + x_0\Delta y - \Delta x \Delta y - x_0 y_0 - y_0\Delta x + x_0 \Delta y + \Delta x\Delta y \right] + 2\Delta x \Delta y + \frac{r^2}{2}\gamma\\ &amp;=&amp; -2 x_0\Delta y - y_0 \Delta x + x_0\Delta y + 2\Delta x \Delta y + \frac{r^2}{2}\gamma\\ &amp;=&amp; \frac{r^2}{2}\gamma + 2 \Delta x \Delta y - y_0 \Delta x - x_0 \Delta y \end{eqnarray*}" src="form_160.png"/>
 </p>
 <h4>m=1, n=0</h4>
 <p>Extracting from the code: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray*} I_{1,0}^{circ} &amp;=&amp; -x_0\left[ \frac{r^2}{2}\gamma + 2\Delta x \Delta y - y_0\Delta x - x_0 \Delta y \right] + \frac{(y_0+\Delta y)^3-(y_0-\Delta y)^3}{3} - 2x_0\Delta x(y_0-\Delta y)\\ &amp;=&amp; -\frac{x_0 r^2}{2}\gamma -2 x_0 \Delta x\Delta y + x_0 y_0\Delta x + x_0^2\Delta y + \frac{y_0^3}{3} + y_0^2\Delta y + y_0 \Delta y^2 + \frac{\Delta y^3}{3} - \frac{y_0^3}{3} + y_0^2\Delta y - y_0\Delta y^2 + \frac{\Delta y^3}{3} - 2x_0y_0\Delta x + 2x_0\Delta x\Delta y\\ &amp;=&amp; -\frac{x_0r^2}{2}\gamma + x_0^2\Delta y + 2y_0^2\Delta y + \frac{2}{3}\Delta y^3 - x_0y_0\Delta x\\ &amp;=&amp; -\frac{x_0r^2}{2}\gamma + x_0^2\Delta y + x_0y_0\Delta x + \frac{2}{3}\Delta y^3\\ \end{eqnarray*}" src="form_180.png"/>
+<img class="formulaDsp" alt="\begin{eqnarray*} I_{1,0}^{circ} &amp;=&amp; -x_0\left[ \frac{r^2}{2}\gamma + 2\Delta x \Delta y - y_0\Delta x - x_0 \Delta y \right] + \frac{(y_0+\Delta y)^3-(y_0-\Delta y)^3}{3} - 2x_0\Delta x(y_0-\Delta y)\\ &amp;=&amp; -\frac{x_0 r^2}{2}\gamma -2 x_0 \Delta x\Delta y + x_0 y_0\Delta x + x_0^2\Delta y + \frac{y_0^3}{3} + y_0^2\Delta y + y_0 \Delta y^2 + \frac{\Delta y^3}{3} - \frac{y_0^3}{3} + y_0^2\Delta y - y_0\Delta y^2 + \frac{\Delta y^3}{3} - 2x_0y_0\Delta x + 2x_0\Delta x\Delta y\\ &amp;=&amp; -\frac{x_0r^2}{2}\gamma + x_0^2\Delta y + 2y_0^2\Delta y + \frac{2}{3}\Delta y^3 - x_0y_0\Delta x\\ &amp;=&amp; -\frac{x_0r^2}{2}\gamma + x_0^2\Delta y + x_0y_0\Delta x + \frac{2}{3}\Delta y^3\\ \end{eqnarray*}" src="form_161.png"/>
 </p>
-<p> Where the last step uses <img class="formulaInl" alt="$x_0\Delta x=y_0\Delta y$" src="form_181.png"/>.</p>
+<p> Where the last step uses <img class="formulaInl" alt="$x_0\Delta x=y_0\Delta y$" src="form_162.png"/>.</p>
 <p>From the solution: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray*} I_{1,0}^{circ} &amp;=&amp; \frac{1}{2}\left\{ x_0^2Q_{0,0} - 2x_0Q_{1,0} + Q_{2,0} - 2\Delta x^2 \Delta y \right\}\\ &amp;=&amp; \frac{1}{2}\left\{ 2x_0^2\Delta y - x_0 \left[ (y_0+\Delta y)(x_0-\Delta x) - (y_0-\Delta y)(x_0+\Delta x) \right] - x_0r^2\gamma + Q_{2,0} - 2\Delta x^2 \Delta y \right\}\\ &amp;=&amp; \frac{1}{2}\left\{ 2x_0^2\Delta y - x_0(x_0 y_0 - y_0 \Delta x + x_0 \Delta y - \Delta x \Delta y -x_0 y_0 - y_0 \Delta x + x_0 \Delta y + \Delta x \Delta y) - x_0 r^2\gamma + 2 r^2 \Delta y - 2y_0^2\Delta y - \frac{2\Delta y^3}{3} - 2 \Delta x^2 \Delta y \right\}\\ &amp;=&amp; \frac{1}{2}\left\{ 2x_0^2\Delta y + 2 x_0 y_0 \Delta x - 2 x_0^2\Delta y - x_0r^2\gamma + 2r^2\Delta y - 2 y_0^2\Delta y - \frac{2\Delta y^3}{3} -2 \Delta x^2\Delta y \right\}\\ &amp;=&amp; x_0 y_0 \Delta x + (r^2-y_0^2)\Delta y - \frac{\Delta y^3}{3} - \Delta x^2 \Delta y - \frac{x_0 r^2}{2} \gamma\\ &amp;=&amp; x_0 y_0 \Delta x + (x_0^2 + \Delta x^2 + \Delta y^2)\Delta y - \frac{\Delta y^3}{3} - \Delta x^2 \Delta y - \frac{x_0 r^2}{2}\gamma\\ &amp;=&amp; x_0 y_0 \Delta x + x_0^2 \Delta y + \frac{2\Delta y^3}{3} - \frac{x_0 r^2}{2}\gamma \end{eqnarray*}" src="form_182.png"/>
+<img class="formulaDsp" alt="\begin{eqnarray*} I_{1,0}^{circ} &amp;=&amp; \frac{1}{2}\left\{ x_0^2Q_{0,0} - 2x_0Q_{1,0} + Q_{2,0} - 2\Delta x^2 \Delta y \right\}\\ &amp;=&amp; \frac{1}{2}\left\{ 2x_0^2\Delta y - x_0 \left[ (y_0+\Delta y)(x_0-\Delta x) - (y_0-\Delta y)(x_0+\Delta x) \right] - x_0r^2\gamma + Q_{2,0} - 2\Delta x^2 \Delta y \right\}\\ &amp;=&amp; \frac{1}{2}\left\{ 2x_0^2\Delta y - x_0(x_0 y_0 - y_0 \Delta x + x_0 \Delta y - \Delta x \Delta y -x_0 y_0 - y_0 \Delta x + x_0 \Delta y + \Delta x \Delta y) - x_0 r^2\gamma + 2 r^2 \Delta y - 2y_0^2\Delta y - \frac{2\Delta y^3}{3} - 2 \Delta x^2 \Delta y \right\}\\ &amp;=&amp; \frac{1}{2}\left\{ 2x_0^2\Delta y + 2 x_0 y_0 \Delta x - 2 x_0^2\Delta y - x_0r^2\gamma + 2r^2\Delta y - 2 y_0^2\Delta y - \frac{2\Delta y^3}{3} -2 \Delta x^2\Delta y \right\}\\ &amp;=&amp; x_0 y_0 \Delta x + (r^2-y_0^2)\Delta y - \frac{\Delta y^3}{3} - \Delta x^2 \Delta y - \frac{x_0 r^2}{2} \gamma\\ &amp;=&amp; x_0 y_0 \Delta x + (x_0^2 + \Delta x^2 + \Delta y^2)\Delta y - \frac{\Delta y^3}{3} - \Delta x^2 \Delta y - \frac{x_0 r^2}{2}\gamma\\ &amp;=&amp; x_0 y_0 \Delta x + x_0^2 \Delta y + \frac{2\Delta y^3}{3} - \frac{x_0 r^2}{2}\gamma \end{eqnarray*}" src="form_163.png"/>
 </p>
 <p> Where the above uses: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray*} Q_{2,0} &amp;=&amp; (r^2-y_0^2) Q_{0,0} - 2 y_0 Q_{0,1} - Q_{0,2} = 2(r^2-y_0^2)\Delta y - \frac{2\Delta y^3}{3}\\ r^2 &amp;=&amp; x_0^2 + y_0^2 + \Delta x^2 + \Delta y^2 \end{eqnarray*}" src="form_183.png"/>
+<img class="formulaDsp" alt="\begin{eqnarray*} Q_{2,0} &amp;=&amp; (r^2-y_0^2) Q_{0,0} - 2 y_0 Q_{0,1} - Q_{0,2} = 2(r^2-y_0^2)\Delta y - \frac{2\Delta y^3}{3}\\ r^2 &amp;=&amp; x_0^2 + y_0^2 + \Delta x^2 + \Delta y^2 \end{eqnarray*}" src="form_164.png"/>
 </p>
 <h4>m=0, n=1</h4>
 <p>Extracting from the code: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\[ I_{1,0}^{circ} = -y_0\left[ \frac{r^2}{2}\gamma + 2\Delta x \Delta y - y_0\Delta x - x_0 \Delta y \right] + \frac{(x_0+\Delta x)^3-(x_0-\Delta x)^3}{3} - 2y_0\Delta y(x_0-\Delta x) \]" src="form_184.png"/>
+<img class="formulaDsp" alt="\[ I_{1,0}^{circ} = -y_0\left[ \frac{r^2}{2}\gamma + 2\Delta x \Delta y - y_0\Delta x - x_0 \Delta y \right] + \frac{(x_0+\Delta x)^3-(x_0-\Delta x)^3}{3} - 2y_0\Delta y(x_0-\Delta x) \]" src="form_165.png"/>
 </p>
-<p> Which is the same as <img class="formulaInl" alt="$I_{1,0}^{circ}$" src="form_185.png"/>, but with ( <img class="formulaInl" alt="$x_0$" src="form_51.png"/>, <img class="formulaInl" alt="$y_0$" src="form_52.png"/>, <img class="formulaInl" alt="$\Delta x$" src="form_53.png"/>, <img class="formulaInl" alt="$\Delta y$" src="form_54.png"/>) substituted with ( <img class="formulaInl" alt="$y_0$" src="form_52.png"/>, <img class="formulaInl" alt="$x_0$" src="form_51.png"/>, <img class="formulaInl" alt="$\Delta y$" src="form_54.png"/>, <img class="formulaInl" alt="$\Delta x$" src="form_53.png"/>), so the final expression must be: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\[ I_{1,0}^{circ} = -\frac{y_0r^2}{2}\gamma + y_0^2\Delta x + x_0y_0\Delta y + \frac{2}{3}\Delta x^3 \]" src="form_186.png"/>
+<p> Which is the same as <img class="formulaInl" alt="$I_{1,0}^{circ}$" src="form_166.png"/>, but with ( <img class="formulaInl" alt="$x_0$" src="form_19.png"/>, <img class="formulaInl" alt="$y_0$" src="form_20.png"/>, <img class="formulaInl" alt="$\Delta x$" src="form_21.png"/>, <img class="formulaInl" alt="$\Delta y$" src="form_22.png"/>) substituted with ( <img class="formulaInl" alt="$y_0$" src="form_20.png"/>, <img class="formulaInl" alt="$x_0$" src="form_19.png"/>, <img class="formulaInl" alt="$\Delta y$" src="form_22.png"/>, <img class="formulaInl" alt="$\Delta x$" src="form_21.png"/>), so the final expression must be: </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ I_{1,0}^{circ} = -\frac{y_0r^2}{2}\gamma + y_0^2\Delta x + x_0y_0\Delta y + \frac{2}{3}\Delta x^3 \]" src="form_167.png"/>
 </p>
 <p>From the solution: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray*} I_{1,0}^{circ} &amp;=&amp; -x_0 Q_{0,1} + Q_{1,1} = Q_{1,1}\\ &amp;=&amp; \frac{y_0}{2}\left[ (x_0+\Delta x)(y_0-\Delta y) - (x_0-\Delta x)(y_0+\Delta y) \right] + \frac{(x_0+\Delta y)^3 - (x_0-\Delta x)^3}{3} - \frac{y_0 r^2}{2}\gamma\\ &amp;=&amp; \frac{y_0}{2} \left[ x_0 y_0 - x_0\Delta y + y_0 \Delta x - \Delta x\Delta y -x_0 y_0 - x_0\Delta y + y_0 \Delta x + \Delta x \Delta y \right] + \frac{x_0^3}{3} + x_0^2\Delta x + x_0\Delta x^2 + \frac{\Delta x^3}{3} - \frac{x_0^3}{3} + x_0^2\Delta x - x_0\Delta x^2 + \frac{\Delta x^3}{3} - \frac{y_0 r^2}{2}\gamma\\ &amp;=&amp; -x_0 y_0 \Delta y + y_0^2\Delta x + 2x_0^2\Delta x + \frac{2\Delta x^3}{3} - \frac{y_0 r^2}{2}\gamma\\ &amp;=&amp; y_0^2\Delta x + x_0 y_0 \Delta y + \frac{2\Delta x^3}{3} - \frac{y_0 r^2}{2}\gamma \end{eqnarray*}" src="form_187.png"/>
+<img class="formulaDsp" alt="\begin{eqnarray*} I_{1,0}^{circ} &amp;=&amp; -x_0 Q_{0,1} + Q_{1,1} = Q_{1,1}\\ &amp;=&amp; \frac{y_0}{2}\left[ (x_0+\Delta x)(y_0-\Delta y) - (x_0-\Delta x)(y_0+\Delta y) \right] + \frac{(x_0+\Delta y)^3 - (x_0-\Delta x)^3}{3} - \frac{y_0 r^2}{2}\gamma\\ &amp;=&amp; \frac{y_0}{2} \left[ x_0 y_0 - x_0\Delta y + y_0 \Delta x - \Delta x\Delta y -x_0 y_0 - x_0\Delta y + y_0 \Delta x + \Delta x \Delta y \right] + \frac{x_0^3}{3} + x_0^2\Delta x + x_0\Delta x^2 + \frac{\Delta x^3}{3} - \frac{x_0^3}{3} + x_0^2\Delta x - x_0\Delta x^2 + \frac{\Delta x^3}{3} - \frac{y_0 r^2}{2}\gamma\\ &amp;=&amp; -x_0 y_0 \Delta y + y_0^2\Delta x + 2x_0^2\Delta x + \frac{2\Delta x^3}{3} - \frac{y_0 r^2}{2}\gamma\\ &amp;=&amp; y_0^2\Delta x + x_0 y_0 \Delta y + \frac{2\Delta x^3}{3} - \frac{y_0 r^2}{2}\gamma \end{eqnarray*}" src="form_168.png"/>
 </p>
 <p>The (m, n)=(2, 0), (1, 1) and (0, 2) expressions contain way too many terms to handle manually, so I fed the to Mathematica which confirmed that they reproduce the expressions in the code.</p>
 <h2>Piecewise <a class="el" href="namespacePSF.html">PSF</a> pieces </h2>
@@ -199,41 +199,41 @@ We need to calculate integrals of the PSF over the shaded piece of the circle wi
 Integrals of the PSF need to be calculated over the shaded piece of the circle.</div></div>
 <p> The integral we wish to compute is:</p>
 <p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{equation} I^{circ}_{m,n}\equiv \int_{y_{min}}^{y_{max}} dy \int_{x_{min}}^{\sqrt{r^2-(y-y_c)^2}+x_c} dx x^m y^n \end{equation}" src="form_188.png"/>
+<img class="formulaDsp" alt="\begin{equation} I^{circ}_{m,n}\equiv \int_{y_{min}}^{y_{max}} dy \int_{x_{min}}^{\sqrt{r^2-(y-y_c)^2}+x_c} dx x^m y^n \end{equation}" src="form_169.png"/>
 </p>
 <h3>The solution:</h3>
 <p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray*} I^{circ}_{m,n} &amp;=&amp; \frac{1}{m+1}\Bigg\{ \sum_{i=0}^{m+1} \binom{m+1}{i} Q_{i,n} x_c^{m+1-i} \nonumber\\&amp;&amp;{}- \frac{x_{min}^{m+1}(y_{max}^{n+1}-y_{min}^{n+1})}{n+1} \Bigg\}\\ Q_{m,n}&amp;=&amp;(r^2-y_c^2)Q_{m-2,n} + 2y_cQ_{m-2,n+1} - Q_{m-2,n+2}\\ Q_{0,n}=P_n^{even}&amp;=&amp; \frac{y_{max}^{n+1}-y_{min}^{n+1}}{n+1}\\ Q_{1,n}=P_n^{odd}&amp;=&amp; \frac{1}{n+2}\Big\{ R_n(y_{min})-R_n(y_{max}) + (2n+1)y_cP_{n-1}^{odd} + (n-1)(r^2-y_c^2)P_{n-2}^{odd} \Big\}\\ P_0^{odd}&amp;=&amp;\frac{1}{2} \sqrt{r^2-(y_c-y_{max})^2}(y_{max}-y_c) - \frac{1}{2} \sqrt{r^2-(y_c-y_{min})^2} (y_{min}-y_c) -\\ &amp;&amp; -\frac{1}{2} r^2 \left( \tan^{-1}\left[ \frac{y_c-y_{max}}{\sqrt{r^2-(y_c-y_{max})^2}} \right] -\tan^{-1}\left[ \frac{y_c-y_{min}}{\sqrt{r^2-(y_c-y_{min})^2}} \right] \right)\\ P_1^{odd}&amp;=&amp;-\frac{1}{6} \sqrt{r^2-(y_c-y_{max})^2} \left(2 r^2+y_c^2+y_c y_{max}-2 y_{max}^2\right)+\\ &amp;&amp;+\frac{1}{6} \sqrt{r^2-(y_c-y_{min})^2} \left(2 r^2+y_c^2+y_c y_{min}-2 y_{min}^2\right)-\\ &amp;&amp;- \frac{1}{2} r^2 y_c \left( \tan^{-1}\left[ \frac{y_c-y_{max}}{\sqrt{r^2-(y_c-y_{max})^2}} \right] - \tan^{-1}\left[ \frac{y_c-y_{min}}{\sqrt{r^2-(y_c-y_{min})^2}} \right] \right) \end{eqnarray*}" src="form_189.png"/>
+<img class="formulaDsp" alt="\begin{eqnarray*} I^{circ}_{m,n} &amp;=&amp; \frac{1}{m+1}\Bigg\{ \sum_{i=0}^{m+1} \binom{m+1}{i} Q_{i,n} x_c^{m+1-i} \nonumber\\&amp;&amp;{}- \frac{x_{min}^{m+1}(y_{max}^{n+1}-y_{min}^{n+1})}{n+1} \Bigg\}\\ Q_{m,n}&amp;=&amp;(r^2-y_c^2)Q_{m-2,n} + 2y_cQ_{m-2,n+1} - Q_{m-2,n+2}\\ Q_{0,n}=P_n^{even}&amp;=&amp; \frac{y_{max}^{n+1}-y_{min}^{n+1}}{n+1}\\ Q_{1,n}=P_n^{odd}&amp;=&amp; \frac{1}{n+2}\Big\{ R_n(y_{min})-R_n(y_{max}) + (2n+1)y_cP_{n-1}^{odd} + (n-1)(r^2-y_c^2)P_{n-2}^{odd} \Big\}\\ P_0^{odd}&amp;=&amp;\frac{1}{2} \sqrt{r^2-(y_c-y_{max})^2}(y_{max}-y_c) - \frac{1}{2} \sqrt{r^2-(y_c-y_{min})^2} (y_{min}-y_c) -\\ &amp;&amp; -\frac{1}{2} r^2 \left( \tan^{-1}\left[ \frac{y_c-y_{max}}{\sqrt{r^2-(y_c-y_{max})^2}} \right] -\tan^{-1}\left[ \frac{y_c-y_{min}}{\sqrt{r^2-(y_c-y_{min})^2}} \right] \right)\\ P_1^{odd}&amp;=&amp;-\frac{1}{6} \sqrt{r^2-(y_c-y_{max})^2} \left(2 r^2+y_c^2+y_c y_{max}-2 y_{max}^2\right)+\\ &amp;&amp;+\frac{1}{6} \sqrt{r^2-(y_c-y_{min})^2} \left(2 r^2+y_c^2+y_c y_{min}-2 y_{min}^2\right)-\\ &amp;&amp;- \frac{1}{2} r^2 y_c \left( \tan^{-1}\left[ \frac{y_c-y_{max}}{\sqrt{r^2-(y_c-y_{max})^2}} \right] - \tan^{-1}\left[ \frac{y_c-y_{min}}{\sqrt{r^2-(y_c-y_{min})^2}} \right] \right) \end{eqnarray*}" src="form_170.png"/>
 </p>
 <h3>Derivation of the solution:</h3>
 <p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray} I^{circ}_{m,n} &amp;=&amp; \frac{1}{m+1}\int_{y_{min}}^{y_{max}} dy y^n\left[(\sqrt{r^2-(y-y_c)^2}+x_c)^{m+1} - x_{min}^{m+1}\right]\nonumber\\ &amp;=&amp; \frac{1}{m+1}\Bigg\{ \sum_{i=0}^{m+1} \binom{m+1}{i} Q_{i,n} x_c^{m+1-i} \nonumber\\&amp;&amp;{}- \frac{x_{min}^{m+1}(y_{max}^{n+1}-y_{min}^{n+1})}{n+1} \Bigg\} \end{eqnarray}" src="form_190.png"/>
+<img class="formulaDsp" alt="\begin{eqnarray} I^{circ}_{m,n} &amp;=&amp; \frac{1}{m+1}\int_{y_{min}}^{y_{max}} dy y^n\left[(\sqrt{r^2-(y-y_c)^2}+x_c)^{m+1} - x_{min}^{m+1}\right]\nonumber\\ &amp;=&amp; \frac{1}{m+1}\Bigg\{ \sum_{i=0}^{m+1} \binom{m+1}{i} Q_{i,n} x_c^{m+1-i} \nonumber\\&amp;&amp;{}- \frac{x_{min}^{m+1}(y_{max}^{n+1}-y_{min}^{n+1})}{n+1} \Bigg\} \end{eqnarray}" src="form_171.png"/>
 </p>
 <p> Where: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{equation} Q_{m,n}\equiv \int_{y_{min}}^{y_{max}} y^n \left[r^2-(y-y_c)^2\right]^{m/2} dy \end{equation}" src="form_191.png"/>
+<img class="formulaDsp" alt="\begin{equation} Q_{m,n}\equiv \int_{y_{min}}^{y_{max}} y^n \left[r^2-(y-y_c)^2\right]^{m/2} dy \end{equation}" src="form_172.png"/>
 </p>
-<p>The <img class="formulaInl" alt="$Q_{m,n}$" src="form_31.png"/> quantities clearly obey the following recursion relation: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{equation} Q_{m,n}=(r^2-y_c^2)Q_{m-2,n} + 2y_cQ_{m-2,n+1} - Q_{m-2,n+2} \end{equation}" src="form_192.png"/>
+<p>The <img class="formulaInl" alt="$Q_{m,n}$" src="form_25.png"/> quantities clearly obey the following recursion relation: </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\begin{equation} Q_{m,n}=(r^2-y_c^2)Q_{m-2,n} + 2y_cQ_{m-2,n+1} - Q_{m-2,n+2} \end{equation}" src="form_173.png"/>
 </p>
-<p>Just as above: <img class="formulaInl" alt="$Q_{0,n}$" src="form_161.png"/> is easy: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray} Q_{0,n}=P_n^{even}&amp;=&amp; \int_{y_{min}}^{y_{max}} y^n dy\\ &amp;=&amp;\frac{1}{n+1}\left[y_{max}^{n+1}-y_{min}^{n+1}\right] \end{eqnarray}" src="form_193.png"/>
+<p>Just as above: <img class="formulaInl" alt="$Q_{0,n}$" src="form_142.png"/> is easy: </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\begin{eqnarray} Q_{0,n}=P_n^{even}&amp;=&amp; \int_{y_{min}}^{y_{max}} y^n dy\\ &amp;=&amp;\frac{1}{n+1}\left[y_{max}^{n+1}-y_{min}^{n+1}\right] \end{eqnarray}" src="form_174.png"/>
 </p>
 <p>And: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{equation} Q_{1,n}=P_n^{odd}= \int_{y_{min}}^{y_{max}} y^n \sqrt{r^2-(y-y_c)^2} dy\\ \end{equation}" src="form_194.png"/>
+<img class="formulaDsp" alt="\begin{equation} Q_{1,n}=P_n^{odd}= \int_{y_{min}}^{y_{max}} y^n \sqrt{r^2-(y-y_c)^2} dy\\ \end{equation}" src="form_175.png"/>
 </p>
 <p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray*} P_n^{odd} - y_cP_{n-1}^{odd} &amp;=&amp; \int_{y_{min}}^{y_{max}} (y-y_c)y^{n-1}\sqrt{r^2-(y-y_c)^2} d(y-y_c)\\ &amp;=&amp; \frac{1}{2}\int_{y_{min}}^{y_{max}} y^{n-1}\sqrt{r^2-(y-y_c)^2} d(y-y_c)^2\\ &amp;=&amp; -\frac{1}{3}\int_{y_{min}}^{y_{max}} y^{n-1} d[r^2-(y-y_c)^2]^{3/2}\\ &amp;=&amp; -\frac{1}{3}\left\{ y^{n-1}\left[r^2-(y-y_c)^2\right]^{3/2} \right\}_{y_{min}}^{y_{max}} + \frac{n-1}{3}\int_{y_{min}}^{y_{max}} y^{n-2} \left[r^2-(y-y_c)^2\right]^{3/2} dy\\ &amp;=&amp; -\frac{1}{3}\left\{ y^{n-1}\left[r^2-(y-y_c)^2\right]^{3/2} \right\}_{y_{min}}^{y_{max}} + \frac{n-1}{3}\left\{ (r^2-y_c^2)P_{n-2} + 2y_cP_{n-1} - P_n \right\} \end{eqnarray*}" src="form_195.png"/>
+<img class="formulaDsp" alt="\begin{eqnarray*} P_n^{odd} - y_cP_{n-1}^{odd} &amp;=&amp; \int_{y_{min}}^{y_{max}} (y-y_c)y^{n-1}\sqrt{r^2-(y-y_c)^2} d(y-y_c)\\ &amp;=&amp; \frac{1}{2}\int_{y_{min}}^{y_{max}} y^{n-1}\sqrt{r^2-(y-y_c)^2} d(y-y_c)^2\\ &amp;=&amp; -\frac{1}{3}\int_{y_{min}}^{y_{max}} y^{n-1} d[r^2-(y-y_c)^2]^{3/2}\\ &amp;=&amp; -\frac{1}{3}\left\{ y^{n-1}\left[r^2-(y-y_c)^2\right]^{3/2} \right\}_{y_{min}}^{y_{max}} + \frac{n-1}{3}\int_{y_{min}}^{y_{max}} y^{n-2} \left[r^2-(y-y_c)^2\right]^{3/2} dy\\ &amp;=&amp; -\frac{1}{3}\left\{ y^{n-1}\left[r^2-(y-y_c)^2\right]^{3/2} \right\}_{y_{min}}^{y_{max}} + \frac{n-1}{3}\left\{ (r^2-y_c^2)P_{n-2} + 2y_cP_{n-1} - P_n \right\} \end{eqnarray*}" src="form_176.png"/>
 </p>
-<p> Letting <img class="formulaInl" alt="$R_n(y)\equiv\left\{ y^{n-1}\left[r^2-(y-y_c)^2\right]^{3/2} \right\}_{y_{min}}^{y_{max}}$" src="form_196.png"/>: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\[ (n+2)P_n^{odd} = -R_n(y) + (2n+1)y_cP_{n-1}^{odd} + (n-1)(r^2-y_c^2)P_{n-2}^{odd} \]" src="form_197.png"/>
+<p> Letting <img class="formulaInl" alt="$R_n(y)\equiv\left\{ y^{n-1}\left[r^2-(y-y_c)^2\right]^{3/2} \right\}_{y_{min}}^{y_{max}}$" src="form_177.png"/>: </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ (n+2)P_n^{odd} = -R_n(y) + (2n+1)y_cP_{n-1}^{odd} + (n-1)(r^2-y_c^2)P_{n-2}^{odd} \]" src="form_178.png"/>
 </p>
 <p>Using Mathematica: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\[ P_0^{odd}=\frac{1}{2} \sqrt{r^2-(y_c-y_{max})^2}(-y_c+y_{max}) + \frac{1}{2} \sqrt{r^2-(y_c-y_min)^2} (y_c-y_{min}) - \frac{1}{2} r^2 \left( \tan^{-1}\left[ \frac{y_c-y_{max}}{\sqrt{r^2-(y_c-y_{max})^2}} \right] -\text{ArcTan}\left[ \frac{y_c-y_{min}}{\sqrt{r^2-(y_c-y_{min})^2}} \right] \right) \]" src="form_198.png"/>
+<img class="formulaDsp" alt="\[ P_0^{odd}=\frac{1}{2} \sqrt{r^2-(y_c-y_{max})^2}(-y_c+y_{max}) + \frac{1}{2} \sqrt{r^2-(y_c-y_min)^2} (y_c-y_{min}) - \frac{1}{2} r^2 \left( \tan^{-1}\left[ \frac{y_c-y_{max}}{\sqrt{r^2-(y_c-y_{max})^2}} \right] -\text{ArcTan}\left[ \frac{y_c-y_{min}}{\sqrt{r^2-(y_c-y_{min})^2}} \right] \right) \]" src="form_179.png"/>
 </p>
 <p class="formulaDsp">
-<img class="formulaDsp" alt="\[ P_1^{odd}=-\frac{1}{6} \sqrt{r^2-(y_c-y_{max})^2} \left(2 r^2+y_c^2+y_c y_{max}-2 y_{max}^2\right) + \frac{1}{6} \sqrt{r^2-(y_c-y_{min})^2} \left(2 r^2+y_c^2+y_c y_{min}-2 y_{min}^2\right) - \frac{1}{2} r^2 y_c \left( \tan^{-1}\left[ \frac{y_c-y_{max}}{\sqrt{r^2-(y_c-y_{max})^2}} \right] - \tan^{-1}\left[ \frac{y_c-y_{min}}{\sqrt{r^2-(y_c-y_{min})^2}} \right] \right) \]" src="form_199.png"/>
+<img class="formulaDsp" alt="\[ P_1^{odd}=-\frac{1}{6} \sqrt{r^2-(y_c-y_{max})^2} \left(2 r^2+y_c^2+y_c y_{max}-2 y_{max}^2\right) + \frac{1}{6} \sqrt{r^2-(y_c-y_{min})^2} \left(2 r^2+y_c^2+y_c y_{min}-2 y_{min}^2\right) - \frac{1}{2} r^2 y_c \left( \tan^{-1}\left[ \frac{y_c-y_{max}}{\sqrt{r^2-(y_c-y_{max})^2}} \right] - \tan^{-1}\left[ \frac{y_c-y_{min}}{\sqrt{r^2-(y_c-y_{min})^2}} \right] \right) \]" src="form_180.png"/>
 </p>
-<p>The solution was checked by implementing it in Machematica and checknig <img class="formulaInl" alt="$P_n^{odd}$" src="form_200.png"/>, <img class="formulaInl" alt="$Q_{m,n}$" src="form_31.png"/> and <img class="formulaInl" alt="$I_{m,n}^{circ}$" src="form_201.png"/> againts the actual integral expressions for a few m, and n values.</p>
+<p>The solution was checked by implementing it in Machematica and checknig <img class="formulaInl" alt="$P_n^{odd}$" src="form_181.png"/>, <img class="formulaInl" alt="$Q_{m,n}$" src="form_25.png"/> and <img class="formulaInl" alt="$I_{m,n}^{circ}$" src="form_182.png"/> againts the actual integral expressions for a few m, and n values.</p>
 <h2>Integrating <b>useless</b> circle pieces </h2>
 <p>I derived the integral over the following area as well due to not thinking through what is actually needed:</p>
 <div class="image">
@@ -242,147 +242,147 @@ Integrals of the PSF need to be calculated over the shaded piece of the circle.<
 We can calculate integrals of the PSF over the shaded piece of the circle.</div></div>
 <p> The integral we wish to compute is:</p>
 <p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{equation} I^{circ}_{m,n}\equiv \int_{y_0}^{y_{max}} dy \int_{x_0}^{\sqrt{r^2-y^2}} dx x^m y^n \end{equation}" src="form_202.png"/>
+<img class="formulaDsp" alt="\begin{equation} I^{circ}_{m,n}\equiv \int_{y_0}^{y_{max}} dy \int_{x_0}^{\sqrt{r^2-y^2}} dx x^m y^n \end{equation}" src="form_183.png"/>
 </p>
-<p> where <img class="formulaInl" alt="$y_{max}\equiv\sqrt{r^2-x_0^2}$" src="form_203.png"/>. Similarly we define <img class="formulaInl" alt="$x_{max}\equiv\sqrt{r^2-y_0^2}$" src="form_204.png"/>.</p>
+<p> where <img class="formulaInl" alt="$y_{max}\equiv\sqrt{r^2-x_0^2}$" src="form_184.png"/>. Similarly we define <img class="formulaInl" alt="$x_{max}\equiv\sqrt{r^2-y_0^2}$" src="form_185.png"/>.</p>
 <h3>The solution:</h3>
 <p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray} I^{circ}_{m,n} &amp;=&amp; \frac{1}{m+1}\left(Q_{m,n} - x_0^{m+1}P^{odd}_n \right)\\ Q_{2k+1,n} &amp;=&amp; \sum_{i=0}^{k+1} {k+1 \choose i} r^{2(k+1-i)} (-1)^i P^{odd}_{n+2i}\\ P^{odd}_n &amp;=&amp; \frac{y_{max}^{n+1} - y_0^{n+1}}{n+1}\\ Q_{2k,n} &amp;=&amp; \sum_{i=0}^{k} {k \choose i} r^{2(k-i)} (-1)^i P^{even}_{n+2i}\\ P^{even}_n &amp;=&amp; \frac{1}{n+2} \left(y_0^{n-1}x_{max}^3 - y_{max}^{n-1}x_0^3\right) + \frac{n-1}{n+2}r^2P^{even}_{n-2}\\ P^{even}_0 &amp;=&amp; \frac{1}{2}\left[y_{max}x_0 - y_0x_{max} + r^2\left(\tan^{-1}\frac{y_{max}}{x_0} - \tan^{-1}\frac{y_0}{x_{max}}\right) \right]\\ P^{even}_1 &amp;=&amp; \frac{1}{3}\left(x_{max}^3 - x_0^3\right) \end{eqnarray}" src="form_205.png"/>
+<img class="formulaDsp" alt="\begin{eqnarray} I^{circ}_{m,n} &amp;=&amp; \frac{1}{m+1}\left(Q_{m,n} - x_0^{m+1}P^{odd}_n \right)\\ Q_{2k+1,n} &amp;=&amp; \sum_{i=0}^{k+1} {k+1 \choose i} r^{2(k+1-i)} (-1)^i P^{odd}_{n+2i}\\ P^{odd}_n &amp;=&amp; \frac{y_{max}^{n+1} - y_0^{n+1}}{n+1}\\ Q_{2k,n} &amp;=&amp; \sum_{i=0}^{k} {k \choose i} r^{2(k-i)} (-1)^i P^{even}_{n+2i}\\ P^{even}_n &amp;=&amp; \frac{1}{n+2} \left(y_0^{n-1}x_{max}^3 - y_{max}^{n-1}x_0^3\right) + \frac{n-1}{n+2}r^2P^{even}_{n-2}\\ P^{even}_0 &amp;=&amp; \frac{1}{2}\left[y_{max}x_0 - y_0x_{max} + r^2\left(\tan^{-1}\frac{y_{max}}{x_0} - \tan^{-1}\frac{y_0}{x_{max}}\right) \right]\\ P^{even}_1 &amp;=&amp; \frac{1}{3}\left(x_{max}^3 - x_0^3\right) \end{eqnarray}" src="form_186.png"/>
 </p>
-<p>The <img class="formulaInl" alt="$Q_{m,n}$" src="form_31.png"/> quantities satisfy the following identity: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\[ Q_{m+2,n}=r^2 Q_{m,n}-Q_{m,n+2} \]" src="form_206.png"/>
+<p>The <img class="formulaInl" alt="$Q_{m,n}$" src="form_25.png"/> quantities satisfy the following identity: </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ Q_{m+2,n}=r^2 Q_{m,n}-Q_{m,n+2} \]" src="form_187.png"/>
 </p>
 <p> See below for proof.</p>
 <p>This allows the same solution to be written in a different form: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray} I^{circ}_{m,n} &amp;=&amp; \frac{1}{m+1}\left(Q_{m,n} - x_0^{m+1}P^{odd}_{n} \right)\\ Q_{m,n} &amp;=&amp; r^2 Q_{m-2,n}-Q_{m-2,n+2}\\ Q_{1,n} &amp;=&amp; r^2 P^{odd}_{n} - P^{odd}_{n+2}\\ Q_{0,n} &amp;=&amp; P^{even}_n\\ \end{eqnarray}" src="form_207.png"/>
+<img class="formulaDsp" alt="\begin{eqnarray} I^{circ}_{m,n} &amp;=&amp; \frac{1}{m+1}\left(Q_{m,n} - x_0^{m+1}P^{odd}_{n} \right)\\ Q_{m,n} &amp;=&amp; r^2 Q_{m-2,n}-Q_{m-2,n+2}\\ Q_{1,n} &amp;=&amp; r^2 P^{odd}_{n} - P^{odd}_{n+2}\\ Q_{0,n} &amp;=&amp; P^{even}_n\\ \end{eqnarray}" src="form_188.png"/>
 </p>
-<p> Where <img class="formulaInl" alt="$P^{even}_n$" src="form_37.png"/> and <img class="formulaInl" alt="$P^{odd}_n$" src="form_38.png"/> are the same quantities as above.</p>
+<p> Where <img class="formulaInl" alt="$P^{even}_n$" src="form_28.png"/> and <img class="formulaInl" alt="$P^{odd}_n$" src="form_29.png"/> are the same quantities as above.</p>
 <h3>Derivation of the solution:</h3>
 <p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray} I^{circ}_{m,n}&amp;=&amp;\frac{1}{m+1}\int_{y_0}^{y_{max}} dy y^n \left[ (r^2-y^2)^{(m+1)/2} - x_0^{m+1}\right]\\ &amp;=&amp; \frac{1}{m+1}\left[Q_{m,n} - \frac{x_0^{m+1}}{n+1} \left(y_{max}^{n+1} - y_0^{n+1}\right)\right] \end{eqnarray}" src="form_208.png"/>
+<img class="formulaDsp" alt="\begin{eqnarray} I^{circ}_{m,n}&amp;=&amp;\frac{1}{m+1}\int_{y_0}^{y_{max}} dy y^n \left[ (r^2-y^2)^{(m+1)/2} - x_0^{m+1}\right]\\ &amp;=&amp; \frac{1}{m+1}\left[Q_{m,n} - \frac{x_0^{m+1}}{n+1} \left(y_{max}^{n+1} - y_0^{n+1}\right)\right] \end{eqnarray}" src="form_189.png"/>
 </p>
 <p> Where: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{equation} Q_{m,n}\equiv\int_{y_0}^{y_{max}} dy y^n (r^2-y^2)^{(m+1)/2} \end{equation}" src="form_209.png"/>
+<img class="formulaDsp" alt="\begin{equation} Q_{m,n}\equiv\int_{y_0}^{y_{max}} dy y^n (r^2-y^2)^{(m+1)/2} \end{equation}" src="form_190.png"/>
 </p>
 <p>At this point we need to consider two separate cases.</p>
-<h4>Case 1: <img class="formulaInl" alt="$m=2k+1$" src="form_210.png"/> with <img class="formulaInl" alt="$k \in \mathbb{Z}^+$" src="form_211.png"/></h4>
+<h4>Case 1: <img class="formulaInl" alt="$m=2k+1$" src="form_191.png"/> with <img class="formulaInl" alt="$k \in \mathbb{Z}^+$" src="form_192.png"/></h4>
 <p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray} Q_{2k+1,n} &amp;=&amp;\int_{y_0}^{y_{max}} y^n (r^2-y^2)^{k+1} dy\\ &amp;=&amp;\int_{y_0}^{y_{max}} y^n \sum_{i=0}^{k+1} r^{2(k+1-i)} (-1)^i y^{2i} dy \end{eqnarray}" src="form_212.png"/>
+<img class="formulaDsp" alt="\begin{eqnarray} Q_{2k+1,n} &amp;=&amp;\int_{y_0}^{y_{max}} y^n (r^2-y^2)^{k+1} dy\\ &amp;=&amp;\int_{y_0}^{y_{max}} y^n \sum_{i=0}^{k+1} r^{2(k+1-i)} (-1)^i y^{2i} dy \end{eqnarray}" src="form_193.png"/>
 </p>
 <p> Which gives: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{equation} Q_{2k+1,n}=\sum_{i=0}^{k+1} {k+1 \choose i} r^{2(k+1-i)} (-1)^i \frac{y_{max}^{n+2i+1} - y_0^{n+2i+1}}{n+2i+1} \end{equation}" src="form_213.png"/>
+<img class="formulaDsp" alt="\begin{equation} Q_{2k+1,n}=\sum_{i=0}^{k+1} {k+1 \choose i} r^{2(k+1-i)} (-1)^i \frac{y_{max}^{n+2i+1} - y_0^{n+2i+1}}{n+2i+1} \end{equation}" src="form_194.png"/>
 </p>
-<h4>Case 2: <img class="formulaInl" alt="$m=2k$" src="form_214.png"/> with <img class="formulaInl" alt="$k \in \mathbb{Z}^+$" src="form_211.png"/></h4>
+<h4>Case 2: <img class="formulaInl" alt="$m=2k$" src="form_195.png"/> with <img class="formulaInl" alt="$k \in \mathbb{Z}^+$" src="form_192.png"/></h4>
 <p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray} Q_{2k,n} &amp;=&amp;\int_{y_0}^{y_{max}} y^n (r^2-y^2)^k \sqrt{r^2-y^2} dy\\ &amp;=&amp;\int_{y_0}^{y_{max}} y^n \sum_{i=0}^{k} {k \choose i} r^{2(k-i)} y^{2i}(-1)^i \sqrt{r^2-y^2}\\ &amp;=&amp;\sum_{i=0}^{k} {k \choose i} r^{2(k-i)} (-1)^i P^{even}_{n+2i} \end{eqnarray}" src="form_215.png"/>
+<img class="formulaDsp" alt="\begin{eqnarray} Q_{2k,n} &amp;=&amp;\int_{y_0}^{y_{max}} y^n (r^2-y^2)^k \sqrt{r^2-y^2} dy\\ &amp;=&amp;\int_{y_0}^{y_{max}} y^n \sum_{i=0}^{k} {k \choose i} r^{2(k-i)} y^{2i}(-1)^i \sqrt{r^2-y^2}\\ &amp;=&amp;\sum_{i=0}^{k} {k \choose i} r^{2(k-i)} (-1)^i P^{even}_{n+2i} \end{eqnarray}" src="form_196.png"/>
 </p>
 <p> With: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{equation} P^{even}_n\equiv\int_{y_0}^{y_{max}} y^n\sqrt{r^2-y^2} dy \end{equation}" src="form_216.png"/>
+<img class="formulaDsp" alt="\begin{equation} P^{even}_n\equiv\int_{y_0}^{y_{max}} y^n\sqrt{r^2-y^2} dy \end{equation}" src="form_197.png"/>
 </p>
 <p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray} P^{even}_n &amp;=&amp;\frac{1}{2} \int_{y_0}^{y_{max}} y^{n-1} \sqrt{r^2-y^2} dy^2\\ &amp;=&amp;-\frac{1}{3} \int_{y_0}^{y_{max}} y^{n-1} d(r^2-y^2)^{3/2}\\ &amp;=&amp;\frac{1}{3}\bigg\{ y_0^{n-1}x_{max}^3 - y_{max}^{n-1} x_0^3 + \nonumber\\ &amp;&amp;\quad\quad {}+(n-1)\int_{y_0}^{y_{max}} y^{n-2}(r^2-y^2)\sqrt{r^2-y^2}dy \bigg\}\\ &amp;=&amp;\frac{1}{3}\left\{ y_0^{n-1} x_{max}^3 - y_max^{n-1}x_0^3 + (n-1)r^2P^{even}_{n-2} - (n-1)P^{even}_n \right\} \end{eqnarray}" src="form_217.png"/>
+<img class="formulaDsp" alt="\begin{eqnarray} P^{even}_n &amp;=&amp;\frac{1}{2} \int_{y_0}^{y_{max}} y^{n-1} \sqrt{r^2-y^2} dy^2\\ &amp;=&amp;-\frac{1}{3} \int_{y_0}^{y_{max}} y^{n-1} d(r^2-y^2)^{3/2}\\ &amp;=&amp;\frac{1}{3}\bigg\{ y_0^{n-1}x_{max}^3 - y_{max}^{n-1} x_0^3 + \nonumber\\ &amp;&amp;\quad\quad {}+(n-1)\int_{y_0}^{y_{max}} y^{n-2}(r^2-y^2)\sqrt{r^2-y^2}dy \bigg\}\\ &amp;=&amp;\frac{1}{3}\left\{ y_0^{n-1} x_{max}^3 - y_max^{n-1}x_0^3 + (n-1)r^2P^{even}_{n-2} - (n-1)P^{even}_n \right\} \end{eqnarray}" src="form_198.png"/>
 </p>
 <p>So we end up with: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{equation} P^{even}_n=\frac{1}{n+2} \left(y_0^{n-1}x_{max}^3 - y_{max}^{n-1}x_0^3\right) + \frac{n-1}{n+2}r^2P^{even}_{n-2} \end{equation}" src="form_218.png"/>
+<img class="formulaDsp" alt="\begin{equation} P^{even}_n=\frac{1}{n+2} \left(y_0^{n-1}x_{max}^3 - y_{max}^{n-1}x_0^3\right) + \frac{n-1}{n+2}r^2P^{even}_{n-2} \end{equation}" src="form_199.png"/>
 </p>
-<p>So in order to be able to calculate any <img class="formulaInl" alt="$P^{even}_n$" src="form_37.png"/> we need <img class="formulaInl" alt="$P^{even}_0$" src="form_219.png"/> and <img class="formulaInl" alt="$P^{even}_1$" src="form_220.png"/>: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray} P^{even}_0 &amp;=&amp; \int_{y_0}^{y_{max}} \sqrt{r^2-y^2} dy \\ &amp;=&amp; \frac{1}{2}\left[y_{max}x_0 - y_0x_{max} + r^2\left(\tan^{-1}\frac{y_{max}}{x_0} - \tan^{-1}\frac{y_0}{x_{max}}\right) \right] \end{eqnarray}" src="form_221.png"/>
+<p>So in order to be able to calculate any <img class="formulaInl" alt="$P^{even}_n$" src="form_28.png"/> we need <img class="formulaInl" alt="$P^{even}_0$" src="form_200.png"/> and <img class="formulaInl" alt="$P^{even}_1$" src="form_201.png"/>: </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\begin{eqnarray} P^{even}_0 &amp;=&amp; \int_{y_0}^{y_{max}} \sqrt{r^2-y^2} dy \\ &amp;=&amp; \frac{1}{2}\left[y_{max}x_0 - y_0x_{max} + r^2\left(\tan^{-1}\frac{y_{max}}{x_0} - \tan^{-1}\frac{y_0}{x_{max}}\right) \right] \end{eqnarray}" src="form_202.png"/>
 </p>
 <p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray} P^{even}_1 &amp;=&amp; \int_{y_0}^{y_{max}} y\sqrt{r^2-y^2} dy\\ &amp;=&amp; -\frac{1}{2}\int_{y_0}^{y_{max}}\sqrt{r^2-y^2} d(r^2-y^2)\\ &amp;=&amp; \frac{1}{3}\left(x_{max}^3 - x_0^3\right) \end{eqnarray}" src="form_222.png"/>
+<img class="formulaDsp" alt="\begin{eqnarray} P^{even}_1 &amp;=&amp; \int_{y_0}^{y_{max}} y\sqrt{r^2-y^2} dy\\ &amp;=&amp; -\frac{1}{2}\int_{y_0}^{y_{max}}\sqrt{r^2-y^2} d(r^2-y^2)\\ &amp;=&amp; \frac{1}{3}\left(x_{max}^3 - x_0^3\right) \end{eqnarray}" src="form_203.png"/>
 </p>
 <h3>Checking the solution:</h3>
 <p>The best way to test if I made any errors in deriving the above is to differentiate the result and see if we get what we expect.</p>
 <p>In particular we expect: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\[ \frac{\partial I^{circ}_{m,n}}{\partial x_0} = \int_{y_0}^{y_{max}} dy x_0^m y^n = -x_0^m\frac{y_{max}^{n+1} - y_0^{n+1}}{n+1} \]" src="form_223.png"/>
+<img class="formulaDsp" alt="\[ \frac{\partial I^{circ}_{m,n}}{\partial x_0} = \int_{y_0}^{y_{max}} dy x_0^m y^n = -x_0^m\frac{y_{max}^{n+1} - y_0^{n+1}}{n+1} \]" src="form_204.png"/>
 </p>
 <p> And </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\[ \frac{\partial I^{circ}_{m,n}}{\partial y_0} = -y_0^n\frac{x_{max}^{m+1} - x_0^{m+1}}{m+1} \]" src="form_224.png"/>
+<img class="formulaDsp" alt="\[ \frac{\partial I^{circ}_{m,n}}{\partial y_0} = -y_0^n\frac{x_{max}^{m+1} - x_0^{m+1}}{m+1} \]" src="form_205.png"/>
 </p>
 <p>Two useful identities: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\[ \frac{\partial y_{max}}{\partial x_0}=-\frac{x_0}{y_max} \quad\mathrm{and}\quad \frac{\partial x_{max}}{\partial y_0}=-\frac{y_0}{x_max} \]" src="form_225.png"/>
+<img class="formulaDsp" alt="\[ \frac{\partial y_{max}}{\partial x_0}=-\frac{x_0}{y_max} \quad\mathrm{and}\quad \frac{\partial x_{max}}{\partial y_0}=-\frac{y_0}{x_max} \]" src="form_206.png"/>
 </p>
-<h4>The derivative with respect to <img class="formulaInl" alt="$x_0$" src="form_51.png"/>:</h4>
+<h4>The derivative with respect to <img class="formulaInl" alt="$x_0$" src="form_19.png"/>:</h4>
 <p>From our solution: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray*} \frac{\partial I^{circ}_{m,n}}{\partial x_0} &amp;=&amp; \frac{\partial}{\partial x_0}\left\{ \frac{1}{m+1}\int_{y_0}^{y_{max}} dy y^n \left[ Q_{m,n} - \frac{x_0^{m+1}}{n+1} \left(y_{max}^{n+1} - y_0^{n+1}\right) \right] \right\}\\ &amp;=&amp; \frac{1}{m+1}\frac{\partial Q_{m,n}}{\partial x_0} - x_0^m\frac{y_{max}^{n+1}-y_0^{n+1}}{n+1} + \frac{x_0^{m+2}y_{max}^{n-1}}{m+1} \end{eqnarray*}" src="form_226.png"/>
+<img class="formulaDsp" alt="\begin{eqnarray*} \frac{\partial I^{circ}_{m,n}}{\partial x_0} &amp;=&amp; \frac{\partial}{\partial x_0}\left\{ \frac{1}{m+1}\int_{y_0}^{y_{max}} dy y^n \left[ Q_{m,n} - \frac{x_0^{m+1}}{n+1} \left(y_{max}^{n+1} - y_0^{n+1}\right) \right] \right\}\\ &amp;=&amp; \frac{1}{m+1}\frac{\partial Q_{m,n}}{\partial x_0} - x_0^m\frac{y_{max}^{n+1}-y_0^{n+1}}{n+1} + \frac{x_0^{m+2}y_{max}^{n-1}}{m+1} \end{eqnarray*}" src="form_207.png"/>
 </p>
 <p>Since the second term is exactly what we want, we need the following to be satisfied: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\[ \frac{\partial Q_{m,n}}{\partial x_0} = -x_0^{m+2}y_{max}^{n-1} \]" src="form_227.png"/>
+<img class="formulaDsp" alt="\[ \frac{\partial Q_{m,n}}{\partial x_0} = -x_0^{m+2}y_{max}^{n-1} \]" src="form_208.png"/>
 </p>
 <p>From the solution: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray*} \frac{\partial Q_{2k+1,n}}{\partial x_0} &amp;=&amp; -\sum_{i=0}^{k+1} {k+1 \choose i} r^{2(k+1-i)} (-1)^i x_0 y_{max}^{n+2i-1}\\ &amp;=&amp; -x_0 y_{max}^{n-1} \sum_{i=0}^{k+1} {k+1 \choose i} (r^2)^{k+1-i} (-y_{max}^2)^i\\ &amp;=&amp; -x_0 y_{max}^{n-1}\left(r^2-y_{max}^2\right)^{k+1}\\ &amp;=&amp; -x_0^{2k+3} y_{max}^{n-1} \end{eqnarray*}" src="form_228.png"/>
+<img class="formulaDsp" alt="\begin{eqnarray*} \frac{\partial Q_{2k+1,n}}{\partial x_0} &amp;=&amp; -\sum_{i=0}^{k+1} {k+1 \choose i} r^{2(k+1-i)} (-1)^i x_0 y_{max}^{n+2i-1}\\ &amp;=&amp; -x_0 y_{max}^{n-1} \sum_{i=0}^{k+1} {k+1 \choose i} (r^2)^{k+1-i} (-y_{max}^2)^i\\ &amp;=&amp; -x_0 y_{max}^{n-1}\left(r^2-y_{max}^2\right)^{k+1}\\ &amp;=&amp; -x_0^{2k+3} y_{max}^{n-1} \end{eqnarray*}" src="form_209.png"/>
 </p>
 <p> Which is exactly what we needed.</p>
 <p>Also from the solution: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray*} \frac{\partial Q_{2k,n}}{\partial x_0} &amp;=&amp; \sum_{i=0}^{k} {k \choose i} r^{2(k-i)} (-1)^i \frac{\partial P^{even}_{n+2i}}{\partial x_0}\\ \end{eqnarray*}" src="form_229.png"/>
+<img class="formulaDsp" alt="\begin{eqnarray*} \frac{\partial Q_{2k,n}}{\partial x_0} &amp;=&amp; \sum_{i=0}^{k} {k \choose i} r^{2(k-i)} (-1)^i \frac{\partial P^{even}_{n+2i}}{\partial x_0}\\ \end{eqnarray*}" src="form_210.png"/>
 </p>
 <p>So we need: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray*} \sum_{i=0}^{k} {k \choose i} r^{2(k-i)} (-1)^i \frac{\partial P^{even}_{n+2i}}{\partial x_0} &amp;=&amp; -x_0^{2k+2}y_{max}^{n-1}\\ &amp;=&amp; -x_0^2 y_{max}^{n-1} \sum_{i=0}^{i=k} {k \choose i} r^{2(k-i)} (-1)^i y_{max}^{2i} \end{eqnarray*}" src="form_230.png"/>
+<img class="formulaDsp" alt="\begin{eqnarray*} \sum_{i=0}^{k} {k \choose i} r^{2(k-i)} (-1)^i \frac{\partial P^{even}_{n+2i}}{\partial x_0} &amp;=&amp; -x_0^{2k+2}y_{max}^{n-1}\\ &amp;=&amp; -x_0^2 y_{max}^{n-1} \sum_{i=0}^{i=k} {k \choose i} r^{2(k-i)} (-1)^i y_{max}^{2i} \end{eqnarray*}" src="form_211.png"/>
 </p>
 <p> which translates to: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\[ \frac{\partial P^{even}_{n+2i}}{\partial x_0} = -x_0^2 y_{max}^{n+2i-1} \]" src="form_231.png"/>
+<img class="formulaDsp" alt="\[ \frac{\partial P^{even}_{n+2i}}{\partial x_0} = -x_0^2 y_{max}^{n+2i-1} \]" src="form_212.png"/>
 </p>
 <p> or </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\[ \frac{\partial P^{even}_n}{\partial x_0} = -x_0^2 y_{max}^{n-1} \]" src="form_232.png"/>
+<img class="formulaDsp" alt="\[ \frac{\partial P^{even}_n}{\partial x_0} = -x_0^2 y_{max}^{n-1} \]" src="form_213.png"/>
 </p>
 <p> First: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray*} \frac{\partial P^{even}_0}{\partial x_0} &amp;=&amp; \frac{1}{2}\left\{ y_{max} - \frac{x_0^2}{y_{max}} - r^2 \frac{1}{1+\frac{y_{max}^2}{x_0^2}} \left[ \frac{1}{y_{max}} + \frac{y_{max}}{x_0^2} \right] \right\}\\ &amp;=&amp; \frac{1}{2y_{max}}\left\{ y_{max}^2 - x_0^2 - r^2 \frac{x_0^2}{x_0^2+y_{max}} \left[ \frac{1} + \frac{y_{max}^2}{x_0^2} \right] \right\}\\ &amp;=&amp; \frac{1}{2y_{max}}\left( y_{max}^2 - x_0^2 - r^2\right)\\ &amp;=&amp; -\frac{x_0^2}{y_{max}} \end{eqnarray*}" src="form_233.png"/>
+<img class="formulaDsp" alt="\begin{eqnarray*} \frac{\partial P^{even}_0}{\partial x_0} &amp;=&amp; \frac{1}{2}\left\{ y_{max} - \frac{x_0^2}{y_{max}} - r^2 \frac{1}{1+\frac{y_{max}^2}{x_0^2}} \left[ \frac{1}{y_{max}} + \frac{y_{max}}{x_0^2} \right] \right\}\\ &amp;=&amp; \frac{1}{2y_{max}}\left\{ y_{max}^2 - x_0^2 - r^2 \frac{x_0^2}{x_0^2+y_{max}} \left[ \frac{1} + \frac{y_{max}^2}{x_0^2} \right] \right\}\\ &amp;=&amp; \frac{1}{2y_{max}}\left( y_{max}^2 - x_0^2 - r^2\right)\\ &amp;=&amp; -\frac{x_0^2}{y_{max}} \end{eqnarray*}" src="form_214.png"/>
 </p>
 <p> which is exactly what we needed.</p>
 <p>Next: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\[ \frac{\partial P^{even}_1}{\partial x_0}=-x_0^2 \]" src="form_234.png"/>
+<img class="formulaDsp" alt="\[ \frac{\partial P^{even}_1}{\partial x_0}=-x_0^2 \]" src="form_215.png"/>
 </p>
 <p> which is also what we needed.</p>
 <p>Finally: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray*} \frac{\partial P^{even}_n}{\partial x_0} &amp;=&amp; \frac{1}{n+2} \left((n-1)y_{max}^{n-3}x_0^4 - 3y_{max}^{n-1}x_0^2\right) + \frac{n-1}{n+2}r^2 \frac{\partial P^{even}_{n-2}}{\partial x_0}\\ &amp;=&amp; \frac{y_{max}^{n-3}x_0^2}{n+2} \left((n-1)x_0^2 - 3y_{max}^2\right) - \frac{n-1}{n+2}r^2 y_{max}^{n-3}x_0^2\\ &amp;=&amp; \frac{y_{max}^{n-3}x_0^2}{n+2} \left((n-1)x_0^2 - 3y_{max}^2 - (n-1)r^2\right)\\ &amp;=&amp; -y_{max}^{n-1}x_0^2 \end{eqnarray*}" src="form_235.png"/>
+<img class="formulaDsp" alt="\begin{eqnarray*} \frac{\partial P^{even}_n}{\partial x_0} &amp;=&amp; \frac{1}{n+2} \left((n-1)y_{max}^{n-3}x_0^4 - 3y_{max}^{n-1}x_0^2\right) + \frac{n-1}{n+2}r^2 \frac{\partial P^{even}_{n-2}}{\partial x_0}\\ &amp;=&amp; \frac{y_{max}^{n-3}x_0^2}{n+2} \left((n-1)x_0^2 - 3y_{max}^2\right) - \frac{n-1}{n+2}r^2 y_{max}^{n-3}x_0^2\\ &amp;=&amp; \frac{y_{max}^{n-3}x_0^2}{n+2} \left((n-1)x_0^2 - 3y_{max}^2 - (n-1)r^2\right)\\ &amp;=&amp; -y_{max}^{n-1}x_0^2 \end{eqnarray*}" src="form_216.png"/>
 </p>
-<p> Which is the last piece we needed for the derivative with respect to <img class="formulaInl" alt="$x_0$" src="form_51.png"/>.</p>
-<h4>The derivative with respect to <img class="formulaInl" alt="$y_0$" src="form_52.png"/>:</h4>
+<p> Which is the last piece we needed for the derivative with respect to <img class="formulaInl" alt="$x_0$" src="form_19.png"/>.</p>
+<h4>The derivative with respect to <img class="formulaInl" alt="$y_0$" src="form_20.png"/>:</h4>
 <p>From our solution: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\[ \frac{\partial I^{circ}_{m,n}}{\partial y_0} = \frac{1}{m+1}\left( \frac{\partial Q_{m,n}}{\partial y_0} + x_0^{m+1} y_0^n \right) \]" src="form_236.png"/>
+<img class="formulaDsp" alt="\[ \frac{\partial I^{circ}_{m,n}}{\partial y_0} = \frac{1}{m+1}\left( \frac{\partial Q_{m,n}}{\partial y_0} + x_0^{m+1} y_0^n \right) \]" src="form_217.png"/>
 </p>
 <p>So we need: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\[ \frac{\partial Q_{m,n}}{\partial y_0} = -x_{max}^{m+1} y_0^n \]" src="form_237.png"/>
+<img class="formulaDsp" alt="\[ \frac{\partial Q_{m,n}}{\partial y_0} = -x_{max}^{m+1} y_0^n \]" src="form_218.png"/>
 </p>
 <p>From the solution: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray*} \frac{\partial Q_{2k+1,n}}{\partial y_0} &amp;=&amp; -\sum_{i=0}^{k+1} {k+1 \choose i} r^{2(k+1-i)} (-1)^i y_0^{n+2i}\\ &amp;=&amp; -y_0^n (r^2-y_0^2)^{k+1}\\ &amp;=&amp; -x_max^{2k+2} y_0^n \end{eqnarray*}" src="form_238.png"/>
+<img class="formulaDsp" alt="\begin{eqnarray*} \frac{\partial Q_{2k+1,n}}{\partial y_0} &amp;=&amp; -\sum_{i=0}^{k+1} {k+1 \choose i} r^{2(k+1-i)} (-1)^i y_0^{n+2i}\\ &amp;=&amp; -y_0^n (r^2-y_0^2)^{k+1}\\ &amp;=&amp; -x_max^{2k+2} y_0^n \end{eqnarray*}" src="form_219.png"/>
 </p>
 <p> Exactly what we need.</p>
 <p>Also from the solution: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\[ \frac{\partial Q_{2k,n}}{\partial y_0} = \sum_{i=0}^{k} {k \choose i} r^{2(k-i)} (-1)^i \frac{\partial P^{even}_{n+2i}}{\partial y_0} \]" src="form_239.png"/>
+<img class="formulaDsp" alt="\[ \frac{\partial Q_{2k,n}}{\partial y_0} = \sum_{i=0}^{k} {k \choose i} r^{2(k-i)} (-1)^i \frac{\partial P^{even}_{n+2i}}{\partial y_0} \]" src="form_220.png"/>
 </p>
 <p>So we need: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray*} \sum_{i=0}^{k} {k \choose i} r^{2(k-i)} (-1)^i \frac{\partial P^{even}_{n+2i}}{\partial y_0}\\ &amp;=&amp; -x_{max}^{2k+1}y_0^n\\ &amp;=&amp; -x_{max}\sum_{i=0}^{k} {k \choose i} r^{2(k-i)} (-1)^i y_0^{n+2i} \end{eqnarray*}" src="form_240.png"/>
+<img class="formulaDsp" alt="\begin{eqnarray*} \sum_{i=0}^{k} {k \choose i} r^{2(k-i)} (-1)^i \frac{\partial P^{even}_{n+2i}}{\partial y_0}\\ &amp;=&amp; -x_{max}^{2k+1}y_0^n\\ &amp;=&amp; -x_{max}\sum_{i=0}^{k} {k \choose i} r^{2(k-i)} (-1)^i y_0^{n+2i} \end{eqnarray*}" src="form_221.png"/>
 </p>
 <p>In other words we must show that: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\[ \frac{\partial P^{even}_n}{\partial y_0}=-x_{max} y_0^n \]" src="form_241.png"/>
+<img class="formulaDsp" alt="\[ \frac{\partial P^{even}_n}{\partial y_0}=-x_{max} y_0^n \]" src="form_222.png"/>
 </p>
 <p>First: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray*} \frac{\partial P^{even}_0}{\partial y_0} &amp;=&amp; \frac{1}{2}\left[\frac{y_0^2}{x_{max}} - x_{max} -r^2 \frac{1}{1+\frac{y_0^2}{x_{max}^2}} \left( \frac{1}{x_{max}} + \frac{y_0^2}{x_{max}^3} \right) \right]\\ &amp;=&amp; \frac{1}{2x_{max}}\left[ y_0^2 - x_{max}^2 - r^2\frac{x_{max}^2}{x_{max}^2+y_0^2} \frac{x_{max}^2 + y_0^2}{x_{max}^2} \right]\\ &amp;=&amp; \frac{1}{2x_{max}}\left[ y_0^2 - x_{max}^2 - r^2 \right]\\ &amp;=&amp; -x_{max} \end{eqnarray*}" src="form_242.png"/>
+<img class="formulaDsp" alt="\begin{eqnarray*} \frac{\partial P^{even}_0}{\partial y_0} &amp;=&amp; \frac{1}{2}\left[\frac{y_0^2}{x_{max}} - x_{max} -r^2 \frac{1}{1+\frac{y_0^2}{x_{max}^2}} \left( \frac{1}{x_{max}} + \frac{y_0^2}{x_{max}^3} \right) \right]\\ &amp;=&amp; \frac{1}{2x_{max}}\left[ y_0^2 - x_{max}^2 - r^2\frac{x_{max}^2}{x_{max}^2+y_0^2} \frac{x_{max}^2 + y_0^2}{x_{max}^2} \right]\\ &amp;=&amp; \frac{1}{2x_{max}}\left[ y_0^2 - x_{max}^2 - r^2 \right]\\ &amp;=&amp; -x_{max} \end{eqnarray*}" src="form_223.png"/>
 </p>
 <p> Which matches our expectation.</p>
 <p>Next: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\[ \frac{\partial P^{even}_1}{\partial y_0} = - x_{max} y_0 \]" src="form_243.png"/>
+<img class="formulaDsp" alt="\[ \frac{\partial P^{even}_1}{\partial y_0} = - x_{max} y_0 \]" src="form_224.png"/>
 </p>
 <p> Which also matches.</p>
-<p>Finally, assuming <img class="formulaInl" alt="$\frac{\partial P^{even}_{n-2}}{\partial y_0} = -x_{max} y_0^{n-2}$" src="form_244.png"/> : </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray*} \frac{\partial P^{even}_n}{\partial y_0} &amp;=&amp; \frac{1}{n+2} \left((n-1) y_0^{n-2}x_{max}^3 - 3 y_0^n x_{max}\right) + \frac{n-1}{n+2}r^2 \frac{\partial P^{even}_{n-2}}{\partial y_0}\\ &amp;=&amp; \frac{1}{n+2} \left((n-1) y_0^{n-2}x_{max}^3 - 3 y_0^n x_{max}\right) - \frac{n-1}{n+2}r^2 x_{max} y_0^{n-2}\\ &amp;=&amp; \frac{x_{max}}{n+2}\left((n-1) y_0^{n-2}x_{max}^2 - 3 y_0^n - (n-1)r^2 y_0^{n-2} \right)\\ &amp;=&amp; -x_{max} y_0^n \end{eqnarray*}" src="form_245.png"/>
+<p>Finally, assuming <img class="formulaInl" alt="$\frac{\partial P^{even}_{n-2}}{\partial y_0} = -x_{max} y_0^{n-2}$" src="form_225.png"/> : </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\begin{eqnarray*} \frac{\partial P^{even}_n}{\partial y_0} &amp;=&amp; \frac{1}{n+2} \left((n-1) y_0^{n-2}x_{max}^3 - 3 y_0^n x_{max}\right) + \frac{n-1}{n+2}r^2 \frac{\partial P^{even}_{n-2}}{\partial y_0}\\ &amp;=&amp; \frac{1}{n+2} \left((n-1) y_0^{n-2}x_{max}^3 - 3 y_0^n x_{max}\right) - \frac{n-1}{n+2}r^2 x_{max} y_0^{n-2}\\ &amp;=&amp; \frac{x_{max}}{n+2}\left((n-1) y_0^{n-2}x_{max}^2 - 3 y_0^n - (n-1)r^2 y_0^{n-2} \right)\\ &amp;=&amp; -x_{max} y_0^n \end{eqnarray*}" src="form_226.png"/>
 </p>
 <p> Which was the last missing piece.</p>
-<h3>Deriving the relation between <img class="formulaInl" alt="$Q_{m,n}$" src="form_31.png"/> quantities.</h3>
-<p>For odd <img class="formulaInl" alt="$m$" src="form_153.png"/>: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray*} Q_{2k+3,n} &amp;=&amp; \sum_{i=0}^{k+2} {k+2 \choose i} r^{2(k+2-i)} (-1)^i P^{odd}_{n+2i}\\ &amp;=&amp; \sum_{i=0}^{k+2} \left[{k+1 \choose i} + {k+1 \choose i-1}\right] r^{2(k+2-i)} (-1)^i P^{odd}_{n+2i}\\ &amp;=&amp; r^2 Q_{2k+1,n} + \sum_{i=1}^{k+2} {k+1 \choose i-1} r^{2(k+2-i)} (-1)^i P^{odd}_{n+2i}\\ &amp;=&amp; r^2 Q_{2k+1,n} - \sum_{i=0}^{k+1} {k+1 \choose i} r^{2(k+1-i)} (-1)^i P^{odd}_{n+2+2i}\\ &amp;=&amp; r^2 Q_{2k+1,n} - Q_{2k+1,n+2} \end{eqnarray*}" src="form_246.png"/>
+<h3>Deriving the relation between <img class="formulaInl" alt="$Q_{m,n}$" src="form_25.png"/> quantities.</h3>
+<p>For odd <img class="formulaInl" alt="$m$" src="form_90.png"/>: </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\begin{eqnarray*} Q_{2k+3,n} &amp;=&amp; \sum_{i=0}^{k+2} {k+2 \choose i} r^{2(k+2-i)} (-1)^i P^{odd}_{n+2i}\\ &amp;=&amp; \sum_{i=0}^{k+2} \left[{k+1 \choose i} + {k+1 \choose i-1}\right] r^{2(k+2-i)} (-1)^i P^{odd}_{n+2i}\\ &amp;=&amp; r^2 Q_{2k+1,n} + \sum_{i=1}^{k+2} {k+1 \choose i-1} r^{2(k+2-i)} (-1)^i P^{odd}_{n+2i}\\ &amp;=&amp; r^2 Q_{2k+1,n} - \sum_{i=0}^{k+1} {k+1 \choose i} r^{2(k+1-i)} (-1)^i P^{odd}_{n+2+2i}\\ &amp;=&amp; r^2 Q_{2k+1,n} - Q_{2k+1,n+2} \end{eqnarray*}" src="form_227.png"/>
 </p>
-<p>For even <img class="formulaInl" alt="$m$" src="form_153.png"/>: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray*} Q_{2k+2,n} &amp;=&amp; \sum_{i=0}^{k+1} {k+1 \choose i} r^{2(k+1-i)} (-1)^i P^{even}_{n+2i}\\ &amp;=&amp; \sum_{i=0}^{k+1} \left[{k \choose i} + {k \choose i-1}\right] r^{2(k+1-i)} (-1)^i P^{even}_{n+2i}\\ &amp;=&amp; r^2Q_{2k,n} + \sum_{i=1}^{k+1} {k \choose i-1} r^{2(k+1-i)} (-1)^i P^{even}_{n+2i}\\ &amp;=&amp; r^2Q_{2k,n} - \sum_{i=0}^{k} {k \choose i} r^{2(k-i)} (-1)^i P^{even}_{n+2+2i}\\ &amp;=&amp; r^2Q_{2k,n} - Q_{2k,n+2} \end{eqnarray*}" src="form_247.png"/>
+<p>For even <img class="formulaInl" alt="$m$" src="form_90.png"/>: </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\begin{eqnarray*} Q_{2k+2,n} &amp;=&amp; \sum_{i=0}^{k+1} {k+1 \choose i} r^{2(k+1-i)} (-1)^i P^{even}_{n+2i}\\ &amp;=&amp; \sum_{i=0}^{k+1} \left[{k \choose i} + {k \choose i-1}\right] r^{2(k+1-i)} (-1)^i P^{even}_{n+2i}\\ &amp;=&amp; r^2Q_{2k,n} + \sum_{i=1}^{k+1} {k \choose i-1} r^{2(k+1-i)} (-1)^i P^{even}_{n+2i}\\ &amp;=&amp; r^2Q_{2k,n} - \sum_{i=0}^{k} {k \choose i} r^{2(k-i)} (-1)^i P^{even}_{n+2+2i}\\ &amp;=&amp; r^2Q_{2k,n} - Q_{2k,n+2} \end{eqnarray*}" src="form_228.png"/>
 </p>
-<p>Actually, this relation is obvious from the definition of <img class="formulaInl" alt="$Q_{m,n}$" src="form_31.png"/>. </p>
+<p>Actually, this relation is obvious from the definition of <img class="formulaInl" alt="$Q_{m,n}$" src="form_25.png"/>. </p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Jan 2 2018 17:31:30 for SuperPhot by
+    <li class="footer">Generated on Thu May 3 2018 17:25:12 for SuperPhot by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

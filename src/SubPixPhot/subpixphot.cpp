@@ -287,6 +287,7 @@ namespace SubPixPhot {
                           : double(t2_clock - t1_clock) / CLOCKS_PER_SEC)
                       << " seconds to photometer" << std::endl;
 #endif
+            ++psfmap_src_iter;
         }
 
         IO::TranslateToAny< std::vector<double> > double_trans;

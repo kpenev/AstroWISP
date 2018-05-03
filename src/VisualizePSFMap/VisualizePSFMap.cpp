@@ -382,7 +382,7 @@ void create_grid_regions(
 					filename);
 }
 
-///Return the name and value in an expression like <name>=<value>
+///Return the name and value in an expression like \<name\>=\<value\>
 PSFMapVariableType parse_variable_expression(
         const std::string &expression,
         unsigned array_size

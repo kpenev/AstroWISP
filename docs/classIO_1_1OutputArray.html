@@ -91,6 +91,7 @@ $(document).ready(function(){initNavTree('classIO_1_1OutputArray.html','');});
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classIO_1_1OutputArray-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -131,6 +132,20 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5b525b484b37b943225f01bdf1fed3a4"><td class="memTemplParams" colspan="2">template&lt;&gt; </td></tr>
 <tr class="memitem:a5b525b484b37b943225f01bdf1fed3a4"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classIO_1_1OutputArray.html#a5b525b484b37b943225f01bdf1fed3a4">parse</a> (const boost::any &amp;value)</td></tr>
 <tr class="separator:a5b525b484b37b943225f01bdf1fed3a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b525b484b37b943225f01bdf1fed3a4"><td class="memTemplParams" colspan="2">template&lt;&gt; </td></tr>
+<tr class="memitem:a5b525b484b37b943225f01bdf1fed3a4"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classIO_1_1OutputArray.html#a5b525b484b37b943225f01bdf1fed3a4">parse</a> (const boost::any &amp;value)</td></tr>
+<tr class="separator:a5b525b484b37b943225f01bdf1fed3a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:ad15debf028d1b2ef312b15de33ac1bfc"><td class="memTemplParams" colspan="2">template&lt;class INPUT_ARRAY_TYPE &gt; </td></tr>
+<tr class="memitem:ad15debf028d1b2ef312b15de33ac1bfc"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classIO_1_1OutputArray.html#ad15debf028d1b2ef312b15de33ac1bfc">try_container_type</a> (const boost::any &amp;value)</td></tr>
+<tr class="memdesc:ad15debf028d1b2ef312b15de33ac1bfc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Try reading the input data assuming it is in some type of container providing beging() and end() const_iterators.  <a href="#ad15debf028d1b2ef312b15de33ac1bfc">More...</a><br /></td></tr>
+<tr class="separator:ad15debf028d1b2ef312b15de33ac1bfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebf5fa77cbdfa7a8bd43f1e86c23de87"><td class="memTemplParams" colspan="2">template&lt;class INPUT_ARRAY_TYPE &gt; </td></tr>
+<tr class="memitem:aebf5fa77cbdfa7a8bd43f1e86c23de87"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classIO_1_1OutputArray.html#aebf5fa77cbdfa7a8bd43f1e86c23de87">try_array_type</a> (const boost::any &amp;value)</td></tr>
+<tr class="memdesc:aebf5fa77cbdfa7a8bd43f1e86c23de87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Try reading the input data assuming it is in some type of container where entries are stored contigously in memory.  <a href="#aebf5fa77cbdfa7a8bd43f1e86c23de87">More...</a><br /></td></tr>
+<tr class="separator:aebf5fa77cbdfa7a8bd43f1e86c23de87"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -344,6 +359,24 @@ template&lt;typename UNIT_TYPE &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a5b525b484b37b943225f01bdf1fed3a4"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classIO_1_1OutputArray.html">IO::OutputArray</a>&lt; double &gt;::parse </td>
+          <td>(</td>
+          <td class="paramtype">const boost::any &amp;&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a378d304e54c047ea2ff39ab8ac3a7f98"></a>
 <div class="memitem">
 <div class="memproto">
@@ -368,6 +401,66 @@ template&lt;typename UNIT_TYPE&gt; </div>
 </div><div class="memdoc">
 
 <p>The number of elements in the array. </p>
+
+</div>
+</div>
+<a class="anchor" id="aebf5fa77cbdfa7a8bd43f1e86c23de87"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename UNIT_TYPE &gt; </div>
+<div class="memtemplate">
+template&lt;class INPUT_ARRAY_TYPE &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classIO_1_1OutputArray.html">IO::OutputArray</a>&lt; UNIT_TYPE &gt;::try_array_type </td>
+          <td>(</td>
+          <td class="paramtype">const boost::any &amp;&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Try reading the input data assuming it is in some type of container where entries are stored contigously in memory. </p>
+
+</div>
+</div>
+<a class="anchor" id="ad15debf028d1b2ef312b15de33ac1bfc"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename UNIT_TYPE &gt; </div>
+<div class="memtemplate">
+template&lt;class INPUT_ARRAY_TYPE &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classIO_1_1OutputArray.html">IO::OutputArray</a>&lt; UNIT_TYPE &gt;::try_container_type </td>
+          <td>(</td>
+          <td class="paramtype">const boost::any &amp;&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Try reading the input data assuming it is in some type of container providing beging() and end() const_iterators. </p>
 
 </div>
 </div>
@@ -451,7 +544,7 @@ template&lt;typename UNIT_TYPE&gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceIO.html">IO</a></li><li class="navelem"><a class="el" href="classIO_1_1OutputArray.html">OutputArray</a></li>
-    <li class="footer">Generated on Tue Jan 2 2018 17:31:30 for SuperPhot by
+    <li class="footer">Generated on Thu May 3 2018 17:25:12 for SuperPhot by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

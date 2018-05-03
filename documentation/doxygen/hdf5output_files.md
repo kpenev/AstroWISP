@@ -53,29 +53,29 @@ Format for HDF5 Photometry and PSF Fitting Files {#hdf5fileformat_main_page}
 
   | Dataset Name   | Dataset Data Type                           | Output Column Name | 
   | -------------- | ------------------------------------------- | ------------------ |
-  | ID             | <string> or <H5T_STD_I16LE>,<H5T_STD_I32LE> | id                 |
-  | x              | <H5T_IEEE_F32LE>                            | x                  |
-  | y              | <H5T_IEEE_F32LE>                            | y                  |
-  | Flux           | <H5T_IEEE_F32LE>                            | flux               |
-  | FluxErr        | <H5T_IEEE_F32LE>                            | flux_err           |
-  | Magnitude      | <H5T_IEEE_F32LE>                            | mag                |
-  | MagnitudeErr   | <H5T_IEEE_F32LE>                            | mag_err            |
-  | QualityFlag    | <H5T_C_S1>                                  | flag               |
-  | Background     | <H5T_IEEE_F32LE>                            | bg                 |
-  | BackgroundErr  | <H5T_IEEE_F32LE>                            | bg_err             |
+  | ID             | `string` or `H5T_STD_I16LE`,`H5T_STD_I32LE` | id                 |
+  | x              | `H5T_IEEE_F32LE`                            | x                  |
+  | y              | `H5T_IEEE_F32LE`                            | y                  |
+  | Flux           | `H5T_IEEE_F32LE`                            | flux               |
+  | FluxErr        | `H5T_IEEE_F32LE`                            | flux_err           |
+  | Magnitude      | `H5T_IEEE_F32LE`                            | mag                |
+  | MagnitudeErr   | `H5T_IEEE_F32LE`                            | mag_err            |
+  | QualityFlag    | `H5T_C_S1`                                  | flag               |
+  | Background     | `H5T_IEEE_F32LE`                            | bg                 |
+  | BackgroundErr  | `H5T_IEEE_F32LE`                            | bg_err             |
   | BackgroundNPix | Smallest little endian signed int that fits | nbgpix             |
 
   ### FitPSF Only: ###
 
   | Dataset Name     | Dataset Data Type | Output Column Name | 
   | ---------------- | ----------------- | ------------------ |
-  | S (only SDK psf) | <H5T_IEEE_F32LE>  | S                  |
-  | D (only SDK psf) | <H5T_IEEE_F32LE>  | D                  |
-  | K (only SDK psf) | <H5T_IEEE_F32LE>  | K                  |
-  | Amplitude        | <H5T_IEEE_F32LE>  | A or amp           |
-  | SignalToNoise    | <H5T_IEEE_F32LE>  | sn                 |
-  | NFitPixels       | <H5T_STD_I16LE>   | npix               |
-  | ReducedChi2      | <H5T_IEEE_F32LE>  | chi2               |
+  | S (only SDK psf) | `H5T_IEEE_F32LE`  | S                  |
+  | D (only SDK psf) | `H5T_IEEE_F32LE`  | D                  |
+  | K (only SDK psf) | `H5T_IEEE_F32LE`  | K                  |
+  | Amplitude        | `H5T_IEEE_F32LE`  | A or amp           |
+  | SignalToNoise    | `H5T_IEEE_F32LE`  | sn                 |
+  | NFitPixels       | `H5T_STD_I16LE`   | npix               |
+  | ReducedChi2      | `H5T_IEEE_F32LE`  | chi2               |
 
   The `PSFMap` group
   -------------------
@@ -111,7 +111,7 @@ Format for HDF5 Photometry and PSF Fitting Files {#hdf5fileformat_main_page}
   | YScale                   | Scaling of the source y value before evaluating the polynomial   |
 
   The `PSFMap` group contains only a single dataset (named Coefficients) with
-  the datatype being an array of <H5T_IEEE_F32LE>. Each array contains the
+  the datatype being an array of `H5T_IEEE_F32LE`. Each array contains the
   polynomial expansion coefficients of a single PSF parameter. Thus, the
   dataset length is 3 for elliptical Gaussian PSF models and 4 times the
   number of interior grid intersections for piecewise bicubic PSF models.

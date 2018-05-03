@@ -27,7 +27,7 @@ extern "C" {
         double exclude_aperture,
 
         ///The image to determine the backgrounds on.
-        const Image *image, 
+        const CoreImage *image, 
 
         ///The confidence to require of the error estimate.
         double error_confidence

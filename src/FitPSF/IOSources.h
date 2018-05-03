@@ -28,7 +28,7 @@ namespace FitPSF {
     ///\brief Parser for a single section of FitPSF input source lists.
     ///
     ///The input file should consist of sections formatted like:
-    ///[<FITS filename> <output filename>]
+    ///[\<FITS filename\> \<output filename\>]
     ///colvalue1 colvalue2 ...
     ///
     ///At least three columns must be included: ID, x and y.
