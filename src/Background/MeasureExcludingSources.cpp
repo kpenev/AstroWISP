@@ -49,7 +49,7 @@ namespace Background {
                 if(
                     x_pix_center * x_pix_center
                     +
-                    y_pix_center*y_pix_center <= ap2
+                    y_pix_center * y_pix_center <= ap2
                 ) {
                     _bg_values(xi, yi) = Core::NaN;
                 }
