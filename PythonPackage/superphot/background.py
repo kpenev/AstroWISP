@@ -172,6 +172,8 @@ class BackgroundExtractor:
             error_confidence
         )
 
+        self._set_sources = False
+
     def __call__(self, source_x, source_y):
         """
         Measure the background under the sources with the given coordinates.
@@ -197,6 +199,10 @@ class BackgroundExtractor:
         """
 
         assert source_x.size == source_y.size
+
+        assert not self._set_sources
+
+        self._set_sources = True
 
         self._library.add_source_list_to_background_extractor(
             self._library_extractor,

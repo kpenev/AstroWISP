@@ -124,9 +124,6 @@ class TestAnnulusBackground(FloatTestCase):
         """Tests involving sources for which no BG can be determined."""
 
         image = numpy.ones(shape=(10, 10))
-        measure_background = BackgroundExtractor(image,
-                                                 inner_radius=10.0,
-                                                 outer_radius=15.0)
 
         for src_x, src_y in [
                 (numpy.array([5.0]), numpy.array([5.0])),
@@ -134,6 +131,10 @@ class TestAnnulusBackground(FloatTestCase):
                     numpy.meshgrid([2.5, 5.0, 7.5], [2.5, 5.0, 7.5])
                 ).reshape(9, 2).transpose()
         ]:
+            measure_background = BackgroundExtractor(image,
+                                                     inner_radius=10.0,
+                                                     outer_radius=15.0)
+
             message = ('Sources at: x = %s, y = %s'
                        %
                        (repr(src_x), repr(src_y)))
@@ -317,4 +318,4 @@ class TestAnnulusBackground(FloatTestCase):
                         )
 
 if __name__ == '__main__':
-    unittest.main(failfast=True)
+    unittest.main(failfast=False)
