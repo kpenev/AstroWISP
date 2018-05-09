@@ -4,6 +4,7 @@
 
 import sys
 import os.path
+import unittest
 import numpy
 
 sys.path.insert(
@@ -47,10 +48,10 @@ class TestAnnulusBackground(FloatTestCase):
 
         for this_x, this_y in zip(source_x, source_y):
             min_x = max(0, int(numpy.ceil(this_x - radius - 0.5)))
-            max_x = min(image.shape[1], int(numpy.floor(this_x + radius - 0.5)))
+            max_x = min(image.shape[1], int(numpy.floor(this_x + radius + 0.5)))
 
             min_y = max(0, int(numpy.ceil(this_y - radius - 0.5)))
-            max_y = min(image.shape[0], int(numpy.floor(this_y + radius - 0.5)))
+            max_y = min(image.shape[0], int(numpy.floor(this_y + radius + 0.5)))
 
             for pixel_x in range(min_x, max_x):
                 for pixel_y in range(min_y, max_y):
@@ -67,8 +68,7 @@ class TestAnnulusBackground(FloatTestCase):
     def test_constant_image(self):
         """Test background extraction on an image with all pixels the same."""
 
-        measure_background = BackgroundExtractor(inner_radius=2.0,
-                                                 outer_radius=4.0)
+        inner_radius, outer_radius = 1.99, 4.01
         for expected_value in [1.0, 10.0, 0.0]:
             for src_x, src_y in [
                     (numpy.array([5.0]), numpy.array([5.0])),
@@ -84,7 +84,7 @@ class TestAnnulusBackground(FloatTestCase):
                     self.add_flux_around_sources(
                         src_x,
                         src_y,
-                        measure_background.inner_radius,
+                        inner_radius,
                         extra_flux,
                         image
                     )
@@ -94,20 +94,40 @@ class TestAnnulusBackground(FloatTestCase):
                         (repr(src_x), repr(src_y), extra_flux)
                     )
 
-                    for extracted_value, extracted_error in zip(
-                            *measure_background(image, src_x, src_y)
+                    measure_background = BackgroundExtractor(
+                        image,
+                        inner_radius=inner_radius,
+                        outer_radius=outer_radius
+                    )
+
+                    for (
+                            source_index,
+                            (extracted_value, extracted_error)
+                    ) in enumerate(
+                        zip(
+                            *measure_background(numpy.copy(src_x),
+                                                numpy.copy(src_y))[:2]
+                        )
                     ):
-                        self.assertApprox(extracted_value,
-                                          expected_value,
-                                          message)
-                        self.assertApprox(extracted_error, 0.0, message)
+                        if source_index == 4:
+                            self.assertTrue(numpy.isnan(extracted_value),
+                                            message)
+                            self.assertTrue(numpy.isnan(extracted_error),
+                                            message)
+                        else:
+                            self.assertApprox(extracted_value,
+                                              expected_value,
+                                              message)
+                            self.assertApprox(extracted_error, 0.0, message)
 
     def test_crowded_image(self):
         """Tests involving sources for which no BG can be determined."""
 
-        measure_background = BackgroundExtractor(inner_radius=10.0,
-                                                 outer_radius=15.0)
         image = numpy.ones(shape=(10, 10))
+        measure_background = BackgroundExtractor(image,
+                                                 inner_radius=10.0,
+                                                 outer_radius=15.0)
+
         for src_x, src_y in [
                 (numpy.array([5.0]), numpy.array([5.0])),
                 numpy.dstack(
@@ -119,7 +139,8 @@ class TestAnnulusBackground(FloatTestCase):
                        (repr(src_x), repr(src_y)))
 
             for extracted_value, extracted_error in zip(
-                    *measure_background(image, src_x, src_y)
+                    *measure_background(numpy.copy(src_x),
+                                        numpy.copy(src_y))[:2]
             ):
                 self.assertTrue(numpy.isnan(extracted_value), message)
                 self.assertTrue(numpy.isnan(extracted_error), message)
@@ -127,25 +148,37 @@ class TestAnnulusBackground(FloatTestCase):
     def test_partially_crowded_image(self):
         """A test where one source is crowded and 4 are not."""
 
-        measure_background = BackgroundExtractor(
-            inner_radius=5.0,
-            outer_radius=(3.0**0.5 + 1.0) * 2.5
-        )
         image = numpy.ones(shape=(10, 10))
-        src_x = numpy.array([2.5, 7.5, 2.5, 7.5, 5.0])
-        src_y = numpy.array([2.5, 2.5, 7.5, 7.5, 5.0])
+
+        inner_radius, outer_radius = 2.5, (3.0**0.5 + 1.0) * 1.25
+
+        src_x = numpy.array([5.0 - 1.25,
+                             5.0 + 1.25,
+                             5.0 - 1.25,
+                             5.0 + 1.25,
+                             5.0])
+        src_y = numpy.array([5.0 - 1.25,
+                             5.0 - 1.25,
+                             5.0 + 1.25,
+                             5.0 + 1.25,
+                             5.0])
         message = 'x = %f, y = %f, extra flux = %f'
         for extra_flux in [0.0, 10.0, numpy.nan]:
             self.add_flux_around_sources(
                 src_x,
                 src_y,
-                measure_background.inner_radius,
+                inner_radius,
                 extra_flux,
                 image
             )
-            extracted_values, extracted_errors = measure_background(image,
-                                                                    src_x,
-                                                                    src_y)
+            measure_background = BackgroundExtractor(
+                image,
+                inner_radius=inner_radius,
+                outer_radius=outer_radius
+            )
+
+            extracted_values, extracted_errors = measure_background(src_x,
+                                                                    src_y)[:2]
 
             for value, source_center in zip(extracted_values[:4],
                                             zip(src_x[:4], src_y[:4])):
@@ -169,11 +202,10 @@ class TestAnnulusBackground(FloatTestCase):
 
         x_gradient, y_gradient = 0.5, 1.5
 
-        for bg_radius in [(1.0, 2.0),
-                          (1.5, 2.0),
+        for bg_radius in [(0.99, 2.01),
+                          (1.5, 2.01),
                           (1.5, 2.5),
-                          (numpy.pi/2, 5.0 - numpy.pi/2)]:
-            measure_background = BackgroundExtractor(*bg_radius)
+                          (numpy.pi/3, numpy.pi/2 + 0.5)]:
 
             for src_x, src_y in [
                     (
@@ -193,12 +225,14 @@ class TestAnnulusBackground(FloatTestCase):
                     self.add_flux_around_sources(
                         src_x,
                         src_y,
-                        measure_background.inner_radius,
+                        bg_radius[0],
                         extra_flux,
                         image
                     )
-                    extracted_values = measure_background(image,
-                                                          src_x,
+
+                    measure_background = BackgroundExtractor(image, *bg_radius)
+
+                    extracted_values = measure_background(src_x,
                                                           src_y)[0]
                     for eval_x, eval_y, extracted in zip(src_x,
                                                          src_y,
@@ -219,7 +253,7 @@ class TestAnnulusBackground(FloatTestCase):
 
         half_pix = numpy.linspace(0.5, 9.5, 10)
 
-        source_position = numpy.arange(0.0, 10.0, 0.1 * numpy.pi)
+        source_position = numpy.arange(0.0, 10.0, 0.3 * numpy.pi)
 
         for source_x in source_position:
             for source_y in source_position:
@@ -238,25 +272,49 @@ class TestAnnulusBackground(FloatTestCase):
                     pixels = image.flatten()
                     pixels = pixels[numpy.logical_not(numpy.isnan(pixels))]
 
-                    for error_confidence in numpy.linspace(0.1, 0.9, 10.0):
-                        extracted_value, extracted_error = BackgroundExtractor(
+                    for error_confidence in numpy.linspace(0.1, 0.9, 10):
+                        (
+                            extracted_value,
+                            extracted_error,
+                            extracted_npix
+                        ) = BackgroundExtractor(
+                            image=image,
                             inner_radius=inner,
                             outer_radius=image.shape[0] + image.shape[1],
                             error_confidence=error_confidence
-                        )(image, numpy.array([source_x]), numpy.array(source_y))
+                        )(
+                            numpy.array([source_x]),
+                            numpy.array([source_y])
+                        )
 
-                        min_range = extracted_value - extracted_error
-                        max_range = extracted_value + extracted_error
+                        extracted_error /= (numpy.pi
+                                            /
+                                            (2.0 * (extracted_npix - 1)))**0.5
 
-                        num_in_range = numpy.logical_and(
-                            pixels > min_range,
-                            pixels < max_range
-                        ).sum()
-
-                        self.assertEqual(
-                            num_in_range,
-                            numpy.ceil(error_confidence * pixels.size()),
+                        message = (
                             'BG radius = %f, source (%f, %f), confidence = %f'
                             %
                             (inner, source_x, source_y, error_confidence)
                         )
+
+                        self.assertEqual(extracted_npix, pixels.size, message)
+
+                        self.assertGreaterEqual(
+                            numpy.logical_and(
+                                pixels >= extracted_value - extracted_error,
+                                pixels <= extracted_value + extracted_error
+                            ).sum(),
+                            numpy.floor(error_confidence * pixels.size + 0.499),
+                            message
+                        )
+                        self.assertLessEqual(
+                            numpy.logical_and(
+                                pixels > extracted_value - extracted_error,
+                                pixels < extracted_value + extracted_error
+                            ).sum(),
+                            numpy.floor(error_confidence * pixels.size + 0.501),
+                            message
+                        )
+
+if __name__ == '__main__':
+    unittest.main(failfast=True)
