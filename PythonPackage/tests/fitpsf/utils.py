@@ -31,20 +31,27 @@ def make_image_and_source_list(sources,
 
     Args:
         sources:    A list of dictionaries with at least the following keywords:
+
                 * x:    The x coordinate of the source center.
+
                 * y:    The y coordinate of the source center.
+
                 * psf:    An instance of some sub-class of PSFBase giving the
-                    sources's PSF. It should already be scaled to the desired
-                    flux.
+                  sources's PSF. It should already be scaled to the desired
+                  flux.
+
             Additional keywords may be added to the source list and hence
             available as variables for PSF fitting by listing the names in the
             extra_variables argument.
 
         filenames: The names of the files to create:
+
             * image:    The filename to save the image under. If a file
-                with this name exists it is overwritten.
+              with this name exists it is overwritten.
+
             * source_list:    The filename to add the source list to. If a
-                file with this name exists it appended to.
+              file with this name exists it appended to.
+
             * psf_fit:    The filename to use for PSF fitting results.
 
         extra_variables:    A list of additional keywords from sources to add to

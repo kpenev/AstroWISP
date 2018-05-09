@@ -33,13 +33,15 @@ class FloatTestCase(unittest.TestCase):
     #Following standard unittest assert naming convections
     #pylint: disable=invalid-name
     def assertApprox(self, value_1, value_2, message=''):
-        """
+        r"""
         Assert that the two values are equal to wihin the current tolerance.
 
         Notes:
             The exact definition is:
 
-            |value_1 - value_2| <= tolerange * |value_1 + value_2|  * float_info.epsilon
+            \|value_1 - value_2\|
+            <=
+            tolerange * \|value_1 + value_2\|  * float_info.epsilon
 
         Args:
             value_1:    The first of the two values to compare.

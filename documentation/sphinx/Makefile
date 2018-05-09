@@ -8,8 +8,9 @@ SPHINXAPIDOC  = sphinx-apidoc
 SPHINXPROJ    = SuperPhot
 SOURCEDIR     = source
 MODULEDIR     = ../../PythonPackage/superphot
+TESTDIR     = ../../PythonPackage/tests
 BUILDDIR      = build
-APIDOCOPTS    = --force -M --separate -o "$(SOURCEDIR)/implementation" 
+APIDOCOPTS    = --force -M --separate
 
 # Put it first so that "make" without argument is like "make help".
 help:
@@ -20,5 +21,6 @@ help:
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
 %: Makefile
-	$(SPHINXAPIDOC) "$(MODULEDIR)" $(APIDOCOPTS)
+	$(SPHINXAPIDOC) "$(MODULEDIR)" $(APIDOCOPTS) -o "$(SOURCEDIR)/implementation" 
+	$(SPHINXAPIDOC) "$(TESTDIR)" $(APIDOCOPTS) -o "$(SOURCEDIR)/unit_tests" 
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)

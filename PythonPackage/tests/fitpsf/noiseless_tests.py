@@ -168,13 +168,14 @@ class TestPiecewiseBicubic(unittest.TestCase):
                 sources to fit. Each list of dictionaries specifies the sources
                 to drop on a single image. Each source must contain the
                 following:
+
                     * x:    The x coordinate of the source center.
 
                     * y:    The y coordinate of the source center.
 
                     * psf_args:    The arguments with which to create the
-                        PiecewiseBicubicPSF for the source. See
-                        PiecewiseBicubicPSF.__init__ for details.
+                      PiecewiseBicubicPSF for the source. See
+                      PiecewiseBicubicPSF.__init__ for details.
 
             psffit_terms:    The terms on which PSF parameters depend on. See
                 --psf.terms argument of the fitpsf command.
