@@ -63,23 +63,31 @@ namespace Background {
                         ? *median_bg_value
                         : 0.5 * (*median_bg_value + *(median_bg_value - 1)));
         while(
-            medbg - bg_range[0] > bg_range[range_len - 1] - medbg
-            && 
             bg_range != last_bg_value - range_len
+            &&
+            medbg - bg_range[0] > bg_range[range_len] - medbg
         )
             ++bg_range;
-        double errorbg;
-        if(bg_range + range_len < last_bg_value) 
-            errorbg = 0.5 * (bg_range[range_len - 1] + bg_range[range_len]);
+        double min_error = std::max(medbg - bg_range[0],
+                                    bg_range[range_len - 1] - medbg),
+               max_error;
+        if(bg_range > first_bg_value && bg_range + range_len < last_bg_value)
+            max_error = std::min(medbg - bg_range[-1],
+                                 bg_range[range_len] - medbg);
+        else if(bg_range > first_bg_value)
+            max_error = medbg - bg_range[-1];
+        else if(bg_range + range_len < last_bg_value)
+            max_error = bg_range[range_len] - medbg;
         else
-            errorbg = bg_range[range_len - 1];
-        if(bg_range>first_bg_value)
-            errorbg -= 0.5 * (bg_range[-1] + bg_range[0]);
-        else
-            errorbg -= bg_range[0];
-        Source result(medbg,
-                      errorbg * std::sqrt(M_PI / (2.0 * (num_bg_values - 1))),
-                      num_bg_values);
+            max_error = min_error;
+
+        Source result(
+            medbg,
+            (min_error + max_error) / 2.0
+            *
+            std::sqrt(M_PI / (2.0 * (num_bg_values - 1))),
+            num_bg_values
+        );
 #ifdef VERBOSE_DEBUG
         std::cerr << "BG(" << x << ", " << y << "): " << result << std::endl;
 #endif

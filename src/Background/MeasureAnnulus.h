@@ -91,7 +91,8 @@ namespace Background {
         ///the points whose centers lie within the annulus and not within the 
         ///inner edge of another source's annulus.
         ///
-        ///The uncertainty of the determined value is estimated as half the 
+        ///The uncertainty of the determined value is estimated as
+        /// \f$\sqrt{\frac{\pi}{2(N-1)}}\f$ times half the 
         ///size of the interval centered on the determined background value 
         ///that contains the fraction of the points specified at construction 
         ///as the error_confidence argument.
