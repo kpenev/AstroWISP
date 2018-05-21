@@ -48,8 +48,8 @@ namespace Background {
         ///The original image with the areas near sources masked.
         Core::Image<double> _bg_values;
     public:
-        ///Construct a background extractor for the given image excluding the
-        ///given aperture around all sources.
+        ///\brief Construct a background extractor for the given image excluding
+        ///pixels with centers inside the given aperture around all sources.
         MeasureExcludingSources(
             ///The image for which background extraction is to be done.
             const Core::Image<double> &image, 
@@ -63,8 +63,9 @@ namespace Background {
             exclude_mask();
         }
 
-        ///Construct a background extractor for the given image excluding an 
-        ///aperture of the given size around all the sources listed.
+        ///\brief Construct a background extractor for the given image excluding
+        ///pixels with centers inside the given aperture around all listed
+        ///sources.
         template<class POINT_TYPE>
         MeasureExcludingSources(
             ///The image for which background extraction is to be done.

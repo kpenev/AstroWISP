@@ -12,11 +12,11 @@
 
 extern "C" {
     ///Opaque struct to cast to/from Background::MeasureAnnulus.
-    struct BackgroundMeasureAnnulus;
+    struct LIB_PUBLIC BackgroundMeasureAnnulus;
 
     ///\brief Create an object for measuring the background in an annulus around
     ///each source.
-    BackgroundMeasureAnnulus *create_background_extractor(
+    LIB_PUBLIC BackgroundMeasureAnnulus *create_background_extractor(
         ///Inner radius of the annulus used for background determination.
         double inner_radius,
 
@@ -34,7 +34,7 @@ extern "C" {
     );
 
     ///Destroy a previously created background extractor.
-    void destroy_background_extractor(
+    LIB_PUBLIC void destroy_background_extractor(
         ///The background extractor to destroy. Must have been created using
         ///create_background_extractor().
         BackgroundMeasureAnnulus *extractor
@@ -52,6 +52,23 @@ extern "C" {
 
         ///The y coordinate (within the image) of the source to add.
         double y
+    );
+
+    ///Add a list of sources to the background.
+    LIB_PUBLIC void add_source_list_to_background_extractor(
+        ///The background extractor to add the sources to.
+        BackgroundMeasureAnnulus *extractor,
+
+        ///The x coordinates (within the image) of the sources to add. Must have
+        ///at least num_sources entries.
+        double *x,
+
+        ///The y coordinates (within the image) of the source to add. Must have
+        ///at least num_sources entries.
+        double *y,
+
+        ///The number of new sources to add.
+        size_t num_sources
     );
 
     ///Estimate the background at a specified position.
@@ -89,12 +106,13 @@ extern "C" {
     ///\brief Get the background under the current source and advance to the
     ///next source.
     ///
-    ///Return valuen indicates whether there are more sources pending.
+    ///Return value indicates whether there are more sources pending.
     bool get_next_background(
         ///The background extractor to use.
         BackgroundMeasureAnnulus *extractor,
 
-        ///Overwritten with the best estimate of the background at (x, y).
+        ///Overwritten with the best estimate of the background under the
+        ///current source.
         double *value,
 
         ///Overwritten with the best estimate of the uncertainty in the
@@ -103,6 +121,27 @@ extern "C" {
 
         ///Overwritten with the number of pixels that contributed to the
         ///determination of the value and error.
+        unsigned *pixels
+    );
+
+    ///\brief Get the backgrounds under all currently added sources.
+    LIB_PUBLIC void get_all_backgrounds(
+        ///The background extractor to use.
+        BackgroundMeasureAnnulus *extractor,
+
+        ///Filled with the best estimates of the backgrounds. Must be
+        ///pre-allocated by the caller, or NULL in which case background values
+        //are not returned.
+        double *values,
+
+        ///Filled with the best estimate of the uncertainty in the
+        ///backgronud determination. Must be pre-allocated by the caller, or
+        ///NULL in which case background values are not returned.
+        double *errors,
+
+        ///Filled with the number of pixels that contributed to the
+        ///determination of the value and error. Must be pre-allocated by
+        ///the caller, or NULL in which case background values are not returned.
         unsigned *pixels
     );
 };//End extern "C".

@@ -30,6 +30,7 @@ class PiecewisePSF(PSFBase):
         """
         Define a PSF with the given boundaries.
 
+        Args:
             boundaries:    Dictionary with keys `x` and `y` giving the offsets
                 relative to the center of the horizontal piece boundaries. The
                 PSF is zero left of the first or right of the last x boundary

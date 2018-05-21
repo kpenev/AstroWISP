@@ -86,16 +86,16 @@ class PiecewiseBicubicPSF(PiecewisePSF):
             psf_parameters:    A dictionary of 2x2 structures with keys:
 
                 * values:    The values of the piece bi-cubic polynomial af the
-                    corners of the piece edge.
+                  corners of the piece edge.
 
                 * d_dx:    The x derivatives of the piece bi-cubic polynomial af
-                    the corners of the piece edge.
+                  the corners of the piece edge.
 
                 * d_dy:    The y derivatives of the piece bi-cubic polynomial af
-                    the corners of the piece edge.
+                  the corners of the piece edge.
 
                 * d2_dxdy:    The x,y cross-derivatives of the piece bi-cubic
-                    polynomial af the corners of the piece edge.
+                  polynomial af the corners of the piece edge.
 
         Returns:
             None

@@ -57,6 +57,7 @@ class PSFBase(ABC):
             height:    The vertical size of the rectangle to integrate over.
 
         Returns:
-            integral:    The integral of the PSF over left < x < left + width
+            float:
+                The integral of the PSF over left < x < left + width,
                 bottom < y < bottom + height
         """

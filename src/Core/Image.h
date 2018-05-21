@@ -331,6 +331,7 @@ namespace Core {
             {
                 if(!__wrapped) {
                     if(__values) delete[] __values;
+                    if(__errors) delete[] __errors;
                     if(__mask) delete[] __mask;
                 }
             }

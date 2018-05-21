@@ -30,10 +30,10 @@ class PSFPiece(ABC):
             height:    The y-size of the rectangle to integrate over.
 
         Returns:
-            integral:    The integral of the bi-cubic polynomial function
-                defining this piece of the PSF over the specified rectangle,
-                with no consideration of whether the rectangle fits within the
-                piece.
+            float:
+                The integral of the bi-cubic polynomial function defining this
+                piece of the PSF over the specified rectangle, with no
+                consideration of whether the rectangle fits within the piece.
         """
     #pylint: enable=invalid-name
 
