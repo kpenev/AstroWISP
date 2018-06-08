@@ -404,7 +404,7 @@ namespace SubPixPhot {
                 "Input PSF map file does not define a PSF model."
         );
         if(psf_model=="bicubic" || psf_model=="zero") 
-            return new PSF::PiecewiseBicubicMap(psf_data, max_aperture);
+            return new PSF::PiecewiseBicubicMap(psf_data, max_aperture + 1.0);
         else {
             assert(psf_model=="sdk");
             return new PSF::EllipticalGaussianMap(psf_data);
