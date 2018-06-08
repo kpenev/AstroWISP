@@ -297,23 +297,23 @@ namespace Core {
 #endif
 #endif
                         ),
-                                     partial_pix_int = (
-                                         std::isnan(r)
-                                         ? full_pix_int
-                                         : psf.integrate(
-                                             x + dx * x_i,
-                                             y + dy * y_i,
-                                             dx,
-                                             dy,
-                                             r
+                        partial_pix_int = (
+                            std::isnan(r)
+                            ? full_pix_int
+                            : psf.integrate(
+                                x + dx * x_i,
+                                y + dy * y_i,
+                                dx,
+                                dy,
+                                r
 #ifdef DEBUG
 #ifdef SHOW_PSF_PIECES
-                                             ,
-                                             reset_piece_id
+                                ,
+                                reset_piece_id
 #endif
 #endif
-                                         )
-                                     );
+                            )
+                        );
                     raw += partial_pix_int;
                     if(__subpixel_map)
                         weighted += full_pix_int * (*__subpixel_map)(x_i, y_i);
