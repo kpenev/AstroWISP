@@ -3,6 +3,7 @@ var searchData=
   ['gain',['gain',['../classFitPSF_1_1Image.html#a38a6d3c3ce6db4b3c1263a1d331ed067',1,'FitPSF::Image']]],
   ['general',['General',['../classError_1_1General.html',1,'Error']]],
   ['general',['General',['../classError_1_1General.html#aef3db2581226ded5704214d8826f63fb',1,'Error::General']]],
+  ['get_5fall_5fbackgrounds',['get_all_backgrounds',['../Background_2CInterface_8h.html#aadfa0077727f5dc6f4221ce08a4a8e29',1,'get_all_backgrounds(BackgroundMeasureAnnulus *extractor, double *values, double *errors, unsigned *pixels):&#160;CInterface.cpp'],['../Background_2CInterface_8cpp.html#a31cf1eb72bef0fc9aaf0ff856ea67557',1,'get_all_backgrounds(BackgroundMeasureAnnulus *extractor, double *values, double *errors, unsigned *pixels):&#160;CInterface.cpp']]],
   ['get_5fcoefficients',['get_coefficients',['../classFitPSF_1_1PolynomialSDK.html#aed4c7b61554a95b5247a35a9c1808f2b',1,'FitPSF::PolynomialSDK']]],
   ['get_5fcomment',['get_comment',['../classIO_1_1FitsHeader.html#a38ba0f4134eb803bc93e349d4be20d09',1,'IO::FitsHeader']]],
   ['get_5ffit_5fsources',['get_fit_sources',['../namespaceFitPSF.html#ab8b7c93401ce2682aed24ec91179779f',1,'FitPSF']]],

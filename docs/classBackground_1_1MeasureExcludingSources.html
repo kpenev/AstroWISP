@@ -142,9 +142,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a8671d331a41144b8c47c07a8bb8f62e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restart iteration over sources from the beginning.  <a href="#a8671d331a41144b8c47c07a8bb8f62e4">More...</a><br /></td></tr>
 <tr class="separator:a8671d331a41144b8c47c07a8bb8f62e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf84de066a9b352e5f3e9f86c0f420c3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBackground_1_1MeasureExcludingSources.html#abf84de066a9b352e5f3e9f86c0f420c3">MeasureExcludingSources</a> (const <a class="el" href="classCore_1_1Image.html">Core::Image</a>&lt; double &gt; &amp;image, double exclude_aperture)</td></tr>
+<tr class="memdesc:abf84de066a9b352e5f3e9f86c0f420c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a background extractor for the given image excluding pixels with centers inside the given aperture around all sources.  <a href="#abf84de066a9b352e5f3e9f86c0f420c3">More...</a><br /></td></tr>
 <tr class="separator:abf84de066a9b352e5f3e9f86c0f420c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a83b738ab93228333240b38c6fe9b319d"><td class="memTemplParams" colspan="2">template&lt;class POINT_TYPE &gt; </td></tr>
 <tr class="memitem:a83b738ab93228333240b38c6fe9b319d"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classBackground_1_1MeasureExcludingSources.html#a83b738ab93228333240b38c6fe9b319d">MeasureExcludingSources</a> (const <a class="el" href="classCore_1_1Image.html">Core::Image</a>&lt; double &gt; &amp;image, double exclude_aperture, const std::list&lt; POINT_TYPE &gt; &amp;sources)</td></tr>
+<tr class="memdesc:a83b738ab93228333240b38c6fe9b319d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a background extractor for the given image excluding pixels with centers inside the given aperture around all listed sources.  <a href="#a83b738ab93228333240b38c6fe9b319d">More...</a><br /></td></tr>
 <tr class="separator:a83b738ab93228333240b38c6fe9b319d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a285770ad49963da07a7fd825809fb0b0"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classBackground_1_1Source.html">Source</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBackground_1_1MeasureExcludingSources.html#a285770ad49963da07a7fd825809fb0b0">operator()</a> () const </td></tr>
 <tr class="memdesc:a285770ad49963da07a7fd825809fb0b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Estimate the background around the current source.  <a href="#a285770ad49963da07a7fd825809fb0b0">More...</a><br /></td></tr>
@@ -345,7 +347,8 @@ template&lt;class POINT_TYPE &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Construct a background extractor for the given image excluding the given aperture around all sources. </p>
+
+<p>Construct a background extractor for the given image excluding pixels with centers inside the given aperture around all sources. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">image</td><td>The image for which background extraction is to be done. </td></tr>
@@ -387,7 +390,8 @@ template&lt;class POINT_TYPE &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Construct a background extractor for the given image excluding an aperture of the given size around all the sources listed. </p>
+
+<p>Construct a background extractor for the given image excluding pixels with centers inside the given aperture around all listed sources. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">image</td><td>The image for which background extraction is to be done. </td></tr>
@@ -800,6 +804,32 @@ template&lt;class POINT_TYPE &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a8e54fbfe39cb5ae5012e8f3a59350fe2"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classBackground_1_1Source.html">Source</a> Background::MeasureExcludingSources::operator() </td>
+          <td>(</td>
+          <td class="paramtype">const Point&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>location</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Estimate the background around the given position. </p>
+
+</div>
+</div>
 <a class="anchor" id="a285770ad49963da07a7fd825809fb0b0"></a>
 <div class="memitem">
 <div class="memproto">
@@ -824,32 +854,6 @@ template&lt;class POINT_TYPE &gt; </div>
 <p>Estimate the background around the current source. </p>
 
 <p>Implements <a class="el" href="classBackground_1_1Measure.html#a89083050439dece3bda6dc4d8a669a09">Background::Measure</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a8e54fbfe39cb5ae5012e8f3a59350fe2"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual <a class="el" href="classBackground_1_1Source.html">Source</a> Background::MeasureExcludingSources::operator() </td>
-          <td>(</td>
-          <td class="paramtype">const Point&lt; double &gt; &amp;&#160;</td>
-          <td class="paramname"><em>location</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Estimate the background around the given position. </p>
 
 </div>
 </div>
@@ -1175,7 +1179,7 @@ template&lt;class POINT_TYPE &gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceBackground.html">Background</a></li><li class="navelem"><a class="el" href="classBackground_1_1MeasureExcludingSources.html">MeasureExcludingSources</a></li>
-    <li class="footer">Generated on Thu May 3 2018 17:25:12 for SuperPhot by
+    <li class="footer">Generated on Tue May 8 2018 18:28:30 for SuperPhot by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

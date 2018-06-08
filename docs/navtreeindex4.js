@@ -1,5 +1,16 @@
 var NAVTREEINDEX4 =
 {
+"classError_1_1Runtime.html#af8a652eee0c4c25f618fd1f2cb6ab6dd":[5,1,0,34,1],
+"classError_1_1Runtime.html#af8a652eee0c4c25f618fd1f2cb6ab6dd":[5,1,2,21,1],
+"classError_1_1Type.html":[5,1,1,28],
+"classError_1_1Type.html":[5,1,0,35],
+"classError_1_1Type.html":[5,1,2,22],
+"classError_1_1Type.html#a32f715211653f591637ae43c3612aa76":[5,1,1,28,1],
+"classError_1_1Type.html#a32f715211653f591637ae43c3612aa76":[5,1,0,35,1],
+"classError_1_1Type.html#a32f715211653f591637ae43c3612aa76":[5,1,2,22,1],
+"classError_1_1Type.html#acdc7bc83c0c8c4bb8e82e277a3499189":[5,1,1,28,0],
+"classError_1_1Type.html#acdc7bc83c0c8c4bb8e82e277a3499189":[5,1,0,35,0],
+"classError_1_1Type.html#acdc7bc83c0c8c4bb8e82e277a3499189":[5,1,2,22,0],
 "classFitPSF_1_1AmplitudeSaturatedPixel.html":[5,1,0,47],
 "classFitPSF_1_1AmplitudeSaturatedPixel.html#a179e54a7e4e770c5b941b65d8ed16a75":[5,1,0,47,2],
 "classFitPSF_1_1AmplitudeSaturatedPixel.html#a379b389a07c481ebe2a22ee0663ed088":[5,1,0,47,5],
@@ -238,16 +249,5 @@ var NAVTREEINDEX4 =
 "classFitPSF_1_1SDKSourceBase.html#a5a2e225e7db0b25080ef281e5ab14163":[5,1,0,44,5],
 "classFitPSF_1_1SDKSourceBase.html#a6c135850c8b03eef959d6e6fcc59b6cd":[5,1,0,44,14],
 "classFitPSF_1_1SDKSourceBase.html#a765eccee24b52831d542a177b6edc70d":[5,1,0,44,15],
-"classFitPSF_1_1SDKSourceBase.html#a7a8d41941c294d83bb449ebf798bc10b":[5,1,0,44,4],
-"classFitPSF_1_1SDKSourceBase.html#a80a70e5883c2323f083f51f606f3278e":[5,1,0,44,13],
-"classFitPSF_1_1SDKSourceBase.html#a82d58a04f19e0f9fee5dcbbf9a052e9a":[5,1,0,44,10],
-"classFitPSF_1_1SDKSourceBase.html#a89d29eabdbae4709ea3952fc23906520":[5,1,0,44,7],
-"classFitPSF_1_1SDKSourceBase.html#a95938dc569000a158863f3aaa0c5d528":[5,1,0,44,1],
-"classFitPSF_1_1SDKSourceBase.html#aaed95f009e84231a452bb71e7436535e":[5,1,0,44,16],
-"classFitPSF_1_1SDKSourceBase.html#abbbd5dbb7295534fbaac2e721e52e2de":[5,1,0,44,8],
-"classFitPSF_1_1SDKSourceBase.html#ada6c4d93ab4e19b702550941e6b36fdb":[5,1,0,44,2],
-"classFitPSF_1_1SDKSourceBase.html#af9dcccaf5743ff449b6f593c5a1a037d":[5,1,0,44,0],
-"classFitPSF_1_1Source.html":[5,1,0,43],
-"classFitPSF_1_1Source.html#a0a782e0369f7cddf89e2ff5ed7f57e59":[5,1,0,43,49],
-"classFitPSF_1_1Source.html#a0b3a38bb59b57a5fbda5d9f4ee37c2e2":[5,1,0,43,5]
+"classFitPSF_1_1SDKSourceBase.html#a7a8d41941c294d83bb449ebf798bc10b":[5,1,0,44,4]
 };

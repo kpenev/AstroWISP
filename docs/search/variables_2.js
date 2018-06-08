@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['backgroundmeasureannulus',['BackgroundMeasureAnnulus',['../Background_2CInterface_8h.html#abd66dcf0a8118f20fff6c1aad3255d11',1,'CInterface.h']]],
   ['bad_5fbackground',['BAD_BACKGROUND',['../Common_8h.html#a992da3bfb68f541be3e238c1f337708d',1,'Common.h']]],
   ['bg',['bg',['../PhotColumns_8h.html#a5fef7fc88df7ec49fc9494801ceb0faa',1,'PhotColumns.h']]],
   ['bg_5ferr',['bg_err',['../PhotColumns_8h.html#a4fa1b770ce6c9b09506de97f642a9bd9',1,'PhotColumns.h']]],
