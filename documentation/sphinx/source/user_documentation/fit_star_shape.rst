@@ -8,8 +8,14 @@ SuperPhot. This is accomplished using the :mod:`fit_star_shape` module.
 Currently only piecewise bi-cubic PSF/PRF models are supported, with the shape
 constrained to depend smoothly on image position and any other user-defined
 parameters, possibly accross multiple images simultaneously and the amplitudes
-(fluxs) of sources being independent of each other. The following must be
-specified by the user:
+(fluxs) of sources being independent of each other. Fitting is done by
+constructing an instance of :class:`FitStarShape` and calling it on a collection
+of frames to be fit simultaneously and a list of all the sources in each frame.
+The exact 
+accomplished by
+specifying the frames to process and a list of sources for each frame
+The following configuration
+parameters control the fitting:
 
     * **Source lists:** dictionary, with keys - the filename of the reduced frame to
       fit the PSF/PRF of and values - list of sources to process, defining at
@@ -103,3 +109,6 @@ specified by the user:
     * **smoothing:** How much smoothing penalty to impose when fitting the PSF.
       ``None`` for no smoothing. Value can be both positive and negative and will
       always result in smoothing (less for negative values).
+
+As usual those can be specified in three stages: when constructing the instance
+of 
