@@ -10,7 +10,7 @@ import os.path
 import sys
 import numpy
 import h5py
-import pyfits
+from astropy.io import fits as pyfits
 
 module_path = os.path.abspath(os.path.dirname(__file__))
 

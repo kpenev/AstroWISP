@@ -17,7 +17,11 @@ sys.path.insert(
     )
 )
 
+#Needs to be after os.path and sys to allow adding the seach path.
+#pylint: disable=wrong-import-position
 from superphot import FitStarShape
+from tests.utilities import FloatTestCase
+#pylint: enable=wrong-import-position
 
 class TestPSFFittingNoiseless(FloatTestCase):
     """Test piecewise bicubic PSF fitting on noiseless images."""
