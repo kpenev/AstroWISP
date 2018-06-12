@@ -2,4 +2,4 @@
 
 from superphot.background import BackgroundExtractor
 
-__all__ = ['BackgroundExtractor']
+__all__ = ['BackgroundExtractor', 'FitStarShape']

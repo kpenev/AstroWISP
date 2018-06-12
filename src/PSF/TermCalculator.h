@@ -730,10 +730,25 @@ namespace PSF {
         }
     }
 
+    ///Fill result with the value of each term for each source.
     template<class TermIterator, class VarIterator, class ResultType>
-    void evaluate_terms(TermIterator start_term, TermIterator end_term,
-                        VarIterator start_var, VarIterator end_var,
-                        ResultType &result)
+        void evaluate_terms(
+            ///Iterator to the first term to evaluate. Each term is a string
+            ///expression involving variables defined by start_var/end_var.
+            TermIterator start_term,
+
+            ///One past the last term to evaluate.
+            TermIterator end_term,
+
+            ///See same name argument to evaluate_term_expression.
+            VarIterator start_var,
+
+            ///See same name argument to evaluate_term_expression.
+            VarIterator end_var,
+
+            ///See same name argument to evaluate_term_expression.
+            ResultType &result
+        )
     {
         TermCalculator::Grammar< std::string::const_iterator, TermValarray > 
             calculator_grammar(start_var->second.size());
@@ -764,11 +779,26 @@ namespace PSF {
         }
     }
 
+    ///Fill result with all terms the PSF depends on per term_expression
     template<class VarIterator, class ResultType>
-    void evaluate_term_expression(const std::string &term_expression,
-                                  VarIterator start_var,
-                                  VarIterator end_var,
-                                  ResultType &result)
+        void evaluate_term_expression(
+            ///The expression defining the terms to include in PSF fitting (see
+            ///Grammar for syntax).
+            const std::string &term_expression,
+
+            ///Iterator to the first varuable that participates in the
+            ///expression. Entries should be pairs of <variable name>, <array of
+            ///values for each source>
+            VarIterator start_var,
+
+            ///Iterator to one past the last variable that participates in the
+            ///expression.
+            VarIterator end_var,
+
+            ///The location to fill with the PSF map terms. Resized as necessary
+            ///to fit the result.
+            ResultType &result
+        )
     {
         assert(term_expression != "");
         using boost::spirit::ascii::space;
@@ -795,8 +825,10 @@ namespace PSF {
         }
 
         result.resize(terms.size());
-        evaluate_terms(terms.begin(), terms.end(),
-                       start_var, end_var,
+        evaluate_terms(terms.begin(),
+                       terms.end(),
+                       start_var,
+                       end_var,
                        result);
     }
 
