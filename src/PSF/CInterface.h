@@ -12,7 +12,7 @@
 extern "C" {
     ///\brief Expand the given expression into a list of expressions, each
     ///defining a single PSF expansion term.
-    void expand_term_expression(
+    void LIB_PUBLIC expand_term_expression(
         ///The expression to parse. See TermGenerator::Grammar for a description
         ///of the syntax.
         char *expansion_term_expression,
@@ -26,7 +26,7 @@ extern "C" {
     );
 
     ///Free the memory allocated by a previous call to expand_term_expression.
-    void free_term_list(
+    void LIB_PUBLIC free_term_list(
         ///The list of terms created by expand_term_expression() to free.
         char **term_list,
 
@@ -35,7 +35,7 @@ extern "C" {
     );
 
     ///\brief Evaluate the given terms for the given list of sources.
-    void evaluate_terms(
+    void LIB_PUBLIC evaluate_terms(
         ///The list of terms to evaluate. Usually created by
         ///expand_term_expression().
         char **term_list,
@@ -54,10 +54,12 @@ extern "C" {
         unsigned num_variables,
 
         ///The number of sources to evaluate the terms of.
-        unsigned num_sources
+        unsigned num_sources,
 
         ///The location to fill with the evaluated terms. Must already be
-        ///allocated with a size of num_variables * num_sources.
+        ///allocated with a size of num_variables * num_sources. The values of
+        ///the first term for all sources is at the beginning of the array,
+        ///followed by the value of the second term for all sources etc.
         double *result
     );
 

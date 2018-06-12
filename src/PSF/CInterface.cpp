@@ -16,24 +16,32 @@ void expand_term_expression(char *expansion_term_expression,
 
     typedef std::list< std::string > GeneratorResultType;
     GeneratorResultType terms;
-    TermGenerator::Grammar< std::string::const_iterator,
+    PSF::TermGenerator::Grammar< std::string::const_iterator,
         GeneratorResultType > generator_grammar;
 
-    bool parser_status = phrase_parse(
-        expansion_term_expression
-        (
-            expansion_term_expression
-            +
-            std::char_traits<char>::length(expansion_term_expression)
-        ),
-        generator_grammar,
-        space,
-        terms
-    );
+    const char *parse_start = expansion_term_expression,
+               *parse_end = (
+                   expansion_term_expression
+                   +
+                   std::char_traits<char>::length(expansion_term_expression)
+               );
 
-    num_terms = terms.size();
+    bool parser_status = phrase_parse(parse_start,
+                                      parse_end,
+                                      generator_grammar,
+                                      space,
+                                      terms);
 
-    term_list = new char*[num_terms];
+    if ( !parser_status || parse_start != parse_end ) {
+        std::ostringstream message;
+        message << "PSF terms parsing failed at "
+                << std::string(parse_start, parse_end);
+        throw Error::CommandLine(message.str());
+    }
+
+    *num_terms = terms.size();
+
+    term_list = new char*[*num_terms];
     unsigned term_index = 0;
     for(
         GeneratorResultType::const_iterator term_iter = terms.begin();
@@ -41,9 +49,9 @@ void expand_term_expression(char *expansion_term_expression,
         ++term_iter, ++term_index
     ) {
         term_list[term_index] = new char[term_iter->size() + 1];
-        std::strcpy(term_list[term_index],
-                    term_iter->c_str(),
-                    term_iter->size() + 1);
+        std::strncpy(term_list[term_index],
+                     term_iter->c_str(),
+                     term_iter->size() + 1);
     }
 }
 
@@ -60,7 +68,45 @@ void evaluate_terms(char **term_expressions,
                     char **variable_names,
                     double **variables,
                     unsigned num_variables,
-                    unsigned num_sources
+                    unsigned num_sources,
                     double *result)
 {
+    PSF::TermCalculator::Grammar<std::string::const_iterator,
+                                 PSF::TermValarray>
+            calculator_grammar(num_sources);
+
+    std::vector<PSF::TermValarray*> variable_copies(num_variables);
+    for(unsigned var_index = 0; var_index < num_variables; ++var_index) {
+        variable_copies[var_index] = new PSF::TermValarray(variables[var_index],
+                                                           num_sources);
+        calculator_grammar.add_variable(variable_names[var_index],
+                                        *variable_copies[var_index]);
+    }
+
+    unsigned result_index = 0;
+    for(unsigned term_index = 0; term_index < num_terms; ++term_index) {
+        using boost::spirit::ascii::space;
+        using boost::spirit::qi::phrase_parse;
+
+        char *parse_start = term_expressions[term_index],
+             *parse_end = (parse_start
+                           +
+                           std::strlen(parse_start));
+        bool parser_status = phrase_parse(
+            parse_start,
+            parse_end,
+            calculator_grammar,
+            space,
+            result + term_index * num_sources
+        );
+        if( !parser_status || parse_start != parse_end ) {
+            std::ostringstream msg;
+            msg << "Parsing " << *start_term 
+                << " failed at " << std::string(parse_start, parse_end);
+            throw Error::ParsingError(msg.str());
+        }
+    }
+
+    for(unsigned var_index = 0; var_index < num_variables; ++var_index)
+        delete variable_copies[var_index];
 }
