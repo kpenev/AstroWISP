@@ -19,12 +19,10 @@ void expand_term_expression(char *expansion_term_expression,
     PSF::TermGenerator::Grammar< std::string::const_iterator,
         GeneratorResultType > generator_grammar;
 
-    const char *parse_start = expansion_term_expression,
-               *parse_end = (
-                   expansion_term_expression
-                   +
-                   std::char_traits<char>::length(expansion_term_expression)
-               );
+    std::string string_expression(expansion_term_expression);
+
+    std::string::const_iterator parse_start = string_expression.begin(),
+                                parse_end = string_expression.end();
 
     bool parser_status = phrase_parse(parse_start,
                                       parse_end,
@@ -83,30 +81,41 @@ void evaluate_terms(char **term_expressions,
                                         *variable_copies[var_index]);
     }
 
-    unsigned result_index = 0;
+
     for(unsigned term_index = 0; term_index < num_terms; ++term_index) {
         using boost::spirit::ascii::space;
         using boost::spirit::qi::phrase_parse;
 
-        char *parse_start = term_expressions[term_index],
-             *parse_end = (parse_start
-                           +
-                           std::strlen(parse_start));
+        std::string string_term(term_expressions[term_index]);
+        std::string::const_iterator parse_start = string_term.begin(),
+                                    parse_end = string_term.end();
+
+        PSF::TermValarray expansion_term_values;
         bool parser_status = phrase_parse(
             parse_start,
             parse_end,
             calculator_grammar,
             space,
-            result + term_index * num_sources
+            expansion_term_values
         );
         if( !parser_status || parse_start != parse_end ) {
             std::ostringstream msg;
-            msg << "Parsing " << *start_term 
+            msg << "Parsing " << term_expressions[term_index]
                 << " failed at " << std::string(parse_start, parse_end);
             throw Error::ParsingError(msg.str());
         }
+
+        for(
+            unsigned source_index = 0;
+            source_index < num_sources;
+            ++source_index
+        )
+            result[source_index * num_terms + term_index] =
+                expansion_term_values[source_index];
+
     }
 
     for(unsigned var_index = 0; var_index < num_variables; ++var_index)
         delete variable_copies[var_index];
+
 }

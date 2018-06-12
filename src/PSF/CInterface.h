@@ -58,8 +58,8 @@ extern "C" {
 
         ///The location to fill with the evaluated terms. Must already be
         ///allocated with a size of num_variables * num_sources. The values of
-        ///the first term for all sources is at the beginning of the array,
-        ///followed by the value of the second term for all sources etc.
+        ///all terms for the first source are at the beginning of the array,
+        ///followed by the value of all terms for the second source etc.
         double *result
     );
 
