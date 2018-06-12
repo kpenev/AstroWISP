@@ -10,7 +10,7 @@ namespace PSF {
         opt::validators::check_first_occurrence(value);
         const std::string &grid_string = 
             opt::validators::get_single_string(option_strings);
-        value = boost::any(Grid(grid_string));
+        value = boost::any(IO::parse_grid_string(grid_string));
     }
 
     void validate(boost::any& value,

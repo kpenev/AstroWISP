@@ -71,7 +71,7 @@ namespace IO {
                 std::string sub_sub_key = sub_key.substr(subkey_split + 1);
                 if(sub_sub_key == "grid")
                     put(__prefix + sub_sub_key, 
-                        std::string(value.as<PSF::Grid>()),
+                        represent_grid(value.as<PSF::Grid>()),
                         translate_string);
                 else put(__prefix + sub_sub_key, value.value());
             }

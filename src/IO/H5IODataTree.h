@@ -11,6 +11,7 @@
 #include "../Core/SharedLibraryExportMacros.h"
 #include "CommandLineConfig.h"
 #include "TranslateToAny.h"
+#include "parse_grid.h"
 #include "../Background/Annulus.h"
 #include "../Core/PhotColumns.h"
 #include "../Core/Error.h"
@@ -51,7 +52,7 @@ namespace IO {
 
         ///The PSF model used (for PSF fitting only).
         std::string __psf_model;
-        
+
         ///\brief Prepares the tree for the specific tool used.
         void initialize_command_line(
             ///The number of command line tokens.
