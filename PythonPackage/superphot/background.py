@@ -12,9 +12,10 @@ from ctypes import\
 from ctypes.util import find_library
 import numpy.ctypeslib
 
-#Naming convention imitated the one by ctypes.
-#Type checking place holders require no content.
+#Naming convention imitates the one by ctypes.
 #pylint: disable=invalid-name
+
+#Type checking place holders require no content.
 #pylint: disable=too-few-public-methods
 class _c_background_extractor_p(c_void_p):
     pass
