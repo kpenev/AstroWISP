@@ -7,6 +7,7 @@
  */
 
 #include "TermCalculator.h"
+#include "Typedefs.h"
 #include <string>
 
 extern "C" {
@@ -19,7 +20,7 @@ extern "C" {
 
         ///The individual terms in the expression. Allocates new memory.
         ///Caller must release allocated memory when no longer required.
-        char **term_list,
+        char ***term_list,
 
         ///On exit, set to the number of terms found in the term expression.
         unsigned *num_terms
@@ -48,7 +49,7 @@ extern "C" {
 
         ///The values of the variables used by the expressions in terms for each
         ///source.
-        double **variables,
+        double **variable_values,
 
         ///The number of different variables used.
         unsigned num_variables,

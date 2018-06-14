@@ -73,7 +73,7 @@ namespace IO {
 
     template<typename UNIT_TYPE>
         template<class INPUT_ARRAY_TYPE>
-        bool OutputArray<UNIT_TYPE>::try_container_type(const boost::any &value)
+        bool LIB_PUBLIC OutputArray<UNIT_TYPE>::try_container_type(const boost::any &value)
         {
             try {
                 const INPUT_ARRAY_TYPE &
@@ -94,7 +94,7 @@ namespace IO {
 
     template<typename UNIT_TYPE>
         template<class INPUT_ARRAY_TYPE>
-        bool OutputArray<UNIT_TYPE>::try_array_type(const boost::any &value)
+        bool LIB_PUBLIC OutputArray<UNIT_TYPE>::try_array_type(const boost::any &value)
         {
             try {
                 const INPUT_ARRAY_TYPE &
@@ -114,7 +114,7 @@ namespace IO {
         }
 
     template<typename UNIT_TYPE>
-        void OutputArray<UNIT_TYPE>::parse(const boost::any &value)
+        void LIB_PUBLIC OutputArray<UNIT_TYPE>::parse(const boost::any &value)
         {
 
             typedef Eigen::Matrix<UNIT_TYPE, Eigen::Dynamic, 1> vector_eigen;
@@ -131,10 +131,10 @@ namespace IO {
                 throw boost::bad_any_cast();
         }
 
-    template<> void OutputArray<double>::parse(const boost::any &value);
+    template<> void LIB_PUBLIC OutputArray<double>::parse(const boost::any &value);
 
     template<typename UNIT_TYPE>
-        bool OutputArray<UNIT_TYPE>::operator==(const OutputArray &rhs)
+        bool LIB_PUBLIC OutputArray<UNIT_TYPE>::operator==(const OutputArray &rhs)
         {
             for(hsize_t i = 0; i < __size; ++i)
                 if(__data[i] != rhs.__data[i]) return false;
