@@ -46,7 +46,7 @@ def _initialize_library():
     return library
 
 class SmoothDependence:
-    """
+    r"""
     Utilities for imposing smooth depnedence of one quantity on others.
 
     Attributes:
@@ -61,6 +61,47 @@ class SmoothDependence:
             the corresponding expansion coefficients. If array, the first
             dimension is assumed to contain the expansion coefficients.
 
+    Examples:
+
+        * Find all terms combining up to x^3 and y^4, with only even powers of y
+          allowed:
+
+            >>> from superphot import SmoothDependence
+            >>> term_list = SmoothDependence.expand_expression('O3{x} * O2{y^2}')
+
+        * Evaluate all terms in a polynomial of x and y of up to combined third
+          order:
+
+          >>> from superphot import SmoothDependence
+          >>> import numpy
+          >>> term_values = SmoothDependence.evaluate_terms(
+          >>>     'O3{x, y}',
+          >>>     x=numpy.arange(10.0),
+          >>>     y=numpy.arange(-10.0, 0.0)
+          >>> )
+
+        * Define two unnamed parameters smoothly depending on x:
+
+              * :math:`2.0 x + 4.0 x^2 + 6.0 x^3`
+              * :math:`1.0 + 3.0 x + 5.0 x^2 + 7.0 x^3`
+
+          and evaluate them for :math:`x \in \{0, 0.1, 0.2, 0.3, 0.4\}`::
+
+          >>> from superphot import SmoothDependence
+          >>> import numpy
+          >>> parameters = numpy.arange(8.0).reshape((4, 2))
+          >>> smooth = SmoothDependence('O3{x}', parameters)
+          >>> param_values = smooth(x=numpy.arange(0.0, 0.45, 0.1))
+
+        * Same as above, but this time name the parameters `a` and `b`::
+
+          >>> from superphot import SmoothDependence
+          >>> import numpy
+          >>> parameters = numpy.empty(4, dtype = [('a', float), ('b', float)])
+          >>> parameters['a'] = numpy.arange(0.0, 7.5, 2.0)
+          >>> parameters['b'] = numpy.arange(1.0, 7.5, 2.0)
+          >>> smooth = SmoothDependence('O3{x}', parameters)
+          >>> param_values = smooth(x=numpy.arange(0.0, 0.45, 0.1))
     """
 
     _library = _initialize_library()
@@ -219,16 +260,16 @@ if __name__ == '__main__':
     print(test_terms)
     print(
         repr(
-            SmoothDependence.evaluate_terms('O3{x}',
-                                            x=numpy.arange(10),
-                                            y=numpy.arange(-10, 0))
+            SmoothDependence.evaluate_terms('O3{x, y}',
+                                            x=numpy.arange(10.0),
+                                            y=numpy.arange(-10.0, 0.0))
         )
     )
 
-    named_param = numpy.empty(4, dtype = [('a', float), ('b', float)])
+    named_param = numpy.empty(4, dtype=[('a', float), ('b', float)])
     named_param['a'] = numpy.arange(0.0, 7.5, 2.0)
     named_param['b'] = numpy.arange(1.0, 7.5, 2.0)
-    for parameters in [numpy.arange(8.0).reshape((4, 2)),
-                       named_param]:
-        xcubed = SmoothDependence('O3{x}', parameters)
+    for param in [numpy.arange(8.0).reshape((4, 2)),
+                  named_param]:
+        xcubed = SmoothDependence('O3{x}', param)
         print(repr(xcubed(x=numpy.arange(0.0, 0.45, 0.1))))
