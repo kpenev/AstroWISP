@@ -46,7 +46,7 @@ namespace SubPixPhot {
     ///\brief Reads the next source from source_input into the last element 
     ///of sources performing all necessary checks.
     template<class SOURCE_TYPE>
-        LIB_LOCAL static void checked_read_last_source(
+        static void checked_read_last_source(
             SourceInput &source_input,
             std::list<SOURCE_TYPE> &sources
         )

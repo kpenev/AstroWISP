@@ -817,7 +817,9 @@ namespace IO {
                                          structure_node,
                                          overwrite);
         }
-        assert(false);
+        throw Error::HDF5(
+            "Unexpected data type found when building HDF5 file!"
+        );
     }
 
     void SubPixHDF5File::add_dataset(

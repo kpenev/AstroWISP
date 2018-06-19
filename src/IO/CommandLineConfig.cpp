@@ -77,24 +77,28 @@ namespace IO {
             return;
         }
 
-        std::ifstream config_stream(
-            operator[]("config-file").as<std::string>().c_str()
-        );
-        if(!config_stream) throw Error::CommandLine(
-            "Failed to open config file: "
-            +
-            operator[]("config-file").as<std::string>()
-        );
-        opt::store(
-            opt::parse_config_file(config_stream,
-                                   config_file_options,
-                                   true),
-            *this
-        );
-        opt::notify(*this);
-        SubPixHDF5File::configure(
-            operator[]("io.hdf5_structure").as<std::string>().c_str()
-        );
+        if(!(operator[]("config-file").as<std::string>().empty())) {
+            std::ifstream config_stream(
+                operator[]("config-file").as<std::string>().c_str()
+            );
+            if(!config_stream) throw Error::CommandLine(
+                "Failed to open config file: "
+                +
+                operator[]("config-file").as<std::string>()
+            );
+            opt::store(
+                opt::parse_config_file(config_stream,
+                                       config_file_options,
+                                       true),
+                *this
+            );
+            opt::notify(*this);
+        }
+        if(count("io.hdf5_structure")) {
+            SubPixHDF5File::configure(
+                operator[]("io.hdf5_structure").as<std::string>().c_str()
+            );
+        }
 
         __executable = argv[0];
         if(__executable == "") __executable = "fitpsf";

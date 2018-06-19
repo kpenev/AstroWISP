@@ -79,6 +79,18 @@ namespace IO {
 
         ///The executable whose command line is being processed (no path).
         const std::string &executable() const {return __executable;}
+
+        ///See ::_hidden
+        const opt::options_description &hidden_options() const
+        {return _hidden;}
+
+        ///See ::_cmdline_only
+        const opt::options_description &cmdline_only_options() const
+        {return _cmdline_only;}
+
+        ///See ::_cmdline_config
+        const opt::options_description &cmdline_config_options() const
+        {return _cmdline_config;}
     }; //End CommandLineConfig class.
 
 } //End IO namespace.

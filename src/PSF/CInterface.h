@@ -13,7 +13,7 @@
 extern "C" {
     ///\brief Expand the given expression into a list of expressions, each
     ///defining a single PSF expansion term.
-    void LIB_PUBLIC expand_term_expression(
+    LIB_PUBLIC void expand_term_expression(
         ///The expression to parse. See TermGenerator::Grammar for a description
         ///of the syntax.
         char *expansion_term_expression,
@@ -27,7 +27,7 @@ extern "C" {
     );
 
     ///Free the memory allocated by a previous call to expand_term_expression.
-    void LIB_PUBLIC free_term_list(
+    LIB_PUBLIC void free_term_list(
         ///The list of terms created by expand_term_expression() to free.
         char **term_list,
 
@@ -36,7 +36,7 @@ extern "C" {
     );
 
     ///\brief Evaluate the given terms for the given list of sources.
-    void LIB_PUBLIC evaluate_terms(
+    LIB_PUBLIC void evaluate_terms(
         ///The list of terms to evaluate. Usually created by
         ///expand_term_expression().
         char **term_list,

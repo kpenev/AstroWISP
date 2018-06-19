@@ -327,7 +327,7 @@ namespace Core {
                 unsigned long y
             ) const;
 
-            ~Image()
+            virtual ~Image()
             {
                 if(!__wrapped) {
                     if(__values) delete[] __values;

@@ -132,7 +132,7 @@ model {
                 }
             }
         }
-        fitpsf(NativeExecutableSpec) {
+        superphotfitpsf(NativeLibrarySpec) {
             sources.cpp {
                 lib library: "eigen"
                 lib library: "superphotbackground"
@@ -142,6 +142,7 @@ model {
                     srcDir "src/FitPSF"
                     include "**/*.cpp"
                     exclude "**/*SDK*.cpp"
+                    exclude "**/fitpsf.cpp"
                 }
             }
         }

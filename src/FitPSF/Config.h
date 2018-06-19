@@ -35,11 +35,13 @@ namespace FitPSF {
         ///options).
         std::string usage_help(const std::string &prog_name) const;
 
-        ///\brief Checks for consistency between the command line options.
+    public:
+        ///\brief Checks for consistency between the command line options and
+        ///perform some finalizing configuration.
         ///
         ///Throws an exception if some inconsistency is detected.
-        void check_consistency();
-    public:
+        void check_and_finalize();
+
         ///Parse the command line.
         Config(
             ///The number of arguments on the command line
@@ -49,17 +51,7 @@ namespace FitPSF {
             ///A C style array of the actual command line arguments.
             char **argv
         )
-        {
-            parse(argc, argv);
-            if(count("help")==0) check_consistency();
-            PSF::EllipticalGaussian::set_default_precision(
-                operator[]("psf.sdk.rel-int-precision").as<double>(),
-                operator[]("psf.sdk.abs-int-precision").as<double>()
-            );
-            PSF::EllipticalGaussian::set_default_max_exp_coef(
-                operator[]("psf.sdk.max-exp-coef").as<double>()
-            );
-        }
+        {if(argc > 0) {parse(argc, argv); check_and_finalize();}}
     }; //End Config class.
 
 } //End FitPSF namespace.
