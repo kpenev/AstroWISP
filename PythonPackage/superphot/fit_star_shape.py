@@ -1,5 +1,51 @@
+#!/usr/bin/env python3
 """Define the :class:`FitStarShape` class, which performs PSF/PRF fitting."""
 
+from numbers import Number
+from ctypes import cdll, c_void_p, c_bool
+from ctypes.util import find_library
+import numpy
+
+#Naming convention imitates the one by ctypes.
+#pylint: disable=invalid-name
+#Type checking place holders require no content.
+#pylint: disable=too-few-public-methods
+
+class _c_fitting_configuration(c_void_p):
+    """Placeholder for the FittingConfiguration opaque struct of fitpsf lib."""
+
+#pylint: enable=invalid-name
+#pylint: enable=too-few-public-methods
+
+def _initialize_library():
+    """Prepare the SuperPhot fitpsf library for use."""
+
+    fitpsf_library_fname = find_library('superphotfitpsf')
+    psf_library_fname = find_library('superphotpsf')
+    io_library_fname = find_library('superphotio')
+    if fitpsf_library_fname is None:
+        raise OSError('Unable to find the SuperPhot PSF fitting library.')
+    if psf_library_fname is None:
+        raise OSError('Unable to find the SuperPhot PSF library.')
+    if io_library_fname is None:
+        raise OSError('Unable to find the SuperPhot I/O library.')
+    cdll.LoadLibrary(io_library_fname)
+    cdll.LoadLibrary(psf_library_fname)
+    library = cdll.LoadLibrary(fitpsf_library_fname)
+
+    library.create_psffit_configuration.argtypes = []
+    library.create_psffit_configuration.restype = _c_fitting_configuration
+
+    library.destroy_psffit_configuration.argtype = [
+        library.create_psffit_configuration.restype
+    ]
+
+    library.update_psffit_configuration.restype = None
+
+    return library
+
+#The __call__, __init__ and __del__ methods justify making this a class.
+#pylint: disable=too-few-public-methods
 class FitStarShape:
     """
     Fit for the PSF/PRF of stars and their flux.
@@ -7,128 +53,212 @@ class FitStarShape:
     .. _attributes:
 
     Attributes:
-        subpixmap (2D numpy array):    The sub-pixel map, for PSF fitting only.
+        _library_psf_fitter:    The library object for carrying out PSF/PRF
+            fitting.
 
-        shape_terms (str):    The terms the PSF is allowed to depend on. The
-            EBNF grammar defining the language for this parameter is::
+        _library_configuration:    Library configuration object set per the
+            current :attr:`configuration`
 
-                (* items in angle brackets (< or >) are assumed to be obvious *)
-                (* and thus are not defined. *)
+        mode(str):    Are we doing `'PSF'` or `'PRF'` fitting (case
+            insensitive).
 
-                termchar = <ascii character> - "," - "}" ;
+        configuration (dict):    The configuraiton for how to carry out PSF/PRF
+            fitting. See the keyword arguments to :meth:`__init__`.
 
-                term = termchar , { termchar } ; (* mathematical expressions  *)
-                                                 (* involving variables,      *)
-                                                 (* floating point numbers    *)
-                                                 (* and pi. The complete list *)
-                                                 (* of mathematical functions *)
-                                                 (* from c++99's cmath        *)
-                                                 (* library are supported.    *)
+    Example:
+        Create and configure a PRF fitting object, allowing up to third order
+        dependence on image position, on a grid which splits the area around the
+        source in 16 squares of 2pix by 2pix size each and using an aperture
+        with 5 pixel radius for the initial estimate of source amplitudes:
 
-                list = "{" , term , { "," , term } , "}" ; (* simple listing  *)
-                                                           (* of terms to     *)
-                                                           (* include.        *)
-
-                poly = "O" , <integer> , list ; (* Expands to all polynomial  *)
-                                                (* terms of up to combined    *)
-                                                (* order <integer> of the     *)
-                                                (* entries in list            *)
-
-                set = list | poly ;
-
-                cross = set , { "*" , set } ; (* expands to the cross product *)
-                                              (* of all sets.                 *)
-
-                expression = cross , { \"+\" , cross } ; (* merge the terms   *)
-                                                         (* of all cross      *)
-                                                         (* products together.*)
-
-        max_chi2 (float):    The value of the reduced chi squared above which
-            sources are excluded from the fit. This can indicate non-point
-            sources or sources for which the location is wrong among ohter
-            things.
-
-        grid (list of floats):    A comma separated list of grid boundaries. Can
-            either be a single list, in which case it is used for both the
-            horizontal and vertical boundaries. If different splitting is
-            desired in the two directions, two lists should be supplied
-            separated by ``;``. The first list should contain the vertical (x)
-            boundaries and the second list gives the horizontal (y) ones.
-
-        pixel_rejection_threshold (float):    A number defining individual
-            pixels to exclude from the PSF fit. Pixels with fitting residuals
-            (normalized by the standard deviation) bigger than this value are
-            excluded. If zero, no pixels are rejected.
-
-        initial_aperture (float):    This aperture is used to derive an initial
-            guess for the amplitudes of sources when fitting for a piecewise
-            bicubic PSF model by doing aperture photometry assuming a perfectly
-            flat PSF.
-
-        max_abs_amplitude_change (float):    The absolute root of sum squares
-            tolerance of the source amplitude changes in order to declare the
-            piecewise bicubic PSF fitting converged.
-
-        max_rel_amplitude_change (float):    The relative root of sum squares
-            tolerance of the source amplitude changes in order to declare the
-            piecewise bicubic PSF fitting converged.
-
-        smoothing (float):    How much smoothing penalty to impose when fitting
-            the PSF. ``None`` for no smoothing. Value can be both positive and
-            negative and will always result in smoothing (less for negative
-            values).
-
-        min_convergence_rate (float):    If the rate of convergence falls below
-            this threshold, iterations are stopped. The rate is calculated as
-            the fractional decrease in the difference between the amplitude
-            change and the value when it would stop, as determined by the
-            :attr:`max_abs_amplitude_change` and
-            :attr:`max_rel_amplitude_change` attributes.
-
-        max_iterations (int):    No more than this number if iterations will be
-            performed. If convergence is not achieved before then, the latest
-            estimates are output and an exception is thrown. A negative value
-            allows infinite iterations. A value of zero, along with an initial
-            guess for the PSF causes only the amplitudes to be fit for PSF
-            fitting photometry with a known PSF. It is an error to pass a value
-            of zero for this option and not specify and initial guess for the
-            PSF.
+        >>> from superphot import FitStarShape
+        >>> fitprf = FitStarShape(mode='prf',
+        >>>                       shape_terms='O3{x, y}',
+        >>>                       grid=[-4.0, -2.0, 0.0, 2.0, 4.0],
+        >>>                       initial_aperture=5.0)
     """
+
+    _library = _initialize_library()
+
+    @staticmethod
+    def _format_config(param_value):
+        """Format config param for passing to SuperPhot PSF fitting lib."""
+
+        prefix = b''
+        if param_value[0] == 'grid':
+            grid = param_value[1]
+            return (
+                b'grid',
+                (
+                    ','.join(map(str, grid)) if isinstance(grid[0], Number)
+                    else ';'.join([','.join(map(repr, grid_part))
+                                   for grid_part in grid])
+                ).encode('ascii')
+            )
+        elif param_value[0] == 'subpixmap':
+            return ()
+        elif param_value[0] == 'shape_terms':
+            return b'psf.terms', param_value[1].encode('ascii')
+        elif param_value[0] == 'pixel_rejection_threshold':
+            return (b'psf.bicubic.pixrej',
+                    repr(param_value[1]).encode('ascii'))
+        elif param_value[0] in ['max_iterations',
+                                'max_chi2',
+                                'min_convergence_rate']:
+            prefix = b'psf.'
+        elif param_value[0] in ['max_abs_amplitude_change',
+                                'max_rel_amplitude_change',
+                                'initial_aperture',
+                                'grid',
+                                'smoothing']:
+            prefix = b'psf.bicubic.'
+        return (
+            prefix + param_value[0].replace('_', '-').encode('ascii'),
+            (
+                param_value[1] if isinstance(param_value[1], str)
+                else repr(param_value[1])
+            ).encode('ascii')
+        )
 
     def __init__(self,
                  *,
-                 subpixmap,
+                 mode,
                  shape_terms,
-                 max_chi2,
                  grid,
-                 pixel_rejection_threshold,
                  initial_aperture,
-                 max_abs_amplitude_change,
-                 max_rel_amplitude_change,
-                 smoothing,
-                 min_convergence_rate,
-                 max_iterations):
+                 subpixmap=numpy.ones((1, 1), dtype=float),
+                 smoothing=None,
+                 max_chi2=100.0,
+                 pixel_rejection_threshold=100.0,
+                 max_abs_amplitude_change=0.0,
+                 max_rel_amplitude_change=1e-6,
+                 min_convergence_rate=-numpy.inf,
+                 max_iterations=1000):
         """
         Set-up an object ready to perform PSF/PRF fitting.
 
         Args:
-            keyword_only:    See class attributes_.
+            mode (str):    What kind of fitting to do 'PSF' or 'PRF' (case
+                insensitive).
+
+            shape_terms (str):    The terms the PSF is allowed to depend on. The
+                EBNF grammar defining the language for this parameter is::
+
+                    (* items in angle brackets (< or >) are assumed to be     *)
+                    (* obvious and thus are not defined.                      *)
+
+                    termchar = <ascii character> - "," - "}" ;
+
+                    (* mathematical expressions  involving variables,         *)
+                    (* floating point numbers and pi. The complete list of    *)
+                    (* mathematical functions from c++99's cmath library are  *)
+                    (* supported.                                             *)
+                    term = termchar , { termchar } ;
+
+
+                    (* simple listing of terms to include.                    *)
+                    list = "{" , term , { "," , term } , "}" ;
+
+                    (* Expands to all polynomial terms of up to combined      *)
+                    (* order <integer> of the entries in list                 *)
+                    poly = "O" , <integer> , list ;
+
+                    set = list | poly ;
+
+
+                    (* expands to the cross product of all sets.              *)
+                    cross = set , { "*" , set } ;
+
+
+                    (* merge the terms of all cross products together.        *)
+                    expression = cross , { \"+\" , cross } ;
+
+            grid (list of floats):    A comma separated list of grid boundaries.
+                Can either be a single list, in which case it is used for both
+                the horizontal and vertical boundaries. If different splitting
+                is desired in the two directions, two lists should be supplied
+                separated by ``;``. The first list should contain the vertical
+                (x) boundaries and the second list gives the horizontal (y)
+                ones.
+
+            initial_aperture (float):    This aperture is used to derive an
+                initial guess for the amplitudes of sources when fitting for a
+                piecewise bicubic PSF model by doing aperture photometry
+                assuming a perfectly flat PSF.
+
+            subpixmap (2D numpy array):    The sub-pixel map, for PSF fitting
+                only.
+
+            smoothing (float):    How much smoothing penalty to impose when
+                fitting the PSF.  ``None`` for no smoothing. Value can be both
+                positive and negative and will always result in smoothing (less
+                for negative values).
+
+            max_chi2 (float):    The value of the reduced chi squared above
+                which sources are excluded from the fit. This can indicate
+                non-point sources or sources for which the location is wrong
+                among ohter things.
+
+            pixel_rejection_threshold (float):    A number defining individual
+                pixels to exclude from the PSF fit.  Pixels with fitting
+                residuals (normalized by the standard deviation) bigger than
+                this value are excluded. If zero, no pixels are rejected.
+
+            max_abs_amplitude_change (float):    The absolute root of sum
+                squares tolerance of the source amplitude changes in order to
+                declare the piecewise bicubic PSF fitting converged.
+
+            max_rel_amplitude_change (float):    The relative root of sum
+                squares tolerance of the source amplitude changes in order to
+                declare the piecewise bicubic PSF fitting converged.
+
+            min_convergence_rate (float):    If the rate of convergence falls
+                below this threshold, iterations are stopped. The rate is
+                calculated as the fractional decrease in the difference between
+                the amplitude change and the value when it would stop, as
+                determined by the :attr:`max_abs_amplitude_change` and
+                :attr:`max_rel_amplitude_change` attributes.
+
+            max_iterations (int):    No more than this number if iterations will
+                be performed. If convergence is not achieved before then, the
+                latest estimates are output and an exception is thrown. A
+                negative value allows infinite iterations. A value of zero,
+                along with an initial guess for the PSF causes only the
+                amplitudes to be fit for PSF fitting photometry with a known
+                PSF. It is an error to pass a value of zero for this option and
+                not specify and initial guess for the PSF.
 
         Returns:
             None
         """
 
-        self.subpixmap = subpixmap
-        self.shape_terms = shape_terms
-        self.max_chi2 = max_chi2
-        self.grid = grid
-        self.pixel_rejection_threshold = pixel_rejection_threshold
-        self.initial_aperture = initial_aperture
-        self.max_abs_amplitude_change = max_abs_amplitude_change
-        self.max_rel_amplitude_change = max_rel_amplitude_change
-        self.smoothing = smoothing
-        self.min_convergence_rate = min_convergence_rate
-        self.max_iterations = max_iterations
+        self.mode = mode.upper()
+        assert self.mode in ['PSF', 'PRF']
+        self.configuration = dict(
+            subpixmap=subpixmap,
+            shape_terms=shape_terms,
+            max_chi2=max_chi2,
+            grid=grid,
+            pixel_rejection_threshold=pixel_rejection_threshold,
+            initial_aperture=initial_aperture,
+            max_abs_amplitude_change=max_abs_amplitude_change,
+            max_rel_amplitude_change=max_rel_amplitude_change,
+            smoothing=smoothing,
+            min_convergence_rate=min_convergence_rate,
+            max_iterations=max_iterations
+        )
+
+        self._library_configuration = (
+            self._library.create_psffit_configuration()
+        )
+        config_arguments = sum(
+            map(self._format_config, self.configuration.items()),
+            (c_bool(self.mode == 'PRF'), b'psf.model', b'bicubic')
+        ) + (b'',)
+        self._library.update_psffit_configuration(
+            self._library_configuration,
+            *config_arguments
+        )
 
     def __call__(self, image_sources):
         """
@@ -168,3 +298,17 @@ class FitStarShape:
         """
 
         raise Exception('Not implemented')
+
+    def __del__(self):
+        r"""Destroy the configuration object created in :meth:`__init__`\ ."""
+
+        self._library.destroy_psffit_configuration(self._library_configuration)
+#pylint: enable=too-few-public-methods
+
+if __name__ == '__main__':
+    fitprf = FitStarShape(mode='prf',
+                          shape_terms='O3{x, y}',
+                          grid=[-4.0, -2.0, 0.0, 2.0, 4.0],
+                          initial_aperture=5.0,
+                          smoothing=0.0,
+                          min_convergence_rate=0.0)

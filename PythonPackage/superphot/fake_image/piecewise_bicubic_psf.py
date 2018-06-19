@@ -22,8 +22,9 @@ class PiecewiseBicubicPSF(PiecewisePSF):
             The same as the arguments of __init__
 
         Returns:
-            psf_piece:    A BicubicPSFPiece instance with parameters as
-            specified by `psf_parameters`.
+            psf_piece:
+                A BicubicPSFPiece instance with parameters as specified by
+                `psf_parameters`.
         """
 
         matrix = scipy.empty((16, 16))
@@ -79,23 +80,25 @@ class PiecewiseBicubicPSF(PiecewisePSF):
         Initialize a PiecewiseBicubicPSF with the given shape.
 
         Args:
-            boundaries:    Dictionary (keys `x` and `y`) of size=2 structures
-                with the first/second entry being the x or y coordinate of the
-                left/right or bottom/top boundary of the cell.
+            boundaries:    Dictionary (keys ``x`` and ``y``) listing the cell
+                horizontal/vertical boundaries.
 
             psf_parameters:    A dictionary of 2x2 structures with keys:
 
                 * values:    The values of the piece bi-cubic polynomial af the
-                  corners of the piece edge.
+                      intersections of the horizontal & vertical ``boundaries``.
 
                 * d_dx:    The x derivatives of the piece bi-cubic polynomial af
-                  the corners of the piece edge.
+                      the intersections of the horizontal & vertical
+                      ``boundaries``.
 
                 * d_dy:    The y derivatives of the piece bi-cubic polynomial af
-                  the corners of the piece edge.
+                      the intersections of the horizontal & vertical
+                      ``boundaries``.
 
                 * d2_dxdy:    The x,y cross-derivatives of the piece bi-cubic
-                  polynomial af the corners of the piece edge.
+                      polynomial af the intersections of the horizontal &
+                      vertical ``boundaries``.
 
         Returns:
             None
