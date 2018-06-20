@@ -7,7 +7,6 @@
  */
 
 #include "SharedLibraryExportMacros.h"
-#include "Image.h"
 
 extern "C" {
     ///Opaque struct to cast to/from Core::Image.
@@ -34,6 +33,7 @@ extern "C" {
     ///Opaque struct to cast to/from Core::SubPixelMap.
     struct CoreSubPixelMap;
 
+    ///Create and fill image for processing by SuperPhot's tools.
     LIB_PUBLIC CoreImage *create_core_image(
         ///See same name argument to Core::Image::Image().
         unsigned long x_resolution,
@@ -59,4 +59,21 @@ extern "C" {
 
     ///Relese memory for an image created by create_core_image().
     LIB_PUBLIC void destroy_core_image(CoreImage *image);
+
+    ///Create and fill a sub-pixel sensitivity map.
+    LIB_PUBLIC CoreSubPixelMap *create_core_subpixel_map(
+        ///See x_res argument to Core::SubPixelMap::SubPixelMap().
+        unsigned long x_resolution,
+
+        ///See y_res argument to Core::SubPixelMap::SubPixelMap().
+        unsigned long y_resolution,
+
+        ///The sensitivities for each piece of the map. The first x_resolution
+        ///entries give the sensitivity of pixels at y=0 for x going from 0 to
+        ///x_resolution. Followed by the sensitivites at y=1 etc.
+        double *sensitivities
+    );
+
+    ///Release memory for a sub-pixel map created by create_core_subpixel_map().
+    LIB_PUBLIC void destroy_core_subpixel_map(CoreSubPixelMap *map);
 };//End extern "C".

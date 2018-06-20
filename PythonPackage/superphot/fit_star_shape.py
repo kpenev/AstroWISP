@@ -6,6 +6,8 @@ from ctypes import cdll, c_void_p, c_bool
 from ctypes.util import find_library
 import numpy
 
+from _initialize_core_library import _initialize_core_library
+
 #Naming convention imitates the one by ctypes.
 #pylint: disable=invalid-name
 #Type checking place holders require no content.
@@ -33,6 +35,8 @@ def _initialize_library():
     cdll.LoadLibrary(psf_library_fname)
     library = cdll.LoadLibrary(fitpsf_library_fname)
 
+    _initialize_core_library(library)
+
     library.create_psffit_configuration.argtypes = []
     library.create_psffit_configuration.restype = _c_fitting_configuration
 
@@ -44,8 +48,6 @@ def _initialize_library():
 
     return library
 
-#The __call__, __init__ and __del__ methods justify making this a class.
-#pylint: disable=too-few-public-methods
 class FitStarShape:
     """
     Fit for the PSF/PRF of stars and their flux.
@@ -58,6 +60,9 @@ class FitStarShape:
 
         _library_configuration:    Library configuration object set per the
             current :attr:`configuration`
+
+        _library_subpixmap:    Library sub-pixel sensitivity map object matching
+            the current configuration.
 
         mode(str):    Are we doing `'PSF'` or `'PRF'` fitting (case
             insensitive).
@@ -260,6 +265,66 @@ class FitStarShape:
             *config_arguments
         )
 
+        self._library_subpixmap = None
+        self.set_subpix_map(subpixmap)
+
+    def configure(self, **configuration):
+        """
+        Modify the currently defined configuration.
+
+        Args:
+            **configuration:    See the keyword arguments of :meth:`__init__`.
+
+        Returns:
+            None
+        """
+
+        for k in configuration:
+            if k not in self.configuration:
+                raise KeyError('Unrecognized configuration parameter: '
+                               +
+                               repr(k))
+
+        if 'mode' in configuration:
+            self.mode = configuration['mode'].upper()
+            assert self.mode in ['PSF', 'PRF']
+
+        self.configuration.update(configuration)
+
+        config_arguments = sum(
+            map(self._format_config, configuration.items()),
+            (c_bool(self.mode == 'PRF'),)
+        ) + (b'',)
+        self._library.update_psffit_configuration(
+            self._library_configuration,
+            *config_arguments
+        )
+
+        if 'subpixmap' in configuration:
+            self.set_subpix_map(configuration['subpixmap'])
+
+    def set_subpix_map(self, subpixmap):
+        """
+        Modify the sub-pixel sensitivity map to use for PSF fitting.
+
+        Args:
+            subpixmap:    See same name keyword argument to :meth:`__init__`
+
+        Returns:
+            None
+        """
+
+        self.configuration['subpixmap'] = subpixmap
+
+        if self._library_subpixmap is not None:
+            self._library.destroy_core_subpixel_map(self._library_subpixmap)
+
+        self._library_subpixmap = self._library.create_core_subpixel_map(
+            subpixmap.shape[1],
+            subpixmap.shape[0],
+            subpixmap
+        )
+
     def __call__(self, image_sources):
         """
         Fit for the shape of the sources in a collection of imeges.
@@ -303,7 +368,6 @@ class FitStarShape:
         r"""Destroy the configuration object created in :meth:`__init__`\ ."""
 
         self._library.destroy_psffit_configuration(self._library_configuration)
-#pylint: enable=too-few-public-methods
 
 if __name__ == '__main__':
     fitprf = FitStarShape(mode='prf',

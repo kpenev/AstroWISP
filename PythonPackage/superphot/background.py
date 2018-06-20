@@ -5,12 +5,11 @@ from ctypes import\
     c_double,\
     c_size_t,\
     c_void_p,\
-    c_ulong,\
-    c_bool,\
-    c_char,\
     c_uint
 from ctypes.util import find_library
 import numpy.ctypeslib
+
+from _initialize_core_library import _initialize_core_library, ndpointer_or_null
 
 #Naming convention imitates the one by ctypes.
 #pylint: disable=invalid-name
@@ -18,36 +17,10 @@ import numpy.ctypeslib
 #Type checking place holders require no content.
 #pylint: disable=too-few-public-methods
 class _c_background_extractor_p(c_void_p):
-    pass
+    """Placeholder for BackgroundExtractor opaque struct."""
 
-class _c_core_image_p(c_void_p):
-    pass
 #pylint: enable=invalid-name
 #pylint: enable=too-few-public-methods
-
-def ndpointer_or_null(*args, **kwargs):
-    """
-    Allow None (->NULL) to be passed for c-style array function arguments.
-
-    Modified from:
-    http://stackoverflow.com/questions/32120178/how-can-i-pass-null-to-an-external-library-using-ctypes-with-an-argument-decla
-    """
-
-    base = numpy.ctypeslib.ndpointer(*args, **kwargs)
-
-    #Call signature dictated by numpy.ctypeslib
-    #pylint: disable=unused-argument
-    def from_param(cls, obj):
-        """Construct numpy.ndpointer from the given object."""
-
-        if obj is None:
-            return obj
-        return base.from_param(obj)
-    #pylint: enable=unused-argument
-
-    return type(base.__name__,
-                (base,),
-                {'from_param': classmethod(from_param)})
 
 def _initialize_library():
     """Prepare the SuperPhot background library for use."""
@@ -57,33 +30,15 @@ def _initialize_library():
         raise OSError('Unable to find the SuperPhot background library.')
     library = cdll.LoadLibrary(library_fname)
 
+    _initialize_core_library(library)
 
-    library.create_core_image.argtypes = [
-        c_ulong,
-        c_ulong,
-        numpy.ctypeslib.ndpointer(dtype=c_double,
-                                  ndim=2,
-                                  flags='C_CONTIGUOUS'),
-        ndpointer_or_null(dtype=c_double,
-                          ndim=2,
-                          flags='C_CONTIGUOUS'),
-        ndpointer_or_null(dtype=c_char,
-                          ndim=2,
-                          flags='C_CONTIGUOUS'),
-        c_bool
+    library.create_background_extractor.argtypes = [
+        c_double,
+        c_double,
+        c_double,
+        library.create_core_image.restype,
+        c_double
     ]
-    library.create_core_image.restype = _c_core_image_p
-
-    library.destroy_core_image.argtypes = [
-        library.create_core_image.restype
-    ]
-    library.destroy_core_image.restype = None
-
-    library.create_background_extractor.argtypes = [c_double,
-                                                    c_double,
-                                                    c_double,
-                                                    _c_core_image_p,
-                                                    c_double]
     library.create_background_extractor.restype = _c_background_extractor_p
 
 
@@ -121,6 +76,8 @@ def _initialize_library():
 
     return library
 
+#The __init__, __del__ and __call__ methods justify making this a class.
+#pylint: disable=too-few-public-methods
 class BackgroundExtractor:
     """
     Measure the background level for each source in an image.
@@ -228,3 +185,5 @@ class BackgroundExtractor:
 
         self._library.destroy_core_image(self._library_image)
         self._library.destroy_background_extractor(self._library_extractor)
+
+#pylint: enable=too-few-public-methods

@@ -6,6 +6,8 @@
  */
 
 #include "CInterface.h"
+#include "Image.h"
+#include "SubPixelMap.h"
 
 CoreImage *create_core_image(unsigned long x_resolution,
                              unsigned long y_resolution,
@@ -35,4 +37,24 @@ CoreImage *create_core_image(unsigned long x_resolution,
 void destroy_core_image(CoreImage *image)
 {
     delete reinterpret_cast<Core::Image<double>*>(image);
+}
+
+CoreSubPixelMap *create_core_subpixel_map(unsigned long x_resolution,
+                                          unsigned long y_resolution,
+                                          double *sensitivities)
+{
+    Core::SubPixelMap *result = new Core::SubPixelMap(x_resolution,
+                                                      y_resolution,
+                                                      "c_interface");
+    for(unsigned y = 0; y < y_resolution; ++y)
+        for(unsigned x = 0; x < x_resolution; ++x) {
+            (*result)(x, y) = *sensitivities;
+            ++sensitivities;
+        }
+    return reinterpret_cast<CoreSubPixelMap*>(result);
+}
+
+void destroy_core_subpixel_map(CoreSubPixelMap *map)
+{
+    delete reinterpret_cast<Core::SubPixelMap*>(map);
 }
