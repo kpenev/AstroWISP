@@ -114,7 +114,7 @@ namespace IO {
         }
 
     template<typename UNIT_TYPE>
-        void LIB_PUBLIC OutputArray<UNIT_TYPE>::parse(const boost::any &value)
+        LIB_PUBLIC void OutputArray<UNIT_TYPE>::parse(const boost::any &value)
         {
 
             typedef Eigen::Matrix<UNIT_TYPE, Eigen::Dynamic, 1> vector_eigen;
@@ -131,7 +131,8 @@ namespace IO {
                 throw boost::bad_any_cast();
         }
 
-    template<> void LIB_PUBLIC OutputArray<double>::parse(const boost::any &value);
+    template<>
+        void OutputArray<double>::parse(const boost::any &value);
 
     template<typename UNIT_TYPE>
         bool LIB_PUBLIC OutputArray<UNIT_TYPE>::operator==(const OutputArray &rhs)

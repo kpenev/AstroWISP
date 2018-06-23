@@ -167,9 +167,9 @@ namespace FitPSF {
     }
 
     IOSources::IOSources(const char *fits_fname,
-                         const char **source_ids,
+                         char **source_ids,
                          const double *column_data,
-                         const char **column_names,
+                         char **column_names,
                          unsigned long num_sources,
                          unsigned long num_columns) :
         __fits_fname(fits_fname)

@@ -258,12 +258,14 @@ class FitStarShape:
         )
         config_arguments = sum(
             map(self._format_config, self.configuration.items()),
-            (c_bool(self.mode == 'PRF'), b'psf.model', b'bicubic')
+            (
+                c_bool(self.mode == 'PRF'),
+                self._library_configuration,
+                b'psf.model',
+                b'bicubic'
+            )
         ) + (b'',)
-        self._library.update_psffit_configuration(
-            self._library_configuration,
-            *config_arguments
-        )
+        self._library.update_psffit_configuration(*config_arguments)
 
         self._library_subpixmap = None
         self.set_subpix_map(subpixmap)

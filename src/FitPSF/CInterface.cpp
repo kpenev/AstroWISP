@@ -9,6 +9,7 @@
 #include "Config.h"
 #include "Image.h"
 #include "LinearSource.h"
+#include "PiecewiseBicubic.h"
 #include <cstdarg>
 #include <string>
 #include <sstream>
@@ -34,8 +35,8 @@ void destroy_psffit_configuration(
     delete reinterpret_cast<FitPSF::Config*>(configuration);
 }
 
-void update_psffit_configuration(FittingConfiguration *target_configuration,
-                                 bool prffit,
+void update_psffit_configuration(bool prffit,
+                                 FittingConfiguration *target_configuration,
                                  ...)
 {
 #ifdef DEBUG
@@ -67,7 +68,7 @@ void update_psffit_configuration(FittingConfiguration *target_configuration,
                        .add(configuration->hidden_options());
 
     va_list arg_list;
-    va_start(arg_list, prffit);
+    va_start(arg_list, target_configuration);
 
     for(
         char *param_name = va_arg(arg_list, char*);
@@ -105,13 +106,13 @@ void prepare_fit_sources(
     std::vector< FitPSF::Image<FitPSF::LinearSource> > fit_images,
 
     ///See same name argument to piecewise_bicubic_fit()
-    const char **column_names,
+    char **column_names,
 
     ///See same name argument to piecewise_bicubic_fit()
-    const char ***source_ids,
+    char ***source_ids,
 
     ///See same name argument to piecewise_bicubic_fit()
-    const double **column_data,
+    double **column_data,
 
     ///See same name argument to piecewise_bicubic_fit()
     unsigned long number_sources,
@@ -269,10 +270,10 @@ bool piecewise_bicubic_fit(double **pixel_values,
         &&
         (*fit_configuration)["psf.ignore-dropped"].as<bool>()
     ),
-         converged = fit_piecewise_bicubic_psf(
+         converged = FitPSF::fit_piecewise_bicubic_psf(
              fit_sources,
              (ignore_dropped ? empty_source_list : dropped_sources),
-             gain,
+             (*fit_configuration)["gain"].as<double>(),
              grid.x_grid,
              grid.y_grid,
              subpix_map,
@@ -291,12 +292,14 @@ bool piecewise_bicubic_fit(double **pixel_values,
          );
 
     fit_sources.splice(fit_sources.end(), dropped_sources);
-    fit_sources.sort(compare_source_assignment_ids<FitPSF::LinearSource>);
+    fit_sources.sort(
+        FitPSF::compare_source_assignment_ids<FitPSF::LinearSource>
+    );
 
     FitPSF::fill_output_data_tree_common(
         fit_sources,
         *real_output_data_tree,
-        options["magnitude-1adu"].as<double>()
+        (*fit_configuration)["magnitude-1adu"].as<double>()
     );
     real_output_data_tree->put("psffit.psfmap",
                                best_fit_coef,

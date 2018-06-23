@@ -132,13 +132,6 @@ namespace FitPSF {
         return result;
     }*/
 
-    template<class SOURCE_TYPE>
-        bool compare_source_assignment_ids(const SOURCE_TYPE *s1,
-                                           const SOURCE_TYPE *s2)
-        {
-            return s1->source_assignment_id() < s2->source_assignment_id();
-        }
-
     ///Fills an output data tree from SDK fit sources.
 /*    void fill_output_data_tree_sdkfit(
         ///The sources fitted for their SDK PSF.

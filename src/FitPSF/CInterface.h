@@ -29,11 +29,11 @@ extern "C" {
 
     ///Update the configuration for PSF fitting.
     LIB_PUBLIC void update_psffit_configuration(
-        ///The configuration to update.
-        FittingConfiguration *target_configuration,
-
         ///Are we deing PRF fittindg (in liu of PSF fitting)?
         bool prffit,
+
+        ///The configuration to update.
+        FittingConfiguration *target_configuration,
 
         ///Alternating <parameter name>, <parameter value> pairs, with both
         ///etries being of type char* type.

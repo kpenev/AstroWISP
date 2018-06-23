@@ -595,7 +595,7 @@ namespace FitPSF {
         }
     }
 
-    bool sourceid_not_hat(const Core::SourceLocation *source)
+    inline bool sourceid_not_hat(const Core::SourceLocation *source)
     {
         return !(source->id().is_hatid());
     }
@@ -882,6 +882,15 @@ namespace FitPSF {
                                      unsigned_trans);
             }
         }
+
+    template<class SOURCE_TYPE>
+        bool compare_source_assignment_ids(const SOURCE_TYPE *s1,
+                                           const SOURCE_TYPE *s2)
+        {
+            return s1->source_assignment_id() < s2->source_assignment_id();
+        }
+
+
 
 } //End FitPSF namespace.
 

@@ -1099,7 +1099,7 @@ namespace IO {
             ==
             "zero"
         ) {
-            assert(!H5::H5File::nameExists(path));
+            assert(!H5::H5File::exists(path));
             data.put("psffit.psfmap",
                      std::vector<double>(),
                      TranslateToAny< std::vector<double> >());

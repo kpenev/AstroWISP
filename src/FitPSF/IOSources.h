@@ -97,7 +97,7 @@ namespace FitPSF {
                 const char *fits_fname,
 
                 ///The IDs to assign to these sources.
-                const char **source_ids,
+                char **source_ids,
 
                 ///The information about the sources organized in equal sized
                 ///columns. The meaning and the order of the columns is
@@ -107,7 +107,7 @@ namespace FitPSF {
                 const double *column_data,
 
                 ///The names of the columns.
-                const char **column_names,
+                char **column_names,
 
                 ///How many sources are in column_data.
                 unsigned long num_sources,

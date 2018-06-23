@@ -93,6 +93,7 @@ model {
         superphotpsf(NativeLibrarySpec) {
             sources.cpp {
                 lib library: "eigen"
+                lib library: "superphotbackground"
                 source {
                     srcDir "src/PSF"
                     include "**/*.cpp"
@@ -100,6 +101,10 @@ model {
                 source {
                     srcDir "src/Core"
                     include "**/*.cpp"
+                }
+                source {
+                    srcDir "src/IO"
+                    include "**/OutputArray.cpp"
                 }
                 exportedHeaders {
                     srcDir "src/PSF/"
