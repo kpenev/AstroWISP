@@ -7,10 +7,13 @@
 
 #include "CInterface.h"
 #include "Config.h"
+#include "Image.h"
+#include "LinearSource.h"
 #include <cstdarg>
 #include <string>
 #include <sstream>
 #include <iostream>
+#include <cmath>
 
 FittingConfiguration *create_psffit_configuration()
 {
@@ -91,4 +94,213 @@ void update_psffit_configuration(FittingConfiguration *target_configuration,
     va_end(arg_list);
 
     opt::notify(*configuration);
+}
+
+///Create a list of all fitting sources (assign pixels, filter etc.).
+void prepare_fit_sources(
+    ///The configuration for PSF fitting.
+    const FitPSF::Config &configuration,
+
+    ///The PSF fitting images for simultaneous fits.
+    std::vector< FitPSF::Image<FitPSF::LinearSource> > fit_images,
+
+    ///See same name argument to piecewise_bicubic_fit()
+    const char **column_names,
+
+    ///See same name argument to piecewise_bicubic_fit()
+    const char ***source_ids,
+
+    ///See same name argument to piecewise_bicubic_fit()
+    const double **column_data,
+
+    ///See same name argument to piecewise_bicubic_fit()
+    unsigned long number_sources,
+
+    ///See same name argument to piecewise_bicubic_fit()
+    unsigned long number_columns,
+
+    ///The list to add the newly created sources suitable for participating in
+    ///the shape fit.
+    FitPSF::LinearSourceList &fit_sources,
+
+    ///The list to add the newly created sources if they are not suitable for
+    ///participating in the shape fit.
+    FitPSF::LinearSourceList &dropped_sources,
+
+    ///The sub-pixel sensitivity map to assume.
+    const Core::SubPixelMap &subpix_map,
+
+    ///An instance of the PSF to use for PSF fitting, with properly defined
+    ///grid, obviously no coefficients.
+    const PSF::PiecewiseBicubic &psf,
+
+    ///The object to add result data to (e.g. background estimates).
+    IO::H5IODataTree &output_data_tree
+)
+{
+    for(
+        unsigned long image_index = 0;
+        image_index == fit_images.size();
+        ++image_index
+    ) {
+        std::ostringstream image_index_stream;
+        image_index_stream.width(
+            int(std::floor(std::log10(fit_images.size())) + 1)
+        );
+        image_index_stream.fill('0');
+        image_index_stream << image_index;
+
+        FitPSF::IOSources image_sources(image_index_stream.str().c_str(),
+                                        source_ids[image_index],
+                                        column_data[image_index],
+                                        column_names,
+                                        number_sources,
+                                        number_columns);
+
+        FitPSF::LinearSourceList section_fit_sources,
+                                 section_dropped_sources;
+        FitPSF::get_section_fit_sources<FitPSF::LinearSource,
+                                        PSF::PiecewiseBicubic>(
+            fit_images[image_index],
+            configuration,
+            image_sources,
+            subpix_map,
+            psf,
+            section_fit_sources,
+            section_dropped_sources
+        );
+        FitPSF::add_expansion_terms(
+            image_sources,
+            configuration["psf.terms"].as<std::string>(),
+            section_fit_sources,
+            section_dropped_sources
+        );
+
+        if(configuration["psf.terms"].as<std::string>() != "") {
+            typedef IO::IOTreeBase::path_type path;
+            output_data_tree.put(
+                path(
+                    "psffit|variables|" + image_index_stream.str(),
+                    '|'
+                ),
+                image_sources.columns(),
+                IO::TranslateToAny<PSF::MapVarListType>()
+            );
+        }
+        fit_sources.splice(fit_sources.end(), section_fit_sources);
+        dropped_sources.splice(dropped_sources.end(), section_dropped_sources);
+    }
+}
+
+bool piecewise_bicubic_fit(double **pixel_values,
+                           double **pixel_errors,
+                           char **pixel_masks,
+                           char **column_names,
+                           char ***source_ids,
+                           double **column_data,
+                           unsigned long number_images,
+                           unsigned long number_sources,
+                           unsigned long number_columns,
+                           unsigned long image_x_resolution,
+                           unsigned long image_y_resolution,
+                           FittingConfiguration *configuration,
+                           double *subpix_sensitivities,
+                           unsigned long subpix_x_resolution,
+                           unsigned long subpix_y_resolution,
+                           H5IODataTree *output_data_tree)
+{
+    Core::SubPixelMap subpix_map(subpix_sensitivities,
+                                 subpix_x_resolution,
+                                 subpix_y_resolution);
+
+    std::vector< FitPSF::Image<FitPSF::LinearSource> >
+        fit_images(number_images);
+    for(
+        unsigned long image_index = 0;
+        image_index < number_images;
+        ++image_index
+    )
+        fit_images[image_index].wrap(
+            pixel_values[image_index],
+            pixel_masks[image_index],
+            image_x_resolution,
+            image_y_resolution,
+            pixel_errors[image_index]
+        );
+
+    FitPSF::Config *fit_configuration =
+        reinterpret_cast<FitPSF::Config*>(configuration);
+
+    const PSF::Grid& grid = (
+        (*fit_configuration)["psf.bicubic.grid"].as<PSF::Grid>()
+    );
+    PSF::PiecewiseBicubic psf(grid.x_grid.begin(),
+                              grid.x_grid.end(),
+                              grid.y_grid.begin(),
+                              grid.y_grid.end());
+    std::vector<double> zeros(grid.x_grid.size() * grid.y_grid.size(),
+                              0);
+    psf.set_values(zeros.begin(), zeros.begin(),
+                   zeros.begin(), zeros.begin());
+
+    FitPSF::LinearSourceList fit_sources, dropped_sources;
+
+    IO::H5IODataTree *real_output_data_tree =
+        reinterpret_cast<IO::H5IODataTree*>(output_data_tree);
+
+    prepare_fit_sources(*fit_configuration,
+                        fit_images,
+                        column_names,
+                        source_ids,
+                        column_data,
+                        number_sources,
+                        number_columns,
+                        fit_sources,
+                        dropped_sources,
+                        subpix_map,
+                        psf,
+                        *real_output_data_tree);
+
+    Eigen::VectorXd best_fit_coef;
+    FitPSF::LinearSourceList empty_source_list;
+
+    bool ignore_dropped = (
+        fit_configuration->count("psf.ignore-dropped") != 0
+        &&
+        (*fit_configuration)["psf.ignore-dropped"].as<bool>()
+    ),
+         converged = fit_piecewise_bicubic_psf(
+             fit_sources,
+             (ignore_dropped ? empty_source_list : dropped_sources),
+             gain,
+             grid.x_grid,
+             grid.y_grid,
+             subpix_map,
+             (*fit_configuration)[
+                 "psf.bicubic.max-abs-amplitude-change"
+             ].as<double>(),
+             (*fit_configuration)[
+                "psf.bicubic.max-rel-amplitude-change"
+             ].as<double>(),
+             (*fit_configuration)["psf.max-chi2"].as<double>(),
+             (*fit_configuration)["psf.bicubic.pixrej"].as<double>(),
+             (*fit_configuration)["psf.min-convergence-rate"].as<double>(),
+             (*fit_configuration)["psf.max-iterations"].as<int>(),
+             (*fit_configuration)["psf.bicubic.smoothing"].as<double>(),
+             best_fit_coef
+         );
+
+    fit_sources.splice(fit_sources.end(), dropped_sources);
+    fit_sources.sort(compare_source_assignment_ids<FitPSF::LinearSource>);
+
+    FitPSF::fill_output_data_tree_common(
+        fit_sources,
+        *real_output_data_tree,
+        options["magnitude-1adu"].as<double>()
+    );
+    real_output_data_tree->put("psffit.psfmap",
+                               best_fit_coef,
+                               IO::TranslateToAny< Eigen::VectorXd >());
+
+    return converged;
 }

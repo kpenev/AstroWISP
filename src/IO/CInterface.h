@@ -7,7 +7,6 @@
  */
 
 #include "../Core/SharedLibraryExportMacros.h"
-#include "../Core/Image.h"
 #include "parse_hat_mask.h"
 
 extern "C" {
@@ -52,10 +51,28 @@ extern "C" {
     ///See Core::MASK_NAN
     LIB_PUBLIC extern const char MASK_NAN;
 
+    ///Opaque struct to cast to/from IO::H5IODataTree.
+    struct LIB_PUBLIC H5IODataTree;
+
     ///C-binding alias for IO::parse_hat_mask.
     LIB_PUBLIC void parse_hat_mask(const char *mask_string,
                                    long x_resolution,
                                    long y_resolution,
                                    char *mask);
+
+    ///Create a tree to hold the results of SuperPhot processing.
+    LIB_PUBLIC H5IODataTree *create_result_tree(
+
+        ///The configuration of the tool being used. Should point to an instance
+        ///of some sub-class of IO::CommandLineConfig
+        void *configuration,
+
+        ///Information about the version of the tool(s) used.
+        char *version_info
+    );
+
+    ///\brief Free the memory held by a result tree previously created by
+    ///create_result_tree()
+    LIB_PUBLIC void destroy_result_tree(H5IODataTree *tree);
 
 } //End Extern "C".

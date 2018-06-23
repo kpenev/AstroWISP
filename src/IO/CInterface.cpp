@@ -7,6 +7,8 @@
 
 #define BUILDING_LIBRARY
 #include "CInterface.h"
+#include "H5IODataTree.h"
+#include "../Core/Image.h"
 
 const char MASK_OK = Core::MASK_OK;
 const char MASK_CLEAR = Core::MASK_CLEAR;
@@ -28,4 +30,21 @@ void parse_hat_mask(const char *mask_string,
                     char *mask)
 {
     return IO::parse_hat_mask(mask_string, x_resolution, y_resolution, mask);
+}
+
+H5IODataTree *create_result_tree(void *configuration, char *version_info)
+{
+    return reinterpret_cast<H5IODataTree*>(
+        new IO::H5IODataTree(
+            0,
+            NULL,
+            version_info,
+            *reinterpret_cast<IO::CommandLineConfig*>(configuration)
+        )
+    );
+}
+
+void destroy_result_tree(H5IODataTree *tree)
+{
+    delete reinterpret_cast<IO::H5IODataTree*>(tree);
 }

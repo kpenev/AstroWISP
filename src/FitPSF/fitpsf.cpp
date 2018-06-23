@@ -139,294 +139,6 @@ namespace FitPSF {
             return s1->source_assignment_id() < s2->source_assignment_id();
         }
 
-    bool sourceid_not_hat(const Core::SourceLocation *source)
-    {
-        return !(source->id().is_hatid());
-    }
-
-    ///Creates an output data tree with information common to all PSF models.
-    template<class SOURCE_LIST_TYPE>
-        void fill_output_data_tree_common(
-            ///The sources fitted for PSF.
-            const SOURCE_LIST_TYPE &fit_result,
-
-            ///The tree to fill.
-            IO::H5IODataTree &output_data_tree,
-
-            ///The magnitude that corresponds to a flux of 1ADU.
-            double mag_1adu)
-        {
-            bool hat_ids=(find_if(fit_result.begin(),
-                                  fit_result.end(),
-                                  sourceid_not_hat)
-                          ==
-                          fit_result.end());
-            hat_ids = false;
-
-            typedef std::pair< std::string, std::vector<double>* > 
-                DoubleKeyValue;
-            typedef std::pair< std::string, std::vector<unsigned>* > 
-                UnsignedKeyValue;
-
-            std::map<std::string, std::vector<double>* >
-                x,
-                y,
-                magnitude_array,
-                magnitude_error_array,
-                flux_array,
-                flux_error_array,
-                mask_magnitude_array,
-                mask_magnitude_error_array,
-                mask_flux_array,
-                mask_flux_error_array,
-                background,
-                background_error,
-                chi2,
-                signal_to_noise;
-            std::map<std::string, std::vector<unsigned>* >
-                quality_flag,
-                field,
-                source,
-                psffit_pixels,
-                background_pixels;
-            std::set<std::string> output_filenames;
-            std::map< std::string, std::vector< char* >* > source_names;
-
-            /*source names
-              =new std::vector<char*>(
-              hat_ids ? 0 : fit_result.size()
-              );*/
-
-            for(
-                typename SOURCE_LIST_TYPE::const_iterator
-                    source_i = fit_result.begin();
-                source_i != fit_result.end();
-                ++source_i
-            ) {
-                const std::string &output_fname = (*source_i)->output_filename();
-                if(output_filenames.insert(output_fname).second) {
-                    x.insert(DoubleKeyValue(output_fname,
-                                            new std::vector<double>));
-                    y.insert(DoubleKeyValue(output_fname,
-                                            new std::vector<double>));
-                    magnitude_array.insert(
-                        DoubleKeyValue(output_fname, new std::vector<double>)
-                    );
-                    magnitude_error_array.insert(
-                        DoubleKeyValue(output_fname, new std::vector<double>)
-                    );
-                    flux_array.insert(
-                        DoubleKeyValue(output_fname, new std::vector<double>)
-                    );
-                    flux_error_array.insert(
-                        DoubleKeyValue(output_fname, new std::vector<double>)
-                    );
-                    mask_magnitude_array.insert(
-                        DoubleKeyValue(output_fname, new std::vector<double>)
-                    );
-                    mask_magnitude_error_array.insert(
-                        DoubleKeyValue(output_fname, new std::vector<double>)
-                    );
-                    mask_flux_array.insert(
-                        DoubleKeyValue(output_fname, new std::vector<double>)
-                    );
-                    mask_flux_error_array.insert(
-                        DoubleKeyValue(output_fname, new std::vector<double>)
-                    );
-                    background.insert(
-                        DoubleKeyValue(output_fname, new std::vector<double>)
-                    );
-                    background_error.insert(
-                        DoubleKeyValue(output_fname, new std::vector<double>)
-                    );
-                    chi2.insert(
-                        DoubleKeyValue(output_fname, new std::vector<double>)
-                    );
-                    signal_to_noise.insert(
-                        DoubleKeyValue(output_fname, new std::vector<double>)
-                    );
-                    quality_flag.insert(
-                        UnsignedKeyValue(output_fname,
-                                         new std::vector<unsigned>)
-                    );
-                    field.insert(
-                        UnsignedKeyValue(output_fname,
-                                         new std::vector<unsigned>)
-                    );
-                    source.insert(
-                        UnsignedKeyValue(output_fname,
-                                         new std::vector<unsigned>)
-                    );
-                    psffit_pixels.insert(
-                        UnsignedKeyValue(output_fname,
-                                         new std::vector<unsigned>)
-                    );
-                    background_pixels.insert(
-                        UnsignedKeyValue(output_fname,
-                                         new std::vector<unsigned>)
-                    );
-                    source_names.insert(
-                        std::pair< std::string, std::vector< char* >* >(
-                            output_fname,
-                            new std::vector< char* >
-                        )
-                    );
-
-                }
-
-                x[output_fname]->push_back((*source_i)->x());
-                y[output_fname]->push_back((*source_i)->y());
-                magnitude_array[output_fname]->push_back(
-                    magnitude((*source_i)->flux(0).value(), mag_1adu)
-                );
-                magnitude_error_array[output_fname]->push_back(
-                    magnitude_error((*source_i)->flux(0).value(),
-                                    (*source_i)->flux(0).error())
-                );
-                flux_array[output_fname]->push_back(
-                    (*source_i)->flux(0).value()
-                );
-                flux_error_array[output_fname]->push_back(
-                    (*source_i)->flux(0).error()
-                );
-
-                mask_magnitude_array[output_fname]->push_back(
-                    magnitude((*source_i)->mask_flux().value(), mag_1adu)
-                );
-                mask_magnitude_error_array[output_fname]->push_back(
-                    magnitude_error((*source_i)->mask_flux().value(),
-                                    (*source_i)->mask_flux().error())
-                );
-                mask_flux_array[output_fname]->push_back(
-                    (*source_i)->mask_flux().value()
-                );
-                mask_flux_error_array[output_fname]->push_back(
-                    (*source_i)->mask_flux().error()
-                );
-
-                background[output_fname]->push_back(
-                    (*source_i)->background().value()
-                );
-                background_error[output_fname]->push_back(
-                    (*source_i)->background().error()
-                );
-                chi2[output_fname]->push_back((*source_i)->reduced_chi2());
-                signal_to_noise[output_fname]->push_back(
-                    (*source_i)->signal_to_noise()
-                );
-                quality_flag[output_fname]->push_back(
-                    static_cast<unsigned>((*source_i)->flux(0).flag())
-                );
-                if(hat_ids) {
-                    field[output_fname]->push_back((*source_i)->id().field());
-                    source[output_fname]->push_back((*source_i)->id().source());
-                } else {
-                    source_names[output_fname]->push_back(
-                        new char[(*source_i)->id().str().size() + 1]
-                    );
-                    strcpy(source_names[output_fname]->back(),
-                           (*source_i)->id().str().c_str());
-                }
-                psffit_pixels[output_fname]->push_back(
-                    (*source_i)->pixel_count()
-                );
-                background_pixels[output_fname]->push_back(
-                    (*source_i)->background().pixels()
-                );
-            }
-
-            IO::TranslateToAny< std::vector<double> > double_trans;
-            IO::TranslateToAny< std::vector<unsigned> > unsigned_trans;
-
-            typedef IO::IOTreeBase::path_type path;
-            for(
-                std::set<std::string>::const_iterator
-                fname_i = output_filenames.begin();
-                fname_i != output_filenames.end();
-                ++fname_i
-            ) {
-                if(hat_ids) {
-                    output_data_tree.put(
-                        path("projsrc|srcid|field|" + *fname_i, '|'),
-                        *(field[*fname_i]),
-                        unsigned_trans
-                    );
-                    output_data_tree.put(
-                        path("projsrc|srcid|source|" + *fname_i, '|'),
-                        *(source[*fname_i]),
-                        unsigned_trans
-                    );
-                } else output_data_tree.put(
-                    path("projsrc|srcid|name|" + *fname_i, '|'),
-                    *(source_names[*fname_i]),
-                    IO::TranslateToAny< std::vector<char*> >()
-                );
-                output_data_tree.put(path("projsrc|x|" + *fname_i, '|'),
-                                     *(x[*fname_i]),
-                                     double_trans);
-                output_data_tree.put(path("projsrc|y|" + *fname_i, '|'),
-                                     *(y[*fname_i]),
-                                     double_trans);
-                output_data_tree.put(path("bg|value|" + *fname_i, '|'),
-                                     *(background[*fname_i]),
-                                     double_trans);
-                output_data_tree.put(path("bg|error|" + *fname_i, '|'),
-                                     *(background_error[*fname_i]),
-                                     double_trans);
-                output_data_tree.put(path("psffit|mag|" + *fname_i, '|'),
-                                     *(magnitude_array[*fname_i]),
-                                     double_trans);
-                output_data_tree.put(path("psffit|mag_err|" + *fname_i, '|'),
-                                     *(magnitude_error_array[*fname_i]),
-                                     double_trans);
-                output_data_tree.put(path("psffit|flux|" + *fname_i, '|'),
-                                     *(flux_array[*fname_i]),
-                                     double_trans);
-                output_data_tree.put(
-                    path("psffit|flux_err|" + *fname_i, '|'),
-                    *(flux_error_array[*fname_i]),
-                    double_trans
-                );
-                output_data_tree.put(
-                    path("psffit|mask_mag|" + *fname_i, '|'),
-                    *(mask_magnitude_array[*fname_i]),
-                    double_trans
-                );
-                output_data_tree.put(
-                    path("psffit|mask_mag_err|" + *fname_i, '|'),
-                    *(mask_magnitude_error_array[*fname_i]),
-                    double_trans
-                );
-                output_data_tree.put(
-                    path("psffit|mask_flux|" + *fname_i, '|'),
-                    *(mask_flux_array[*fname_i]),
-                    double_trans
-                );
-                output_data_tree.put(
-                    path("psffit|mask_flux_err|" + *fname_i, '|'),
-                    *(mask_flux_error_array[*fname_i]),
-                    double_trans
-                );
-                output_data_tree.put(path("psffit|chi2|" + *fname_i, '|'),
-                                     *(chi2[*fname_i]),
-                                     double_trans);
-                output_data_tree.put(
-                    path("psffit|sigtonoise|" + *fname_i, '|'),
-                    *(signal_to_noise[*fname_i]),
-                    double_trans
-                );
-                output_data_tree.put(path("psffit|npix|" + *fname_i, '|'),
-                                     *(psffit_pixels[*fname_i]),
-                                     unsigned_trans);
-                output_data_tree.put(path("bg|npix|" + *fname_i, '|'),
-                                     *(background_pixels[*fname_i]),
-                                     unsigned_trans);
-                output_data_tree.put(path("psffit|quality|" + *fname_i, '|'),
-                                     *(quality_flag[*fname_i]),
-                                     unsigned_trans);
-            }
-        }
-
     ///Fills an output data tree from SDK fit sources.
 /*    void fill_output_data_tree_sdkfit(
         ///The sources fitted for their SDK PSF.
@@ -448,7 +160,7 @@ namespace FitPSF {
         std::cerr << ("Filling output data tree with PSF model independent "
                       "information.") << std::endl;
 #endif*/
-        /*	fill_output_data_tree_common(fit_result,
+        /*	FitPSF::fill_output_data_tree_common(fit_result,
             output_data_tree,
             mag_1adu);*/
 /*        if(individual_sdk) {
@@ -510,166 +222,6 @@ namespace FitPSF {
             );
         }
     }*/
-
-    ///\brief For each selected and dropped source subject to PSF fitting, add
-    ///the terms the PSF is allowed to depend on.
-    template<class SOURCE_LIST_TYPE>
-        void add_expansion_terms(
-            const FitPSF::IOSources &source_list,
-            const std::string &expansion_term_expression,
-            SOURCE_LIST_TYPE &fit_sources,
-            SOURCE_LIST_TYPE &dropped_sources
-        )
-    {
-        std::vector<PSF::TermValarray> expansion_term_values;
-        const PSF::MapVarListType &psfmap_variables = source_list.columns();
-        if(expansion_term_expression != "")
-            evaluate_term_expression(expansion_term_expression,
-                                     psfmap_variables.begin(),
-                                     psfmap_variables.end(),
-                                     expansion_term_values);
-
-        typename SOURCE_LIST_TYPE::iterator last_source = (
-            dropped_sources.size() > 0 ? dropped_sources.end()
-                                       : fit_sources.end()
-        );
-        for(
-            typename SOURCE_LIST_TYPE::iterator src_i = fit_sources.begin();
-            src_i != last_source;
-            ++src_i
-        ) {
-            if(src_i == fit_sources.end()) src_i = dropped_sources.begin();
-
-            Eigen::VectorXd &expansion_terms = (*src_i)->expansion_terms();
-            expansion_terms.resize(expansion_term_expression == ""
-                                   ? 1
-                                   : expansion_term_values.size());
-            for(
-                unsigned term_i = 0;
-                term_i < expansion_terms.size();
-                ++term_i
-            )
-                if(expansion_term_expression == "") {
-                    expansion_terms[term_i] = 1;
-                } else {
-                    expansion_terms[term_i] = expansion_term_values[term_i][
-                        (*src_i)->source_assignment_id() - 1
-                    ];
-                }
-#ifdef VERBOSE_DEBUG
-            std::cerr << "Source("
-                      << (*src_i)->x()
-                      << ", "
-                      << (*src_i)->y()
-                      << ") terms("
-                      << (*src_i)->expansion_terms().size()
-                      << "):";
-            for(
-                unsigned term_i = 0;
-                term_i < (*src_i)->expansion_terms().size();
-                ++term_i
-            )
-                std::cerr << " " << (*src_i)->expansion_terms()[term_i];
-            std::cerr << std::endl;
-#endif
-        }
-    }
-
-    ///Find the source to use for PSF fitting for a single input image.
-    template<class FIT_SOURCE_TYPE, class PSF_TYPE>
-        void get_section_fit_sources(
-            FitPSF::Image<FIT_SOURCE_TYPE>      &image,
-            const FitPSF::Config                &options,
-            const FitPSF::IOSources             &source_list,
-            const Core::SubPixelMap             &subpix_map,
-            const PSF_TYPE                      &psf,
-            std::list<FIT_SOURCE_TYPE *>        &fit_sources,
-            std::list<FIT_SOURCE_TYPE *>        &dropped_sources)
-        {
-            double min_ston = -Core::Inf,
-                   max_sat_frac = Core::Inf,
-                   max_aperture = Core::Inf;
-            unsigned min_pix = 0,
-                     max_pix = (image.x_resolution()
-                                *
-                                image.y_resolution()),
-                     max_src_count = std::numeric_limits<unsigned>::max();
-
-            if(options["psf.model"].as<PSF::ModelType>() != PSF::ZERO) {
-                min_ston = options["src.min-signal-to-noise"].as<double>();
-                max_sat_frac = options["src.max-sat-frac"].as<double>();
-                min_pix = options["src.min-pix"].as<unsigned>();
-                max_pix = options["src.max-pix"].as<unsigned>();
-                max_src_count = options["src.max-count"].as<unsigned>();
-                max_aperture = options["src.max-aperture"].as<double>();
-            }
-
-            Background::Measure *backgrounds;
-            if(options["bg.zero"].as<bool>()) {
-                backgrounds = new Background::Zero(
-                    source_list.locations().size()
-                );
-            } else {
-                const Background::Annulus& background_annulus =
-                    options["bg.annulus"].as<Background::Annulus>();
-                backgrounds = new Background::MeasureAnnulus(
-                    background_annulus.inner_radius(),
-                    background_annulus.outer_radius(),
-                    background_annulus.inner_radius(),
-                    image,
-                    source_list.locations()
-                );
-            }
-
-            get_fit_sources<FIT_SOURCE_TYPE, PSF_TYPE>(
-                image,
-                &subpix_map,
-                source_list.locations(),
-                psf,
-                min_ston,
-                max_sat_frac,
-                min_pix,
-                max_pix,
-                *backgrounds,
-                options["bg.min-pix"].as<unsigned>(),
-                max_src_count,
-                max_aperture,
-                source_list.output_fname(),
-                fit_sources,
-                dropped_sources,
-                options.count("src.cover-bicubic-grid"),
-                options["psf.model"].as<PSF::ModelType>() == PSF::ZERO
-            );
-
-            const PSF::MapVarListType &psfmap_variables = source_list.columns();
-            const std::valarray<double> *enabled = NULL;
-            for(
-                PSF::MapVarListType::const_iterator
-                    var_i = psfmap_variables.begin();
-                (var_i != psfmap_variables.end() && enabled==NULL);
-                ++var_i
-            )
-                if(var_i->first == "enabled")
-                    enabled = &(var_i->second);
-
-            if(enabled != NULL)
-                for(
-                    typename std::list<FIT_SOURCE_TYPE *>::iterator
-                    src_i = fit_sources.begin();
-                    src_i != fit_sources.end();
-                ) {
-                    typename std::list<FIT_SOURCE_TYPE *>::iterator
-                        drop_iter = src_i++;
-                    if(!(*enabled)[(*drop_iter)->source_assignment_id() - 1]) {
-                        (*drop_iter)->exclude_from_shape_fit();
-                        dropped_sources.splice(dropped_sources.end(),
-                                               fit_sources,
-                                               drop_iter);
-                    }
-                }
-
-            delete backgrounds;
-        }
 
     ///Find the sources on which PSF fitting will be performed.
     template<class FIT_SOURCE_TYPE, class PSF_TYPE>
@@ -748,7 +300,7 @@ namespace FitPSF {
 
                 std::list<FIT_SOURCE_TYPE *> section_fit_sources,
                                              section_dropped_sources;
-                get_section_fit_sources<FIT_SOURCE_TYPE, PSF_TYPE>(
+                FitPSF::get_section_fit_sources<FIT_SOURCE_TYPE, PSF_TYPE>(
                     *image,
                     options,
                     source_list,
@@ -757,10 +309,12 @@ namespace FitPSF {
                     section_fit_sources,
                     section_dropped_sources
                 );
-                add_expansion_terms(source_list,
-                                    options["psf.terms"].as<std::string>(),
-                                    section_fit_sources,
-                                    section_dropped_sources);
+                FitPSF::add_expansion_terms(
+                    source_list,
+                    options["psf.terms"].as<std::string>(),
+                    section_fit_sources,
+                    section_dropped_sources
+                );
                 if(options["psf.terms"].as<std::string>() != "") {
                     typedef IO::IOTreeBase::path_type path;
                     output_data_tree.put(
@@ -846,9 +400,11 @@ namespace FitPSF {
 #ifdef TRACK_PROGRESS
         std::cerr << "Filling output data tree." << std::endl;
 #endif
-        fill_output_data_tree_common(fit_sources,
-                                     output_data_tree,
-                                     options["magnitude-1adu"].as<double>());
+        FitPSF::fill_output_data_tree_common(
+            fit_sources,
+            output_data_tree,
+            options["magnitude-1adu"].as<double>()
+        );
 
         output_data_tree.put("psffit.grid",
                              std::string(grid),
@@ -1068,9 +624,11 @@ namespace FitPSF {
 #ifdef TRACK_PROGRESS
         std::cerr << "Filling output data tree." << std::endl;
 #endif
-        fill_output_data_tree_common(fit_sources,
-                                     output_data_tree,
-                                     options["magnitude-1adu"].as<double>());
+        FitPSF::fill_output_data_tree_common(
+            fit_sources,
+            output_data_tree,
+            options["magnitude-1adu"].as<double>()
+        );
         output_data_tree.put("psffit.psfmap",
                              best_fit_coef,
                              IO::TranslateToAny< Eigen::VectorXd >());

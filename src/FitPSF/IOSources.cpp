@@ -96,6 +96,39 @@ namespace FitPSF {
         __last = input_stream.eof();
     }
 
+    void IOSources::set_source_coordinates()
+    {
+        const double *x = NULL, *y = NULL;
+        for(
+            PSF::MapVarListType::const_iterator column_i = __columns.begin();
+            x == NULL || y == NULL;
+            ++column_i
+        ) {
+            if(column_i == __columns.end())
+                throw Error::IO(
+                    "Missing 'x' and/or 'y' column in input source list!"
+                );
+            if(column_i->first == "x") {
+                x = &(column_i->second[0]);
+                assert(__locations.size() == column_i->second.size());
+            } if(column_i->first == "y") {
+                y = &(column_i->second[0]);
+                assert(__locations.size() == column_i->second.size());
+            }
+        }
+
+
+        for(
+            std::list<Core::SourceLocation>::iterator
+                loc_i = __locations.begin();
+            loc_i != __locations.end();
+            ++loc_i
+        ) {
+            loc_i->x() = *x++;
+            loc_i->y() = *y++;
+        }
+    }
+
     void fill_valarray_from_list(const std::list<double> &from,
                                  std::valarray<double> &to)
     {
@@ -131,5 +164,35 @@ namespace FitPSF {
                 ++column_values;
             }
         }
+    }
+
+    IOSources::IOSources(const char *fits_fname,
+                         const char **source_ids,
+                         const double *column_data,
+                         const char **column_names,
+                         unsigned long num_sources,
+                         unsigned long num_columns) :
+        __fits_fname(fits_fname)
+    {
+        for(unsigned long col_ind = 0; col_ind < num_columns; ++col_ind) {
+            __columns.push_back(
+                PSF::MapVariableType(
+                    column_names[col_ind],
+                    std::valarray<double>(column_data + col_ind * num_sources,
+                                          num_sources)
+                )
+            );
+        }
+        for(
+            unsigned long source_ind = 0;
+            source_ind < num_sources;
+            ++source_ind
+        )
+            __locations.push_back(
+                Core::SourceLocation(
+                    Core::SourceID(source_ids[source_ind])
+                )
+            );
+        set_source_coordinates();
     }
 }
