@@ -62,7 +62,6 @@ extern "C" {
 
     ///Create a tree to hold the results of SuperPhot processing.
     LIB_PUBLIC H5IODataTree *create_result_tree(
-
         ///The configuration of the tool being used. Should point to an instance
         ///of some sub-class of IO::CommandLineConfig
         void *configuration,

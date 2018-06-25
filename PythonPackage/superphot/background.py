@@ -9,7 +9,9 @@ from ctypes import\
 from ctypes.util import find_library
 import numpy.ctypeslib
 
-from _initialize_core_library import _initialize_core_library, ndpointer_or_null
+from superphot._initialize_core_library import\
+    _initialize_core_library,\
+    ndpointer_or_null
 
 #Naming convention imitates the one by ctypes.
 #pylint: disable=invalid-name

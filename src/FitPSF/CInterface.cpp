@@ -115,7 +115,7 @@ void prepare_fit_sources(
     double **column_data,
 
     ///See same name argument to piecewise_bicubic_fit()
-    unsigned long number_sources,
+    unsigned long *number_sources,
 
     ///See same name argument to piecewise_bicubic_fit()
     unsigned long number_columns,
@@ -155,7 +155,7 @@ void prepare_fit_sources(
                                         source_ids[image_index],
                                         column_data[image_index],
                                         column_names,
-                                        number_sources,
+                                        number_sources[image_index],
                                         number_columns);
 
         FitPSF::LinearSourceList section_fit_sources,
@@ -196,14 +196,14 @@ void prepare_fit_sources(
 bool piecewise_bicubic_fit(double **pixel_values,
                            double **pixel_errors,
                            char **pixel_masks,
+                           unsigned long number_images,
+                           unsigned long image_x_resolution,
+                           unsigned long image_y_resolution,
                            char **column_names,
                            char ***source_ids,
                            double **column_data,
-                           unsigned long number_images,
-                           unsigned long number_sources,
+                           unsigned long *number_sources,
                            unsigned long number_columns,
-                           unsigned long image_x_resolution,
-                           unsigned long image_y_resolution,
                            FittingConfiguration *configuration,
                            double *subpix_sensitivities,
                            unsigned long subpix_x_resolution,

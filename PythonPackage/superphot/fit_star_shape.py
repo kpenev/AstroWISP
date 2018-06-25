@@ -2,11 +2,20 @@
 """Define the :class:`FitStarShape` class, which performs PSF/PRF fitting."""
 
 from numbers import Number
-from ctypes import cdll, c_void_p, c_bool
+from ctypes import\
+    cdll,\
+    c_void_p,\
+    c_bool,\
+    POINTER,\
+    c_double,\
+    c_char_p,\
+    c_char,\
+    c_ulong
 from ctypes.util import find_library
 import numpy
 
-from _initialize_core_library import _initialize_core_library
+from superphot._initialize_core_library import _initialize_core_library
+from superphot._initialize_io_library import _initialize_io_library
 
 #Naming convention imitates the one by ctypes.
 #pylint: disable=invalid-name
@@ -24,29 +33,52 @@ def _initialize_library():
 
     fitpsf_library_fname = find_library('superphotfitpsf')
     psf_library_fname = find_library('superphotpsf')
-    io_library_fname = find_library('superphotio')
     if fitpsf_library_fname is None:
         raise OSError('Unable to find the SuperPhot PSF fitting library.')
     if psf_library_fname is None:
         raise OSError('Unable to find the SuperPhot PSF library.')
-    if io_library_fname is None:
-        raise OSError('Unable to find the SuperPhot I/O library.')
-    cdll.LoadLibrary(io_library_fname)
     cdll.LoadLibrary(psf_library_fname)
-    library = cdll.LoadLibrary(fitpsf_library_fname)
+    io_library = _initialize_io_library()
+    fitting_library = cdll.LoadLibrary(fitpsf_library_fname)
 
-    _initialize_core_library(library)
+    _initialize_core_library(fitting_library)
 
-    library.create_psffit_configuration.argtypes = []
-    library.create_psffit_configuration.restype = _c_fitting_configuration
+    fitting_library.create_psffit_configuration.argtypes = []
+    fitting_library.create_psffit_configuration.restype = (
+        _c_fitting_configuration
+    )
 
-    library.destroy_psffit_configuration.argtype = [
-        library.create_psffit_configuration.restype
+    fitting_library.destroy_psffit_configuration.argtype = [
+        fitting_library.create_psffit_configuration.restype
     ]
 
-    library.update_psffit_configuration.restype = None
+    fitting_library.update_psffit_configuration.restype = None
 
-    return library
+    fitting_library.piecewise_bicubic_fit.argtypes = [
+        POINTER(POINTER(c_double)),                 #pixel_values
+        POINTER(POINTER(c_double)),                 #pixel_errors
+        POINTER(POINTER(c_char)),                   #pixel_masks
+        c_ulong,                                    #number_images
+        c_ulong,                                    #image_x_resolution
+        c_ulong,                                    #image_y_resolution
+        POINTER(c_char_p),                          #column_names
+        POINTER(POINTER(c_char_p)),                 #source_ids
+        POINTER(POINTER(c_double)),                 #column_data
+        numpy.ctypeslib.ndpointer(dtype=c_ulong,    #number_sources
+                                  ndim=1,
+                                  flags='C_CONTIGUOUS'),
+        c_ulong,                                    #number_columns
+        fitting_library.create_psffit_configuration.restype,#configuration
+        numpy.ctypeslib.ndpointer(dtype=c_double,   #subpixel_sensitivities
+                                  ndim=2,
+                                  flags='C_CONTIGUOUS'),
+        c_ulong,                                    #subpix_x_resolution
+        c_ulong,                                    #subpix_y_resolution
+        io_library.create_result_tree.restype       #ouput_data_tree
+    ]
+    fitting_library.piecewise_bicubic_fit.restype = c_bool
+
+    return fitting_library, io_library
 
 class FitStarShape:
     """
@@ -61,8 +93,8 @@ class FitStarShape:
         _library_configuration:    Library configuration object set per the
             current :attr:`configuration`
 
-        _library_subpixmap:    Library sub-pixel sensitivity map object matching
-            the current configuration.
+        _library_result_tree:    The H5IODataTree instance containing the last
+            fittintg results, on None, if no fitting has been performed yet.
 
         mode(str):    Are we doing `'PSF'` or `'PRF'` fitting (case
             insensitive).
@@ -83,7 +115,7 @@ class FitStarShape:
         >>>                       initial_aperture=5.0)
     """
 
-    _library = _initialize_library()
+    _fitting_library, _io_library = _initialize_library()
 
     @staticmethod
     def _format_config(param_value):
@@ -131,7 +163,7 @@ class FitStarShape:
                  shape_terms,
                  grid,
                  initial_aperture,
-                 subpixmap=numpy.ones((1, 1), dtype=float),
+                 subpixmap=numpy.ones((1, 1), dtype=c_double),
                  smoothing=None,
                  max_chi2=100.0,
                  pixel_rejection_threshold=100.0,
@@ -254,7 +286,7 @@ class FitStarShape:
         )
 
         self._library_configuration = (
-            self._library.create_psffit_configuration()
+            self._fitting_library.create_psffit_configuration()
         )
         config_arguments = sum(
             map(self._format_config, self.configuration.items()),
@@ -265,10 +297,9 @@ class FitStarShape:
                 b'bicubic'
             )
         ) + (b'',)
-        self._library.update_psffit_configuration(*config_arguments)
+        self._fitting_library.update_psffit_configuration(*config_arguments)
 
-        self._library_subpixmap = None
-        self.set_subpix_map(subpixmap)
+        self._library_result_tree = None
 
     def configure(self, **configuration):
         """
@@ -297,71 +328,263 @@ class FitStarShape:
             map(self._format_config, configuration.items()),
             (c_bool(self.mode == 'PRF'),)
         ) + (b'',)
-        self._library.update_psffit_configuration(
+        self._fitting_library.update_psffit_configuration(
             self._library_configuration,
             *config_arguments
         )
 
-        if 'subpixmap' in configuration:
-            self.set_subpix_map(configuration['subpixmap'])
-
-    def set_subpix_map(self, subpixmap):
-        """
-        Modify the sub-pixel sensitivity map to use for PSF fitting.
-
-        Args:
-            subpixmap:    See same name keyword argument to :meth:`__init__`
-
-        Returns:
-            None
-        """
-
-        self.configuration['subpixmap'] = subpixmap
-
-        if self._library_subpixmap is not None:
-            self._library.destroy_core_subpixel_map(self._library_subpixmap)
-
-        self._library_subpixmap = self._library.create_core_subpixel_map(
-            subpixmap.shape[1],
-            subpixmap.shape[0],
-            subpixmap
-        )
-
-    def __call__(self, image_sources):
+    def fit(self, image_sources):
         """
         Fit for the shape of the sources in a collection of imeges.
 
         Args:
-            image_sources (dict):    Dictionary, with keys - the filename of the
-                reduced frame (FITS) to fit the PSF/PRF of and values - list of
-                sources to process, defining at least the following quantities:
+            image_sources (list of 4-tuples):    Each entry consists of:
 
-                    * **ID** (string): some unique identifier for the source
+                1. The pixel values of the calibratred image
 
-                    * **x** (float): The x coordinate of the source center in pixels
+                2. The error estimates of the pixel values
 
-                    * **y** (float): See ``x``
+                3. Mask flags of the pixel values.
 
-                May define additional quantities on which the PSF shape is
-                allowed to depend. This can be either a numy record array with
-                field names as keys or a dictionary with field names as keys
-                and 1-D numpy arrays of identical lengths as values.
+                4. Sources to process, defining at least the following
+                   quantities:
+
+                       * **ID** (string): some unique identifier for the source
+
+                       * **x** (float): The x coordinate of the source
+                         center in pixels
+
+                       * **y** (float): See ``x``
+
+                   May define additional quantities on which the PSF shape is
+                   allowed to depend. This can be either a numy record array
+                   with field names as keys or a dictionary with field names as
+                   keys and 1-D numpy arrays of identical lengths as values.
 
         Returns:
-            dict:
+            None:
+                Use :meth:`get_last_fit_result` to obtain the results.
+        """
 
-                * keys:
-                    The filenames of the reduced frames used in fitting.
+        def create_image_arguments():
+            """
+            Create the three image arguments for piecewise_bicubic_fit.
 
-                * values:
-                    2-tuples containing the following arrays:
+            Args:
+                None
 
-                    * 4D numpy array:
-                        The coefficients of the PSF/PRF map.
+            Returns:
+                tuple:
+                    POINTER(POINTER(c_double)):
+                        The pixel_values argument to the piecewise_bicubic_fit
+                        library function
 
-                    * 1D numpy array:
-                        The best-fit fluxes of the sources in the same order as
-                        specified in the :obj:`image_sources` argument.
+                    POINTER(POINTER(c_double)):
+                        The pixel_errors argument to the piecewise_bicubic_fit
+                        library function
+
+                    POINTER(POINTER(c_char)):
+                        The pixel_masks argument to the piecewise_bicubic_fit
+                        library function
+
+                    int:
+                        The number of images to simultaneously process.
+
+                    int:
+                        The common x resolution of the images.
+
+                    int:
+                        The common y resolution of the images.
+
+                Raises:
+                    AssertionError:    If the shapes of the images do not all
+                        match.
+            """
+
+            number_images = len(image_sources)
+            image_y_resolution, image_x_resolution = image_sources[0][0].shape
+
+            for entry in image_sources:
+                for image in entry[:3]:
+                    assert image.shape == (image_y_resolution,
+                                           image_x_resolution)
+
+            return (
+                (POINTER(c_double) * number_images)(
+                    *(
+                        entry[0].ctypes.data_as(POINTER(c_double))
+                        for entry in image_sources
+                    )
+                ),
+                (POINTER(c_double) * number_images)(
+                    *(
+                        entry[1].ctypes.data_as(POINTER(c_double))
+                        for entry in image_sources
+                    )
+                ),
+                (POINTER(c_char) * number_images)(
+                    *(
+                        entry[1].ctypes.data_as(POINTER(c_char))
+                        for entry in image_sources
+                    )
+                ),
+                number_images,
+                image_x_resolution,
+                image_y_resolution
+            )
+
+        def get_column_names():
+            """
+            Return the list of columns defined for the input sources.
+
+            Args:
+                None
+
+            Returns:
+                list:
+                    The column names which participate in the PSF expansion.
+
+            Raises:
+                AssertionError:    If the columns defined for all images do not
+                    match or if any of the minimum required columns: 'ID', 'x',
+                    'y' is missing.
+            """
+
+            if isinstance(image_sources[0][3], numpy.ndarray):
+                column_names = image_sources[0][3].dtype.names
+                for entry in image_sources:
+                    assert entry[3].dtype.names == column_names
+            else:
+                column_names = image_sources[0][3].keys()
+                column_name_set = set(column_names)
+                for entry in image_sources:
+                    assert set(entry[3].keys()) == column_name_set
+
+            column_names.remove('ID')
+
+            for required_column in ['ID', 'x', 'y']:
+                assert required_column in column_names
+
+            return column_names
+
+        def create_column_data(column_names):
+            """
+            Create the column_data array required by create_source_arguments.
+
+            Args:
+                column_names([str]):    The columns, other than ID defined for
+                    the input list of sources.
+
+            Returns:
+                [numpy.ndarray]:
+                    See column_data argument of create_source_arguments.
+            """
+
+            column_data = [
+                numpy.empty((len(column_names), len(entry[4]['ID'])),
+                            dtype=c_double)
+                for entry in image_sources
+            ]
+            for image_index, entry in enumerate(image_sources):
+                for column_index, column_name in enumerate(column_names):
+                    column_data[image_index][column_index, :] = (
+                        entry[4][column_name]
+                    )
+            return column_data
+
+        def create_source_arguments(column_names, column_data):
+            """
+            Create the arguments defining the sources for piecewise_bicubic_fit.
+
+            Args:
+                column_names([str]):    The columns, other than ID defined for
+                    the input list of sources.
+
+                column_data([numpy.ndarray]):    List of one 2-D array for each
+                    image with the first array index going accross columns and
+                    the second array index going accross sources.
+
+            Returns:
+                tuple:
+                    POINTER(c_char_p):    The column_names argument to the
+                        piecewise_bicubic_fit library function.
+
+                    POINTER(POINTER(c_char_p)):    The source_ids argument to
+                        the piecewise_bicubic_fit library function.
+
+                    POINTER(POINTER(c_double)):    The column_data argument to
+                        the piecewise_bicubic_fit library function.
+
+                    numpy.array(c_ulong):    1-D array contining the number of
+                        sources in each image.
+
+                    int:    The number of columns in the column_data.
+            """
+
+            number_images = len(image_sources)
+            number_columns = len(column_names)
+
+            return (
+                (c_char_p * number_columns)(
+                    *(
+                        c_char_p(colname.encode('ascii'))
+                        for colname in column_names
+                    )
+                ),
+                (POINTER(c_char_p) * number_images)(
+                    *(
+                        (c_char_p * len(entry[4]['ID']))(
+                            *(
+                                (
+                                    source_id if isinstance(source_id, bytes)
+                                    else source_id.encode('ascii')
+                                )
+                                for source_id in entry[4]['ID']
+                            )
+                        )
+                        for entry in image_sources
+                    )
+                ),
+                (POINTER(c_double) * number_images)(
+                    *(
+                        columns.ctypes.data_as(POINTER(c_double))
+                        for columns in column_data
+                    )
+                ),
+                numpy.array([len(entry[4]['ID']) for entry in image_sources],
+                            dtype=c_ulong),
+                number_columns
+            )
+
+        column_names = get_column_names()
+        column_data = create_column_data(column_names)
+        if self._library_result_tree is not None:
+            self._io_library.destroy_result_tree(self._library_result_tree)
+        self._library_result_tree = self._io_library.create_result_tree(
+            self._library_configuration,
+            b''
+        )
+        self._fitting_library.piecewise_bicubic_fit(
+            *create_image_arguments(),
+            *create_source_arguments(column_names, column_data),
+            self._library_configuration,
+            self.configuration['subpixmap'],
+            self.configuration['subpixmap'].shape[1],
+            self.configuration['subpixmap'].shape[0],
+            self._library_result_tree
+        )
+
+    def get_last_fit_result(self, quantity):
+        """
+        Return the specified quantity determined by the last :meth:`fit` call.
+
+        Args:
+            quantity (str):    The quantity to return the best fit value of.
+
+        Returns:
+            numpy.ndarray:
+                The best fit value of the specified quantity determined by the
+                last call of :meth:`fit`.
         """
 
         raise Exception('Not implemented')
@@ -369,7 +592,11 @@ class FitStarShape:
     def __del__(self):
         r"""Destroy the configuration object created in :meth:`__init__`\ ."""
 
-        self._library.destroy_psffit_configuration(self._library_configuration)
+        self._fitting_library.destroy_psffit_configuration(
+            self._library_configuration
+        )
+        if self._library_result_tree is not None:
+            self._io_library.destroy_result_tree(self._library_result_tree)
 
 if __name__ == '__main__':
     fitprf = FitStarShape(mode='prf',
