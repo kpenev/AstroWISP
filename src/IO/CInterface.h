@@ -74,4 +74,28 @@ extern "C" {
     ///create_result_tree()
     LIB_PUBLIC void destroy_result_tree(H5IODataTree *tree);
 
+    ///\brief Query the result tree for a value (NULL if value is undefined).
+    ///
+    ///If the value requested is found and not empty, the return value is true,
+    ///otherwise, false and result is not touched.
+    bool query_result_tree(
+        ///The tree to extract the quantity from.
+        H5IODataTree *tree,
+
+        ///What quantity to get from the tree
+        const char *quantity,
+
+        ///Data type of quantity to expect.
+        ///Examples:
+        ///    "int" for a single integer value
+        ///    "[int]" for an array of integers
+        ///    "double:double" for a pair of doubles
+        const char *format,
+
+        ///Destination to fill with the value of the quantity. Must be pointer
+        ///to the correct format and have sufficient space pre-allocated.
+        void *result
+    );
+
+
 } //End Extern "C".

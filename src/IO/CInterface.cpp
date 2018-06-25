@@ -48,3 +48,184 @@ void destroy_result_tree(H5IODataTree *tree)
 {
     delete reinterpret_cast<IO::H5IODataTree*>(tree);
 }
+
+///Set result to a single value of type UNIT_TYPE.
+template<typename UNIT_TYPE>
+void set_single_value(const boost::any &value, void *result)
+{
+    *reinterpret_cast<UNIT_TYPE*>(result) = boost::any_cast<UNIT_TYPE>(value);
+}
+
+///Set result to a std::pair of values both of type UNIT_TYPE.
+template<typename UNIT_TYPE>
+void set_value_pair(const boost::any &value, void *result)
+{
+    UNIT_TYPE *destination = reinterpret_cast<UNIT_TYPE*>(result);
+    const std::pair<UNIT_TYPE, UNIT_TYPE> &source =
+        IO::TranslateToAny< std::pair<UNIT_TYPE, UNIT_TYPE> >().get_value(value);
+
+    destination[0] = source.first;
+    destination[1] = source.second;
+}
+
+///Try copying a STL container of values, each of type UNIT_TYPE to result.
+template<typename SOURCE_CONTAINER_TYPE, typename UNIT_TYPE>
+bool try_copying_container(const boost::any &value, void *result)
+{
+    try {
+        const SOURCE_CONTAINER_TYPE & input_container =
+            IO::TranslateToAny<SOURCE_CONTAINER_TYPE>().get_value(value);
+
+        UNIT_TYPE *destination = reinterpret_cast<UNIT_TYPE*>(result);
+
+        std::copy(input_container.begin(), input_container.end(), destination);
+
+        return true;
+    } catch(boost::bad_any_cast) {
+        return false;
+    }
+}
+
+///Try copying an array of values, each of type UNIT_TYPE to result.
+template<typename SOURCE_ARRAY_TYPE, typename UNIT_TYPE>
+bool try_copying_array(const boost::any &value, void *result)
+{
+    try {
+        const SOURCE_ARRAY_TYPE &input_array =
+            IO::TranslateToAny<SOURCE_ARRAY_TYPE>().get_value(value);
+
+        UNIT_TYPE *destination = reinterpret_cast<UNIT_TYPE*>(result);
+
+        const UNIT_TYPE *start = &(input_array[0]),
+                        *end = start + input_array.size();
+
+        std::copy(start, end, destination);
+
+        return true;
+    } catch(boost::bad_any_cast) {
+        return false;
+    }
+}
+
+template<typename UNIT_TYPE> void copy_array(const boost::any &value, void *result)
+{
+    UNIT_TYPE *destination = reinterpret_cast<UNIT_TYPE*>(result);
+    if(value.type() == typeid(UNIT_TYPE)) {
+        *destination = boost::any_cast<const UNIT_TYPE&>(value);
+        return;
+    }
+    typedef Eigen::Matrix<UNIT_TYPE, Eigen::Dynamic, 1> VectorEigen;
+    typedef Eigen::Array<UNIT_TYPE, Eigen::Dynamic, 1> ArrayEigen;
+    if(
+        !(
+            try_copying_container< std::vector<UNIT_TYPE>, UNIT_TYPE >(value,
+                                                                       result)
+            ||
+            try_copying_container< std::list<UNIT_TYPE>, UNIT_TYPE >(value,
+                                                                     result)
+            ||
+            try_copying_array< std::valarray<UNIT_TYPE>, UNIT_TYPE >(value,
+                                                                     result)
+            ||
+            try_copying_array< VectorEigen, UNIT_TYPE >(value, result)
+            ||
+            try_copying_array< ArrayEigen, UNIT_TYPE >(value, result)
+        )
+    )
+        throw boost::bad_any_cast();
+}
+
+bool query_result_tree(H5IODataTree *tree,
+                              const char *quantity,
+                              const char *format,
+                              void *result)
+{
+    const boost::any &value = 
+        reinterpret_cast<IO::H5IODataTree*>(tree)->get<boost::any>(quantity,
+                                                                   boost::any());
+    if(value.empty())
+        return false;
+
+    if(strcmp(format, "int"))
+        set_single_value<int>(value, result);
+    else if(strcmp(format, "long"))
+        set_single_value<long>(value, result);
+    else if(strcmp(format, "short"))
+        set_single_value<short>(value, result);
+    else if(strcmp(format, "char"))
+        set_single_value<char>(value, result);
+    else if(strcmp(format, "unsigned"))
+        set_single_value<unsigned>(value, result);
+    else if(strcmp(format, "ulong"))
+        set_single_value<unsigned long>(value, result);
+    else if(strcmp(format, "ushort"))
+        set_single_value<unsigned short>(value, result);
+    else if(strcmp(format, "uchar"))
+        set_single_value<unsigned char>(value, result);
+    else if(strcmp(format, "bool"))
+        set_single_value<bool>(value, result);
+    else if(strcmp(format, "double"))
+        set_single_value<double>(value, result);
+    else if(strcmp(format, "[int]"))
+        copy_array<int>(value, result);
+    else if(strcmp(format, "[long]"))
+        copy_array<long>(value, result);
+    else if(strcmp(format, "[short]"))
+        copy_array<short>(value, result);
+    else if(strcmp(format, "[char]"))
+        copy_array<char>(value, result);
+    else if(strcmp(format, "[unsigned]"))
+        copy_array<unsigned>(value, result);
+    else if(strcmp(format, "[ulong]"))
+        copy_array<unsigned long>(value, result);
+    else if(strcmp(format, "[ushort]"))
+        copy_array<unsigned short>(value, result);
+    else if(strcmp(format, "[uchar]"))
+        copy_array<unsigned char>(value, result);
+    else if(strcmp(format, "[bool]"))
+        copy_array<bool>(value, result);
+    else if(strcmp(format, "[double]"))
+        copy_array<double>(value, result);
+    else {
+        int split_position = 0;
+        while(format[split_position]!=':') {
+            if(format[split_position] == '\0')
+                throw Error::InvalidArgument(
+                    "query_result_tree",
+                    "invalid format: " + std::string(format)
+                );
+            ++split_position;
+        }
+        if(!strncmp(format, format + split_position + 1, split_position))
+            throw Error::InvalidArgument(
+                "query_result_tree",
+                "invalid format: " + std::string(format)
+            );
+        if(strncmp(format, "int", split_position))
+            set_value_pair<int>(value, result);
+        else if(strncmp(format, "long", split_position))
+            set_value_pair<long>(value, result);
+        else if(strncmp(format, "short", split_position))
+            set_value_pair<short>(value, result);
+        else if(strncmp(format, "char", split_position))
+            set_value_pair<char>(value, result);
+        else if(strncmp(format, "unsigned", split_position))
+            set_value_pair<unsigned>(value, result);
+        else if(strncmp(format, "ulong", split_position))
+            set_value_pair<unsigned long>(value, result);
+        else if(strncmp(format, "ushort", split_position))
+            set_value_pair<unsigned short>(value, result);
+        else if(strncmp(format, "uchar", split_position))
+            set_value_pair<unsigned char>(value, result);
+        else if(strncmp(format, "bool", split_position))
+            set_value_pair<bool>(value, result);
+        else if(strncmp(format, "double", split_position))
+            set_value_pair<double>(value, result);
+        else
+            throw Error::InvalidArgument(
+                "query_result_tree",
+                "invalid format: " + std::string(format)
+            );
+    }
+    return true;
+}
