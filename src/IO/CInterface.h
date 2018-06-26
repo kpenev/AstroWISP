@@ -78,7 +78,7 @@ extern "C" {
     ///
     ///If the value requested is found and not empty, the return value is true,
     ///otherwise, false and result is not touched.
-    bool query_result_tree(
+    LIB_PUBLIC bool query_result_tree(
         ///The tree to extract the quantity from.
         H5IODataTree *tree,
 
@@ -90,10 +90,14 @@ extern "C" {
         ///    "int" for a single integer value
         ///    "[int]" for an array of integers
         ///    "double:double" for a pair of doubles
+        ///    "str" for a string entry
         const char *format,
 
-        ///Destination to fill with the value of the quantity. Must be pointer
-        ///to the correct format and have sufficient space pre-allocated.
+        ///Destination to fill with the value of the quantity. For all formats
+        ///except "str", result must be pointer to the correct format and have
+        ///sufficient space pre-allocated. For strings, result should be char**,
+        ///and new memory is allocated for the string, so the caller is
+        ///responsible for free-ing that.
         void *result
     );
 

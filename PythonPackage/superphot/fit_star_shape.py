@@ -10,12 +10,14 @@ from ctypes import\
     c_double,\
     c_char_p,\
     c_char,\
-    c_ulong
+    c_ulong,\
+    c_int,\
+    c_uint
 from ctypes.util import find_library
 import numpy
 
 from superphot._initialize_core_library import _initialize_core_library
-from superphot._initialize_io_library import _initialize_io_library
+from superphot.io_library_interface import SuperPhotIOTree
 
 #Naming convention imitates the one by ctypes.
 #pylint: disable=invalid-name
@@ -38,7 +40,6 @@ def _initialize_library():
     if psf_library_fname is None:
         raise OSError('Unable to find the SuperPhot PSF library.')
     cdll.LoadLibrary(psf_library_fname)
-    io_library = _initialize_io_library()
     fitting_library = cdll.LoadLibrary(fitpsf_library_fname)
 
     _initialize_core_library(fitting_library)
@@ -74,11 +75,11 @@ def _initialize_library():
                                   flags='C_CONTIGUOUS'),
         c_ulong,                                    #subpix_x_resolution
         c_ulong,                                    #subpix_y_resolution
-        io_library.create_result_tree.restype       #ouput_data_tree
+        SuperPhotIOTree.library.create_result_tree.restype       #ouput_data_tree
     ]
     fitting_library.piecewise_bicubic_fit.restype = c_bool
 
-    return fitting_library, io_library
+    return fitting_library
 
 class FitStarShape:
     """
@@ -93,7 +94,7 @@ class FitStarShape:
         _library_configuration:    Library configuration object set per the
             current :attr:`configuration`
 
-        _library_result_tree:    The H5IODataTree instance containing the last
+        _result_tree:    The SuperPhotIOTree instance containing the last
             fittintg results, on None, if no fitting has been performed yet.
 
         mode(str):    Are we doing `'PSF'` or `'PRF'` fitting (case
@@ -115,7 +116,7 @@ class FitStarShape:
         >>>                       initial_aperture=5.0)
     """
 
-    _fitting_library, _io_library = _initialize_library()
+    _fitting_library = _initialize_library()
 
     @staticmethod
     def _format_config(param_value):
@@ -299,7 +300,7 @@ class FitStarShape:
         ) + (b'',)
         self._fitting_library.update_psffit_configuration(*config_arguments)
 
-        self._library_result_tree = None
+        self._result_tree = None
 
     def configure(self, **configuration):
         """
@@ -558,12 +559,7 @@ class FitStarShape:
 
         column_names = get_column_names()
         column_data = create_column_data(column_names)
-        if self._library_result_tree is not None:
-            self._io_library.destroy_result_tree(self._library_result_tree)
-        self._library_result_tree = self._io_library.create_result_tree(
-            self._library_configuration,
-            b''
-        )
+        self._result_tree = SuperPhotIOTree(self._library_configuration)
         self._fitting_library.piecewise_bicubic_fit(
             *create_image_arguments(),
             *create_source_arguments(column_names, column_data),
@@ -571,7 +567,7 @@ class FitStarShape:
             self.configuration['subpixmap'],
             self.configuration['subpixmap'].shape[1],
             self.configuration['subpixmap'].shape[0],
-            self._library_result_tree
+            self._result_tree.library_tree
         )
 
     def get_last_fit_result(self, quantity):
@@ -595,8 +591,6 @@ class FitStarShape:
         self._fitting_library.destroy_psffit_configuration(
             self._library_configuration
         )
-        if self._library_result_tree is not None:
-            self._io_library.destroy_result_tree(self._library_result_tree)
 
 if __name__ == '__main__':
     fitprf = FitStarShape(mode='prf',
@@ -605,3 +599,15 @@ if __name__ == '__main__':
                           initial_aperture=5.0,
                           smoothing=0.0,
                           min_convergence_rate=0.0)
+
+    tree = SuperPhotIOTree(fitprf._library_configuration)
+    print('BG tool: ' + repr(tree.get('bg.tool', str)))
+    print('Max chi squared: '
+          +
+          repr(tree.get('psffit.max_chi2', c_double)))
+    print('Maximum iterations: '
+          +
+          repr(tree.get('psffit.max_iterations', c_int)))
+    print('Pixel rejection threshold: '
+          +
+          repr(tree.get('psffit.pixrej', c_double)))

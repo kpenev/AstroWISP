@@ -51,14 +51,25 @@ void destroy_result_tree(H5IODataTree *tree)
 
 ///Set result to a single value of type UNIT_TYPE.
 template<typename UNIT_TYPE>
-void set_single_value(const boost::any &value, void *result)
+void get_single_value(const boost::any &value, void *result)
 {
     *reinterpret_cast<UNIT_TYPE*>(result) = boost::any_cast<UNIT_TYPE>(value);
 }
 
+///Set result to a newly allocated c-style string.
+void get_string_value(const boost::any &value, void *result)
+{
+    const std::string &source = IO::translate_string.get_value(value);
+    char **destination = reinterpret_cast<char**>(result);
+    *destination = reinterpret_cast<char*>(
+        malloc(sizeof(char) * (source.size() + 1))
+    );
+    strcpy(*destination, source.c_str());
+}
+
 ///Set result to a std::pair of values both of type UNIT_TYPE.
 template<typename UNIT_TYPE>
-void set_value_pair(const boost::any &value, void *result)
+void get_value_pair(const boost::any &value, void *result)
 {
     UNIT_TYPE *destination = reinterpret_cast<UNIT_TYPE*>(result);
     const std::pair<UNIT_TYPE, UNIT_TYPE> &source =
@@ -140,51 +151,56 @@ bool query_result_tree(H5IODataTree *tree,
                               const char *format,
                               void *result)
 {
+
     const boost::any &value = 
         reinterpret_cast<IO::H5IODataTree*>(tree)->get<boost::any>(quantity,
                                                                    boost::any());
-    if(value.empty())
+    if(value.empty()) {
+        std::cout << "Empty quantity: " << quantity << std::endl;
         return false;
+    }
 
-    if(strcmp(format, "int"))
-        set_single_value<int>(value, result);
-    else if(strcmp(format, "long"))
-        set_single_value<long>(value, result);
-    else if(strcmp(format, "short"))
-        set_single_value<short>(value, result);
-    else if(strcmp(format, "char"))
-        set_single_value<char>(value, result);
-    else if(strcmp(format, "unsigned"))
-        set_single_value<unsigned>(value, result);
-    else if(strcmp(format, "ulong"))
-        set_single_value<unsigned long>(value, result);
-    else if(strcmp(format, "ushort"))
-        set_single_value<unsigned short>(value, result);
-    else if(strcmp(format, "uchar"))
-        set_single_value<unsigned char>(value, result);
-    else if(strcmp(format, "bool"))
-        set_single_value<bool>(value, result);
-    else if(strcmp(format, "double"))
-        set_single_value<double>(value, result);
-    else if(strcmp(format, "[int]"))
+    if(strcmp(format, "str") == 0)
+        get_string_value(value, result);
+    else if(strcmp(format, "int") == 0)
+        get_single_value<int>(value, result);
+    else if(strcmp(format, "long") == 0)
+        get_single_value<long>(value, result);
+    else if(strcmp(format, "short") == 0)
+        get_single_value<short>(value, result);
+    else if(strcmp(format, "char") == 0)
+        get_single_value<char>(value, result);
+    else if(strcmp(format, "uint") == 0)
+        get_single_value<unsigned>(value, result);
+    else if(strcmp(format, "ulong") == 0)
+        get_single_value<unsigned long>(value, result);
+    else if(strcmp(format, "ushort") == 0)
+        get_single_value<unsigned short>(value, result);
+    else if(strcmp(format, "uchar") == 0)
+        get_single_value<unsigned char>(value, result);
+    else if(strcmp(format, "bool") == 0)
+        get_single_value<bool>(value, result);
+    else if(strcmp(format, "double") == 0)
+        get_single_value<double>(value, result);
+    else if(strcmp(format, "[int]") == 0)
         copy_array<int>(value, result);
-    else if(strcmp(format, "[long]"))
+    else if(strcmp(format, "[long]") == 0)
         copy_array<long>(value, result);
-    else if(strcmp(format, "[short]"))
+    else if(strcmp(format, "[short]") == 0)
         copy_array<short>(value, result);
-    else if(strcmp(format, "[char]"))
+    else if(strcmp(format, "[char]") == 0)
         copy_array<char>(value, result);
-    else if(strcmp(format, "[unsigned]"))
+    else if(strcmp(format, "[uint]") == 0)
         copy_array<unsigned>(value, result);
-    else if(strcmp(format, "[ulong]"))
+    else if(strcmp(format, "[ulong]") == 0)
         copy_array<unsigned long>(value, result);
-    else if(strcmp(format, "[ushort]"))
+    else if(strcmp(format, "[ushort]") == 0)
         copy_array<unsigned short>(value, result);
-    else if(strcmp(format, "[uchar]"))
+    else if(strcmp(format, "[uchar]") == 0)
         copy_array<unsigned char>(value, result);
-    else if(strcmp(format, "[bool]"))
+    else if(strcmp(format, "[bool]") == 0)
         copy_array<bool>(value, result);
-    else if(strcmp(format, "[double]"))
+    else if(strcmp(format, "[double]") == 0)
         copy_array<double>(value, result);
     else {
         int split_position = 0;
@@ -196,31 +212,31 @@ bool query_result_tree(H5IODataTree *tree,
                 );
             ++split_position;
         }
-        if(!strncmp(format, format + split_position + 1, split_position))
+        if(strncmp(format, format + split_position + 1, split_position) != 0)
             throw Error::InvalidArgument(
                 "query_result_tree",
                 "invalid format: " + std::string(format)
             );
-        if(strncmp(format, "int", split_position))
-            set_value_pair<int>(value, result);
-        else if(strncmp(format, "long", split_position))
-            set_value_pair<long>(value, result);
-        else if(strncmp(format, "short", split_position))
-            set_value_pair<short>(value, result);
-        else if(strncmp(format, "char", split_position))
-            set_value_pair<char>(value, result);
-        else if(strncmp(format, "unsigned", split_position))
-            set_value_pair<unsigned>(value, result);
-        else if(strncmp(format, "ulong", split_position))
-            set_value_pair<unsigned long>(value, result);
-        else if(strncmp(format, "ushort", split_position))
-            set_value_pair<unsigned short>(value, result);
-        else if(strncmp(format, "uchar", split_position))
-            set_value_pair<unsigned char>(value, result);
-        else if(strncmp(format, "bool", split_position))
-            set_value_pair<bool>(value, result);
-        else if(strncmp(format, "double", split_position))
-            set_value_pair<double>(value, result);
+        if(strncmp(format, "int", split_position) == 0)
+            get_value_pair<int>(value, result);
+        else if(strncmp(format, "long", split_position) == 0)
+            get_value_pair<long>(value, result);
+        else if(strncmp(format, "short", split_position) == 0)
+            get_value_pair<short>(value, result);
+        else if(strncmp(format, "char", split_position) == 0)
+            get_value_pair<char>(value, result);
+        else if(strncmp(format, "uint", split_position) == 0)
+            get_value_pair<unsigned>(value, result);
+        else if(strncmp(format, "ulong", split_position) == 0)
+            get_value_pair<unsigned long>(value, result);
+        else if(strncmp(format, "ushort", split_position) == 0)
+            get_value_pair<unsigned short>(value, result);
+        else if(strncmp(format, "uchar", split_position) == 0)
+            get_value_pair<unsigned char>(value, result);
+        else if(strncmp(format, "bool", split_position) == 0)
+            get_value_pair<bool>(value, result);
+        else if(strncmp(format, "double", split_position) == 0)
+            get_value_pair<double>(value, result);
         else
             throw Error::InvalidArgument(
                 "query_result_tree",

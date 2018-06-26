@@ -6,6 +6,7 @@
  */
 
 #include "H5IODataTree.h"
+#include <iostream>
 
 namespace IO {
 
@@ -66,14 +67,16 @@ namespace IO {
             if(subkey_split == std::string::npos) {
                 if(sub_key == "model")
                     put(__prefix + sub_key, __psf_model, translate_string);
-                else put(__prefix + sub_key, value.value());
+                else
+                    put(__prefix + sub_key, value.value());
             } else if(sub_key.substr(0, subkey_split) == __psf_model) {
                 std::string sub_sub_key = sub_key.substr(subkey_split + 1);
                 if(sub_sub_key == "grid")
                     put(__prefix + sub_sub_key, 
                         std::string(value.as<PSF::Grid>()),
                         translate_string);
-                else put(__prefix + sub_sub_key, value.value());
+                else
+                    put(__prefix + sub_sub_key, value.value());
             }
         } else if(component == "io"
                   &&
