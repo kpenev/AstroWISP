@@ -559,7 +559,7 @@ class FitStarShape:
 
         column_names = get_column_names()
         column_data = create_column_data(column_names)
-        self._result_tree = SuperPhotIOTree(self._library_configuration)
+        result_tree = SuperPhotIOTree(self._library_configuration)
         self._fitting_library.piecewise_bicubic_fit(
             *create_image_arguments(),
             *create_source_arguments(column_names, column_data),
@@ -569,21 +569,7 @@ class FitStarShape:
             self.configuration['subpixmap'].shape[0],
             self._result_tree.library_tree
         )
-
-    def get_last_fit_result(self, quantity):
-        """
-        Return the specified quantity determined by the last :meth:`fit` call.
-
-        Args:
-            quantity (str):    The quantity to return the best fit value of.
-
-        Returns:
-            numpy.ndarray:
-                The best fit value of the specified quantity determined by the
-                last call of :meth:`fit`.
-        """
-
-        raise Exception('Not implemented')
+        return result_tree
 
     def __del__(self):
         r"""Destroy the configuration object created in :meth:`__init__`\ ."""
@@ -595,9 +581,9 @@ class FitStarShape:
 if __name__ == '__main__':
     fitprf = FitStarShape(mode='prf',
                           shape_terms='O3{x, y}',
-                          grid=[-4.0, -2.0, 0.0, 2.0, 4.0],
-                          initial_aperture=5.0,
-                          smoothing=0.0,
+                          grid=[-1.0, 0.0, 1.0],
+                          initial_aperture=2.0,
+                          smoothing=None,
                           min_convergence_rate=0.0)
 
     tree = SuperPhotIOTree(fitprf._library_configuration)
