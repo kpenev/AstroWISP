@@ -18,6 +18,7 @@ import numpy
 
 from superphot._initialize_core_library import _initialize_core_library
 from superphot.io_library_interface import SuperPhotIOTree
+from superphot import BackgroundExtractor
 
 #Naming convention imitates the one by ctypes.
 #pylint: disable=invalid-name
@@ -56,26 +57,60 @@ def _initialize_library():
     fitting_library.update_psffit_configuration.restype = None
 
     fitting_library.piecewise_bicubic_fit.argtypes = [
-        POINTER(POINTER(c_double)),                 #pixel_values
-        POINTER(POINTER(c_double)),                 #pixel_errors
-        POINTER(POINTER(c_char)),                   #pixel_masks
-        c_ulong,                                    #number_images
-        c_ulong,                                    #image_x_resolution
-        c_ulong,                                    #image_y_resolution
-        POINTER(c_char_p),                          #column_names
-        POINTER(POINTER(c_char_p)),                 #source_ids
-        POINTER(POINTER(c_double)),                 #column_data
-        numpy.ctypeslib.ndpointer(dtype=c_ulong,    #number_sources
+        #pixel_values
+        POINTER(POINTER(c_double)),
+
+        #pixel_errors
+        POINTER(POINTER(c_double)),
+
+        #pixel_masks
+        POINTER(POINTER(c_char)),
+
+        #number_images
+        c_ulong,
+
+        #image_x_resolution
+        c_ulong,
+
+        #image_y_resolution
+        c_ulong,
+
+        #column_names
+        POINTER(c_char_p),
+
+        #source_ids
+        POINTER(POINTER(c_char_p)),
+
+        #column_data
+        POINTER(POINTER(c_double)),
+
+        #number_sources
+        numpy.ctypeslib.ndpointer(dtype=c_ulong,
                                   ndim=1,
                                   flags='C_CONTIGUOUS'),
-        c_ulong,                                    #number_columns
-        fitting_library.create_psffit_configuration.restype,#configuration
-        numpy.ctypeslib.ndpointer(dtype=c_double,   #subpixel_sensitivities
+
+        #number_columns
+        c_ulong,
+
+        #backgrounds
+        BackgroundExtractor.library.create_background_extractor.restype,
+
+        #configuration
+        fitting_library.create_psffit_configuration.restype,
+
+        #subpixel_sensitivities
+        numpy.ctypeslib.ndpointer(dtype=c_double,
                                   ndim=2,
                                   flags='C_CONTIGUOUS'),
-        c_ulong,                                    #subpix_x_resolution
-        c_ulong,                                    #subpix_y_resolution
-        SuperPhotIOTree.library.create_result_tree.restype       #ouput_data_tree
+
+        #subpix_x_resolution
+        c_ulong,
+
+        #subpix_y_resolution
+        c_ulong,
+
+        #ouput_data_tree
+        SuperPhotIOTree.library.create_result_tree.restype
     ]
     fitting_library.piecewise_bicubic_fit.restype = c_bool
 
@@ -116,17 +151,28 @@ class FitStarShape:
         >>>                       initial_aperture=5.0)
     """
 
-    _fitting_library = _initialize_library()
+    library = _initialize_library()
 
     @staticmethod
     def _format_config(param_value):
         """Format config param for passing to SuperPhot PSF fitting lib."""
 
+        print('Original param value: ' + repr(param_value))
         prefix = b''
-        if param_value[0] == 'grid':
+        if param_value[0].startswith('src_'):
+            param_value = (param_value[0][4:], param_value[1])
+            prefix = b'src.'
+        if param_value[0].startswith('bg_'):
+            param_value = (param_value[0][3:], param_value[1])
+            prefix = b'bg.'
+
+        elif param_value[0] == 'cover_grid':
+            return (b'src.cover-bicubic-grid',
+                    repr(param_value[1]).encode('ascii'))
+        elif param_value[0] == 'grid':
             grid = param_value[1]
             return (
-                b'grid',
+                b'psf.bicubic.grid',
                 (
                     ','.join(map(str, grid)) if isinstance(grid[0], Number)
                     else ';'.join([','.join(map(repr, grid_part))
@@ -134,6 +180,8 @@ class FitStarShape:
                 ).encode('ascii')
             )
         elif param_value[0] == 'subpixmap':
+            return ()
+        elif param_value[0] == 'smoothing' and param_value[1] is None:
             return ()
         elif param_value[0] == 'shape_terms':
             return b'psf.terms', param_value[1].encode('ascii')
@@ -150,6 +198,7 @@ class FitStarShape:
                                 'grid',
                                 'smoothing']:
             prefix = b'psf.bicubic.'
+        print('Modified param value: ' + repr(param_value))
         return (
             prefix + param_value[0].replace('_', '-').encode('ascii'),
             (
@@ -171,7 +220,16 @@ class FitStarShape:
                  max_abs_amplitude_change=0.0,
                  max_rel_amplitude_change=1e-6,
                  min_convergence_rate=-numpy.inf,
-                 max_iterations=1000):
+                 max_iterations=1000,
+                 gain=1.0,
+                 cover_grid=True,
+                 src_min_signal_to_noise=3.0,
+                 src_max_aperture=10.0,
+                 src_max_sat_frac=1.0,
+                 src_min_pix=5,
+                 src_max_pix=1000,
+                 src_max_count=10000,
+                 bg_min_pix=50):
         """
         Set-up an object ready to perform PSF/PRF fitting.
 
@@ -266,6 +324,47 @@ class FitStarShape:
                 PSF. It is an error to pass a value of zero for this option and
                 not specify and initial guess for the PSF.
 
+            gain (float):    The gain in electrons per ADU to assume for the
+                input images.
+
+            cover_grid (bool):    If this option is true, all pixels that at
+                least partially overlap with the grid are assigned to the
+                corresponding source. This option is ignored for sdk PSF models.
+
+            src_min_signal_to_noise (float):    How far above the background (in
+                units of RMS) should pixels be to still be considered part of a
+                source. Ignored if the piecewise bibucic PSF grid is used to
+                select source pixels (cover-bicubic-grid option).
+
+            src_max_aperture (float):    If this option has a positive value,
+                pixels are assigned to sources in circular apertures (the
+                smallest such that all pixels that pass the signal to noise cut
+                are still assigned to the source). If an aperture larger than
+                this value is required, an exception is thrown.
+
+            src_max_sat_frac (float):    If more than this fraction of
+                the pixels assigned to a source are saturated, the source is
+                excluded from the fit.
+
+            src_min_pix (int):    The minimum number of pixels that must be
+                assigned to a source in order to include the source is the PSF
+                fit.
+
+            src_max_pix (int):    The maximum number of pixels that car be
+                assigned to a source before excluding the source from the PSF
+                fit.
+
+            src_max_count (int):    The maximum number of sources to include in
+                the fit for the PSF shape. The rest of the sources get their
+                amplitudes fit and are used to determine the overlaps. Sources
+                are ranked according to the sum of (background excess)^2/(pixel
+                variance+background variance) of their individual non-saturated
+                pixels.
+
+            bg_min_pix (int):    The minimum number of pixels a background
+                estimate must be based on in order to include the source in
+                shape fitting.
+
         Returns:
             None
         """
@@ -283,11 +382,20 @@ class FitStarShape:
             max_rel_amplitude_change=max_rel_amplitude_change,
             smoothing=smoothing,
             min_convergence_rate=min_convergence_rate,
-            max_iterations=max_iterations
+            max_iterations=max_iterations,
+            gain=gain,
+            cover_grid=cover_grid,
+            src_min_signal_to_noise=src_min_signal_to_noise,
+            src_max_aperture=src_max_aperture,
+            src_max_sat_frac=src_max_sat_frac,
+            src_min_pix=src_min_pix,
+            src_max_pix=src_max_pix,
+            src_max_count=src_max_count,
+            bg_min_pix=bg_min_pix
         )
 
         self._library_configuration = (
-            self._fitting_library.create_psffit_configuration()
+            self.library.create_psffit_configuration()
         )
         config_arguments = sum(
             map(self._format_config, self.configuration.items()),
@@ -298,7 +406,8 @@ class FitStarShape:
                 b'bicubic'
             )
         ) + (b'',)
-        self._fitting_library.update_psffit_configuration(*config_arguments)
+        print('Setting fit configuration to: ' + repr(config_arguments))
+        self.library.update_psffit_configuration(*config_arguments)
 
         self._result_tree = None
 
@@ -329,12 +438,12 @@ class FitStarShape:
             map(self._format_config, configuration.items()),
             (c_bool(self.mode == 'PRF'),)
         ) + (b'',)
-        self._fitting_library.update_psffit_configuration(
+        self.library.update_psffit_configuration(
             self._library_configuration,
             *config_arguments
         )
 
-    def fit(self, image_sources):
+    def fit(self, image_sources, backgrounds):
         """
         Fit for the shape of the sources in a collection of imeges.
 
@@ -361,6 +470,9 @@ class FitStarShape:
                    allowed to depend. This can be either a numy record array
                    with field names as keys or a dictionary with field names as
                    keys and 1-D numpy arrays of identical lengths as values.
+
+            backgrounds:    The measured backgrounds under the sources (instance
+                of BackgroundExtractor.
 
         Returns:
             None:
@@ -461,10 +573,15 @@ class FitStarShape:
                 for entry in image_sources:
                     assert set(entry[3].keys()) == column_name_set
 
-            column_names.remove('ID')
+            print('column_names = ' + repr(column_names))
+            column_names = list(column_names)
 
-            for required_column in ['ID', 'x', 'y']:
-                assert required_column in column_names
+            assert 'ID' in column_names
+            assert 'x' in column_names
+            assert 'y' in column_names
+
+
+            column_names.remove('ID')
 
             return column_names
 
@@ -482,14 +599,14 @@ class FitStarShape:
             """
 
             column_data = [
-                numpy.empty((len(column_names), len(entry[4]['ID'])),
+                numpy.empty((len(column_names), len(entry[3]['ID'])),
                             dtype=c_double)
                 for entry in image_sources
             ]
             for image_index, entry in enumerate(image_sources):
                 for column_index, column_name in enumerate(column_names):
                     column_data[image_index][column_index, :] = (
-                        entry[4][column_name]
+                        entry[3][column_name]
                     )
             return column_data
 
@@ -534,13 +651,13 @@ class FitStarShape:
                 ),
                 (POINTER(c_char_p) * number_images)(
                     *(
-                        (c_char_p * len(entry[4]['ID']))(
+                        (c_char_p * len(entry[3]['ID']))(
                             *(
                                 (
                                     source_id if isinstance(source_id, bytes)
                                     else source_id.encode('ascii')
                                 )
-                                for source_id in entry[4]['ID']
+                                for source_id in entry[3]['ID']
                             )
                         )
                         for entry in image_sources
@@ -552,35 +669,47 @@ class FitStarShape:
                         for columns in column_data
                     )
                 ),
-                numpy.array([len(entry[4]['ID']) for entry in image_sources],
+                numpy.array([len(entry[3]['ID']) for entry in image_sources],
                             dtype=c_ulong),
                 number_columns
             )
 
+        print('Starting PSF fit')
         column_names = get_column_names()
+        print('Column names: ' + repr(column_names))
         column_data = create_column_data(column_names)
+        print('Column data: ' +  repr(column_data))
         result_tree = SuperPhotIOTree(self._library_configuration)
-        self._fitting_library.piecewise_bicubic_fit(
+        print('Created result tree.')
+        self.library.piecewise_bicubic_fit(
             *create_image_arguments(),
             *create_source_arguments(column_names, column_data),
+            (
+                len(backgrounds)
+                *
+                BackgroundExtractor.library.create_background_extractor.restype
+            )(
+                *(bg.library_extractor for bg in backgrounds)
+            ),
             self._library_configuration,
             self.configuration['subpixmap'],
             self.configuration['subpixmap'].shape[1],
             self.configuration['subpixmap'].shape[0],
-            self._result_tree.library_tree
+            result_tree.library_tree
         )
+        print('Finished fitting.')
         return result_tree
 
     def __del__(self):
         r"""Destroy the configuration object created in :meth:`__init__`\ ."""
 
-        self._fitting_library.destroy_psffit_configuration(
+        self.library.destroy_psffit_configuration(
             self._library_configuration
         )
 
 if __name__ == '__main__':
     fitprf = FitStarShape(mode='prf',
-                          shape_terms='O3{x, y}',
+                          shape_terms='{1}',
                           grid=[-1.0, 0.0, 1.0],
                           initial_aperture=2.0,
                           smoothing=None,
@@ -588,6 +717,7 @@ if __name__ == '__main__':
 
     tree = SuperPhotIOTree(fitprf._library_configuration)
     print('BG tool: ' + repr(tree.get('bg.tool', str)))
+    print('PSF terms: ' + repr(tree.get('psffit.terms', str)))
     print('Max chi squared: '
           +
           repr(tree.get('psffit.max_chi2', c_double)))

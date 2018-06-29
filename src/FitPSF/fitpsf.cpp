@@ -291,17 +291,38 @@ namespace FitPSF {
                     throw Error::FitsImage(message.str());
                 }
 
+                Background::Measure *backgrounds;
+                if(options["bg.zero"].as<bool>()) {
+                    backgrounds = new Background::Zero(
+                        source_list.locations().size()
+                    );
+                } else {
+                    const Background::Annulus& background_annulus =
+                        options["bg.annulus"].as<Background::Annulus>();
+                    backgrounds = new Background::MeasureAnnulus(
+                        background_annulus.inner_radius(),
+                        background_annulus.outer_radius(),
+                        background_annulus.inner_radius(),
+                        image,
+                        source_list.locations()
+                    );
+                }
+
                 std::list<FIT_SOURCE_TYPE *> section_fit_sources,
                                              section_dropped_sources;
                 FitPSF::get_section_fit_sources<FIT_SOURCE_TYPE, PSF_TYPE>(
                     *image,
                     options,
                     source_list,
+                    *backgrounds,
                     subpix_map,
                     psf,
                     section_fit_sources,
                     section_dropped_sources
                 );
+
+                delete backgrounds;
+
                 FitPSF::add_expansion_terms(
                     source_list,
                     options["psf.terms"].as<std::string>(),

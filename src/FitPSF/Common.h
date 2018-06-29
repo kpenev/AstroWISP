@@ -253,7 +253,7 @@ namespace FitPSF {
         LIB_PUBLIC void get_fit_sources(
             ///The image being processed. Should be a reference to the exact
             ///same variable for all sources in a single image!
-            Image<FIT_SOURCE_TYPE>                        &image,
+            Image<FIT_SOURCE_TYPE>                 &image,
 
             ///The sub-pixel sensitivity map to assume. Must not be destroyed 
             ///while this object is in use.
@@ -418,26 +418,30 @@ namespace FitPSF {
     template<class FIT_SOURCE_TYPE, class PSF_TYPE>
         void get_section_fit_sources(
             ///The image where fit pixels are being tracked.
-            Image<FIT_SOURCE_TYPE>      &image,
+            Image<FIT_SOURCE_TYPE>          &image,
 
             ///The configuration with which to perform PSF fitting.
-            const Config                &options,
+            const Config                    &options,
 
             ///The sources in the image, location and all variables requried for
             ///PSF fitting.
-            const IOSources             &source_list,
+            const IOSources                 &source_list,
+
+            ///The measured background for the image sources.
+            Background::Measure             &backgrounds,
 
             ///The sub-pixel sensitivity map to assume.
-            const Core::SubPixelMap             &subpix_map,
+            const Core::SubPixelMap         &subpix_map,
 
             ///See same name argument to get_fit_sources.
-            const PSF_TYPE                      &psf,
+            const PSF_TYPE                  &psf,
 
             ///See same name argument to get_fit_sources.
-            std::list<FIT_SOURCE_TYPE *>        &fit_sources,
+            std::list<FIT_SOURCE_TYPE *>    &fit_sources,
 
             ///See same name argument to get_fit_sources.
-            std::list<FIT_SOURCE_TYPE *>        &dropped_sources)
+            std::list<FIT_SOURCE_TYPE *>    &dropped_sources
+        )
         {
             double min_ston = -Core::Inf,
                    max_sat_frac = Core::Inf,
@@ -448,31 +452,15 @@ namespace FitPSF {
                                 image.y_resolution()),
                      max_src_count = std::numeric_limits<unsigned>::max();
 
-            if(options["psf.model"].as<PSF::ModelType>() != PSF::ZERO) {
-                min_ston = options["src.min-signal-to-noise"].as<double>();
-                max_sat_frac = options["src.max-sat-frac"].as<double>();
-                min_pix = options["src.min-pix"].as<unsigned>();
-                max_pix = options["src.max-pix"].as<unsigned>();
-                max_src_count = options["src.max-count"].as<unsigned>();
-                max_aperture = options["src.max-aperture"].as<double>();
-            }
-
-            Background::Measure *backgrounds;
-            if(options["bg.zero"].as<bool>()) {
-                backgrounds = new Background::Zero(
-                    source_list.locations().size()
-                );
-            } else {
-                const Background::Annulus& background_annulus =
-                    options["bg.annulus"].as<Background::Annulus>();
-                backgrounds = new Background::MeasureAnnulus(
-                    background_annulus.inner_radius(),
-                    background_annulus.outer_radius(),
-                    background_annulus.inner_radius(),
-                    image,
-                    source_list.locations()
-                );
-            }
+            min_ston = options["src.min-signal-to-noise"].as<double>();
+            max_sat_frac = options["src.max-sat-frac"].as<double>();
+            min_pix = options["src.min-pix"].as<unsigned>();
+            max_pix = options["src.max-pix"].as<unsigned>();
+            max_src_count = options["src.max-count"].as<unsigned>();
+            max_aperture = options["src.max-aperture"].as<double>();
+#ifdef TRACK_PROGRESS
+            std::cerr << "Got useful configuration." << std::endl;
+#endif
 
             get_fit_sources<FIT_SOURCE_TYPE, PSF_TYPE>(
                 image,
@@ -483,7 +471,7 @@ namespace FitPSF {
                 max_sat_frac,
                 min_pix,
                 max_pix,
-                *backgrounds,
+                backgrounds,
                 options["bg.min-pix"].as<unsigned>(),
                 max_src_count,
                 max_aperture,
@@ -520,8 +508,6 @@ namespace FitPSF {
                                                drop_iter);
                     }
                 }
-
-            delete backgrounds;
         }
 
     ///\brief For each selected and dropped source subject to PSF fitting, add

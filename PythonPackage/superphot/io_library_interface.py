@@ -96,6 +96,11 @@ class SuperPhotIOTree:
                 shape is (1,).
         """
 
+        print('Reading result quantity: ' + repr(qunatity)
+              +
+              ', type: ' + repr(dtype)
+              +
+              ', shape: ' + repr(shape))
         byte_quantity = (quantity if isinstance(quantity, bytes)
                          else quantity.encode('ascii'))
 

@@ -15,10 +15,11 @@ namespace IO {
                                                const std::string &executable,
                                                const std::string &version)
     {
-        assert(argc!=0);
         std::ostringstream command_line;
+        command_line << "'";
         for(int i = 0; i < argc; ++i)
-            command_line << "'" << argv[i] << (i == argc - 1 ? "'" : "' ");
+            command_line << "'" << argv[i] << (i == argc - 1 ? "" : "' ");
+        command_line << "'";
 
         if(executable == "fitpsf" || executable == "fitprf") {
             __tool = (executable == "FitPSF" ? FITPSF : FITPRF);
@@ -65,12 +66,14 @@ namespace IO {
         if(component == "psf") {
             size_t subkey_split = sub_key.find_first_of('.');
             if(subkey_split == std::string::npos) {
+                std::cout << "Setting " << __prefix + sub_key << std::endl;
                 if(sub_key == "model")
                     put(__prefix + sub_key, __psf_model, translate_string);
                 else
                     put(__prefix + sub_key, value.value());
             } else if(sub_key.substr(0, subkey_split) == __psf_model) {
                 std::string sub_sub_key = sub_key.substr(subkey_split + 1);
+                std::cout << "Setting " << __prefix + sub_sub_key << std::endl;
                 if(sub_sub_key == "grid")
                     put(__prefix + sub_sub_key, 
                         std::string(value.as<PSF::Grid>()),

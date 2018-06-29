@@ -120,6 +120,10 @@ void prepare_fit_sources(
     ///See same name argument to piecewise_bicubic_fit()
     unsigned long number_columns,
 
+    ///The measured background for the sources in each image, indexed by the
+    ///image index.
+    BackgroundMeasureAnnulus **backgrounds,
+
     ///The list to add the newly created sources suitable for participating in
     ///the shape fit.
     FitPSF::LinearSourceList &fit_sources,
@@ -135,15 +139,20 @@ void prepare_fit_sources(
     ///grid, obviously no coefficients.
     const PSF::PiecewiseBicubic &psf,
 
-    ///The object to add result data to (e.g. background estimates).
+    ///The object to add result data to (e.g. PSF map variables).
     IO::H5IODataTree &output_data_tree
 )
 {
     for(
         unsigned long image_index = 0;
-        image_index == fit_images.size();
+        image_index < fit_images.size();
         ++image_index
     ) {
+#ifdef TRACK_PROGRESS
+        std::cerr << "Extracting sources from image "
+                  << image_index
+                  << std::endl;
+#endif
         std::ostringstream image_index_stream;
         image_index_stream.width(
             int(std::floor(std::log10(fit_images.size())) + 1)
@@ -157,6 +166,12 @@ void prepare_fit_sources(
                                         column_names,
                                         number_sources[image_index],
                                         number_columns);
+#ifdef TRACK_PROGRESS
+        std::cerr << "List contains "
+                  << image_sources.locations().size()
+                  << " sources"
+                  << std::endl;
+#endif
 
         FitPSF::LinearSourceList section_fit_sources,
                                  section_dropped_sources;
@@ -165,17 +180,29 @@ void prepare_fit_sources(
             fit_images[image_index],
             configuration,
             image_sources,
+            *reinterpret_cast<Background::MeasureAnnulus*>(
+                backgrounds[image_index]
+            ),
             subpix_map,
             psf,
             section_fit_sources,
             section_dropped_sources
         );
+#ifdef TRACK_PROGRESS
+        std::cerr << "Extracted "
+                  << section_fit_sources.size()
+                  << " sources."
+                  << std::endl;
+#endif
         FitPSF::add_expansion_terms(
             image_sources,
             configuration["psf.terms"].as<std::string>(),
             section_fit_sources,
             section_dropped_sources
         );
+#ifdef TRACK_PROGRESS
+        std::cerr << "Added expansion terms." << std::endl;
+#endif
 
         if(configuration["psf.terms"].as<std::string>() != "") {
             typedef IO::IOTreeBase::path_type path;
@@ -188,8 +215,17 @@ void prepare_fit_sources(
                 IO::TranslateToAny<PSF::MapVarListType>()
             );
         }
+#ifdef TRACK_PROGRESS
+        std::cerr << "Added PSF fit variables to result tree." << std::endl;
+#endif
         fit_sources.splice(fit_sources.end(), section_fit_sources);
         dropped_sources.splice(dropped_sources.end(), section_dropped_sources);
+#ifdef TRACK_PROGRESS
+        std::cerr << "Integrated into global source lists:"
+                  << fit_sources.size() << " fit sources and "
+                  << dropped_sources.size() << " dropped sources"
+                  << std::endl;
+#endif
     }
 }
 
@@ -204,16 +240,23 @@ bool piecewise_bicubic_fit(double **pixel_values,
                            double **column_data,
                            unsigned long *number_sources,
                            unsigned long number_columns,
+                           BackgroundMeasureAnnulus** backgrounds,
                            FittingConfiguration *configuration,
                            double *subpix_sensitivities,
                            unsigned long subpix_x_resolution,
                            unsigned long subpix_y_resolution,
                            H5IODataTree *output_data_tree)
 {
+#ifdef TRACK_PROGRESS
+    std::cerr << "Starting piecewise bicubic fit." << std::endl;
+#endif
     Core::SubPixelMap subpix_map(subpix_sensitivities,
                                  subpix_x_resolution,
                                  subpix_y_resolution);
 
+#ifdef TRACK_PROGRESS
+    std::cerr << "Created subpixel map." << std::endl;
+#endif
     std::vector< FitPSF::Image<FitPSF::LinearSource> >
         fit_images(number_images);
     for(
@@ -228,6 +271,9 @@ bool piecewise_bicubic_fit(double **pixel_values,
             image_y_resolution,
             pixel_errors[image_index]
         );
+#ifdef TRACK_PROGRESS
+    std::cerr << "Created fit images" << std::endl;
+#endif
 
     FitPSF::Config *fit_configuration =
         reinterpret_cast<FitPSF::Config*>(configuration);
@@ -235,10 +281,16 @@ bool piecewise_bicubic_fit(double **pixel_values,
     const PSF::Grid& grid = (
         (*fit_configuration)["psf.bicubic.grid"].as<PSF::Grid>()
     );
+#ifdef TRACK_PROGRESS
+    std::cerr << "Got PSF grid." << std::endl;
+#endif
     PSF::PiecewiseBicubic psf(grid.x_grid.begin(),
                               grid.x_grid.end(),
                               grid.y_grid.begin(),
                               grid.y_grid.end());
+#ifdef TRACK_PROGRESS
+    std::cerr << "Created a PSF" << std::endl;
+#endif
     std::vector<double> zeros(grid.x_grid.size() * grid.y_grid.size(),
                               0);
     psf.set_values(zeros.begin(), zeros.begin(),
@@ -246,21 +298,41 @@ bool piecewise_bicubic_fit(double **pixel_values,
 
     FitPSF::LinearSourceList fit_sources, dropped_sources;
 
+#ifdef TRACK_PROGRESS
+    std::cerr << "Created source lists" << std::endl;
+#endif
     IO::H5IODataTree *real_output_data_tree =
         reinterpret_cast<IO::H5IODataTree*>(output_data_tree);
 
-    prepare_fit_sources(*fit_configuration,
-                        fit_images,
-                        column_names,
-                        source_ids,
-                        column_data,
-                        number_sources,
-                        number_columns,
-                        fit_sources,
-                        dropped_sources,
-                        subpix_map,
-                        psf,
-                        *real_output_data_tree);
+#ifdef TRACK_PROGRESS
+    std::cerr << "Converted output data tree." << std::endl;
+#endif
+    prepare_fit_sources(
+        *fit_configuration,
+        fit_images,
+        column_names,
+        source_ids,
+        column_data,
+        number_sources,
+        number_columns,
+        backgrounds,
+        fit_sources,
+        dropped_sources,
+        subpix_map,
+        psf,
+        *real_output_data_tree
+    );
+
+#ifdef TRACK_PROGRESS
+    std::cerr << "Got " << fit_sources.size() << " fit sources:" << std::endl;
+    for(
+        FitPSF::LinearSourceList::const_iterator src_i = fit_sources.begin();
+        src_i != fit_sources.end();
+        ++src_i
+    )
+        std::cerr << "x=" << (*src_i)->x() << ", y=" << (*src_i)->y()
+                  << std::endl;
+#endif
 
     Eigen::VectorXd best_fit_coef;
     FitPSF::LinearSourceList empty_source_list;
@@ -269,41 +341,58 @@ bool piecewise_bicubic_fit(double **pixel_values,
         fit_configuration->count("psf.ignore-dropped") != 0
         &&
         (*fit_configuration)["psf.ignore-dropped"].as<bool>()
-    ),
-         converged = FitPSF::fit_piecewise_bicubic_psf(
-             fit_sources,
-             (ignore_dropped ? empty_source_list : dropped_sources),
-             (*fit_configuration)["gain"].as<double>(),
-             grid.x_grid,
-             grid.y_grid,
-             subpix_map,
-             (*fit_configuration)[
-                 "psf.bicubic.max-abs-amplitude-change"
-             ].as<double>(),
-             (*fit_configuration)[
-                "psf.bicubic.max-rel-amplitude-change"
-             ].as<double>(),
-             (*fit_configuration)["psf.max-chi2"].as<double>(),
-             (*fit_configuration)["psf.bicubic.pixrej"].as<double>(),
-             (*fit_configuration)["psf.min-convergence-rate"].as<double>(),
-             (*fit_configuration)["psf.max-iterations"].as<int>(),
-             (*fit_configuration)["psf.bicubic.smoothing"].as<double>(),
-             best_fit_coef
-         );
+    );
+#ifdef TRACK_PROGRESS
+    std::cerr << "Ignore dropped: " << ignore_dropped << std::endl;
+#endif
+    bool converged = FitPSF::fit_piecewise_bicubic_psf(
+        fit_sources,
+        (ignore_dropped ? empty_source_list : dropped_sources),
+        (*fit_configuration)["gain"].as<double>(),
+        grid.x_grid,
+        grid.y_grid,
+        subpix_map,
+        (*fit_configuration)[
+        "psf.bicubic.max-abs-amplitude-change"
+        ].as<double>(),
+        (*fit_configuration)[
+        "psf.bicubic.max-rel-amplitude-change"
+        ].as<double>(),
+        (*fit_configuration)["psf.max-chi2"].as<double>(),
+        (*fit_configuration)["psf.bicubic.pixrej"].as<double>(),
+        (*fit_configuration)["psf.min-convergence-rate"].as<double>(),
+        (*fit_configuration)["psf.max-iterations"].as<int>(),
+        (*fit_configuration)["psf.bicubic.smoothing"].as<double>(),
+        best_fit_coef
+    );
+#ifdef TRACK_PROGRESS
+    std::cerr << "Converged: " << converged << std::endl;
+#endif
 
     fit_sources.splice(fit_sources.end(), dropped_sources);
     fit_sources.sort(
         FitPSF::compare_source_assignment_ids<FitPSF::LinearSource>
     );
 
+#ifdef TRACK_PROGRESS
+    std::cerr << "Re-integrated dropped sources to source list." << std::endl;
+#endif
+
     FitPSF::fill_output_data_tree_common(
         fit_sources,
         *real_output_data_tree,
         (*fit_configuration)["magnitude-1adu"].as<double>()
     );
+#ifdef TRACK_PROGRESS
+    std::cerr << "Updated common to all PSF fits entries of the output tree."
+              << std::endl;
+#endif
     real_output_data_tree->put("psffit.psfmap",
                                best_fit_coef,
                                IO::TranslateToAny< Eigen::VectorXd >());
+#ifdef TRACK_PROGRESS
+    std::cerr << "Added PSF map to output tree." << std::endl;
+#endif
 
     return converged;
 }

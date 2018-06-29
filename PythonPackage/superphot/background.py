@@ -97,7 +97,7 @@ class BackgroundExtractor:
             background error.
     """
 
-    _library = _initialize_library()
+    library = _initialize_library()
 
     def __init__(self,
                  image,
@@ -116,7 +116,7 @@ class BackgroundExtractor:
         self.inner_radius = inner_radius
         self.outer_radius = outer_radius
         self.error_confidence = error_confidence
-        self._library_image = self._library.create_core_image(
+        self._library_image = self.library.create_core_image(
             image.shape[1],
             image.shape[0],
             image,
@@ -124,7 +124,7 @@ class BackgroundExtractor:
             None,
             True
         )
-        self._library_extractor = self._library.create_background_extractor(
+        self.library_extractor = self.library.create_background_extractor(
             inner_radius,
             outer_radius,
             inner_radius,
@@ -164,8 +164,8 @@ class BackgroundExtractor:
 
         self._set_sources = True
 
-        self._library.add_source_list_to_background_extractor(
-            self._library_extractor,
+        self.library.add_source_list_to_background_extractor(
+            self.library_extractor,
             source_x,
             source_y,
             source_x.size
@@ -174,8 +174,8 @@ class BackgroundExtractor:
         bg_value = numpy.empty(source_x.size, dtype=c_double)
         bg_error = numpy.empty(source_x.size, dtype=c_double)
         bg_numpix = numpy.empty(source_x.size, dtype=c_uint)
-        self._library.get_all_backgrounds(
-            self._library_extractor,
+        self.library.get_all_backgrounds(
+            self.library_extractor,
             bg_value,
             bg_error,
             bg_numpix
@@ -185,7 +185,7 @@ class BackgroundExtractor:
     def __del__(self):
         r"""Destroy the image and extractor created in :meth:`__init__`\ ."""
 
-        self._library.destroy_core_image(self._library_image)
-        self._library.destroy_background_extractor(self._library_extractor)
+        self.library.destroy_core_image(self._library_image)
+        self.library.destroy_background_extractor(self.library_extractor)
 
 #pylint: enable=too-few-public-methods

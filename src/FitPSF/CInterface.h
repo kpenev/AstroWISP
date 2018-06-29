@@ -8,6 +8,7 @@
 
 #include "../Core/CInterface.h"
 #include "../IO/CInterface.h"
+#include "../Background/CInterface.h"
 
 extern "C" {
     ///Opaque struct to cast to/from FitPSF::Config.
@@ -80,6 +81,10 @@ extern "C" {
 
         ///How many columns are used in PSF fitting.
         unsigned long number_columns,
+
+        ///Pointers to the measured background for the input sources indexed by
+        ///the image index.
+        BackgroundMeasureAnnulus **backgrounds,
 
         ///The configuration for how to do the fitting.
         FittingConfiguration *configuration,
