@@ -5,9 +5,8 @@
 import sys
 import os.path
 import unittest
-import numpy
-import h5py
 from ctypes import c_ubyte
+import numpy
 
 _module_path = os.path.abspath(os.path.dirname(__file__))
 
@@ -24,7 +23,7 @@ sys.path.insert(
 
 #Needs to be after os.path and sys to allow adding the seach path.
 #pylint: disable=wrong-import-position
-from superphot import FitStarShape
+from superphot import FitStarShape, BackgroundExtractor
 from superphot.fake_image.piecewise_bicubic_psf import PiecewiseBicubicPSF
 
 from tests.utilities import FloatTestCase
@@ -58,15 +57,14 @@ class TestFitStarShapeNoiseless(FloatTestCase):
         else:
             enabled_sources = numpy.full(len(sources), True, dtype=bool)
 
-        psf_fit_file = h5py.File(psf_fit_fname, 'r')
-        map_group = psf_fit_file['PSFFit/Map']
         variables = {
             var: val[enabled_sources]
             for var, val in zip(['x', 'y'] + extra_variables,
-                                map_group['Variables'][:])
+                                result_tree.get('psffit.variables',
+                                                shape=(len(sources),)))
         }
 
-        psffit_terms = map_group.attrs['Terms'][0].decode()
+        psffit_terms = result_tree.get('psffit.terms', str)
         assert psffit_terms[0] == '{'
         assert psffit_terms[-1] == '}'
 
@@ -84,7 +82,13 @@ class TestFitStarShapeNoiseless(FloatTestCase):
                 term_list[term_index] = numpy.full(num_sources, float(term))
 
         term_list = numpy.dstack(term_list)[0]
-        coefficients = map_group['Coefficients'][:]
+        coefficients = result_tree.get(
+            'psffit.psfmap',
+            shepe=(4,
+                   len(sources[0][0]['psf_args']['boundaries']['x']) - 1,
+                   len(sources[0][0]['psf_args']['boundaries']['y']) - 1,
+                   len(term_list))
+        )
 
         #Indices are: source index, variable, y boundary ind, x boundary ind
         fit_params = numpy.tensordot(term_list, coefficients, [1, 3])
@@ -92,7 +96,8 @@ class TestFitStarShapeNoiseless(FloatTestCase):
             fit_params.shape,
             (num_sources, 4, num_x_boundaries, num_y_boundaries)
         )
-        fluxes = psf_fit_file['PSFFit/Flux'][:]
+        fluxes = result_tree.get('psffit.flux',
+                                 shape=(len(variables['x']),))
 
         assert len(sources) == len(fluxes)
         for src_ind, src in enumerate(sources):
@@ -175,6 +180,8 @@ class TestFitStarShapeNoiseless(FloatTestCase):
 #                           numpy.array([[0.0, 0.0], [0.0, 4.0]])]:
             fit_images_and_sources = []
 
+
+            measure_backgrounds = []
             for image_sources in sources:
                 print('Image sources:\n' + repr(image_sources))
                 image, source_list = make_image_and_source_list(
@@ -194,7 +201,19 @@ class TestFitStarShapeNoiseless(FloatTestCase):
                         source_list
                     )
                 )
+                measure_backgrounds.append(
+                    BackgroundExtractor(
+                        image,
+                        6.0,
+                        7.0
+                    )
+                )
+                measure_backgrounds[-1](
+                    numpy.array([src['x'] for src in image_sources]),
+                    numpy.array([src['y'] for src in image_sources])
+                )
 
+            print('Fitting for the PSF.')
             fit_star_shape = FitStarShape(
                 mode='PSF',
                 shape_terms=psffit_terms,
@@ -202,7 +221,7 @@ class TestFitStarShapeNoiseless(FloatTestCase):
                       sources[0][0]['psf_args']['boundaries']['y']],
                 initial_aperture=5.0,
                 subpixmap=subpixmap,
-                smoothing=None,
+                smoothing=-100.0,
                 max_chi2=100.0,
                 pixel_rejection_threshold=100.0,
                 max_abs_amplitude_change=0.0,
@@ -210,7 +229,10 @@ class TestFitStarShapeNoiseless(FloatTestCase):
                 min_convergence_rate=-10.0,
                 max_iterations=10000
             )
-            result_tree = fit_star_shape.fit(fit_images_and_sources)
+            result_tree = fit_star_shape.fit(
+                fit_images_and_sources,
+                measure_backgrounds
+            )
 
             self.check_results(
                 result_tree,
