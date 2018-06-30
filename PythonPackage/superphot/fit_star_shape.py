@@ -703,6 +703,7 @@ class FitStarShape:
     def __del__(self):
         r"""Destroy the configuration object created in :meth:`__init__`\ ."""
 
+        print('Destroying PSF fitting configuraiton.')
         self.library.destroy_psffit_configuration(
             self._library_configuration
         )

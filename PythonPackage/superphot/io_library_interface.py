@@ -96,7 +96,7 @@ class SuperPhotIOTree:
                 shape is (1,).
         """
 
-        print('Reading result quantity: ' + repr(qunatity)
+        print('Reading result quantity: ' + repr(quantity)
               +
               ', type: ' + repr(dtype)
               +
@@ -113,6 +113,7 @@ class SuperPhotIOTree:
                 cast(library_result, c_void_p)
             )
             result = library_result.contents.value.decode()
+            print('Freeing library result')
             self.library.free(library_result.contents)
         else:
             result = numpy.empty(shape=shape, dtype=dtype)
@@ -164,5 +165,6 @@ class SuperPhotIOTree:
     def __del__(self):
         """Destroy the tree allocated by __init__."""
 
+        print('Destroying result tree.')
         self.library.destroy_result_tree(self.library_tree)
 #pylint: enable=too-few-public-methods
