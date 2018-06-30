@@ -185,6 +185,31 @@ namespace FitPSF {
                 bool allow_rounding = false
             );
 
+            ///\brief Wrap the given data in an image.
+            ///
+            ///See Core::Image::wrap() for description of the arguments.
+            virtual void wrap(double *values,
+                              char *mask,
+                              unsigned long x_resolution,
+                              unsigned long y_resolution,
+                              double *errors)
+            {
+                IO::FitsImage<double>::wrap(values,
+                                            mask,
+                                            x_resolution,
+                                            y_resolution,
+                                            errors);
+                __fit_pixels.resize(x_resolution * y_resolution);
+                __gain = 1.0;
+            }
+
+            virtual void wrap(Core::Image<double> &image)
+            {
+                IO::FitsImage<double>::wrap(image);
+                __fit_pixels.resize(image.x_resolution() * image.y_resolution());
+                __gain = 1.0;
+            }
+
             ///The gain of the image set at construction.
             double gain() const {return __gain;}
 
@@ -284,6 +309,9 @@ namespace FitPSF {
     template<class SOURCE_TYPE>
         void Image<SOURCE_TYPE>::delete_allocated_pixels()
         {
+#ifdef VERBOSE_DEBUG
+            std::cerr << "Deleting all allocated FitPSF pixels." << std::endl;
+#endif
             for(
                 typename PixelVector::iterator p = __fit_pixels.begin();
                 p != __fit_pixels.end();

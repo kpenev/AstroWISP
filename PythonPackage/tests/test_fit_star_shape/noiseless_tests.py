@@ -227,7 +227,8 @@ class TestFitStarShapeNoiseless(FloatTestCase):
                 max_abs_amplitude_change=0.0,
                 max_rel_amplitude_change=1e-8,
                 min_convergence_rate=-10.0,
-                max_iterations=10000
+                max_iterations=10000,
+                bg_min_pix=5
             )
             result_tree = fit_star_shape.fit(
                 fit_images_and_sources,
