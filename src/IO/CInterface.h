@@ -101,5 +101,22 @@ extern "C" {
         void *result
     );
 
+    ///\brief Get the PSF map variables for a given image index from the given
+    ///result tree.
+    ///
+    ///If the correspnoding entry in the tree is empty or non-existent, return
+    ///false and do not touch the column_data argument.
+    LIB_PUBLIC bool get_psf_map_variables(
+        ///The tree to extract the varibales from.
+        H5IODataTree *tree,
 
+        ///The image index for which to extract the variables.
+        unsigned image_index,
+
+        ///The location to fill with the values of the variables. The values of
+        ///each varibale are consecutive in memory. All required storage must
+        ///already be allocated.
+        double *column_data
+    );
+    
 } //End Extern "C".

@@ -54,6 +54,15 @@ def _initialize_io_library():
     ]
     library.query_result_tree.restype = c_bool
 
+    library.get_psf_map_variables.argtypes = [
+        library.create_result_tree.restype,
+        c_uint,
+        numpy.ctypeslib.ndpointer(dtype=c_double,
+                                  ndim=2,
+                                  flags='C_CONTIGUOUS')
+    ]
+    library.get_psf_map_variables.restype = None
+
     library.free.argtypes = [c_void_p]
     library.free.restype = None
 
@@ -77,7 +86,31 @@ class SuperPhotIOTree:
                    c_ushort: 'ushort',
                    c_ubyte: 'uchar'}
 
-    def get(self, quantity, dtype=c_double, shape=(1,)):
+    def __init__(self, library_configuration, version_info=''):
+        """
+        Create a tree with just the given configuration.
+
+        Args:
+            library_configuration:    The configuration object created by the
+                library for the tool which will be using the configuration tree.
+
+            version_info:    Information about the version of the
+                tool/scripts/... using this tree. It is safe to leave this
+                empty, if it is not required as an entry in the tree.
+
+        Returns:
+            None
+        """
+
+        self.library_tree = self.library.create_result_tree(
+            library_configuration,
+            (
+                version_info if isinstance(version_info, bytes)
+                else version_info.encode('ascii')
+            )
+        )
+
+    def get(self, quantity, dtype=c_double, shape=None):
         """
         Return the given quantity as a proper python object.
 
@@ -87,7 +120,7 @@ class SuperPhotIOTree:
             dtype:    The data type of individual values of the quantity.
 
             shape (tulpe of ints):    The shape of the array of values
-                to expect.
+                to expect. Use None for scalar quantities.
 
         Returns:
             numpy.ndarray(shape=shape, dtype=dtype):
@@ -119,10 +152,8 @@ class SuperPhotIOTree:
             result = numpy.empty(shape=shape, dtype=dtype)
 
             type_string_arg = self.type_string[dtype]
-            for dim_size in shape:
-                if dim_size != 1:
-                    type_string_arg = '[' + type_string_arg + ']'
-                    break
+            if shape is not None:
+                type_string_arg = '[' + type_string_arg + ']'
 
             defined = self.library.query_result_tree(
                 self.library_tree,
@@ -138,29 +169,32 @@ class SuperPhotIOTree:
             )
         return result
 
-    def __init__(self, library_configuration, version_info=''):
+    def get_psfmap_variables(self, image_index, num_variables, num_sources):
         """
-        Create a tree with just the given configuration.
+        Return the values of the PSF map variables for all sources in an image.
 
         Args:
-            library_configuration:    The configuration object created by the
-                library for the tool which will be using the configuration tree.
+            image_index:    The index of the image for which to return the
+                values of the variables as supplied to PSF fitting.
 
-            version_info:    Information about the version of the
-                tool/scripts/... using this tree. It is safe to leave this
-                empty, if it is not required as an entry in the tree.
+            num_variables:    The number of variables used for PSF fitting.
+
+            num_sources:    The number of sources in the selected image.
 
         Returns:
-            None
+            numpy.ndarray(dtype=float, shape=(num_variables, num_sources):
+                Array with records named as the PSF map variables and entries
+                containing the values of the variables for all sources in the
+                image identified by image_index.
         """
 
-        self.library_tree = self.library.create_result_tree(
-            library_configuration,
-            (
-                version_info if isinstance(version_info, bytes)
-                else version_info.encode('ascii')
-            )
-        )
+        result = numpy.empty(dtype=float, shape=(num_variables, num_sources))
+        print('Created result')
+        self.library.get_psf_map_variables(self.library_tree,
+                                           image_index,
+                                           result)
+        print('Filled result')
+        return result
 
     def __del__(self):
         """Destroy the tree allocated by __init__."""

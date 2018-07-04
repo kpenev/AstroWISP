@@ -172,7 +172,7 @@ namespace FitPSF {
                          char **column_names,
                          unsigned long num_sources,
                          unsigned long num_columns) :
-        __fits_fname(fits_fname)
+        __fits_fname(fits_fname), __output_fname(fits_fname)
     {
         for(unsigned long col_ind = 0; col_ind < num_columns; ++col_ind) {
             __columns.push_back(

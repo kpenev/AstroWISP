@@ -118,7 +118,8 @@ bool try_copying_array(const boost::any &value, void *result)
     }
 }
 
-template<typename UNIT_TYPE> void copy_array(const boost::any &value, void *result)
+template<typename UNIT_TYPE> void copy_array(const boost::any &value,
+                                             void *result)
 {
     UNIT_TYPE *destination = reinterpret_cast<UNIT_TYPE*>(result);
     if(value.type() == typeid(UNIT_TYPE)) {
@@ -127,6 +128,32 @@ template<typename UNIT_TYPE> void copy_array(const boost::any &value, void *resu
     }
     typedef Eigen::Matrix<UNIT_TYPE, Eigen::Dynamic, 1> VectorEigen;
     typedef Eigen::Array<UNIT_TYPE, Eigen::Dynamic, 1> ArrayEigen;
+#ifdef VERBOSE_DEBUG
+    if(try_copying_container< std::vector<UNIT_TYPE>, UNIT_TYPE >(value,
+                                                                  result))
+        return;
+    else
+        std::cerr << "Not vector" << std::endl;
+    if(try_copying_container< std::list<UNIT_TYPE>, UNIT_TYPE >(value,
+                                                                result))
+        return;
+    else
+        std::cerr << "Not list" << std::endl;
+    if(try_copying_array< std::valarray<UNIT_TYPE>, UNIT_TYPE >(value,
+                                                                result))
+        return;
+    else
+        std::cerr << "Not valarray" << std::endl;
+    if(try_copying_array< VectorEigen, UNIT_TYPE >(value, result))
+        return;
+    else
+        std::cerr << "Not Eigen::Vector" << std::endl;
+    if(try_copying_array< ArrayEigen, UNIT_TYPE >(value, result))
+        return;
+    else
+        std::cerr << "Not Eigen::Array" << std::endl;
+    throw boost::bad_any_cast();
+#else
     if(
         !(
             try_copying_container< std::vector<UNIT_TYPE>, UNIT_TYPE >(value,
@@ -144,6 +171,7 @@ template<typename UNIT_TYPE> void copy_array(const boost::any &value, void *resu
         )
     )
         throw boost::bad_any_cast();
+#endif
 }
 
 bool query_result_tree(H5IODataTree *tree,
@@ -244,4 +272,54 @@ bool query_result_tree(H5IODataTree *tree,
             );
     }
     return true;
+}
+
+LIB_PUBLIC bool get_psf_map_variables(H5IODataTree *output_data_tree,
+                                      unsigned image_index,
+                                      double *column_data)
+{
+    IO::H5IODataTree *real_output_data_tree =
+        reinterpret_cast<IO::H5IODataTree*>(output_data_tree);
+
+    std::ostringstream tree_path;
+    tree_path << "psffit.variables." << image_index;
+#ifdef VERBOSE_DEBUG
+    std::cerr << "Getting PSF map variables from tree at "
+              << real_output_data_tree
+              << " with path "
+              << tree_path.str()
+              << std::endl;
+#endif
+    
+    const PSF::MapVarListType &variables =
+        real_output_data_tree->get<PSF::MapVarListType>(
+            std::string("psffit.variables.0"),
+            PSF::MapVarListType(),
+            IO::TranslateToAny<PSF::MapVarListType>()
+        );
+    if(variables.size() == 0) {
+#ifdef VERBOSE_DEBUG
+        std::cerr << "Empty varibales entry in result tree!" << std::endl;
+#endif
+        return false;
+    }
+#ifdef VERBOSE_DEBUG
+    else
+        std::cerr << "Finished reading back psffit variables with zise:"
+                  << variables.size() << "x" << variables.begin()->second.size()
+                  << std::endl;
+#endif
+
+    double *destination = column_data;
+    for(
+        PSF::MapVarListType::const_iterator var_i = variables.begin();
+        var_i != variables.end();
+        ++var_i
+    ) {
+        const double *start = &(var_i->second[0]),
+                     *end = start + var_i->second.size();
+
+        std::copy(start, end, destination);
+        destination += var_i->second.size();
+    }
 }
