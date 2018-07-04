@@ -74,30 +74,9 @@ model {
                 }
             }
         }
-        superphotbackground(NativeLibrarySpec) {
+        superphot(NativeLibrarySpec) {
             sources.cpp {
                 lib library: "eigen"
-                source {
-                    srcDir "src/Background"
-                    include "**/*.cpp"
-                }
-                source {
-                    srcDir "src/Core"
-                    include "**/*.cpp"
-                }
-                exportedHeaders {
-                    srcDir "src/Background/"
-                }
-            }
-        }
-        superphotpsf(NativeLibrarySpec) {
-            sources.cpp {
-                lib library: "eigen"
-                lib library: "superphotbackground"
-                source {
-                    srcDir "src/PSF"
-                    include "**/*.cpp"
-                }
                 source {
                     srcDir "src/Core"
                     include "**/*.cpp"
@@ -106,48 +85,35 @@ model {
                     srcDir "src/IO"
                     include "**/OutputArray.cpp"
                 }
-                exportedHeaders {
-                    srcDir "src/PSF/"
-                }
-            }
-        }
-        superphotio(NativeLibrarySpec) {
-            sources.cpp {
-                lib library: "eigen"
-                lib library: "superphotbackground"
-                lib library: "superphotpsf"
                 source {
-                    srcDir "src/IO"
+                    srcDir "src/Background"
                     include "**/*.cpp"
                 }
-                exportedHeaders {
-                    srcDir "src/IO/"
-                }
-            }
-        }
-        subpixphot(NativeExecutableSpec) {
-            sources.cpp {
-                lib library: "eigen"
-                lib library: "superphotbackground"
-                lib library: "superphotpsf"
-                lib library: "superphotio"
                 source {
-                    srcDir "src/SubPixPhot"
+                    srcDir "src/PSF"
                     include "**/*.cpp"
                 }
-            }
-        }
-        superphotfitpsf(NativeLibrarySpec) {
-            sources.cpp {
-                lib library: "eigen"
-                lib library: "superphotbackground"
-                lib library: "superphotpsf"
-                lib library: "superphotio"
                 source {
                     srcDir "src/FitPSF"
                     include "**/*.cpp"
                     exclude "**/*SDK*.cpp"
                     exclude "**/fitpsf.cpp"
+                }
+                source {
+                    srcDir "src/SubPixPhot"
+                    include "**/*.cpp"
+                }
+                exportedHeaders {
+                    srcDir "src/Background/"
+                }
+                exportedHeaders {
+                    srcDir "src/PSF/"
+                }
+                exportedHeaders {
+                    srcDir "src/IO/"
+                }
+                exportedHeaders {
+                    srcDir "src/FitPSF/"
                 }
             }
         }

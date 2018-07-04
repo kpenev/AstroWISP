@@ -1,49 +1,10 @@
 """Define a class for imposing smooth depndence of one quantity on others."""
 
-from ctypes import\
-    cdll,\
-    c_double,\
-    c_char_p,\
-    c_uint,\
-    POINTER,\
-    byref
-from ctypes.util import find_library
-import numpy.ctypeslib
+from ctypes import c_double, c_uint, c_char_p, POINTER, byref
 
-def _initialize_library():
-    """Prepare the SuperPhot psf library for use."""
+import numpy
 
-    psf_library_fname = find_library('superphotpsf')
-    io_library_fname = find_library('superphotio')
-    if psf_library_fname is None:
-        raise OSError('Unable to find the SuperPhot PSF library.')
-    if io_library_fname is None:
-        raise OSError('Unable to find the SuperPhot I/O library.')
-    cdll.LoadLibrary(io_library_fname)
-    library = cdll.LoadLibrary(psf_library_fname)
-
-    library.expand_term_expression.argtypes = [
-        c_char_p,
-        POINTER(POINTER(c_char_p)),
-        POINTER(c_uint)
-    ]
-    library.expand_term_expression.restype = None
-
-    library.free_term_list.argtypes = [POINTER(c_char_p), c_uint]
-    library.free_term_list.restype = None
-
-    library.evaluate_terms.argtypes = [
-        POINTER(c_char_p),
-        c_uint,
-        POINTER(c_char_p),
-        POINTER(POINTER(c_double)),
-        c_uint,
-        c_uint,
-        numpy.ctypeslib.ndpointer(dtype=c_double,
-                                  ndim=2,
-                                  flags='C_CONTIGUOUS')
-    ]
-    return library
+from superphot._initialize_library import superphot_library
 
 class SmoothDependence:
     r"""
@@ -104,8 +65,6 @@ class SmoothDependence:
           >>> param_values = smooth(x=numpy.arange(0.0, 0.45, 0.1))
     """
 
-    _library = _initialize_library()
-
     @classmethod
     def expand_expression(cls, expression):
         """
@@ -124,13 +83,13 @@ class SmoothDependence:
         num_terms = c_uint()
         c_expression = c_char_p(expression if isinstance(expression, bytes)
                                 else expression.encode('ascii'))
-        cls._library.expand_term_expression(c_expression,
-                                            byref(terms),
-                                            byref(num_terms))
+        superphot_library.expand_term_expression(c_expression,
+                                                 byref(terms),
+                                                 byref(num_terms))
         result = [terms[term_index].decode()
                   for term_index in range(num_terms.value)]
 
-        cls._library.free_term_list(terms, num_terms)
+        superphot_library.free_term_list(terms, num_terms)
         return result
 
     @classmethod
@@ -176,13 +135,13 @@ class SmoothDependence:
 
         result = numpy.empty((num_sources, num_terms), dtype=c_double)
 
-        cls._library.evaluate_terms(term_list,
-                                    num_terms,
-                                    variable_names,
-                                    variable_values,
-                                    num_variables,
-                                    num_sources,
-                                    result)
+        superphot_library.evaluate_terms(term_list,
+                                         num_terms,
+                                         variable_names,
+                                         variable_values,
+                                         num_variables,
+                                         num_sources,
+                                         result)
         return result
 
     def __init__(self, expression, parameters):

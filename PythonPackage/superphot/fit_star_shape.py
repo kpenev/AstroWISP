@@ -3,118 +3,17 @@
 
 from numbers import Number
 from ctypes import\
-    cdll,\
-    c_void_p,\
     c_bool,\
     POINTER,\
     c_double,\
     c_char_p,\
     c_char,\
     c_ulong,\
-    c_int,\
-    c_uint
-from ctypes.util import find_library
+    c_int
 import numpy
 
-from superphot._initialize_core_library import _initialize_core_library
+from superphot._initialize_library import superphot_library
 from superphot.io_library_interface import SuperPhotIOTree
-from superphot import BackgroundExtractor
-
-#Naming convention imitates the one by ctypes.
-#pylint: disable=invalid-name
-#Type checking place holders require no content.
-#pylint: disable=too-few-public-methods
-
-class _c_fitting_configuration(c_void_p):
-    """Placeholder for the FittingConfiguration opaque struct of fitpsf lib."""
-
-#pylint: enable=invalid-name
-#pylint: enable=too-few-public-methods
-
-def _initialize_library():
-    """Prepare the SuperPhot fitpsf library for use."""
-
-    fitpsf_library_fname = find_library('superphotfitpsf')
-    psf_library_fname = find_library('superphotpsf')
-    if fitpsf_library_fname is None:
-        raise OSError('Unable to find the SuperPhot PSF fitting library.')
-    if psf_library_fname is None:
-        raise OSError('Unable to find the SuperPhot PSF library.')
-    cdll.LoadLibrary(psf_library_fname)
-    fitting_library = cdll.LoadLibrary(fitpsf_library_fname)
-
-    _initialize_core_library(fitting_library)
-
-    fitting_library.create_psffit_configuration.argtypes = []
-    fitting_library.create_psffit_configuration.restype = (
-        _c_fitting_configuration
-    )
-
-    fitting_library.destroy_psffit_configuration.argtype = [
-        fitting_library.create_psffit_configuration.restype
-    ]
-
-    fitting_library.update_psffit_configuration.restype = None
-
-    fitting_library.piecewise_bicubic_fit.argtypes = [
-        #pixel_values
-        POINTER(POINTER(c_double)),
-
-        #pixel_errors
-        POINTER(POINTER(c_double)),
-
-        #pixel_masks
-        POINTER(POINTER(c_char)),
-
-        #number_images
-        c_ulong,
-
-        #image_x_resolution
-        c_ulong,
-
-        #image_y_resolution
-        c_ulong,
-
-        #column_names
-        POINTER(c_char_p),
-
-        #source_ids
-        POINTER(POINTER(c_char_p)),
-
-        #column_data
-        POINTER(POINTER(c_double)),
-
-        #number_sources
-        numpy.ctypeslib.ndpointer(dtype=c_ulong,
-                                  ndim=1,
-                                  flags='C_CONTIGUOUS'),
-
-        #number_columns
-        c_ulong,
-
-        #backgrounds
-        BackgroundExtractor.library.create_background_extractor.restype,
-
-        #configuration
-        fitting_library.create_psffit_configuration.restype,
-
-        #subpixel_sensitivities
-        numpy.ctypeslib.ndpointer(dtype=c_double,
-                                  ndim=2,
-                                  flags='C_CONTIGUOUS'),
-
-        #subpix_x_resolution
-        c_ulong,
-
-        #subpix_y_resolution
-        c_ulong,
-
-        #ouput_data_tree
-        SuperPhotIOTree.library.create_result_tree.restype
-    ]
-    fitting_library.piecewise_bicubic_fit.restype = c_bool
-
-    return fitting_library
 
 class FitStarShape:
     """
@@ -298,8 +197,6 @@ class FitStarShape:
         >>>                       initial_aperture=5.0)
     """
 
-    library = _initialize_library()
-
     _default_configuration = dict(subpixmap=numpy.ones((1, 1), dtype=c_double),
                                   smoothing=None,
                                   max_chi2=100.0,
@@ -319,6 +216,8 @@ class FitStarShape:
                                   bg_min_pix=50,
                                   magnitude_1adu=10.0)
 
+    #Many return statements make sense in this case.
+    #pylint: disable=too-many-return-statements
     @staticmethod
     def _format_config(param_value):
         """Format config param for passing to SuperPhot PSF fitting lib."""
@@ -372,6 +271,7 @@ class FitStarShape:
                 else repr(param_value[1])
             ).encode('ascii')
         )
+    #pylint: enable=too-many-return-statements
 
     def __init__(self,
                  *,
@@ -398,7 +298,7 @@ class FitStarShape:
                                   **other_configuration)
 
         self._library_configuration = (
-            self.library.create_psffit_configuration()
+            superphot_library.create_psffit_configuration()
         )
         config_arguments = sum(
             map(self._format_config, self.configuration.items()),
@@ -410,7 +310,7 @@ class FitStarShape:
             )
         ) + (b'',)
         print('Setting fit configuration to: ' + repr(config_arguments))
-        self.library.update_psffit_configuration(*config_arguments)
+        superphot_library.update_psffit_configuration(*config_arguments)
 
         self._result_tree = None
 
@@ -441,7 +341,7 @@ class FitStarShape:
             map(self._format_config, configuration.items()),
             (c_bool(self.mode == 'PRF'),)
         ) + (b'',)
-        self.library.update_psffit_configuration(
+        superphot_library.update_psffit_configuration(
             self._library_configuration,
             *config_arguments
         )
@@ -475,7 +375,7 @@ class FitStarShape:
                    keys and 1-D numpy arrays of identical lengths as values.
 
             backgrounds:    The measured backgrounds under the sources (instance
-                of BackgroundExtractor.
+                of :class:BackgroundExtractor.
 
         Returns:
             None:
@@ -684,21 +584,21 @@ class FitStarShape:
         print('Column data: ' +  repr(column_data))
         result_tree = SuperPhotIOTree(self._library_configuration)
         print('Created result tree.')
-        if not self.library.piecewise_bicubic_fit(
-            *create_image_arguments(),
-            *create_source_arguments(column_names, column_data),
-            (
-                len(backgrounds)
-                *
-                BackgroundExtractor.library.create_background_extractor.restype
-            )(
-                *(bg.library_extractor for bg in backgrounds)
-            ),
-            self._library_configuration,
-            self.configuration['subpixmap'],
-            self.configuration['subpixmap'].shape[1],
-            self.configuration['subpixmap'].shape[0],
-            result_tree.library_tree
+        if not superphot_library.piecewise_bicubic_fit(
+                *create_image_arguments(),
+                *create_source_arguments(column_names, column_data),
+                (
+                    len(backgrounds)
+                    *
+                    superphot_library.create_background_extractor.restype
+                )(
+                    *(bg.library_extractor for bg in backgrounds)
+                ),
+                self._library_configuration,
+                self.configuration['subpixmap'],
+                self.configuration['subpixmap'].shape[1],
+                self.configuration['subpixmap'].shape[0],
+                result_tree.library_tree
         ):
             raise RuntimeError("Star shep fitting failed to converge!")
         return result_tree
@@ -707,7 +607,7 @@ class FitStarShape:
         r"""Destroy the configuration object created in :meth:`__init__`\ ."""
 
         print('Destroying PSF fitting configuraiton.')
-        self.library.destroy_psffit_configuration(
+        superphot_library.destroy_psffit_configuration(
             self._library_configuration
         )
 

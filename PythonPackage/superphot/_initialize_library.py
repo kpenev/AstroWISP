@@ -1,0 +1,295 @@
+"""Load the C library and define the function interface."""
+
+from ctypes import\
+    cdll,\
+    c_double,\
+    c_size_t,\
+    c_void_p,\
+    c_ulong,\
+    c_bool,\
+    c_char,\
+    c_uint,\
+    c_char_p,\
+    POINTER
+from ctypes.util import find_library
+import numpy.ctypeslib
+
+#Naming convention imitates the one by ctypes.
+#pylint: disable=invalid-name
+
+#Type checking place holders require no content.
+#pylint: disable=too-few-public-methods
+class _c_core_image_p(c_void_p):
+    """Placeholder for CoreImage opaque struct."""
+
+class _c_core_sub_pixel_map_p(c_void_p):
+    """Placeholder for CoreSubPixelMap opaque struct."""
+
+
+class _c_background_extractor_p(c_void_p):
+    """Placeholder for BackgroundExtractor opaque struct."""
+
+class _c_h5io_data_tree_p(c_void_p):
+    """Placeholder for pointer to H5IODataTree opaque struct."""
+
+class _c_fitting_configuration(c_void_p):
+    """Placeholder for the FittingConfiguration opaque struct of fitpsf lib."""
+
+#pylint: enable=invalid-name
+#pylint: enable=too-few-public-methods
+
+def ndpointer_or_null(*args, **kwargs):
+    """
+    Allow None (->NULL) to be passed for c-style array function arguments.
+
+    Modified from:
+    http://stackoverflow.com/questions/32120178/how-can-i-pass-null-to-an-external-library-using-ctypes-with-an-argument-decla
+    """
+
+    base = numpy.ctypeslib.ndpointer(*args, **kwargs)
+
+    #Call signature dictated by numpy.ctypeslib
+    #pylint: disable=unused-argument
+    def from_param(cls, obj):
+        """Construct numpy.ndpointer from the given object."""
+
+        if obj is None:
+            return obj
+        return base.from_param(obj)
+    #pylint: enable=unused-argument
+
+    return type(base.__name__,
+                (base,),
+                {'from_param': classmethod(from_param)})
+
+def _setup_core_interface(library):
+    """Set-up the argument and return types of Core library functions."""
+
+    library.create_core_image.argtypes = [
+        c_ulong,
+        c_ulong,
+        numpy.ctypeslib.ndpointer(dtype=c_double,
+                                  ndim=2,
+                                  flags='C_CONTIGUOUS'),
+        ndpointer_or_null(dtype=c_double,
+                          ndim=2,
+                          flags='C_CONTIGUOUS'),
+        ndpointer_or_null(dtype=c_char,
+                          ndim=2,
+                          flags='C_CONTIGUOUS'),
+        c_bool
+    ]
+    library.create_core_image.restype = _c_core_image_p
+
+    library.destroy_core_image.argtypes = [
+        library.create_core_image.restype
+    ]
+    library.destroy_core_image.restype = None
+
+    library.create_core_subpixel_map.argtypes = [
+        c_ulong,
+        c_ulong,
+        ndpointer_or_null(dtype=c_double,
+                          ndim=2,
+                          flags='C_CONTIGUOUS')
+    ]
+    library.create_core_subpixel_map.restype = _c_core_sub_pixel_map_p
+
+    library.destroy_core_subpixel_map.argtypes = [
+        library.create_core_subpixel_map.restype
+    ]
+    library.destroy_core_subpixel_map.restype = None
+
+def _setup_io_interface(library):
+    """Set-up the argument and return types of the I/O library functions."""
+
+    library.create_result_tree.argtypes = [c_void_p, c_char_p]
+    library.create_result_tree.restype = _c_h5io_data_tree_p
+
+    library.destroy_result_tree.argtypes = [
+        library.create_result_tree.restype
+    ]
+    library.destroy_result_tree.restype = None
+
+    library.query_result_tree.argtypes = [
+        library.create_result_tree.restype,
+        c_char_p,
+        c_char_p,
+        c_void_p
+    ]
+    library.query_result_tree.restype = c_bool
+
+    library.get_psf_map_variables.argtypes = [
+        library.create_result_tree.restype,
+        c_uint,
+        numpy.ctypeslib.ndpointer(dtype=c_double,
+                                  ndim=2,
+                                  flags='C_CONTIGUOUS')
+    ]
+    library.get_psf_map_variables.restype = None
+
+    library.free.argtypes = [c_void_p]
+    library.free.restype = None
+
+def _setup_background_interface(library):
+    """Set-up the argument and return types of the background library funcs."""
+
+    library.create_background_extractor.argtypes = [
+        c_double,
+        c_double,
+        c_double,
+        library.create_core_image.restype,
+        c_double
+    ]
+    library.create_background_extractor.restype = _c_background_extractor_p
+
+
+    library.destroy_background_extractor.argtypes = [
+        library.create_background_extractor.restype
+    ]
+    library.destroy_background_extractor.restype = None
+
+
+    library.add_source_list_to_background_extractor.argtypes = [
+        library.create_background_extractor.restype,
+        numpy.ctypeslib.ndpointer(dtype=c_double,
+                                  ndim=1,
+                                  flags='C_CONTIGUOUS'),
+        numpy.ctypeslib.ndpointer(dtype=c_double,
+                                  ndim=1,
+                                  flags='C_CONTIGUOUS'),
+        c_size_t
+    ]
+    library.add_source_list_to_background_extractor.restype = None
+
+    library.get_all_backgrounds.argtypes = [
+        library.create_background_extractor.restype,
+        ndpointer_or_null(dtype=c_double,
+                          ndim=1,
+                          flags='C_CONTIGUOUS'),
+        ndpointer_or_null(dtype=c_double,
+                          ndim=1,
+                          flags='C_CONTIGUOUS'),
+        ndpointer_or_null(dtype=c_uint,
+                          ndim=1,
+                          flags='C_CONTIGUOUS'),
+    ]
+    library.get_all_backgrounds.restype = None
+
+    return library
+
+def _setup_psf_interface(library):
+    """Set-up the argument and return types of the PSF library funcs."""
+
+    library.expand_term_expression.argtypes = [
+        c_char_p,
+        POINTER(POINTER(c_char_p)),
+        POINTER(c_uint)
+    ]
+    library.expand_term_expression.restype = None
+
+    library.free_term_list.argtypes = [POINTER(c_char_p), c_uint]
+    library.free_term_list.restype = None
+
+    library.evaluate_terms.argtypes = [
+        POINTER(c_char_p),
+        c_uint,
+        POINTER(c_char_p),
+        POINTER(POINTER(c_double)),
+        c_uint,
+        c_uint,
+        numpy.ctypeslib.ndpointer(dtype=c_double,
+                                  ndim=2,
+                                  flags='C_CONTIGUOUS')
+    ]
+
+def _setup_fitpsf_interface(library):
+    """Set-up the argument and return types of the PSF fitting library funcs."""
+
+    library.create_psffit_configuration.argtypes = []
+    library.create_psffit_configuration.restype = (
+        _c_fitting_configuration
+    )
+
+    library.destroy_psffit_configuration.argtype = [
+        library.create_psffit_configuration.restype
+    ]
+
+    library.update_psffit_configuration.restype = None
+
+    library.piecewise_bicubic_fit.argtypes = [
+        #pixel_values
+        POINTER(POINTER(c_double)),
+
+        #pixel_errors
+        POINTER(POINTER(c_double)),
+
+        #pixel_masks
+        POINTER(POINTER(c_char)),
+
+        #number_images
+        c_ulong,
+
+        #image_x_resolution
+        c_ulong,
+
+        #image_y_resolution
+        c_ulong,
+
+        #column_names
+        POINTER(c_char_p),
+
+        #source_ids
+        POINTER(POINTER(c_char_p)),
+
+        #column_data
+        POINTER(POINTER(c_double)),
+
+        #number_sources
+        numpy.ctypeslib.ndpointer(dtype=c_ulong,
+                                  ndim=1,
+                                  flags='C_CONTIGUOUS'),
+
+        #number_columns
+        c_ulong,
+
+        #backgrounds
+        library.create_background_extractor.restype,
+
+        #configuration
+        library.create_psffit_configuration.restype,
+
+        #subpixel_sensitivities
+        numpy.ctypeslib.ndpointer(dtype=c_double,
+                                  ndim=2,
+                                  flags='C_CONTIGUOUS'),
+
+        #subpix_x_resolution
+        c_ulong,
+
+        #subpix_y_resolution
+        c_ulong,
+
+        #ouput_data_tree
+        library.create_result_tree.restype
+    ]
+    library.piecewise_bicubic_fit.restype = c_bool
+
+
+
+def _initialize_library():
+    """Prepare the superphot library for use."""
+
+    library_fname = find_library('superphot')
+    if library_fname is None:
+        raise OSError('Unable to find the SuperPhot library.')
+    library = cdll.LoadLibrary(library_fname)
+
+    _setup_core_interface(library)
+    _setup_io_interface(library)
+    _setup_background_interface(library)
+    _setup_psf_interface(library)
+
+    return library
+
+superphot_library = _initialize_library()

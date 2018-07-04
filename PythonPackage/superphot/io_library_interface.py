@@ -1,9 +1,6 @@
 """Define a function for intefracing with the superphotio library."""
 
 from ctypes import\
-    cdll,\
-    c_void_p,\
-    c_char_p,\
     c_bool,\
     c_double,\
     c_int,\
@@ -14,66 +11,19 @@ from ctypes import\
     c_ulong,\
     c_ushort,\
     c_ubyte,\
+    c_char_p,\
+    c_void_p,\
     pointer,\
     cast
-from ctypes.util import find_library
+
 import numpy
 
-#Naming convention imitates the one by ctypes.
-#pylint: disable=invalid-name
-
-#Type checking place holders require no content.
-#pylint: disable=too-few-public-methods
-class _c_h5io_data_tree_p(c_void_p):
-    """Placeholder for pointer to H5IODataTree opaque struct."""
-
-#pylint: enable=invalid-name
-#pylint: enable=too-few-public-methods
-
-def _initialize_io_library():
-    """Load and initalize the superphotio librray."""
-
-    library_fname = find_library('superphotio')
-    if library_fname is None:
-        raise OSError('Unable to find the SuperPhot I/O library.')
-    library = cdll.LoadLibrary(library_fname)
-
-    library.create_result_tree.argtypes = [c_void_p, c_char_p]
-    library.create_result_tree.restype = _c_h5io_data_tree_p
-
-    library.destroy_result_tree.argtypes = [
-        library.create_result_tree.restype
-    ]
-    library.destroy_result_tree.restype = None
-
-    library.query_result_tree.argtypes = [
-        library.create_result_tree.restype,
-        c_char_p,
-        c_char_p,
-        c_void_p
-    ]
-    library.query_result_tree.restype = c_bool
-
-    library.get_psf_map_variables.argtypes = [
-        library.create_result_tree.restype,
-        c_uint,
-        numpy.ctypeslib.ndpointer(dtype=c_double,
-                                  ndim=2,
-                                  flags='C_CONTIGUOUS')
-    ]
-    library.get_psf_map_variables.restype = None
-
-    library.free.argtypes = [c_void_p]
-    library.free.restype = None
-
-    return library
+from superphot._initialize_library import superphot_library
 
 #Sufficient functionality to justify a class.
 #pylint: disable=too-few-public-methods
 class SuperPhotIOTree:
     """Interface for extracting entries from an IO::H5IODataTree."""
-
-    library = _initialize_io_library()
 
     type_string = {c_bool: 'bool',
                    c_double: 'double',
@@ -102,7 +52,7 @@ class SuperPhotIOTree:
             None
         """
 
-        self.library_tree = self.library.create_result_tree(
+        self.library_tree = superphot_library.create_result_tree(
             library_configuration,
             (
                 version_info if isinstance(version_info, bytes)
@@ -139,7 +89,7 @@ class SuperPhotIOTree:
 
         if dtype == str:
             library_result = pointer(c_char_p())
-            defined = self.library.query_result_tree(
+            defined = superphot_library.query_result_tree(
                 self.library_tree,
                 byte_quantity,
                 b'str',
@@ -147,7 +97,7 @@ class SuperPhotIOTree:
             )
             result = library_result.contents.value.decode()
             print('Freeing library result')
-            self.library.free(library_result.contents)
+            superphot_library.free(library_result.contents)
         else:
             result = numpy.empty(shape=shape, dtype=dtype)
 
@@ -155,7 +105,7 @@ class SuperPhotIOTree:
             if shape is not None:
                 type_string_arg = '[' + type_string_arg + ']'
 
-            defined = self.library.query_result_tree(
+            defined = superphot_library.query_result_tree(
                 self.library_tree,
                 byte_quantity,
                 type_string_arg.encode('ascii'),
@@ -190,9 +140,9 @@ class SuperPhotIOTree:
 
         result = numpy.empty(dtype=float, shape=(num_variables, num_sources))
         print('Created result')
-        self.library.get_psf_map_variables(self.library_tree,
-                                           image_index,
-                                           result)
+        superphot_library.get_psf_map_variables(self.library_tree,
+                                                image_index,
+                                                result)
         print('Filled result')
         return result
 
@@ -200,5 +150,5 @@ class SuperPhotIOTree:
         """Destroy the tree allocated by __init__."""
 
         print('Destroying result tree.')
-        self.library.destroy_result_tree(self.library_tree)
+        superphot_library.destroy_result_tree(self.library_tree)
 #pylint: enable=too-few-public-methods

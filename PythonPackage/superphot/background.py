@@ -1,82 +1,9 @@
 """Interface to the SuperPhot background library."""
 
-from ctypes import\
-    cdll,\
-    c_double,\
-    c_size_t,\
-    c_void_p,\
-    c_uint
-from ctypes.util import find_library
-import numpy.ctypeslib
+from ctypes import c_double, c_uint
+import numpy
 
-from superphot._initialize_core_library import\
-    _initialize_core_library,\
-    ndpointer_or_null
-
-#Naming convention imitates the one by ctypes.
-#pylint: disable=invalid-name
-
-#Type checking place holders require no content.
-#pylint: disable=too-few-public-methods
-class _c_background_extractor_p(c_void_p):
-    """Placeholder for BackgroundExtractor opaque struct."""
-
-#pylint: enable=invalid-name
-#pylint: enable=too-few-public-methods
-
-def _initialize_library():
-    """Prepare the SuperPhot background library for use."""
-
-    library_fname = find_library('superphotbackground')
-    if library_fname is None:
-        raise OSError('Unable to find the SuperPhot background library.')
-    library = cdll.LoadLibrary(library_fname)
-
-    _initialize_core_library(library)
-
-    library.create_background_extractor.argtypes = [
-        c_double,
-        c_double,
-        c_double,
-        library.create_core_image.restype,
-        c_double
-    ]
-    library.create_background_extractor.restype = _c_background_extractor_p
-
-
-    library.destroy_background_extractor.argtypes = [
-        library.create_background_extractor.restype
-    ]
-    library.destroy_background_extractor.restype = None
-
-
-    library.add_source_list_to_background_extractor.argtypes = [
-        library.create_background_extractor.restype,
-        numpy.ctypeslib.ndpointer(dtype=c_double,
-                                  ndim=1,
-                                  flags='C_CONTIGUOUS'),
-        numpy.ctypeslib.ndpointer(dtype=c_double,
-                                  ndim=1,
-                                  flags='C_CONTIGUOUS'),
-        c_size_t
-    ]
-    library.add_source_list_to_background_extractor.restype = None
-
-    library.get_all_backgrounds.argtypes = [
-        library.create_background_extractor.restype,
-        ndpointer_or_null(dtype=c_double,
-                          ndim=1,
-                          flags='C_CONTIGUOUS'),
-        ndpointer_or_null(dtype=c_double,
-                          ndim=1,
-                          flags='C_CONTIGUOUS'),
-        ndpointer_or_null(dtype=c_uint,
-                          ndim=1,
-                          flags='C_CONTIGUOUS'),
-    ]
-    library.get_all_backgrounds.restype = None
-
-    return library
+from superphot._initialize_library import superphot_library
 
 #The __init__, __del__ and __call__ methods justify making this a class.
 #pylint: disable=too-few-public-methods
@@ -96,8 +23,6 @@ class BackgroundExtractor:
         error_confidence:    The confidence level to use for estimating the
             background error.
     """
-
-    library = _initialize_library()
 
     def __init__(self,
                  image,
@@ -123,7 +48,7 @@ class BackgroundExtractor:
               ', shape = '
               +
               repr(image.shape))
-        self._library_image = self.library.create_core_image(
+        self._library_image = superphot_library.create_core_image(
             self.image.shape[1],
             self.image.shape[0],
             self.image,
@@ -131,7 +56,7 @@ class BackgroundExtractor:
             None,
             True
         )
-        self.library_extractor = self.library.create_background_extractor(
+        self.library_extractor = superphot_library.create_background_extractor(
             inner_radius,
             outer_radius,
             inner_radius,
@@ -171,7 +96,7 @@ class BackgroundExtractor:
 
         self._set_sources = True
 
-        self.library.add_source_list_to_background_extractor(
+        superphot_library.add_source_list_to_background_extractor(
             self.library_extractor,
             source_x,
             source_y,
@@ -181,7 +106,7 @@ class BackgroundExtractor:
         bg_value = numpy.empty(source_x.size, dtype=c_double)
         bg_error = numpy.empty(source_x.size, dtype=c_double)
         bg_numpix = numpy.empty(source_x.size, dtype=c_uint)
-        self.library.get_all_backgrounds(
+        superphot_library.get_all_backgrounds(
             self.library_extractor,
             bg_value,
             bg_error,
@@ -192,7 +117,7 @@ class BackgroundExtractor:
     def __del__(self):
         r"""Destroy the image and extractor created in :meth:`__init__`\ ."""
 
-        self.library.destroy_core_image(self._library_image)
-        self.library.destroy_background_extractor(self.library_extractor)
+        superphot_library.destroy_core_image(self._library_image)
+        superphot_library.destroy_background_extractor(self.library_extractor)
 
 #pylint: enable=too-few-public-methods
