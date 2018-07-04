@@ -300,17 +300,7 @@ class FitStarShape:
         self._library_configuration = (
             superphot_library.create_psffit_configuration()
         )
-        config_arguments = sum(
-            map(self._format_config, self.configuration.items()),
-            (
-                c_bool(self.mode == 'PRF'),
-                self._library_configuration,
-                b'psf.model',
-                b'bicubic'
-            )
-        ) + (b'',)
-        print('Setting fit configuration to: ' + repr(config_arguments))
-        superphot_library.update_psffit_configuration(*config_arguments)
+        self.configure()
 
         self._result_tree = None
 
@@ -338,13 +328,15 @@ class FitStarShape:
         self.configuration.update(configuration)
 
         config_arguments = sum(
-            map(self._format_config, configuration.items()),
-            (c_bool(self.mode == 'PRF'),)
+            map(self._format_config, self.configuration.items()),
+            (
+                c_bool(self.mode == 'PRF'),
+                self._library_configuration,
+                b'psf.model',
+                b'bicubic'
+            )
         ) + (b'',)
-        superphot_library.update_psffit_configuration(
-            self._library_configuration,
-            *config_arguments
-        )
+        superphot_library.update_psffit_configuration(*config_arguments)
 
     def fit(self, image_sources, backgrounds):
         """

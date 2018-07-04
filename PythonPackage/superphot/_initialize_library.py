@@ -25,7 +25,6 @@ class _c_core_image_p(c_void_p):
 class _c_core_sub_pixel_map_p(c_void_p):
     """Placeholder for CoreSubPixelMap opaque struct."""
 
-
 class _c_background_extractor_p(c_void_p):
     """Placeholder for BackgroundExtractor opaque struct."""
 
@@ -289,6 +288,7 @@ def _initialize_library():
     _setup_io_interface(library)
     _setup_background_interface(library)
     _setup_psf_interface(library)
+    _setup_fitpsf_interface(library)
 
     return library
 
