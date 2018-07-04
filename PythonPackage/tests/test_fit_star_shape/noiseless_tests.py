@@ -33,13 +33,17 @@ from tests.test_fit_star_shape.utils import make_image_and_source_list
 class TestFitStarShapeNoiseless(FloatTestCase):
     """Test piecewise bicubic PSF fitting on noiseless images."""
 
-    def check_results(self, result_tree, sources, extra_variables):
+    def check_results(self, result_tree, image_index, sources, extra_variables):
         """
         Assert that fitted PSF map and source fluxes match expectations.
 
         Args:
             result_tree:    The result tree containing the PSF fitting
                 configuration and results.
+
+            image_index:    The index of the image for which to check results
+                within the result tree (the same as the index when fitting was
+                called).
 
             sources:    The sources argument used to generate the image that was
                 fit. See same name argument of run_test.
@@ -62,7 +66,7 @@ class TestFitStarShapeNoiseless(FloatTestCase):
             var: val[enabled_sources]
             for var, val in zip(
                 ['x', 'y'] + extra_variables,
-                result_tree.get_psfmap_variables(0,
+                result_tree.get_psfmap_variables(image_index,
                                                  len(extra_variables) + 2,
                                                  len(sources))
             )
@@ -90,9 +94,9 @@ class TestFitStarShapeNoiseless(FloatTestCase):
         term_list = numpy.dstack(term_list)[0]
         coefficients = result_tree.get(
             'psffit.psfmap',
-            shepe=(4,
-                   len(sources[0][0]['psf_args']['boundaries']['x']) - 1,
-                   len(sources[0][0]['psf_args']['boundaries']['y']) - 1,
+            shape=(4,
+                   len(sources[0]['psf_args']['boundaries']['x']) - 2,
+                   len(sources[0]['psf_args']['boundaries']['y']) - 2,
                    len(term_list))
         )
 
@@ -102,7 +106,7 @@ class TestFitStarShapeNoiseless(FloatTestCase):
             fit_params.shape,
             (num_sources, 4, num_x_boundaries, num_y_boundaries)
         )
-        fluxes = result_tree.get('psffit.flux.0',
+        fluxes = result_tree.get('psffit.flux.' + str(image_index),
                                  shape=(len(variables['x']),))
 
         assert len(sources) == len(fluxes)
@@ -241,11 +245,13 @@ class TestFitStarShapeNoiseless(FloatTestCase):
                 measure_backgrounds
             )
 
-            self.check_results(
-                result_tree,
-                sources,
-                extra_variables
-            )
+            for image_index, image_sources in enumerate(sources):
+                self.check_results(
+                    result_tree,
+                    image_index,
+                    image_sources,
+                    extra_variables
+                )
 
     def test_single_source(self):
         """Test fitting a single source in the center of the image."""
