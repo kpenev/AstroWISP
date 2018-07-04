@@ -103,7 +103,7 @@ void prepare_fit_sources(
     const FitPSF::Config &configuration,
 
     ///The PSF fitting images for simultaneous fits.
-    std::vector< FitPSF::Image<FitPSF::LinearSource> > fit_images,
+    std::vector< FitPSF::Image<FitPSF::LinearSource> > &fit_images,
 
     ///See same name argument to piecewise_bicubic_fit()
     char **column_names,
@@ -154,10 +154,6 @@ void prepare_fit_sources(
                   << std::endl;
 #endif
         std::ostringstream image_index_stream;
-        image_index_stream.width(
-            int(std::floor(std::log10(fit_images.size())) + 1)
-        );
-        image_index_stream.fill('0');
         image_index_stream << image_index;
 
         FitPSF::IOSources image_sources(image_index_stream.str().c_str(),
@@ -207,13 +203,17 @@ void prepare_fit_sources(
         if(configuration["psf.terms"].as<std::string>() != "") {
             typedef IO::IOTreeBase::path_type path;
             output_data_tree.put(
-                path(
-                    "psffit|variables|" + image_index_stream.str(),
-                    '|'
-                ),
+                "psffit.variables." + image_index_stream.str(),
                 image_sources.columns(),
                 IO::TranslateToAny<PSF::MapVarListType>()
             );
+            std::cerr << "Trying to read back psffit variables." << std::endl;
+            output_data_tree.get<PSF::MapVarListType>(
+                "psffit.variables." + image_index_stream.str(),
+                PSF::MapVarListType(),
+                IO::TranslateToAny<PSF::MapVarListType>()
+            );
+            std::cerr << "Finished reading back psffit variables." << std::endl;
         }
 #ifdef TRACK_PROGRESS
         std::cerr << "Added PSF fit variables to result tree." << std::endl;
@@ -226,6 +226,56 @@ void prepare_fit_sources(
                   << dropped_sources.size() << " dropped sources"
                   << std::endl;
 #endif
+    }
+}
+
+LIB_PUBLIC bool local_get_psf_map_variables(H5IODataTree *output_data_tree,
+                                            unsigned image_index,
+                                            double *column_data)
+{
+    IO::H5IODataTree *real_output_data_tree =
+        reinterpret_cast<IO::H5IODataTree*>(output_data_tree);
+
+    std::ostringstream tree_path;
+    tree_path << "psffit.variables." << image_index;
+#ifdef VERBOSE_DEBUG
+    std::cerr << "Getting PSF map variables from tree at "
+              << real_output_data_tree
+              << " with path "
+              << tree_path.str()
+              << std::endl;
+#endif
+    
+    const PSF::MapVarListType &variables =
+        real_output_data_tree->get<PSF::MapVarListType>(
+            std::string("psffit.variables.0"),
+            PSF::MapVarListType(),
+            IO::TranslateToAny<PSF::MapVarListType>()
+        );
+    if(variables.size() == 0) {
+#ifdef VERBOSE_DEBUG
+        std::cerr << "Empty varibales entry in result tree!" << std::endl;
+#endif
+        return false;
+    }
+#ifdef VERBOSE_DEBUG
+    else
+        std::cerr << "Finished reading back psffit variables with zise:"
+                  << variables.size() << "x" << variables.begin()->second.size()
+                  << std::endl;
+#endif
+
+    double *destination = column_data;
+    for(
+        PSF::MapVarListType::const_iterator var_i = variables.begin();
+        var_i != variables.end();
+        ++var_i
+    ) {
+        const double *start = &(var_i->second[0]),
+                     *end = start + var_i->second.size();
+
+        std::copy(start, end, destination);
+        destination += var_i->second.size();
     }
 }
 
@@ -393,6 +443,26 @@ bool piecewise_bicubic_fit(double **pixel_values,
 #ifdef TRACK_PROGRESS
     std::cerr << "Added PSF map to output tree." << std::endl;
 #endif
+
+#ifdef VERBOSE_DEBUG
+    std::cerr << "Output data tree: " << *real_output_data_tree << std::endl;
+#endif
+
+    std::cerr << "Trying to read back psffit variables from tree at "
+              << real_output_data_tree
+              << std::endl;
+    const PSF::MapVarListType &variables =
+        real_output_data_tree->get<PSF::MapVarListType>(
+            std::string("psffit.variables.0"),
+            PSF::MapVarListType(),
+            IO::TranslateToAny<PSF::MapVarListType>()
+        );
+    std::cerr << "Finished reading back psffit variables with zise:"
+              << variables.size() << "x" << variables.begin()->second.size()
+              << std::endl;
+
+    double *mock_column_data = new double[10];
+    local_get_psf_map_variables(output_data_tree, 0, mock_column_data); 
 
     return converged;
 }

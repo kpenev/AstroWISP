@@ -459,7 +459,9 @@ namespace FitPSF {
             max_src_count = options["src.max-count"].as<unsigned>();
             max_aperture = options["src.max-aperture"].as<double>();
 #ifdef TRACK_PROGRESS
-            std::cerr << "Got useful configuration." << std::endl;
+            std::cerr << "Got useful configuration for output file: ." 
+                      << source_list.output_fname()
+                      << std::endl;
 #endif
 
             get_fit_sources<FIT_SOURCE_TYPE, PSF_TYPE>(

@@ -64,7 +64,17 @@ namespace FitPSF {
                 IO::FitsImage<double>(filename, hdu_number),
                 __fit_pixels(x_resolution() * y_resolution(), NULL),
                 __gain(gain)
-            {}
+            {
+#ifdef VERBOSE_DEBUG
+                std::cerr << "Created FitPSF::Image instance at " << this
+                          << "with resolution "
+                          << x_resolution() << "x" << y_resolution()
+                          << " from FITS file: " << filename
+                          << " HDU: " << hdu_number
+                          << " with no errors"
+                          << std::endl;
+#endif
+            }
 
             ///\brief Create a fit pixel manager for the given image.
             Image(
@@ -82,7 +92,17 @@ namespace FitPSF {
                 IO::FitsImage<double>(filename, values_hdu, false, errors_hdu),
                 __fit_pixels(x_resolution() * y_resolution(), NULL),
                 __gain(1.0)
-            {}
+            {
+#ifdef VERBOSE_DEBUG
+                std::cerr << "Created FitPSF::Image instance at " << this
+                          << "with resolution "
+                          << x_resolution() << "x" << y_resolution()
+                          << " from FITS file: " << filename
+                          << " values HDU: " << values_hdu
+                          << " errors HDU: " << errors_hdu
+                          << std::endl;
+#endif
+            }
 
             ///\brief Create a fit pixel manager for the given image.
             ///
@@ -103,6 +123,13 @@ namespace FitPSF {
                 __gain(gain)
             {
                 Core::Image<double>::wrap(observed_image);
+#ifdef VERBOSE_DEBUG
+                std::cerr << "Created FitPSF::Image instance at " << this
+                          << "with resolution "
+                          << x_resolution() << "x" << y_resolution()
+                          << " by wrapping " << &observed_image
+                          << std::endl;
+#endif
             }
 
             ///\brief Add the pixel at the given coordinates to the given
@@ -201,6 +228,16 @@ namespace FitPSF {
                                             errors);
                 __fit_pixels.resize(x_resolution * y_resolution);
                 __gain = 1.0;
+#ifdef VERBOSE_DEBUG
+                std::cerr << "FitPSF::Image instance at " << this
+                          << "with resolution "
+                          << this->x_resolution() << "x" << this->y_resolution()
+                          << " wrapped c-style data:"
+                          << "\tvalues at: " << values
+                          << "\terrors at: " << errors
+                          << "\tmask at: " << (void*)mask
+                          << std::endl;
+#endif
             }
 
             virtual void wrap(Core::Image<double> &image)
@@ -208,13 +245,28 @@ namespace FitPSF {
                 IO::FitsImage<double>::wrap(image);
                 __fit_pixels.resize(image.x_resolution() * image.y_resolution());
                 __gain = 1.0;
+#ifdef VERBOSE_DEBUG
+                std::cerr << "FitPSF::Image instance at " << this
+                          << "with resolution "
+                          << x_resolution() << "x" << y_resolution()
+                          << " wrapped image at:" << &image
+                          << std::endl;
+#endif
             }
 
             ///The gain of the image set at construction.
             double gain() const {return __gain;}
 
             ///Delete any pixels allocated through assign_to_source.
-            virtual ~Image() {delete_allocated_pixels();}
+            virtual ~Image() {
+#ifdef VERBOSE_DEBUG
+                std::cerr << "Destroying FitPSF::Image instance at " << this
+                          << "with resolution "
+                          << x_resolution() << "x" << y_resolution()
+                          << std::endl;
+#endif
+                delete_allocated_pixels();
+            }
         }; //End Image class.
 
 #ifdef TOOLCHAIN_CLANG
