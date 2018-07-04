@@ -56,17 +56,23 @@ class TestFitStarShapeNoiseless(FloatTestCase):
                                           dtype=bool)
         else:
             enabled_sources = numpy.full(len(sources), True, dtype=bool)
+        print('Flagged enabled sources')
 
         variables = {
             var: val[enabled_sources]
-            for var, val in zip(['x', 'y'] + extra_variables,
-                                result_tree.get('psffit.variables',
-                                                shape=(len(sources),)))
+            for var, val in zip(
+                ['x', 'y'] + extra_variables,
+                result_tree.get_psfmap_variables(0,
+                                                 len(extra_variables) + 2,
+                                                 len(sources))
+            )
         }
+        print('Read PSF map variables')
 
         psffit_terms = result_tree.get('psffit.terms', str)
         assert psffit_terms[0] == '{'
         assert psffit_terms[-1] == '}'
+        print('Read PSF map terms')
 
         num_sources = variables['x'].size
         num_x_boundaries = len(sources[0]['psf_args']['boundaries']['x']) - 2
@@ -96,7 +102,7 @@ class TestFitStarShapeNoiseless(FloatTestCase):
             fit_params.shape,
             (num_sources, 4, num_x_boundaries, num_y_boundaries)
         )
-        fluxes = result_tree.get('psffit.flux',
+        fluxes = result_tree.get('psffit.flux.0',
                                  shape=(len(variables['x']),))
 
         assert len(sources) == len(fluxes)
