@@ -13,7 +13,7 @@ from ctypes import\
 import numpy
 
 from superphot._initialize_library import superphot_library
-from superphot.io_library_interface import SuperPhotIOTree
+from superphot.SuperPhotIOTree import SuperPhotIOTree
 
 class FitStarShape:
     """

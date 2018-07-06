@@ -33,6 +33,69 @@ from tests.test_fit_star_shape.utils import make_image_and_source_list
 class TestFitStarShapeNoiseless(FloatTestCase):
     """Test piecewise bicubic PSF fitting on noiseless images."""
 
+    def create_debug_files(self,
+                           image,
+                           source_list,
+                           fit_config,
+                           sub_image=None):
+        """
+        Create the pair of files used by the C test of PSF fitting.
+
+        Args:
+            image (2D numpy array):    The image being fit.
+
+            source_list:    The list of sources participating in the fit.
+
+            fit_config:    The :attr:`FitStarShape.configuration` of the PSF
+                fitting object used for fitting.
+
+            sub_image:    The index of the image within the list of images being
+                fit simultaneously.
+        """
+
+        fname_start = (
+            '/Users/kpenev/projects/git/SuperPhot/src/debug/'
+            +
+            self.id().rsplit('.', 1)[1]
+            +
+            '_' + str(sub_image)
+        )
+
+        with open(fname_start + '_config.txt', 'w') as test_config:
+            for param_value in fit_config.items():
+                formatted_config = FitStarShape._format_config(param_value)
+                if formatted_config:
+                    test_config.write(formatted_config[0].decode()
+                                      +
+                                      ' = '
+                                      +
+                                      formatted_config[1].decode()
+                                      +
+                                      '\n')
+
+        with open(fname_start + '_image.txt', 'w') as test_image:
+            test_image.write(str(image.shape[1])
+                             +
+                             ' '
+                             +
+                             str(image.shape[0])
+                             +
+                             '\n')
+            for value in image.flatten():
+                test_image.write('\n' + repr(value))
+
+        with open(fname_start + '_sources.txt', 'w') as test_sources:
+            for var in source_list.dtype.names:
+                test_sources.write('%25s' % var)
+            test_sources.write('\n')
+            for source in source_list:
+                for var in source_list.dtype.names:
+                    if var == 'ID':
+                        test_sources.write('%25s' % source[var].decode())
+                    else:
+                        test_sources.write('%25.16e' % source[var])
+                test_sources.write('\n')
+
     def check_results(self, result_tree, image_index, sources, extra_variables):
         """
         Assert that fitted PSF map and source fluxes match expectations.
@@ -97,8 +160,11 @@ class TestFitStarShapeNoiseless(FloatTestCase):
             shape=(4,
                    len(sources[0]['psf_args']['boundaries']['x']) - 2,
                    len(sources[0]['psf_args']['boundaries']['y']) - 2,
-                   len(term_list))
+                   len(term_list[0]))
         )
+
+        print('Term list shape:' + repr(term_list.shape))
+        print('coefficients shape: ' + repr(coefficients.shape))
 
         #Indices are: source index, variable, y boundary ind, x boundary ind
         fit_params = numpy.tensordot(term_list, coefficients, [1, 3])
@@ -188,11 +254,28 @@ class TestFitStarShapeNoiseless(FloatTestCase):
 #                           numpy.array([[1.9], [0.1]]),
 #                           numpy.array([[2.0, 0.0], [0.0, 2.0]]),
 #                           numpy.array([[0.0, 0.0], [0.0, 4.0]])]:
+
+            print('Fitting for the PSF.')
+            fit_star_shape = FitStarShape(
+                mode='PSF',
+                shape_terms=psffit_terms,
+                grid=[sources[0][0]['psf_args']['boundaries']['x'],
+                      sources[0][0]['psf_args']['boundaries']['y']],
+                initial_aperture=5.0,
+                subpixmap=subpixmap,
+                smoothing=-100.0,
+                max_chi2=100.0,
+                pixel_rejection_threshold=100.0,
+                max_abs_amplitude_change=0.0,
+                max_rel_amplitude_change=1e-8,
+                min_convergence_rate=-10.0,
+                max_iterations=10000,
+                bg_min_pix=5
+            )
+
             fit_images_and_sources = []
-
-
             measure_backgrounds = []
-            for image_sources in sources:
+            for sub_image, image_sources in enumerate(sources):
                 print('Image sources:\n' + repr(image_sources))
                 image, source_list = make_image_and_source_list(
                     sources=[dict(x=src['x'],
@@ -222,24 +305,11 @@ class TestFitStarShapeNoiseless(FloatTestCase):
                     numpy.array([src['x'] for src in image_sources]),
                     numpy.array([src['y'] for src in image_sources])
                 )
+                self.create_debug_files(image,
+                                        source_list,
+                                        fit_star_shape.configuration,
+                                        sub_image)
 
-            print('Fitting for the PSF.')
-            fit_star_shape = FitStarShape(
-                mode='PSF',
-                shape_terms=psffit_terms,
-                grid=[sources[0][0]['psf_args']['boundaries']['x'],
-                      sources[0][0]['psf_args']['boundaries']['y']],
-                initial_aperture=5.0,
-                subpixmap=subpixmap,
-                smoothing=-100.0,
-                max_chi2=100.0,
-                pixel_rejection_threshold=100.0,
-                max_abs_amplitude_change=0.0,
-                max_rel_amplitude_change=1e-8,
-                min_convergence_rate=-10.0,
-                max_iterations=10000,
-                bg_min_pix=5
-            )
             result_tree = fit_star_shape.fit(
                 fit_images_and_sources,
                 measure_backgrounds
@@ -252,6 +322,7 @@ class TestFitStarShapeNoiseless(FloatTestCase):
                     image_sources,
                     extra_variables
                 )
+                print('Finished checking results for image ' + str(image_index))
 
     def test_single_source(self):
         """Test fitting a single source in the center of the image."""
@@ -281,6 +352,89 @@ class TestFitStarShapeNoiseless(FloatTestCase):
             ]],
             psffit_terms='{1}'
         )
+
+    def test_isolated_sources(self):
+        """Test fitting an image containing 8 well isolated sources."""
+
+        psf_parameters = dict(values=numpy.zeros((3, 3)),
+                              d_dx=numpy.zeros((3, 3)),
+                              d_dy=numpy.zeros((3, 3)),
+                              d2_dxdy=numpy.zeros((3, 3)))
+        boundaries = dict(x=numpy.array([-2.0, 0.0, 2.0]),
+                          y=numpy.array([-1.4, 0.0, 1.4]))
+
+        sources = []
+
+        psf_parameters['values'][1, 1] = 1.0
+        sources.append(dict(x=15.0,
+                            y=15.0,
+                            psf_args=dict(psf_parameters=dict(psf_parameters),
+                                          boundaries=boundaries)))
+        psf_parameters['d_dx'] = numpy.zeros((3, 3))
+
+        psf_parameters['d_dx'][1, 1] = 1.0
+        sources.append(dict(x=45.0,
+                            y=15.0,
+                            psf_args=dict(psf_parameters=dict(psf_parameters),
+                                          boundaries=boundaries)))
+        psf_parameters['d_dx'] = numpy.zeros((3, 3))
+        psf_parameters['d_dy'] = numpy.zeros((3, 3))
+
+        psf_parameters['d_dy'][1, 1] = 1.0
+        sources.append(dict(x=15.0,
+                            y=45.0,
+                            psf_args=dict(psf_parameters=dict(psf_parameters),
+                                          boundaries=boundaries)))
+        psf_parameters['d_dx'] = numpy.zeros((3, 3))
+        psf_parameters['d_dy'] = numpy.zeros((3, 3))
+
+        psf_parameters['d_dx'][1, 1] = 0.75
+        psf_parameters['d_dy'][1, 1] = 1.00
+        sources.append(dict(x=37.5,
+                            y=45.0,
+                            psf_args=dict(psf_parameters=dict(psf_parameters),
+                                          boundaries=boundaries)))
+        psf_parameters['d_dx'] = numpy.zeros((3, 3))
+        psf_parameters['d_dy'] = numpy.zeros((3, 3))
+
+        psf_parameters['d_dx'][1, 1] = 0.5
+        psf_parameters['d_dy'][1, 1] = 0.0
+        sources.append(dict(x=30.0,
+                            y=15.0,
+                            psf_args=dict(psf_parameters=dict(psf_parameters),
+                                          boundaries=boundaries)))
+        psf_parameters['d_dx'] = numpy.zeros((3, 3))
+        psf_parameters['d_dy'] = numpy.zeros((3, 3))
+
+        psf_parameters['d_dx'][1, 1] = 0.0
+        psf_parameters['d_dy'][1, 1] = 0.5
+        sources.append(dict(x=15.0,
+                            y=30.0,
+                            psf_args=dict(psf_parameters=dict(psf_parameters),
+                                          boundaries=boundaries)))
+        psf_parameters['d_dx'] = numpy.zeros((3, 3))
+        psf_parameters['d_dy'] = numpy.zeros((3, 3))
+
+        psf_parameters['d_dx'][1, 1] = 0.5
+        psf_parameters['d_dy'][1, 1] = 1.0
+        sources.append(dict(x=30.0,
+                            y=45.0,
+                            psf_args=dict(psf_parameters=dict(psf_parameters),
+                                          boundaries=boundaries)))
+        psf_parameters['d_dx'] = numpy.zeros((3, 3))
+        psf_parameters['d_dy'] = numpy.zeros((3, 3))
+
+        psf_parameters['d_dx'][1, 1] = 1.0
+        psf_parameters['d_dy'][1, 1] = 0.5
+        sources.append(dict(x=45.0,
+                            y=30.0,
+                            psf_args=dict(psf_parameters=dict(psf_parameters),
+                                          boundaries=boundaries)))
+        psf_parameters['d_dx'] = numpy.zeros((3, 3))
+        psf_parameters['d_dy'] = numpy.zeros((3, 3))
+
+        self.run_test(sources=[sources],
+                      psffit_terms='{1, x, y}')
 
 if __name__ == '__main__':
     unittest.main(failfast=True)

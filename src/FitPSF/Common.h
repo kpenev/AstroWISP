@@ -634,7 +634,7 @@ namespace FitPSF {
                 psffit_pixels,
                 background_pixels;
             std::set<std::string> output_filenames;
-            std::map< std::string, std::vector< char* >* > source_names;
+            std::map< std::string, std::vector<std::string>* > source_names;
 
             /*source names
               =new std::vector<char*>(
@@ -710,9 +710,9 @@ namespace FitPSF {
                                          new std::vector<unsigned>)
                     );
                     source_names.insert(
-                        std::pair< std::string, std::vector< char* >* >(
+                        std::pair< std::string, std::vector<std::string>* >(
                             output_fname,
-                            new std::vector< char* >
+                            new std::vector<std::string>
                         )
                     );
 
@@ -766,10 +766,8 @@ namespace FitPSF {
                     source[output_fname]->push_back((*source_i)->id().source());
                 } else {
                     source_names[output_fname]->push_back(
-                        new char[(*source_i)->id().str().size() + 1]
+                        (*source_i)->id().str()
                     );
-                    strcpy(source_names[output_fname]->back(),
-                           (*source_i)->id().str().c_str());
                 }
                 psffit_pixels[output_fname]->push_back(
                     (*source_i)->pixel_count()
@@ -803,7 +801,7 @@ namespace FitPSF {
                 } else output_data_tree.put(
                     path("projsrc|srcid|name|" + *fname_i, '|'),
                     *(source_names[*fname_i]),
-                    IO::TranslateToAny< std::vector<char*> >()
+                    IO::TranslateToAny< std::vector<std::string> >()
                 );
                 output_data_tree.put(path("projsrc|x|" + *fname_i, '|'),
                                      *(x[*fname_i]),
@@ -868,6 +866,26 @@ namespace FitPSF {
                 output_data_tree.put(path("psffit|quality|" + *fname_i, '|'),
                                      *(quality_flag[*fname_i]),
                                      unsigned_trans);
+                delete x[*fname_i];
+                delete y[*fname_i];
+                delete magnitude_array[*fname_i];
+                delete magnitude_error_array[*fname_i];
+                delete flux_array[*fname_i];
+                delete flux_error_array[*fname_i];
+                delete mask_magnitude_array[*fname_i];
+                delete mask_magnitude_error_array[*fname_i];
+                delete mask_flux_array[*fname_i];
+                delete mask_flux_error_array[*fname_i];
+                delete background[*fname_i];
+                delete background_error[*fname_i];
+                delete chi2[*fname_i];
+                delete signal_to_noise[*fname_i];
+                delete quality_flag[*fname_i];
+                delete field[*fname_i];
+                delete source[*fname_i];
+                delete psffit_pixels[*fname_i];
+                delete background_pixels[*fname_i];
+                delete source_names[*fname_i];
             }
         }
 

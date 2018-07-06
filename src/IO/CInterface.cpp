@@ -46,7 +46,13 @@ H5IODataTree *create_result_tree(void *configuration, char *version_info)
 
 void destroy_result_tree(H5IODataTree *tree)
 {
+#ifdef VERBOSE_DEBUG
+    std::cerr << "Deleting H5IOData tree at " << tree << std::endl;
+#endif
     delete reinterpret_cast<IO::H5IODataTree*>(tree);
+#ifdef VERBOSE_DEBUG
+    std::cerr << "Successfully Deleted H5IOData tree." << std::endl;
+#endif
 }
 
 ///Set result to a single value of type UNIT_TYPE.

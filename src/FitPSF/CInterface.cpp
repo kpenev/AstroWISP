@@ -448,21 +448,12 @@ bool piecewise_bicubic_fit(double **pixel_values,
     std::cerr << "Output data tree: " << *real_output_data_tree << std::endl;
 #endif
 
-    std::cerr << "Trying to read back psffit variables from tree at "
-              << real_output_data_tree
-              << std::endl;
-    const PSF::MapVarListType &variables =
-        real_output_data_tree->get<PSF::MapVarListType>(
-            std::string("psffit.variables.0"),
-            PSF::MapVarListType(),
-            IO::TranslateToAny<PSF::MapVarListType>()
-        );
-    std::cerr << "Finished reading back psffit variables with zise:"
-              << variables.size() << "x" << variables.begin()->second.size()
-              << std::endl;
-
-    double *mock_column_data = new double[10];
-    local_get_psf_map_variables(output_data_tree, 0, mock_column_data); 
+    for(
+        FitPSF::LinearSourceList::iterator src_i = fit_sources.begin();
+        src_i != fit_sources.end();
+        ++src_i
+    )
+        delete *src_i;
 
     return converged;
 }

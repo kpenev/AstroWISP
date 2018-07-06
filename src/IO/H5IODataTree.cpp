@@ -181,13 +181,13 @@ namespace IO {
             ++node_i
         ) {
             for(unsigned i = 0; i<level; ++i) os << padding;
-            os << node_i->first
+            os << "(" << node_i->first << ")"
                << (node_i->second.data().empty() ? "<empty>" : "<filled>")
                << std::endl;
             ++level;
             os << node_i->second;
+            --level;
         }
-        --level;
         return os;
     }
 
