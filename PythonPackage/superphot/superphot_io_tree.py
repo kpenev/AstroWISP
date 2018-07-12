@@ -149,6 +149,5 @@ class SuperPhotIOTree:
     def __del__(self):
         """Destroy the tree allocated by __init__."""
 
-        print('Destroying result tree.')
         superphot_library.destroy_result_tree(self.library_tree)
 #pylint: enable=too-few-public-methods

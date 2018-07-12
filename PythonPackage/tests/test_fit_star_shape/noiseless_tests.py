@@ -141,7 +141,7 @@ class TestFitStarShapeNoiseless(FloatTestCase):
         assert psffit_terms[-1] == '}'
         print('Read PSF map terms')
 
-        num_sources = variables['x'].size
+        num_enabled_sources = variables['x'].size
         num_x_boundaries = len(sources[0]['psf_args']['boundaries']['x']) - 2
         num_y_boundaries = len(sources[0]['psf_args']['boundaries']['y']) - 2
 
@@ -152,7 +152,8 @@ class TestFitStarShapeNoiseless(FloatTestCase):
         #pylint: enable=eval-used
         for term_index, term in enumerate(term_list):
             if isinstance(term, (float, int)):
-                term_list[term_index] = numpy.full(num_sources, float(term))
+                term_list[term_index] = numpy.full(num_enabled_sources,
+                                                   float(term))
 
         term_list = numpy.dstack(term_list)[0]
         coefficients = result_tree.get(
@@ -170,12 +171,11 @@ class TestFitStarShapeNoiseless(FloatTestCase):
         fit_params = numpy.tensordot(term_list, coefficients, [1, 3])
         self.assertEqual(
             fit_params.shape,
-            (num_sources, 4, num_x_boundaries, num_y_boundaries)
+            (num_enabled_sources, 4, num_x_boundaries, num_y_boundaries)
         )
         fluxes = result_tree.get('psffit.flux.' + str(image_index),
-                                 shape=(len(variables['x']),))
+                                 shape=(len(sources),))
 
-        assert len(sources) == len(fluxes)
         for src_ind, src in enumerate(sources):
             if 'enabled' in extra_variables and not src['enabled']:
                 continue
@@ -247,13 +247,13 @@ class TestFitStarShapeNoiseless(FloatTestCase):
 
         if extra_variables is None:
             extra_variables = []
-        for subpixmap in [numpy.ones((1, 1))]:#,
-#                           numpy.ones((2, 2)),
-#                           numpy.array([[1.99, 0.01], [0.01, 1.99]]),
-#                           numpy.array([[0.5, 0.5], [0.5, 2.5]]),
-#                           numpy.array([[1.9], [0.1]]),
-#                           numpy.array([[2.0, 0.0], [0.0, 2.0]]),
-#                           numpy.array([[0.0, 0.0], [0.0, 4.0]])]:
+        for subpixmap in [numpy.ones((1, 1)),
+                          numpy.ones((2, 2)),
+                          numpy.array([[1.99, 0.01], [0.01, 1.99]]),
+                          numpy.array([[0.5, 0.5], [0.5, 2.5]]),
+                          numpy.array([[1.9], [0.1]]),
+                          numpy.array([[2.0, 0.0], [0.0, 2.0]]),
+                          numpy.array([[0.0, 0.0], [0.0, 4.0]])]:
 
             print('Fitting for the PSF.')
             fit_star_shape = FitStarShape(
@@ -276,7 +276,9 @@ class TestFitStarShapeNoiseless(FloatTestCase):
             fit_images_and_sources = []
             measure_backgrounds = []
             for sub_image, image_sources in enumerate(sources):
-                print('Image sources:\n' + repr(image_sources))
+                print('Image sources:\n')
+                for src in image_sources:
+                    print('\t' + repr(src) + '\n')
                 image, source_list = make_image_and_source_list(
                     sources=[dict(x=src['x'],
                                   y=src['y'],
@@ -435,6 +437,234 @@ class TestFitStarShapeNoiseless(FloatTestCase):
 
         self.run_test(sources=[sources],
                       psffit_terms='{1, x, y}')
+
+    def test_two_overlapping_sources(self):
+        """Test fitting an image containing 2 sources all overlapping."""
+
+        psf_args = dict(psf_parameters=dict(values=numpy.zeros((3, 3)),
+                                            d_dx=numpy.zeros((3, 3)),
+                                            d_dy=numpy.zeros((3, 3)),
+                                            d2_dxdy=numpy.zeros((3, 3))),
+                        boundaries=dict(x=numpy.array([-1.0, 0.0, 1.0]),
+                                        y=numpy.array([-1.4, 0.0, 1.4])))
+
+        psf_args['psf_parameters']['values'][1, 1] = 1.0
+
+        sources = [dict(x=14.53,
+                        y=14.02,
+                        psf_args=psf_args),
+                   dict(x=16.51,
+                        y=14.03,
+                        psf_args=psf_args)]
+        self.run_test(sources=[sources], psffit_terms='{1}')
+
+    def test_four_overlapping_sources(self):
+        """Test fitting an image containing 4 overlapping sources."""
+
+        psf_parameters = dict(
+            values=numpy.zeros((3, 3)),
+            d_dx=numpy.zeros((3, 3)),
+            d_dy=numpy.zeros((3, 3)),
+            d2_dxdy=numpy.zeros((3, 3))
+        )
+
+        boundaries = dict(
+            x=numpy.array([-2.2, 0.0, 2.2]),
+            y=numpy.array([-1.4, 0.0, 1.4])
+        )
+
+        psf_parameters['values'][1, 1] = 1.0
+
+        sources = [dict(x=12.5,
+                        y=13.5,
+                        psf_args=dict(psf_parameters=dict(psf_parameters),
+                                      boundaries=boundaries))]
+
+
+        psf_parameters['d_dx'] = numpy.zeros((3, 3))
+        psf_parameters['d_dy'] = numpy.zeros((3, 3))
+        psf_parameters['d_dx'][1, 1] = 1.0
+        sources.append(dict(x=16.5,
+                            y=13.5,
+                            psf_args=dict(psf_parameters=dict(psf_parameters),
+                                          boundaries=boundaries)))
+
+        psf_parameters['d_dx'] = numpy.zeros((3, 3))
+        psf_parameters['d_dy'] = numpy.zeros((3, 3))
+        psf_parameters['d_dy'][1, 1] = 1.0
+        sources.append(dict(x=12.5,
+                            y=15.5,
+                            psf_args=dict(psf_parameters=dict(psf_parameters),
+                                          boundaries=boundaries)))
+
+        psf_parameters['d_dx'] = numpy.zeros((3, 3))
+        psf_parameters['d_dy'] = numpy.zeros((3, 3))
+        psf_parameters['d_dx'][1, 1] = 1.0
+        psf_parameters['d_dy'][1, 1] = 1.0
+        sources.append(dict(x=16.5,
+                            y=15.5,
+                            psf_args=dict(psf_parameters=dict(psf_parameters),
+                                          boundaries=boundaries)))
+
+#        self.run_test(sources=[sources], psffit_terms='{1, x*x, y*y}')
+
+        for src in sources:
+            src['enabled'] = 1
+        psf_parameters['d_dx'] = numpy.zeros((3, 3))
+        psf_parameters['d_dy'] = numpy.zeros((3, 3))
+        psf_parameters['d2_dxdy'] = numpy.zeros((3, 3))
+        psf_parameters['d_dx'][1, 1] = 1.0
+        psf_parameters['d_dy'][1, 1] = 2.0
+        psf_parameters['d2_dxdy'][1, 1] = 3.0
+        sources.append(dict(x=4.0,
+                            y=4.0,
+                            enabled=0,
+                            psf_args=dict(psf_parameters=dict(psf_parameters),
+                                          boundaries=boundaries)))
+        sources.append(dict(x=25.0,
+                            y=25.0,
+                            enabled=0,
+                            psf_args=dict(psf_parameters=dict(psf_parameters),
+                                          boundaries=boundaries)))
+        self.run_test(sources=[sources],
+                      psffit_terms='{1, x*x, y*y}',
+                      extra_variables=['enabled'])
+
+    def test_multi_image_with_extra_var(self):
+        """Test fitting a series of 5 images and non-position variables."""
+
+        boundaries = dict(x=numpy.array([-3.02, 0.0, 3.02]),
+                          y=numpy.array([-2.04, 0.0, 2.04]))
+
+        #t & z are arbitrary and dx and dy seem reasonable
+        #pylint: disable=invalid-name
+        def image_sources(dx_dy_z_fluxbkp, t):
+            """Return 3 overlapping sources with slightly different PSFs."""
+
+
+            values = numpy.zeros((3, 3))
+            d_dx = numpy.zeros((3, 3))
+            d_dy = numpy.zeros((3, 3))
+            d2_dxdy = numpy.zeros((3, 3))
+
+            values[1, 1] = 10.0
+
+            sources = []
+            for dx, dy, z, flux_backup in dx_dy_z_fluxbkp:
+                d_dx[1, 1] = ((1.0 - t) * dx / 150.0
+                              +
+                              (1.0 - t) * dy / 300.0)
+                d_dy[1, 1] = (1.0 - t) * dx / 150.0 + 0.01 * z
+#                print("Dx = " + repr(d_dx[1, 1]) + ", Dy = " + repr(d_dy[1, 1]))
+                sources.append(
+                    dict(
+                        x=30.0 + dx,
+                        y=30.0 + dy,
+                        z=z,
+                        t=t,
+                        flux_backup=flux_backup,
+                        psf_args=dict(
+                            psf_parameters=dict(
+                                values=numpy.copy(values),
+                                d_dx=numpy.copy(d_dx),
+                                d_dy=numpy.copy(d_dy),
+                                d2_dxdy=numpy.copy(d2_dxdy),
+                            ),
+                            boundaries=boundaries
+                        )
+                    )
+                )
+
+            return sources
+        #pylint: enable=invalid-name
+
+        sources = [
+            image_sources(
+                [
+                    (-17.3, -15.3, numpy.pi, None),
+                    (12.3, -17.0, numpy.e, None),
+                    (-15.0, 13.0, 1.0 / numpy.pi, None),
+                    (17.3, 17.0, 1.0 / numpy.e, None)
+                ],
+                1.0
+            ),
+            image_sources(
+                [
+                    (0.0, -1.5, 1.0, None),
+                    (-4.0, 1.5, 2.0, None),
+                    (4.0, 1.5, 3.0, None)],
+                2.0
+            ),
+            image_sources(
+                [
+                    (5.5, -2.5, numpy.pi * numpy.e, None),
+                    (5.5, 2.5, numpy.pi**2, None),
+                    (0.0, 0.0, numpy.e**2, None),
+                    (-5.5, -2.5, numpy.pi / numpy.e, None),
+                    (-5.5, 2.5, -1.0, None)
+                ],
+                3.0
+            ),
+            image_sources(
+                [
+                    (-12.0, round(-5.0 * numpy.pi, 6), 10.0, None),
+                    (-16.0, round(-5.0 * numpy.pi, 6), 10.0, None),
+                    (14.5, -15.0, -10.0, None),
+                    (16.2, -15.0, -10.0, None),
+                    (-15.5, 13.15, 0.0, None),
+                    (15.5, 14.83, -10.0, None),
+                    (17.8, 15.0, 0.0, None),
+                    (13.0, 15.8, -10.0, None),
+                    (-17.8, -15.8, 0.0, None)
+                ],
+                4.0
+            ),
+            image_sources(
+                [
+                    (
+                        dx,
+                        dy,
+                        1.0,
+                        (
+                            None if (
+                                dx < -12.5
+                                or
+                                dx > 12.5
+                                or
+                                dy < -12.5
+                                or
+                                dy > 12.5
+                            ) else (
+                                10.0 * boundaries['x'][-1] * boundaries['y'][-1]
+                            )
+                        )
+                    )
+                    for dx in [-20.2, -15.3, -10.4, -5.5, 0.6, 5.7, 10.8,
+                               15.9, 20.0]
+                    for dy in [-20.2, -15.3, -10.4, -5.5, 0.6, 5.7, 10.8,
+                               15.9, 20.0]
+                ],
+                5.0
+            ),
+            image_sources(
+                [
+                    (
+                        dx,
+                        dy,
+                        3.0,
+                        None
+                    )
+                    for dx in [-22.8, -15.2, -7.6, 0.0, 7.6, 15.2, 22.8]
+                    for dy in [-22.8, -11.6, 0.0, 11.6, 22.8]
+                ],
+                5.0
+            )
+        ]
+        self.run_test(sources=sources,
+                      psffit_terms='{1, x, y, t, x*t, y*t, z}',
+                      extra_variables=['t', 'z'])
+
+
 
 if __name__ == '__main__':
     unittest.main(failfast=True)

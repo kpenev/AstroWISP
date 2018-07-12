@@ -13,7 +13,7 @@ from ctypes import\
 import numpy
 
 from superphot._initialize_library import superphot_library
-from superphot.SuperPhotIOTree import SuperPhotIOTree
+from superphot.superphot_io_tree import SuperPhotIOTree
 
 class FitStarShape:
     """
@@ -598,7 +598,6 @@ class FitStarShape:
     def __del__(self):
         r"""Destroy the configuration object created in :meth:`__init__`\ ."""
 
-        print('Destroying PSF fitting configuraiton.')
         superphot_library.destroy_psffit_configuration(
             self._library_configuration
         )
