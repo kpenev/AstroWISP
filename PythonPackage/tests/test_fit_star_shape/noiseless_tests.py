@@ -247,13 +247,17 @@ class TestFitStarShapeNoiseless(FloatTestCase):
 
         if extra_variables is None:
             extra_variables = []
-        for subpixmap in [numpy.ones((1, 1)),
-                          numpy.ones((2, 2)),
-                          numpy.array([[1.99, 0.01], [0.01, 1.99]]),
-                          numpy.array([[0.5, 0.5], [0.5, 2.5]]),
-                          numpy.array([[1.9], [0.1]]),
-                          numpy.array([[2.0, 0.0], [0.0, 2.0]]),
-                          numpy.array([[0.0, 0.0], [0.0, 4.0]])]:
+        for subpixmap in [
+                numpy.ones((1, 1)),
+                #numpy.ones((1, 2)),
+                #numpy.ones((2, 1)),
+                #numpy.ones((2, 2)),
+                #numpy.array([[1.99, 0.01], [0.01, 1.99]]),
+                #numpy.array([[0.5, 0.5], [0.5, 2.5]]),
+                #numpy.array([[1.9], [0.1]]),
+                #numpy.array([[2.0, 0.0], [0.0, 2.0]]),
+                #numpy.array([[0.0, 0.0], [0.0, 4.0]])
+        ]:
 
             print('Fitting for the PSF.')
             fit_star_shape = FitStarShape(
@@ -290,10 +294,10 @@ class TestFitStarShapeNoiseless(FloatTestCase):
                 )
                 fit_images_and_sources.append(
                     (
-                        image,
+                        numpy.copy(image),
                         image**0.5,
                         numpy.zeros(image.shape, dtype=c_ubyte),
-                        source_list
+                        source_list[:]
                     )
                 )
                 measure_backgrounds.append(
@@ -326,7 +330,7 @@ class TestFitStarShapeNoiseless(FloatTestCase):
                 )
                 print('Finished checking results for image ' + str(image_index))
 
-    def test_single_source(self):
+    def dont_test_single_source(self):
         """Test fitting a single source in the center of the image."""
 
         values = numpy.zeros((3, 3))
@@ -355,7 +359,7 @@ class TestFitStarShapeNoiseless(FloatTestCase):
             psffit_terms='{1}'
         )
 
-    def test_isolated_sources(self):
+    def dont_test_isolated_sources(self):
         """Test fitting an image containing 8 well isolated sources."""
 
         psf_parameters = dict(values=numpy.zeros((3, 3)),
@@ -438,7 +442,7 @@ class TestFitStarShapeNoiseless(FloatTestCase):
         self.run_test(sources=[sources],
                       psffit_terms='{1, x, y}')
 
-    def test_two_overlapping_sources(self):
+    def dont_test_two_overlapping_sources(self):
         """Test fitting an image containing 2 sources all overlapping."""
 
         psf_args = dict(psf_parameters=dict(values=numpy.zeros((3, 3)),
@@ -458,7 +462,7 @@ class TestFitStarShapeNoiseless(FloatTestCase):
                         psf_args=psf_args)]
         self.run_test(sources=[sources], psffit_terms='{1}')
 
-    def test_four_overlapping_sources(self):
+    def dont_test_four_overlapping_sources(self):
         """Test fitting an image containing 4 overlapping sources."""
 
         psf_parameters = dict(
@@ -592,14 +596,15 @@ class TestFitStarShapeNoiseless(FloatTestCase):
                 [
                     (0.0, -1.5, 1.0, None),
                     (-4.0, 1.5, 2.0, None),
-                    (4.0, 1.5, 3.0, None)],
+                    (4.0, 1.5, 3.0, None)
+                ],
                 2.0
             ),
-            image_sources(
+            image_sources(#PROBLEM IMAGE
                 [
                     (5.5, -2.5, numpy.pi * numpy.e, None),
                     (5.5, 2.5, numpy.pi**2, None),
-                    (0.0, 0.0, numpy.e**2, None),
+                    (0.0, 0.0, numpy.e**2, None),#SOLE PROBLEM SOURCE
                     (-5.5, -2.5, numpy.pi / numpy.e, None),
                     (-5.5, 2.5, -1.0, None)
                 ],
@@ -619,7 +624,7 @@ class TestFitStarShapeNoiseless(FloatTestCase):
                 ],
                 4.0
             ),
-            image_sources(
+            image_sources(#PROBLEM IMAGE
                 [
                     (
                         dx,
@@ -660,7 +665,7 @@ class TestFitStarShapeNoiseless(FloatTestCase):
                 5.0
             )
         ]
-        self.run_test(sources=sources,
+        self.run_test(sources=[sources[2]],
                       psffit_terms='{1, x, y, t, x*t, y*t, z}',
                       extra_variables=['t', 'z'])
 
