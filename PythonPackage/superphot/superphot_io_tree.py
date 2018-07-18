@@ -96,7 +96,7 @@ class SuperPhotIOTree:
                 cast(library_result, c_void_p)
             )
             result = library_result.contents.value.decode()
-            print('Freeing library result')
+            print('Freeing library result: ' + repr(result))
             superphot_library.free(library_result.contents)
         else:
             result = numpy.empty(shape=shape, dtype=dtype)

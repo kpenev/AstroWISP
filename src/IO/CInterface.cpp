@@ -299,7 +299,7 @@ LIB_PUBLIC bool get_psf_map_variables(H5IODataTree *output_data_tree,
     
     const PSF::MapVarListType &variables =
         real_output_data_tree->get<PSF::MapVarListType>(
-            std::string("psffit.variables.0"),
+            tree_path.str(),
             PSF::MapVarListType(),
             IO::TranslateToAny<PSF::MapVarListType>()
         );
