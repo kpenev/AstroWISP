@@ -10,7 +10,7 @@ import os.path
 import sys
 import numpy
 import h5py
-import pyfits
+from astropy.io import fits as pyfits
 
 module_path = os.path.abspath(os.path.dirname(__file__))
 
@@ -33,7 +33,7 @@ from tests.fitpsf.utils import make_image_and_source_list
 #pylint: enable=wrong-import-position
 
 
-class TestPiecewiseBicubic(unittest.TestCase):
+class TestPiecewiseBicubicNoiseless(unittest.TestCase):
     """Test piecewise bicubic PSF fitting on noiseless images."""
 
     fitpsf_executable = os.path.abspath(

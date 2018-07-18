@@ -113,6 +113,12 @@ namespace IO {
             ///The parsed command line options.
             const boost::program_options::variables_map& options
         );
+
+#ifdef VERBOSE_DEBUG
+        ~H5IODataTree() {
+            std::cerr << "Destroying H5IODataTree at " << this << std::endl;
+        }
+#endif
     }; //End H5IODataTree class.
 
     LIB_PUBLIC std::ostream &operator<<(std::ostream &os,

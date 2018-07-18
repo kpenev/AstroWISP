@@ -148,9 +148,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a8671d331a41144b8c47c07a8bb8f62e4 inherit pub_methods_classBackground_1_1MeasureExcludingSources"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restart iteration over sources from the beginning.  <a href="#a8671d331a41144b8c47c07a8bb8f62e4">More...</a><br /></td></tr>
 <tr class="separator:a8671d331a41144b8c47c07a8bb8f62e4 inherit pub_methods_classBackground_1_1MeasureExcludingSources"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf84de066a9b352e5f3e9f86c0f420c3 inherit pub_methods_classBackground_1_1MeasureExcludingSources"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBackground_1_1MeasureExcludingSources.html#abf84de066a9b352e5f3e9f86c0f420c3">MeasureExcludingSources</a> (const <a class="el" href="classCore_1_1Image.html">Core::Image</a>&lt; double &gt; &amp;image, double exclude_aperture)</td></tr>
+<tr class="memdesc:abf84de066a9b352e5f3e9f86c0f420c3 inherit pub_methods_classBackground_1_1MeasureExcludingSources"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a background extractor for the given image excluding pixels with centers inside the given aperture around all sources.  <a href="#abf84de066a9b352e5f3e9f86c0f420c3">More...</a><br /></td></tr>
 <tr class="separator:abf84de066a9b352e5f3e9f86c0f420c3 inherit pub_methods_classBackground_1_1MeasureExcludingSources"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a83b738ab93228333240b38c6fe9b319d inherit pub_methods_classBackground_1_1MeasureExcludingSources"><td class="memTemplParams" colspan="2">template&lt;class POINT_TYPE &gt; </td></tr>
 <tr class="memitem:a83b738ab93228333240b38c6fe9b319d inherit pub_methods_classBackground_1_1MeasureExcludingSources"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classBackground_1_1MeasureExcludingSources.html#a83b738ab93228333240b38c6fe9b319d">MeasureExcludingSources</a> (const <a class="el" href="classCore_1_1Image.html">Core::Image</a>&lt; double &gt; &amp;image, double exclude_aperture, const std::list&lt; POINT_TYPE &gt; &amp;sources)</td></tr>
+<tr class="memdesc:a83b738ab93228333240b38c6fe9b319d inherit pub_methods_classBackground_1_1MeasureExcludingSources"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a background extractor for the given image excluding pixels with centers inside the given aperture around all listed sources.  <a href="#a83b738ab93228333240b38c6fe9b319d">More...</a><br /></td></tr>
 <tr class="separator:a83b738ab93228333240b38c6fe9b319d inherit pub_methods_classBackground_1_1MeasureExcludingSources"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a285770ad49963da07a7fd825809fb0b0 inherit pub_methods_classBackground_1_1MeasureExcludingSources"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classBackground_1_1Source.html">Source</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBackground_1_1MeasureExcludingSources.html#a285770ad49963da07a7fd825809fb0b0">operator()</a> () const </td></tr>
 <tr class="memdesc:a285770ad49963da07a7fd825809fb0b0 inherit pub_methods_classBackground_1_1MeasureExcludingSources"><td class="mdescLeft">&#160;</td><td class="mdescRight">Estimate the background around the current source.  <a href="#a285770ad49963da07a7fd825809fb0b0">More...</a><br /></td></tr>
@@ -391,7 +393,7 @@ template&lt;class POINT_TYPE &gt; </div>
 
 <p>measure the background for a source at (x,y). </p>
 <p>Estimate the background around the given position as the median of the points whose centers lie within the annulus and not within the inner edge of another source's annulus.</p>
-<p>The uncertainty of the determined value is estimated as half the size of the interval centered on the determined background value that contains the fraction of the points specified at construction as the error_confidence argument. </p>
+<p>The uncertainty of the determined value is estimated as <img class="formulaInl" alt="$\sqrt{\frac{\pi}{2(N-1)}}$" src="form_323.png"/> times half the size of the interval centered on the determined background value that contains the fraction of the points specified at construction as the error_confidence argument. </p>
 
 <p>Implements <a class="el" href="classBackground_1_1MeasureExcludingSources.html#a4c45472a4f4ef10b185e4354a8e58a2e">Background::MeasureExcludingSources</a>.</p>
 
@@ -470,7 +472,7 @@ template&lt;class POINT_TYPE &gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceBackground.html">Background</a></li><li class="navelem"><a class="el" href="classBackground_1_1MeasureAnnulus.html">MeasureAnnulus</a></li>
-    <li class="footer">Generated on Thu May 3 2018 17:25:12 for SuperPhot by
+    <li class="footer">Generated on Tue May 8 2018 18:28:30 for SuperPhot by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

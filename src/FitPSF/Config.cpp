@@ -297,19 +297,20 @@ namespace FitPSF {
         return "Usage: " + prog_name + " [OPTION ...]";
     }
 
-    void Config::check_consistency()
+    void Config::check_and_finalize()
     {
+        if(count("help") == 0) return;
         if(
-                operator[]("psf.model").as<PSF::ModelType>() == PSF::SDK
-                &&
-                (
-                    operator[]("psf.sdk.minS").as<double>() < 0
-                    ||
-                    operator[]("psf.sdk.maxS").as<double>()
-                    <
-                    operator[]("psf.sdk.minS").as<double>()
-                )
-        ) 
+            operator[]("psf.model").as<PSF::ModelType>() == PSF::SDK
+            &&
+            (
+                operator[]("psf.sdk.minS").as<double>() < 0
+                ||
+                operator[]("psf.sdk.maxS").as<double>()
+                <
+                operator[]("psf.sdk.minS").as<double>()
+            )
+        )
             throw Error::CommandLine("Invalid S range for SDK fitting "
                                      "(need max(S) > min(S) > 0).");
         if(operator[]("psf.sdk.fit-tolerance").as<double>() <= 0)
@@ -345,6 +346,13 @@ namespace FitPSF {
         )
             throw Error::CommandLine("Requested only amplitude fitting with "
                                      "no initial guess for the PSF map.");
-    }
 
+        PSF::EllipticalGaussian::set_default_precision(
+            operator[]("psf.sdk.rel-int-precision").as<double>(),
+            operator[]("psf.sdk.abs-int-precision").as<double>()
+        );
+        PSF::EllipticalGaussian::set_default_max_exp_coef(
+            operator[]("psf.sdk.max-exp-coef").as<double>()
+        );
+    }
 }

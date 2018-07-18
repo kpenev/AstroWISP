@@ -817,7 +817,9 @@ namespace IO {
                                          structure_node,
                                          overwrite);
         }
-        assert(false);
+        throw Error::HDF5(
+            "Unexpected data type found when building HDF5 file!"
+        );
     }
 
     void SubPixHDF5File::add_dataset(
@@ -1097,7 +1099,7 @@ namespace IO {
             ==
             "zero"
         ) {
-            assert(!H5::H5File::nameExists(path));
+            assert(!H5::H5File::exists(path));
             data.put("psffit.psfmap",
                      std::vector<double>(),
                      TranslateToAny< std::vector<double> >());

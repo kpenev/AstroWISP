@@ -7,3 +7,4 @@ User Documentation
     :caption: Contents:
 
     background
+    fit_star_shape

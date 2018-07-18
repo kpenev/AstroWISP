@@ -42,6 +42,17 @@ namespace Background {
 
         double xcent = x - 0.5;
         double ycent = y - 0.5;
+#ifdef VERBOSE_DEBUG
+        std::cerr
+            << "Excluding pixels from background of source "
+            << "(x = " << x << ", y = " << y << ") "
+            << "bounded within aperture = " << __aperture
+            << ", checking pixels with "
+            << xi_min << " <= x < " << xi_max
+            << ", "
+            << yi_min << " <= y < " << yi_max
+            << std::endl;
+#endif
         for (unsigned long yi = yi_min; yi < yi_max; ++yi) {
             double y_pix_center = yi - ycent;
             for (unsigned long xi = xi_min; xi < xi_max; ++xi) {

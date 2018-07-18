@@ -11,8 +11,8 @@ Welcome to SuperPhot's Python Interface documentation!
     :caption: Contents:
 
     user_documentation/index
-    Implementation <implementation/modules>
-    Unit Testing Code <unit_tests/modules>
+    Implementation <_implementation/modules>
+    Unit Testing Code <_unit_tests/modules>
 
 Indices and tables
 ==================

@@ -76,6 +76,10 @@ namespace FitPSF {
                 std::vector< std::list<double> > &column_data
             );
 
+            ///\brief Use the contents of __columns to set the (x, y)
+            ///coordinates of  __locations.
+            void set_source_coordinates();
+
         public:
             ///\brief Read into self a single section (one FITS frames's
             ///sources) from the given stream.
@@ -85,6 +89,31 @@ namespace FitPSF {
 
                 ///The names of the columns in each section.
                 const std::list<std::string> &column_names
+            );
+
+            ///\brief Construct from an array of sources.
+            IOSources(
+                ///The FITS filename these sources are contained in.
+                const char *fits_fname,
+
+                ///The IDs to assign to these sources.
+                char **source_ids,
+
+                ///The information about the sources organized in equal sized
+                ///columns. The meaning and the order of the columns is
+                ///specified by column_names. The first num_sources entries are
+                ///the values of first column, followed by the second column
+                ///etc.
+                const double *column_data,
+
+                ///The names of the columns.
+                char **column_names,
+
+                ///How many sources are in column_data.
+                unsigned long num_sources,
+
+                ///How many columns.
+                unsigned long num_columns
             );
 
             ///The locations of the sources for PSF fitting.

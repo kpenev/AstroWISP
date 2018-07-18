@@ -4,7 +4,7 @@ from math import ceil
 
 import os.path
 import sys
-import pyfits
+from astropy.io import fits as pyfits
 
 sys.path.insert(
     0,
