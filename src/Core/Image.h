@@ -188,10 +188,23 @@ namespace Core {
                     );
                 } else
                     __errors = NULL;
+
+#ifdef VERBOSE_DEBUG
+                    std::cerr << "Copied to image at " << this
+                              << " from" << std::endl
+                              << "\tvalues = " << orig_values << std::endl
+                              << "\terrors = " << orig_errors << std::endl
+                              << "\tmask = " << (void*)orig_mask << std::endl
+                              << "to" << std::endl
+                              << "\t__values = " << __values << std::endl
+                              << "\t__errors = " << __errors << std::endl
+                              << "\t__mask = " << (void*)__mask << std::endl;
+#endif
+
             }
 
             ///\brief Wrap the given data in an image.
-            void wrap(
+            virtual void wrap(
                 ///The pixel values in the image. The x coordinate changes
                 ///faster than the y with successive entries. The data is
                 ///used directly rather than copying, so it must not be
@@ -224,10 +237,17 @@ namespace Core {
                 __x_resolution = x_resolution;
                 __y_resolution = y_resolution;
                 __wrapped = true;
+#ifdef VERBOSE_DEBUG
+                std::cerr << "Wrapped image " << this
+                          << " around:" << std::endl
+                          << "\t__values = " << __values << std::endl
+                          << "\t__errors = " << __errors << std::endl
+                          << "\t__mask = " << (void*)__mask << std::endl;
+#endif
             }
 
             ///Make this image an alias of the input image.
-            void wrap(Image<DATA_TYPE> &image)
+            virtual void wrap(Image<DATA_TYPE> &image)
             {
                 wrap(image.__values,
                      image.__mask,
@@ -327,9 +347,16 @@ namespace Core {
                 unsigned long y
             ) const;
 
-            ~Image()
+            virtual ~Image()
             {
                 if(!__wrapped) {
+#ifdef VERBOSE_DEBUG
+                    std::cerr << "Deleting image at " << this
+                              << " with" << std::endl
+                              << "\t__values = " << __values << std::endl
+                              << "\t__errors = " << __errors << std::endl
+                              << "\t__mask = " << (void*)__mask << std::endl;
+#endif
                     if(__values) delete[] __values;
                     if(__errors) delete[] __errors;
                     if(__mask) delete[] __mask;

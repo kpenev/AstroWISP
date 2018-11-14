@@ -35,6 +35,13 @@ namespace Core {
             __sensitivities(x_res*y_res), __x_res(x_res), __y_res(y_res),
             __name(name) {}
 
+        ///Create a sub-pixel map with the given resolution and sensitivities.
+        SubPixelMap(double *sensitivities, unsigned x_res, unsigned y_res) :
+            __sensitivities(sensitivities, x_res * y_res),
+            __x_res(x_res),
+            __y_res(y_res)
+        {}
+
         ///Sets the resolution of the sub-pixel map, losing previous content.
         void set_resolution(unsigned x_res, unsigned y_res)
         {__x_res=x_res; __y_res=y_res; __sensitivities.resize(x_res*y_res);}

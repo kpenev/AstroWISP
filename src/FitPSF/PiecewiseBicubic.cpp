@@ -1214,6 +1214,7 @@ namespace FitPSF {
                                         basis_parameter_sets);
             time_this("Preparing smoothing");
         }
+        time_this("No smoothing");
 
         bool discard_by_chi2 = false;
         bool converged = true;
@@ -1221,6 +1222,7 @@ namespace FitPSF {
                         max_chi2,
                         discard_by_chi2,
                         dropped_sources);
+        time_this("Initial discarding of sources");
         while(
             num_discarded_sources > 0
             || discarded_pixels > 0

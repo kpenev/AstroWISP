@@ -680,6 +680,14 @@ namespace FitPSF {
                 ++pix_i
             ) {
                 if((*pix_i)->flag() == Core::BAD) {
+#ifdef VERBOSE_DEBUG
+                    std::cerr << "Pixel("
+                              << (*pix_i)->x()
+                              << ", "
+                              << (*pix_i)->y()
+                              << ") is bad, excluding from shape and flux fit."
+                              << std::endl;
+#endif
                     (*pix_i)->exclude_from_shape_fit();
                     (*pix_i)->exclude_from_flux_fit();
                 } else if(
@@ -690,8 +698,17 @@ namespace FitPSF {
                     std::isnan(this->background_electrons())
                     ||
                     std::isnan(this->background_electrons_variance())
-                )
+                ) {
+#ifdef VERBOSE_DEBUG
+                    std::cerr << "Pixel("
+                              << (*pix_i)->x()
+                              << ", "
+                              << (*pix_i)->y()
+                              << ") is not perfect, excluding from shape fit."
+                              << std::endl;
+#endif
                     (*pix_i)->exclude_from_shape_fit();
+                }
             }
             __pixels.sort(
                 PixelOrder(Source<PSF_TYPE>::background_electrons(),

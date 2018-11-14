@@ -70,7 +70,7 @@ namespace IO {
     {
         if(dataset_key == "projsrc.srcid.field")
             return H5::PredType::STD_U16LE;
-        else if(dataset_key == "projsrc.srcid.source") 
+        else if(dataset_key == "projsrc.srcid.source")
             return H5::PredType::STD_U32LE;
         else if(dataset_key == "projsrc.srcid.name")
             return VARLEN_STR_TYPE;
@@ -136,7 +136,7 @@ namespace IO {
                         node->first
                 );
                 std::string node_path=(path=="" ? "" : path+"/")
-                                      + 
+                                      +
                                       element_name;
 
                 std::string type=node->second.get<std::string>(
@@ -170,7 +170,7 @@ namespace IO {
                                     ""
                                 )
                         );
-                    } 
+                    }
                 } else if(type=="attribute") {
                     __attribute_paths.put(
                         node->second.get<std::string>("<xmlattr>.value")
@@ -202,7 +202,7 @@ namespace IO {
                         node_path
                     );
                     continue;
-                } 
+                }
                 fill_paths(node->second,
                            node_path,
                            get_node_type(node->second));
@@ -312,7 +312,7 @@ namespace IO {
     {
         if(value.empty()) return;
         const hsize_t single_value_dimensions[] = {1};
-        const H5::DataSpace single_value_dataspace(1, 
+        const H5::DataSpace single_value_dataspace(1,
                                                    single_value_dimensions);
         H5::DataType h5type;
         if(aperture_index<0 && value.type()==typeid(bool)) {
@@ -347,7 +347,7 @@ namespace IO {
             );
             double cast_value=boost::any_cast<double>(value);
             attribute.write(H5::PredType::NATIVE_DOUBLE, &cast_value);
-        } else if(aperture_index<0 
+        } else if(aperture_index<0
                   &&
                   value.type()==typeid(std::pair<double, double>)) {
             std::pair<double, double> cast_value =
@@ -653,7 +653,7 @@ namespace IO {
                 "psffit.variables", -1, data
         );
         if(dataset_node == data.not_found()) return H5::DataSet();
-        const PSF::MapVarListType &variables = 
+        const PSF::MapVarListType &variables =
             TranslateToAny<PSF::MapVarListType>().get_value(
                 dataset_node->second.data()
             );
@@ -667,7 +667,7 @@ namespace IO {
                 ++var_i
         ) {
             assert(var_i->second.size() == num_sources);
-            output_data[std::slice(slice_start, num_sources, 1)] = 
+            output_data[std::slice(slice_start, num_sources, 1)] =
                 var_i->second;
             slice_start += num_sources;
         }
@@ -703,9 +703,9 @@ namespace IO {
     {
         typedef IOTreeBase::path_type path;
         path dataset_path(dataset_id);
-        if(aperture_index>=0) 
+        if(aperture_index>=0)
             dataset_path /= path(
-                    static_cast<std::ostringstream*>( 
+                    static_cast<std::ostringstream*>(
                         &(std::ostringstream() << aperture_index)
                     )->str()
             );
@@ -719,7 +719,7 @@ namespace IO {
             not_found = dataset_node->second.not_found();
 #ifdef DEBUG
             std::string key = dataset_path.reduce();
-            std::cerr << "Getting sub-node '" << key << "' of '" 
+            std::cerr << "Getting sub-node '" << key << "' of '"
                       << dataset_node->first << "'" << std::endl;
             dataset_node = dataset_node->second.find(key);
 #else
@@ -747,7 +747,7 @@ namespace IO {
 #ifdef DEBUG
             std::cerr << "Value for dataset: " << dataset_id
                       << " not found in output data tree. Node "
-                      << dset_path_str << " found: " 
+                      << dset_path_str << " found: "
                       << (dataset_node != data.not_found())
                       << std::endl;
 #endif
@@ -817,7 +817,9 @@ namespace IO {
                                          structure_node,
                                          overwrite);
         }
-        assert(false);
+        throw Error::HDF5(
+            "Unexpected data type found when building HDF5 file!"
+        );
     }
 
     void SubPixHDF5File::add_dataset(
@@ -858,7 +860,7 @@ namespace IO {
                     overwrite
             );
         } else {
-            IOTreeBase::const_assoc_iterator dataset_node = 
+            IOTreeBase::const_assoc_iterator dataset_node =
                 find_dataset_data(dataset_id, aperture_index, data);
             if(dataset_node != data.not_found()) {
                 H5::DataType output_data_type = dataset_type(dataset_id);
@@ -947,7 +949,7 @@ namespace IO {
                 ).empty()
                 &&
                 !data.get<boost::any>(
-                    "projsrc.srcid.source", 
+                    "projsrc.srcid.source",
                     boost::any()
                 ).empty()
             ) {
@@ -995,7 +997,7 @@ namespace IO {
             boost::any apertures=data.get<boost::any>("apphot.aperture",
                                                       boost::any());
             max_aperture=(apertures.empty()
-                          ? -1 
+                          ? -1
                           : OutputArray<double>(apertures).size()-1);
         }
         for(ptree::const_iterator node=structure.begin();

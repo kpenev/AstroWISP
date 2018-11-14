@@ -2,7 +2,7 @@
 
 namespace IO {
     template<>
-        void OutputArray<double>::parse(const boost::any &value)
+        LIB_PUBLIC void OutputArray<double>::parse(const boost::any &value)
         {
             if(value.type() == typeid(double)) {
                 __size = 1;

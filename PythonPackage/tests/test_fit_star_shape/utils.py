@@ -1,10 +1,10 @@
-"""A collection of functions used by the fitpsf unit tests."""
+"""A collection of functions used by the fit_star_shape unit tests."""
 
 from math import ceil
-
 import os.path
 import sys
-from astropy.io import fits as pyfits
+from ctypes import c_double
+import numpy
 
 sys.path.insert(
     0,
@@ -17,15 +17,14 @@ sys.path.insert(
     )
 )
 
-#Needs to be after os.path and sys to allow adding the seach path.
+#Needs to be after sys.path is updated to allow importing superphot package.
 #pylint: disable=wrong-import-position
 from superphot.fake_image.image import Image
 #pylint: enable=wrong-import-position
 
 def make_image_and_source_list(sources,
                                extra_variables,
-                               subpix_map,
-                               filenames):
+                               subpix_map):
     """
     Create an image and a list of the sources in it ready for psf fitting.
 
@@ -44,16 +43,6 @@ def make_image_and_source_list(sources,
             available as variables for PSF fitting by listing the names in the
             extra_variables argument.
 
-        filenames: The names of the files to create:
-
-            * image:    The filename to save the image under. If a file
-              with this name exists it is overwritten.
-
-            * source_list:    The filename to add the source list to. If a
-              file with this name exists it appended to.
-
-            * psf_fit:    The filename to use for PSF fitting results.
-
         extra_variables:    A list of additional keywords from sources to add to
             the source list and the order in which those should be added. The
             corresponding entries in sources must be floating point values.
@@ -62,7 +51,9 @@ def make_image_and_source_list(sources,
             details see same name argument of Image.add_source.
 
     Returns:
-        None
+        numpy record array:
+            The sources added to the image. The fields give the variables
+            defined for the sources.
     """
 
     min_x = min(s['x'] for s in sources)
@@ -74,12 +65,16 @@ def make_image_and_source_list(sources,
                   int(ceil(max_y + min_y)),
                   background=1.0)
 
-    src_list = open(filenames['source_list'], 'a')
-    src_list.write(
-        '[' + filenames['image'] + ' ' + filenames['psf_fit'] + ']\n'
+    src_list_vars = ['x', 'y'] + extra_variables
+    src_list = numpy.empty(
+        len(sources),
+        dtype=(
+            [('ID', '|S6')]
+            +
+            [(var, c_double) for var in src_list_vars]
+        )
     )
 
-    src_list_vars = ['x', 'y'] + extra_variables
 
     for src_id, src in enumerate(sources):
         image.add_source(x=src['x'],
@@ -88,12 +83,8 @@ def make_image_and_source_list(sources,
                          amplitude=1.0,
                          subpix_map=subpix_map)
 
-        src_list.write('%10d' % src_id)
+        src_list[src_id]['ID'] = b'%06d' % src_id
         for var in src_list_vars:
-            src_list.write(' %25.16e' % src[var])
-        src_list.write('\n')
+            src_list[src_id][var] = src[var]
 
-    src_list.close()
-
-    hdu_list = pyfits.HDUList([pyfits.PrimaryHDU(image)])
-    hdu_list.writeto(filenames['image'], clobber=True)
+    return image, src_list
