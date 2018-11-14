@@ -86,9 +86,11 @@ namespace PSF {
             __x_grid[0] = __y_grid[0] = -min_psf_span;
             __x_grid[1] = __y_grid[1] = min_psf_span;
         } else {
-            Grid grid(data.get<std::string>("psffit.grid",
-                                            "",
-                                            IO::translate_string));
+            Grid grid = IO::parse_grid_string(
+                data.get<std::string>("psffit.grid",
+                                      "",
+                                      IO::translate_string)
+            );
             __x_grid=grid.x_grid;
             __y_grid=grid.y_grid;
         }

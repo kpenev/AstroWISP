@@ -9,6 +9,7 @@
 #define __PSF_COMMAND_LINE_UTIL_H
 
 #include "../Core/SharedLibraryExportMacros.h"
+#include "../IO/parse_grid.h"
 #include "EllipticalGaussian.h"
 #include "Grid.h"
 #include "Typedefs.h"

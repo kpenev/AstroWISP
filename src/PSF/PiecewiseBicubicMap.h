@@ -8,6 +8,7 @@
 #define __PIECEWISE_BICUBIC_PSF_MAP_H
 
 #include "../Core/SharedLibraryExportMacros.h"
+#include "../IO/parse_grid.h"
 #include "PiecewiseBicubic.h"
 #include "Map.h"
 #include "Eigen/Dense"

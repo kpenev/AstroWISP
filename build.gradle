@@ -103,6 +103,10 @@ model {
                     srcDir "src/SubPixPhot"
                     include "**/*.cpp"
                 }
+                source {
+                    srcDir "src/Core"
+                    include "**/*.cpp"
+                }
                 exportedHeaders {
                     srcDir "src/Background/"
                 }

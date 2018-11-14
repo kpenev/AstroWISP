@@ -14,6 +14,7 @@
 #include "../PSF/PiecewiseBicubic.h"
 #include "../IO/SubPixHDF5File.h"
 #include "../IO/FitsImage.h"
+#include "../IO/parse_grid.h"
 #include "../Background/Measure.h"
 #include "../Background/Zero.h"
 #include "../Background/MeasureAnnulus.h"
@@ -421,7 +422,7 @@ namespace FitPSF {
         );
 
         output_data_tree.put("psffit.grid",
-                             std::string(grid),
+                             IO::represent_grid(grid),
                              IO::translate_string);
 
         Eigen::VectorXd best_fit_coef;
