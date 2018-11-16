@@ -2,15 +2,18 @@
 #
 
 # You can set these variables from the command line.
-SPHINXOPTS    =
-SPHINXBUILD   = sphinx-build
-SPHINXAPIDOC  = sphinx-apidoc
-SPHINXPROJ    = SuperPhot
-SOURCEDIR     = source
-MODULEDIR     = ../../PythonPackage/superphot
-TESTDIR     = ../../PythonPackage/tests
-BUILDDIR      = build
-APIDOCOPTS    = --force -M --separate
+SPHINXOPTS  	=
+SPHINXBUILD 	= sphinx-build
+SPHINXAPIDOC	= sphinx-apidoc
+SPHINXPROJ    	= SuperPhot
+SOURCEDIR     	= source
+MODULEDIR     	= ../../PythonPackage/superphot
+TESTDIR     	= ../../PythonPackage/tests
+BUILDDIR    	= build
+APIDOCOPTS  	= --force -M --separate
+DOXYGENDIR		= ../doxygen
+DOXYFILE		= Doxyfile
+DOXYGEN			= doxygen
 
 # Put it first so that "make" without argument is like "make help".
 help:

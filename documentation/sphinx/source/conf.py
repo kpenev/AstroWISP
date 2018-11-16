@@ -18,8 +18,16 @@ import inspect
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
 import os
-import sys
-sys.path.insert(0, os.path.abspath('../../../PythonPackage'))
+
+sys.path.insert(
+    0,
+    os.path.abspath(
+        os.path.join(
+            os.path.dirname(__file__),
+            '../../../PythonPackage'
+        )
+    )
+)
 
 
 # -- Project information -----------------------------------------------------
@@ -55,7 +63,8 @@ extensions = [
     'sphinx.ext.viewcode',
     'sphinx.ext.githubpages',
     'sphinx.ext.napoleon',
-    'sphinx.ext.inheritance_diagram'
+    'sphinx.ext.inheritance_diagram',
+    'breathe'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -232,3 +241,18 @@ def setup(app):
 
     app.add_stylesheet('unlimited_width.css')
     app.connect('autodoc-process-docstring', add_inheritance_diagram)
+
+
+doxygen_xml = os.path.abspath(
+    os.path.join(
+        os.path.dirname(__file__),
+        '../../build/doxygen/xml'
+    )
+)
+
+breathe_projects = {
+    'C++ library': doxygen_xml
+}
+
+
+breathe_default_project = "C++ library"
