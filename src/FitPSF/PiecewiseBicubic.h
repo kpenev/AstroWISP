@@ -10,7 +10,7 @@
  *
  *   - The stack of \f$(\mathbf{\kappa}^i)^T\,\mathbf{\kappa}\f$ -
  *     poly_coef_matrix
- *     
+ *
  *   - \f$\mathbf{\tilde{\Lambda}}\f$ - symmetrized_pix_integral_matrix
  *
  *   - \f$\mathbf{\Lambda}\f$ - matrix_to_invert

@@ -54,7 +54,7 @@ namespace Phot {
 		num_recognized_columns
 	};
 
-    ///\brief Names to use for printing Phot::Columns to streams.
+    ///\brief Names to use for printing Columns to streams.
 	class LIB_LOCAL ColumnNamesVector : public std::vector<std::string> {
 	public:
 		ColumnNamesVector() :
