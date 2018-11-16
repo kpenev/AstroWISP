@@ -1,6 +1,3 @@
-#ifndef __PIECEWISE_BICUBIC_PSF_FITTING_H
-#define __PIECEWISE_BICUBIC_PSF_FITTING_H
-
 /**\file
  *
  * \brief The declarations of the functions related to fitting piecewise
@@ -8,19 +5,30 @@
  *
  * The following variable names are used for the quentities defined in the
  * [description of the algorithm](@ref PiecewiseBicubicFitPSF_main_page).
+ *
  *   - \f$\mathbf{\tilde{M}^i}\f$ - pix_integral_matrix
+ *
  *   - The stack of \f$(\mathbf{\kappa}^i)^T\,\mathbf{\kappa}\f$ -
-       poly_coef_matrix
+ *     poly_coef_matrix
+ *     
  *   - \f$\mathbf{\tilde{\Lambda}}\f$ - symmetrized_pix_integral_matrix
+ *
  *   - \f$\mathbf{\Lambda}\f$ - matrix_to_invert
+ *
  *   - \f$\mathbf{r}\f$ - rhs
+ *
  *   - \f$\mathbf{\tilde{r}}\f$ - modified_rhs
+ *
  *   - \f$\mathbf{r'}\f$ - flux_scaled_modified_rhs
+ *
  * The last four quantities are re-computed after changing the source
  * amplitudes.
  *
  * \ingroup FitPSF
  */
+
+#ifndef __PIECEWISE_BICUBIC_PSF_FITTING_H
+#define __PIECEWISE_BICUBIC_PSF_FITTING_H
 
 #include "../Core/SharedLibraryExportMacros.h"
 #include "Common.h"
@@ -121,7 +129,7 @@ namespace FitPSF {
         Eigen::MatrixXd &symmetrized_pix_integral_matrix,
 
         ///Derived from pixel_excesses by applying
-        /// f$(\mathbf{\tilde{M}^i})^T\f$ on each
+        /// \f$\left(\mathbf{\tilde{M}^i}\right)^T\f$ on each
         ///source's pixels. Should have the correct dimensions on input.
         Eigen::VectorXd &modified_pixel_excesses,
 

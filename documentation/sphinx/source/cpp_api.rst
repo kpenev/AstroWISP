@@ -2,6 +2,11 @@
 C++ API
 *******
 
+Debug
+=====
+
+.. doxygenfile:: /FitPSF/PiecewiseBicubic.h
+
 FitPSF
 ======
 

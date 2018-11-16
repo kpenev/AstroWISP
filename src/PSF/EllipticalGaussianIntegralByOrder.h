@@ -87,7 +87,7 @@ namespace PSF {
         
         std::valarray<double>
             ///\brief \f$ C_{20}/2 \f$, \f$ C_{11}/2 \f$, \f$ C_{02}/2 \f$,
-            /// \f$ C_{10}/2 \HW10: Kalof$, \f$ C_{01}/2 \f$
+            /// \f$ C_{10}/2 \f$, \f$ C_{01}/2 \f$
             __coef,
 
             ///The argument of the exponent of each term of eq 45
