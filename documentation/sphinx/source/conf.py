@@ -246,7 +246,7 @@ def setup(app):
 doxygen_xml = os.path.abspath(
     os.path.join(
         os.path.dirname(__file__),
-        '../../build/doxygen/xml'
+        '../../doxygen/build/xml'
     )
 )
 
@@ -256,3 +256,8 @@ breathe_projects = {
 
 
 breathe_default_project = "C++ library"
+
+breathe_default_members = ('members',
+                           'protected-members',
+                           'private-members',
+                           'undoc-members')

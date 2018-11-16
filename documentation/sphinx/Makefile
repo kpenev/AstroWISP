@@ -24,15 +24,8 @@ help:
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
 %: Makefile
-	$(shell \
-		cd ../../; \
-		for f in $(find src/ -type f -print); do \
-			newf="doc_${f}"; \
-			mkdir -p $(dirname $newf); \
-			sed -e 's%LIB_LOCAL%%g' -e 's%LIB_PUBLIC%%g' $f > $newf; \
-		done \
-	)
-	cd $(DOXYGENDIR) && rm -rf build/xml && doxygen Doxyfile
+	./make_doc_src.sh
+	cd $(DOXYGENDIR) && rm -rf build/xml && doxygen Doxyfile && cp images/* build/xml/
 	rm -rf $(BUILDDIR)
 	$(SPHINXAPIDOC) "$(MODULEDIR)" $(APIDOCOPTS) -o "$(SOURCEDIR)/_implementation" 
 	$(SPHINXAPIDOC) "$(TESTDIR)" $(APIDOCOPTS) -o "$(SOURCEDIR)/_unit_tests" 

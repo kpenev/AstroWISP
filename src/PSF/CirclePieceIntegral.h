@@ -1,6 +1,6 @@
 /**\file
  *
- * \brief Declares a class that calculates x^my^n integrals over circle 
+ * \brief Declares a class that calculates x^my^n integrals over circle
  * pieces.
  *
  * \ingroup PSF
@@ -19,12 +19,12 @@
 
 namespace PSF {
 
-    /**\brief Implements integral of \f$x^my^n\f$ over a horizontal circlre 
+    /**\brief Implements integral of \f$x^my^n\f$ over a horizontal circlre
      * piece in the first quadrant.
      *
      * The wedge is defined by the following diagram:
      *
-     * ![](images/hcircle_piece_diagram.png)
+     * ![](hcircle_piece_diagram.png)
      *
      * The is solution described [here](@ref PSF_integrals_page).
      *
@@ -32,7 +32,7 @@ namespace PSF {
      */
     class LIB_LOCAL CirclePieceIntegral {
     private:
-        double 
+        double
             ///Circle center y coordinate (\f$y_c^2\f$) (see diagram).
             __yc,
 
@@ -58,7 +58,7 @@ namespace PSF {
             /// \f$\sqrt{r^2-(y_c-y_{max})^2}\f$
             __root_ymax;
 
-        std::vector<double> 
+        std::vector<double>
             ///Various powers of \f$y_{min}\f$
             __ymin_pow,
 
@@ -77,13 +77,13 @@ namespace PSF {
             /// \f$R_{n+1}(y_{max})\f$
             __R_ymax;
 
-        std::vector< std::vector<double> > 
+        std::vector< std::vector<double> >
             ///All previously computed values of the integral.
             __values,
 
             ///\brief All previously computed \f$Q_{m,n}\f$ values.
             ///
-            ///The first (outer) index is m and the second (inner) is n. This 
+            ///The first (outer) index is m and the second (inner) is n. This
             ///way __q[0] is \f$P^{even}\f$ and __q[1] is \f$P^{odd}\f$.
             __q;
 
@@ -94,20 +94,20 @@ namespace PSF {
 
                 ///The array of powers of the y argument.
                 std::vector<double> &y_pow,
-                
-                ///The vector to fill with the computed values, it must 
+
+                ///The vector to fill with the computed values, it must
                 ///contain at least the \f$R_0(y)\f$ entry.
                 std::vector<double> &Rn);
 
-        ///\brief Computes all \f$R_n(y_{max})\f$ values for n<=max_n and 
+        ///\brief Computes all \f$R_n(y_{max})\f$ values for n<=max_n and
         ///stores them in __R_max.
         void fill_R_max(Core::vector_size_type max_n);
 
-        ///\brief Computes all \f$P^{even}_n\f$  for n<max_n and stores them 
+        ///\brief Computes all \f$P^{even}_n\f$  for n<max_n and stores them
         ///in __q[0]
         void fill_p_even(Core::vector_size_type max_n);
 
-        ///\brief Computes all \f$P^{odd}_n\f$  for n<max_n and stores tham 
+        ///\brief Computes all \f$P^{odd}_n\f$  for n<max_n and stores tham
         ///in __q[1]
         void fill_p_odd(Core::vector_size_type max_n);
 
@@ -122,7 +122,7 @@ namespace PSF {
         void calculate_q(Core::vector_size_type m, Core::vector_size_type n);
 
 #ifdef DEBUG
-        ///\brief A set of asserts verify that the circle piece parameters 
+        ///\brief A set of asserts verify that the circle piece parameters
         ///define a proper circle piece.
         void assert_parameter_consistency();
 #endif
@@ -148,9 +148,9 @@ namespace PSF {
             ///The radius of the circle
             double r,
 
-            ///The integral will be initiall prepared to compute values 
-            ///for up to this combined x and y power. Calculating values 
-            ///for larger powers still works, but may result in moving 
+            ///The integral will be initiall prepared to compute values
+            ///for up to this combined x and y power. Calculating values
+            ///for larger powers still works, but may result in moving
             ///data around.
             Core::vector_size_type initial_storage = 3
         );

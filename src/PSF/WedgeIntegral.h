@@ -25,13 +25,13 @@
 
 namespace PSF {
 
-    /**\brief A class that implements the integral of x^my^n over a circle 
+    /**\brief A class that implements the integral of x^my^n over a circle
      * wedge.
      *
      * The wedge is defined by r, \f$x_0\f$ and \f$y_0\f$ as in the following
      * diagram:
      *
-     * ![](images/circle_wedge.png)
+     * ![](circle_wedge.png)
      *
      * The is solution described [here](@ref PSF_integrals_page).
      *
@@ -43,14 +43,14 @@ namespace PSF {
     private:
         static const Core::vector_size_type __initial_storage = 30;
 
-        double 
-            ///\brief The x distance from the circle center to the center of 
+        double
+            ///\brief The x distance from the circle center to the center of
             ///the chord.
-            __x0,    
+            __x0,
 
-            ///\brief The y distance from the circle center to the center 
+            ///\brief The y distance from the circle center to the center
             ///of the chord.
-            __y0,    
+            __y0,
 
             __y02,    	///< The square of __y0.
             __twice_y0,	///< 2*__y0
@@ -72,18 +72,18 @@ namespace PSF {
             ///relation for \f$P^odd\f$ which does not depend on previous
             /// \f$P^odd\f$ for odd n.
             __p_odd_free_term_mult_odd;
-        
+
         std::vector< std::vector<double> >
             ///All previously computed values of the integral.
             __values,
 
             ///All previously computed \f$Q_{m,n}\f$ values.
             ///
-            ///The first (outer) index is m and the second (inner) is n. This 
+            ///The first (outer) index is m and the second (inner) is n. This
             ///way __q[0] is \f$P^{even}\f$ and __q[1] is \f$P^{odd}\f$.
             __q;
 
-        std::vector<double> 
+        std::vector<double>
             ///Various powers of \f$\Delta x\f$.
             __deltax_pow,
 
@@ -116,8 +116,8 @@ namespace PSF {
         void output_q(std::ostream &os);
 #endif
 
-        ///\brief Increases the size of all vectors holding pre-calculated 
-        ///values by a power of 2 such that they can hold at least the given 
+        ///\brief Increases the size of all vectors holding pre-calculated
+        ///values by a power of 2 such that they can hold at least the given
         ///m and n values.
         void expand_storage(Core::vector_size_type min_m_size,
                             Core::vector_size_type min_n_size);

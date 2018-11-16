@@ -16,7 +16,7 @@
 
 namespace PSF {
 
-    /**\brief A PSF model consisting of a grid of rectangles each with a 
+    /**\brief A PSF model consisting of a grid of rectangles each with a
      * separate intensity function.
      */
     class LIB_PUBLIC Piecewise : public PSF {
@@ -84,7 +84,7 @@ namespace PSF {
         ) const
         {return cell_index(grid, x, hint_lower, grid.size());}
 
-        ///\brief If an index is outside a range it is replaced by the 
+        ///\brief If an index is outside a range it is replaced by the
         ///closest boundary.
         void impose_boundaries(Core::vector_size_type &index,
                                Core::vector_size_type boundary1,
@@ -113,7 +113,7 @@ namespace PSF {
         ///Throws an exception if x or y are not inside the grid range.
         void check_inside_grid(double x, double y) const;
 
-        ///\brief Calculates the integral over a rectangle that fits in a 
+        ///\brief Calculates the integral over a rectangle that fits in a
         ///single column of cells.
         ///
         /// \image html PiecewisePSF_single_column_rectangle_iiidddd.png "The area being integrated along with the meaning of all function arguments."
@@ -149,7 +149,7 @@ namespace PSF {
             parameter_sets=std::vector< std::valarray<double> >()
         ) const;
 
-        ///\brief Calculates the integral over a rectangle that fits in a 
+        ///\brief Calculates the integral over a rectangle that fits in a
         ///single row of cells.
         ///
         /// \image html PiecewisePSF_single_row_rectangle_iiidddd.png "The area being integrated along with the meaning of all function arguments."
@@ -230,8 +230,8 @@ namespace PSF {
         ///of cells.
         ///
         ///The area being integrated matches one of the following diagrams.
-        /// \image html PiecewisePSF_single_column_wedge_iiidddd_ur.png 
-        /// \image html PiecewisePSF_single_column_wedge_iiidddd_ul.png 
+        /// \image html PiecewisePSF_single_column_wedge_iiidddd_ur.png
+        /// \image html PiecewisePSF_single_column_wedge_iiidddd_ul.png
         /// \image html PiecewisePSF_single_column_wedge_iiidddd_dr.png
         /// \image html PiecewisePSF_single_column_wedge_iiidddd_dl.png
         double integrate_single_column_wedge(
@@ -252,7 +252,7 @@ namespace PSF {
             ///The y coordinate of the wedge corner in cell coordinates.
             double cell_corner_y,
 
-            ///The y coordinate of the y tip of the wedge in cell 
+            ///The y coordinate of the y tip of the wedge in cell
             ///coordinates.
             double cell_tip_y,
 
@@ -280,7 +280,7 @@ namespace PSF {
             ///The y coordinate of the wedge corner in cell coordinates.
             double cell_corner_y,
 
-            ///The x coordinate of the y tip of the wedge in cell 
+            ///The x coordinate of the y tip of the wedge in cell
             ///coordinates.
             double cell_tip_x,
 
@@ -291,8 +291,8 @@ namespace PSF {
         ///\brief Integrates over the area interior to a circle that overlaps
         ///with a row of cells.
         ///
-        ///The configuration of the circle and cells must be such that the 
-        ///circle intersect the outside vertical wall of one end cells and 
+        ///The configuration of the circle and cells must be such that the
+        ///circle intersect the outside vertical wall of one end cells and
         ///one of the horizontal walls of the other end cell.
         ///
         ///In addition the arc may not go through \f$n\pi/2\f$.
@@ -350,7 +350,7 @@ namespace PSF {
             bool up
         ) const;
 
-        ///\brief Integrates a row betweent the corner and the tip of a multi 
+        ///\brief Integrates a row betweent the corner and the tip of a multi
         ///row and column wedge.
         double integrate_middle_row(
             ///The row being integrated.
@@ -408,7 +408,7 @@ namespace PSF {
             bool right
         ) const;
 
-        ///\brief Calculates the integral over a wedge that spans multiple 
+        ///\brief Calculates the integral over a wedge that spans multiple
         ///rows and colunms of cells.
         double integrate_multi_row_column_wedge(
             ///The index in __grid_x of the cell containing the most
@@ -433,11 +433,11 @@ namespace PSF {
             ///The y coordinate of the wedge corner in cell coordinates.
             double cell_corner_y,
 
-            ///The x coordinate of the y tip of the wedge in cell 
+            ///The x coordinate of the y tip of the wedge in cell
             ///coordinates.
             double cell_tip_x,
 
-            ///The y coordinate of the y tip of the wedge in cell 
+            ///The y coordinate of the y tip of the wedge in cell
             ///coordinates.
             double cell_tip_y,
 
@@ -466,7 +466,7 @@ namespace PSF {
         ///Same for y0 and bottom.
         double integrate_wedge(double x,
                                double y,
-                               double radius, 
+                               double radius,
                                bool left = false,
                                bool bottom = false) const;
     public:
@@ -506,7 +506,7 @@ namespace PSF {
 
                 ///The vertical index of the grid cell to set.
                 const Core::vector_size_type &y_index,
-                
+
                 ///Wether to store the cell directly or to clone it. The clones
                 ///are destroyed by the destructor.
                 bool clone=false);
@@ -517,7 +517,7 @@ namespace PSF {
                 ///An iterator over (const) pointers to cells pointing to the
                 ///first cell (the one with x index = y index = 0.
                 ConstCellIterator first_cell,
-                
+
                 ///Whether to store clones of the cells instead of the cells
                 //directly. Clones are deallocated by the destructor.
                 bool clone=false)
@@ -539,7 +539,7 @@ namespace PSF {
         std::valarray<double> operator()(
                 ///The x coordinate where to evaluate the PSF.
                 double x,
-                
+
                 ///The y coordinate where to evaluate the PSF.
                 double y,
 
