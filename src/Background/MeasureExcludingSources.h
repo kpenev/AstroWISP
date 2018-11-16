@@ -22,13 +22,13 @@ namespace Background {
 
     ///\brief Avoid pixels close to sources when extracting a background.
     ///
-    ///A base class for background extractors which exclude some circular 
+    ///A base class for background extractors which exclude some circular
     ///aperture around every source when determining the backgrounds of other
     ///sources.
     ///
     ///Masks (assigns NaN to) the pixels in the given image whose centers lie
     ///within the specified aperture of at least one source. This masked array
-    ///can then be used by a non-abstract child class to derive a background 
+    ///can then be used by a non-abstract child class to derive a background
     ///value and uncertainty.
     class LIB_PUBLIC MeasureExcludingSources : public Measure {
     private:
@@ -44,7 +44,7 @@ namespace Background {
     protected:
         ///The sources in the image
         std::list< Core::Point<double> > _sources;
-        
+
         ///The original image with the areas near sources masked.
         Core::Image<double> _bg_values;
     public:
@@ -52,7 +52,7 @@ namespace Background {
         ///pixels with centers inside the given aperture around all sources.
         MeasureExcludingSources(
             ///The image for which background extraction is to be done.
-            const Core::Image<double> &image, 
+            const Core::Image<double> &image,
 
             ///The size of the aperture to exclude around each source.
             double exclude_aperture
@@ -69,7 +69,7 @@ namespace Background {
         template<class POINT_TYPE>
         MeasureExcludingSources(
             ///The image for which background extraction is to be done.
-            const Core::Image<double> &image, 
+            const Core::Image<double> &image,
 
             ///The size of the aperture to exclude around each source.
             double exclude_aperture,
@@ -78,19 +78,19 @@ namespace Background {
             const std::list< POINT_TYPE > &sources
         );
 
-        ///@{
         ///\brief Add a source.
         ///
-        ///Register another source and remove the values in its aperture from 
+        ///Register another source and remove the values in its aperture from
         ///_bg_values.
         virtual void add_source(double x, double y);
 
+        ///See add_source(double, double)
         virtual void add_source(const Core::Point<double> &location)
         {add_source(location.x(), location.y());}
 
+        ///See add_source(double, double)
         virtual void add_source(const Core::Point<double> *location)
         {add_source(location->x(), location->y());}
-        ///@}
 
         ///Estimate the background around the current source.
         inline virtual Source operator()() const
@@ -105,15 +105,15 @@ namespace Background {
 
         ///\brief Jump to the next source and return true iff it exists.
         ///
-        ///The next evaluation (operator()) will return the background 
+        ///The next evaluation (operator()) will return the background
         ///estimate for the next source. Retruns true iff the new source exists.
-        inline virtual bool next_source() 
+        inline virtual bool next_source()
         {return ++__source_iter!=_sources.end();}
 
         ///Move one source back. Returns true iff the new source exists.
-        inline virtual bool previous_source() 
+        inline virtual bool previous_source()
         {
-            if(__source_iter==_sources.begin()) return false; 
+            if(__source_iter==_sources.begin()) return false;
             else {--__source_iter; return true;}
         }
 
@@ -136,7 +136,7 @@ namespace Background {
             typename std::list< POINT_TYPE >::const_iterator
             src_iter=sources.begin(); src_iter!=sources.end();
             src_iter++
-        ) 
+        )
             add_source(*src_iter);
     }
 

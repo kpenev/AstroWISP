@@ -1,6 +1,6 @@
-/**\brief
+/**\file
  *
- * \file The declarations of Map methods and related functions.
+ * \brief The declarations of Map methods and related functions.
  */
 
 #include "Map.h"

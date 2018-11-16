@@ -1,15 +1,12 @@
-/**
- * \addtogroup FitPSF
- * @{
+/**\file
+ *
+ * \brief Declares Input/Output interface for the FitPSF tool.
+ *
+ * \ingroup FitPSF
  */
 
 #ifndef __FIT_PSF_IO_H
 #define __FIT_PSF_IO_H
-
-/**\file
- *
- * \brief Declares Input/Output interface for the FitPSF tool.
- */
 
 #include "../Core/SharedLibraryExportMacros.h"
 #include "../PSF/Typedefs.h"
@@ -137,7 +134,7 @@ namespace FitPSF {
             {return __source_assignment_fname;}
 
             ///Was this the last section in the input stream?
-            bool last() const {return __last;} 
+            bool last() const {return __last;}
     };
 }
 

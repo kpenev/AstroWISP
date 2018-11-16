@@ -39,8 +39,8 @@ namespace MultiNestFit {
 		///of subpixels. The mapping of the unit cube to subpixel
 		///sensitivities is such that the prior probability for all subpixel
 		///maps is the same. If the values of the unit cube are u_i then the
-		///sensitivities s_i are calculated as follows: 
-		///s_i=c_i{1-(1-u_i)^[1/(N-i)]}, 
+		///sensitivities s_i are calculated as follows:
+		///s_i=c_i{1-(1-u_i)^[1/(N-i)]},
 		///with c_i=1-SUM(s_j, j<i), except for s_N which is set to c_N. With
 		///the sensitivities ordered such that x changes faster with i.
 		void set_sensitivities(const double *MNCube);
@@ -49,20 +49,21 @@ namespace MultiNestFit {
 
 	///The actual function to be maximized by MultiNest: -Log(Chi2).
 	LIB_LOCAL void log_likelihood(
-				///\brief On input: the ndim parameters in unit-hypercube
-				///On output: all sensitivities, including the last one.
-				double *Cube,
+        ///On input: the ndim parameters in unit-hypercube
+        ///On output: all sensitivities, including the last one.
+        double *Cube,
 
-				///One less than the number of supixels, input only.
-				int &ndim, 
+        ///One less than the number of supixels, input only.
+        int &ndim,
 
-				///\brief Total number of subpixels (number of output
-				///parameters), input only.
-				int &npars, 
+        ///Total number of subpixels (number of output
+        ///parameters), input only.
+        int &,
 
-				///\brief The value of the function to maximize for the given
-				///hypercube values.
-				double &lnew);
+        ///The value of the function to maximize for the given
+        ///hypercube values.
+        double &lnew
+    );
 
 	///Perform the actual fitting.
     LIB_LOCAL void fit(
@@ -79,26 +80,26 @@ namespace MultiNestFit {
 	///arguments in whichever way he/she wants
 	LIB_LOCAL void dumper(
 		///Total number of samples in posterior distribution.
-		int &nSamples, 
+		int &nSamples,
 
 		///total number of live points
-		int &nlive, 
+		int &nlive,
 
 		///Total number of parameters (free + derived).
-		int &nPar, 
-		
+		int &nPar,
+
 		///2D array containing the last set of live points (physical
 		///parameters plus derived parameters) along with their loglikelihood
 		///values: physLive[1][nlive * (nPar + 1)]
-		double **physLive, 
+		double **physLive,
 
 		///posterior distribution containing nSamples points. Each sample has
 		///nPar parameters (physical + derived) along with the their loglike
 		///value & posterior probability: posterior[1][nSamples * (nPar + 2)]
-		double **posterior, 
+		double **posterior,
 
 		///The contents is:
-		/// - paramConstr[0][0] to paramConstr[0][nPar - 1]: mean values of 
+		/// - paramConstr[0][0] to paramConstr[0][nPar - 1]: mean values of
 		///   the parameters
 		/// - paramConstr[0][nPar] to paramConstr[0][2*nPar - 1]: standard
 		///   deviation of the parameters
@@ -106,13 +107,13 @@ namespace MultiNestFit {
 		///   (maxlike) parameters
 		/// - paramConstr[0][nPar*4] to paramConstr[0][4*nPar - 1]: MAP
 		///   (maximum-a-posteriori) parameters
-		double **paramConstr, 
+		double **paramConstr,
 
 		///maximum loglikelihood value
-		double &maxLogLike, 
-		
+		double &maxLogLike,
+
 		///log evidence value
-		double &logZ, 
+		double &logZ,
 
 		///error on log evidence value
 		double &logZerr);

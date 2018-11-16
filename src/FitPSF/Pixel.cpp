@@ -22,13 +22,13 @@ namespace FitPSF {
 
     double background_excess(double                     value,
                              double                     variance,
-                             const Background::Source   &background,
+                             const Background::Source   &background_adu,
                              double                     gain)
     {
         return background_excess(value,
                                  variance,
-                                 background.value() * gain,
-                                 std::pow(background.error() * gain, 2));
+                                 background_adu.value() * gain,
+                                 std::pow(background_adu.error() * gain, 2));
     }
 
 } //End FitPSF namespace.

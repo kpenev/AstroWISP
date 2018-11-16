@@ -108,7 +108,7 @@ extern "C" {
     ///false and do not touch the column_data argument.
     LIB_PUBLIC bool get_psf_map_variables(
         ///The tree to extract the varibales from.
-        H5IODataTree *tree,
+        H5IODataTree *output_data_tree,
 
         ///The image index for which to extract the variables.
         unsigned image_index,
@@ -118,5 +118,5 @@ extern "C" {
         ///already be allocated.
         double *column_data
     );
-    
+
 } //End Extern "C".

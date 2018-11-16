@@ -1,6 +1,6 @@
 /**\file
- * 
- * \brief Declare a class for managing the configuration with which tools are 
+ *
+ * \brief Declare a class for managing the configuration with which tools are
  * run.
  *
  * \ingroup IO
@@ -31,7 +31,7 @@ namespace IO {
         ///Describes the available command line options.
         virtual void describe_options() =0;
 
-        ///\brief The part of the help describing the usage and purpose (no 
+        ///\brief The part of the help describing the usage and purpose (no
         ///options).
         virtual std::string usage_help(
             ///The name of the executable being run.
@@ -41,7 +41,7 @@ namespace IO {
 
     protected:
         opt::options_description
-            ///\brief The descriptions of options not included in the help 
+            ///\brief The descriptions of options not included in the help
             ///message.
             ///
             ///In this case the positional options.
@@ -80,15 +80,15 @@ namespace IO {
         ///The executable whose command line is being processed (no path).
         const std::string &executable() const {return __executable;}
 
-        ///See ::_hidden
+        ///See opt::variables_map::_hidden
         const opt::options_description &hidden_options() const
         {return _hidden;}
 
-        ///See ::_cmdline_only
+        ///See opt::variables_map::_cmdline_only
         const opt::options_description &cmdline_only_options() const
         {return _cmdline_only;}
 
-        ///See ::_cmdline_config
+        ///See opt::variables_map::_cmdline_config
         const opt::options_description &cmdline_config_options() const
         {return _cmdline_config;}
     }; //End CommandLineConfig class.

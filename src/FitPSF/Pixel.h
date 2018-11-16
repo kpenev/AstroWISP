@@ -32,7 +32,7 @@ namespace FitPSF {
                 ///The y-coordinate of the pixel within the image.
                 __y;
 
-            double 
+            double
                 ///The measured value of the pixel in electrons.
                 __measured,
 
@@ -45,7 +45,7 @@ namespace FitPSF {
             ///Is this pixel included in the PSF/PRF shape fitting.
             bool __shape_fit;
 
-            ///\brief The index of this pixel within the flux fitting vector 
+            ///\brief The index of this pixel within the flux fitting vector
             ///(negative if excluded).
             int __flux_fit_index;
 
@@ -151,7 +151,7 @@ namespace FitPSF {
             ///Should this pixel be included in the fit for the PSF shape?
             bool shape_fit() const {return __shape_fit;}
 
-            ///\brief Should this pixel be included in fit for the amplitude of 
+            ///\brief Should this pixel be included in fit for the amplitude of
             ///its sources?
             bool flux_fit() const {return __flux_fit_index >= 0;}
 
@@ -218,7 +218,7 @@ namespace FitPSF {
 
         };//End Pixel class.
 
-    ///\brief Return the square of the signal to noise ratio with which a 
+    ///\brief Return the square of the signal to noise ratio with which a
     ///pixel sticks above a background.
     double background_excess(
         ///The value of the pixel in electrons.

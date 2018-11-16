@@ -24,7 +24,7 @@
 
 namespace PSF {
 
-    ///\brief Same as valarray<double> but on assignment resizes result as 
+    ///\brief Same as valarray<double> but on assignment resizes result as
     ///necessary.
     class LIB_PUBLIC TermValarray : public std::valarray<double> {
         private:
@@ -52,7 +52,7 @@ namespace PSF {
 #endif
             {
 #ifdef VERBOSE
-                std::cout << "Constructed (size = " << size 
+                std::cout << "Constructed (size = " << size
                           << ", value =" << value
                           << ") Array " << __id
                           << std::endl;
@@ -66,7 +66,7 @@ namespace PSF {
 #endif
             {
 #ifdef VERBOSE
-                std::cout << "Constructed (copy) Array " << __id 
+                std::cout << "Constructed (copy) Array " << __id
                           << "from " << orig
                           << std::endl;
 #endif
@@ -79,7 +79,7 @@ namespace PSF {
 #endif
             {
 #ifdef VERBOSE
-                std::cout << "Constructed (copy) Array " << __id 
+                std::cout << "Constructed (copy) Array " << __id
                           << "from double*: " << *this
                           << std::endl;
 #endif
@@ -88,7 +88,7 @@ namespace PSF {
             TermValarray &operator=(const std::valarray<double> &rhs)
             {
 #ifdef VERBOSE
-                std::cout << "Array " << __id 
+                std::cout << "Array " << __id
                           << " (size " << size()
                           << ") setting to " << rhs
                           << std::endl;
@@ -224,7 +224,7 @@ namespace PSF {
                 ResultType ceil(const ResultType &x)
                 {
                     ResultType result(x.size());
-                    for( size_t i = 0; i < x.size(); ++i ) 
+                    for( size_t i = 0; i < x.size(); ++i )
                         result[i]=std::ceil(x[i]);
                     return result;
                 }
@@ -233,7 +233,7 @@ namespace PSF {
                 ResultType floor(const ResultType &x)
                 {
                     ResultType result(x.size());
-                    for( size_t i = 0; i < x.size(); ++i ) 
+                    for( size_t i = 0; i < x.size(); ++i )
                         result[i]=std::floor(x[i]);
                     return result;
                 }
@@ -244,7 +244,7 @@ namespace PSF {
                 {
                     assert(numer.size() == denom.size());
                     ResultType result(numer.size());
-                    for( size_t i = 0; i < numer.size(); ++i ) 
+                    for( size_t i = 0; i < numer.size(); ++i )
                         result[i]=std::fmod(numer[i], denom[i]);
                     return result;
                 }
@@ -253,16 +253,16 @@ namespace PSF {
                 ResultType abs(const std::valarray<double> &x)
                 {return ResultType(std::abs(x));}
 
-                
-                qi::rule<Iterator, ResultType(), ascii::space_type> 
+
+                qi::rule<Iterator, ResultType(), ascii::space_type>
                     ///Rule defining the final expression as a sum of terms.
                     __expression,
 
-                    ///\brief Rule defining a term in the expression as a 
+                    ///\brief Rule defining a term in the expression as a
                     ///product of factors.
                     __factor,
 
-                    ///\brief Rule defining a value in a power as unary 
+                    ///\brief Rule defining a value in a power as unary
                     ///function or number.
                     __value,
 
@@ -321,20 +321,20 @@ namespace PSF {
                 qi::rule<Iterator, std::string(), ascii::space_type>
                     __simple_term;
 
-                qi::rule<Iterator, ResultType(), ascii::space_type> 
+                qi::rule<Iterator, ResultType(), ascii::space_type>
 
-                    ///\brief Rule defining a comma separated list of terms 
+                    ///\brief Rule defining a comma separated list of terms
                     ///in {...}.
                     __term_list,
 
                     ///Rule defining a set of terms.
                     __term_set,
 
-                    ///\brief Rule defining a cross product of an arbitrary 
+                    ///\brief Rule defining a cross product of an arbitrary
                     ///number of term sets.
                     __cross_product,
 
-                    ///\brief Rule defining the full generator as union of 
+                    ///\brief Rule defining the full generator as union of
                     ///cross products.
                     __expression;
 
@@ -385,7 +385,7 @@ namespace PSF {
                 ///Describe the currently supported language (EBNF format).
         };
 
-        const std::string ebnf_definition = 
+        const std::string ebnf_definition =
             "(* items in angle brackets (< or >) are assumed to be obvious "
             "and thus not defined. *)\n"
             "termchar = <ascii character> - \",\" - \"}\" ;\n"
@@ -418,8 +418,8 @@ namespace PSF {
             using boost::phoenix::bind;
 
             __exponentiation = (
-                    __value[_val = _1] 
-                    >> 
+                    __value[_val = _1]
+                    >>
                     -('^' >> __value[_val = bind(&Grammar::pow,
                                                  this,
                                                  _val,
@@ -430,44 +430,44 @@ namespace PSF {
                     double_[bind(&ResultType::resize,
                                  &_val,
                                  __result_size,
-                                 _1)] 
+                                 _1)]
 
                     | __variables[_val = _1]
 
                     | ( "cos("
                         >>
                         __expression[_val = bind(&Grammar::cos, this, _1)]
-                        >> 
+                        >>
                         ')' )
 
                     | ( "sin("
                         >>
                         __expression[_val = bind(&Grammar::sin, this, _1)]
-                        >> 
+                        >>
                         ')' )
 
                     | ( "tan("
                         >>
                         __expression[_val = bind(&Grammar::tan, this, _1)]
-                        >> 
+                        >>
                         ')' )
 
                     | ( "acos("
                         >>
                         __expression[_val = bind(&Grammar::acos, this, _1)]
-                        >> 
+                        >>
                         ')' )
 
                     | ( "asin("
                         >>
                         __expression[_val = bind(&Grammar::asin, this, _1)]
-                        >> 
+                        >>
                         ')' )
 
                     | ( "atan("
                         >>
                         __expression[_val = bind(&Grammar::atan, this, _1)]
-                        >> 
+                        >>
                         ')' )
 
                     | ( "atan2("
@@ -479,61 +479,61 @@ namespace PSF {
                         __expression[
                             _val = bind(&Grammar::atan2, this, _val, _1)
                         ]
-                        >> 
+                        >>
                         ')' )
 
                     | ( "cosh("
                         >>
                         __expression[_val = bind(&Grammar::cosh, this, _1)]
-                        >> 
+                        >>
                         ')' )
 
                     | ( "sinh("
                         >>
                         __expression[_val = bind(&Grammar::sinh, this, _1)]
-                        >> 
+                        >>
                         ')' )
 
                     | ( "tanh("
                         >>
                         __expression[_val = bind(&Grammar::tanh, this, _1)]
-                        >> 
+                        >>
                         ')' )
 
                     | ( "exp("
                         >>
                         __expression[_val = bind(&Grammar::exp, this, _1)]
-                        >> 
+                        >>
                         ')' )
 
                     | ( "log("
                         >>
                         __expression[_val = bind(&Grammar::log, this, _1)]
-                        >> 
+                        >>
                         ')' )
 
                     | ( "log10("
                         >>
                         __expression[_val = bind(&Grammar::log10, this, _1)]
-                        >> 
+                        >>
                         ')' )
 
                     | ( "sqrt("
                         >>
                         __expression[_val = bind(&Grammar::sqrt, this, _1)]
-                        >> 
+                        >>
                         ')' )
 
                     | ( "ceil("
                         >>
                         __expression[_val = bind(&Grammar::ceil, this, _1)]
-                        >> 
+                        >>
                         ')' )
 
                     | ( "floor("
                         >>
                         __expression[_val = bind(&Grammar::floor, this, _1)]
-                        >> 
+                        >>
                         ')' )
 
                     | ( "fmod("
@@ -546,13 +546,13 @@ namespace PSF {
                                                  this,
                                                  _val,
                                                  _1)]
-                        >> 
+                        >>
                         ')' )
 
                     | ( "abs("
                         >>
                         __expression[_val = bind(&Grammar::abs, this, _1)]
-                        >> 
+                        >>
                         ')' )
 
                     | ( '(' >> __expression[_val = _1] >> ')' )
@@ -566,7 +566,7 @@ namespace PSF {
                         | ( '/' >> __exponentiation[_val /= _1] )
                     )
             );
-            
+
             __expression = (
                     __factor[_val = _1]
                     >>
@@ -610,11 +610,11 @@ namespace PSF {
                 ResultType &output_terms,
                 const std::string &prefix)
         {
-            typename ResultType::const_iterator 
+            typename ResultType::const_iterator
                 next_input_term=first_input_term;
             ++next_input_term;
             if ( next_input_term == last_input_term ) {
-                if ( order == 0 && prefix == "" ) 
+                if ( order == 0 && prefix == "" )
                     output_terms.push_back("1");
                 else {
                     std::ostringstream term_to_add;
@@ -624,7 +624,7 @@ namespace PSF {
                     }
                     if ( order != 0 ) {
                         term_to_add << "(" << *first_input_term << ")";
-                        if ( order != 1 ) 
+                        if ( order != 1 )
                             term_to_add << "^" << order;
                     }
                     output_terms.push_back(term_to_add.str());
@@ -668,7 +668,7 @@ namespace PSF {
                                                       const ResultType &rhs)
         {
             ResultType result;
-            for( typename ResultType::const_iterator 
+            for( typename ResultType::const_iterator
                     lhs_iter = lhs.begin();
                     lhs_iter != lhs.end();
                     ++lhs_iter )
@@ -676,14 +676,14 @@ namespace PSF {
                         rhs_iter = rhs.begin();
                         rhs_iter != rhs.end();
                         ++rhs_iter )
-                    result.push_back( 
+                    result.push_back(
                             "(" + *lhs_iter + ") * (" + *rhs_iter + ")"
                     );
             lhs=result;
         }
 
         template<typename Iterator, typename ResultType>
-        Grammar<Iterator, ResultType>::Grammar() : 
+        Grammar<Iterator, ResultType>::Grammar() :
             Grammar::base_type(__expression)
         {
             using phoenix::push_back;
@@ -700,7 +700,7 @@ namespace PSF {
             __simple_term = +( char_ - ',' - '}');
 
             __term_list = (
-                    '{' 
+                    '{'
                     >> ( __simple_term[push_back(_val, _1)] % ',' )
                     >> '}'
             );
@@ -714,14 +714,14 @@ namespace PSF {
 
             __cross_product = (
                     __term_set[_val = _1]
-                    >> *( '*' 
-                          >> 
+                    >> *( '*'
+                          >>
                           __term_set[
                               bind(&Grammar::cross_set, this, _val, _1)
                           ] )
             );
 
-            __expression = ( 
+            __expression = (
                     __cross_product[
                         bind(&Grammar::union_set, this, _val, _1)
                     ] % '+'
@@ -750,7 +750,7 @@ namespace PSF {
             ResultType &result
         )
     {
-        TermCalculator::Grammar< std::string::const_iterator, TermValarray > 
+        TermCalculator::Grammar< std::string::const_iterator, TermValarray >
             calculator_grammar(start_var->second.size());
 
         for(; start_var != end_var; ++start_var) {
@@ -772,7 +772,7 @@ namespace PSF {
                                               result[result_index++]);
             if( !parser_status || parse_start != parse_end ) {
                 std::ostringstream msg;
-                msg << "Parsing " << *start_term 
+                msg << "Parsing " << *start_term
                     << " failed at " << std::string(parse_start, parse_end);
                 throw Error::ParsingError(msg.str());
             }
@@ -787,8 +787,8 @@ namespace PSF {
             const std::string &term_expression,
 
             ///Iterator to the first varuable that participates in the
-            ///expression. Entries should be pairs of <variable name>, <array of
-            ///values for each source>
+            ///expression. Entries should be pairs of \<variable name\>,
+            ///\<array of values for each source\>
             VarIterator start_var,
 
             ///Iterator to one past the last variable that participates in the

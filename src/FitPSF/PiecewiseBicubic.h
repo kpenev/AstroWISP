@@ -3,7 +3,7 @@
 
 /**\file
  *
- *\brief The declarations of the functions related to fitting piecewise
+ * \brief The declarations of the functions related to fitting piecewise
  * bicubic PSFs.
  *
  * The following variable names are used for the quentities defined in the

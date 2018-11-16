@@ -1,6 +1,6 @@
-/** \file SubPixPhot.h
+/** \file
  *
- * \brief The executable that corrects for sub-pixel sensitivity variation. 
+ * \brief The executable that corrects for sub-pixel sensitivity variation.
  *
  * The SubPixPhot executable performs aperture photometry on a list of
  * sources with known point spread functions. It properly accounts for pixels
@@ -47,7 +47,7 @@ namespace SubPixPhot {
     {
         _hidden.add_options()
             (
-                "io.image", 
+                "io.image",
                 opt::value<std::string>(),
                 "Reduced file to fit the PSF of."
             )
@@ -146,7 +146,7 @@ namespace SubPixPhot {
     void SubPixPhot::Config::apply_fallbacks()
     {
         std::stringstream fallbacks;
-        fallbacks 
+        fallbacks
             << "[io]" << std::endl
             << "psfmap = " << (*this)["io.sources"].as<std::string>()
             << std::endl
@@ -171,7 +171,7 @@ namespace SubPixPhot {
                 i != (*this)["ap.aperture"].as<Core::RealList>().end();
                 ++i
         )
-            if(*i < 0) 
+            if(*i < 0)
                 throw Error::CommandLine("Negative aperture encountered!");
         if((*this)["gain"].as<double>()<0)
             throw Error::CommandLine("Negative gain specified!");
@@ -194,7 +194,7 @@ namespace SubPixPhot {
     template<class FLUX_MEASURER>
     void add_flux_measurements(
             ///The SPF map to use.
-            const PSF::Map &psf_map, 
+            const PSF::Map &psf_map,
 
             ///The object that will measure the fluxes.
             FLUX_MEASURER &measure_flux,
@@ -220,12 +220,12 @@ namespace SubPixPhot {
         std::vector< std::vector<unsigned>* > flags(num_apertures);
         for(unsigned ap_index = 0; ap_index < num_apertures; ++ap_index) {
             magnitudes[ap_index] = new std::vector<double>(num_sources);
-            magnitude_errors[ap_index] = 
+            magnitude_errors[ap_index] =
                 new std::vector<double>(num_sources);
             flags[ap_index] = new std::vector<unsigned>(num_sources);
         }
-                                           
-        PSF::MapSourceContainer::const_iterator 
+
+        PSF::MapSourceContainer::const_iterator
             psfmap_src_iter = psfmap_sources.begin();
 
         unsigned x_resolution = measure_flux.image().x_resolution(),
@@ -271,7 +271,7 @@ namespace SubPixPhot {
                         measured.value(),
                         mag_1adu
                 );
-                (*(magnitude_errors[ap_index]))[source_index] = 
+                (*(magnitude_errors[ap_index]))[source_index] =
                     magnitude_error(
                         measured.value(),
                         measured.error()
@@ -307,7 +307,7 @@ namespace SubPixPhot {
         }
     }
 
-    ///\brief Measures the background of all input sources and adds it to an 
+    ///\brief Measures the background of all input sources and adds it to an
     ///I/O tree.
     void add_background_measurements(
         ///The annulus to use for measuring the background.
@@ -323,7 +323,7 @@ namespace SubPixPhot {
     {
         Background::MeasureAnnulus measure_background(
             annulus.inner_radius(),
-            annulus.outer_radius(), 
+            annulus.outer_radius(),
             annulus.inner_radius(),
             image
         );
@@ -331,10 +331,10 @@ namespace SubPixPhot {
                                 y(data_tree.get<boost::any>("projsrc.y"));
         unsigned num_sources = x.size();
         assert(y.size() == num_sources);
-        std::vector<double> 
+        std::vector<double>
             *background = new std::vector<double>(num_sources),
             *background_error = new std::vector<double>(num_sources);
-        std::vector<unsigned> 
+        std::vector<unsigned>
             *background_pixels = new std::vector<unsigned>(num_sources);
         for(
             unsigned source_index = 0;
@@ -369,7 +369,7 @@ namespace SubPixPhot {
 
             ///The largest aperture that will be used.
             double max_aperture,
-            
+
             ///The data tree to fill with extra quantities
             IO::H5IODataTree &psf_data)
     {
@@ -403,7 +403,7 @@ namespace SubPixPhot {
         if(psf_model=="") throw Error::CommandLine(
                 "Input PSF map file does not define a PSF model."
         );
-        if(psf_model=="bicubic" || psf_model=="zero") 
+        if(psf_model=="bicubic" || psf_model=="zero")
             return new PSF::PiecewiseBicubicMap(psf_data, max_aperture + 1.0);
         else {
             assert(psf_model=="sdk");
@@ -413,7 +413,7 @@ namespace SubPixPhot {
 
     void print_data_tree_keys(
         const boost::property_tree::basic_ptree<
-            std::basic_string<char>, 
+            std::basic_string<char>,
             boost::any
         > &data_tree,
         const std::string &indent = ""
@@ -518,7 +518,7 @@ int main(int argc, char **argv)
             data_tree
         );
     } else {
-        Core::SubPixelCorrectedFlux< IO::FitsImage<double> > 
+        Core::SubPixelCorrectedFlux< IO::FitsImage<double> >
             measure_flux(
                 image,
                 subpix_map,

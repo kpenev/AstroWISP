@@ -2,7 +2,7 @@
  *
  * \brief Defines constants to denote the various columns that can be input
  * or output by the various tools and some utility functions.
- * 
+ *
  * \ingroup Core
  */
 
@@ -21,9 +21,9 @@
 ///\ingroup FitSubpix
 ///\ingroup FitPSF
 namespace Phot {
-	///\brief constants to denote the various columns that can be input or 
+	///\brief constants to denote the various columns that can be input or
 	///output by the SubPixPhot tool
-	enum LIB_PUBLIC Columns{
+	enum LIB_PUBLIC Columns {
 		id,			///< The HAT-id.
 		x,			///< The x coordinate in the input fits image.
 		y,			///< The y coordinate in the input fits image.
@@ -54,9 +54,10 @@ namespace Phot {
 		num_recognized_columns
 	};
 
+    ///\brief Names to use for printing Phot::Columns to streams.
 	class LIB_LOCAL ColumnNamesVector : public std::vector<std::string> {
 	public:
-		ColumnNamesVector() : 
+		ColumnNamesVector() :
 			std::vector<std::string>(num_recognized_columns)
 		{
 			std::vector<std::string> &vector=*this;

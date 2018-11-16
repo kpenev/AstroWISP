@@ -1,6 +1,6 @@
-/**\brief
+/**\file
  *
- * \file Declarations of the Map class and some related functions.
+ * \brief Declarations of the Map class and some related functions.
  */
 
 #ifndef __PSF_MAP_H
@@ -47,14 +47,14 @@ namespace PSF {
             ///The source whose PSF we want.
             const MapSource &source,
 
-            ///Background to add to the PSF (assumed constant) normalized 
+            ///Background to add to the PSF (assumed constant) normalized
             ///in the same way as the backgroundless PSFs produced by
             ///the map.
             double background = 0
         ) const
         {return (*this)(source.expansion_terms(), background);}
 
-        ///\brief All quantities needed to construct the PSF map from an I/O 
+        ///\brief All quantities needed to construct the PSF map from an I/O
         ///data tree.
         static const std::set<std::string> &required_data_tree_quantities();
     };

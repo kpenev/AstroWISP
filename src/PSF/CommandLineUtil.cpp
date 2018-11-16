@@ -8,7 +8,7 @@ namespace PSF {
                   int)
     {
         opt::validators::check_first_occurrence(value);
-        const std::string &grid_string = 
+        const std::string &grid_string =
             opt::validators::get_single_string(option_strings);
         value = boost::any(IO::parse_grid_string(grid_string));
     }
@@ -19,7 +19,7 @@ namespace PSF {
                   int)
     {
         opt::validators::check_first_occurrence(value);
-        std::string psf_model_string = 
+        std::string psf_model_string =
             opt::validators::get_single_string(option_strings);
         std::transform(psf_model_string.begin(),
                        psf_model_string.end(),
@@ -34,5 +34,3 @@ namespace PSF {
     }
 
 } //End PSF namespace.
-
-
