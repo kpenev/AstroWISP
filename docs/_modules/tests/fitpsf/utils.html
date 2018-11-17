@@ -1,0 +1,311 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>tests.fitpsf.utils &mdash; SuperPhot Python Interface  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/unlimited_width.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> SuperPhot Python Interface
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_documentation/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_implementation/modules.html">Python Package Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../cpp_api.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../c_api.html">C API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_unit_tests/modules.html">Unit Testing Code</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">SuperPhot Python Interface</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>tests.fitpsf.utils</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for tests.fitpsf.utils</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;A collection of functions used by the fitpsf unit tests.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">ceil</span>
+
+<span class="kn">import</span> <span class="nn">os.path</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">astropy.io</span> <span class="k">import</span> <span class="n">fits</span> <span class="k">as</span> <span class="n">pyfits</span>
+
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span>
+    <span class="mi">0</span><span class="p">,</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span>
+            <span class="s1">&#39;..&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;..&#39;</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1">#Needs to be after os.path and sys to allow adding the seach path.</span>
+<span class="c1">#pylint: disable=wrong-import-position</span>
+<span class="kn">from</span> <span class="nn">superphot.fake_image.image</span> <span class="k">import</span> <span class="n">Image</span>
+<span class="c1">#pylint: enable=wrong-import-position</span>
+
+<div class="viewcode-block" id="make_image_and_source_list"><a class="viewcode-back" href="../../../_unit_tests/tests.fitpsf.utils.html#tests.fitpsf.utils.make_image_and_source_list">[docs]</a><span class="k">def</span> <span class="nf">make_image_and_source_list</span><span class="p">(</span><span class="n">sources</span><span class="p">,</span>
+                               <span class="n">extra_variables</span><span class="p">,</span>
+                               <span class="n">subpix_map</span><span class="p">,</span>
+                               <span class="n">filenames</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create an image and a list of the sources in it ready for psf fitting.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        sources:    A list of dictionaries with at least the following keywords:</span>
+
+<span class="sd">                * x:    The x coordinate of the source center.</span>
+
+<span class="sd">                * y:    The y coordinate of the source center.</span>
+
+<span class="sd">                * psf:    An instance of some sub-class of PSFBase giving the</span>
+<span class="sd">                  sources&#39;s PSF. It should already be scaled to the desired</span>
+<span class="sd">                  flux.</span>
+
+<span class="sd">            Additional keywords may be added to the source list and hence</span>
+<span class="sd">            available as variables for PSF fitting by listing the names in the</span>
+<span class="sd">            extra_variables argument.</span>
+
+<span class="sd">        filenames: The names of the files to create:</span>
+
+<span class="sd">            * image:    The filename to save the image under. If a file</span>
+<span class="sd">              with this name exists it is overwritten.</span>
+
+<span class="sd">            * source_list:    The filename to add the source list to. If a</span>
+<span class="sd">              file with this name exists it appended to.</span>
+
+<span class="sd">            * psf_fit:    The filename to use for PSF fitting results.</span>
+
+<span class="sd">        extra_variables:    A list of additional keywords from sources to add to</span>
+<span class="sd">            the source list and the order in which those should be added. The</span>
+<span class="sd">            corresponding entries in sources must be floating point values.</span>
+
+<span class="sd">        subpix_map:    The sub-pixel map to impose on the image. For more</span>
+<span class="sd">            details see same name argument of Image.add_source.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">min_x</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">)</span>
+    <span class="n">max_x</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">)</span>
+    <span class="n">min_y</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">)</span>
+    <span class="n">max_y</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">)</span>
+
+    <span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">ceil</span><span class="p">(</span><span class="n">max_x</span> <span class="o">+</span> <span class="n">min_x</span><span class="p">)),</span>
+                  <span class="nb">int</span><span class="p">(</span><span class="n">ceil</span><span class="p">(</span><span class="n">max_y</span> <span class="o">+</span> <span class="n">min_y</span><span class="p">)),</span>
+                  <span class="n">background</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+
+    <span class="n">src_list</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filenames</span><span class="p">[</span><span class="s1">&#39;source_list&#39;</span><span class="p">],</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span>
+    <span class="n">src_list</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+        <span class="s1">&#39;[&#39;</span> <span class="o">+</span> <span class="n">filenames</span><span class="p">[</span><span class="s1">&#39;image&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">filenames</span><span class="p">[</span><span class="s1">&#39;psf_fit&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;]</span><span class="se">\n</span><span class="s1">&#39;</span>
+    <span class="p">)</span>
+
+    <span class="n">src_list_vars</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">extra_variables</span>
+
+    <span class="k">for</span> <span class="n">src_id</span><span class="p">,</span> <span class="n">src</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sources</span><span class="p">):</span>
+        <span class="n">image</span><span class="o">.</span><span class="n">add_source</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">src</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span>
+                         <span class="n">y</span><span class="o">=</span><span class="n">src</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">],</span>
+                         <span class="n">psf</span><span class="o">=</span><span class="n">src</span><span class="p">[</span><span class="s1">&#39;psf&#39;</span><span class="p">],</span>
+                         <span class="n">amplitude</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+                         <span class="n">subpix_map</span><span class="o">=</span><span class="n">subpix_map</span><span class="p">)</span>
+
+        <span class="n">src_list</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%10d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">src_id</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">src_list_vars</span><span class="p">:</span>
+            <span class="n">src_list</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39; </span><span class="si">%25.16e</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">src</span><span class="p">[</span><span class="n">var</span><span class="p">])</span>
+        <span class="n">src_list</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="n">src_list</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="n">hdu_list</span> <span class="o">=</span> <span class="n">pyfits</span><span class="o">.</span><span class="n">HDUList</span><span class="p">([</span><span class="n">pyfits</span><span class="o">.</span><span class="n">PrimaryHDU</span><span class="p">(</span><span class="n">image</span><span class="p">)])</span>
+    <span class="n">hdu_list</span><span class="o">.</span><span class="n">writeto</span><span class="p">(</span><span class="n">filenames</span><span class="p">[</span><span class="s1">&#39;image&#39;</span><span class="p">],</span> <span class="n">clobber</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Kaloyan Penev.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

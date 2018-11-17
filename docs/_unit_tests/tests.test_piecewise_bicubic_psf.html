@@ -1,0 +1,313 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>tests.test_piecewise_bicubic_psf module &mdash; SuperPhot Python Interface  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/unlimited_width.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="tests.utilities module" href="tests.utilities.html" />
+    <link rel="prev" title="tests.test_fake_image module" href="tests.test_fake_image.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> SuperPhot Python Interface
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../user_documentation/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_implementation/modules.html">Python Package Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cpp_api.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../c_api.html">C API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Unit Testing Code</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="tests.html">tests package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="tests.html#subpackages">Subpackages</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="tests.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="tests.test_background.html">tests.test_background module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tests.test_fake_image.html">tests.test_fake_image module</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">tests.test_piecewise_bicubic_psf module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tests.utilities.html">tests.utilities module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SuperPhot Python Interface</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="modules.html">tests</a> &raquo;</li>
+        
+          <li><a href="tests.html">tests package</a> &raquo;</li>
+        
+      <li>tests.test_piecewise_bicubic_psf module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/_unit_tests/tests.test_piecewise_bicubic_psf.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-tests.test_piecewise_bicubic_psf">
+<span id="tests-test-piecewise-bicubic-psf-module"></span><h1>tests.test_piecewise_bicubic_psf module<a class="headerlink" href="#module-tests.test_piecewise_bicubic_psf" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="class-inheritance-diagram">
+<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this headline">¶</a></h2>
+<img src="../_images/inheritance-6baf1e21420633bd1d0a6d10c4ebead6f90ca1e4.png" alt="Inheritance diagram of FloatTestCase, PiecewiseBicubicPSF, TestPiecewiseBicubicPSF" usemap="#inheritance0087abd281" class="inheritance"/>
+<map id="inheritance0087abd281" name="inheritance0087abd281">
+<area shape="rect" id="node1" title="Helper class that provides a standard way to create an ABC using" alt="" coords="187,5,263,31"/>
+<area shape="rect" id="node4" href="../_implementation/superphot.fake_image.psf_base.html#superphot.fake_image.psf_base.PSFBase" target="_top" title="The base class for all supported PSFs." alt="" coords="82,79,369,104"/>
+<area shape="rect" id="node2" href="../_implementation/superphot.fake_image.piecewise_bicubic_psf.html#superphot.fake_image.piecewise_bicubic_psf.PiecewiseBicubicPSF" target="_top" title="A piecewise PSF class where the PSF over each piece is a bi&#45;cubic function." alt="" coords="5,225,445,251"/>
+<area shape="rect" id="node3" href="../_implementation/superphot.fake_image.piecewise_psf.html#superphot.fake_image.piecewise_psf.PiecewisePSF" target="_top" title="Base clas for PSFs defined on a grid of pieces." alt="" coords="53,152,397,177"/>
+<area shape="rect" id="node5" href="#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF" target="_top" title="Make sure the PiecewiseBicubicPSF class functions as expected." alt="" coords="421,152,808,177"/>
+<area shape="rect" id="node6" href="tests.utilities.html#tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="517,79,712,104"/>
+<area shape="rect" id="node7" title="A class whose instances are single test cases." alt="" coords="531,5,698,31"/>
+</map>
+<p>Define unittest test case for the PiecewiseBicubicPSF class.</p>
+<dl class="class">
+<dt id="tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF">
+<em class="property">class </em><code class="descclassname">tests.test_piecewise_bicubic_psf.</code><code class="descname">TestPiecewiseBicubicPSF</code><span class="sig-paren">(</span><em>methodName='runTest'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_piecewise_bicubic_psf.html#TestPiecewiseBicubicPSF"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="tests.utilities.html#tests.utilities.FloatTestCase" title="tests.utilities.FloatTestCase"><code class="xref py py-class docutils literal"><span class="pre">tests.utilities.FloatTestCase</span></code></a></p>
+<img src="../_images/inheritance-8a31fde6811ab34e85f79d7ef8d99b6b26773312.png" alt="Inheritance diagram of tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF" usemap="#inheritance131314dfe9" class="inheritance"/>
+<map id="inheritance131314dfe9" name="inheritance131314dfe9">
+<area shape="rect" id="node1" href="#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF" target="_top" title="Make sure the PiecewiseBicubicPSF class functions as expected." alt="" coords="5,152,392,177"/>
+<area shape="rect" id="node2" href="tests.utilities.html#tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="101,79,296,104"/>
+<area shape="rect" id="node3" title="A class whose instances are single test cases." alt="" coords="115,5,282,31"/>
+</map>
+<p>Make sure the PiecewiseBicubicPSF class functions as expected.</p>
+<dl class="method">
+<dt id="tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.setUp">
+<code class="descname">setUp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_piecewise_bicubic_psf.html#TestPiecewiseBicubicPSF.setUp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.setUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Define a set of picewise PSF grids to use during tests.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_linear">
+<code class="descname">test_linear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_piecewise_bicubic_psf.html#TestPiecewiseBicubicPSF.test_linear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_linear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test PSFs that is are linear functions of x and/or y work.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_one">
+<code class="descname">test_one</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_piecewise_bicubic_psf.html#TestPiecewiseBicubicPSF.test_one"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_one" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make sure that a PSF = 1 everywhere within the grid works.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_pi">
+<code class="descname">test_pi</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_piecewise_bicubic_psf.html#TestPiecewiseBicubicPSF.test_pi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_pi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make sure that a PSF = 1 everywhere within the grid works.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_random_single_patch">
+<code class="descname">test_random_single_patch</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_piecewise_bicubic_psf.html#TestPiecewiseBicubicPSF.test_random_single_patch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_random_single_patch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test PSFs equal to random bi-cubic polynomials.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_zero">
+<code class="descname">test_zero</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_piecewise_bicubic_psf.html#TestPiecewiseBicubicPSF.test_zero"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_zero" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make sure that all-zero input produces an identically zero PSF.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="tests.test_piecewise_bicubic_psf.point_in_grid">
+<code class="descclassname">tests.test_piecewise_bicubic_psf.</code><code class="descname">point_in_grid</code><span class="sig-paren">(</span><em>point</em>, <em>grid</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_piecewise_bicubic_psf.html#point_in_grid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_piecewise_bicubic_psf.point_in_grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True iff the point is within grid.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="tests.utilities.html" class="btn btn-neutral float-right" title="tests.utilities module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="tests.test_fake_image.html" class="btn btn-neutral" title="tests.test_fake_image module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Kaloyan Penev.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,424 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>superphot.smooth_dependence module &mdash; SuperPhot Python Interface  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/unlimited_width.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="superphot.superphot_io_tree module" href="superphot.superphot_io_tree.html" />
+    <link rel="prev" title="superphot.fit_star_shape module" href="superphot.fit_star_shape.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> SuperPhot Python Interface
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../user_documentation/index.html">User Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Python Package Implementation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="superphot.html">superphot package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="superphot.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="superphot.html#subpackages">Subpackages</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="superphot.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="superphot.background.html">superphot.background module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="superphot.fit_star_shape.html">superphot.fit_star_shape module</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">superphot.smooth_dependence module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="superphot.superphot_io_tree.html">superphot.superphot_io_tree module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cpp_api.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../c_api.html">C API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_unit_tests/modules.html">Unit Testing Code</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SuperPhot Python Interface</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="modules.html">superphot</a> &raquo;</li>
+        
+          <li><a href="superphot.html">superphot package</a> &raquo;</li>
+        
+      <li>superphot.smooth_dependence module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/_implementation/superphot.smooth_dependence.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-superphot.smooth_dependence">
+<span id="superphot-smooth-dependence-module"></span><h1>superphot.smooth_dependence module<a class="headerlink" href="#module-superphot.smooth_dependence" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="class-inheritance-diagram">
+<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this headline">¶</a></h2>
+<img src="../_images/inheritance-128e8bb0c5eaf60396f1bbaa90f1cccad603abb2.png" alt="Inheritance diagram of SmoothDependence, c_char_p, c_double, c_uint" usemap="#inheritancebd1a737e32" class="inheritance"/>
+<map id="inheritancebd1a737e32" name="inheritancebd1a737e32">
+<area shape="rect" id="node4" href="#superphot.smooth_dependence.SmoothDependence" target="_top" title="Utilities for imposing smooth depnedence of one quantity on others." alt="" coords="435,5,797,31"/>
+</map>
+<p>Define a class for imposing smooth depndence of one quantity on others.</p>
+<dl class="class">
+<dt id="superphot.smooth_dependence.SmoothDependence">
+<em class="property">class </em><code class="descclassname">superphot.smooth_dependence.</code><code class="descname">SmoothDependence</code><span class="sig-paren">(</span><em>expression</em>, <em>parameters</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/smooth_dependence.html#SmoothDependence"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.smooth_dependence.SmoothDependence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<img src="../_images/inheritance-7a490aee77bf3a3d0763656d75140cc1cf9d6f8a.png" alt="Inheritance diagram of superphot.smooth_dependence.SmoothDependence" usemap="#inheritancea67291338e" class="inheritance"/>
+<map id="inheritancea67291338e" name="inheritancea67291338e">
+<area shape="rect" id="node1" href="#superphot.smooth_dependence.SmoothDependence" target="_top" title="Utilities for imposing smooth depnedence of one quantity on others." alt="" coords="5,5,368,31"/>
+</map>
+<p>Utilities for imposing smooth depnedence of one quantity on others.</p>
+<dl class="attribute">
+<dt id="superphot.smooth_dependence.SmoothDependence.expression">
+<code class="descname">expression</code><a class="headerlink" href="#superphot.smooth_dependence.SmoothDependence.expression" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; The expression defining the dependence of
+parameters on a set of variables.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="superphot.smooth_dependence.SmoothDependence.terms">
+<code class="descname">terms</code><a class="headerlink" href="#superphot.smooth_dependence.SmoothDependence.terms" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>[str]</em> &#8211; The terms the depnedence expression expands to.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="superphot.smooth_dependence.SmoothDependence.parameters">
+<code class="descname">parameters</code><a class="headerlink" href="#superphot.smooth_dependence.SmoothDependence.parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>dict-like, record array or #-D array, #&gt;=2</em> &#8211; The
+parameters that depend smoothly on the variables. If dict-like or
+record array, indexed by the names of the parameters and containing
+the corresponding expansion coefficients. If array, the first
+dimension is assumed to contain the expansion coefficients.</p>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<ul>
+<li><p class="first">Find all terms combining up to x^3 and y^4, with only even powers of y
+allowed:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">superphot</span> <span class="k">import</span> <span class="n">SmoothDependence</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">term_list</span> <span class="o">=</span> <span class="n">SmoothDependence</span><span class="o">.</span><span class="n">expand_expression</span><span class="p">(</span><span class="s1">&#39;O3</span><span class="si">{x}</span><span class="s1"> * O2{y^2}&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Evaluate all terms in a polynomial of x and y of up to combined third
+order:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">superphot</span> <span class="k">import</span> <span class="n">SmoothDependence</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">term_values</span> <span class="o">=</span> <span class="n">SmoothDependence</span><span class="o">.</span><span class="n">evaluate_terms</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s1">&#39;O3{x, y}&#39;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">x</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">10.0</span><span class="p">),</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">y</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Define two unnamed parameters smoothly depending on x:</p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="math">\(2.0 x + 4.0 x^2 + 6.0 x^3\)</span></li>
+<li><span class="math">\(1.0 + 3.0 x + 5.0 x^2 + 7.0 x^3\)</span></li>
+</ul>
+</div></blockquote>
+<p>and evaluate them for <span class="math">\(x \in \{0, 0.1, 0.2, 0.3, 0.4\}\)</span>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">superphot</span> <span class="k">import</span> <span class="n">SmoothDependence</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parameters</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">8.0</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">smooth</span> <span class="o">=</span> <span class="n">SmoothDependence</span><span class="p">(</span><span class="s1">&#39;O3</span><span class="si">{x}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">parameters</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">param_values</span> <span class="o">=</span> <span class="n">smooth</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">))</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Same as above, but this time name the parameters <cite>a</cite> and <cite>b</cite>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">superphot</span> <span class="k">import</span> <span class="n">SmoothDependence</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parameters</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="nb">float</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="nb">float</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">smooth</span> <span class="o">=</span> <span class="n">SmoothDependence</span><span class="p">(</span><span class="s1">&#39;O3</span><span class="si">{x}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">parameters</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">param_values</span> <span class="o">=</span> <span class="n">smooth</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">))</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<dl class="method">
+<dt id="superphot.smooth_dependence.SmoothDependence.__call__">
+<code class="descname">__call__</code><span class="sig-paren">(</span><em>**indep_var</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/smooth_dependence.html#SmoothDependence.__call__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.smooth_dependence.SmoothDependence.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the <a class="reference internal" href="#superphot.smooth_dependence.SmoothDependence.parameters" title="superphot.smooth_dependence.SmoothDependence.parameters"><code class="xref py py-attr docutils literal"><span class="pre">parameters</span></code></a> for the given variable values.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>**indep_var</strong> (<em>1D arrays</em>) &#8211; The values of the independent variables
+to evaluate the dependence at. Must all have the same length.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The values of the parameters evaluated for the indepnedent
+variable values supplied.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">(same type as <a class="reference internal" href="#superphot.smooth_dependence.SmoothDependence.parameters" title="superphot.smooth_dependence.SmoothDependence.parameters"><code class="xref py py-attr docutils literal"><span class="pre">parameters</span></code></a> attribute)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="superphot.smooth_dependence.SmoothDependence.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>expression</em>, <em>parameters</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/smooth_dependence.html#SmoothDependence.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.smooth_dependence.SmoothDependence.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set-up a smooth depnednece of a set of parameters on a set of variables.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>expression</strong> &#8211; See <a class="reference internal" href="#superphot.smooth_dependence.SmoothDependence.expression" title="superphot.smooth_dependence.SmoothDependence.expression"><code class="xref py py-attr docutils literal"><span class="pre">expression</span></code></a> attribute.</li>
+<li><strong>parameters</strong> &#8211; See <a class="reference internal" href="#superphot.smooth_dependence.SmoothDependence.parameters" title="superphot.smooth_dependence.SmoothDependence.parameters"><code class="xref py py-attr docutils literal"><span class="pre">parameters</span></code></a> attribute.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="superphot.smooth_dependence.SmoothDependence.evaluate_terms">
+<em class="property">classmethod </em><code class="descname">evaluate_terms</code><span class="sig-paren">(</span><em>terms</em>, <em>**indep_var</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/smooth_dependence.html#SmoothDependence.evaluate_terms"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.smooth_dependence.SmoothDependence.evaluate_terms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluate the given terms or a term expression for the given sources.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>terms</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em> or </em><em></em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>]</em><em></em>) &#8211; Either a single string giving an expression
+which is expanded to a list of terms using expand_expression(),
+or directly a list of terms to evaluate.</li>
+<li><strong>**indep_var</strong> (<em>1D numpy array</em>) &#8211; The values of the independent
+variables involved in terms. The argument names must match the
+names used in <cite>terms</cite>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The values of the terms for each entry in indep_var. Each column
+contains a different term.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">2D numpy array</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="superphot.smooth_dependence.SmoothDependence.expand_expression">
+<em class="property">classmethod </em><code class="descname">expand_expression</code><span class="sig-paren">(</span><em>expression</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/smooth_dependence.html#SmoothDependence.expand_expression"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.smooth_dependence.SmoothDependence.expand_expression" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the terms expression expands to per SuperPhot smooth grammar.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>expression</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.7)"><em>bytes</em></a>) &#8211; The expression to parse.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">List of the term the expression expands to.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="superphot.superphot_io_tree.html" class="btn btn-neutral float-right" title="superphot.superphot_io_tree module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="superphot.fit_star_shape.html" class="btn btn-neutral" title="superphot.fit_star_shape module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Kaloyan Penev.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

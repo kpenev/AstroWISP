@@ -1,0 +1,446 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>superphot.smooth_dependence &mdash; SuperPhot Python Interface  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/unlimited_width.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> SuperPhot Python Interface
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../user_documentation/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_implementation/modules.html">Python Package Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cpp_api.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../c_api.html">C API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_unit_tests/modules.html">Unit Testing Code</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">SuperPhot Python Interface</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>superphot.smooth_dependence</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for superphot.smooth_dependence</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Define a class for imposing smooth depndence of one quantity on others.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">ctypes</span> <span class="k">import</span> <span class="n">c_double</span><span class="p">,</span> <span class="n">c_uint</span><span class="p">,</span> <span class="n">c_char_p</span><span class="p">,</span> <span class="n">POINTER</span><span class="p">,</span> <span class="n">byref</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span>
+
+<span class="kn">from</span> <span class="nn">superphot._initialize_library</span> <span class="k">import</span> <span class="n">superphot_library</span>
+
+<div class="viewcode-block" id="SmoothDependence"><a class="viewcode-back" href="../../_implementation/superphot.smooth_dependence.html#superphot.SmoothDependence">[docs]</a><span class="k">class</span> <span class="nc">SmoothDependence</span><span class="p">:</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Utilities for imposing smooth depnedence of one quantity on others.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        expression (str):    The expression defining the dependence of</span>
+<span class="sd">            parameters on a set of variables.</span>
+
+<span class="sd">        terms ([str]):    The terms the depnedence expression expands to.</span>
+
+<span class="sd">        parameters (dict-like, record array or #-D array, #&gt;=2):    The</span>
+<span class="sd">            parameters that depend smoothly on the variables. If dict-like or</span>
+<span class="sd">            record array, indexed by the names of the parameters and containing</span>
+<span class="sd">            the corresponding expansion coefficients. If array, the first</span>
+<span class="sd">            dimension is assumed to contain the expansion coefficients.</span>
+
+<span class="sd">    Examples:</span>
+
+<span class="sd">        * Find all terms combining up to x^3 and y^4, with only even powers of y</span>
+<span class="sd">          allowed:</span>
+
+<span class="sd">            &gt;&gt;&gt; from superphot import SmoothDependence</span>
+<span class="sd">            &gt;&gt;&gt; term_list = SmoothDependence.expand_expression(&#39;O3{x} * O2{y^2}&#39;)</span>
+
+<span class="sd">        * Evaluate all terms in a polynomial of x and y of up to combined third</span>
+<span class="sd">          order:</span>
+
+<span class="sd">          &gt;&gt;&gt; from superphot import SmoothDependence</span>
+<span class="sd">          &gt;&gt;&gt; import numpy</span>
+<span class="sd">          &gt;&gt;&gt; term_values = SmoothDependence.evaluate_terms(</span>
+<span class="sd">          &gt;&gt;&gt;     &#39;O3{x, y}&#39;,</span>
+<span class="sd">          &gt;&gt;&gt;     x=numpy.arange(10.0),</span>
+<span class="sd">          &gt;&gt;&gt;     y=numpy.arange(-10.0, 0.0)</span>
+<span class="sd">          &gt;&gt;&gt; )</span>
+
+<span class="sd">        * Define two unnamed parameters smoothly depending on x:</span>
+
+<span class="sd">              * :math:`2.0 x + 4.0 x^2 + 6.0 x^3`</span>
+<span class="sd">              * :math:`1.0 + 3.0 x + 5.0 x^2 + 7.0 x^3`</span>
+
+<span class="sd">          and evaluate them for :math:`x \in \{0, 0.1, 0.2, 0.3, 0.4\}`::</span>
+
+<span class="sd">          &gt;&gt;&gt; from superphot import SmoothDependence</span>
+<span class="sd">          &gt;&gt;&gt; import numpy</span>
+<span class="sd">          &gt;&gt;&gt; parameters = numpy.arange(8.0).reshape((4, 2))</span>
+<span class="sd">          &gt;&gt;&gt; smooth = SmoothDependence(&#39;O3{x}&#39;, parameters)</span>
+<span class="sd">          &gt;&gt;&gt; param_values = smooth(x=numpy.arange(0.0, 0.45, 0.1))</span>
+
+<span class="sd">        * Same as above, but this time name the parameters `a` and `b`::</span>
+
+<span class="sd">          &gt;&gt;&gt; from superphot import SmoothDependence</span>
+<span class="sd">          &gt;&gt;&gt; import numpy</span>
+<span class="sd">          &gt;&gt;&gt; parameters = numpy.empty(4, dtype = [(&#39;a&#39;, float), (&#39;b&#39;, float)])</span>
+<span class="sd">          &gt;&gt;&gt; parameters[&#39;a&#39;] = numpy.arange(0.0, 7.5, 2.0)</span>
+<span class="sd">          &gt;&gt;&gt; parameters[&#39;b&#39;] = numpy.arange(1.0, 7.5, 2.0)</span>
+<span class="sd">          &gt;&gt;&gt; smooth = SmoothDependence(&#39;O3{x}&#39;, parameters)</span>
+<span class="sd">          &gt;&gt;&gt; param_values = smooth(x=numpy.arange(0.0, 0.45, 0.1))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="SmoothDependence.expand_expression"><a class="viewcode-back" href="../../_implementation/superphot.smooth_dependence.html#superphot.SmoothDependence.expand_expression">[docs]</a>    <span class="k">def</span> <span class="nf">expand_expression</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">expression</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the terms expression expands to per SuperPhot smooth grammar.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            expression(str or bytes):    The expression to parse.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            [str]:</span>
+<span class="sd">                List of the term the expression expands to.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">terms_type</span> <span class="o">=</span> <span class="n">POINTER</span><span class="p">(</span><span class="n">c_char_p</span><span class="p">)</span>
+        <span class="n">terms</span> <span class="o">=</span> <span class="n">terms_type</span><span class="p">()</span>
+        <span class="n">num_terms</span> <span class="o">=</span> <span class="n">c_uint</span><span class="p">()</span>
+        <span class="n">c_expression</span> <span class="o">=</span> <span class="n">c_char_p</span><span class="p">(</span><span class="n">expression</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expression</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">)</span>
+                                <span class="k">else</span> <span class="n">expression</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">))</span>
+        <span class="n">superphot_library</span><span class="o">.</span><span class="n">expand_term_expression</span><span class="p">(</span><span class="n">c_expression</span><span class="p">,</span>
+                                                 <span class="n">byref</span><span class="p">(</span><span class="n">terms</span><span class="p">),</span>
+                                                 <span class="n">byref</span><span class="p">(</span><span class="n">num_terms</span><span class="p">))</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">terms</span><span class="p">[</span><span class="n">term_index</span><span class="p">]</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+                  <span class="k">for</span> <span class="n">term_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_terms</span><span class="o">.</span><span class="n">value</span><span class="p">)]</span>
+
+        <span class="n">superphot_library</span><span class="o">.</span><span class="n">free_term_list</span><span class="p">(</span><span class="n">terms</span><span class="p">,</span> <span class="n">num_terms</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span></div>
+
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="SmoothDependence.evaluate_terms"><a class="viewcode-back" href="../../_implementation/superphot.smooth_dependence.html#superphot.SmoothDependence.evaluate_terms">[docs]</a>    <span class="k">def</span> <span class="nf">evaluate_terms</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">terms</span><span class="p">,</span> <span class="o">**</span><span class="n">indep_var</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Evaluate the given terms or a term expression for the given sources.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            terms (str or [str]):    Either a single string giving an expression</span>
+<span class="sd">                which is expanded to a list of terms using expand_expression(),</span>
+<span class="sd">                or directly a list of terms to evaluate.</span>
+
+<span class="sd">            **indep_var (1D numpy array):    The values of the independent</span>
+<span class="sd">                variables involved in terms. The argument names must match the</span>
+<span class="sd">                names used in `terms`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            2D numpy array:</span>
+<span class="sd">                The values of the terms for each entry in indep_var. Each column</span>
+<span class="sd">                contains a different term.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">terms</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">)):</span>
+            <span class="n">terms</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">expand_expression</span><span class="p">(</span><span class="n">terms</span><span class="p">)</span>
+        <span class="n">term_list</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_char_p</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">terms</span><span class="p">))(</span><span class="o">*</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">terms</span><span class="p">))</span>
+
+        <span class="n">num_variables</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">indep_var</span><span class="p">)</span>
+        <span class="n">num_terms</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">terms</span><span class="p">)</span>
+        <span class="n">num_sources</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">indep_var</span><span class="o">.</span><span class="n">values</span><span class="p">())))</span>
+
+        <span class="c1">#Only need names not values.</span>
+        <span class="c1">#pylint: disable=consider-iterating-dictionary</span>
+        <span class="n">variable_names</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_char_p</span> <span class="o">*</span> <span class="n">num_variables</span><span class="p">)(</span>
+            <span class="o">*</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">indep_var</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="p">)</span>
+        <span class="c1">#pylint: enable=consider-iterating-dictionary</span>
+
+        <span class="n">contiguous_vars</span> <span class="o">=</span> <span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">require</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">c_double</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;C_CONTIGUOUS&#39;</span><span class="p">,))</span>
+                           <span class="k">for</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">indep_var</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span>
+        <span class="n">variable_values</span> <span class="o">=</span> <span class="p">(</span><span class="n">POINTER</span><span class="p">(</span><span class="n">c_double</span><span class="p">)</span> <span class="o">*</span> <span class="n">num_variables</span><span class="p">)(</span>
+            <span class="o">*</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data_as</span><span class="p">(</span><span class="n">POINTER</span><span class="p">(</span><span class="n">c_double</span><span class="p">))</span> <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">contiguous_vars</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">num_sources</span><span class="p">,</span> <span class="n">num_terms</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">c_double</span><span class="p">)</span>
+
+        <span class="n">superphot_library</span><span class="o">.</span><span class="n">evaluate_terms</span><span class="p">(</span><span class="n">term_list</span><span class="p">,</span>
+                                         <span class="n">num_terms</span><span class="p">,</span>
+                                         <span class="n">variable_names</span><span class="p">,</span>
+                                         <span class="n">variable_values</span><span class="p">,</span>
+                                         <span class="n">num_variables</span><span class="p">,</span>
+                                         <span class="n">num_sources</span><span class="p">,</span>
+                                         <span class="n">result</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span></div>
+
+<div class="viewcode-block" id="SmoothDependence.__init__"><a class="viewcode-back" href="../../_implementation/superphot.smooth_dependence.html#superphot.SmoothDependence.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expression</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set-up a smooth depnednece of a set of parameters on a set of variables.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            expression:    See :attr:`expression` attribute.</span>
+
+<span class="sd">            parameters:    See :attr:`parameters` attribute.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">expression</span> <span class="o">=</span> <span class="n">expression</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">terms</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">expand_expression</span><span class="p">(</span><span class="n">expression</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span> <span class="o">=</span> <span class="n">parameters</span>
+
+        <span class="k">assert</span> <span class="n">parameters</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">terms</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="p">(</span>
+            <span class="p">(</span><span class="n">parameters</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">parameters</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">names</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="ow">or</span>
+            <span class="p">(</span><span class="n">parameters</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">parameters</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">names</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="SmoothDependence.__call__"><a class="viewcode-back" href="../../_implementation/superphot.smooth_dependence.html#superphot.SmoothDependence.__call__">[docs]</a>    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">indep_var</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculate the :attr:`parameters` for the given variable values.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            **indep_var (1D arrays):    The values of the independent variables</span>
+<span class="sd">                to evaluate the dependence at. Must all have the same length.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            (same type as :attr:`parameters` attribute):</span>
+<span class="sd">                The values of the parameters evaluated for the indepnedent</span>
+<span class="sd">                variable values supplied.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">num_sources</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">indep_var</span><span class="o">.</span><span class="n">values</span><span class="p">())))</span>
+        <span class="n">num_terms</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">terms</span><span class="p">)</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">num_sources</span><span class="p">,)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span>
+                             <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">names</span><span class="p">:</span>
+            <span class="n">num_parameters</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">names</span><span class="p">)</span>
+
+            <span class="c1">#pylint false positive</span>
+            <span class="c1">#pylint: disable=unused-variable</span>
+            <span class="n">write_to</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span>
+                <span class="p">(</span><span class="n">num_sources</span><span class="p">,</span> <span class="n">num_parameters</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="c1">#pylint: enable=unused-variable</span>
+
+            <span class="n">parameter_view</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span>
+                <span class="p">(</span><span class="n">num_terms</span><span class="p">,</span> <span class="n">num_parameters</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">write_to</span> <span class="o">=</span> <span class="n">result</span>
+            <span class="n">parameter_view</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span>
+
+        <span class="n">term_values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluate_terms</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">terms</span><span class="p">,</span> <span class="o">**</span><span class="n">indep_var</span><span class="p">)</span>
+        <span class="n">write_to</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">tensordot</span><span class="p">(</span>
+            <span class="n">term_values</span><span class="p">,</span>
+            <span class="n">parameter_view</span><span class="p">,</span>
+            <span class="mi">1</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result</span></div></div>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">test_terms</span> <span class="o">=</span> <span class="n">SmoothDependence</span><span class="o">.</span><span class="n">expand_expression</span><span class="p">(</span><span class="s1">&#39;O3</span><span class="si">{x}</span><span class="s1"> * O2{y^2}&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">test_terms</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="nb">repr</span><span class="p">(</span>
+            <span class="n">SmoothDependence</span><span class="o">.</span><span class="n">evaluate_terms</span><span class="p">(</span><span class="s1">&#39;O3{x, y}&#39;</span><span class="p">,</span>
+                                            <span class="n">x</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">10.0</span><span class="p">),</span>
+                                            <span class="n">y</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="n">named_param</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="p">[(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="nb">float</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="nb">float</span><span class="p">)])</span>
+    <span class="n">named_param</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)</span>
+    <span class="n">named_param</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">8.0</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">)),</span>
+                  <span class="n">named_param</span><span class="p">]:</span>
+        <span class="n">xcubed</span> <span class="o">=</span> <span class="n">SmoothDependence</span><span class="p">(</span><span class="s1">&#39;O3</span><span class="si">{x}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">xcubed</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">))))</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Kaloyan Penev.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

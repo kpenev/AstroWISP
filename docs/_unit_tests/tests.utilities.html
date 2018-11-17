@@ -1,0 +1,317 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>tests.utilities module &mdash; SuperPhot Python Interface  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/unlimited_width.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="tests.test_piecewise_bicubic_psf module" href="tests.test_piecewise_bicubic_psf.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> SuperPhot Python Interface
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../user_documentation/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_implementation/modules.html">Python Package Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cpp_api.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../c_api.html">C API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Unit Testing Code</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="tests.html">tests package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="tests.html#subpackages">Subpackages</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="tests.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="tests.test_background.html">tests.test_background module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tests.test_fake_image.html">tests.test_fake_image module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tests.test_piecewise_bicubic_psf.html">tests.test_piecewise_bicubic_psf module</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">tests.utilities module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SuperPhot Python Interface</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="modules.html">tests</a> &raquo;</li>
+        
+          <li><a href="tests.html">tests package</a> &raquo;</li>
+        
+      <li>tests.utilities module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/_unit_tests/tests.utilities.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-tests.utilities">
+<span id="tests-utilities-module"></span><h1>tests.utilities module<a class="headerlink" href="#module-tests.utilities" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="class-inheritance-diagram">
+<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this headline">¶</a></h2>
+<img src="../_images/inheritance-08c51703e0e6f5027f3269f5575c275c71e32f65.png" alt="Inheritance diagram of FloatTestCase" usemap="#inheritance5fbd0abfe6" class="inheritance"/>
+<map id="inheritance5fbd0abfe6" name="inheritance5fbd0abfe6">
+<area shape="rect" id="node1" href="#tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="5,79,200,104"/>
+<area shape="rect" id="node2" title="A class whose instances are single test cases." alt="" coords="19,5,186,31"/>
+</map>
+<p>A collection of general use testing utilities.</p>
+<dl class="class">
+<dt id="tests.utilities.FloatTestCase">
+<em class="property">class </em><code class="descclassname">tests.utilities.</code><code class="descname">FloatTestCase</code><span class="sig-paren">(</span><em>methodName='runTest'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/utilities.html#FloatTestCase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.utilities.FloatTestCase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">unittest.case.TestCase</span></code></p>
+<img src="../_images/inheritance-3f31eec3e2de326c6e9346cd2a9a7ce80b70a4ba.png" alt="Inheritance diagram of tests.utilities.FloatTestCase" usemap="#inheritance687fbef197" class="inheritance"/>
+<map id="inheritance687fbef197" name="inheritance687fbef197">
+<area shape="rect" id="node1" href="#tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="5,79,200,104"/>
+<area shape="rect" id="node2" title="A class whose instances are single test cases." alt="" coords="19,5,186,31"/>
+</map>
+<p>Test case involving floating point comparisons.</p>
+<dl class="method">
+<dt id="tests.utilities.FloatTestCase.approx_equal">
+<code class="descname">approx_equal</code><span class="sig-paren">(</span><em>value_1</em>, <em>value_2</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/utilities.html#FloatTestCase.approx_equal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.utilities.FloatTestCase.approx_equal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True iff value_1 ~= value_2 to within tolerance.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.utilities.FloatTestCase.assertApprox">
+<code class="descname">assertApprox</code><span class="sig-paren">(</span><em>value_1</em>, <em>value_2</em>, <em>message=''</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/utilities.html#FloatTestCase.assertApprox"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.utilities.FloatTestCase.assertApprox" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assert that the two values are equal to wihin the current tolerance.</p>
+<p class="rubric">Notes</p>
+<p>The exact definition is:</p>
+<p>|value_1 - value_2|
+&lt;=
+tolerange * |value_1 + value_2|  * float_info.epsilon</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>value_1</strong> &#8211; The first of the two values to compare.</li>
+<li><strong>value_2</strong> &#8211; The second of the two values to compare.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">True iff the two values are within tolerance of each other.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.utilities.FloatTestCase.set_tolerance">
+<code class="descname">set_tolerance</code><span class="sig-paren">(</span><em>tolerance</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/utilities.html#FloatTestCase.set_tolerance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.utilities.FloatTestCase.set_tolerance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the tolerance for floating point comparisons.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tolerance</strong> &#8211; The maximum fractional difference in units of floating
+point epsilon to allow when comparing two floating point
+numbers. See assertApprox for more details.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="tests.utilities.FloatTestCase.tolerance">
+<code class="descname">tolerance</code><em class="property"> = 10.0</em><a class="headerlink" href="#tests.utilities.FloatTestCase.tolerance" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="tests.test_piecewise_bicubic_psf.html" class="btn btn-neutral" title="tests.test_piecewise_bicubic_psf module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Kaloyan Penev.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

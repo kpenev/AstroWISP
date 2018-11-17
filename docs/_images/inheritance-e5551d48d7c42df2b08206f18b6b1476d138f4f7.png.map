@@ -1,0 +1,5 @@
+<map id="inheritance7b068483b8" name="inheritance7b068483b8">
+<area shape="rect" id="node1" href="superphot.background.html#superphot.background.BackgroundExtractor" target="_top" title="Measure the background level for each source in an image." alt="" coords="5,5,309,31"/>
+<area shape="rect" id="node2" href="superphot.fit_star_shape.html#superphot.fit_star_shape.FitStarShape" target="_top" title="Fit for the PSF/PRF of stars and their flux." alt="" coords="333,5,600,31"/>
+<area shape="rect" id="node3" href="superphot.smooth_dependence.html#superphot.smooth_dependence.SmoothDependence" target="_top" title="Utilities for imposing smooth depnedence of one quantity on others." alt="" coords="624,5,987,31"/>
+</map>

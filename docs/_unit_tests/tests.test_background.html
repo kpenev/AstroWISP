@@ -1,0 +1,322 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>tests.test_background module &mdash; SuperPhot Python Interface  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/unlimited_width.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="tests.test_fake_image module" href="tests.test_fake_image.html" />
+    <link rel="prev" title="tests.fitpsf.utils module" href="tests.fitpsf.utils.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> SuperPhot Python Interface
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../user_documentation/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_implementation/modules.html">Python Package Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cpp_api.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../c_api.html">C API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Unit Testing Code</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="tests.html">tests package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="tests.html#subpackages">Subpackages</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="tests.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">tests.test_background module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tests.test_fake_image.html">tests.test_fake_image module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tests.test_piecewise_bicubic_psf.html">tests.test_piecewise_bicubic_psf module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tests.utilities.html">tests.utilities module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SuperPhot Python Interface</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="modules.html">tests</a> &raquo;</li>
+        
+          <li><a href="tests.html">tests package</a> &raquo;</li>
+        
+      <li>tests.test_background module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/_unit_tests/tests.test_background.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-tests.test_background">
+<span id="tests-test-background-module"></span><h1>tests.test_background module<a class="headerlink" href="#module-tests.test_background" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="class-inheritance-diagram">
+<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this headline">¶</a></h2>
+<img src="../_images/inheritance-9927054ff4a4731f6c2c4f759996cb89f5e11177.png" alt="Inheritance diagram of BackgroundExtractor, FloatTestCase, TestAnnulusBackground" usemap="#inheritance0c0bad10a6" class="inheritance"/>
+<map id="inheritance0c0bad10a6" name="inheritance0c0bad10a6">
+<area shape="rect" id="node1" href="../_implementation/superphot.background.html#superphot.background.BackgroundExtractor" target="_top" title="Measure the background level for each source in an image." alt="" coords="5,5,309,31"/>
+<area shape="rect" id="node2" href="#tests.test_background.TestAnnulusBackground" target="_top" title="Test background extraction based on annuli around sources." alt="" coords="257,152,578,177"/>
+<area shape="rect" id="node3" href="tests.utilities.html#tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="320,79,515,104"/>
+<area shape="rect" id="node4" title="A class whose instances are single test cases." alt="" coords="334,5,501,31"/>
+</map>
+<p>Test SuperPhot&#8217;s background extraction.</p>
+<dl class="class">
+<dt id="tests.test_background.TestAnnulusBackground">
+<em class="property">class </em><code class="descclassname">tests.test_background.</code><code class="descname">TestAnnulusBackground</code><span class="sig-paren">(</span><em>methodName='runTest'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_background.html#TestAnnulusBackground"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_background.TestAnnulusBackground" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="tests.utilities.html#tests.utilities.FloatTestCase" title="tests.utilities.FloatTestCase"><code class="xref py py-class docutils literal"><span class="pre">tests.utilities.FloatTestCase</span></code></a></p>
+<img src="../_images/inheritance-cd3fadc9af40cc0ec535fa0f05ed08537d2232ea.png" alt="Inheritance diagram of tests.test_background.TestAnnulusBackground" usemap="#inheritance25d02e3b0b" class="inheritance"/>
+<map id="inheritance25d02e3b0b" name="inheritance25d02e3b0b">
+<area shape="rect" id="node1" href="#tests.test_background.TestAnnulusBackground" target="_top" title="Test background extraction based on annuli around sources." alt="" coords="5,152,327,177"/>
+<area shape="rect" id="node2" href="tests.utilities.html#tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="69,79,263,104"/>
+<area shape="rect" id="node3" title="A class whose instances are single test cases." alt="" coords="83,5,249,31"/>
+</map>
+<p>Test background extraction based on annuli around sources.</p>
+<dl class="staticmethod">
+<dt id="tests.test_background.TestAnnulusBackground.add_flux_around_sources">
+<em class="property">static </em><code class="descname">add_flux_around_sources</code><span class="sig-paren">(</span><em>source_x</em>, <em>source_y</em>, <em>radius</em>, <em>extra_flux</em>, <em>image</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_background.html#TestAnnulusBackground.add_flux_around_sources"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_background.TestAnnulusBackground.add_flux_around_sources" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add extra flux to image pixels within a radius around sources.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>source_x</strong> &#8211; The x coordinates of the sources to add flux around.</li>
+<li><strong>source_x</strong> &#8211; The y coordinates of the sources to add flux around.</li>
+<li><strong>radius</strong> &#8211; Pixes with centers within this radius get extra flux.</li>
+<li><strong>extra_flux</strong> &#8211; The amount of extra flux per pixel to add.</li>
+<li><strong>image</strong> &#8211; The image to add flux to.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.test_background.TestAnnulusBackground.test_background_error">
+<code class="descname">test_background_error</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_background.html#TestAnnulusBackground.test_background_error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_background.TestAnnulusBackground.test_background_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test constant gradient background but with known error.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.test_background.TestAnnulusBackground.test_background_gradient">
+<code class="descname">test_background_gradient</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_background.html#TestAnnulusBackground.test_background_gradient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_background.TestAnnulusBackground.test_background_gradient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests where the background has a constant non-zero gradient.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.test_background.TestAnnulusBackground.test_constant_image">
+<code class="descname">test_constant_image</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_background.html#TestAnnulusBackground.test_constant_image"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_background.TestAnnulusBackground.test_constant_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test background extraction on an image with all pixels the same.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.test_background.TestAnnulusBackground.test_crowded_image">
+<code class="descname">test_crowded_image</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_background.html#TestAnnulusBackground.test_crowded_image"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_background.TestAnnulusBackground.test_crowded_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests involving sources for which no BG can be determined.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.test_background.TestAnnulusBackground.test_partially_crowded_image">
+<code class="descname">test_partially_crowded_image</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_background.html#TestAnnulusBackground.test_partially_crowded_image"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_background.TestAnnulusBackground.test_partially_crowded_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>A test where one source is crowded and 4 are not.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="tests.test_fake_image.html" class="btn btn-neutral float-right" title="tests.test_fake_image module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="tests.fitpsf.utils.html" class="btn btn-neutral" title="tests.fitpsf.utils module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Kaloyan Penev.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

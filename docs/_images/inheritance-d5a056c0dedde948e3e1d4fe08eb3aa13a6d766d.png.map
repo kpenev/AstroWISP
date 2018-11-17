@@ -1,0 +1,5 @@
+<map id="inheritancedeed27bb82" name="inheritancedeed27bb82">
+<area shape="rect" id="node1" href="#tests.test_fake_image.TestImage" target="_top" title="Make sure the Image class functions as expected." alt="" coords="5,152,239,177"/>
+<area shape="rect" id="node2" href="tests.utilities.html#tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="25,79,219,104"/>
+<area shape="rect" id="node3" title="A class whose instances are single test cases." alt="" coords="39,5,205,31"/>
+</map>
