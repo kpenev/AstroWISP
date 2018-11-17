@@ -24,8 +24,12 @@ namespace FitPSF {
             ///See Source::__background_electrons_variance.
             __background_electrons_variance;
     public:
+        ///Construct the predicate based on a given background.
         PixelOrder(
+            ///The number of electrons per pixel in the background
             double background_electrons,
+
+            ///The estiamted variance in background_electrons.
             double background_electrons_variance
         ) :
             __background_electrons(background_electrons),
@@ -54,9 +58,9 @@ namespace FitPSF {
                 else if(!second->flux_fit()) return true;
             } else if(second->shape_fit() || second->flux_fit()) return false;
 
-            if(first->flag() < second->flag()) 
+            if(first->flag() < second->flag())
                 return true;
-            else 
+            else
                 return (
                     background_excess(*first,
                                       __background_electrons,

@@ -33,7 +33,7 @@
 
 namespace FitPSF {
 
-    /**\brief An abstract base class for sources which participate in PSF 
+    /**\brief An abstract base class for sources which participate in PSF
      * fitting.
      *
      * \ingroup FitPSF
@@ -59,7 +59,7 @@ namespace FitPSF {
             ///The id of the source in the source_assignment array
             unsigned __source_assignment_id,
 
-                     ///\brief The number of sources which were combined with this 
+                     ///\brief The number of sources which were combined with this
                      ///source when fitting for the amplitude.
                      __group_sources;
 
@@ -73,7 +73,7 @@ namespace FitPSF {
             ///pixels.
             Core::Flux __mask_flux;
 
-            std::string 
+            std::string
                 ///See image_filename().
                 __image_filename,
 
@@ -91,7 +91,7 @@ namespace FitPSF {
             SourceDropReason __drop_reason;
 
         protected:
-            ///\brief A structure holding all necessary information about 
+            ///\brief A structure holding all necessary information about
             ///saturated pixels.
             std::list<AmplitudeSaturatedPixel> _saturated_pixels;
 
@@ -114,7 +114,7 @@ namespace FitPSF {
                 double &excess_sum_squares
             ) =0;
 
-            ///\brief Fit for the flux of the source and return the change from 
+            ///\brief Fit for the flux of the source and return the change from
             ///its previous value.
             double fit_flux(
                 ///The integrals of the PSF x sub-pixel map over the source
@@ -129,7 +129,7 @@ namespace FitPSF {
                 const Core::SourceID &id,
 
                 ///The x coordinate of the source center.
-                double x0, 
+                double x0,
 
                 ///The y coordinate of the source center.
                 double y0,
@@ -143,7 +143,7 @@ namespace FitPSF {
                 ///The id to assign to this source in the source_assignment array
                 int source_assignment_id,
 
-                ///The sub-pixel sensitivity map to assume. Must not be destroyed 
+                ///The sub-pixel sensitivity map to assume. Must not be destroyed
                 ///while this object is in use.
                 const Core::SubPixelMap *subpix_map,
 
@@ -151,7 +151,7 @@ namespace FitPSF {
                 ///extracted.
                 const std::string &image_fname,
 
-                ///The name of the file where this source should be saved after 
+                ///The name of the file where this source should be saved after
                 ///the fit.
                 const std::string &output_fname
             );
@@ -169,12 +169,12 @@ namespace FitPSF {
                 background().value() = value / __gain;
             }
 
-            ///\brief The variance of the background under the source in 
+            ///\brief The variance of the background under the source in
             ///electrons squared
             double background_electrons_variance() const
             {return __background_electrons_variance;}
 
-            ///\brief A reference to the variance of the background under the 
+            ///\brief A reference to the variance of the background under the
             ///source in electrons squared
             void set_background_electrons_variance(double value)
             {
@@ -226,11 +226,12 @@ namespace FitPSF {
             ///Teh sub-pixel map supplied on input.
             const Core::SubPixelMap &subpix_map() const {return *__subpix_map;}
 
-            ///Order sources by their merit function
+            ///\brief Comparison between this and RHS, ordering by the
+            ///respective merit function.
             bool operator<(const Source<PSF_TYPE> &rhs) const
             {return merit()<rhs.merit();}
 
-            ///Order sources by their merit function
+            ///Opposite of operator<()
             bool operator>(const Source<PSF_TYPE> &rhs) const
             {return merit()>rhs.merit();}
 
@@ -258,18 +259,18 @@ namespace FitPSF {
             ///Sets the amplitude of the PSF to the given value.
             void set_psf_amplitude(double value) {__amplitude=value;}
 
-            ///\brief Set how many sources were in the same group as this one 
+            ///\brief Set how many sources were in the same group as this one
             ///when amplitude was fit.
             void set_sources_in_group(unsigned source_count)
             {__group_sources = source_count;}
 
 
             ///\brief Reference to the values of the expanion terms the PSF
-            ///of the source depends on. 
+            ///of the source depends on.
             Eigen::VectorXd &expansion_terms()
             {return __expansion_terms;}
 
-            ///The values of the expanion terms the PSF of the source depends on. 
+            ///The values of the expanion terms the PSF of the source depends on.
             const Eigen::VectorXd &expansion_terms() const
             {return __expansion_terms;}
 
@@ -320,7 +321,7 @@ namespace FitPSF {
     template<class PSF_TYPE>
         Source<PSF_TYPE>::Source(
             const Core::SourceID     &id,
-            double                    x0, 
+            double                    x0,
             double                    y0,
             double                    gain,
             const Background::Source &background,

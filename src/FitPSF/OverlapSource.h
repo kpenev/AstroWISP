@@ -20,10 +20,16 @@ namespace FitPSF {
         class LIB_LOCAL OverlapSource : public Source<PSF_TYPE> {
         private:
 
+            ///Alias type for a set of sources used in PSF fitting.
             typedef std::set< FIT_SOURCE_TYPE* > SourceSet;
 
+            ///Alias type for a list of fit source pixels.
             typedef std::list< Pixel<FIT_SOURCE_TYPE>* > PixelList;
+
+            ///Alias type for iterator to unmutable list of fit source pixels.
             typedef typename PixelList::const_iterator ConstPixelIter;
+
+            ///Alias type for iterator to mutable list of fit source pixels.
             typedef typename PixelList::iterator PixelIter;
 
             ///\brief The pixels assigned to this source.
@@ -82,21 +88,28 @@ namespace FitPSF {
                 ///The number of non-good pixels assigned to this source.
                 __saturated_pixel_count,
 
-                ///The number of source pixels used in the last fit for the
-                ///shape of the PSF.
+                ///\brief The number of source pixels used in the last fit for
+                ///the shape of the PSF.
                 __shape_fit_pixel_count,
 
-                ///The number of pixels used in the last fit for the source
-                ///flux.
+                ///\brief The number of pixels used in the last fit for the
+                ///source flux.
                 __flux_fit_pixel_count;
 
             ///Is this source ready for PSF fitting?
             bool __ready_to_fit;
 
             ///Assigns the given pixel to this source.
-            void take_pixel(unsigned                    x,
-                            unsigned                    y,
-                            Image<FIT_SOURCE_TYPE>      &psffit_image)
+            void take_pixel(
+                ///The x coordinate of the pixel to add
+                unsigned x,
+
+                ///The y coordinate of the pixel to add
+                unsigned y,
+
+                ///The PSF fitting image.
+                Image<FIT_SOURCE_TYPE> &psffit_image
+            )
             {
 #ifdef VERBOSE_DEBUG
                 std::cerr << "Source("
@@ -151,14 +164,23 @@ namespace FitPSF {
             ///pixel to this source, and calls itself on all neighboring
             ///pixels.
             double process_pixel(
+                ///The x coordinate of the pixel to potentially add.
                 unsigned               x,
+
+                ///The y coordinate of the pixel to potentially add.
                 unsigned               y,
+
+                ///The PSF fitting image image.
                 Image<FIT_SOURCE_TYPE> &psffit_image,
+
+                ///See the alpha parameter of the constructor.
                 double                 alpha,
+
+                ///Is this the central pixel of the source.
                 bool                   central_pixel = false
             );
 
-            ///Flag any pixels not suitable for fitting as excluded from
+            ///\brief Flag any pixels not suitable for fitting as excluded from
             ///shape/flux fits.
             void reject_pixels_from_fit();
 

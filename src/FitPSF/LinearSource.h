@@ -28,18 +28,20 @@ namespace FitPSF {
         public OverlapSource<LinearSource, PSF::PiecewiseBicubic> {
     private:
 
+        ///Convenience alias for unmutable iterators to source pixels.
         typedef std::list< Pixel<LinearSource>* >::const_iterator
             ConstPixelIter;
+
+        ///Convenience alias for mutable iterators to source pixels.
         typedef std::list< Pixel<LinearSource>* >::const_iterator
             PixelIter;
-
 
         ///See psf argument of the constructors.
         const PSF::PiecewiseBicubic &__psf;
 
         ///\brief A (piece of a) matrix which after applying to the PSF
-        ///fitting coefficients and scaling by the amplitude gives the 
-        ///integral of the PSF over the source pixels selected for shape 
+        ///fitting coefficients and scaling by the amplitude gives the
+        ///integral of the PSF over the source pixels selected for shape
         ///fitting.
         const Eigen::Block<Eigen::MatrixXd> *__shape_fit_integral_matrix;
 
@@ -85,7 +87,7 @@ namespace FitPSF {
             std::valarray<double> &pixel_integrals
         );
 
-        ///\brief Prepare matrices giving PSF integrals over the source 
+        ///\brief Prepare matrices giving PSF integrals over the source
         ///pixels.
         ///
         ///The result is split between two matrices: the output argument
@@ -106,16 +108,16 @@ namespace FitPSF {
         ///source pixels used for fitting.
         ///
         ///Just as fill_pixel_integral_matrix(), the result is split into two
-        ///pieces: the output argument to this method, with entries for shape 
-        ///fitting pixels only and an internally stored matrix for flux-only 
+        ///pieces: the output argument to this method, with entries for shape
+        ///fitting pixels only and an internally stored matrix for flux-only
         ///fitting pixels.
         void fill_background_excess(
             ///See same name argument of prepare_for_fitting.
             Eigen::VectorBlock<Eigen::VectorXd> &shape_fit_background_excess
         );
 
-        ///Re-orders a flux fitting column from the order matching the list
-        ///of source pixels to the order specified by the flux_fit_index()
+        ///\brief Re-orders a flux fitting column from the order matching the
+        ///list of source pixels to the order specified by the flux_fit_index()
         ///Pixel method.
         template<class OUTPUT_TYPE>
             void reorder_flux_fit_column(
@@ -154,10 +156,10 @@ namespace FitPSF {
         );
 
     public:
-        ///\brief See Source constructor with matching arguments (except the 
+        ///\brief See Source constructor with matching arguments (except the
         ///first two).
         LinearSource(
-            ///A properly constructed PSF for this source. The exact shape 
+            ///A properly constructed PSF for this source. The exact shape
             ///parameters set are irrelevant. Must not be destroyed while
             ///this object is in use.
             const PSF::PiecewiseBicubic &psf,
@@ -166,7 +168,7 @@ namespace FitPSF {
             const Core::SourceID &id,
 
             ///See OverlapSource::OverlapSource()
-            double x0, 
+            double x0,
 
             ///See OverlapSource::OverlapSource()
             double y0,
@@ -215,10 +217,10 @@ namespace FitPSF {
 #endif
         }
 
-        ///\brief See Source constructor with matching arguments (except the 
+        ///\brief See Source constructor with matching arguments (except the
         ///first one).
         LinearSource(
-            ///A properly constructed PSF for this source. The exact shape 
+            ///A properly constructed PSF for this source. The exact shape
             ///parameters set are irrelevant. Must not be destroyed while
             ///this object is in use.
             const PSF::PiecewiseBicubic &psf,
@@ -227,7 +229,7 @@ namespace FitPSF {
             const Core::SourceID &id,
 
             ///See OverlapSource::OverlapSource()
-            double x0, 
+            double x0,
 
             ///See OverlapSource::OverlapSource()
             double y0,
@@ -261,7 +263,7 @@ namespace FitPSF {
         ) :
             OverlapSource<LinearSource, PSF::PiecewiseBicubic>(
                 id,
-                x0, 
+                x0,
                 y0,
                 background,
                 psffit_image,
@@ -284,13 +286,13 @@ namespace FitPSF {
 #endif
         }
 
-        ///\brief A post-processing step to prepare the source for fitting, 
+        ///\brief A post-processing step to prepare the source for fitting,
         ///which must be called after all sources are constructed.
         ///
         ///In addition to setting up the source it also fills pieces of the
         ///matrices needed for fitting.
         virtual void prepare_for_fitting(
-            ///The collection of PSF parameter basis vectors for which to 
+            ///The collection of PSF parameter basis vectors for which to
             ///calculate the predicted pixel response. The first set should
             ///correspond to the overall integral being projected out of the
             ///basis.
@@ -330,7 +332,7 @@ namespace FitPSF {
         using OverlapSource<LinearSource,
                             PSF::PiecewiseBicubic>::fill_fluxfit_column;
 
-        ///\brief Sets the entries in the flux fitting matrix 
+        ///\brief Sets the entries in the flux fitting matrix
         ///corresponding to this source.
         template<class SHAPE_FIT_OUTPUT_TYPE, class FLUX_FIT_OUTPUT_TYPE>
             void fill_fluxfit_column(
@@ -363,7 +365,7 @@ namespace FitPSF {
 
         using OverlapSource<LinearSource, PSF::PiecewiseBicubic>::pixel_psf;
 
-        ///\brief The integral of the normalized PSF over the current 
+        ///\brief The integral of the normalized PSF over the current
         ///pixel and its derivatives
         double pixel_psf(PSF::SDKDerivative =PSF::NO_DERIV) const
         {

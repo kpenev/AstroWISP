@@ -50,7 +50,7 @@ namespace Core {
             ///argument of Image::Image()
             char *__mask;
 
-            unsigned long 
+            unsigned long
                 ///The x resolutions of the image.
                 __x_resolution,
 
@@ -82,7 +82,7 @@ namespace Core {
                 ///faster than the y with successive entries. The image uses
                 //a copy of this data.
                 const DATA_TYPE *values = NULL,
-                
+
                 ///Quality flags for the image pixels in the same order as
                 ///values. See comments for values argument.
                 const char *mask = NULL,
@@ -113,7 +113,10 @@ namespace Core {
 
             ///\brief Create a new image containing a copy of the data of the
             ///given image.
-            Image(const Image<DATA_TYPE> &image) :
+            Image(
+                ///The image to copy.
+                const Image<DATA_TYPE> &image
+            ) :
                 __values(NULL),
                 __errors(NULL),
                 __mask(NULL),
@@ -137,7 +140,7 @@ namespace Core {
                 ///faster than the y with successive entries. The image uses
                 //a copy of this data.
                 const DATA_TYPE *orig_values,
-                
+
                 ///Quality flags for the image pixels in the same order as
                 ///values. See comments for values argument. If no bad pixel
                 //mask should be used, set this to NULL.
@@ -216,7 +219,7 @@ namespace Core {
                 ///modified through this object. To force copying the data,
                 ///use the constructor with const arguments.
                 DATA_TYPE *values,
-                
+
                 ///Quality flags for the image pixels in the same order as
                 ///values. See comments for values argument.
                 char *mask,
@@ -251,7 +254,10 @@ namespace Core {
             }
 
             ///Make this image an alias of the input image.
-            virtual void wrap(Image<DATA_TYPE> &image)
+            virtual void wrap(
+                ///The image to wrap
+                Image<DATA_TYPE> &image
+            )
             {
                 wrap(image.__values,
                      image.__mask,
@@ -316,7 +322,7 @@ namespace Core {
             virtual bool cosmic(unsigned long x, unsigned long y) const
             {return mask(x, y) & MASK_COSMIC;}
 
-            ///\brief True if the given pixel is flagged as coming from 
+            ///\brief True if the given pixel is flagged as coming from
             ///outside the image.
             ///TODO: this flag is never set
             virtual bool outside(unsigned long x, unsigned long y) const
@@ -335,7 +341,7 @@ namespace Core {
             virtual bool saturated(unsigned long x, unsigned long y) const
             {return mask(x, y) & MASK_SATURATED;}
 
-            ///\brief True iff the given pixel is flagged having its value 
+            ///\brief True iff the given pixel is flagged having its value
             ///interpolated (rather than really read out).
             virtual bool interpolated(unsigned long x, unsigned long y) const
             {return mask(x,y) & MASK_INTERPOLATED;}

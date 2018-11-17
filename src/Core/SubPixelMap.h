@@ -21,22 +21,58 @@ namespace Core {
     ///\ingroup Core
     class LIB_PUBLIC SubPixelMap {
     private:
+        ///\brief The sensitivities of the sub-pixels making up the map,
+        ///arranged with the x varying fast and y slow.
         std::valarray<double> __sensitivities;
-        unsigned __x_res, __y_res;
+
+        unsigned
+            ///See x_resolution()
+            __x_res,
+
+            ///See x_resolution()
+            __y_res;
+
+        ///See name()
         std::string __name;
     public:
         ///\brief Create a sub-pixel map (must call set_resolution and actually
         ///set sensitivities before use).
-        SubPixelMap(const std::string &name) : __name(name) {}
+        SubPixelMap(
+            ///See name()
+            const std::string &name
+        ) :
+            __name(name)
+        {}
 
         ///\brief Create a sub-pixel map with the given resolution (must set
         ///sensitivities before use).
-        SubPixelMap(unsigned x_res, unsigned y_res, const std::string &name) :
-            __sensitivities(x_res*y_res), __x_res(x_res), __y_res(y_res),
-            __name(name) {}
+        SubPixelMap(
+            ///Resolution along x
+            unsigned x_res,
+
+            ///Resolution along y
+            unsigned y_res,
+
+            ///See name()
+            const std::string &name
+        ) :
+            __sensitivities(x_res * y_res),
+            __x_res(x_res),
+            __y_res(y_res),
+            __name(name)
+        {}
 
         ///Create a sub-pixel map with the given resolution and sensitivities.
-        SubPixelMap(double *sensitivities, unsigned x_res, unsigned y_res) :
+        SubPixelMap(
+            ///The sensitivities to set arranged with x varying faster than y.
+            double *sensitivities,
+
+            ///Resolution along x
+            unsigned x_res,
+
+            ///Resolution along y
+            unsigned y_res
+        ) :
             __sensitivities(sensitivities, x_res * y_res),
             __x_res(x_res),
             __y_res(y_res)

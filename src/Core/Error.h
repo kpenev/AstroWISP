@@ -34,8 +34,8 @@ namespace Error {
 	private:
 		std::string message;
 	public:
-		General(const std::string &error_message="") : 
-			message(error_message) 
+		General(const std::string &error_message="") :
+			message(error_message)
             {
 #ifndef NDEBUG
                 std::cerr << what() << ": " << get_message() << std::endl;
@@ -87,9 +87,9 @@ namespace Error {
 	class LIB_PUBLIC FitsImageOutside : public FitsImage {
 	public:
 		FitsImageOutside(unsigned long x, unsigned long y, unsigned long xres,
-				unsigned long yres, 
-				const std::string &filename="unknown fits file", 
-				int hdu_number=0) 
+				unsigned long yres,
+				const std::string &filename="unknown fits file",
+				int hdu_number=0)
 		{
 			std::ostringstream msg;
 			msg << "Attempting to access outside the image area ("
@@ -101,7 +101,7 @@ namespace Error {
 		}
 		virtual const char *what() const throw() {return "Outside fits image error";}
 	};
-	
+
 	///\brief The parent of all run-time errors.
 	///\ingroup SubPixPhot
 	///\ingroup FitSubpix
@@ -132,7 +132,7 @@ namespace Error {
 		InvalidArgument(
 				///Name of the function that received the invalid argument.
 				const std::string &func_name,
-				
+
 				///A message giving details about which argument and why.
 				const std::string &arg_msg)
 		{
@@ -144,7 +144,7 @@ namespace Error {
 		InvalidArgument(
 				///Name of the function that received the invalid argument.
 				const std::string &func_name,
-				
+
 				///The number of the offending argument.
 				int arg_num)
 		{
@@ -162,7 +162,7 @@ namespace Error {
 	///\ingroup FitPSF
 	class LIB_PUBLIC CommandLine : public Runtime {
 	public:
-		CommandLine(const std::string &error_message="") : 
+		CommandLine(const std::string &error_message="") :
 				Runtime(error_message) {}
 		virtual const char *what() const throw()
         {return "Bad command line or config";}
@@ -185,7 +185,7 @@ namespace Error {
 	///\ingroup FitPSF
 	class LIB_PUBLIC IO : public Runtime {
 	public:
-		IO(const std::string &error_message="") : 
+		IO(const std::string &error_message="") :
 				Runtime(error_message) {}
 		virtual const char *what() const throw()
 		{return "Failed I/O operation";}
@@ -196,16 +196,16 @@ namespace Error {
 	private:
 		std::string __path, __message;
 	public:
-		HDF5(	
+		HDF5(
 				///The path (including the filename) where the error
 				///occurred.
 				const std::string &path="",
 
 				///Message about what went wrong.
-				const std::string &error_message="") : 
-			IO(error_message + " at " + path), 
+				const std::string &error_message="") :
+			IO(error_message + " at " + path),
 			__path(path),
-			__message(error_message) 
+			__message(error_message)
             {}
 
 		virtual const char *what() const throw()
@@ -261,8 +261,14 @@ namespace Error {
 	///\ingroup FitPSF
 	class LIB_PUBLIC CFITSIO : public Runtime {
 	public:
-		CFITSIO(int cfitsio_error_code,
-				const std::string &error_message="")
+        ///Create the error.
+		CFITSIO(
+            ///The error code returned by CFITSIO
+            int cfitsio_error_code,
+
+            ///A message describing the error.
+            const std::string &error_message=""
+        )
 		{
 			std::ostringstream msg;
 			char cfitsio_msg[81];

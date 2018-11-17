@@ -27,7 +27,7 @@ namespace FitPSF {
 
         double __variance; ///<The estimated variance of the saturated pixel
 
-        ///\brief The integral of the PSF over the saturated pixel and its 
+        ///\brief The integral of the PSF over the saturated pixel and its
         ///derivatives (if requested).
         std::valarray<double> __psf_integral;
     public:
@@ -53,14 +53,17 @@ namespace FitPSF {
         ///The estimated variance of the saturated pixel
         inline double variance() const {return __variance;}
 
-        ///\brief The integral of the PSF over the saturated pixel and all of 
+        ///\brief The integral of the PSF over the saturated pixel and all of
         ///its derivatives.
         inline const std::valarray<double> &psf_integral() const
         {return __psf_integral;}
 
-        ///\brief The integral of the PSF over the saturated pixel or one of 
+        ///\brief The integral of the PSF over the saturated pixel or one of
         ///its derivatives
-        inline double psf_integral(PSF::SDKDerivative deriv) const
+        inline double psf_integral(
+            ///The derivate to return.
+            PSF::SDKDerivative deriv
+        ) const
         {return __psf_integral[deriv];}
 
         ///The amplitude below which this pixel should not be saturated
@@ -69,7 +72,10 @@ namespace FitPSF {
 
         ///\brief Comparison of saturated pixels based on the amplitude below
         ///which they should not be saturated
-        bool operator<(const AmplitudeSaturatedPixel &rhs) const
+        bool operator<(
+            ///The saturated pixel to compare to.
+            const AmplitudeSaturatedPixel &rhs
+        ) const
         {return critical_amplitude() < rhs.critical_amplitude();}
     }; //End AmplitudeSaturatedPixel class.
 

@@ -38,11 +38,21 @@ namespace Core {
     public:
 
         ///Construct out of the given string.
-        SourceID( const std::string &id, bool assume_non_hat=false)
-        : __id( id ), __is_hatid(!assume_non_hat && parse_hatid()) {}
+        SourceID( const std::string &id, bool assume_non_hat=false) :
+            __id( id ),
+            __is_hatid(!assume_non_hat && parse_hatid())
+        {}
 
-        SourceID(unsigned field, unsigned source)
-            : __field(field), __source(source)
+        ///Create a source ID from the given field and source number.
+        SourceID(
+            ///The HAT field the source belongs to
+            unsigned field,
+
+            ///The source number within the HAT field.
+            unsigned source
+        ) :
+            __field(field),
+            __source(source)
         {
             std::ostringstream temp;
             temp.fill('0');
@@ -56,17 +66,27 @@ namespace Core {
         SourceID() {}
 
         ///Copy constructor.
-        SourceID( const SourceID& id ) :
-            __id(id.__id), __is_hatid(id.__is_hatid), __field(id.__field),
-            __source(id.__source) {}
+        SourceID(const SourceID& id) :
+            __id(id.__id),
+            __is_hatid(id.__is_hatid),
+            __field(id.__field),
+            __source(id.__source)
+        {}
 
         ///Convert to string.
         virtual operator const std::string& () const {return __id;}
 
+        ///Copy RHS to this.
         virtual SourceID &operator=(const SourceID &rhs)
-        {__is_hatid=rhs.__is_hatid; __id=rhs.__id; __field=rhs.__field;
-            __source=rhs.__source; return *this;}
+        {
+            __is_hatid = rhs.__is_hatid;
+            __id = rhs.__id;
+            __field = rhs.__field;
+            __source = rhs.__source;
+            return *this;
+        }
 
+        ///Copy RHS to this.
         virtual SourceID &operator=(const std::string &rhs)
         {__id=rhs; __is_hatid=parse_hatid(); return *this;}
 
@@ -74,12 +94,12 @@ namespace Core {
         virtual const std::string& str() const {return __id;}
 
         ///Self explanatory.
-        virtual bool operator!= ( const SourceID& rhs ) const {
+        virtual bool operator!= (const SourceID& rhs) const {
             return __id != rhs.__id;
         }
 
         ///Self explanatory.
-        virtual bool operator== ( const SourceID& rhs ) const {
+        virtual bool operator== (const SourceID& rhs) const {
             return __id == rhs.__id;
         }
 

@@ -41,8 +41,12 @@ namespace Core {
         ///The actual pixel values of the fits image.
         const Core::Image<double> *__image;
 
-        ///Constant variance to add to flux dependent variance.
-        double __var_offset, __gain;
+        double
+            ///Constant variance to add to flux dependent variance.
+            __var_offset,
+
+            ///See gain argument to constructor.
+            __gain;
 
         ///\brief A set of sub-pixel structure independent matrices (one
         ///for each aperture), which can be used to apply a different

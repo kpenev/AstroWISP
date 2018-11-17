@@ -53,7 +53,10 @@ namespace FitPSF {
             bool __last;
 
             ///Check for correct format and read FITS and output filenames.
-            void read_filenames(std::istream &input_stream);
+            void read_filenames(
+                ///The stream to read from.
+                std::istream &input_stream
+            );
 
             ///Read the column data, initializing __locations along the way.
             void read_column_data(

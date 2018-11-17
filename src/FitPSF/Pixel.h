@@ -24,7 +24,9 @@ namespace FitPSF {
     template<class SOURCE_TYPE>
         class LIB_LOCAL Pixel {
         private:
+            ///Alias type for a set of sources.
             typedef std::set< SOURCE_TYPE* > SourceSet;
+
             unsigned long
                 ///The x-coordinate of the pixel within the image.
                 __x,
@@ -97,7 +99,10 @@ namespace FitPSF {
             {assert(__variance > 0); add_to_source(source);}
 
             ///Add this pixel to another source.
-            void add_to_source(SOURCE_TYPE *source)
+            void add_to_source(
+                ///The source to add the pixel to.
+                SOURCE_TYPE *source
+            )
             {
 #ifdef VERBOSE_DEBUG
                 std::cerr << "Adding source "

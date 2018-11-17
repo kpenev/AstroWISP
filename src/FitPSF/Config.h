@@ -22,7 +22,7 @@
 
 namespace FitPSF {
 
-    ///\brief Default configuration from file but overwritten by command line 
+    ///\brief Default configuration from file but overwritten by command line
     ///options.
     ///
     ///\ingroup FitPSF
@@ -31,9 +31,12 @@ namespace FitPSF {
         ///Describes the available command line options.
         void describe_options();
 
-        ///\brief The part of the help describing the usage and purpose (no 
+        ///\brief The part of the help describing the usage and purpose (no
         ///options).
-        std::string usage_help(const std::string &prog_name) const;
+        std::string usage_help(
+            ///The name of the executable invoked.
+            const std::string &prog_name
+        ) const;
 
     public:
         ///\brief Checks for consistency between the command line options and

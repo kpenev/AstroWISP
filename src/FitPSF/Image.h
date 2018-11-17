@@ -18,7 +18,7 @@
 
 namespace FitPSF {
 
-    /**\brief A class for managing the selection of pixels for PSF/PRF 
+    /**\brief A class for managing the selection of pixels for PSF/PRF
      * fitting.
      *
      * \ingroup FitPSF
@@ -215,11 +215,22 @@ namespace FitPSF {
             ///\brief Wrap the given data in an image.
             ///
             ///See Core::Image::wrap() for description of the arguments.
-            virtual void wrap(double *values,
-                              char *mask,
-                              unsigned long x_resolution,
-                              unsigned long y_resolution,
-                              double *errors)
+            virtual void wrap(
+                ///The image values of the image to wrap.
+                double *values,
+
+                ///The pixel quality mask of the image to wrap.
+                char *mask,
+
+                ///The x resolution of the image.
+                unsigned long x_resolution,
+
+                ///The y resolution of the image.
+                unsigned long y_resolution,
+
+                ///Estimated errors of the image pixel values.
+                double *errors
+            )
             {
                 IO::FitsImage<double>::wrap(values,
                                             mask,
@@ -240,6 +251,7 @@ namespace FitPSF {
 #endif
             }
 
+            ///Wrap the given image.
             virtual void wrap(Core::Image<double> &image)
             {
                 IO::FitsImage<double>::wrap(image);

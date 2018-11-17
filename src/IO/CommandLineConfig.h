@@ -57,8 +57,12 @@ namespace IO {
         opt::positional_options_description _positional;
 
     public:
+        ///Parse the command line (if any arguments are given as arguments).
         CommandLineConfig(
+            ///The number of command line arguments.
             int argc = 0,
+
+            ///The actual command line arguments.
             char **argv = NULL
         )
             : __parsed_ok(false)

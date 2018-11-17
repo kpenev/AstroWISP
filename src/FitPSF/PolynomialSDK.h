@@ -19,24 +19,24 @@
 
 namespace FitPSF {
 
-    ///\brief A class that assumes the PSF on an image is described by an 
-    ///elliptical Gaussian, specified via the S, D, K parameters, and that 
-    ///those parameters are low order polynomials of the image position and 
+    ///\brief A class that assumes the PSF on an image is described by an
+    ///elliptical Gaussian, specified via the S, D, K parameters, and that
+    ///those parameters are low order polynomials of the image position and
     ///fits for the coefficients of the polynomials.
     template< class SUBPIX_TYPE >
         class LIB_LOCAL PolynomialSDK {
         private:
             double
                 ///Lower limit for the initial search of PSF scale
-                __minS, 
+                __minS,
 
                 ///Upper limit for the initial search of PSF scale
-                __maxS, 
+                __maxS,
 
                 ///The tolerance to which to determine fit values
                 __fit_tolerance,
 
-                ///The maximum reduced chi squared allowed before a source is 
+                ///The maximum reduced chi squared allowed before a source is
                 ///dropped from the fit.
                 __max_source_chi2;
 
@@ -48,30 +48,30 @@ namespace FitPSF {
             ///The largest absolute value of each PSF term over all sources.
             Eigen::VectorXd __max_abs_expansion_terms;
 
-            ///\brief Returns initial guesses for the S, D and K polynomials 
-            ///in a newly allocated GSL vector generated from the 
+            ///\brief Returns initial guesses for the S, D and K polynomials
+            ///in a newly allocated GSL vector generated from the
             ///coefficients of a fit with one less term.
             gsl_vector *initial_poly(gsl_vector *lower_order_coef);
 
-            ///Finds a point between min_S and max_S that has a chi squared 
-            ///value less than at both min_S and max_S. Also possibly updates 
+            ///Finds a point between min_S and max_S that has a chi squared
+            ///value less than at both min_S and max_S. Also possibly updates
             ///min_S and max_S to a narrower internal.
             double find_mid_S(double &min_S,
                               double &max_S,
                               void *param_array);
 
-            ///Performs a sigle dimensional fit for an approximate S value of 
+            ///Performs a sigle dimensional fit for an approximate S value of
             ///the image.
             template<class SOURCE_ITERATOR>
-                double fit_initial_S(SOURCE_ITERATOR first_source, 
+                double fit_initial_S(SOURCE_ITERATOR first_source,
                                      SOURCE_ITERATOR past_last_source,
                                      const SUBPIX_TYPE &subpix_map,
                                      double min_S,
                                      double max_S);
 
-            ///Performs a fit for the PSF dependence restricted to terms of 
-            ///up to the given order starting with the given initial 
-            ///coefficients. Assumes that gsl_params variable is already 
+            ///Performs a fit for the PSF dependence restricted to terms of
+            ///up to the given order starting with the given initial
+            ///coefficients. Assumes that gsl_params variable is already
             ///properly initialized as required by gsl_minimization_function.
             void restricted_gsl_fit(
                 gsl_vector* poly_coef,
@@ -79,11 +79,11 @@ namespace FitPSF {
                 double      initial_step_size = 0.5
             );
 
-            ///Performs a single nr step (updating poly_coef and chi2) such 
+            ///Performs a single nr step (updating poly_coef and chi2) such
             ///that at the end chi squared is smaller than at the beginning.
             template<class SOURCE_ITERATOR>
                 bool nr_step(
-                    SOURCE_ITERATOR first_source, 
+                    SOURCE_ITERATOR first_source,
                     SOURCE_ITERATOR past_last_source,
                     const SUBPIX_TYPE &subpix_map,
                     const Eigen::VectorXd &coef_change,
@@ -95,7 +95,7 @@ namespace FitPSF {
             ///Performs a Newton-Raphson fit for a single order.
             template<class SOURCE_ITERATOR>
                 void single_order_nr_fit(
-                    SOURCE_ITERATOR first_source, 
+                    SOURCE_ITERATOR first_source,
                     SOURCE_ITERATOR past_last_source,
                     const SUBPIX_TYPE &subpix_map,
                     Eigen::VectorXd &poly_coef
@@ -104,10 +104,11 @@ namespace FitPSF {
             ///Fills in __max_abs_expansion_terms.
             template<class SOURCE_ITERATOR>
                 void find_max_expansion_terms(
-                    SOURCE_ITERATOR first_source, 
+                    SOURCE_ITERATOR first_source,
                     SOURCE_ITERATOR past_last_source
                 );
         public:
+            ///Construct a polynomial S, D, K dependence for fitting.
             PolynomialSDK(
                 ///The lower end of the range of S values to consider for
                 ///this image.
@@ -121,8 +122,8 @@ namespace FitPSF {
                 ///S, D and K
                 double fit_tolerance = 1e-2,
 
-                ///Sources for which the reduced chi2 is larger than this 
-                ///value are dropped from the fit on the grounds that they 
+                ///Sources for which the reduced chi2 is larger than this
+                ///value are dropped from the fit on the grounds that they
                 ///are probably not point sources.
                 double max_source_chi2 = 10.0
             ) :
@@ -132,42 +133,42 @@ namespace FitPSF {
                 __max_source_chi2(max_source_chi2)
             {}
 
-            ///\brief Performs the fit for the PSF dependence based on the 
-            ///given list of sources and returns a list of SDK sources with 
-            ///properly set S,D,K, amplitude and background. Uses GSL simplex 
+            ///\brief Performs the fit for the PSF dependence based on the
+            ///given list of sources and returns a list of SDK sources with
+            ///properly set S,D,K, amplitude and background. Uses GSL simplex
             ///method for the fit.
             template<class SOURCE_ITERATOR>
                 void gsl_fit(SOURCE_ITERATOR first_source,
                              SOURCE_ITERATOR past_last_source,
                              const SUBPIX_TYPE &subpix_map,
-                             const std::list<double> 
+                             const std::list<double>
                              &guess_poly_coef = std::list<double>());
 
-            ///\brief Fills grad with the gradient vector and d2 with the 
-            ///second derivative matrix of chi squared for the given sources 
-            ///and S, D, K expansion of the given order. The gradient (second 
-            ///order derivative) is only defined if the given sources have 
+            ///\brief Fills grad with the gradient vector and d2 with the
+            ///second derivative matrix of chi squared for the given sources
+            ///and S, D, K expansion of the given order. The gradient (second
+            ///order derivative) is only defined if the given sources have
             ///first (second) order derivatives enabled.
             template<class SOURCE_ITERATOR>
                 void chi2_grad_d2(
-                    SOURCE_ITERATOR first_source, 
+                    SOURCE_ITERATOR first_source,
                     SOURCE_ITERATOR past_last_source,
                     const Eigen::VectorXd &poly_coef,
                     const SUBPIX_TYPE &subpix_map, double &chi2,
                     Eigen::VectorXd &grad, Eigen::MatrixXd &d2
                 );
 
-            ///\brief The same as gsl_fit, but uses Newton-Raphon method to 
+            ///\brief The same as gsl_fit, but uses Newton-Raphon method to
             ///solve for a zero of the gradient of chi squared.
             template<class SOURCE_ITERATOR>
                 void nr_fit(SOURCE_ITERATOR first_source,
                             SOURCE_ITERATOR past_last_source,
                             const SUBPIX_TYPE &subpix_map,
-                            const std::list<double> 
+                            const std::list<double>
                             &guess_poly_coef=std::list<double>());
 
-            ///\brief Prepares a list of SDKSource objects properly 
-            ///initialized with S, D, K, amplitude and background according 
+            ///\brief Prepares a list of SDKSource objects properly
+            ///initialized with S, D, K, amplitude and background according
             ///to the latest best fit polynomial coefficients.
             template<class SOURCE_ITERATOR>
                 std::list<IO::OutputSDKSource> best_fit_sources(
@@ -184,9 +185,9 @@ namespace FitPSF {
                     const COEF_TYPE &poly_coef
                 );
 
-            ///\brief Evaluates the most recently derived fit (or the 
-            ///polynomial defined by the given coefficients) at the given 
-            ///position, returning a PSF that would be appropriate for a 
+            ///\brief Evaluates the most recently derived fit (or the
+            ///polynomial defined by the given coefficients) at the given
+            ///position, returning a PSF that would be appropriate for a
             ///source centered there.
             PSF::EllipticalGaussian operator()(const PSF::MapSource &source)
             {return operator()(source, __poly_coef);}
@@ -196,7 +197,7 @@ namespace FitPSF {
             {return __poly_coef;}
         }; //End PolynomialSDK class.
 
-    ///\brief Returns initial guesses for the S, D and K polynomials in a 
+    ///\brief Returns initial guesses for the S, D and K polynomials in a
     ///newly allocated GSL vector generated from the coefficients of a fit
     ///one smaller order.
     template<class SUBPIX_TYPE>
@@ -225,8 +226,8 @@ namespace FitPSF {
             return result;
         }
 
-    ///\brief Finds a point between min_S and max_S that has a chi squared 
-    ///value less than at both min_S and max_S. Also possibly updates min_S 
+    ///\brief Finds a point between min_S and max_S that has a chi squared
+    ///value less than at both min_S and max_S. Also possibly updates min_S
     ///and max_S to a narrower internal.
     template<class SUBPIX_TYPE>
         double PolynomialSDK<SUBPIX_TYPE>::find_mid_S(double &min_S,
@@ -243,7 +244,7 @@ namespace FitPSF {
             chi2_values.push_back(gsl_s_minimization_function(max_S,
                                                               gsl_param));
             std::list<double>::iterator s_right = test_s.begin(),
-                                        s_left = s_right++, 
+                                        s_left = s_right++,
                                         chi2_right = chi2_values.begin(),
                                         chi2_left = chi2_right++;
             bool searching;
@@ -270,7 +271,7 @@ namespace FitPSF {
                         s_right = test_s.begin();
                         s_left = s_right++;
                         chi2_right = chi2_values.begin();
-                    } 
+                    }
                     chi2_left = chi2_right++;
                 }
             } while (searching);
@@ -336,9 +337,9 @@ namespace FitPSF {
         return mid_S;
     }
 
-    ///\brief Performs a fit for the PSF dependence restricted to terms of up 
-    ///to the given order starting with the given initial coefficients 
-    ///(overwritten on exit). Assumes that gsl_params variable is already 
+    ///\brief Performs a fit for the PSF dependence restricted to terms of up
+    ///to the given order starting with the given initial coefficients
+    ///(overwritten on exit). Assumes that gsl_params variable is already
     ///properly initialized as required by gsl_minimization_function.
     template<class SUBPIX_TYPE>
         void PolynomialSDK<SUBPIX_TYPE>::restricted_gsl_fit(
@@ -365,7 +366,7 @@ namespace FitPSF {
         for(unsigned iter = 0; status == GSL_CONTINUE; ++iter) {
             status = gsl_multimin_fminimizer_iterate(minimizer);
 
-            if (status) 
+            if (status)
                 throw Error::GSLError("Nonzero return status from iterate "
                         "while minimizing PSF map.");
 
@@ -385,7 +386,7 @@ namespace FitPSF {
     template<class SUBPIX_TYPE>
         template<class SOURCE_ITERATOR>
         bool PolynomialSDK<SUBPIX_TYPE>::nr_step(
-            SOURCE_ITERATOR first_source, 
+            SOURCE_ITERATOR first_source,
             SOURCE_ITERATOR past_last_source,
             const SUBPIX_TYPE &subpix_map,
             const Eigen::VectorXd &coef_change,
@@ -407,7 +408,7 @@ namespace FitPSF {
                         gamma = (__minS - poly_coef[0]) / coef_change[0];
                     else if(new_s>__maxS)
                         gamma = (__maxS - poly_coef[0]) / coef_change[0];
-                    if(poly_coef.size() == 3) { 
+                    if(poly_coef.size() == 3) {
                         double s2_m_d2_m_k2 = (
                             std::pow(poly_coef[0], 2)
                             -
@@ -442,7 +443,7 @@ namespace FitPSF {
                                 gamma = sol1;
                             } else if(nroots == 2) {
                                 if(sol1 * gamma > 0) gamma = sol1;
-                                else if(sol2 * gamma > 0) gamma = sol2;	
+                                else if(sol2 * gamma > 0) gamma = sol2;
 #ifdef DEBUG
                                 else assert(false);
 #endif
@@ -569,7 +570,7 @@ namespace FitPSF {
     template<class SUBPIX_TYPE>
         template<class SOURCE_ITERATOR>
         void PolynomialSDK<SUBPIX_TYPE>::find_max_expansion_terms(
-            SOURCE_ITERATOR first_source, 
+            SOURCE_ITERATOR first_source,
             SOURCE_ITERATOR past_last_source
         )
         {
@@ -580,7 +581,7 @@ namespace FitPSF {
                 si != past_last_source;
                 ++si
             ) {
-                const Eigen::VectorXd 
+                const Eigen::VectorXd
                     &expansion_terms = si->expansion_terms();
                 for(unsigned term_i = 0; term_i < nterms; ++term_i)
                     __max_abs_expansion_terms[term_i] = std::max(
@@ -590,10 +591,10 @@ namespace FitPSF {
             }
         }
 
-    ///\brief Fills grad with the gradient vector and d2 with the second 
-    ///derivative matrix of chi squared for the given sources and S, D, K 
-    ///expansion of the given order. The gradient (second order derivative) 
-    ///is only defined if the given sources have first (second) order 
+    ///\brief Fills grad with the gradient vector and d2 with the second
+    ///derivative matrix of chi squared for the given sources and S, D, K
+    ///expansion of the given order. The gradient (second order derivative)
+    ///is only defined if the given sources have first (second) order
     ///derivatives enabled.
     template<class SUBPIX_TYPE>
         template<class SOURCE_ITERATOR>
@@ -675,7 +676,7 @@ namespace FitPSF {
                     );
 
                     Eigen::MatrixXd two_poly_terms = (
-                        si->expansion_terms().head(coef_count) 
+                        si->expansion_terms().head(coef_count)
                         *
                         si->expansion_terms().head(coef_count).transpose()
                     );
@@ -722,7 +723,7 @@ namespace FitPSF {
     template<class SUBPIX_TYPE>
         template<class SOURCE_ITERATOR>
         void PolynomialSDK<SUBPIX_TYPE>::gsl_fit(
-            SOURCE_ITERATOR first_source, 
+            SOURCE_ITERATOR first_source,
             SOURCE_ITERATOR past_last_source,
             const SUBPIX_TYPE &subpix_map,
             const std::list<double> &guess_poly_coef
@@ -782,7 +783,7 @@ namespace FitPSF {
 
     ///The same as gsl_fit, but uses Newton-Raphon method to solve for a zero
     ///of the gradient of chi squared.
-    template<class SUBPIX_TYPE> 
+    template<class SUBPIX_TYPE>
         template<class SOURCE_ITERATOR>
         void PolynomialSDK<SUBPIX_TYPE>::nr_fit(
             SOURCE_ITERATOR first_source,
@@ -833,7 +834,7 @@ namespace FitPSF {
                             old_poly_coef.head(old_coef_count);
 
                         poly_coef.segment(new_coef_count, old_coef_count)=
-                            old_poly_coef.segment(old_coef_count, 
+                            old_poly_coef.segment(old_coef_count,
                                                   old_coef_count);
 
                         poly_coef.segment(2 * new_coef_count,
@@ -867,12 +868,12 @@ namespace FitPSF {
             __poly_coef[i] = poly_coef[i];
     }
 
-    ///Prepares a list of SDKSource objects properly initialized with S, D, 
+    ///Prepares a list of SDKSource objects properly initialized with S, D,
     ///K, amplitude and background according to the latest best fit
     ///polynomial coefficients.
     template<class SUBPIX_TYPE>
         template<class SOURCE_ITERATOR>
-        std::list<IO::OutputSDKSource> 
+        std::list<IO::OutputSDKSource>
         PolynomialSDK<SUBPIX_TYPE>::best_fit_sources(
             SOURCE_ITERATOR first_source,
             SOURCE_ITERATOR past_last_source,
@@ -906,7 +907,7 @@ namespace FitPSF {
                             /
                             gain,
                             src_iter->background_pixels()
-                        ), 
+                        ),
                         src_iter->chi2() / (src_iter->fit_pixels() - 1),
                         src_iter->fit_pixels(),
                         std::sqrt(src_iter->merit())
@@ -924,10 +925,10 @@ namespace FitPSF {
                 flux.error() =
                     std::sqrt(
                         flux.value() * gain
-                        +  
+                        +
                         (
                             src_iter->background_electrons()
-                            + 
+                            +
                             src_iter->background_electrons_variance()
                         )
                         *
@@ -953,7 +954,7 @@ namespace FitPSF {
             else {
                 assert(poly_coef.size() % 3 == 0);
                 unsigned var_size = poly_coef.size() / 3;
-                const Eigen::VectorXd 
+                const Eigen::VectorXd
                     &expansion_terms = source.expansion_terms();
                 for(size_t i=0; i<var_size; i++) {
                     s += expansion_terms[i]*poly_coef[i];

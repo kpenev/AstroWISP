@@ -25,6 +25,7 @@ namespace PSF {
         Eigen::VectorXd __expansion_terms;
 
     public:
+        ///Create the source with the given properties.
         MapSource(
                 ///See Source::Source
                 const Core::SourceID &id,

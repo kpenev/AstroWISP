@@ -21,16 +21,28 @@ namespace Core {
                __k,///< The coefficient in front of (xy) in the exponent
                __amp,///< The amplitude of the PSF
                __bg;///< The background for the PSF only!
+
+        ///The PSF of the source.
         PSF::EllipticalGaussian *__SDKpsf;
     public:
-        SDKSource(const SourceID& id = SourceID(), unsigned num_apertures=1,
-                double x=NaN, double y=NaN, double s=NaN, double d=NaN,
-                double k=NaN, double amp=NaN,
-                const Background::Source &bg=Background::Source(),
-                double max_exp_coef=1) :
+        ///\brief Create a source at the specified location with the specified
+        ///PSF parameters, amplitude and background.
+        SDKSource(
+            const SourceID& id = SourceID(),
+            unsigned num_apertures=1,
+            double x=NaN,
+            double y=NaN,
+            double s=NaN,
+            double d=NaN,
+            double k=NaN,
+            double amp=NaN,
+            const Background::Source &bg=Background::Source(),
+            double max_exp_coef=1
+        ) :
             Source(id, num_apertures, x, y, bg), __SDKpsf(NULL)
         {set_psf(s, d, k, amp, bg.value(), max_exp_coef);}
 
+        ///Copy a source.
         SDKSource(const SDKSource &orig) :
             Source(orig),
             __s(orig.__s), __d(orig.__d), __k(orig.__k), __amp(orig.__amp),

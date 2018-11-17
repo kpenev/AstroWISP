@@ -18,16 +18,29 @@ namespace FitPSF {
     template<class SOURCE_TYPE, class PSF_TYPE>
         class LIB_LOCAL OverlapGroup {
         private:
+            ///Alias for the type for a list of sources.
             typedef typename std::list< SOURCE_TYPE* > SourceList;
 
+            ///Alias for the type for a set of sources.
             typedef std::set< SOURCE_TYPE* > SourceSet;
+
+            ///Alias for iterator type over a mutable set of sources.
             typedef typename SourceSet::iterator SourceSetIterator;
-            typedef typename SourceSet::const_iterator 
+
+            ///Alias for iterator type over an unmutable set of sources.
+            typedef typename SourceSet::const_iterator
                 ConstSourceSetIterator;
 
+            ///Alias for the type for a set of pixels.
             typedef std::set< Pixel<SOURCE_TYPE>* > PixelSet;
+
+            ///Alias for the type for a list of pixels.
             typedef std::list< Pixel<SOURCE_TYPE>* > PixelList;
+
+            ///Alias for iterator type over an unmutable set of pixels.
             typedef typename PixelList::const_iterator ConstPixelIter;
+
+            ///Alias for iterator type over n mutable set of pixels.
             typedef typename PixelList::iterator PixelIter;
 
             ///The filename of the image this group is part of.
@@ -102,7 +115,7 @@ namespace FitPSF {
 
                 if(__sources.insert(source).second)
                     for(
-                        typename SourceSet::const_iterator 
+                        typename SourceSet::const_iterator
                             si = source->overlaps().begin();
                         si != source->overlaps().end();
                         ++si
@@ -156,7 +169,7 @@ namespace FitPSF {
             ///\brief Fit for the fluxes of all sources in the group
             ///returning the sum square of the amplitude changes.
             ///
-            ///Set flux() and chi2() for all sources. 
+            ///Set flux() and chi2() for all sources.
             template<typename PSF_INFO_TYPE>
                 double fit_fluxes(
                     ///Sufficient information to define the PSF.
@@ -435,8 +448,8 @@ namespace FitPSF {
                 if((*source_i)->background_electrons_variance()) {
                     if(zero_variance)
                         bg_weight = 0.0;
-                    else 
-                        bg_weight /= 
+                    else
+                        bg_weight /=
                             (*source_i)->background_electrons_variance();
                 } else zero_variance = true;
 
@@ -505,7 +518,7 @@ namespace FitPSF {
                 );
             }
 
-            unsigned flux_fit_index = 0; 
+            unsigned flux_fit_index = 0;
             for(
                 typename PixelSet::const_iterator
                     pix_i = shared_pixels.begin();
@@ -654,7 +667,7 @@ namespace FitPSF {
 #ifdef VERBOSE_DEBUG
                 std::cerr << "Source at ("
                           << (*source_i)->x()
-                          << ", " 
+                          << ", "
                           << (*source_i)->y()
                           << ") overlaps with "
                           << (*source_i)->overlaps().size()
