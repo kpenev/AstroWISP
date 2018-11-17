@@ -3,4 +3,6 @@ build
 .*.swp
 *.outerr
 *.txt
-a.out
+*.out
+*.dSYM
+doc_src
