@@ -17,15 +17,20 @@ private:
 	void describe_options();
 
 	///The part of the help describing the usage and purpose (no options).
-	std::string usage_help(const std::string &prog_name) const;
+	std::string usage_help(
+        ///The name with which this tool was invoked.
+        const std::string &prog_name
+    ) const;
 public:
+    ///Parse the command line to this object.
 	SubtractPSFCfg(
-			///The number of arguments on the command line
-			///(+1 for the executable)
-			int argc,
+        ///The number of arguments on the command line
+        ///(+1 for the executable)
+        int argc,
 
-			///A C style array of the actual command line arguments.
-			char **argv)
+        ///A C style array of the actual command line arguments.
+        char **argv
+    )
 	{parse(argc, argv);}
 };
 

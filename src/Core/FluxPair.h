@@ -20,17 +20,21 @@ namespace Core {
     class LIB_LOCAL FluxPair {
     private:
         double
-            ///The simple integral of the PSF over a pixel.
+            ///See raw_flux()
             __raw_flux,
 
-            ///\brief SubPixel sensitivity weighted integral of the PSF over
-            ///a pixel.
+            ///See weighted_flux()
             __weighted_flux;
 
     public:
         ///Create a pair with the given weigthed and unweigthed fluxes.
-        FluxPair(double raw = 0,
-                 double weighted = 0) :
+        FluxPair(
+            ///See raw_flux()
+            double raw = 0,
+
+            ///See weighted_flux()
+            double weighted = 0
+        ) :
             __raw_flux(raw),
             __weighted_flux(weighted)
         {}

@@ -51,12 +51,15 @@
 
 namespace FitPSF {
 
+    ///Convenience alias for unmutable iterator over pixels.
     typedef std::list< Pixel<LinearSource>* >::const_iterator
         ConstPixelIter;
 
+    ///Convenience alias for mutable iterator over pixels.
     typedef std::list< Pixel<LinearSource>* >::const_iterator
         PixelIter;
 
+    ///Convenience alias for a list of groups of overlapping sources.
     typedef std::list< OverlapGroup<LinearSource, PSF::PiecewiseBicubic> >
         OverlapGroupList;
 
@@ -236,7 +239,7 @@ namespace FitPSF {
     ///\brief Updates the fluxes of the fit sources with new best estimates
     ///derived by fitting each source's background excesses.
     ///
-    ///Returns the root sum square change of the fluxes.
+    ///\return the root sum square change of the fluxes.
     double LIB_LOCAL update_fluxes(
         ///The list of sources for which to update the flux.
         LinearSourceList &fit_sources,
@@ -246,8 +249,9 @@ namespace FitPSF {
         const Eigen::VectorXd &best_fit
     );
 
-    ///\brief Performs a single PSF parameter fit, amplitude fit iteration and
-    ///returns the sum root square change of the source fluxes.
+    ///\brief Performs a single PSF parameter fit, amplitude fit iteration.
+    ///
+    ///\return the sum root square change of the source fluxes.
     double LIB_LOCAL fit_piecewise_bicubic_psf_step(
         ///The list of sources to fit. On output their fluxes are updated to
         ///the new best fit value.

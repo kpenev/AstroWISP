@@ -28,13 +28,19 @@ namespace Background {
     ///another source.
     class LIB_PUBLIC MeasureAnnulus : public MeasureExcludingSources {
     private:
-        ///The inner and outer radii of the region around a source used to
-        ///deterime the background.
-        double __inner_radius, __outer_radius;
+        double
+            ///The inner radius of the region around a source used to
+            ///deterime the background.
+            __inner_radius,
+
+            ///The outer radius of the region around a source used to
+            ///deterime the background.
+            __outer_radius;
 
         ///What fraction of the pixels on which the background is based should 
         ///fall within the error range.
         double __error_confidence;
+
     public:
         ///\brief Use the given radii to determive background.
         MeasureAnnulus(

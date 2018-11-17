@@ -282,9 +282,13 @@ namespace FitPSF {
             }
         }
 
+    ///Output a human readable description of a group of overlapping sources.
     template<class SOURCE_TYPE, class PSF_TYPE>
         std::ostream &operator<<(
+            ///The stream to output to.
             std::ostream &os,
+
+            ///The group to describe
             const OverlapGroup<SOURCE_TYPE, PSF_TYPE> &group
         )
         {

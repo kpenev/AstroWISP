@@ -17,24 +17,42 @@ namespace Core {
     ///including an error estimate and a flag.
     class LIB_PUBLIC Flux {
     private:
-        double __value, ///< The estimate of the flux.
-               __error; ///< An estimate of the error.
-        Core::PhotometryFlag __flag; ///< The quality flag.
+        double __value, ///< See value()
+               __error; ///< See error()
+        Core::PhotometryFlag __flag; ///< See flag()
     public:
+        ///Create a flux with the given properties.
         Flux(
+            ///The flux value
             double value = NaN,
+
+            ///Error estimate for the flux value.
             double error = NaN,
+
+            ///Quality flag indicating the relaibility of the flux measurement.
             Core::PhotometryFlag flag = UNDEFINED
         ) :
             __value(value),
             __error(error),
             __flag(flag)
         {}
+
+        ///The estimate of the flux (immutable).
         double value() const {return __value;}
+
+        ///The estimate of the flux (mutable).
         double &value() {return __value;}
+
+        ///An estimate of the error (immutable).
         double error() const {return __error;}
+
+        ///An estimate of the error (mutable).
         double &error() {return __error;}
+
+        ///The quality flag (immutable)
         Core::PhotometryFlag flag() const {return __flag;}
+
+        ///The quality flag (mutable)
         Core::PhotometryFlag &flag() {return __flag;}
     };
 

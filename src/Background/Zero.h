@@ -34,11 +34,11 @@ namespace Background {
             __current_index(0)
         {}
 
-        ///@{
-        ///\brief Notify the background extractor of (another) source
+        ///See Measure::add_source(double, double)
         void add_source(double, double) {++__number_sources;}
+
+        ///See Measure::add_source(const Core::Point<double> &)
         void add_source(const Core::Point<double> &) {++__number_sources;}
-        ///@}
 
         ///Estimate the background around the current source.
         Source operator()() const 

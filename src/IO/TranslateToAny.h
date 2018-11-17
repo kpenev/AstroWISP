@@ -45,9 +45,16 @@ namespace IO {
             {return value;}
         };
 
+    ///Translator for signed integers.
     const TranslateToAny<int> translate_int;
+
+    ///Translator for unsigned integers.
     const TranslateToAny<unsigned> translate_unsigned;
+
+    ///Translator for doubles.
     const TranslateToAny<double> translate_double;
+
+    ///Translator for strings.
     const TranslateToAny<std::string> translate_string;
 
 } //End IO namespace.

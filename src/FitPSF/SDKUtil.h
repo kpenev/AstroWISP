@@ -35,11 +35,17 @@ namespace FitPSF {
     ///\brief The function to pass to the GSL simplex minimizer, forced to 
     ///assume SOURCE_ITERATOR = GSLSourceIteratorType
     ///and SUBPIX_TYPE = GSLSubPixType
-    LIB_LOCAL double gsl_minimization_function(const gsl_vector *poly_coef,
-                                     void *params);
+    ///
+    ///See GSL documentation for description of the parameters.
+    LIB_LOCAL double gsl_minimization_function(
+        const gsl_vector *poly_coef,
+        void *params
+    );
 
     ///\brief The function to pass to the GSL brent minimizer for finding an 
     ///initial frame S.
+    ///
+    ///See GSL documentation for description of the parameters.
     LIB_LOCAL double gsl_s_minimization_function(double s, void *params);
 
 } //End FitPSF namespace.

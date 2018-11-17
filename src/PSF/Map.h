@@ -62,11 +62,20 @@ namespace PSF {
         static const std::set<std::string> &required_data_tree_quantities();
     };
 
-    ///To be used by inheriting PSF maps to add their required quantities.
+    ///\brief Combine two collections of required data tree quantities into a set.
+    ///
+    ///Used by inheriting PSF maps to add their required quantities.
     std::set<std::string> combine_required_tree_quantities(
+        ///The first iterator from the first set to include.
         std::set<std::string>::const_iterator v1_start,
+
+        ///One past the last iterator from the first set to include.
         std::set<std::string>::const_iterator v1_end,
+
+        ///The first iterator from the second set to include.
         const std::string* v2_start,
+
+        ///One past the last iterator from the second set to include.
         const std::string* v2_end
     );
 

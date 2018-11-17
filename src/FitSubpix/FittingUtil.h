@@ -201,11 +201,17 @@ public:
 
 ///Convert a vector of unit cube values to the corresponding sub-pixel map.
 template<typename EIGEN_DERIVED>
-Eigen::VectorXd x_to_s(const Eigen::DenseBase<EIGEN_DERIVED> &x_vec);
+Eigen::VectorXd x_to_s(
+    ///The vector of unit-cube values to convert to a sub-pixel map.
+    const Eigen::DenseBase<EIGEN_DERIVED> &x_vec
+);
 
 ///Convert a sub-pixel map to a vector of unit cube values.
 template<typename EIGEN_DERIVED>
-Eigen::VectorXd s_to_x(const Eigen::DenseBase<EIGEN_DERIVED> &s_vec);
+Eigen::VectorXd s_to_x(
+    ///The vector of sub-pixel sensitivities to convert to a unit cube.
+    const Eigen::DenseBase<EIGEN_DERIVED> &s_vec
+);
 
 ///Calculates the Jocobian matrix for the given x vector.
 Eigen::MatrixXd calculate_jacobian(const Eigen::VectorXd &x);

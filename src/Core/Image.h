@@ -57,9 +57,13 @@ namespace Core {
                 ///The y resolutions of the image.
                 __y_resolution;
 
+            ///\brief Is this image a wrap around another (and hence it should
+            ///not free its memory).
             bool __wrapped;
 
         protected:
+            ///\brief The index of the pixel at the given location within the
+            ///1-D array.
             inline unsigned long index(unsigned long x,
                                        unsigned long y) const
             {

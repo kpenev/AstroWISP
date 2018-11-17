@@ -19,9 +19,15 @@ namespace IO {
 
     const hsize_t SubPixHDF5File::__chunk_size=100;
 
+    ///Output all values in an OutputArray to a stream.
     template<typename SCALAR_TYPE>
-    std::ostream& operator<<(std::ostream &os,
-                             const OutputArray<SCALAR_TYPE> &array)
+    std::ostream& operator<<(
+        ///The stream to output to.
+        std::ostream &os,
+
+        ///The array to output.
+        const OutputArray<SCALAR_TYPE> &array
+    )
     {
         for(unsigned i=0; i<array.size(); ++i)
             os << array[i] << std::endl;
@@ -42,8 +48,17 @@ namespace IO {
         attribute.read(memory_type, destination);
     }
 
-    void output_tree(const boost::property_tree::ptree &pt,
-            const std::string &indent="")
+    ///Output the contents of a proprty tree to a stream.
+    ///
+    ///The output is organized as a vertical tree with nested nodes indented to
+    ///their parents.
+    void output_tree(
+        ///The tree to output.
+        const boost::property_tree::ptree &pt,
+
+        ///Indentation to use for the outermost nodes.
+        const std::string &indent=""
+    )
     {
         using boost::property_tree::ptree;
         for(ptree::const_iterator node=pt.begin(); node!=pt.end(); ++node) {

@@ -17,11 +17,12 @@ namespace Background {
     ///The minimum requirements for a Background extractor class.
     class LIB_LOCAL Measure {
     public:
-        ///@{
-        ///\brief Notify the background extractor of (another) source
+        ///\brief Notify the background extractor of (another) source at the
+        ///given location
         virtual void add_source(double x, double y) = 0;
+
+        ///See add_source(double, double).
         virtual void add_source(const Core::Point<double> &location) = 0;
-        ///@}
 
         ///Estimate the background around the current source.
         virtual Source operator()() const =0;

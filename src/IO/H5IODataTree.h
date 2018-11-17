@@ -29,6 +29,7 @@ namespace IO {
 
     namespace opt = boost::program_options;
 
+    ///Convenience alias for the boost base class for the IO tree.
     typedef boost::property_tree::basic_ptree<std::string, boost::any>
         IOTreeBase;
 
@@ -122,8 +123,15 @@ namespace IO {
 #endif
     }; //End H5IODataTree class.
 
-    LIB_PUBLIC std::ostream &operator<<(std::ostream &os,
-                                        const IOTreeBase &tree);
+    ///\brief List the entries in an IO tree flagging which are filled and which
+    ///are empty.
+    LIB_PUBLIC std::ostream &operator<<(
+        ///The stream to print to.
+        std::ostream &os,
+        
+        ///The tree to report on.
+        const IOTreeBase &tree
+    );
 
 } //End IO namespace.
 

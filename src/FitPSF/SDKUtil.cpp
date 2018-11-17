@@ -10,15 +10,15 @@
 
 namespace FitPSF {
 
-    template<class SourceIterator>
-        double calculate_chi2(SourceIterator first_source,
-                              SourceIterator past_last_source,
+    template<class SOURCE_ITERATOR>
+        double calculate_chi2(SOURCE_ITERATOR first_source,
+                              SOURCE_ITERATOR past_last_source,
                               double max_source_chi2)
         {
             double numerator = 0,
                    denominator = 0;
             for(
-                SourceIterator si = first_source;
+                SOURCE_ITERATOR si = first_source;
                 si!=past_last_source; ++si
             ) {
                 if(std::isnan(si->chi2())) {

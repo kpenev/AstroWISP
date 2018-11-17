@@ -86,7 +86,7 @@ double GSLchi2_func(const gsl_vector *fit_var, void *params)
 	return result;
 }
 
-void fit_using_GSL_simplex(const FitSubpixConfig &options)
+void fit_using_GSL_simplex(const FitSubPixConfig &options)
 {
 	unsigned dimensions=options["subpix.x-split"].as<unsigned>
                         *
@@ -208,8 +208,7 @@ void simulated_annealing_output(void *configuration)
 	std::cout.flush();
 }
 
-void fit_using_GSL_simulated_annealing(
-		const FitSubpixCommandLineOptions &options)
+void fit_using_GSL_simulated_annealing(const FitSubPixConfig &options)
 {
     Variance var(
         options.frames(),

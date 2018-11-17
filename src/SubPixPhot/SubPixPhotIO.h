@@ -23,10 +23,19 @@ namespace SubPixPhot {
 
     ///Outputs the sources to stdout
     LIB_LOCAL void output_to_stdout(
+        ///The sources to output.
         const std::list<IO::OutputSDKSource>&   sources,
+
+        ///The columns to output.
         const std::list<Phot::Columns>&         columns,
+
+        ///The magnitude that corresponds to a flux of 1ADU
         double                                  mag_1ADU,
+
+        ///The gain with which the image was taken.
         double                                  gain,
+
+        ///The stream to write the output to.
         std::ostream&                           os = std::cout
     );
 
@@ -38,10 +47,19 @@ namespace SubPixPhot {
     ///the  command line with which the command was invoked if argc is 
     ///non-zero, in which case argc and argv should be the same arguments 
     ///that main() received.
-    LIB_LOCAL void write_header(std::ostream      &os,
-                                int               argc = 0,
-                                char**            argv = NULL,
-                                const std::string &version_string = "");
+    LIB_LOCAL void write_header(
+        ///The stream to output the header to.
+        std::ostream      &os,
+
+        ///The number of command line arguments used.
+        int               argc = 0,
+
+        ///The actual command line arguments.
+        char**            argv = NULL,
+
+        ///A string which identifies the version of the tool.
+        const std::string &version_string = ""
+    );
 
     ///\brief Reads the next source from source_input into the last element 
     ///of sources performing all necessary checks.
@@ -106,7 +124,10 @@ namespace SubPixPhot {
         }
 
     ///Reads in polynomial expansion coefficients of S,D, K from a file.
-    std::list<double> LIB_PUBLIC read_sdk_coef(const std::string &fname);
+    std::list<double> LIB_PUBLIC read_sdk_coef(
+        ///The name of the file to read from.
+        const std::string &fname
+    );
 
 } //End SubPixPhot namespace.
 

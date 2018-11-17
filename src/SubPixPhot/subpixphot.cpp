@@ -39,7 +39,8 @@
 #include <iomanip>
 
 
-const std::string SUB_PIX_PHOT_VERSION="$Revision: $";
+///The hash identifying a unique version of the file.
+const std::string SUB_PIX_PHOT_VERSION="$Id: $";
 
 namespace SubPixPhot {
 
@@ -411,6 +412,7 @@ namespace SubPixPhot {
         }
     }
 
+    ///List all the keys in the given data tree to stdout.
     void print_data_tree_keys(
         const boost::property_tree::basic_ptree<
             std::basic_string<char>,
@@ -461,6 +463,7 @@ namespace SubPixPhot {
 
 } //End SubPixPhot namespace.
 
+///Perform the photometry specified through the command line.
 int main(int argc, char **argv)
 {
 #ifndef DEBUG

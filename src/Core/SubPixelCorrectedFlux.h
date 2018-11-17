@@ -232,6 +232,8 @@ namespace Core {
     ///\brief Apply a previously derived sub-pixel independent scaling to
     ///calculate the source flux corrected with the given sub-pixel
     ///sensitivity map.
+    ///
+    ///\return The sub-pixel sensitivity corrected flux.
     template<typename EIGEN_TP1, typename EIGEN_TP2>
         double apply_subpix_scaling(
             ///A matrix giving the sub-pixel independent scaling.
@@ -243,7 +245,7 @@ namespace Core {
         )
         {return (scaling*subpix_map).array().inverse().sum();}
 
-    ///See the two template version of apply_subpix_scaling().
+    ///See the two template version of apply_subpix_scaling() for details.
     template<typename EIGEN_TP>
         double apply_subpix_scaling(
             const Eigen::MatrixBase<EIGEN_TP> &scaling,

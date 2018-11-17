@@ -473,12 +473,24 @@ namespace IO {
 
     }; //End SubPixHDF5File class.
 
-    ///Present a uniform reading function for attributes and datasets.
-    LIB_PUBLIC void simple_read_from_h5(const H5::DataSet &dataset,
-                                        const H5::DataType &memory_type,
-                                        void *destination);
+    ///\brief Present a uniform reading function for attributes and datasets.
+    ///This one reads datasets.
+    ///
+    ///The memory type for the read. See H5::DataSet::read()
+    LIB_PUBLIC void simple_read_from_h5(
+        ///The actual dataset handle to read from.
+        const H5::DataSet &dataset,
 
-    ///Present a uniform reading function for attributes and datasets.
+        ///The memory type for the read. See H5::DataSet::read()
+        const H5::DataType &memory_type,
+
+        ///The destination for the new data.
+        void *destination
+    );
+
+    ///\brief Same as
+    ///simple_read_from_h5(const H5::DataSet &, H5::DataType &, void *)
+    ///but for attributes.
     LIB_PUBLIC void simple_read_from_h5(const H5::Attribute &attribute,
                                         const H5::DataType &memory_type,
                                         void *destination);

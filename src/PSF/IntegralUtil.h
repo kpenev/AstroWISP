@@ -16,10 +16,16 @@
 
 namespace PSF {
 
-    ///\brief Fills in the y array with powers up to max_pow, assuming it
+    ///\brief Extend a vector with powers x^n up to max_pow, assuming it
     ///already contains some.
-    LIB_LOCAL void fill_powers(std::vector<double> &powers,
-                               Core::vector_size_type max_pow);
+    LIB_LOCAL void fill_powers(
+        ///The vector to extend. Must already contain at lesat two entries: 1
+        ///and x.
+        std::vector<double> &powers,
+
+        ///The largest power to include in the vector.
+        Core::vector_size_type max_pow
+    );
 
     ///Initializes a vector of powers.
     LIB_LOCAL void initialize_powers(
