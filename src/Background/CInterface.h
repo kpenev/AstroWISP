@@ -11,23 +11,26 @@
 #include "../Core/CInterface.h"
 
 extern "C" {
+
     ///Opaque struct to cast to/from Background::MeasureAnnulus.
     struct LIB_PUBLIC BackgroundMeasureAnnulus;
 
     ///\brief Create an object for measuring the background in an annulus around
     ///each source.
+    ///
+    ///\return An object able to measure the background behind sources.
     LIB_PUBLIC BackgroundMeasureAnnulus *create_background_extractor(
         ///Inner radius of the annulus used for background determination.
         double inner_radius,
 
         ///Outer radius of the annulus used for background determination.
-        double outer_radius, 
+        double outer_radius,
 
         ///Size of the area to exclude from other source's annuli.
         double exclude_aperture,
 
         ///The image to determine the backgrounds on.
-        const CoreImage *image, 
+        const CoreImage *image,
 
         ///The confidence to require of the error estimate.
         double error_confidence
@@ -74,7 +77,7 @@ extern "C" {
     ///Estimate the background at a specified position.
     void measure_background(
         ///The background extractor to use.
-        const BackgroundMeasureAnnulus *extractor,
+        BackgroundMeasureAnnulus *extractor,
 
         ///The x coordinate (within the image) for which to estimate the
         ///background.
@@ -106,7 +109,7 @@ extern "C" {
     ///\brief Get the background under the current source and advance to the
     ///next source.
     ///
-    ///Return value indicates whether there are more sources pending.
+    ///\return A value indicating whether there are more sources pending.
     bool get_next_background(
         ///The background extractor to use.
         BackgroundMeasureAnnulus *extractor,

@@ -305,12 +305,6 @@ namespace PSF {
         namespace qi = boost::spirit::qi;
         namespace ascii = boost::spirit::ascii;
 
-        template<typename ResultType>
-        struct PolyOrderSpec {
-            unsigned max_order;
-            ResultType terms;
-        };
-
         ///The grammar of the term generator language.
         template<typename Iterator, typename ResultType>
         class Grammar : public boost::spirit::qi::grammar<Iterator,

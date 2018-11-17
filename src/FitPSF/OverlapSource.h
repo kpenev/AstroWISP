@@ -15,6 +15,7 @@
 
 namespace FitPSF {
 
+    ///PSF fitting source which handles overlaps with other sources.
     template<class FIT_SOURCE_TYPE, class PSF_TYPE>
         class LIB_LOCAL OverlapSource : public Source<PSF_TYPE> {
         private:
@@ -73,11 +74,11 @@ namespace FitPSF {
             ///aperture for the source.
             double __max_circular_aperture2,
 
-                   ///\brief The actual minimal circular aperture that contains 
+                   ///\brief The actual minimal circular aperture that contains
                    ///all source pixels squared.
                    __aperture2;
 
-            unsigned 
+            unsigned
                 ///The number of non-good pixels assigned to this source.
                 __saturated_pixel_count,
 
@@ -98,8 +99,8 @@ namespace FitPSF {
                             Image<FIT_SOURCE_TYPE>      &psffit_image)
             {
 #ifdef VERBOSE_DEBUG
-                std::cerr << "Source(" 
-                          << this->x() << ", " << this->y() << "): " 
+                std::cerr << "Source("
+                          << this->x() << ", " << this->y() << "): "
                           << this
                           << " taking pixel(" << x << ", " << y << ")"
                           << std::endl;
@@ -113,7 +114,7 @@ namespace FitPSF {
                 );
             }
 
-            ///\brief Adds all pixels within the given aperture to the source 
+            ///\brief Adds all pixels within the given aperture to the source
             ///taking care of overlaps.
             void add_pixels_in_circle(
                 ///The size of the circle within which pixels are added to the
@@ -124,7 +125,7 @@ namespace FitPSF {
                 Image<FIT_SOURCE_TYPE> &psffit_image
             );
 
-            ///\brief Adds all pixels within the given rectangle to the source 
+            ///\brief Adds all pixels within the given rectangle to the source
             ///taking care of overlaps.
             void add_pixels_in_rectangle(
                 ///relative to source center
@@ -179,7 +180,7 @@ namespace FitPSF {
                 const Core::SourceID &id,
 
                 ///See same name argument to Source constructor.
-                double x0, 
+                double x0,
 
                 ///See same name argument to Source constructor.
                 double y0,
@@ -188,7 +189,7 @@ namespace FitPSF {
                 const Background::Source &background,
 
                 ///The image of fit pixels we are deriving the PSF/PRF map of. On
-                ///exit, it is updated with the pixels belonging to the newly 
+                ///exit, it is updated with the pixels belonging to the newly
                 ///constructed source.
                 Image<FIT_SOURCE_TYPE> &psffit_image,
 
@@ -217,7 +218,7 @@ namespace FitPSF {
             ///Expose Source constructor (see for argument details).
             OverlapSource(
                 const Core::SourceID &id,
-                double x0, 
+                double x0,
                 double y0,
                 const Background::Source& background,
                 Image<FIT_SOURCE_TYPE> &psffit_image,
@@ -236,7 +237,7 @@ namespace FitPSF {
 
             ///See Source::ready_to_fit()
             bool ready_to_fit() const;
- 
+
             ///\brief Adds the given set of overlaps to this sources overlaps,
             ///skipping this source if found.
             void add_overlaps(const SourceSet &extra_overlaps);
@@ -244,11 +245,11 @@ namespace FitPSF {
             ///\brief A set of the sources which this source overlaps with on the
             ///observed image.
             ///
-            ///Until finalize_pixels() is called, this function returns an 
+            ///Until finalize_pixels() is called, this function returns an
             ///empty set!
             const SourceSet &overlaps() const {return __overlaps;}
 
-            ///\brief Sets the entries in the flux fitting matrix 
+            ///\brief Sets the entries in the flux fitting matrix
             ///corresponding to this source.
             template<class SHAPE_FIT_OUTPUT_TYPE, class FLUX_FIT_OUTPUT_TYPE>
                 void fill_fluxfit_column(
@@ -278,7 +279,7 @@ namespace FitPSF {
                     bool sequential_flux_fit_pixels = true
                 );
 
-            ///\brief Sets the entries in the flux fitting matrix 
+            ///\brief Sets the entries in the flux fitting matrix
             ///corresponding to this source assuming the given PSF map.
             template<class SHAPE_FIT_OUTPUT_TYPE, class FLUX_FIT_OUTPUT_TYPE>
                 void fill_fluxfit_column(
@@ -336,7 +337,7 @@ namespace FitPSF {
             virtual double pixel_psf(const Pixel<FIT_SOURCE_TYPE>* pixel,
                                      const PSF::PSF &psf) const;
 
-            ///\brief The integral of the normalized PSF over the current pixel 
+            ///\brief The integral of the normalized PSF over the current pixel
             ///and its derivatives
             double pixel_psf(
                 ///The PSF to integrate.
@@ -351,7 +352,7 @@ namespace FitPSF {
                                                   "No derivatives allowed!");
             }
 
-            ///\brief Return a const reference to the list of image pixels 
+            ///\brief Return a const reference to the list of image pixels
             ///assigned to this source.
             const PixelList &pixels() const
             {return __pixels;}
@@ -374,7 +375,7 @@ namespace FitPSF {
             ConstPixelIter shape_fit_pixels_end() const
             {return __const_first_flux_fit_pixel;}
 
-            ///\brief Iterator over flux but not shape fitting pixels, pointing 
+            ///\brief Iterator over flux but not shape fitting pixels, pointing
             ///to the first pixel included in flux but not shape fitting.
             PixelIter flux_fit_pixels_begin()
             {return __first_flux_fit_pixel;}
@@ -383,7 +384,7 @@ namespace FitPSF {
             ConstPixelIter flux_fit_pixels_begin() const
             {return __const_first_flux_fit_pixel;}
 
-            ///\brief Iterator over flux but not shape fitting pixels, pointing 
+            ///\brief Iterator over flux but not shape fitting pixels, pointing
             ///to one past the last pixel included in flux but not shape fitting.
             PixelIter flux_fit_pixels_end()
             {return __first_excluded_pixel;}
@@ -412,12 +413,12 @@ namespace FitPSF {
                 return __current_pixel != __pixels.end();
             }
 
-            ///\brief The number of pixels belonging to this source suitable for 
+            ///\brief The number of pixels belonging to this source suitable for
             ///PSF shape fitting.
             size_t shape_fit_pixel_count() const
             {return __shape_fit_pixel_count;}
 
-            ///\brief The number of pixels belonging to this source suitable for 
+            ///\brief The number of pixels belonging to this source suitable for
             ///PSF flux fitting.
             size_t flux_fit_pixel_count() const {return __flux_fit_pixel_count;}
 
@@ -426,7 +427,7 @@ namespace FitPSF {
             virtual void pixel_was_excluded(
                 ///The pixel which was excluded. Must belong to this source,
                 ///otherwise the behaviour is undefined. Calling the pixel's
-                ///exclude_from_*_fit function(s) must be done before invoking 
+                ///exclude_from_*_fit function(s) must be done before invoking
                 ///this method.
                 const Pixel<FIT_SOURCE_TYPE> *pixel,
 
@@ -447,7 +448,7 @@ namespace FitPSF {
 
             ///\brief Replace the source pixels.
             ///
-            ///The iterators should point to elements that provide x(), y(), 
+            ///The iterators should point to elements that provide x(), y(),
             ///value(), variance() and saturated().
             template<class ITERATOR_TYPE>
                 void replace_pixels(
@@ -499,7 +500,7 @@ namespace FitPSF {
 
             if(std::pow(dist_to_boundary, 2) < aperture2)
                 __quality_flag = Core::BAD;
-            long 
+            long
                 miny = std::max(
                     long(0),
                     static_cast<long>(std::ceil(this->y() - yrange - 0.5))
@@ -600,21 +601,21 @@ namespace FitPSF {
             double                      alpha,
             bool                        central_pixel)
         {
-            Core::PhotometryFlag 
+            Core::PhotometryFlag
                 pixel_flag = psffit_image.photometry_flag(x, y);
             __quality_flag = std::max(__quality_flag, pixel_flag);
 
             if(pixel_flag != Core::BAD || central_pixel) {
                 double bg_excess = psffit_image.background_excess(
                     x,
-                    y, 
+                    y,
                     Source<PSF_TYPE>::background_electrons(),
                     Source<PSF_TYPE>::background_electrons_variance()
                 );
                 const Pixel<FIT_SOURCE_TYPE> *pixel = psffit_image(x, y);
                 if(
                     !central_pixel
-                    && 
+                    &&
                     (
                         (bg_excess < alpha)
                         ||
@@ -640,7 +641,7 @@ namespace FitPSF {
             double aperture2 = std::pow(0.5 + x - this->x(), 2)
                 +
                 std::pow(0.5 + y - this->y(), 2);
-            if(x > 0) 
+            if(x > 0)
                 aperture2 = std::max(aperture2,
                                      process_pixel(x - 1,
                                                    y,
@@ -721,11 +722,11 @@ namespace FitPSF {
                 pix_i != __pixels.end();
                 ++pix_i
             ) {
-                std::cerr << "Pixel(" 
+                std::cerr << "Pixel("
                           << (*pix_i)->x()
                           << ", "
                           << (*pix_i)->y()
-                          << ", shape: " 
+                          << ", shape: "
                           << (*pix_i)->shape_fit()
                           << ", flux: "
                           << (*pix_i)->flux_fit()
@@ -787,7 +788,7 @@ namespace FitPSF {
     template<class FIT_SOURCE_TYPE, class PSF_TYPE>
         OverlapSource<FIT_SOURCE_TYPE, PSF_TYPE>::OverlapSource(
             const Core::SourceID     &id,
-            double                    x0, 
+            double                    x0,
             double                    y0,
             const Background::Source &background,
             Image<FIT_SOURCE_TYPE>   &psffit_image,
@@ -826,12 +827,12 @@ namespace FitPSF {
             if(
                 x0 < 0
                 ||
-                y0 < 0 
+                y0 < 0
                 ||
                 x0 >= psffit_image.x_resolution()
                 ||
                 y0 >= psffit_image.y_resolution()
-            ) 
+            )
                 return;
 
             __aperture2 = process_pixel(
@@ -850,7 +851,7 @@ namespace FitPSF {
     template<class FIT_SOURCE_TYPE, class PSF_TYPE>
         OverlapSource<FIT_SOURCE_TYPE, PSF_TYPE>::OverlapSource(
             const Core::SourceID      &id,
-            double                     x0, 
+            double                     x0,
             double                     y0,
             const Background::Source  &background,
             Image<FIT_SOURCE_TYPE>    &psffit_image,
@@ -886,7 +887,7 @@ namespace FitPSF {
     {
         if (
             x0 < 0
-            ||  
+            ||
             y0 < 0
             ||
             x0 >= psffit_image.x_resolution()

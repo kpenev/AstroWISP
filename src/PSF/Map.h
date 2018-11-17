@@ -17,11 +17,14 @@
 
 namespace PSF {
 
+    ///\brief Interface for working with smooth dependenc of PSF/PRF on source
+    ///parameters.
     class LIB_PUBLIC Map {
     private:
         ///The number of terms that the map depends on.
         unsigned __num_terms;
     public:
+        ///Create a map with the given number of terms.
         Map(unsigned num_terms=0) : __num_terms(num_terms) {}
 
         virtual ~Map() {}

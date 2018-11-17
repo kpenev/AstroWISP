@@ -25,7 +25,7 @@ namespace Core {
     public:
         SDKSource(const SourceID& id = SourceID(), unsigned num_apertures=1,
                 double x=NaN, double y=NaN, double s=NaN, double d=NaN,
-                double k=NaN, double amp=NaN, 
+                double k=NaN, double amp=NaN,
                 const Background::Source &bg=Background::Source(),
                 double max_exp_coef=1) :
             Source(id, num_apertures, x, y, bg), __SDKpsf(NULL)
@@ -45,7 +45,7 @@ namespace Core {
 
         ///The coefficient in front of (xy) in the exponent
         double psf_k() const {return __k;}
-        
+
         ///The amplitude of the PSF
         double psf_amplitude() const {return __amp;}
 
@@ -81,8 +81,14 @@ namespace Core {
 
 } //End Core namespace.
 
-///Outputs all known information about an SDKSource object (i.e. the location
-///and the PSF parameters).
-std::ostream &operator<<(std::ostream &os, const Core::SDKSource &src);
+///\brief Outputs all known information about an SDKSource object (i.e. the
+///location and the PSF parameters).
+std::ostream &operator<<(
+    ///The stream to write to.
+    std::ostream &os,
+
+    ///The source to describe.
+    const Core::SDKSource &src
+);
 
 #endif

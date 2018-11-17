@@ -54,7 +54,9 @@ extern "C" {
     ///Opaque struct to cast to/from IO::H5IODataTree.
     struct LIB_PUBLIC H5IODataTree;
 
-    ///C-binding alias for IO::parse_hat_mask.
+    ///\brief C-binding alias for IO::parse_hat_mask.
+    ///
+    ///See IO::parse_hat_mask() for more details.
     LIB_PUBLIC void parse_hat_mask(const char *mask_string,
                                    long x_resolution,
                                    long y_resolution,
@@ -72,7 +74,10 @@ extern "C" {
 
     ///\brief Free the memory held by a result tree previously created by
     ///create_result_tree()
-    LIB_PUBLIC void destroy_result_tree(H5IODataTree *tree);
+    LIB_PUBLIC void destroy_result_tree(
+        ///The tree to destroy.
+        H5IODataTree *tree
+    );
 
     ///\brief Query the result tree for a value (NULL if value is undefined).
     ///

@@ -87,15 +87,30 @@ namespace Phot {
 		}
 	};
 
+    ///Instantiate of ColumnNamesVector so it can be used.
 	const ColumnNamesVector column_name;
 }
 
-inline LIB_LOCAL double magnitude(double flux, double mag_1adu)
+///Calculate the magnitude corresponding to a given flux.
+inline LIB_LOCAL double magnitude(
+    ///The flux to convert to a magnitude.
+    double flux,
+
+    ///The magnitude corresponding to a flux of 1.
+    double mag_1adu
+)
 {
 	return mag_1adu-2.5*log10(flux);
 }
 
-inline LIB_LOCAL double magnitude_error(double flux, double flux_error)
+///The error in the magnitude corresponding to a given flux.
+inline LIB_LOCAL double magnitude_error(
+    ///The flux being converted to a magnitude.
+    double flux,
+
+    ///The error estimate of the flux.
+    double flux_error
+)
 {
 	return -2.5*log10(1.0-flux_error/flux);
 }

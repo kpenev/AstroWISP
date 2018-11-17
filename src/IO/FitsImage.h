@@ -18,6 +18,7 @@
 
 namespace IO {
 
+    ///An interface for working with FITS images.
     template<typename DATA_TYPE>
         class LIB_PUBLIC FitsImage : public Core::Image<DATA_TYPE> {
         private:
@@ -45,7 +46,7 @@ namespace IO {
                 const std::string &filename = "unknown fits file"
             );
 
-            ///\brief Based on the fi function for parsing mask strings from 
+            ///\brief Based on the fi function for parsing mask strings from
             ///the header.
             void parse_mask_string(
                 ///The mask string to parse.
@@ -73,7 +74,7 @@ namespace IO {
                 fitsfile *fptr,
 
                 ///The number of pixels to read from the image.
-                long num_pixels, 
+                long num_pixels,
 
                 ///The memory location where to place the data.
                 DATA_TYPE *destination,
@@ -86,11 +87,11 @@ namespace IO {
         public:
             ///\brief Reads the data in the given fits image(s).
             ///
-            ///If both expect_errors is false and error_image == "", the 
-            ///errors are estimated assuming Poisson statistics of the pixel 
+            ///If both expect_errors is false and error_image == "", the
+            ///errors are estimated assuming Poisson statistics of the pixel
             ///fluxes.
             FitsImage(
-                ///The filename of the image containing pixel fluxes as 
+                ///The filename of the image containing pixel fluxes as
                 ///primary HDU.
                 const std::string &filename = "",
 
@@ -117,13 +118,13 @@ namespace IO {
 
             ///Copies orig to *this.
             FitsImage(const FitsImage &orig)
-                : 
+                :
                     Core::Image<DATA_TYPE>(orig),
                     __header(orig.__header),
                     __filename(orig.__filename)
             {}
 
-            ///\brief Open the given fits image (see constructor 
+            ///\brief Open the given fits image (see constructor
             ///documentation for details).
             virtual void open(
                  ///The name of the file to open. Only used in error messages.
@@ -161,7 +162,7 @@ namespace IO {
             const std::string &filename() const {return __filename;}
 
             ///Clean up any allocated arrays.
-            ~FitsImage() 
+            ~FitsImage()
             {
                 if(__pixel_values) delete[] __pixel_values;
                 if(__mask) delete[] __mask;
@@ -171,7 +172,7 @@ namespace IO {
     template<class DATA_TYPE>
         fitsfile *FitsImage<DATA_TYPE>::open_fits(
             const std::string &filename
-        ) 
+        )
         {
             fitsfile *fptr;
             int fits_status=0;
@@ -278,7 +279,7 @@ namespace IO {
             int dimensions, fits_status = 0, bitpix, hdu_type = IMAGE_HDU;
             long naxes[2];
             for(
-                ; 
+                ;
                 fits_status == 0;
                 fits_movrel_hdu(fptr, 1, &hdu_type, &fits_status)
             ) {
@@ -309,7 +310,7 @@ namespace IO {
             if(fits_status)
                 throw Error::Fits("Failed to read image parameters in "
                                   "FitsImageData::read.");
-            if(dimensions!=2) 
+            if(dimensions!=2)
                 throw Error::Fits(
                     "Only 2D image are supported at this time."
                 );
@@ -317,7 +318,7 @@ namespace IO {
             if(
                 std::numeric_limits<DATA_TYPE>::is_integer
                 &&
-                bitpix < 0 
+                bitpix < 0
                 &&
                 !allow_rounding
             )

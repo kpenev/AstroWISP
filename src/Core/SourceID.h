@@ -89,9 +89,9 @@ namespace Core {
         ///\brief The field corresponding to the given source.
         ///
         ///An exception is thrown if not a HAT-ID.
-        virtual unsigned field() const 
+        virtual unsigned field() const
         {
-            if(!__is_hatid) 
+            if(!__is_hatid)
                 throw Error::Type("Asking for field of a non-HAT ID!");
             return __field;
         }
@@ -99,25 +99,37 @@ namespace Core {
         ///\brief The source corresponding to the given source.
         ///
         ///An exception is thrown if not a HAT-ID.
-        virtual unsigned source() const 
+        virtual unsigned source() const
         {
-            if(!__is_hatid) 
+            if(!__is_hatid)
                 throw Error::Type("Asking for source of a non-HAT ID!");
             return __source;
         }
 
         friend std::istream& operator>>( std::istream& is, SourceID& id );
 
-        
+
         friend std::ostream& operator<<(std::ostream& os,
                                         const SourceID& id);
     }; //End SourceID class.
 
     ///Output the ID to the given stream.
-    LIB_PUBLIC std::ostream& operator<<( std::ostream& os, const SourceID& id);
+    LIB_PUBLIC std::ostream& operator<<(
+        ///The stream to write to.
+        std::ostream& os,
+
+        ///The source ID to write.
+        const SourceID& id
+    );
 
     ///Read the ID from the given stream.
-    LIB_PUBLIC std::istream& operator>>( std::istream& is, SourceID& id);
+    LIB_PUBLIC std::istream& operator>>(
+        ///The stream to read from.
+        std::istream& is,
+
+        ///The variable to set to the parsed ID.
+        SourceID& id
+    );
 
 } //End Core namespace.
 

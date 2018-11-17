@@ -10,10 +10,11 @@
 
 namespace FitPSF {
 
+    ///A class that applies a smoothing penalty during PSF/PRF fitting.
     class LIB_LOCAL PiecewiseBicubicPSFSmoothing {
     private:
 
-        Eigen::MatrixXd 
+        Eigen::MatrixXd
             ///The average of \f$ {\kappa^s}^T \kappa^s \f$ over all sources.
             __lhs_spatial_dependence,
 
@@ -21,7 +22,7 @@ namespace FitPSF {
             __lhs_matrix;
 
 
-        Eigen::VectorXd 
+        Eigen::VectorXd
             ///The average of the PSF terms for all sources.
             __rhs_spatial_dependence,
 
@@ -31,7 +32,7 @@ namespace FitPSF {
         ///Is this object ready for smoothing?
         bool __prepared;
 
-        ///\brief Fill the matrix which converts cell parameters to the 
+        ///\brief Fill the matrix which converts cell parameters to the
         ///smoothing penalty.
         ///
         ///This is the \f$ \mathbf{A}_{cell} \f$ in the documentation.

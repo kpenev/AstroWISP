@@ -10,6 +10,7 @@
 #include "H5Cpp.h"
 #include "PiecewiseBicubicPSFMap.h"
 
+///Command line parser for subtracting PSF models from images.
 class LIB_PUBLIC SubtractPSFCfg : public CommandLineConfig {
 private:
 	///Describes the available command line options.
@@ -22,7 +23,7 @@ public:
 			///The number of arguments on the command line
 			///(+1 for the executable)
 			int argc,
-			
+
 			///A C style array of the actual command line arguments.
 			char **argv)
 	{parse(argc, argv);}

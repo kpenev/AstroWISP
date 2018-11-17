@@ -229,9 +229,20 @@ void prepare_fit_sources(
     }
 }
 
-LIB_PUBLIC bool local_get_psf_map_variables(H5IODataTree *output_data_tree,
-                                            unsigned image_index,
-                                            double *column_data)
+///Get the variables that participate in the PSF map from a data tree.
+LIB_PUBLIC bool local_get_psf_map_variables(
+    ///The data tree containing the variables to extract.
+    H5IODataTree *output_data_tree,
+
+    ///The index of the image for wich to get the variables within the list of
+    ///input images.
+    unsigned image_index,
+
+    ///An array to fill with the values of the variables. All values of the
+    ///first variable come first, followed by all values of the second variable
+    ///etc.
+    double *column_data
+)
 {
     IO::H5IODataTree *real_output_data_tree =
         reinterpret_cast<IO::H5IODataTree*>(output_data_tree);
@@ -245,7 +256,7 @@ LIB_PUBLIC bool local_get_psf_map_variables(H5IODataTree *output_data_tree,
               << tree_path.str()
               << std::endl;
 #endif
-    
+
     const PSF::MapVarListType &variables =
         real_output_data_tree->get<PSF::MapVarListType>(
             std::string("psffit.variables.0"),

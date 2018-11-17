@@ -1,5 +1,5 @@
 /**\file
- * 
+ *
  * \brief Declares the command line parser for the VisualizePSFMap tool.
  */
 
@@ -23,6 +23,7 @@
 #include <cstdio>
 #include <fstream>
 
+///Command line parser for Visualizing PSF maps.
 class LIB_PUBLIC VisualizePSFMapConfig : public CommandLineConfig {
 private:
 	///Describes the available command line options.
@@ -34,7 +35,7 @@ public:
 			///The number of arguments on the command line
 			///(+1 for the executable)
 			int argc,
-			
+
 			///A C style array of the actual command line arguments.
 			char **argv)
 	{

@@ -33,8 +33,10 @@ namespace FitPSF {
 
     class LinearSource;
 
+    ///Convenience alias.
     typedef std::list<LinearSource *> LinearSourceList;
 
+    ///Value of 1 for which we can treate a reference/pointer.
     const unsigned long ulong1 = 1;
 
     /**\brief Define tags for reasons to exclude sources from the fit.
@@ -61,9 +63,15 @@ namespace FitPSF {
     };
 
     ///Human readable output of the reasons to drop sources.
-    LIB_LOCAL std::ostream &operator<<(std::ostream &os,
-                                       const SourceDropReason &reason);
+    LIB_LOCAL std::ostream &operator<<(
+        ///The stream to write to.
+        std::ostream &os,
 
+        ///The reson for dropping the source to describe.
+        const SourceDropReason &reason
+    );
+
+    ///Convenience alias.
     typedef Core::SubPixelMap GSLSubPixType;
 
     ///\brief Checks of whether a source should be used for PSF fitting.
@@ -87,7 +95,7 @@ namespace FitPSF {
                 std::isnan(srcbg.error())
                 ||
                 srcbg.pixels() < min_bg_pixels
-            ) 
+            )
                 last_source.drop(BAD_BACKGROUND);
             else if(last_source.pixel_count() > max_pixels_per_source) {
                 last_source.drop(MANY_PIXELS);
@@ -255,7 +263,7 @@ namespace FitPSF {
             ///same variable for all sources in a single image!
             Image<FIT_SOURCE_TYPE>                 &image,
 
-            ///The sub-pixel sensitivity map to assume. Must not be destroyed 
+            ///The sub-pixel sensitivity map to assume. Must not be destroyed
             ///while this object is in use.
             const Core::SubPixelMap                *subpix_map,
 
@@ -267,11 +275,11 @@ namespace FitPSF {
             ///have the correct structure (i.e. grid for piecewis PSFs).
             const PSF_TYPE                         &psf,
 
-            ///The minimum S/N threshold to considering a pixel above the 
+            ///The minimum S/N threshold to considering a pixel above the
             ///background
             double                                  alpha,
 
-            ///The maximum fraction of saturated pixels for a source to be 
+            ///The maximum fraction of saturated pixels for a source to be
             ///used.
             double                                  max_saturated_fraction,
 
@@ -285,18 +293,18 @@ namespace FitPSF {
             ///The background estimate of the sources.
             Background::Measure                     &bg,
 
-            ///The minimum number of pixels required in the background 
+            ///The minimum number of pixels required in the background
             ///determination.
             unsigned                                min_bg_pixels,
 
             ///The largest number of sources allowed in the final list.
             unsigned                                max_sources,
 
-            ///If source pixels outside this radius are found, the source is 
+            ///If source pixels outside this radius are found, the source is
             ///excluded
             double                                  max_circular_aperture,
 
-            ///The name of the file where this source should be saved after 
+            ///The name of the file where this source should be saved after
             ///the fit.
             const std::string                      &output_fname,
 
@@ -309,10 +317,10 @@ namespace FitPSF {
             ///If true, any pixel which even partially overlaps with the PSF
             ///gets included. Otherwise, pixels are assigned by signal to
             ///noise (optionally filling up a circular aperture). This must
-            ///be false for 
+            ///be false for
             bool                                    cover_psf = false,
 
-            ///Do not drop any sources from PSF fitting (only used for zero 
+            ///Do not drop any sources from PSF fitting (only used for zero
             ///PSF fit at the moment).
             bool                                    do_not_drop = false,
 
@@ -326,7 +334,7 @@ namespace FitPSF {
             location = source_locations.begin();
         typedef typename std::list< FIT_SOURCE_TYPE *>::iterator SourceIter;
         SourceIter first_new_source;
-        
+
         for(
             size_t source_assignment_id = 1;
             location != source_locations.end();
@@ -351,7 +359,7 @@ namespace FitPSF {
                 first_new_source = --psf_fit_sources.end();
 #ifdef TRACK_PROGRESS
             std::cerr << "Added source #"
-                      << psf_fit_sources.size() 
+                      << psf_fit_sources.size()
                       << "("
                       << &last_source
                       << "), contaning "
@@ -459,7 +467,7 @@ namespace FitPSF {
             max_src_count = options["src.max-count"].as<unsigned>();
             max_aperture = options["src.max-aperture"].as<double>();
 #ifdef TRACK_PROGRESS
-            std::cerr << "Got useful configuration for output file: ." 
+            std::cerr << "Got useful configuration for output file: ."
                       << source_list.output_fname()
                       << std::endl;
 #endif
@@ -518,7 +526,7 @@ namespace FitPSF {
         void add_expansion_terms(
             ///A list of the source locations within the image.
             const IOSources &source_list,
-            
+
             ///The expression giving the PSF dependence on source variables.
             const std::string &expansion_term_expression,
 
@@ -583,6 +591,7 @@ namespace FitPSF {
         }
     }
 
+    ///True if and only if the given source is not identified by a HAT ID.
     inline bool sourceid_not_hat(const Core::SourceLocation *source)
     {
         return !(source->id().is_hatid());
@@ -607,9 +616,9 @@ namespace FitPSF {
                           fit_result.end());
             hat_ids = false;
 
-            typedef std::pair< std::string, std::vector<double>* > 
+            typedef std::pair< std::string, std::vector<double>* >
                 DoubleKeyValue;
-            typedef std::pair< std::string, std::vector<unsigned>* > 
+            typedef std::pair< std::string, std::vector<unsigned>* >
                 UnsignedKeyValue;
 
             std::map<std::string, std::vector<double>* >
@@ -889,6 +898,7 @@ namespace FitPSF {
             }
         }
 
+    ///True if and only if the ID of s1 is less than the ID of s2.
     template<class SOURCE_TYPE>
         bool compare_source_assignment_ids(const SOURCE_TYPE *s1,
                                            const SOURCE_TYPE *s2)

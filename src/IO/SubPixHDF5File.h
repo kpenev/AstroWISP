@@ -25,11 +25,10 @@
 
 namespace IO {
 
-    /* \brief A class for reading/writing HDF5 files imposing a user defined
-     * structure.
-     *
-     * \ingroup IO
-     */
+    ///\brief A class for reading/writing HDF5 files imposing a user
+    ///defined structure.
+    ///
+    ///\ingroup IO
     class LIB_PUBLIC SubPixHDF5File : public H5::H5File {
     private:
         ///Identifiers for the various HDF5 components.
@@ -54,13 +53,13 @@ namespace IO {
 
         ///The structure of the output file parsed on creation.
         static boost::property_tree::ptree __structure,
-            
+
             ///The paths to the recognized datasets in __structure.
             __dataset_paths,
-            
+
             ///The paths to the recognized attributes
             __attribute_paths,
-            
+
             ///The paths to the various links
             __link_paths;
 
@@ -70,7 +69,7 @@ namespace IO {
             const boost::property_tree::ptree &node
         );
 
-        ///\brief Fills the __(dataset/property/link)_paths also fixed source 
+        ///\brief Fills the __(dataset/property/link)_paths also fixed source
         ///id entry.
         static void fill_paths(
             boost::property_tree::ptree& sub_structure=__structure,
@@ -94,7 +93,7 @@ namespace IO {
             unsigned ap_ind
         );
 
-        ///\brief Creates a new attribute, assuming no conflict with an 
+        ///\brief Creates a new attribute, assuming no conflict with an
         ///existing one.
         void create_attribute(
             ///The hdf5 location to add the attribute to.
@@ -113,7 +112,7 @@ namespace IO {
 
         ///Adds all known attributes to a group or a dataset.
         void add_attributes(
-            ///The node in the structure corresponding to the location 
+            ///The node in the structure corresponding to the location
             ///being filled.
             const boost::property_tree::ptree& structure_node,
 
@@ -139,7 +138,7 @@ namespace IO {
             const std::list<PSF::MapVariableType> &variables
         );
 
-        ///\brief Returns a H5::DSetCreatPropList that implements a given 
+        ///\brief Returns a H5::DSetCreatPropList that implements a given
         ///compression.
         H5::DSetCreatPropList compression_proplist(
             ///What compression to use (if any) for a dataset. Can be a
@@ -177,7 +176,7 @@ namespace IO {
             bool overwrite
         );
 
-        ///\brief Creates (or overwwrites) the dataset containing the 
+        ///\brief Creates (or overwwrites) the dataset containing the
         ///variables required by the PSF map.
         H5::DataSet add_psfmap_variables(
             ///The name to give to the new dataset.
@@ -373,7 +372,7 @@ namespace IO {
             const std::string &path
         );
 
-        ///\brief Reading a scalar 1d dataset or attribute (return false if 
+        ///\brief Reading a scalar 1d dataset or attribute (return false if
         ///not scalar).
         template<class DSET_ATTR>
         bool read_scalar(
@@ -518,8 +517,8 @@ namespace IO {
                 array.size()
             );
 #ifdef DEBUG
-            std::cerr << "Creating " << dataset_name << " dataset with " 
-                      << dataspace.getSimpleExtentNpoints() << " points!" 
+            std::cerr << "Creating " << dataset_name << " dataset with "
+                      << dataspace.getSimpleExtentNpoints() << " points!"
                       << std::endl;
 #endif
             if(overwrite) {
@@ -584,7 +583,7 @@ namespace IO {
                          std::string(result),
                          TranslateToAny<std::string>());
                 delete[] result;
-            } else 
+            } else
                 throw Error::HDF5(getFileName(),
                                   "Zero length dataset encountered!");
         }
@@ -621,7 +620,7 @@ namespace IO {
                         H5::PredType::NATIVE_DOUBLE,
                         data,
                         path
-                    );								
+                    );
                 } else if(type_class==H5T_STRING) {
                     read_1d_string<DSET_ATTR>(
                         source,

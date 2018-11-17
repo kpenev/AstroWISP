@@ -19,12 +19,13 @@ namespace Core {
     ///Flags for the quality of a photometric measurement.
     enum LIB_PUBLIC PhotometryFlag {UNDEFINED=-1, GOOD, SATURATED, BAD};
 
+    ///Alias for the type to use for size/index of double vectors.
     typedef std::vector<double>::size_type vector_size_type;
 
     ///Synonim for list of doubles (needed for boost command line parsing).
     class LIB_LOCAL RealList : public std::list<double> {};
 
-    ///\brief Synonim for list of column names (needed for boost command 
+    ///\brief Synonim for list of column names (needed for boost command
     ///line parsing).
     class LIB_LOCAL ColumnList : public std::list<Phot::Columns> {};
 

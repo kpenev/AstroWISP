@@ -57,13 +57,25 @@ void destroy_result_tree(H5IODataTree *tree)
 
 ///Set result to a single value of type UNIT_TYPE.
 template<typename UNIT_TYPE>
-void get_single_value(const boost::any &value, void *result)
+void get_single_value(
+    ///The value to read from.
+    const boost::any &value,
+
+    ///The destination to write to.
+    void *result
+)
 {
     *reinterpret_cast<UNIT_TYPE*>(result) = boost::any_cast<UNIT_TYPE>(value);
 }
 
 ///Set result to a newly allocated c-style string.
-void get_string_value(const boost::any &value, void *result)
+void get_string_value(
+    ///The value to read from.
+    const boost::any &value,
+
+    ///The destination to write to.
+    void *result
+)
 {
     const std::string &source = IO::translate_string.get_value(value);
     char **destination = reinterpret_cast<char**>(result);
@@ -75,7 +87,13 @@ void get_string_value(const boost::any &value, void *result)
 
 ///Set result to a std::pair of values both of type UNIT_TYPE.
 template<typename UNIT_TYPE>
-void get_value_pair(const boost::any &value, void *result)
+void get_value_pair(
+    ///The value to read from.
+    const boost::any &value,
+
+    ///The destination to write to.
+    void *result
+)
 {
     UNIT_TYPE *destination = reinterpret_cast<UNIT_TYPE*>(result);
     const std::pair<UNIT_TYPE, UNIT_TYPE> &source =
@@ -87,7 +105,13 @@ void get_value_pair(const boost::any &value, void *result)
 
 ///Try copying a STL container of values, each of type UNIT_TYPE to result.
 template<typename SOURCE_CONTAINER_TYPE, typename UNIT_TYPE>
-bool try_copying_container(const boost::any &value, void *result)
+bool try_copying_container(
+    ///The value to read from.
+    const boost::any &value,
+
+    ///The destination to write to.
+    void *result
+)
 {
     try {
         const SOURCE_CONTAINER_TYPE & input_container =
@@ -105,7 +129,13 @@ bool try_copying_container(const boost::any &value, void *result)
 
 ///Try copying an array of values, each of type UNIT_TYPE to result.
 template<typename SOURCE_ARRAY_TYPE, typename UNIT_TYPE>
-bool try_copying_array(const boost::any &value, void *result)
+bool try_copying_array(
+    ///The value to read from.
+    const boost::any &value,
+
+    ///The destination to write to.
+    void *result
+)
 {
     try {
         const SOURCE_ARRAY_TYPE &input_array =
@@ -124,8 +154,14 @@ bool try_copying_array(const boost::any &value, void *result)
     }
 }
 
-template<typename UNIT_TYPE> void copy_array(const boost::any &value,
-                                             void *result)
+///Copy an array of values to a C-style array.
+template<typename UNIT_TYPE> void copy_array(
+    ///The input array of values to copy from.
+    const boost::any &value,
+
+    ///The destination to fill with the values. Must be pre-allocated.
+    void *result
+)
 {
     UNIT_TYPE *destination = reinterpret_cast<UNIT_TYPE*>(result);
     if(value.type() == typeid(UNIT_TYPE)) {
@@ -186,7 +222,7 @@ bool query_result_tree(H5IODataTree *tree,
                               void *result)
 {
 
-    const boost::any &value = 
+    const boost::any &value =
         reinterpret_cast<IO::H5IODataTree*>(tree)->get<boost::any>(quantity,
                                                                    boost::any());
     if(value.empty()) {
@@ -296,7 +332,7 @@ LIB_PUBLIC bool get_psf_map_variables(H5IODataTree *output_data_tree,
               << tree_path.str()
               << std::endl;
 #endif
-    
+
     const PSF::MapVarListType &variables =
         real_output_data_tree->get<PSF::MapVarListType>(
             tree_path.str(),

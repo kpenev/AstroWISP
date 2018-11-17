@@ -58,7 +58,10 @@ extern "C" {
     );
 
     ///Relese memory for an image created by create_core_image().
-    LIB_PUBLIC void destroy_core_image(CoreImage *image);
+    LIB_PUBLIC void destroy_core_image(
+        ///The image to destroy. Must have been created by create_core_image().
+        CoreImage *image
+    );
 
     ///Create and fill a sub-pixel sensitivity map.
     LIB_PUBLIC CoreSubPixelMap *create_core_subpixel_map(
@@ -75,5 +78,9 @@ extern "C" {
     );
 
     ///Release memory for a sub-pixel map created by create_core_subpixel_map().
-    LIB_PUBLIC void destroy_core_subpixel_map(CoreSubPixelMap *map);
+    LIB_PUBLIC void destroy_core_subpixel_map(
+        ///The sub-pixel map to destroy. Must have been created by
+        ///create_core_subpixel_map()
+        CoreSubPixelMap *map
+    );
 };//End extern "C".

@@ -38,7 +38,7 @@ namespace Background {
 
             ///Number of pixels used in the measurement
             unsigned pixels=0
-        ) : 
+        ) :
             __value(value), __error(error), __pixels(pixels) {}
 
 
@@ -56,14 +56,21 @@ namespace Background {
         ///@}
 
         ///@{
-        ///The number of pixels that contributed to the determination of the 
+        ///The number of pixels that contributed to the determination of the
         ///value and error.
         unsigned pixels() const {return __pixels;}
         unsigned &pixels() {return __pixels;}
         ///@}
     }; //End Source class.
 
-    std::ostream &operator<<(std::ostream &os, const Source& source);
+    ///Output Human readable representation of the source background to stream.
+    std::ostream &operator<<(
+        ///The stream to write to.
+        std::ostream &os,
+
+        ///The background under a source to output.
+        const Source& source
+    );
 
 }//End Core namespace.
 

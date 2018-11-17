@@ -1,5 +1,5 @@
 /**\file
- * 
+ *
  * \brief Defines default datatypes to use for HDF5 files.
  *
  * \ingroup IO
@@ -19,6 +19,7 @@
 
 namespace IO {
 
+    ///Determine the default data type to use for writing data to an HDF5 file.
     template<typename SCALAR>
         class LIB_PUBLIC H5DefaultDataType {
         public:
@@ -59,7 +60,7 @@ namespace IO {
                 return (has_sign
                         ? H5::PredType::STD_I8LE
                         : H5::PredType::STD_U8LE);
-            else if(max_value < 1 << (has_sign ? 15 : 16)) 
+            else if(max_value < 1 << (has_sign ? 15 : 16))
                 return (has_sign
                         ? H5::PredType::STD_I16LE
                         : H5::PredType::STD_U16LE);

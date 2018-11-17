@@ -52,9 +52,9 @@ namespace Core {
         ///Returns the resolution of the map along the x direction.
         unsigned long y_resolution() const {return __y_res;}
 
-        ///\brief Returns a modifiable reference to the sensitivity at the 
+        ///\brief Returns a modifiable reference to the sensitivity at the
         ///given sub-pixel.
-        double &operator()(unsigned long x, unsigned long y) 
+        double &operator()(unsigned long x, unsigned long y)
         {return __sensitivities[x+y*__x_res];}
 
         ///\brief Returns a copy of the sensitivity at the given sub-pixel.
@@ -67,13 +67,13 @@ namespace Core {
 
         ///Copy RHS to *this.
         SubPixelMap &operator=(const SubPixelMap &RHS)
-        {__sensitivities.resize(RHS.__sensitivities.size()); 
-            __sensitivities=RHS.__sensitivities; 
+        {__sensitivities.resize(RHS.__sensitivities.size());
+            __sensitivities=RHS.__sensitivities;
             __x_res=RHS.__x_res; __y_res=RHS.__y_res; return *this;}
 
         ///Saves the sub-pixel map to a FITS image with the given name.
         ///
-        ///If a file with the given name already exists and the filename does 
+        ///If a file with the given name already exists and the filename does
         ///not start with '!', an exception is raised.
         void save_to_fits(const std::string &filename);
 
@@ -86,9 +86,14 @@ namespace Core {
 
 }//End Core namespace.
 
-///Outputs the sensitivities of the subpixels as an array to the given 
+///Outputs the sensitivities of the subpixels as an array to the given
 ///stream.
-std::ostream &operator<<(std::ostream &os,
-                         const Core::SubPixelMap &subpix_map);
+std::ostream &operator<<(
+    ///The stream to write to.
+    std::ostream &os,
+
+    ///The map to output.
+    const Core::SubPixelMap &subpix_map
+);
 
 #endif

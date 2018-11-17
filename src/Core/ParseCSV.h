@@ -23,7 +23,7 @@ namespace Core {
     LIB_LOCAL std::list<int> parse_int_list(
         const std::string &csv,
         const std::string &optname,
-        unsigned min_count, 
+        unsigned min_count,
         unsigned max_count
     );
 
@@ -36,7 +36,7 @@ namespace Core {
         const std::string &optname,
 
         ///Minimum required number of values (exception thrown if not met).
-        unsigned min_count, 
+        unsigned min_count,
 
         ///Maximum required number of values (exception thrown if exceeded).
         unsigned max_count
@@ -50,7 +50,7 @@ namespace Core {
         const std::string &optname,
 
         ///Minimum required number of values (exception thrown if not met).
-        unsigned min_count, 
+        unsigned min_count,
 
         ///Maximum required number of values (exception thrown if exceeded).
         unsigned max_count
@@ -64,7 +64,7 @@ namespace Core {
         const std::string &csv,
 
         ///How many copies of per-aperture columns to make.
-        unsigned num_apertures, 
+        unsigned num_apertures,
 
         ///The name of the option being parsed (only used for error message).
         const std::string &optname,
@@ -74,12 +74,15 @@ namespace Core {
         bool allow_unknown=true
     );
 
-    ///Perses a string of comma separated values into a list.
+    ///\brief Perses a string of comma separated values into a list.
+    ///
+    ///See parse_real_list() for a description of the arguments.
     template<class VAL_TYPE>
         LIB_LOCAL void parse_csv_list(const std::string &csv,
-                            const std::string &optname, unsigned min_count, 
-                            unsigned max_count,
-                            std::list<VAL_TYPE> &result)
+                                      const std::string &optname,
+                                      unsigned min_count,
+                                      unsigned max_count,
+                                      std::list<VAL_TYPE> &result)
         {
             std::istringstream csv_stream(csv);
             VAL_TYPE value;
@@ -88,7 +91,7 @@ namespace Core {
                 if(csv_stream) result.push_back(value);
                 if(
                     csv_stream.eof()
-                    && 
+                    &&
                     (std::isnan(min_count) || result.size()>=min_count)
                     &&
                     (std::isnan(max_count) || result.size()<=max_count)
@@ -100,7 +103,7 @@ namespace Core {
             error_msg << "Malformatted "
                 << optname
                 << " option: "
-                << csv 
+                << csv
                 << "expected comma separated list of ";
             if(!std::isnan(min_count))
                 error_msg << "at least " << min_count << " ";

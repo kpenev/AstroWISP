@@ -17,13 +17,13 @@ namespace Core {
     ///column per aperture.
     template<class ITER_TYPE, class VAL_TYPE>
     void replicate_last(
-            ///All elements after this one (including this one) are 
+            ///All elements after this one (including this one) are
             ///replicated.
-            ITER_TYPE &start_replicate, 
+            ITER_TYPE &start_replicate,
 
             ///The number of copies to make.
             unsigned copies,
-            
+
             ///The list this operation is performed on.
             std::list<VAL_TYPE> &target)
     {
@@ -33,25 +33,25 @@ namespace Core {
         --stop_replicate;
         ++skip1;
         target.insert(target.end(), skip1, stop_replicate);
-        for(;copies>1; --copies) 
+        for(;copies>1; --copies)
             target.insert(target.end(), start_replicate, stop_replicate);
     }
 
 
 
-    Core::RealList parse_real_list(const std::string &csv,
-                                   const std::string &optname,
-                                   unsigned min_count, 
-                                   unsigned max_count)
+    RealList parse_real_list(const std::string &csv,
+                             const std::string &optname,
+                             unsigned min_count,
+                             unsigned max_count)
     {
-        Core::RealList result;
+        RealList result;
         parse_csv_list(csv, optname, min_count, max_count, result);
         return result;
     }
 
     std::list<int> parse_int_list(const std::string &csv,
                                   const std::string &optname,
-                                  unsigned min_count, 
+                                  unsigned min_count,
                                   unsigned max_count)
     {
         std::list<int> result;
@@ -59,13 +59,13 @@ namespace Core {
         return result;
     }
 
-    Core::ColumnList parse_column_list(const std::string &csv,
-                                       unsigned num_apertures, 
+    ColumnList parse_column_list(const std::string &csv,
+                                       unsigned num_apertures,
                                        const std::string &optname,
                                        bool allow_unknown)
     {
         std::istringstream csv_stream(csv);
-        Core::ColumnList result;
+        ColumnList result;
         std::string colname;
         std::list<Phot::Columns>::const_iterator to_replicate=result.end();
         bool per_ap=false, old_per_ap=false;
@@ -90,7 +90,7 @@ namespace Core {
                 result.push_back(Phot::K);
                 per_ap = false;
             } else if(colname == "A" || colname == "amp") {
-                result.push_back(Phot::A); 
+                result.push_back(Phot::A);
                 per_ap = false;
             } else if(colname == "bg") {
                 result.push_back(Phot::bg);
@@ -158,24 +158,24 @@ namespace Core {
             old_per_ap = per_ap;
         }
         std::ostringstream error_msg;
-        error_msg << "Malformatted " << optname << " option: " << csv 
+        error_msg << "Malformatted " << optname << " option: " << csv
                   << "expected comma separated list of column names.";
         throw Error::CommandLine(error_msg.str());
     }
 
-    Core::StringList parse_string_list(const std::string &csv,
-                                       const std::string &optname,
-                                       unsigned min_count, 
-                                       unsigned max_count)
+    StringList parse_string_list(const std::string &csv,
+                                 const std::string &optname,
+                                 unsigned min_count,
+                                 unsigned max_count)
     {
         std::istringstream csv_stream(csv);
-        Core::StringList result;
+        StringList result;
         while(csv_stream) {
             result.push_back("");
             getline(csv_stream, result.back(), ',');
             if(
                 csv_stream.eof()
-                && 
+                &&
                 (std::isnan(min_count) || result.size()>=min_count)
                 &&
                 (std::isnan(max_count) || result.size()<=max_count)
@@ -183,7 +183,7 @@ namespace Core {
                 return result;
         }
         std::ostringstream error_msg;
-        error_msg << "Malformatted " << optname << " option: " << csv 
+        error_msg << "Malformatted " << optname << " option: " << csv
                   << "expected comma separated list of ";
         if(!std::isnan(min_count))
             error_msg << "at least " << min_count << " ";

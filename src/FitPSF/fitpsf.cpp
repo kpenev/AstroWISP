@@ -30,15 +30,16 @@
 #include <algorithm>
 #include <map>
 
-const std::string FIT_PSF_VERSION="$Revision: $";
+///The hash identifiying this version of fitpsf.
+const std::string FIT_PSF_VERSION="$Id: $";
 
 namespace FitPSF {
 
-    ///\brief Fit the PSF of all sources simultaneously assuming smooth 
+    ///\brief Fit the PSF of all sources simultaneously assuming smooth
     ///variation with position.
     ///
-    ///Perform a global fit for the polynomial expansions of S, D and K over 
-    ///the image using the given sources, starting from the given initial 
+    ///Perform a global fit for the polynomial expansions of S, D and K over
+    ///the image using the given sources, starting from the given initial
     ///guess if supplied.
 /*    std::list<IO::OutputSDKSource> global_sdk_fit(
             ///A list of the sources in the image.
@@ -51,17 +52,17 @@ namespace FitPSF {
             const Core::SubPixelMap &subpix_map,
 
             ///The fitter supports two fitting methods: Newton-Raphson and
-            ///simplex. If this parameters is true the much slower simplex 
+            ///simplex. If this parameters is true the much slower simplex
             ///method is used, otherwise Newton-Raphson.
             bool use_GSL_simplex,
 
             ///The gain to assume for the image.
             double gain,
 
-            ///An initial guess for the polynomial coefficients in the 
-            ///expansions of S,D and K. The order is S coefficients first, 
-            ///followed by D and then K. For each variable the terms are in 
-            ///increasing overall order (that is const, x, y, x^2, xy, 
+            ///An initial guess for the polynomial coefficients in the
+            ///expansions of S,D and K. The order is S coefficients first,
+            ///followed by D and then K. For each variable the terms are in
+            ///increasing overall order (that is const, x, y, x^2, xy,
             ///y^2, ...).
             const std::list<double> &initial_guess_coef=std::list<double>()
     )
@@ -220,17 +221,35 @@ namespace FitPSF {
     ///Find the sources on which PSF fitting will be performed.
     template<class FIT_SOURCE_TYPE, class PSF_TYPE>
         std::list< FitPSF::Image<FIT_SOURCE_TYPE>* > prepare_fit_sources(
+            ///The parsed command line options.
             const FitPSF::Config &options,
+
+            ///Gets filled with the sources to use for the shape fit.
             std::list<FIT_SOURCE_TYPE *> &fit_sources,
+
+            ///Gets fiiled with the sources dropped from the shape fit, still
+            ///fit their amplitudes.
             std::list<FIT_SOURCE_TYPE *> &dropped_sources,
+
+            ///Gets set to the common resolution of the input images in the x
+            ///direction.
             unsigned &x_resolution,
+
+            ///Gets set to the common resolution of the input images in the y
+            ///direction.
             unsigned &y_resolution,
+
+            ///The sub-pixel sensitivity map to assume.
             const Core::SubPixelMap &subpix_map,
+
+            ///A PSF that has grid that should be used for fitting.
             const PSF_TYPE &psf,
+
+            ///The tree to fill with output data.
             IO::H5IODataTree &output_data_tree
         )
         {
-            std::string source_list_fname = 
+            std::string source_list_fname =
                 options["io.source-list"].as<std::string>();
 
             std::istream *source_list_stream;
@@ -250,7 +269,7 @@ namespace FitPSF {
                 );
 
                 FitPSF::Image<FIT_SOURCE_TYPE> *image;
-                
+
                 if(options["io.expect-error-hdu"].as<unsigned>() > 0) {
                     image = new FitPSF::Image<FIT_SOURCE_TYPE>(
                         source_list.fits_fname(),
@@ -356,9 +375,16 @@ namespace FitPSF {
         }
 
     ///\brief Does not actually fit for the PSF but sets up a constant one.
-    bool zero_fit(const FitPSF::Config &options,
-                  const Core::SubPixelMap &subpix_map,
-                  IO::H5IODataTree &output_data_tree)
+    bool zero_fit(
+        ///The parsed command line options.
+        const FitPSF::Config &options,
+
+        ///The sub-pixel sensitivity map to assume.
+        const Core::SubPixelMap &subpix_map,
+
+        ///The data tree to fill with the results.
+        IO::H5IODataTree &output_data_tree
+    )
     {
 #ifdef TRACK_PROGRESS
         std::cerr << "Extracting source pixels for zero PSF fitting."
@@ -386,7 +412,7 @@ namespace FitPSF {
 
         unsigned x_resolution, y_resolution;
         LinearSourceList fit_sources, dropped_sources;
-        std::list< FitPSF::Image<LinearSource>* > fit_images = 
+        std::list< FitPSF::Image<LinearSource>* > fit_images =
             prepare_fit_sources<LinearSource, PSF::PiecewiseBicubic>(
                 options,
                 fit_sources,
@@ -440,7 +466,7 @@ namespace FitPSF {
         return true;
     }
 
-    ///\brief Fit an elliptical gaussian PSF model according to the command 
+    ///\brief Fit an elliptical gaussian PSF model according to the command
     ///line options.
 /*    bool sdk_fit(const FitPSF::Config &options,
                  const Core::SubPixelMap &subpix_map,
@@ -514,9 +540,18 @@ namespace FitPSF {
 
     ///\brief Fit a piecewise bicubic PSF model according to the command line
     ///options.
-    bool piecewise_bicubic_fit(const FitPSF::Config &options,
-                               const Core::SubPixelMap &subpix_map,
-                               IO::H5IODataTree &output_data_tree)
+    ///
+    ///\return True if and only if the fit successfully converged.
+    bool piecewise_bicubic_fit(
+        ///The parsed command line options.
+        const FitPSF::Config &options,
+
+        ///The sub-pixel map to assume.
+        const Core::SubPixelMap &subpix_map,
+
+        ///The data tree to fill with the results of the fit.
+        IO::H5IODataTree &output_data_tree
+    )
     {
 #ifdef TRACK_PROGRESS
         std::cerr << "Starting piecewise bicubic fit."
@@ -540,7 +575,7 @@ namespace FitPSF {
         psf.set_values(zeros.begin(), zeros.begin(),
                        zeros.begin(), zeros.begin());
 
-        std::list< FitPSF::Image<LinearSource>* > fit_images = 
+        std::list< FitPSF::Image<LinearSource>* > fit_images =
             prepare_fit_sources<LinearSource, PSF::PiecewiseBicubic>(
                 options,
                 fit_sources,
@@ -687,7 +722,11 @@ namespace FitPSF {
         }
     }
 
-    void output(const IO::H5IODataTree &output_data_tree)
+    ///Create/fill the output files with the newly derived PSF fit.
+    void output(
+        ///The information to output.
+        const IO::H5IODataTree &output_data_tree
+    )
     {
 #ifdef TRACK_PROGRESS
         std::cerr << "Outputting data tree:" << std::endl
@@ -762,7 +801,7 @@ int main(int argc, char *argv[])
                                          output_data_tree);
 /*        else if(options["psf.model"].as<PSF::ModelType>() == PSF::SDK)
 			converged = sdk_fit(options, subpix_map, output_data_tree);*/
-		else 
+		else
             converged = piecewise_bicubic_fit(options,
                                               subpix_map,
                                               output_data_tree);
@@ -788,7 +827,7 @@ int main(int argc, char *argv[])
 		std::cerr << ex.what() << ":" << ex.get_message() << std::endl;
 		return 2;
     } catch(H5::Exception &ex) {
-        std::cerr 
+        std::cerr
             << ex.getFuncName()
             << ": "
             << ex.getDetailMsg()

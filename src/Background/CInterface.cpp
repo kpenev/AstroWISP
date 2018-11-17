@@ -8,7 +8,7 @@
 #include "CInterface.h"
 
 BackgroundMeasureAnnulus *create_background_extractor(double inner_radius,
-                                                      double outer_radius, 
+                                                      double outer_radius,
                                                       double exclude_aperture,
                                                       const CoreImage *image,
                                                       double error_confidence)
