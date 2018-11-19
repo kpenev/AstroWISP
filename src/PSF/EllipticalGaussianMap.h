@@ -41,6 +41,7 @@ namespace PSF {
             const IO::H5IODataTree &data
         );
 
+        ///Evaluate the map at particular values of the terms.
         EllipticalGaussian *get_psf(
             ///The values of the terms on which the PSF map depends.
             const Eigen::VectorXd &terms,

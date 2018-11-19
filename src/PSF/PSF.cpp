@@ -259,15 +259,19 @@ namespace PSF {
     }
 
     double PSF::integrate(
-            double center_x, double center_y, double dx, 
-            double dy, double circle_radius
+        double center_x,
+        double center_y,
+        double dx, 
+        double dy,
+        double circle_radius
 #ifdef DEBUG	
 #ifdef SHOW_PSF_PIECES
-                ,
-                bool reset_piece_id, bool skip_piece
+        ,
+        bool reset_piece_id,
+        bool skip_piece
 #endif
 #endif
-            ) const
+    ) const
     {
         if(circle_radius) {
             double dxh=dx/2, dyh=dy/2;

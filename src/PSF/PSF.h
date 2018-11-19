@@ -31,51 +31,107 @@ namespace PSF {
         ///                    returned value
         /// * negative value : two intersections exist at +- the returned 
         ///                    value
-        double line_circle_intersections(double x1, double x2,
-                double y, double r, bool left_on_circle=false, 
-                bool right_on_circle=false) const;
+        double line_circle_intersections(
+            double x1,
+            double x2,
+            double y,
+            double r,
+            bool left_on_circle=false, 
+            bool right_on_circle=false
+        ) const;
 
         ///Integrates the PSF over the intersection of a rectangle and a cirle
         ///under the assumption that the bottom side of the rectangle lies
         ///outside the circle. See integrate_overlap for description of 
         ///command line arguments. Also assumes the rectangle is entirely 
         ///contained within a quadrant.
-        double integrate_overlap_bottom_out(double x1, double y1, double x2, 
-                double y2, double rc, std::valarray<bool> on_circle,
-                std::valarray<double> &intersections) const;
+        double integrate_overlap_bottom_out(
+            ///See same name argu ment to integrate_overlap()
+            double x1,
+
+            ///See same name argu ment to integrate_overlap()
+            double y1,
+
+            ///See same name argu ment to integrate_overlap()
+            double x2, 
+
+            ///See same name argu ment to integrate_overlap()
+            double y2,
+
+            ///See same name argu ment to integrate_overlap()
+            double rc,
+
+            ///See same name argu ment to integrate_overlap()
+            std::valarray<bool> on_circle,
+
+            std::valarray<double> &intersections
+        ) const;
 
         ///Integrates the PSF over the intersection of a rectangle and a cirle
         ///under the assumption that the bottom side of the rectangle lies
         ///inside the circle. See integrate_overlap for description of command
         ///line arguments. Also assumes the rectangle is entirely contained
         ///within a quadrant.
-        double integrate_overlap_bottom_in(double x1, double y1, double x2, 
-                double y2, double rc, std::valarray<bool> on_circle, 
-                std::valarray<double> &intersections) const;
+        double integrate_overlap_bottom_in(
+            ///See same name argu ment to integrate_overlap()
+            double x1,
 
-        ///Integrates the PSF over the common overlapping area of the 
-        ///rectangle with corners at (x1, y1), (x2, y1), (x2, y2), (x1, y2)
-        ///and the circle centered on (0, 0) with a radius rc. The on_circle
-        ///array identifies rectangle corners (in the order given above) which 
-        ///lie exactly on the circle. It must be true that x1<x2, y1<y2.
-        double integrate_overlap(double x1, double y1, double x2, double y2,
-                double rc, const std::valarray<bool> 
-                &on_circle=std::valarray<bool>(false, 4)) const;
+            ///See same name argu ment to integrate_overlap()
+            double y1,
+
+            ///See same name argu ment to integrate_overlap()
+            double x2, 
+
+            ///See same name argu ment to integrate_overlap()
+            double y2,
+
+            ///See same name argu ment to integrate_overlap()
+            double rc,
+
+            ///See same name argu ment to integrate_overlap()
+            std::valarray<bool> on_circle,
+
+            std::valarray<double> &intersections
+        ) const;
+
+        ///\brief Integrates the PSF over the common overlapping area of a 
+        ///rectangle and a circle.
+        double integrate_overlap(
+            ///The left boundary of the rectangle.
+            double x1,
+
+            ///The bottom boundary of the rectangle.
+            double y1,
+
+            ///The right boundary of the rectangle. Must be > x1.
+            double x2,
+
+            ///The top boundary of the rectangle.
+            double y2,
+
+            ///The radius of the circle. The circle is centered at (0, 0).
+            double rc,
+
+            ///Identifies if rectangle corners, in the order (x1, y1), (x2, y1,
+            ///(x2, y2), (x1, y2), lie exactly on the circle.
+            const std::valarray<bool> &on_circle=std::valarray<bool>(false, 4)
+        ) const;
 
     protected:
         ///\brief Calculates the integral of the PSF over a rectangle.
         virtual double integrate_rectangle(
-                ///The x coordinate of the center of the rectangle.
-                double center_x,
+            ///The x coordinate of the center of the rectangle.
+            double center_x,
 
-                ///The y coordinate of the center of the rectangle.
-                double center_y,
+            ///The y coordinate of the center of the rectangle.
+            double center_y,
 
-                ///The full x size of the rectangle.
-                double dx,
-                
-                ///The full y size of the rectangle.
-                double dy) const =0;
+            ///The full x size of the rectangle.
+            double dx,
+
+            ///The full y size of the rectangle.
+            double dy
+        ) const =0;
 
         ///Integrates the PSF over the smallest of the four wedges with the
         //following boundaries:
@@ -90,32 +146,53 @@ namespace PSF {
         ///Set a precision requirement for integrals. May be ignored by actual
         ///PSF.
         virtual void set_precision(
-                ///Relative precision
-                double,
+            ///Relative precision
+            double,
 
-                ///Absolute precision
-                double) const {}
+            ///Absolute precision
+            double
+        ) const
+        {}
 
         ///Evaluates the PSF at the given position
         virtual double operator()(double x, double y) const =0;
 
-        ///Calculates the integral of the PSF over (a piece of, 
-        ///if circle_radius!=0) a rectangle 
-        ///interior to a circle.
+        ///\brief Calculates the integral of the PSF over (a piece of, if 
+        ///circle_radius!=0) a rectangle interior to a circle.
         ///
         ///The rectangle is defined by:
         ///center_x - dx/2 < x < center_x + dx/2, 
         ///center_y - dy/2 < y < center_y + dy/2
         ///and the circle is centered at 0 and has the given radius
-        virtual double integrate(double center_x, double center_y, double dx, 
-                double dy, double circle_radius=0
+        virtual double integrate(
+            ///The x coordinate of the center of the rectangle to integrate
+            ///over.
+            double center_x,
+
+            ///The y coordinate of the center of the rectangle to integrate
+            ///over.
+            double center_y,
+
+            ///The width of the rectangle.
+            double dx, 
+
+            ///The height of the rectangle.
+            double dy,
+
+            ///The radius of the circle.
+            double circle_radius=0
 #ifdef DEBUG	
 #ifdef SHOW_PSF_PIECES
-                ,
-                bool reset_piece_id=false, bool skip_piece=false
+            ,
+            ///Should counting PSF pieces start from scratch.
+            bool reset_piece_id=false,
+
+            ///If true, information about the piece being integrated is not
+            ///output.
+            bool skip_piece=false
 #endif
 #endif
-                ) const;
+        ) const;
 
         ///Virtual destructor.
         virtual ~PSF() {}

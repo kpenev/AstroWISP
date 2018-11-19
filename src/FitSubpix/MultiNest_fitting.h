@@ -29,8 +29,14 @@ namespace MultiNestFit {
 		///Just name the map, resultion must be set later.
 		MultiNestSubPixelMap() : SubPixelMap("MultiNest sub pixel map") {}
 
-		///Construct a map with the given resolution.
-		MultiNestSubPixelMap(unsigned long x_split, unsigned long y_split) :
+		///Construct a sub-pixel sensitivity map with the given resolution.
+		MultiNestSubPixelMap(
+            ///The x resolution of teh sub-pixel map
+            unsigned long x_split,
+
+            ///The y resolution of teh sub-pixel map
+            unsigned long y_split
+        ) :
 			SubPixelMap(x_split, y_split, "MultiNest sub pixel map") {}
 
 		///\brief Sets the sensitivities from the given MultiNest unit cube.
@@ -43,7 +49,10 @@ namespace MultiNestFit {
 		///s_i=c_i{1-(1-u_i)^[1/(N-i)]},
 		///with c_i=1-SUM(s_j, j<i), except for s_N which is set to c_N. With
 		///the sensitivities ordered such that x changes faster with i.
-		void set_sensitivities(const double *MNCube);
+		void set_sensitivities(
+            ///The unit cube values to convert to sensitivities.
+            const double *MNCube
+        );
 	};
 
 
@@ -67,10 +76,19 @@ namespace MultiNestFit {
 
 	///Perform the actual fitting.
     LIB_LOCAL void fit(
+        ///The resolution of the sub-pixel map in the x direction.
         const int&          x_split,
+
+        ///The resolution of the sub-pixel map in the y direction.
         const int&          y_split,
+
+        ///The list of frame files to fit.
         const StringList&   frame_filenames,
+
+        ///The list of source list files to fit (maching frame_filenames).
         const StringList&   source_filenames,
+
+        ///The aperture to use for photometry during fitting.
         double              aperture,
     );
 

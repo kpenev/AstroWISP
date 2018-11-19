@@ -21,8 +21,8 @@ namespace IO {
         ///already converted to properly scaled and offset integers.
         std::valarray<unsigned long> __converted;
 
-        ///The offset to apply to the converted values before converting them 
-        ///back to whatever type they were.
+        ///\brief The offset to apply to the converted values before converting
+        ///them back to whatever type they were.
         long __offset;
 
         ///The maximum value of the converted column
@@ -37,12 +37,18 @@ namespace IO {
         ///\brief Converts a real-valued column to unsigned long integers 
         ///preserving the values to the currently set precision
         template<class REAL_TYPE>
-            void convert_real(const std::valarray<REAL_TYPE> &column);
+            void convert_real(
+                ///The volues to convert.
+                const std::valarray<REAL_TYPE> &column
+            );
 
         ///\brief Converts an integer-valued column to unsigned long integers 
-        ///losslessly
+        ///losslessly in preparation for saving.
         template<class INT_TYPE>
-            void convert_int(const std::valarray<INT_TYPE> &column);
+            void convert_int(
+                ///The values to convert.
+                const std::valarray<INT_TYPE> &column
+            );
     public:
         ///\brief Pack in binary form the given column, if VAL_TYPE is 
         ///integer the  packing is lossless, if it is real valued,
@@ -50,7 +56,10 @@ namespace IO {
         ///should be pre-set using the precision method inherited from 
         ///ostream.
         template<class VAL_TYPE>
-            binostream &operator<<(const std::valarray<VAL_TYPE> &column);
+            binostream &operator<<(
+                ///Write the given column to the stream.
+                const std::valarray<VAL_TYPE> &column
+            );
     };
 
     template<class REAL_TYPE>

@@ -113,6 +113,8 @@ namespace PSF {
         ///The underlying PSF fit coefficients (as given by PSF fitting)
         const double *coefficients() const {return __coefficients;}
 
+        ///\brief Evaluate the PSF map for a particular set of values of the 
+        ///terms and return the PSF.
         PiecewiseBicubic *get_psf(
             ///The values of the terms on which the PSF map depends.
             const Eigen::VectorXd &terms,

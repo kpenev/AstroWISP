@@ -15,24 +15,42 @@ namespace PSF {
     ///given by a bi-cubic polynomial.
     class LIB_PUBLIC PiecewiseBicubicCell : public PiecewiseCell {
     private:
-        ///The sets of polynomial coefficients.
+        ///\brief The sets of polynomial coefficients.
         ///
         ///The coefficient in front of \f$x^m y^n\f$ is __coef[m+4*n].
         std::valarray<double> __coef;
+
     public:
-        ///Create a cell with the given horizontal and vertical sizes.
+        ///\brief Create a cell with the given size, but without initializing
+        ///the polynomial coefficients.
         PiecewiseBicubicCell(
+            ///The horizontal size of the cell to create.
             double horizontal_size,
+
+            ///The vertical size of the cell to create.
             double vertical_size
         ) :
             PiecewiseCell(horizontal_size, vertical_size)
         {}
 
-        ///Create a cell with the given horizontal and vertical sizes and
+        ///\brief Create a cell with the given horizontal and vertical sizes and
         ///initialize the coefficients.
+        ///
+        ///See __coef for the order of the coefficients.
         template<class IteratorType>
-        PiecewiseBicubicCell(double horizontal_size, double vertical_size,
-                IteratorType first_coef, IteratorType last_coef) :
+        PiecewiseBicubicCell(
+            ///The horizental size of the cell to create.
+            double horizontal_size,
+
+            ///The vertical size of the cell to create.
+            double vertical_size,
+
+            ///An iterator to the first polynomial coefficient.
+            IteratorType first_coef,
+
+            ///An iterator to one past the last polynomial coefficient.
+            IteratorType last_coef
+        ) :
             PiecewiseCell(horizontal_size, vertical_size),
             __coef(16)
         {
@@ -44,8 +62,13 @@ namespace PSF {
             assert(first_coef==last_coef);
         }
 
-        PiecewiseBicubicCell(const PiecewiseBicubicCell &orig) :
-            PiecewiseCell(orig), __coef(orig.__coef) {}
+        ///Copy constructor.
+        PiecewiseBicubicCell(
+            ///The original cell to copy.
+            const PiecewiseBicubicCell &orig
+        ) :
+            PiecewiseCell(orig), __coef(orig.__coef)
+        {}
 
         ///\brief Calculate the integral of the intensity over a rectangle 
         ///that is contained entirely within the cell.

@@ -21,11 +21,14 @@ namespace PSF {
     ///parameters.
     class LIB_PUBLIC Map {
     private:
-        ///The number of terms that the map depends on.
+        ///See num_terms()
         unsigned __num_terms;
     public:
         ///Create a map with the given number of terms.
-        Map(unsigned num_terms=0) : __num_terms(num_terms) {}
+        Map(
+            ///See num_terms()
+            unsigned num_terms=0
+        ) : __num_terms(num_terms) {}
 
         virtual ~Map() {}
 
@@ -33,7 +36,10 @@ namespace PSF {
         virtual unsigned num_terms() const {return __num_terms;}
 
         ///Set the number of terms that the map depends on.
-        virtual void set_num_terms(unsigned nterms)
+        virtual void set_num_terms(
+            ///The number of terms to set.
+            unsigned nterms
+        )
         {__num_terms = nterms;}
 
         ///A reference to a dynamically allocated PSF.

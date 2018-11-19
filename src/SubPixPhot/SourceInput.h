@@ -38,8 +38,8 @@ namespace SubPixPhot {
 
             __col_num;///< The number of columns in an input line
 
-        ///\brief The minimum subdivision size to allow the read sources when
-        ///they calculate intergrals of their PSFs
+        ///See max_exp_coef argument to
+        ///SourceInput(const std::list<Phot::Columns> &, double).
         double __max_exp_coef;
 
         bool __good, ///< Did the last operation complete successfully
@@ -47,23 +47,49 @@ namespace SubPixPhot {
 
         ///\brief Set the values of the __*_col members according to the 
         ///contents of the argument.
-        void set_columns(const std::list<Phot::Columns> &columns);
+        void set_columns(
+            ///The columns to expect in the input stream, in the correct order.
+            const std::list<Phot::Columns> &columns
+        );
 
         ///\brief Read a source from the input stream to source and return 
         ///its enabled/disabled status if such a column was specified (the 
         ///result is undefined if it was not).
         template<class SOURCE_TYPE>
-            bool read_source(SOURCE_TYPE &source,
-                             double &s,
-                             double &d,
-                             double &k,
-                             double &amp,
-                             double &bg);
+            bool read_source(
+                ///The source to set the ID and location of.
+                SOURCE_TYPE &source,
+
+                ///The elliptical gaussian \f$(x^2 + y^2)\f$ coefficient to set
+                ///to the newly read value.
+                double &s,
+
+                ///The elliptical gaussian \f$(x^2 - y^2)\f$ coefficient to set
+                ///to the newly read value.
+                double &d,
+
+                ///The elliptical gaussian \f$(xy)\f$ coefficient to set
+                ///to the newly read value.
+                double &k,
+
+                ///The amplitude of the source to set to the newly read value.
+                double &amp,
+
+                ///The background level behind the source to set to the
+                ///newly read value.
+                double &bg
+            );
     public:
         ///\brief Construct an input stream that expects the input to contain 
         ///the given columns in the specified order.
-        SourceInput(const std::list<Phot::Columns> &columns,
-                    double max_exp_coef = 1) :
+        SourceInput(
+            ///The list of columns to expect.
+            const std::list<Phot::Columns> &columns,
+
+            ///The maximum value of any term appearing in an exponent when 
+            ///calculating PSF integrals.
+            double max_exp_coef = 1
+        ) :
             __instream(NULL),
             __col_num(columns.size()),
             __max_exp_coef(max_exp_coef),
@@ -72,9 +98,17 @@ namespace SubPixPhot {
         {set_columns(columns);}
 
         ///Create a source input tied to the given stream.
-        SourceInput(const std::list<Phot::Columns> &columns,
-                    std::istream &instream,
-                    double max_exp_coef = 1) :
+        SourceInput(
+            ///The list of columns to expect.
+            const std::list<Phot::Columns> &columns,
+
+            ///The stream to read from.
+            std::istream &instream,
+
+            ///See same name argument to
+            ///SourceInput(const std::list<Phot::Columns> &, double).
+            double max_exp_coef = 1
+        ) :
             __instream(&instream),
             __col_num(columns.size()),
             __max_exp_coef(max_exp_coef),
@@ -83,18 +117,30 @@ namespace SubPixPhot {
         {set_columns(columns);}
 
         ///Read sources from the given stream
-        void attach_to_stream(std::istream &instream)
+        void attach_to_stream(
+            ///The stream to read from
+            std::istream &instream
+        )
         {__instream = &instream;}
 
         ///Read a source with an Elliptical Gaussian PSF.
-        SourceInput &operator>>(Core::SDKSource &source);
+        SourceInput &operator>>(
+            ///The source to fill per the next entry in the input stream.
+            Core::SDKSource &source
+        );
 
         ///Read a source with an unspecified PSF.
-        SourceInput &operator>>(Core::SourceLocation &source);
+        SourceInput &operator>>(
+            ///The source to fill per the next entry in the input stream.
+            Core::SourceLocation &source
+        );
 
         ///\brief Read a source with an Elliptical Gaussian PSF that can be 
         ///enabled/disabled according to a column in the input file
-        SourceInput &operator>>(IO::OutputSDKSource &source);
+        SourceInput &operator>>(
+            ///The source to fill per the next entry in the input stream.
+            IO::OutputSDKSource &source
+        );
 
         ///\brief Is the state of the source reader bad (i.e. last operation 
         ///failed or we reached the end of input

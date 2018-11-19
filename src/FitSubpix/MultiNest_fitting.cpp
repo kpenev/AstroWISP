@@ -50,7 +50,10 @@ namespace MultiNestFit {
 	}
 
 	///Outputs the given sensitivities to stdout.
-	void dump_sensitivities(double *sensitivities)
+	void dump_sensitivities(
+        ///A C-style array of the sensitivities to output.
+        double *sensitivities
+    )
 	{
 		std::ios_base::fmtflags orig_flags=std::cout.flags();
 		std::streamsize orig_precision=std::cout.precision();
@@ -117,12 +120,12 @@ namespace MultiNestFit {
 	}
 
 	void fit(
-			const int&          x_split,
-			const int&          y_split,
-			const StringList&   frame_filenames,
-			const StringList&   source_filenames,
-			double              aperture,
-			)
+        const int&          x_split,
+        const int&          y_split,
+        const StringList&   frame_filenames,
+        const StringList&   source_filenames,
+        double              aperture,
+    )
 	{
 		// set the MultiNest sampling parameters
 		int mmodal = 1;					//do mode separation?

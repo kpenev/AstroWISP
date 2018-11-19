@@ -30,28 +30,40 @@ namespace IO {
         private:
             hsize_t __size;				///< The size of the array.
             const UNIT_TYPE *__data;	///< The first element.
-            UNIT_TYPE *__allocated_data;
+            UNIT_TYPE *__allocated_data;///< Data allocated by this class.
 
             ///\brief Try reading the input data assuming it is in some type of
             ///container providing beging() and end() const_iterators
             template<class INPUT_ARRAY_TYPE>
-                bool try_container_type(const boost::any &value);
+                bool try_container_type(
+                    ///The value to try parsing.
+                    const boost::any &value
+                );
 
             ///\brief Try reading the input data assuming it is in some type of
             ///container where entries are stored contigously in memory.
             template<class INPUT_ARRAY_TYPE>
-                bool try_array_type(const boost::any &value);
+                bool try_array_type(
+                    ///The value to try parsing.
+                    const boost::any &value
+                );
 
         public:
             ///To be filled later using parse().
             OutputArray() : __allocated_data(NULL) {};
 
             ///Attempts all possible casts on the given value.
-            OutputArray(const boost::any &value) : __allocated_data(NULL)
+            OutputArray(
+                ///The value(s) to initialize the array with.
+                const boost::any &value
+            ) : __allocated_data(NULL)
             {parse(value);}
 
             ///Parses the given value into this.
-            void parse(const boost::any &value);
+            void parse(
+                ///The value to fill the array with.
+                const boost::any &value
+            );
 
             ///The number of elements in the array.
             const hsize_t &size() const {return __size;}
@@ -61,12 +73,18 @@ namespace IO {
             const UNIT_TYPE *data() const {return __data;}
 
             ///Constant reference to an array element.
-            const UNIT_TYPE &operator[](hsize_t index) const
+            const UNIT_TYPE &operator[](
+                ///The index within the array to return.
+                hsize_t index
+            ) const
             {assert(index < __size); return __data[index];}
 
             ///\brief Compares two arrays element by element (empty arrays 
             ///compare equal).
-            bool operator==(const OutputArray<UNIT_TYPE> &rhs);
+            bool operator==(
+                ///The original array to copy.
+                const OutputArray<UNIT_TYPE> &rhs
+            );
 
             ~OutputArray() {if(__allocated_data) delete[] __allocated_data;}
         };

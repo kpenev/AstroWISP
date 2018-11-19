@@ -20,8 +20,14 @@ namespace PSF {
                ///The vertical size of the cell.
                __vertical_size;
     public:
-        ///Create a cell with the given horizontal and vertical sizes.
-        PiecewiseCell(double horizontal_size, double vertical_size) :
+        ///Create a cell with the given size.
+        PiecewiseCell(
+            ///The horizental size of the new cell.
+            double horizontal_size,
+
+            ///The vertical size of the new cell.
+            double vertical_size
+        ) :
             __horizontal_size(horizontal_size), 
             __vertical_size(vertical_size)
         {}
@@ -425,7 +431,7 @@ namespace PSF {
         {return integrate_hspan((up ? y : 0), (up ? __vertical_size : y),
                 coef_sets);}
 
-        ///Calculate the integral of the intensity over a rectangle.
+        ///\brief Calculate the integral of the intensity over a rectangle.
         ///
         /// \image html PiecewisePSFCell_integrate_rectangle_ddbb.png "The area being integrated along with the meaning of all function arguments."
         virtual double integrate_rectangle(
@@ -451,7 +457,7 @@ namespace PSF {
                 (right ? x : 0), (right ? __horizontal_size : x),
                 (up ? y : 0), (up ? __vertical_size : y));}
 
-        ///Calculate the integral of the intensity over a rectangle.
+        ///\brief Calculate the integral of the intensity over a rectangle.
         ///
         /// \image html PiecewisePSFCell_integrate_rectangle_ddbb.png "The area being integrated along with the meaning of all function arguments."
         virtual std::valarray<double> integrate_rectangle(

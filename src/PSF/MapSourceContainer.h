@@ -20,8 +20,14 @@ namespace PSF {
         MapSourceContainer() {}
 
         ///Initialize the container from an H5IODataTree.
-        MapSourceContainer(const IO::H5IODataTree &data_tree,
-                           unsigned num_apertures);
+        MapSourceContainer(
+            ///The IO tree containing the sources, the configuration for the PSF
+            ///map etc.
+            const IO::H5IODataTree &data_tree,
+
+            ///The number of apertures to set for the new MapSource objects.
+            unsigned num_apertures
+        );
 
         ///\brief All quantities needed to construct the source list from an 
         ///I/O data tree.

@@ -38,11 +38,17 @@ namespace IO {
             std::string __filename;
 
             ///Opens a fits file for reading.
-            fitsfile *open_fits(const std::string &filename);
+            fitsfile *open_fits(
+                ///The name of the file to open.
+                const std::string &filename
+            );
 
             ///Closes as previously opened fits file.
             void close_fits(
+                ///The underlying open CFITSIO file to close.
                 fitsfile *fptr,
+
+                ///The name of the file file (used for error messages only).
                 const std::string &filename = "unknown fits file"
             );
 
@@ -150,7 +156,10 @@ namespace IO {
             virtual FitsHeader &header() {return __header;}
 
             ///Copies RHS to *this.
-            FitsImage &operator=(const FitsImage &rhs)
+            FitsImage &operator=(
+                ///The original image to copy.
+                const FitsImage &rhs
+            )
             {
                 operator=(rhs);
                 __header = rhs.__header;

@@ -1,8 +1,9 @@
 #include "TermCalculator.h"
 
-#ifdef STANDALONE
 
 namespace PSF {
+
+    unsigned TermValarray::__max_id = 0;
 
     std::ostream &operator<<(std::ostream &os,
                              const std::valarray<double> &array)
@@ -14,7 +15,7 @@ namespace PSF {
         return os;
     }
 
-
+#ifdef STANDALONE
     void define_some_variables(MapVarListType &variables,
                                unsigned length = 3)
     {
@@ -133,6 +134,6 @@ namespace PSF {
                   << std::endl;
         exercise();
     }
+#endif
 
 }
-#endif

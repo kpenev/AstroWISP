@@ -23,8 +23,12 @@ namespace IO {
     template<typename SCALAR>
         class LIB_PUBLIC H5DefaultDataType {
         public:
+            ///The native memory data type corresponding to SCALAR.
             static const H5::PredType &native;
+
+            ///The file data type corresponding to SCALAR.
             inline static const H5::PredType &file(
+                ///The vector of values to represent.
                 const std::vector<SCALAR> &value
             );
         };

@@ -24,22 +24,38 @@
 
 namespace PSF {
 
-    ///\brief Same as valarray<double> but on assignment resizes result as
+#ifdef VERBOSE_DEBUG
+    ///Output all elements of a valarray.
+    std::ostream & LIB_LOCAL operator<<(std::ostream &os,
+                                        const std::valarray<double> &array);
+#endif
+
+    ///\brief Same as std::valarray<double> but on assignment resizes result as
     ///necessary.
+    ///
+    ///Implements the same interfca as std::valarray<double>, except for copy
+    ///operator, which in this case works regardless of the size of the input
+    ///array, resizing the result as necessary.
+    ///
+    ///Also adds debugging information if compiled with VERBOSE_DEBUG
+    ///pre-processing directive defined
     class LIB_PUBLIC TermValarray : public std::valarray<double> {
         private:
+            ///The largest ID assigned to any TermValarray. Debugging only.
             static unsigned __max_id;
-#ifdef VERBOSE
+
+#ifdef VERBOSE_DEBUG
+            ///A unique ID for this TermValarray within all instances.
             unsigned __id;
 #endif
         public:
             TermValarray(size_t size = 0) :
                 std::valarray<double>(size)
-#ifdef VERBOSE
+#ifdef VERBOSE_DEBUG
                 , __id(__max_id++)
 #endif
             {
-#ifdef VERBOSE
+#ifdef VERBOSE_DEBUG
                 std::cout << "Constructed (size = " << size << ") Array "
                           << __id << std::endl;
 #endif
@@ -47,11 +63,11 @@ namespace PSF {
 
             TermValarray(double value, size_t size) :
                 std::valarray<double>(value, size)
-#ifdef VERBOSE
+#ifdef VERBOSE_DEBUG
                 , __id(__max_id++)
 #endif
             {
-#ifdef VERBOSE
+#ifdef VERBOSE_DEBUG
                 std::cout << "Constructed (size = " << size
                           << ", value =" << value
                           << ") Array " << __id
@@ -61,11 +77,11 @@ namespace PSF {
 
             TermValarray(const std::valarray<double> &orig) :
                 std::valarray<double>(orig)
-#ifdef VERBOSE
+#ifdef VERBOSE_DEBUG
                 , __id(__max_id++)
 #endif
             {
-#ifdef VERBOSE
+#ifdef VERBOSE_DEBUG
                 std::cout << "Constructed (copy) Array " << __id
                           << "from " << orig
                           << std::endl;
@@ -74,11 +90,11 @@ namespace PSF {
 
             TermValarray(const double *data, size_t data_size) :
                 std::valarray<double>(data, data_size)
-#ifdef VERBOSE
+#ifdef VERBOSE_DEBUG
                 , __id(__max_id++)
 #endif
             {
-#ifdef VERBOSE
+#ifdef VERBOSE_DEBUG
                 std::cout << "Constructed (copy) Array " << __id
                           << "from double*: " << *this
                           << std::endl;
@@ -87,7 +103,7 @@ namespace PSF {
 
             TermValarray &operator=(const std::valarray<double> &rhs)
             {
-#ifdef VERBOSE
+#ifdef VERBOSE_DEBUG
                 std::cout << "Array " << __id
                           << " (size " << size()
                           << ") setting to " << rhs
@@ -99,7 +115,7 @@ namespace PSF {
             }
 
 
-#ifdef VERBOSE
+#ifdef VERBOSE_DEBUG
             void resize(size_t size, double value = double())
             {
                 std::cout << "Array " << __id
@@ -133,10 +149,6 @@ namespace PSF {
                 return *this;
             }
     };
-
-#ifdef VERBOSE
-    unsigned TermValarray::__max_id = 0;
-#endif
 
     namespace TermCalculator {
         namespace qi = boost::spirit::qi;
@@ -240,7 +252,7 @@ namespace PSF {
 
                 ///Alias of std::fmod, needed for type determination.
                 ResultType fmod(const ResultType &numer,
-                                 const ResultType &denom)
+                                const ResultType &denom)
                 {
                     assert(numer.size() == denom.size());
                     ResultType result(numer.size());
@@ -278,10 +290,18 @@ namespace PSF {
 
                 ///\brief Construct a term calculator producing results of
                 ///the given length.
-                Grammar(size_t result_size=0);
+                Grammar(
+                    ///The number of sources for which expressions are being
+                    ///evaluated.
+                    size_t result_size=0
+                );
 
                 ///Define length of the final result vector.
-                void set_result_size(size_t result_size)
+                void set_result_size(
+                    ///The number of sources for which expressions are being
+                    ///evaluated.
+                    size_t result_size
+                )
                 {__result_size=result_size;}
 
                 ///\brief Define a new variable which may participate in the
@@ -366,10 +386,28 @@ namespace PSF {
                 );
 
                 ///\brief The cross product of two sets of terms.
-                void cross_set(ResultType &lhs, const ResultType &rhs);
+                ///
+                ///This is defined as products between all possible matches 
+                ///between a term in the first set with a term in the second
+                ///set.
+                void cross_set(
+                    ///The first set of terms, providing the left side of the
+                    ///generated product operations.
+                    ResultType &lhs,
+
+                    ///The second set of terms, providing the right side of the
+                    ///generated product operations.
+                    const ResultType &rhs
+                );
 
                 ///Combine the terms of two sets.
-                void union_set(ResultType &lhs, const ResultType &rhs)
+                void union_set(
+                    ///The destination to append the new terms to.
+                    ResultType &lhs,
+
+                    ///The new terms to insert.
+                    const ResultType &rhs
+                )
                 {lhs.insert(lhs.end(), rhs.begin(), rhs.end());}
 
             public:
@@ -578,13 +616,13 @@ namespace PSF {
             const ResultType &value
         )
         {
-#ifdef VERBOSE
+#ifdef VERBOSE_DEBUG
             std::cout << "Adding variable " << name << ": " << value
                       << std::endl;
 #endif
             assert(value.size() == __result_size);
             __variables.add(name, value);
-#ifdef VERBOSE
+#ifdef VERBOSE_DEBUG
             std::cout << "Added variable " << name << ": " << value
                       << std::endl;
 #endif

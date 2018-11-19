@@ -60,25 +60,42 @@ namespace SubPixPhot {
     public:
         ///Use the given stream for output.
         BinarySourceOutput(
+            ///The stream to write the sources to.
             IO::binostream &outstream,
+
+            ///The magnitude that corresponds to a flux of 1ADU.
             double mag_1ADU,
+
+            ///The columns to include in the output.
             const std::list<Phot::Columns> &output_columns =
                 std::list<Phot::Columns>()
         ); 
 
         ///Sets the columns (including order) which to output.
-        void set_columns(const std::list<Phot::Columns> &output_columns);
+        void set_columns(
+            ///The new columns to include in the output.
+            const std::list<Phot::Columns> &output_columns
+        );
 
         ///\brief Outputs the given list of sources to the given stream in 
         ///packed binary format.
-        void operator()(const std::list<IO::OutputSDKSource> &sources);
+        void operator()(
+            ///The sources which were just photometered to output.
+            const std::list<IO::OutputSDKSource> &sources
+        );
 
         ///The precision with which the given column will be output.
-        double precision(Phot::Columns column) const
+        double precision(
+            ///The column to get the precision of.
+            Phot::Columns column
+        ) const
         {return __precision[column];}
 
         ///The precision with which the given column will be output.
-        double &precision(Phot::Columns column)
+        double &precision(
+            ///The column to get the precision of.
+            Phot::Columns column
+        )
         {return __precision[column];}
     }; //End BinarySourceOutput class.
 

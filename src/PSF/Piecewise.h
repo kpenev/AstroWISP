@@ -35,11 +35,16 @@ namespace PSF {
         std::vector<bool> __cloned_cell;
 
         ///The index of the cell with the given x and y indices.
-        Core::vector_size_type cell_index(Core::vector_size_type x_ind,
-                                          Core::vector_size_type y_ind) const
+        Core::vector_size_type cell_index(
+            ///The x index of the cell to get.
+            Core::vector_size_type x_ind,
+
+            ///The y index of the cell to get.
+            Core::vector_size_type y_ind
+        ) const
         {return x_ind + y_ind * (__grid_x.size() - 1);}
 
-        ///The index of the cell to which the given coordinate belongs.
+        ///\brief The index of the cell to which the given coordinate belongs.
         ///
         ///Cell boundaries are assumed to belong to the smaller cell index,
         ///except the boundary at hint_lower which belongs to the hint_lower
@@ -84,11 +89,19 @@ namespace PSF {
         ) const
         {return cell_index(grid, x, hint_lower, grid.size());}
 
-        ///\brief If an index is outside a range it is replaced by the
+        ///\brief If an index is outside a range it is overwritten by the
         ///closest boundary.
-        void impose_boundaries(Core::vector_size_type &index,
-                               Core::vector_size_type boundary1,
-                               Core::vector_size_type buondary2) const;
+        void impose_boundaries(
+            ///The index to keep within bouds.
+            Core::vector_size_type &index,
+
+            ///One of the bounds to keep the index within. Need not be the lower
+            ///bound.
+            Core::vector_size_type boundary1,
+
+            ///The other of the bounds to keep the index within.
+            Core::vector_size_type buondary2
+        ) const;
 
         ///Finds the range of cells that tightly cover a range of positions.
         void cell_span(
@@ -110,8 +123,15 @@ namespace PSF {
             Core::vector_size_type &high
         ) const;
 
-        ///Throws an exception if x or y are not inside the grid range.
-        void check_inside_grid(double x, double y) const;
+        ///\brief Throws an exception if the specified location is not not 
+        ///inside the grid range.
+        void check_inside_grid(
+            ///The x coordinate of the location to check.
+            double x,
+
+            ///The y coordinate of the location to check.
+            double y
+        ) const;
 
         ///\brief Calculates the integral over a rectangle that fits in a
         ///single column of cells.
@@ -185,8 +205,8 @@ namespace PSF {
             parameter_sets=std::vector< std::valarray<double> >()
         ) const;
 
-        ///Calculates the integral over a rectangle spanning multiple rows and
-        ///columns.
+        ///\brief Calculates the integral over a rectangle spanning multiple 
+        ///rows and columns.
         ///
         /// \image html PiecewisePSF_multi_row_column_rectangle_iiiidddd.png "The area being integrated along with the meaning of all function arguments."
         std::valarray<double> integrate_multi_row_column_rectangle(
@@ -226,8 +246,8 @@ namespace PSF {
             parameter_sets=std::vector< std::valarray<double> >()
         ) const;
 
-        ///Calculates the integral over a wedge that fits in a single column
-        ///of cells.
+        ///\brief Calculates the integral over a wedge that fits in a single 
+        ///column of cells.
         ///
         ///The area being integrated matches one of the following diagrams.
         /// \image html PiecewisePSF_single_column_wedge_iiidddd_ur.png
@@ -260,7 +280,7 @@ namespace PSF {
             double radius
         ) const;
 
-        ///Calculates the integral over a wedge that fits in a single row
+        ///\brief Calculates the integral over a wedge that fits in a single row
         ///of cells.
         double integrate_single_row_wedge(
             ///The index in __grid_x of the cell containing the tip of the
@@ -445,11 +465,21 @@ namespace PSF {
             double radius
         ) const;
     protected:
-        ///Calculates the integral of the PSF over a rectangle.
-        double integrate_rectangle(double center_x,
-                                   double center_y,
-                                   double dx,
-                                   double dy) const
+        ///\brief Equivalent to integrate_rectangle_parameters() but for the
+        ///current PSF setup.
+        double integrate_rectangle(
+            ///See integrate_rectangle_parameters()
+            double center_x,
+
+            ///See integrate_rectangle_parameters()
+            double center_y,
+
+            ///See integrate_rectangle_parameters()
+            double dx,
+
+            ///See integrate_rectangle_parameters()
+            double dy
+        ) const
         {
             return integrate_rectangle_parameters(center_x,
                                                   center_y,
@@ -464,11 +494,24 @@ namespace PSF {
         /// * the circle centered at (0, 0) with a radius=radius
         ///If x is 0 the left vs right wedge is chosen according to left
         ///Same for y0 and bottom.
-        double integrate_wedge(double x,
-                               double y,
-                               double radius,
-                               bool left = false,
-                               bool bottom = false) const;
+        double integrate_wedge(
+            ///The vertical boundary of the wedge.
+            double x,
+
+            ///The horizontal boundary of the wedge
+            double y,
+
+            ///The radius of the rounded boundary of the wedge.
+            double radius,
+
+            ///If x is exactly 0, this argument determines if the wedge is
+            //assumed to be on the left (true) or the right(fals) side of x=0.
+            bool left = false,
+
+            ///If y is exactly 0, this argument determines if the wedge is
+            //assumed to be on the bottom (true) or the top(fals) side of y=0.
+            bool bottom = false
+        ) const;
     public:
         ///\brief Create a PSF model on a specified grid with invalid cells.
         ///
@@ -531,7 +574,13 @@ namespace PSF {
             }
 
         ///Evaluates the PSF at the given position
-        double operator()(double x, double y) const
+        double operator()(
+            ///The x coolrdinate to evaluate the PSF at.
+            double x,
+
+            ///The y coolrdinate to evaluate the PSF at.
+            double y
+        ) const
         {return operator()(x, y, std::vector< std::valarray<double> >())[0];}
 
         ///\brief Evaluates the PSF at the given position assuming a list of cell
@@ -551,12 +600,18 @@ namespace PSF {
                 const std::vector< std::valarray<double> >& parameter_sets
         ) const;
 
-        ///Returns the width of the column-th cell column.
-        double grid_column_width(Core::vector_size_type column) const
+        ///Returns the width of a cell column.
+        double grid_column_width(
+            ///The column to return the width of.
+            Core::vector_size_type column
+        ) const
         {return __grid_x[column + 1] - __grid_x[column];}
 
-        ///Returns the height of the rowth-th cell row.
-        double grid_row_height(Core::vector_size_type row) const
+        ///Returns the height of a cell row.
+        double grid_row_height(
+            ///The row to return the height of.
+            Core::vector_size_type row
+        ) const
         {return __grid_y[row + 1] - __grid_y[row];}
 
         ///The left boundary of the PSF grid.

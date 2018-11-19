@@ -17,19 +17,31 @@ namespace PSF {
     ///of up to some degree defined at construction.
     class LIB_PUBLIC LocalPolynomial : public PSF {
     private:
-        ///The minimum order of polynomial coefficients to consider.
-        unsigned __min_poly_degree,
+        unsigned
+            ///See min_poly_degree argument to constructor.
+            __min_poly_degree,
 
-                 ///The maximum order of polynomial coefficients to consider.
-                 __max_poly_degree;
+            ///See max_poly_degree argument to constructor.
+            __max_poly_degree;
 
     protected:
         ///\brief Calculates the integral of the PSF over a rectangle.
         ///
         ///Using the local polynomial approximation around the center of the
         ///rectangle.
-        virtual double integrate_rectangle(double center_x, double center_y,
-                double dx, double dy) const;
+        virtual double integrate_rectangle(
+            ///The x coordinate of the center of the rectangle.
+            double center_x,
+
+            ///The y coordinate of the center of the rectangle.
+            double center_y,
+
+            ///The full size of the rectangle along x.
+            double dx,
+
+            ///The full size of the rectangle along y.
+            double dy
+        ) const;
 
         ///\brief Integrates the PSF a wedge of a circle.
         //
@@ -39,23 +51,65 @@ namespace PSF {
         /// * the circle centered at (0, 0) with a radius=radius
         ///If x is 0 the the left vs right wedge is chosen according to left
         ///Same for y0 and bottom.
-        virtual double integrate_wedge(double x, double y, double radius, 
-                bool left=false, bool bottom=false) const;
+        virtual double integrate_wedge(
+            ///The left/right boundary of the wedge if the given value is
+            ///positive/negative.
+            double x,
+
+            ///The bottom/top boundary of the wedge if the given value is
+            ///positive/negative.
+            double y,
+            
+            ///The radius of the circle giving the rounded boundary of the
+            ///wedge.
+            double radius, 
+            
+            ///If x is exactly 0, this values is used to decide to which side of
+            ///x the wedge extends.
+            bool left=false,
+
+            ///If y is exactly 0, this values is used to decide to which side of
+            ///y the wedge extends.
+            bool bottom=false
+        ) const;
 
     public:
         ///Create a polynomial approximated PSF of up to the given degree.
-        LocalPolynomial(unsigned max_poly_degree, unsigned min_poly_degree=0):
+        LocalPolynomial(
+            ///The maximum order of polynomial coefficients to consider.
+            unsigned max_poly_degree,
+
+            ///The minimum order of polynomial coefficients to consider.
+            unsigned min_poly_degree=0
+        ):
             __min_poly_degree(min_poly_degree),
             __max_poly_degree(max_poly_degree) {}
 
-        ///The coefficient of the term in front of the x^x_power*y^y_power term 
+        ///\brief The coefficient of the term in front of the
+        /// \f$x^{x_power}\times y^{y_power}\f$ term 
         ///in the local polynomial approximation of the PSF valid arount x, y
-        virtual double poly_coef(double x, double y, unsigned x_power, 
-                unsigned y_power) const =0;
+        virtual double poly_coef(
+            ///The value of x to evaluate the polynomial term at.
+            double x,
 
-        ///Changes the maximum degree of polynomial terms to the given value.
-        virtual void set_degree_range(unsigned max_poly_degree,
-                                      unsigned min_poly_degree = 0) 
+            ///The value of y to evaluate the polynomial term at.
+            double y,
+            
+            ///The powerlaw index of x in the term.
+            unsigned x_power, 
+
+            ///The powerlaw index of y in the term.
+            unsigned y_power
+        ) const =0;
+
+        ///Changes the maximum/minimum degree of polynomial terms.
+        virtual void set_degree_range(
+            ///See same name argument to constructor.
+            unsigned max_poly_degree,
+
+            ///See same name argument to constructor.
+            unsigned min_poly_degree = 0
+        )
         {
             __min_poly_degree=min_poly_degree;
             __max_poly_degree=max_poly_degree;

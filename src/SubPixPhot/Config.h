@@ -22,7 +22,11 @@ namespace SubPixPhot {
         void describe_options();
 
         ///The part of the help describing the usage and purpose (no options).
-        std::string usage_help(const std::string &prog_name) const;
+        std::string usage_help(
+            ///The name with which the executable was invoked on the command
+            ///line.
+            const std::string &prog_name
+        ) const;
 
         ///Uses io.sources instead of io.psfmap or io.output, if not specified.
         void apply_fallbacks();

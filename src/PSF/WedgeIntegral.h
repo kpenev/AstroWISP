@@ -41,6 +41,8 @@ namespace PSF {
      */
     class LIB_LOCAL WedgeIntegral {
     private:
+        ///\brief How many entries to allocate storage for in the __values and 
+        ///__q attributes at construction.
         static const Core::vector_size_type __initial_storage = 30;
 
         double
@@ -95,39 +97,81 @@ namespace PSF {
 
         ///\brief Computes all \f$P^{even}_n\f$  for n<max_n and stores them
         ///in __q[0]
-        void fill_p_even(Core::vector_size_type max_n);
+        void fill_p_even(
+            ///The index of the last term of \f$P^{even}$ to calculate.
+            Core::vector_size_type max_n
+        );
 
         ///\brief Computes all \f$P^{odd}_n\f$  for n<max_n and stores them
         ///in __q[1]
-        void fill_p_odd(Core::vector_size_type max_n);
+        void fill_p_odd(
+            ///The index of the last term of \f$P^{odd}$ to calculate.
+            Core::vector_size_type max_n
+        );
 
         ///\brief Fills in a diagonal of __q with indices that sum up to
         ///(m+n) and the first of which has the same parity as m, up to
         ///(m, n), assuming all earlier diagonals are filled.
-        void fill_q_diagonal(Core::vector_size_type m,
-                             Core::vector_size_type n);
+        void fill_q_diagonal(
+            ///The first index of the final \f$Q_{m,n}\f$ term to fill.
+            Core::vector_size_type m,
+
+            ///The second index of the final \f$Q_{m,n}\f$ term to fill.
+            Core::vector_size_type n
+        );
 
         ///\brief Fills in __q[m][n] and possibly other entries of __q if they
         ///are calculated along the way.
-        void calculate_q(Core::vector_size_type m, Core::vector_size_type n);
+        void calculate_q(
+            ///The first index of \f$Q_{m,n}\f$ of the new term to calculate.
+            Core::vector_size_type m,
+
+            ///The second index of \f$Q_{m,n}\f$ of the new term to calculate.
+            Core::vector_size_type n
+        );
 
 #ifdef DEBUG
         ///Outputs the currently calculated \f$Q_{m,n}\f$ values.
-        void output_q(std::ostream &os);
+        void output_q(
+            ///The stream to output to.
+            std::ostream &os
+        );
 #endif
 
         ///\brief Increases the size of all vectors holding pre-calculated
         ///values by a power of 2 such that they can hold at least the given
         ///m and n values.
-        void expand_storage(Core::vector_size_type min_m_size,
-                            Core::vector_size_type min_n_size);
+        void expand_storage(
+            ///The first index of the term for which storage must be guaranteed.
+            Core::vector_size_type min_m_size,
+
+            ///The second index of the term for which storage must be
+            ///guaranteed.
+            Core::vector_size_type min_n_size
+        );
     public:
         ///\brief Create an integral over a wedge with the center of the
         ///chord at (x0, y0) in a circle with radius r.
-        WedgeIntegral(double r, double x0, double y0);
+        WedgeIntegral(
+            ///The radius of the circle defining the outer boundary of the
+            ///wedge.
+            double r,
+
+            ///The x coordinate of the center of the cord defining the wedge.
+            double x0,
+
+            ///The y coordinate of the center of the cord defining the wedge.
+            double y0
+        );
 
         ///Returns the integral of x^m y^n over the wedge.
-        double operator()(unsigned m, unsigned n);
+        double operator()(
+            ///The powerlaw index of x in the term to integrate.
+            unsigned m,
+
+            ///The powerlaw index of y in the term to integrate.
+            unsigned n
+        );
     }; //End WedgeIntegral class.
 
 } //Eend PSF namespace.

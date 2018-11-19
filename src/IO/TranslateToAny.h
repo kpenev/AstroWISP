@@ -31,17 +31,30 @@ namespace IO {
         public:
             TranslateToAny() {}
 
-            const DATA_TYPE &get_value(const boost::any &value) const
+            ///Convert the given value back to DATA_TYPE.
+            const DATA_TYPE &get_value(
+                ///The value to convert.
+                const boost::any &value
+            ) const
             {
                 if(value.type()==typeid(DATA_TYPE))
                     return boost::any_cast< const DATA_TYPE& >(value);
                 else return *boost::any_cast< const DATA_TYPE* >(value);
             }
 
-            boost::any put_value(const DATA_TYPE& value) const
+            ///Construct a boost any-value containing a copy of the given value.
+            boost::any put_value(
+                ///The original value to copy.
+                const DATA_TYPE& value
+            ) const
             {return value;}
 
-            boost::any put_value(const DATA_TYPE* value) const
+            ///\brief Construct a boost any-value containing a pointer to the 
+            ///location pointed to by the input.
+            boost::any put_value(
+                ///The pointer to copy. 
+                const DATA_TYPE* value
+            ) const
             {return value;}
         };
 

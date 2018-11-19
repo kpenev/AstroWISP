@@ -234,23 +234,38 @@ namespace PSF {
         ///and center_y - dy/2 < y < center_y + dy/2. The circle is always 
         ///centered on (0, 0) and has the given radius. If the circle radius 
         ///is zero, the integral over the full rectangle is calculated.
-        double integrate(double center_x, double center_y,
-                double dx, double dy, double circle_radius=0
+        double integrate(
+            double center_x,
+            double center_y,
+            double dx,
+            double dy,
+            double circle_radius=0
 #ifdef DEBUG	
 #ifdef SHOW_PSF_PIECES
-                ,
-                bool reset_piece_id=false, bool skip_piece=false
+            ,
+            bool reset_piece_id=false,
+            bool skip_piece=false
 #endif
 #endif
-                ) const
-        {return integrate(center_x,center_y,dx,dy,circle_radius,false,false
+        ) const
+        {
+            return integrate(
+                center_x,
+                center_y,
+                dx,
+                dy,
+                circle_radius,
+                false,
+                false
 #ifdef DEBUG
 #ifdef SHOW_PSF_PIECES
                 ,
-                reset_piece_id, skip_piece
+                reset_piece_id,
+                skip_piece
 #endif
 #endif
-                );}
+            );
+        }
 
         ///\brief Calculates the integral of the PSF over a rectangle (or its
         ///overlap with a circle) with optional derivatives.

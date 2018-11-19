@@ -69,11 +69,16 @@ namespace IO {
             const boost::property_tree::ptree &node
         );
 
-        ///\brief Fills the __(dataset/property/link)_paths also fixed source
-        ///id entry.
+        ///\brief Fills the __(dataset/property/link)_paths per the given
+        ///(sub-) tree, also fixed source id entry 
         static void fill_paths(
+            ///The sub-tree from which to parse the structure.
             boost::property_tree::ptree& sub_structure=__structure,
+
+            ///The path under which to place the specified structure.
             const std::string& parent_path="/",
+
+            ///What type of object is the parent.
             const __H5COMPONENT parent_type=GROUP
         );
 
@@ -212,15 +217,31 @@ namespace IO {
             const H5IODataTree& data
         );
 
+        ///Create (or overwrite) a 1-D dataset.
         template<typename DATA_TYPE>
             H5::DataSet add_1d_dataset(
+                ///See same name arg to add_generic_dataset
                 const std::string& dataset_name,
+
+                ///See same name arg to add_generic_dataset
                 H5::Group& destination,
+
+                ///The memory data type of the input data.
                 const H5::DataType &memory_data_type,
+
+                ///See same name arg to add_generic_dataset
                 const H5::DataType &output_data_type,
+
+                ///Is this a floating point dataset.
                 bool floating_point_data,
+
+                ///See same name arg to add_generic_dataset
                 const boost::any &any_array,
+
+                ///See same name arg to add_generic_dataset
                 const boost::property_tree::ptree& structure_node,
+
+                ///See same name arg to add_generic_dataset
                 bool overwrite
             );
 
@@ -336,6 +357,7 @@ namespace IO {
             int aperture_index=-1
         );
 
+        ///Read a 1-D numeric dataset from the file.
         template<class DSET_ATTR, typename UNIT_TYPE>
         void read_1d(
             ///The dataset or attribute to read.
@@ -354,6 +376,7 @@ namespace IO {
             const std::string &path
         );
 
+        ///Read a 1-D string dataset from the file.
         template<class DSET_ATTR>
         void read_1d_string(
             ///The dataset or attribute to read.
