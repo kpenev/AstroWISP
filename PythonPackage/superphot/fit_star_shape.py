@@ -19,6 +19,25 @@ class FitStarShape:
     """
     Fit for the PSF/PRF of stars and their flux.
 
+    The PSF and PRF describe the distribution of light from a point source at
+    infinity on the imaging device pixels.
+
+        * PSF is the distribution of light produced by the optical system in the
+          plane of the detector for a point source at infinity.
+
+        * PRF is the response of a detector pixel at some offset from the
+          ``center'' of the source. That is, the PRF is the PSF convolved with
+          the sensitivity of detector pixels.
+
+    Both representations use a general piece-wise polynomial model in which the
+    area around the source location is split into a rectangular, but in general
+    irregular, grid of cells. Over each cell the PSF/PRF is modeled as a
+    bi-cubic polynomial. The resulting function is constraned to have continuous
+    values, first order derivatives and x-y cross-derivative across cell
+    boundaries. Further, it's value, first derivative and the x-y cross
+    derivative are contsrainted to go to zero on the outside boundaries of the
+    grid.
+
     .. _attributes:
 
     Attributes:
@@ -284,6 +303,8 @@ class FitStarShape:
         Set-up an object ready to perform PSF/PRF fitting.
 
         Args:
+            All the configuration attributes of the class can be configured by
+            passing them as keyword arguments.
 
         Returns:
             None
@@ -309,7 +330,7 @@ class FitStarShape:
         Modify the currently defined configuration.
 
         Args:
-            **configuration:    See the keyword arguments of :meth:`__init__`.
+            **configuration:    See :attr:`configuration`\ .
 
         Returns:
             None
@@ -362,16 +383,17 @@ class FitStarShape:
                        * **y** (float): See ``x``
 
                    May define additional quantities on which the PSF shape is
-                   allowed to depend. This can be either a numy record array
-                   with field names as keys or a dictionary with field names as
-                   keys and 1-D numpy arrays of identical lengths as values.
+                   allowed to depend.
+                   
+                   The source list can be either a numy record array with field
+                   names as keys or a dictionary with field names as keys and
+                   1-D numpy arrays of identical lengths as values.
 
             backgrounds:    The measured backgrounds under the sources (instance
-                of :class:BackgroundExtractor.
+                of :class:`BackgroundExtractor`\ ).
 
         Returns:
-            None:
-                Use :meth:`get_last_fit_result` to obtain the results.
+            None. Use :meth:`get_last_fit_result` to obtain the results.
         """
 
         def create_image_arguments():
@@ -592,7 +614,7 @@ class FitStarShape:
                 self.configuration['subpixmap'].shape[0],
                 result_tree.library_tree
         ):
-            raise RuntimeError("Star shep fitting failed to converge!")
+            raise RuntimeError("Star shape fitting failed to converge!")
         return result_tree
 
     def __del__(self):
@@ -610,7 +632,10 @@ if __name__ == '__main__':
                           smoothing=None,
                           min_convergence_rate=0.0)
 
+    #Debugging code
+    #pylint: disable=protected-access
     tree = SuperPhotIOTree(fitprf._library_configuration)
+    #pylint: enable=protected-access
     print('BG tool: ' + repr(tree.get('bg.tool', str)))
     print('PSF terms: ' + repr(tree.get('psffit.terms', str)))
     print('Max chi squared: '

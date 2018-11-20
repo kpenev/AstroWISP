@@ -20,8 +20,9 @@ excluding pixels too close to other sources. The user specifies two radii:
 Background measurement is performed using the
 :class:`superphot.BackgroundExtractor` class and requires specifying the image,
 list of source locations, the inner/outer background radii  and returns
-estimates of the background for each source, its error, and the number of pixels
-that participated in the determination of the background value and error::
+estimates of the background for each source, its error (standard deviation), and
+the number of pixels that participated in the determination of the background
+value and error::
 
     from superphot import BackgroundExtractor
     import numpy.random

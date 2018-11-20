@@ -11,7 +11,7 @@ SuperPhot. This is accomplished using the :mod:`superphot.fit_star_shape`
 module.  Currently only piecewise bi-cubic PSF/PRF models are supported, with
 the shape constrained to depend smoothly on image position and any other
 user-defined parameters, possibly accross multiple images simultaneously and the
-amplitudes (fluxs) of sources being independent of each other. Fitting is done
+amplitudes (fluxes) of sources being independent of each other. Fitting is done
 by constructing an instance of :class:`superphot.FitStarShape` and calling it on
 a collection of frames to be fit simultaneously and a list of all the sources in
 each frame.  For details on how to specify fitting parameters and source and
@@ -20,7 +20,7 @@ frame listts, see the documentation of :class:`superphot.FitStarShape`.
 PSF Map utilities
 =================
 
-Smooth dependence of PSF/PRF on parameters is enforced by modeling the PSF
+Smooth dependence of PSF/PRF on parameters is enforced by modeling the PSF/PRF
 parameters as low order polynomials of user specified quantities. SuperPhot
 defines a language for specifying the dependence (see
 :attr:`superphot.FitStarShape.shape_terms` for the definition of the language).
