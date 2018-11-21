@@ -8,4 +8,5 @@ Python Interface Documentation
 
     background
     fit_star_shape
+    fitpsf_example
     aperture_photometry

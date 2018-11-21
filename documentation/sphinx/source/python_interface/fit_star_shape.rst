@@ -17,6 +17,9 @@ a collection of frames to be fit simultaneously and a list of all the sources in
 each frame.  For details on how to specify fitting parameters and source and
 frame listts, see the documentation of :class:`superphot.FitStarShape`.
 
+An example of fitting for the PSF in an image can be found
+`here <fitpsf_example.ipynb>`_
+
 PSF Map utilities
 =================
 
