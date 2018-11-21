@@ -79,11 +79,6 @@ class SuperPhotIOTree:
                 shape is (1,).
         """
 
-        print('Reading result quantity: ' + repr(quantity)
-              +
-              ', type: ' + repr(dtype)
-              +
-              ', shape: ' + repr(shape))
         byte_quantity = (quantity if isinstance(quantity, bytes)
                          else quantity.encode('ascii'))
 
@@ -96,7 +91,6 @@ class SuperPhotIOTree:
                 cast(library_result, c_void_p)
             )
             result = library_result.contents.value.decode()
-            print('Freeing library result: ' + repr(result))
             superphot_library.free(library_result.contents)
         else:
             result = numpy.empty(shape=shape, dtype=dtype)
@@ -139,11 +133,9 @@ class SuperPhotIOTree:
         """
 
         result = numpy.empty(dtype=float, shape=(num_variables, num_sources))
-        print('Created result')
         superphot_library.get_psf_map_variables(self.library_tree,
                                                 image_index,
                                                 result)
-        print('Filled result')
         return result
 
     def __del__(self):

@@ -41,13 +41,6 @@ class BackgroundExtractor:
         self.inner_radius = inner_radius
         self.outer_radius = outer_radius
         self.error_confidence = error_confidence
-        print('Creating BG image from image with dtype = '
-              +
-              repr(image.dtype)
-              +
-              ', shape = '
-              +
-              repr(image.shape))
         self._library_image = superphot_library.create_core_image(
             self.image.shape[1],
             self.image.shape[0],

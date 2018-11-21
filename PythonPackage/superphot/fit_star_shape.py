@@ -26,7 +26,7 @@ class FitStarShape:
           plane of the detector for a point source at infinity.
 
         * PRF is the response of a detector pixel at some offset from the
-          ``center'' of the source. That is, the PRF is the PSF convolved with
+          center of the source. That is, the PRF is the PSF convolved with
           the sensitivity of detector pixels.
 
     Both representations use a general piece-wise polynomial model in which the
@@ -50,7 +50,7 @@ class FitStarShape:
         _result_tree:    The SuperPhotIOTree instance containing the last
             fittintg results, on None, if no fitting has been performed yet.
 
-        mode(str):    Are we doing `'PSF'` or `'PRF'` fitting (case
+        mode(str):    Are we doing 'PSF' or 'PRF' fitting (case
             insensitive).
 
         configuration (dict):    The configuraiton for how to carry out PSF/PRF
@@ -241,7 +241,6 @@ class FitStarShape:
     def _format_config(param_value):
         """Format config param for passing to SuperPhot PSF fitting lib."""
 
-        print('Original param value: ' + repr(param_value))
         prefix = b''
         if param_value[0].startswith('src_'):
             param_value = (param_value[0][4:], param_value[1])
@@ -282,7 +281,6 @@ class FitStarShape:
                                 'grid',
                                 'smoothing']:
             prefix = b'psf.bicubic.'
-        print('Modified param value: ' + repr(param_value))
         return (
             prefix + param_value[0].replace('_', '-').encode('ascii'),
             (
@@ -490,7 +488,6 @@ class FitStarShape:
                 for entry in image_sources:
                     assert set(entry[3].keys()) == column_name_set
 
-            print('column_names = ' + repr(column_names))
             column_names = list(column_names)
 
             assert 'ID' in column_names
@@ -591,13 +588,9 @@ class FitStarShape:
                 number_columns
             )
 
-        print('Starting PSF fit')
         column_names = get_column_names()
-        print('Column names: ' + repr(column_names))
         column_data = create_column_data(column_names)
-        print('Column data: ' +  repr(column_data))
         result_tree = SuperPhotIOTree(self._library_configuration)
-        print('Created result tree.')
         if not superphot_library.piecewise_bicubic_fit(
                 *create_image_arguments(),
                 *create_source_arguments(column_names, column_data),
