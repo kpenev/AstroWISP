@@ -32,7 +32,10 @@ class _c_h5io_data_tree_p(c_void_p):
     """Placeholder for pointer to H5IODataTree opaque struct."""
 
 class _c_fitting_configuration(c_void_p):
-    """Placeholder for the FittingConfiguration opaque struct of fitpsf lib."""
+    """Placeholder for the FittingConfiguration opaque struct."""
+
+class _c_subpixphot_configuration(c_void_p):
+    """Placeholder for the SubPixPhotConfiguration opaque struct."""
 
 #pylint: enable=invalid-name
 #pylint: enable=too-few-public-methods
@@ -210,7 +213,7 @@ def _setup_fitpsf_interface(library):
         _c_fitting_configuration
     )
 
-    library.destroy_psffit_configuration.argtype = [
+    library.destroy_psffit_configuration.argtypes = [
         library.create_psffit_configuration.restype
     ]
 
@@ -274,7 +277,28 @@ def _setup_fitpsf_interface(library):
     ]
     library.piecewise_bicubic_fit.restype = c_bool
 
+def _setup_subpixphot_interface(library):
+    """Set-up the argument and return tyes of the aperture photometry funcs."""
 
+    library.create_subpixphot_configuration.argtypes = []
+    library.create_subpixphot_configuration.restype = (
+        _c_subpixphot_configuration
+    )
+
+    library.destroy_subpixphot_configuration.argtypes = (
+        library.create_subpixphot_configuration.restype
+    )
+    library.destroy_subpixphot_configuration.restype = None
+
+    library.update_subpixphot_configuration.restype = None
+
+    library.subpixphot.argtypes = [
+        _c_core_image_p,
+        _c_core_sub_pixel_map_p,
+        library.create_subpixphot_configuration.restype,
+        library.create_result_tree.restype
+    ]
+    library.subpixphot.restype = None
 
 def _initialize_library():
     """Prepare the superphot library for use."""
@@ -289,6 +313,7 @@ def _initialize_library():
     _setup_background_interface(library)
     _setup_psf_interface(library)
     _setup_fitpsf_interface(library)
+    _setup_subpixphot_interface(library)
 
     return library
 
