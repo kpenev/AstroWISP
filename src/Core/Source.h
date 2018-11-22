@@ -196,6 +196,9 @@ namespace Core {
         {throw Error::Type("Requesting the number of fitting pixels of a "
                            "non-PSF fitted source!");}
 
+        ///Allow inheriting classes to define custom cleanup.
+        virtual ~Source() {}
+
     }; //End Source class.
 
 } //End Core namespace.

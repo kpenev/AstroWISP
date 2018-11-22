@@ -97,6 +97,23 @@ namespace IO {
         {return _cmdline_config;}
     }; //End CommandLineConfig class.
 
+    ///\brief Modify the mock command line configuration for a tool.
+    ///
+    ///Used only by the "C" interface.
+    LIB_LOCAL void update_configuration(
+        ///The configuration to update.
+        IO::CommandLineConfig &configuration,
+
+        ///The mock command line executable to use.
+        const std::string &mock_executable,
+
+        ///The variable argument list of options to set. Should consist of
+        //alternating /<parameter name>, <parameter value> pairs, with both
+        ///etries being of type char* type. The list is assumed to end when an
+        ///empty <parameter name> is encountered.
+        va_list options
+    );
+
 } //End IO namespace.
 
 #endif

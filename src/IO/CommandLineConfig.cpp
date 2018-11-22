@@ -107,4 +107,57 @@ namespace IO {
         __parsed_ok = true;
     }
 
+    void update_configuration(IO::CommandLineConfig &configuration,
+                              const std::string &mock_executable,
+                              va_list options)
+    {
+#ifdef DEBUG
+        std::cerr << "updating config at: " << &configuration << std::endl;
+#endif
+
+        char config_file_option[] = "--config-file",
+             empty_str[] = "";
+        char **argv_like = new char*[3];
+        argv_like[0] = const_cast<char*>(mock_executable.c_str());
+        argv_like[1] = config_file_option;
+        argv_like[2] = empty_str;
+
+#ifdef DEBUG
+        std::cerr << "Pretending executable is: " << argv_like[0] << std::endl;
+#endif
+
+        configuration.parse(3, argv_like);
+        delete[] argv_like;
+
+        opt::options_description config_file_options;
+
+        config_file_options.add(configuration.cmdline_config_options())
+            .add(configuration.hidden_options());
+
+
+        for(
+            char *param_name = va_arg(options, char*);
+            param_name[0] != '\0';
+            param_name = va_arg(options, char*)
+        ) {
+            char *param_value = va_arg(options, char*);
+
+            std::stringstream config_stream;
+            config_stream << param_name << " = " << param_value << std::endl;
+#ifdef DEBUG
+            config_stream.seekg(0, std::ios::beg);
+            std::cerr << "Setting " << config_stream.str() << std::endl;
+#endif
+            config_stream.seekg(0, std::ios::beg);
+            opt::store(
+                opt::parse_config_file(config_stream,
+                                       config_file_options,
+                                       true),
+                configuration
+            );
+        }
+
+        opt::notify(configuration);
+    }
+
 } //End IO namespace.
