@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="../_static/unlimited_width.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="tests.test_background module" href="tests.test_background.html" />
+    <link rel="next" title="tests.test_fit_star_shape package" href="tests.test_fit_star_shape.html" />
     <link rel="prev" title="tests.fitpsf.noiseless_tests module" href="tests.fitpsf.noiseless_tests.html" /> 
 
   
@@ -82,7 +82,7 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../user_documentation/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python_interface/index.html">Python Interface Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../_implementation/modules.html">Python Package Implementation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cpp_api.html">C++ API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../c_api.html">C API</a></li>
@@ -90,6 +90,7 @@
 <li class="toctree-l2 current"><a class="reference internal" href="tests.html">tests package</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="tests.html#subpackages">Subpackages</a><ul class="current">
 <li class="toctree-l4 current"><a class="reference internal" href="tests.fitpsf.html">tests.fitpsf package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tests.test_fit_star_shape.html">tests.test_fit_star_shape package</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="tests.html#submodules">Submodules</a></li>
@@ -167,64 +168,27 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-tests.fitpsf.utils">
-<span id="tests-fitpsf-utils-module"></span><h1>tests.fitpsf.utils module<a class="headerlink" href="#module-tests.fitpsf.utils" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="class-inheritance-diagram">
-<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this headline">¶</a></h2>
-<img src="../_images/inheritance-72ea22dae018ec977a368566b3e0e5a13ca38f66.png" alt="Inheritance diagram of Image" usemap="#inheritance285ff13dbf" class="inheritance"/>
-<map id="inheritance285ff13dbf" name="inheritance285ff13dbf">
-<area shape="rect" id="node1" title="ndarray(shape, dtype=float, buffer=None, offset=0," alt="" coords="73,5,191,31"/>
-<area shape="rect" id="node2" href="../_implementation/superphot.fake_image.image.html#superphot.fake_image.image.Image" target="_top" title="A base class for fake images." alt="" coords="5,79,259,104"/>
-</map>
-<p>A collection of functions used by the fitpsf unit tests.</p>
-<dl class="function">
-<dt id="tests.fitpsf.utils.make_image_and_source_list">
-<code class="descclassname">tests.fitpsf.utils.</code><code class="descname">make_image_and_source_list</code><span class="sig-paren">(</span><em>sources</em>, <em>extra_variables</em>, <em>subpix_map</em>, <em>filenames</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/fitpsf/utils.html#make_image_and_source_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.fitpsf.utils.make_image_and_source_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create an image and a list of the sources in it ready for psf fitting.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>sources</strong> &#8211; <p>A list of dictionaries with at least the following keywords:</p>
-<blockquote>
-<div><ul>
-<li>x:    The x coordinate of the source center.</li>
-<li>y:    The y coordinate of the source center.</li>
-<li>psf:    An instance of some sub-class of PSFBase giving the
-sources&#8217;s PSF. It should already be scaled to the desired
-flux.</li>
-</ul>
-</div></blockquote>
-<p>Additional keywords may be added to the source list and hence
-available as variables for PSF fitting by listing the names in the
-extra_variables argument.</p>
-</li>
-<li><strong>filenames</strong> &#8211; <p>The names of the files to create:</p>
-<ul>
-<li>image:    The filename to save the image under. If a file
-with this name exists it is overwritten.</li>
-<li>source_list:    The filename to add the source list to. If a
-file with this name exists it appended to.</li>
-<li>psf_fit:    The filename to use for PSF fitting results.</li>
-</ul>
-</li>
-<li><strong>extra_variables</strong> &#8211; A list of additional keywords from sources to add to
-the source list and the order in which those should be added. The
-corresponding entries in sources must be floating point values.</li>
-<li><strong>subpix_map</strong> &#8211; The sub-pixel map to impose on the image. For more
-details see same name argument of Image.add_source.</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">None</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
 
-</div>
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="tests-fitpsf-utils-module">
+<h1>tests.fitpsf.utils module<a class="headerlink" href="#tests-fitpsf-utils-module" title="Permalink to this headline">¶</a></h1>
 </div>
 
 
@@ -235,7 +199,7 @@ details see same name argument of Image.add_source.</li>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="tests.test_background.html" class="btn btn-neutral float-right" title="tests.test_background module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="tests.test_fit_star_shape.html" class="btn btn-neutral float-right" title="tests.test_fit_star_shape package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="tests.fitpsf.noiseless_tests.html" class="btn btn-neutral" title="tests.fitpsf.noiseless_tests module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

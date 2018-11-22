@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>User Documentation &mdash; SuperPhot Python Interface  documentation</title>
+  <title>tests.test_fit_star_shape.noiseless_tests module &mdash; SuperPhot Python Interface  documentation</title>
   
 
   
@@ -30,8 +30,8 @@
   <link rel="stylesheet" href="../_static/unlimited_width.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Measuring Background" href="background.html" />
-    <link rel="prev" title="Welcome to SuperPhot’s Python Interface documentation!" href="../index.html" /> 
+    <link rel="next" title="tests.test_fit_star_shape.utils module" href="tests.test_fit_star_shape.utils.html" />
+    <link rel="prev" title="tests.test_fit_star_shape package" href="tests.test_fit_star_shape.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -82,15 +82,22 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">User Documentation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="background.html">Measuring Background</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fit_star_shape.html">PSF/PRF Fitting</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../python_interface/index.html">Python Interface Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../_implementation/modules.html">Python Package Implementation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cpp_api.html">C++ API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../c_api.html">C API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../_unit_tests/modules.html">Unit Testing Code</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Unit Testing Code</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="tests.html">tests package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="tests.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="tests.fitpsf.html">tests.fitpsf package</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="tests.test_fit_star_shape.html">tests.test_fit_star_shape package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tests.html#submodules">Submodules</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
             
@@ -136,13 +143,19 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>User Documentation</li>
+          <li><a href="modules.html">tests</a> &raquo;</li>
+        
+          <li><a href="tests.html">tests package</a> &raquo;</li>
+        
+          <li><a href="tests.test_fit_star_shape.html">tests.test_fit_star_shape package</a> &raquo;</li>
+        
+      <li>tests.test_fit_star_shape.noiseless_tests module</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/user_documentation/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/_unit_tests/tests.test_fit_star_shape.noiseless_tests.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -155,19 +168,27 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="user-documentation">
-<h1>User Documentation<a class="headerlink" href="#user-documentation" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="background.html">Measuring Background</a></li>
-<li class="toctree-l1"><a class="reference internal" href="fit_star_shape.html">PSF/PRF Fitting</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="fit_star_shape.html#fitting-for-source-shapes">Fitting for Source Shapes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fit_star_shape.html#psf-map-utilities">PSF Map utilities</a></li>
-</ul>
-</li>
-</ul>
-</div>
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="tests-test-fit-star-shape-noiseless-tests-module">
+<h1>tests.test_fit_star_shape.noiseless_tests module<a class="headerlink" href="#tests-test-fit-star-shape-noiseless-tests-module" title="Permalink to this headline">¶</a></h1>
 </div>
 
 
@@ -178,10 +199,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="background.html" class="btn btn-neutral float-right" title="Measuring Background" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="tests.test_fit_star_shape.utils.html" class="btn btn-neutral float-right" title="tests.test_fit_star_shape.utils module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../index.html" class="btn btn-neutral" title="Welcome to SuperPhot’s Python Interface documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="tests.test_fit_star_shape.html" class="btn btn-neutral" title="tests.test_fit_star_shape package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

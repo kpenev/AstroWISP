@@ -1,0 +1,641 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Example of PSF Fitting Using Mock Data &mdash; SuperPhot Python Interface  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/unlimited_width.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="superphot" href="../_implementation/modules.html" />
+    <link rel="prev" title="PSF/PRF Fitting" href="fit_star_shape.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> SuperPhot Python Interface
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Python Interface Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="background.html">Measuring Background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fit_star_shape.html">PSF/PRF Fitting</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Example of PSF Fitting Using Mock Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Step-1:-Prepare-Mock-Input-Data-for-PSF-Fitting">Step 1: Prepare Mock Input Data for PSF Fitting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Step-2:-Perform-the-PSF-Fitting">Step 2: Perform the PSF Fitting</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../_implementation/modules.html">Python Package Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cpp_api.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../c_api.html">C API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_unit_tests/modules.html">Unit Testing Code</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SuperPhot Python Interface</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Python Interface Documentation</a> &raquo;</li>
+        
+      <li>Example of PSF Fitting Using Mock Data</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/python_interface/fitpsf_example.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #303F9F;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #D84315;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 8ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #cfcfcf;
+    border-radius: 2px;
+    background: #f7f7f7;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.pngmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="Example-of-PSF-Fitting-Using-Mock-Data">
+<h1>Example of PSF Fitting Using Mock Data<a class="headerlink" href="#Example-of-PSF-Fitting-Using-Mock-Data" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="Step-1:-Prepare-Mock-Input-Data-for-PSF-Fitting">
+<h2>Step 1: Prepare Mock Input Data for PSF Fitting<a class="headerlink" href="#Step-1:-Prepare-Mock-Input-Data-for-PSF-Fitting" title="Permalink to this headline">¶</a></h2>
+<p>Import the required objects for creating mock input data to demonstrate
+PSF fitting.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">from</span> <span class="nn">ctypes</span> <span class="k">import</span> <span class="n">c_ubyte</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;/Users/kpenev/projects/git/SuperPhot/PythonPackage&#39;</span><span class="p">)</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;/Users/kpenev/projects/git/SuperPhot/PythonPackage/tests&#39;</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">superphot.fake_image.piecewise_bicubic_psf</span> <span class="k">import</span> <span class="n">PiecewiseBicubicPSF</span>
+<span class="kn">from</span> <span class="nn">test_fit_star_shape.utils</span> <span class="k">import</span> <span class="n">make_image_and_source_list</span>
+</pre></div>
+</div>
+</div>
+<p>Create a mock image, sub-pixel map and list of sources to demonstrate
+PSF fitting.</p>
+<p>The properties of the created items are:</p>
+<ul>
+<li><p class="first">The image contains a single source with center at (5, 5).</p>
+</li>
+<li><p class="first">The PSF is on a bicubic grid with x boundaries -2, 0 and 2 and y
+boundaries -1, 0, 1 relative to the center.</p>
+</li>
+<li><p class="first">The PSF, its first order derivatives and the x-y cross derivative are
+all zero at the boundaries</p>
+<div class="math">
+\[x=\pm2 \quad\mathrm{or}\quad y=\pm1\]</div>
+</li>
+<li><p class="first">The first order derivative and the x-y cross derivative are zero at
+the center (x=0, y=0) and the values is 1 ADU.</p>
+</li>
+<li><p class="first">The image has a background of 1 ADU</p>
+</li>
+<li><p class="first">The source list contains exactly the following columns: <code class="docutils literal"><span class="pre">ID</span></code>, <code class="docutils literal"><span class="pre">x</span></code>
+and <code class="docutils literal"><span class="pre">y</span></code> giving a unique Id for the source and the position of its
+center in the image</p>
+</li>
+<li><p class="first">The sub-pixel map is a good approximation for the effective
+sensitivity map that should be used for DSLR cameras, which stagger 4
+channels on the image, and hence only a quarter of each &#8220;pixel&#8221; is
+sensitive for each channel</p>
+</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">subpix_map</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">]])</span>
+
+<span class="n">values</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">d_dx</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">d_dy</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">d2_dxdy</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">values</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+<span class="n">sources</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span>
+        <span class="n">y</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span>
+        <span class="n">psf</span><span class="o">=</span><span class="n">PiecewiseBicubicPSF</span><span class="p">(</span>
+            <span class="n">psf_parameters</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">values</span><span class="o">=</span><span class="n">values</span><span class="p">,</span>
+                <span class="n">d_dx</span><span class="o">=</span><span class="n">d_dx</span><span class="p">,</span>
+                <span class="n">d_dy</span><span class="o">=</span><span class="n">d_dy</span><span class="p">,</span>
+                <span class="n">d2_dxdy</span><span class="o">=</span><span class="n">d2_dxdy</span>
+            <span class="p">),</span>
+            <span class="n">boundaries</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">]),</span>
+                            <span class="n">y</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]))</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">]</span>
+
+<span class="n">image</span><span class="p">,</span> <span class="n">source_list</span> <span class="o">=</span> <span class="n">make_image_and_source_list</span><span class="p">(</span><span class="n">sources</span><span class="p">,</span> <span class="n">extra_variables</span><span class="o">=</span><span class="p">[],</span> <span class="n">subpix_map</span><span class="o">=</span><span class="n">subpix_map</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">pyplot</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">bone</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Image&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Source list:&#39;</span> <span class="o">+</span> <span class="nb">repr</span><span class="p">(</span><span class="n">source_list</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Source list:array([(b&#39;000000&#39;, 5., 5.)],
+      dtype=[(&#39;ID&#39;, &#39;S6&#39;), (&#39;x&#39;, &#39;&lt;f8&#39;), (&#39;y&#39;, &#39;&lt;f8&#39;)])
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/python_interface_fitpsf_example_5_1.png" src="../_images/python_interface_fitpsf_example_5_1.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">pyplot</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">subpix_map</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">pyplot</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">bone</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Sub-pixel sensivity map&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/python_interface_fitpsf_example_6_0.png" src="../_images/python_interface_fitpsf_example_6_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Step-2:-Perform-the-PSF-Fitting">
+<h2>Step 2: Perform the PSF Fitting<a class="headerlink" href="#Step-2:-Perform-the-PSF-Fitting" title="Permalink to this headline">¶</a></h2>
+<p>Import the required objects for PSF fitting and Background extraction</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">superphot</span> <span class="k">import</span> <span class="n">FitStarShape</span><span class="p">,</span> <span class="n">BackgroundExtractor</span>
+</pre></div>
+</div>
+</div>
+<p>Construct a PSF fitting object</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">fit_star_shape</span> <span class="o">=</span> <span class="n">FitStarShape</span><span class="p">(</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;PSF&#39;</span><span class="p">,</span> <span class="c1"># use PSF fitting (as opposed to PRF)</span>
+    <span class="n">shape_terms</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{1}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="c1"># Assume the PSF is the same for all sources</span>
+    <span class="n">grid</span><span class="o">=</span><span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">]),</span>
+          <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])],</span> <span class="c1"># Use the same grid that was used to create the sources</span>
+    <span class="n">initial_aperture</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="c1"># Initial guess for source flux will be measured using an aperture with radius 3 pixels</span>
+    <span class="n">subpixmap</span><span class="o">=</span><span class="n">subpix_map</span><span class="p">,</span> <span class="c1"># Assume the same sub-pixel map that was used to generate the image</span>
+    <span class="n">max_abs_amplitude_change</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="c1"># Force convergence based entirely on relative change in the amplitudes</span>
+    <span class="n">max_rel_amplitude_change</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span> <span class="c1"># Require that the flux estimates change by no more than ppm for convergence</span>
+    <span class="n">bg_min_pix</span><span class="o">=</span><span class="mi">3</span> <span class="c1">#Require that the background is determined using at least 3 pixels</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Measure the background behind the sources.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">background</span> <span class="o">=</span> <span class="n">BackgroundExtractor</span><span class="p">(</span>
+    <span class="n">image</span><span class="p">,</span>
+    <span class="mi">3</span><span class="p">,</span> <span class="c1"># Include only pixels with centers at least 3 pixels away from the source center.</span>
+    <span class="mi">6</span>  <span class="c1"># Include only pixels with centers at most 6 pixels away from the source center.</span>
+<span class="p">)</span>
+<span class="n">background</span><span class="p">(</span>
+    <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">5.0</span><span class="p">]),</span> <span class="c1"># list of source x coordinates</span>
+    <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">5.0</span><span class="p">])</span>  <span class="c1"># list of source y coordinates</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<p>Find the best-fit PSF shape.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">result_tree</span> <span class="o">=</span> <span class="n">fit_star_shape</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="p">(</span>
+            <span class="n">image</span><span class="p">,</span> <span class="c1"># The pixel values in the image</span>
+            <span class="n">image</span><span class="o">**</span><span class="mf">0.5</span><span class="p">,</span> <span class="c1"># Standard deviations of the pixels values (assume Poisson noise only and gain of 1)</span>
+            <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">c_ubyte</span><span class="p">),</span>
+            <span class="n">source_list</span>
+        <span class="p">)</span>
+    <span class="p">],</span>
+    <span class="p">[</span><span class="n">background</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;PSF map coefficients: &#39;</span> <span class="o">+</span> <span class="nb">repr</span><span class="p">(</span><span class="n">result_tree</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;psffit.psfmap&#39;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,))))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;PSF fit flux: &#39;</span> <span class="o">+</span> <span class="nb">repr</span><span class="p">(</span><span class="n">result_tree</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;psffit.flux.0&#39;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,))))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+PSF map coefficients: array([ 5.00000000e-01,  1.51662586e-16, -1.65018810e-17, -2.77749592e-15])
+PSF fit flux: array([2.])
+</pre></div></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../_implementation/modules.html" class="btn btn-neutral float-right" title="superphot" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="fit_star_shape.html" class="btn btn-neutral" title="PSF/PRF Fitting" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Kaloyan Penev.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

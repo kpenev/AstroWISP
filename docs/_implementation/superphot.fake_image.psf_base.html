@@ -82,10 +82,9 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../user_documentation/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python_interface/index.html">Python Interface Documentation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">Python Package Implementation</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="superphot.html">superphot package</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="superphot.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="superphot.html#subpackages">Subpackages</a><ul class="current">
 <li class="toctree-l4 current"><a class="reference internal" href="superphot.fake_image.html">superphot.fake_image package</a></li>
 </ul>
@@ -168,105 +167,27 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-superphot.fake_image.psf_base">
-<span id="superphot-fake-image-psf-base-module"></span><h1>superphot.fake_image.psf_base module<a class="headerlink" href="#module-superphot.fake_image.psf_base" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="class-inheritance-diagram">
-<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this headline">¶</a></h2>
-<img src="../_images/inheritance-bcea2c193730d67d434be763ed194b1dc28f2e8a.png" alt="Inheritance diagram of ABC, PSFBase" usemap="#inheritance35d7c8c5af" class="inheritance"/>
-<map id="inheritance35d7c8c5af" name="inheritance35d7c8c5af">
-<area shape="rect" id="node1" title="Helper class that provides a standard way to create an ABC using" alt="" coords="111,5,187,31"/>
-<area shape="rect" id="node2" href="#superphot.fake_image.psf_base.PSFBase" target="_top" title="The base class for all supported PSFs." alt="" coords="5,79,292,104"/>
-</map>
-<p>Defines a base class for all PSF models: PSFBase.</p>
-<dl class="class">
-<dt id="superphot.fake_image.psf_base.PSFBase">
-<em class="property">class </em><code class="descclassname">superphot.fake_image.psf_base.</code><code class="descname">PSFBase</code><a class="reference internal" href="../_modules/superphot/fake_image/psf_base.html#PSFBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.fake_image.psf_base.PSFBase" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.7)"><code class="xref py py-class docutils literal"><span class="pre">abc.ABC</span></code></a></p>
-<img src="../_images/inheritance-4fafc267b622e86e946901586130f21a67fb171e.png" alt="Inheritance diagram of superphot.fake_image.psf_base.PSFBase" usemap="#inheritance7fd20383cb" class="inheritance"/>
-<map id="inheritance7fd20383cb" name="inheritance7fd20383cb">
-<area shape="rect" id="node1" title="Helper class that provides a standard way to create an ABC using" alt="" coords="111,5,187,31"/>
-<area shape="rect" id="node2" href="#superphot.fake_image.psf_base.PSFBase" target="_top" title="The base class for all supported PSFs." alt="" coords="5,79,292,104"/>
-</map>
-<p>The base class for all supported PSFs.</p>
-<dl class="method">
-<dt id="superphot.fake_image.psf_base.PSFBase.__call__">
-<code class="descname">__call__</code><span class="sig-paren">(</span><em>x</em>, <em>y</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/fake_image/psf_base.html#PSFBase.__call__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.fake_image.psf_base.PSFBase.__call__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the value of the PSF at the given point.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>x</strong> &#8211; The horizontal offset from center of the point at which to
-return the PSF value.</li>
-<li><strong>y</strong> &#8211; The vertical offset from center of the point at which to
-return the PSF value.</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The value of the PSF at (x, y) relative to the source center.</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
 
-<dl class="method">
-<dt id="superphot.fake_image.psf_base.PSFBase.get_down_range">
-<code class="descname">get_down_range</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/fake_image/psf_base.html#PSFBase.get_down_range"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.fake_image.psf_base.PSFBase.get_down_range" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return how far the PSF extends downward of center.</p>
-</dd></dl>
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
 
-<dl class="method">
-<dt id="superphot.fake_image.psf_base.PSFBase.get_left_range">
-<code class="descname">get_left_range</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/fake_image/psf_base.html#PSFBase.get_left_range"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.fake_image.psf_base.PSFBase.get_left_range" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return how far the PSF extends to the left of center.</p>
-</dd></dl>
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
 
-<dl class="method">
-<dt id="superphot.fake_image.psf_base.PSFBase.get_right_range">
-<code class="descname">get_right_range</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/fake_image/psf_base.html#PSFBase.get_right_range"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.fake_image.psf_base.PSFBase.get_right_range" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return how far the PSF extends to the right of center.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="superphot.fake_image.psf_base.PSFBase.get_up_range">
-<code class="descname">get_up_range</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/fake_image/psf_base.html#PSFBase.get_up_range"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.fake_image.psf_base.PSFBase.get_up_range" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return how far the PSF extends upward of center.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="superphot.fake_image.psf_base.PSFBase.integrate">
-<code class="descname">integrate</code><span class="sig-paren">(</span><em>left</em>, <em>bottom</em>, <em>width</em>, <em>height</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/fake_image/psf_base.html#PSFBase.integrate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.fake_image.psf_base.PSFBase.integrate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the integral of the PSF over a rectangle.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>left</strong> &#8211; The horizontal offset relative to the center of the left
-boundary of the rectangle to integrate over.</li>
-<li><strong>bottom</strong> &#8211; The vertical offset relative to the center of the bottom
-boundary of the rectangle to integrate over.</li>
-<li><strong>width</strong> &#8211; The horizontal size of the rectangle to integrate over.</li>
-<li><strong>height</strong> &#8211; The vertical size of the rectangle to integrate over.</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The integral of the PSF over left &lt; x &lt; left + width,
-bottom &lt; y &lt; bottom + height</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-</dd></dl>
-
-</div>
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="superphot-fake-image-psf-base-module">
+<h1>superphot.fake_image.psf_base module<a class="headerlink" href="#superphot-fake-image-psf-base-module" title="Permalink to this headline">¶</a></h1>
 </div>
 
 

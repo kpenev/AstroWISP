@@ -82,7 +82,7 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../user_documentation/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python_interface/index.html">Python Interface Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../_implementation/modules.html">Python Package Implementation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cpp_api.html">C++ API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../c_api.html">C API</a></li>
@@ -90,6 +90,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">tests package</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="tests.fitpsf.html">tests.fitpsf package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tests.test_fit_star_shape.html">tests.test_fit_star_shape package</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a><ul>
@@ -169,23 +170,44 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-tests">
-<span id="tests-package"></span><h1>tests package<a class="headerlink" href="#module-tests" title="Permalink to this headline">¶</a></h1>
-<p>Unit tests of the super_phot python package.</p>
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="tests-package">
+<h1>tests package<a class="headerlink" href="#tests-package" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-tests"></span><p>Unit tests of the super_phot python package.</p>
 <div class="section" id="subpackages">
 <h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="tests.fitpsf.html">tests.fitpsf package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="tests.fitpsf.html#submodules">Submodules</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="tests.fitpsf.noiseless_tests.html">tests.fitpsf.noiseless_tests module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="tests.fitpsf.noiseless_tests.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.fitpsf.noiseless_tests.html">tests.fitpsf.noiseless_tests module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.fitpsf.utils.html">tests.fitpsf.utils module</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="tests.fitpsf.utils.html">tests.fitpsf.utils module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="tests.fitpsf.utils.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="tests.test_fit_star_shape.html">tests.test_fit_star_shape package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tests.test_fit_star_shape.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tests.test_fit_star_shape.noiseless_tests.html">tests.test_fit_star_shape.noiseless_tests module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.test_fit_star_shape.utils.html">tests.test_fit_star_shape.utils module</a></li>
 </ul>
 </li>
 </ul>
@@ -197,18 +219,9 @@
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="tests.test_background.html">tests.test_background module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tests.test_background.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="tests.test_fake_image.html">tests.test_fake_image module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tests.test_fake_image.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="tests.test_piecewise_bicubic_psf.html">tests.test_piecewise_bicubic_psf module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tests.test_piecewise_bicubic_psf.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="tests.test_background.html">tests.test_background module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tests.test_fake_image.html">tests.test_fake_image module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tests.test_piecewise_bicubic_psf.html">tests.test_piecewise_bicubic_psf module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tests.utilities.html">tests.utilities module</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="tests.utilities.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
 </ul>

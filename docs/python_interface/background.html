@@ -31,7 +31,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="PSF/PRF Fitting" href="fit_star_shape.html" />
-    <link rel="prev" title="User Documentation" href="index.html" /> 
+    <link rel="prev" title="Python Interface Documentation" href="index.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -82,9 +82,10 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">User Documentation</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Python Interface Documentation</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Measuring Background</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fit_star_shape.html">PSF/PRF Fitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fitpsf_example.html">Example of PSF Fitting Using Mock Data</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../_implementation/modules.html">Python Package Implementation</a></li>
@@ -136,7 +137,7 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="index.html">User Documentation</a> &raquo;</li>
+          <li><a href="index.html">Python Interface Documentation</a> &raquo;</li>
         
       <li>Measuring Background</li>
     
@@ -144,7 +145,7 @@
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/user_documentation/background.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/python_interface/background.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -157,7 +158,26 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="measuring-background">
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="measuring-background">
 <h1>Measuring Background<a class="headerlink" href="#measuring-background" title="Permalink to this headline">¶</a></h1>
 <p>Photometry starts by determining the background level and its uncertainty for
 each source. At present SuperPhot uses the median average and the scatter around
@@ -176,10 +196,11 @@ of this source or any other source.</li>
 </ul>
 </div></blockquote>
 <p>Background measurement is performed using the
-<a class="reference internal" href="../_implementation/superphot.html#superphot.BackgroundExtractor" title="superphot.BackgroundExtractor"><code class="xref py py-class docutils literal"><span class="pre">superphot.BackgroundExtractor</span></code></a> class and requires specifying the image,
+<code class="xref py py-class docutils literal"><span class="pre">superphot.BackgroundExtractor</span></code> class and requires specifying the image,
 list of source locations, the inner/outer background radii  and returns
-estimates of the background for each source, its error, and the number of pixels
-that participated in the determination of the background value and error:</p>
+estimates of the background for each source, its error (standard deviation), and
+the number of pixels that participated in the determination of the background
+value and error:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">superphot</span> <span class="k">import</span> <span class="n">BackgroundExtractor</span>
 <span class="kn">import</span> <span class="nn">numpy.random</span>
 
@@ -206,7 +227,7 @@ that participated in the determination of the background value and error:</p>
         <a href="fit_star_shape.html" class="btn btn-neutral float-right" title="PSF/PRF Fitting" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral" title="User Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral" title="Python Interface Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
