@@ -6,6 +6,9 @@
  * \ingroup FitPSF
  */
 
+#ifndef __FITPSF_C_INTERFACE_H
+#define __FITPSF_C_INTERFACE_H
+
 #include "../Core/CInterface.h"
 #include "../IO/CInterface.h"
 #include "../Background/CInterface.h"
@@ -17,9 +20,13 @@ extern "C" {
     ///Opaque struct to cast to/from FitPSF::Image.
     struct LIB_PUBLIC FitPSFImage;
 
-    ///Create an object for holding the configuration for PSF fitting.
-    LIB_PUBLIC FittingConfiguration *create_psffit_configuration(
-    );
+    ///\brief Create an object for holding the configuration for PSF fitting.
+    ///
+    ///Must be initialized by updated_psffit_configuration() before use.
+    ///
+    ///Must be destroyed by destroy_psffit_configuration when no longer needed
+    ///to avoid a memory leak.
+    LIB_PUBLIC FittingConfiguration *create_psffit_configuration();
 
     ///\brief Destroy a configuration previously created by
     ///create_psffit_configuration()
@@ -103,3 +110,5 @@ extern "C" {
     );
 
 };//End extern "C"
+
+#endif

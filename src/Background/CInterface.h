@@ -6,6 +6,9 @@
  * \ingroup Background
  */
 
+#ifndef __BACKGROUND_C_INTERFACE_H
+#define __BACKGROUND_C_INTERFACE_H
+
 #include "MeasureAnnulus.h"
 #include "../Core/Image.h"
 #include "../Core/CInterface.h"
@@ -148,3 +151,5 @@ extern "C" {
         unsigned *pixels
     );
 };//End extern "C".
+
+#endif

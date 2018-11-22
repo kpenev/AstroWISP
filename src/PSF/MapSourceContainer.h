@@ -5,6 +5,9 @@
  * \ingroup PSF
  */
 
+#ifndef __PSF_MAP_SOURCE_CONTAINER_H
+#define __PSF_MAP_SOURCE_CONTAINER_H
+
 #include "../Core/SharedLibraryExportMacros.h"
 #include "MapSource.h"
 #include "../IO/H5IODataTree.h"
@@ -35,3 +38,5 @@ namespace PSF {
     };
 
 } //End PSF namespace.
+
+#endif

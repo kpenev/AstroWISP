@@ -6,6 +6,9 @@
  * \ingroup Core
  */
 
+#ifndef __CORE_C_INTERFACE_H
+#define __CORE_C_INTERFACE_H
+
 #include "SharedLibraryExportMacros.h"
 
 extern "C" {
@@ -84,3 +87,5 @@ extern "C" {
         CoreSubPixelMap *map
     );
 };//End extern "C".
+
+#endif
