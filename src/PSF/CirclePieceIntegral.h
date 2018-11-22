@@ -89,33 +89,51 @@ namespace PSF {
 
         ///\brief Fills \f$R_n(y)\f$.
         void fill_R(
-                ///The index (n) up to which to compute \f$R_n(y)\f$ values.
-                Core::vector_size_type max_n,
+            ///The index (n) up to which to compute \f$R_n(y)\f$ values.
+            Core::vector_size_type max_n,
 
-                ///The array of powers of the y argument.
-                std::vector<double> &y_pow,
+            ///The array of powers of the y argument.
+            std::vector<double> &y_pow,
 
-                ///The vector to fill with the computed values, it must
-                ///contain at least the \f$R_0(y)\f$ entry.
-                std::vector<double> &Rn);
+            ///The vector to fill with the computed values, it must
+            ///contain at least the \f$R_0(y)\f$ entry.
+            std::vector<double> &Rn
+        );
 
         ///\brief Computes all \f$R_n(y_{max})\f$ values for n<=max_n and
         ///stores them in __R_max.
-        void fill_R_max(Core::vector_size_type max_n);
+        void fill_R_max(
+            ///One past the maximum value of the index for which to compute
+            /// \f$R_n\$.
+            Core::vector_size_type max_n
+        );
 
         ///\brief Computes all \f$P^{even}_n\f$  for n<max_n and stores them
         ///in __q[0]
-        void fill_p_even(Core::vector_size_type max_n);
+        void fill_p_even(
+            ///One past the maximum value of teh index for which to compute
+            /// \f$P^{even}_n\f$.
+            Core::vector_size_type max_n
+        );
 
         ///\brief Computes all \f$P^{odd}_n\f$  for n<max_n and stores tham
         ///in __q[1]
-        void fill_p_odd(Core::vector_size_type max_n);
+        void fill_p_odd(
+            ///One past the maximum value of teh index for which to compute
+            /// \f$P^{odd}_n\f$.
+            Core::vector_size_type max_n
+        );
 
         ///\brief Fills in a diagonal of __q with indices that sum up to
         ///(m+n) and the first of which has the same parity as m, up to
         ///(m, n), assuming all earlier diagonals are filled.
-        void fill_q_diagonal(Core::vector_size_type m,
-                             Core::vector_size_type n);
+        void fill_q_diagonal(
+            ///See description.
+            Core::vector_size_type m,
+
+            ///See description.
+            Core::vector_size_type n
+        );
 
         ///\brief Fills in __q[m][n] and possibly other entries of __q if
         ///they are calculated along the way.

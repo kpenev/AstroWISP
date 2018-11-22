@@ -35,9 +35,7 @@ namespace PSF {
      *
      * The is solution described [here](@ref PSF_integrals_page).
      *
-     * \ingroup SubPixPhot
-     * \ingroup FitSubpix
-     * \ingroup FitPSF
+     * \ingroup PSF
      */
     class LIB_LOCAL WedgeIntegral {
     private:
@@ -79,7 +77,7 @@ namespace PSF {
             ///All previously computed values of the integral.
             __values,
 
-            ///All previously computed \f$Q_{m,n}\f$ values.
+            ///\brief All previously computed \f$Q_{m,n}\f$ values.
             ///
             ///The first (outer) index is m and the second (inner) is n. This
             ///way __q[0] is \f$P^{even}\f$ and __q[1] is \f$P^{odd}\f$.
@@ -96,7 +94,7 @@ namespace PSF {
             __x0_pow;
 
         ///\brief Computes all \f$P^{even}_n\f$  for n<max_n and stores them
-        ///in __q[0]
+        ///in __q[0].
         void fill_p_even(
             ///The index of the last term of \f$P^{even}$ to calculate.
             Core::vector_size_type max_n
