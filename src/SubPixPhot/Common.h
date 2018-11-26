@@ -22,27 +22,40 @@ namespace SubPixPhot {
     ///Measures the fluxes of the sources using aperture photometry.
     template<class FLUX_MEASURER>
     void add_flux_measurements(
-            ///The SPF map to use.
-            const PSF::Map &psf_map,
+        ///The SPF map to use.
+        const PSF::Map &psf_map,
 
-            ///The object that will measure the fluxes.
-            FLUX_MEASURER &measure_flux,
+        ///The object that will measure the fluxes.
+        FLUX_MEASURER &measure_flux,
 
-            ///The magnitude that corresponds to a flux of 1ADU
-            double mag_1adu,
+        ///The magnitude that corresponds to a flux of 1ADU
+        double mag_1adu,
 
-            ///The data tree to add the fluxes to. It must contain the source
-            ///positions and backgrounds on input.
-            IO::H5IODataTree &data_tree)
+        ///The data tree to add the fluxes to. It must contain the source
+        ///positions and backgrounds on input.
+        IO::H5IODataTree &data_tree,
+
+        ///The string to add to node names when querying data_tree to select the
+        ///entries corresponding to the image being processed within the output
+        ///tree. If no split by image is present, use an empty string.
+        const std::string &data_tree_image_id=""
+    )
     {
+        std::string tree_suffix = (data_tree_image_id.empty()
+                                   ? ""
+                                   : "." + data_tree_image_id);
         unsigned num_apertures = measure_flux.number_apertures();
 
         PSF::MapSourceContainer psfmap_sources(data_tree, num_apertures);
         unsigned num_sources = psfmap_sources.size();
 
         IO::OutputArray<double>
-            background(data_tree.get<boost::any>("bg.value")),
-            background_error(data_tree.get<boost::any>("bg.error"));
+            background(
+                data_tree.get<boost::any>("bg.value" + tree_suffix)
+            ),
+            background_error(
+                data_tree.get<boost::any>("bg.error" + tree_suffix)
+            );
 
         std::vector< std::vector<double>* > magnitudes(num_apertures),
                                             magnitude_errors(num_apertures);
@@ -123,15 +136,15 @@ namespace SubPixPhot {
         IO::TranslateToAny< std::vector<unsigned> > unsigned_trans;
         for(unsigned ap_index = 0; ap_index < num_apertures; ++ap_index) {
             std::ostringstream key;
-            key << "apphot.mag." << ap_index;
+            key << "apphot.mag" << tree_suffix << "." << ap_index;
             data_tree.put(key.str(), magnitudes[ap_index], double_trans);
             key.str("");
-            key << "apphot.mag_err." << ap_index;
+            key << "apphot.mag_err" << tree_suffix << "." << ap_index;
             data_tree.put(key.str(),
                           magnitude_errors[ap_index],
                           double_trans);
             key.str("");
-            key << "apphot.quality." << ap_index;
+            key << "apphot.quality" << tree_suffix << "." << ap_index;
             data_tree.put(key.str(), flags[ap_index], unsigned_trans);
         }
     }

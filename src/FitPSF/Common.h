@@ -607,7 +607,8 @@ namespace FitPSF {
             IO::H5IODataTree &output_data_tree,
 
             ///The magnitude that corresponds to a flux of 1ADU.
-            double mag_1adu)
+            double mag_1adu
+        )
         {
             bool hat_ids=(find_if(fit_result.begin(),
                                   fit_result.end(),

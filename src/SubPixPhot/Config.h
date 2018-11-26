@@ -11,6 +11,14 @@
 
 #include "../Core/SharedLibraryExportMacros.h"
 #include "../IO/CommandLineConfig.h"
+#include "../Background/Annulus.h"
+#include "../Background/CommandLineUtil.h"
+#include "../Core/PhotColumns.h"
+#include "../Core/Error.h"
+#include "../Core/Typedefs.h"
+#include "../Core/CommandLineUtil.h"
+#include <string>
+#include <sstream>
 
 namespace SubPixPhot {
 
@@ -47,18 +55,21 @@ namespace SubPixPhot {
             char **argv
         )
         {
-            parse(argc, argv);
-            if(count("help")==0) {
-                apply_fallbacks();
-                check_consistency();
+            if(argc > 0) {
+                parse(argc, argv);
+
+                if(count("help")==0) {
+                    apply_fallbacks();
+                    check_consistency();
+                }
+                PSF::EllipticalGaussian::set_default_precision(
+                    operator[]("psf.sdk.rel-int-precision").as<double>(),
+                    operator[]("psf.sdk.abs-int-precision").as<double>()
+                );
+                PSF::EllipticalGaussian::set_default_max_exp_coef(
+                    operator[]("psf.sdk.max-exp-coef").as<double>()
+                );
             }
-            PSF::EllipticalGaussian::set_default_precision(
-                operator[]("psf.sdk.rel-int-precision").as<double>(),
-                operator[]("psf.sdk.abs-int-precision").as<double>()
-            );
-            PSF::EllipticalGaussian::set_default_max_exp_coef(
-                operator[]("psf.sdk.max-exp-coef").as<double>()
-            );
         }
     };
 

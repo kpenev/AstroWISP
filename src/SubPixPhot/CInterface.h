@@ -56,7 +56,10 @@ extern "C" {
 
         ///The tree containing the resuts from PSF fitting. On exit, updated
         ///with the aperture photometry results.
-        H5IODataTree *io_data_tree
+        H5IODataTree *io_data_tree,
+
+        ///The image index within the output tree image corresponds to.
+        unsigned image_index
     );
 
 } //End Extern "C"

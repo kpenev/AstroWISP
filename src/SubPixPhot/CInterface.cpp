@@ -47,7 +47,8 @@ void update_subpixphot_configuration(
 LIB_PUBLIC void subpixphot(const CoreImage *image,
                            const CoreSubPixelMap *subpixmap,
                            SubPixPhotConfiguration *configuration,
-                           H5IODataTree *io_data_tree)
+                           H5IODataTree *io_data_tree,
+                           unsigned image_index)
 {
 #ifdef TRACK_PROGRESS
     std::cerr << "Starting aperture photometry." << std::endl;
@@ -78,10 +79,14 @@ LIB_PUBLIC void subpixphot(const CoreImage *image,
         apertures,
         (*real_configuration)["gain"].as<double>()
     );
+
+    std::ostringstream image_index_str;
+    image_index_str << image_index;
     SubPixPhot::add_flux_measurements(
         psf_map,
         measure_flux,
         (*real_configuration)["magnitude-1adu"].as<double>(),
-        *real_io_data_tree
+        *real_io_data_tree,
+        image_index_str.str()
     );
 }

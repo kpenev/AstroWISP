@@ -285,9 +285,9 @@ def _setup_subpixphot_interface(library):
         _c_subpixphot_configuration
     )
 
-    library.destroy_subpixphot_configuration.argtypes = (
+    library.destroy_subpixphot_configuration.argtypes = [
         library.create_subpixphot_configuration.restype
-    )
+    ]
     library.destroy_subpixphot_configuration.restype = None
 
     library.update_subpixphot_configuration.restype = None
@@ -296,7 +296,8 @@ def _setup_subpixphot_interface(library):
         _c_core_image_p,
         _c_core_sub_pixel_map_p,
         library.create_subpixphot_configuration.restype,
-        library.create_result_tree.restype
+        library.create_result_tree.restype,
+        c_uint
     ]
     library.subpixphot.restype = None
 

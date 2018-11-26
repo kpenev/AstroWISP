@@ -7,3 +7,6 @@ all: noiseless_psffit
 
 noiseless_psffit: noiseless_psffit.cpp
 	g++ $(FLAGS) noiseless_psffit.cpp -o noiseless_psffit  $(LIBS)
+
+apphot: apphot.cpp
+	g++ $(FLAGS) apphot.cpp -o apphot $(LIBS)
