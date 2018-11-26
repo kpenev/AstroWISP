@@ -26,8 +26,8 @@ namespace PSF {
 
 #ifdef VERBOSE_DEBUG
     ///Output all elements of a valarray.
-    std::ostream & LIB_LOCAL operator<<(std::ostream &os,
-                                        const std::valarray<double> &array);
+    LIB_LOCAL std::ostream &operator<<(std::ostream &os,
+                                       const std::valarray<double> &array);
 #endif
 
     ///\brief Same as std::valarray<double> but on assignment resizes result as
@@ -387,7 +387,7 @@ namespace PSF {
 
                 ///\brief The cross product of two sets of terms.
                 ///
-                ///This is defined as products between all possible matches 
+                ///This is defined as products between all possible matches
                 ///between a term in the first set with a term in the second
                 ///set.
                 void cross_set(

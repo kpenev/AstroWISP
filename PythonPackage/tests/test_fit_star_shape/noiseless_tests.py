@@ -54,7 +54,7 @@ class TestFitStarShapeNoiseless(FloatTestCase):
         """
 
         fname_start = (
-            '/Users/kpenev/projects/git/SuperPhot/src/debug/'
+            os.path.expanduser('~/projects/git/SuperPhot/src/debug/')
             +
             self.id().rsplit('.', 1)[1]
             +

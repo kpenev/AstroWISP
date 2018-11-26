@@ -7,6 +7,7 @@
 
 #include "CommandLineConfig.h"
 #include "SubPixHDF5File.h"
+#include <cstdarg>
 
 namespace IO {
 

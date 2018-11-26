@@ -125,6 +125,9 @@ namespace IO {
             ///Copies orig to *this.
             FitsImage(const FitsImage &orig)
                 :
+                    __pixel_values(NULL),
+                    __pixel_errors(NULL),
+                    __mask(NULL),
                     Core::Image<DATA_TYPE>(orig),
                     __header(orig.__header),
                     __filename(orig.__filename)

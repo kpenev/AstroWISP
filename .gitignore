@@ -1,6 +1,7 @@
 .gradle
 build
 .*.swp
+.*.swo
 *.outerr
 *.txt
 *.out

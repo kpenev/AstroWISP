@@ -14,7 +14,6 @@
 #include <boost/program_options.hpp>
 #include "../PSF/EllipticalGaussian.h"
 
-
 namespace opt = boost::program_options;
 
 namespace IO {

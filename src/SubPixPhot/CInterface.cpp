@@ -6,6 +6,8 @@
 #include "../Core/Image.h"
 #include "../Core/SubPixelCorrectedFlux.h"
 
+#include <cstdarg>
+
 SubPixPhotConfiguration *create_subpixphot_configuration()
 {
     SubPixPhotConfiguration* result =
@@ -65,7 +67,7 @@ LIB_PUBLIC void subpixphot(const CoreImage *image,
     IO::H5IODataTree *real_io_data_tree =
         reinterpret_cast<IO::H5IODataTree*>(io_data_tree);
 
-    Core::RealList apertures = 
+    Core::RealList apertures =
         (*real_configuration)["ap.aperture"].as<Core::RealList>();
     apertures.sort();
 

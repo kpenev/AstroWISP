@@ -131,7 +131,7 @@ namespace Core {
                                    image.__x_resolution,
                                    image.__y_resolution,
                                    image.__errors);
-                } else assert(false);
+                }
             }
 
             ///Initialize this image with a copy of the given data.
