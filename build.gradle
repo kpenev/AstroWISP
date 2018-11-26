@@ -21,6 +21,7 @@ model {
             } else if(buildType == buildTypes.debug) {
                 cppCompiler.define "DEBUG"
                 cppCompiler.define "VERBOSE_DEBUG"
+                cppCompiler.define "TRACK_PROGRESS"
             }
 
             if (toolChain in Gcc || toolChain in Clang) {
