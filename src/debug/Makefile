@@ -1,7 +1,7 @@
 .PHONY: all
 
 FLAGS=-ggdb -DTOOLCHAIN_CLANG -W -Wall -fvisibility=hidden -I/Users/kpenev/projects/git/SuperPhot/src/third_party_libs/Eigen
-LIBS=-L/Users/kpenev/lib/ -lsuperphot
+LIBS=-L$(HOME)/lib/ -lsuperphot
 
 all: noiseless_psffit
 
