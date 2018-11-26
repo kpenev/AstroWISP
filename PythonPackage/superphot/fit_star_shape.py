@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Define the :class:`FitStarShape` class, which performs PSF/PRF fitting."""
+"""Define the :class:`FitStarShape`, which performs PSF/PRF fitting."""
 
 from numbers import Number
 from ctypes import\
@@ -324,7 +324,7 @@ class FitStarShape:
         self._result_tree = None
 
     def configure(self, **configuration):
-        """
+        r"""
         Modify the currently defined configuration.
 
         Args:
@@ -358,7 +358,7 @@ class FitStarShape:
         superphot_library.update_psffit_configuration(*config_arguments)
 
     def fit(self, image_sources, backgrounds):
-        """
+        r"""
         Fit for the shape of the sources in a collection of imeges.
 
         Args:
@@ -382,7 +382,7 @@ class FitStarShape:
 
                    May define additional quantities on which the PSF shape is
                    allowed to depend.
-                   
+
                    The source list can be either a numy record array with field
                    names as keys or a dictionary with field names as keys and
                    1-D numpy arrays of identical lengths as values.
@@ -391,7 +391,8 @@ class FitStarShape:
                 of :class:`BackgroundExtractor`\ ).
 
         Returns:
-            None. Use :meth:`get_last_fit_result` to obtain the results.
+            _c_h5io_data_tree_p:
+                A SubPixPhot IO tree containing all the newly derived results.
         """
 
         def create_image_arguments():
