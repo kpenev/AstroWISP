@@ -82,10 +82,9 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../user_documentation/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python_interface/index.html">Python Interface Documentation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">Python Package Implementation</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="superphot.html">superphot package</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="superphot.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
 <li class="toctree-l3"><a class="reference internal" href="superphot.html#subpackages">Subpackages</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="superphot.html#submodules">Submodules</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="superphot.background.html">superphot.background module</a></li>
@@ -169,292 +168,27 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-superphot.fit_star_shape">
-<span id="superphot-fit-star-shape-module"></span><h1>superphot.fit_star_shape module<a class="headerlink" href="#module-superphot.fit_star_shape" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="class-inheritance-diagram">
-<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this headline">¶</a></h2>
-<img src="../_images/inheritance-21d54b93c070021149a174cdaa39d800b77b3018.png" alt="Inheritance diagram of FitStarShape, Number, SuperPhotIOTree, c_bool, c_char, c_char_p, c_double, c_int, c_ulong" usemap="#inheritance0d53412eca" class="inheritance"/>
-<map id="inheritance0d53412eca" name="inheritance0d53412eca">
-<area shape="rect" id="node7" title="All numbers inherit from this class." alt="" coords="838,5,973,31"/>
-<area shape="rect" id="node8" href="#superphot.fit_star_shape.FitStarShape" target="_top" title="Fit for the PSF/PRF of stars and their flux." alt="" coords="997,5,1264,31"/>
-<area shape="rect" id="node9" href="superphot.superphot_io_tree.html#superphot.superphot_io_tree.SuperPhotIOTree" target="_top" title="Interface for extracting entries from an IO::H5IODataTree." alt="" coords="1288,5,1605,31"/>
-</map>
-<p>Define the <a class="reference internal" href="#superphot.fit_star_shape.FitStarShape" title="superphot.fit_star_shape.FitStarShape"><code class="xref py py-class docutils literal"><span class="pre">FitStarShape</span></code></a> class, which performs PSF/PRF fitting.</p>
-<dl class="class">
-<dt id="superphot.fit_star_shape.FitStarShape">
-<em class="property">class </em><code class="descclassname">superphot.fit_star_shape.</code><code class="descname">FitStarShape</code><span class="sig-paren">(</span><em>*</em>, <em>mode</em>, <em>shape_terms</em>, <em>grid</em>, <em>initial_aperture</em>, <em>**other_configuration</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/fit_star_shape.html#FitStarShape"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.fit_star_shape.FitStarShape" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
-<img src="../_images/inheritance-a46cc456bd72dcd92fa71185d22416ab66d8b429.png" alt="Inheritance diagram of superphot.fit_star_shape.FitStarShape" usemap="#inheritance6e1863ece1" class="inheritance"/>
-<map id="inheritance6e1863ece1" name="inheritance6e1863ece1">
-<area shape="rect" id="node1" href="#superphot.fit_star_shape.FitStarShape" target="_top" title="Fit for the PSF/PRF of stars and their flux." alt="" coords="5,5,272,31"/>
-</map>
-<p>Fit for the PSF/PRF of stars and their flux.</p>
-<span class="target" id="attributes"></span><dl class="attribute">
-<dt id="superphot.fit_star_shape.FitStarShape._library_psf_fitter">
-<code class="descname">_library_psf_fitter</code><a class="headerlink" href="#superphot.fit_star_shape.FitStarShape._library_psf_fitter" title="Permalink to this definition">¶</a></dt>
-<dd><p>The library object for carrying out PSF/PRF
-fitting.</p>
-</dd></dl>
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
 
-<dl class="attribute">
-<dt id="superphot.fit_star_shape.FitStarShape._library_configuration">
-<code class="descname">_library_configuration</code><a class="headerlink" href="#superphot.fit_star_shape.FitStarShape._library_configuration" title="Permalink to this definition">¶</a></dt>
-<dd><p>Library configuration object set per the
-current <a class="reference internal" href="#superphot.fit_star_shape.FitStarShape.configuration" title="superphot.fit_star_shape.FitStarShape.configuration"><code class="xref py py-attr docutils literal"><span class="pre">configuration</span></code></a></p>
-</dd></dl>
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
 
-<dl class="attribute">
-<dt id="superphot.fit_star_shape.FitStarShape._result_tree">
-<code class="descname">_result_tree</code><a class="headerlink" href="#superphot.fit_star_shape.FitStarShape._result_tree" title="Permalink to this definition">¶</a></dt>
-<dd><p>The SuperPhotIOTree instance containing the last
-fittintg results, on None, if no fitting has been performed yet.</p>
-</dd></dl>
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
 
-<dl class="attribute">
-<dt id="superphot.fit_star_shape.FitStarShape.mode">
-<code class="descname">mode</code><a class="headerlink" href="#superphot.fit_star_shape.FitStarShape.mode" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>str</em> &#8211; Are we doing <cite>&#8216;PSF&#8217;</cite> or <cite>&#8216;PRF&#8217;</cite> fitting (case
-insensitive).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="superphot.fit_star_shape.FitStarShape.configuration">
-<code class="descname">configuration</code><a class="headerlink" href="#superphot.fit_star_shape.FitStarShape.configuration" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>dict</em> &#8211; The configuraiton for how to carry out PSF/PRF
-fitting. The following keys are used (others are ignored by this
-class):</p>
-<dl class="docutils">
-<dt>mode (str):</dt>
-<dd>What kind of fitting to do &#8216;PSF&#8217; or &#8216;PRF&#8217; (case insensitive).</dd>
-<dt>shape_terms (str):</dt>
-<dd><p class="first">The terms the PSF is allowed to depend on. The EBNF grammar
-defining the language for this parameter is:</p>
-<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">*</span> <span class="n">items</span> <span class="ow">in</span> <span class="n">angle</span> <span class="n">brackets</span> <span class="p">(</span><span class="o">&lt;</span> <span class="ow">or</span> <span class="o">&gt;</span><span class="p">)</span> <span class="n">are</span> <span class="n">assumed</span> <span class="n">to</span> <span class="n">be</span>     <span class="o">*</span><span class="p">)</span>
-<span class="p">(</span><span class="o">*</span> <span class="n">obvious</span> <span class="ow">and</span> <span class="n">thus</span> <span class="n">are</span> <span class="ow">not</span> <span class="n">defined</span><span class="o">.</span>                      <span class="o">*</span><span class="p">)</span>
-
-<span class="n">termchar</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">ascii</span> <span class="n">character</span><span class="o">&gt;</span> <span class="o">-</span> <span class="s2">&quot;,&quot;</span> <span class="o">-</span> <span class="s2">&quot;}&quot;</span> <span class="p">;</span>
-
-<span class="p">(</span><span class="o">*</span> <span class="n">mathematical</span> <span class="n">expressions</span>  <span class="n">involving</span> <span class="n">variables</span><span class="p">,</span>         <span class="o">*</span><span class="p">)</span>
-<span class="p">(</span><span class="o">*</span> <span class="n">floating</span> <span class="n">point</span> <span class="n">numbers</span> <span class="ow">and</span> <span class="n">pi</span><span class="o">.</span> <span class="n">The</span> <span class="n">complete</span> <span class="nb">list</span> <span class="n">of</span>    <span class="o">*</span><span class="p">)</span>
-<span class="p">(</span><span class="o">*</span> <span class="n">mathematical</span> <span class="n">functions</span> <span class="kn">from</span> <span class="nn">c</span><span class="o">++</span><span class="mi">99</span><span class="s1">&#39;s cmath library are  *)</span>
-<span class="p">(</span><span class="o">*</span> <span class="n">supported</span><span class="o">.</span>                                             <span class="o">*</span><span class="p">)</span>
-<span class="n">term</span> <span class="o">=</span> <span class="n">termchar</span> <span class="p">,</span> <span class="p">{</span> <span class="n">termchar</span> <span class="p">}</span> <span class="p">;</span>
-
-
-<span class="p">(</span><span class="o">*</span> <span class="n">simple</span> <span class="n">listing</span> <span class="n">of</span> <span class="n">terms</span> <span class="n">to</span> <span class="n">include</span><span class="o">.</span>                    <span class="o">*</span><span class="p">)</span>
-<span class="nb">list</span> <span class="o">=</span> <span class="s2">&quot;{&quot;</span> <span class="p">,</span> <span class="n">term</span> <span class="p">,</span> <span class="p">{</span> <span class="s2">&quot;,&quot;</span> <span class="p">,</span> <span class="n">term</span> <span class="p">}</span> <span class="p">,</span> <span class="s2">&quot;}&quot;</span> <span class="p">;</span>
-
-<span class="p">(</span><span class="o">*</span> <span class="n">Expands</span> <span class="n">to</span> <span class="nb">all</span> <span class="n">polynomial</span> <span class="n">terms</span> <span class="n">of</span> <span class="n">up</span> <span class="n">to</span> <span class="n">combined</span>      <span class="o">*</span><span class="p">)</span>
-<span class="p">(</span><span class="o">*</span> <span class="n">order</span> <span class="o">&lt;</span><span class="n">integer</span><span class="o">&gt;</span> <span class="n">of</span> <span class="n">the</span> <span class="n">entries</span> <span class="ow">in</span> <span class="nb">list</span>                 <span class="o">*</span><span class="p">)</span>
-<span class="n">poly</span> <span class="o">=</span> <span class="s2">&quot;O&quot;</span> <span class="p">,</span> <span class="o">&lt;</span><span class="n">integer</span><span class="o">&gt;</span> <span class="p">,</span> <span class="nb">list</span> <span class="p">;</span>
-
-<span class="nb">set</span> <span class="o">=</span> <span class="nb">list</span> <span class="o">|</span> <span class="n">poly</span> <span class="p">;</span>
-
-
-<span class="p">(</span><span class="o">*</span> <span class="n">expands</span> <span class="n">to</span> <span class="n">the</span> <span class="n">cross</span> <span class="n">product</span> <span class="n">of</span> <span class="nb">all</span> <span class="n">sets</span><span class="o">.</span>              <span class="o">*</span><span class="p">)</span>
-<span class="n">cross</span> <span class="o">=</span> <span class="nb">set</span> <span class="p">,</span> <span class="p">{</span> <span class="s2">&quot;*&quot;</span> <span class="p">,</span> <span class="nb">set</span> <span class="p">}</span> <span class="p">;</span>
-
-
-<span class="p">(</span><span class="o">*</span> <span class="n">merge</span> <span class="n">the</span> <span class="n">terms</span> <span class="n">of</span> <span class="nb">all</span> <span class="n">cross</span> <span class="n">products</span> <span class="n">together</span><span class="o">.</span>        <span class="o">*</span><span class="p">)</span>
-<span class="n">expression</span> <span class="o">=</span> <span class="n">cross</span> <span class="p">,</span> <span class="p">{</span> <span class="s2">&quot;+&quot;</span> <span class="p">,</span> <span class="n">cross</span> <span class="p">}</span> <span class="p">;</span>
-</pre></div>
-</div>
-</dd>
-<dt>grid (list of floats):</dt>
-<dd>A comma separated list of grid boundaries.  Can either be a
-single list, in which case it is used for both the horizontal
-and vertical boundaries. If different splitting is desired in
-the two directions, two lists should be supplied separated by
-<code class="docutils literal"><span class="pre">;</span></code>. The first list should contain the vertical (x) boundaries
-and the second list gives the horizontal (y) ones.</dd>
-<dt>initial_aperture (float):</dt>
-<dd>This aperture is used to derive an initial guess for the
-amplitudes of sources when fitting for a piecewise bicubic PSF
-model by doing aperture photometry assuming a perfectly flat
-PSF.</dd>
-<dt>subpixmap (2D numpy array):</dt>
-<dd>The sub-pixel map, for PSF fitting only.</dd>
-<dt>smoothing (float):</dt>
-<dd>How much smoothing penalty to impose when fitting the PSF.
-<code class="docutils literal"><span class="pre">None</span></code> for no smoothing. Value can be both positive and
-negative and will always result in smoothing (less for negative
-values).</dd>
-<dt>max_chi2 (float):</dt>
-<dd>The value of the reduced chi squared above which sources are
-excluded from the fit. This can indicate non-point sources or
-sources for which the location is wrong among ohter things.</dd>
-<dt>pixel_rejection_threshold (float):</dt>
-<dd>A number defining individual pixels to exclude from the PSF fit.
-Pixels with fitting residuals (normalized by the standard
-deviation) bigger than this value are excluded. If zero, no
-pixels are rejected.</dd>
-<dt>max_abs_amplitude_change (float):</dt>
-<dd>The absolute root of sum squares tolerance of the source
-amplitude changes in order to declare the piecewise bicubic PSF
-fitting converged.</dd>
-<dt>max_rel_amplitude_change (float):</dt>
-<dd>The relative root of sum squares tolerance of the source
-amplitude changes in order to declare the piecewise bicubic PSF
-fitting converged.</dd>
-<dt>min_convergence_rate (float):</dt>
-<dd>If the rate of convergence falls below this threshold,
-iterations are stopped. The rate is calculated as the fractional
-decrease in the difference between the amplitude change and the
-value when it would stop, as determined by the
-<code class="xref py py-attr docutils literal"><span class="pre">max_abs_amplitude_change</span></code> and
-<code class="xref py py-attr docutils literal"><span class="pre">max_rel_amplitude_change</span></code> attributes.</dd>
-<dt>max_iterations (int):</dt>
-<dd>No more than this number if iterations will be performed. If
-convergence is not achieved before then, the latest estimates
-are output and an exception is thrown. A negative value allows
-infinite iterations. A value of zero, along with an initial
-guess for the PSF causes only the amplitudes to be fit for PSF
-fitting photometry with a known PSF. It is an error to pass a
-value of zero for this option and not specify and initial guess
-for the PSF.</dd>
-<dt>gain (float):</dt>
-<dd>The gain in electrons per ADU to assume for the input images.</dd>
-<dt>cover_grid (bool):</dt>
-<dd>If this option is true, all pixels that at least partially
-overlap with the grid are assigned to the corresponding source.
-This option is ignored for sdk PSF models.</dd>
-<dt>src_min_signal_to_noise (float):</dt>
-<dd>How far above the background (in units of RMS) should pixels be
-to still be considered part of a source. Ignored if the
-piecewise bibucic PSF grid is used to select source pixels
-(cover-bicubic-grid option).</dd>
-<dt>src_max_aperture (float):</dt>
-<dd>If this option has a positive value, pixels are assigned to
-sources in circular apertures (the smallest such that all pixels
-that pass the signal to noise cut are still assigned to the
-source). If an aperture larger than this value is required, an
-exception is thrown.</dd>
-<dt>src_max_sat_frac (float):</dt>
-<dd>If more than this fraction of the pixels assigned to a source
-are saturated, the source is excluded from the fit.</dd>
-<dt>src_min_pix (int):</dt>
-<dd>The minimum number of pixels that must be assigned to a source
-in order to include the source is the PSF fit.</dd>
-<dt>src_max_pix (int):</dt>
-<dd>The maximum number of pixels that car be assigned to a source
-before excluding the source from the PSF fit.</dd>
-<dt>src_max_count (int):</dt>
-<dd>The maximum number of sources to include in the fit for the PSF
-shape. The rest of the sources get their amplitudes fit and are
-used to determine the overlaps. Sources are ranked according to
-the sum of (background excess)^2/(pixel variance+background
-variance) of their individual non-saturated pixels.</dd>
-<dt>bg_min_pix (int):</dt>
-<dd>The minimum number of pixels a background estimate must be based
-on in order to include the source in shape fitting.</dd>
-<dt>magnitude_1adu (float):</dt>
-<dd>The magnitude that corresponds to a flux of 1ADU.</dd>
-</dl>
-</dd></dl>
-
-<p class="rubric">Example</p>
-<p>Create and configure a PRF fitting object, allowing up to third order
-dependence on image position, on a grid which splits the area around the
-source in 16 squares of 2pix by 2pix size each and using an aperture
-with 5 pixel radius for the initial estimate of source amplitudes:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">superphot</span> <span class="k">import</span> <span class="n">FitStarShape</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">fitprf</span> <span class="o">=</span> <span class="n">FitStarShape</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;prf&#39;</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>                      <span class="n">shape_terms</span><span class="o">=</span><span class="s1">&#39;O3{x, y}&#39;</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>                      <span class="n">grid</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">4.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">],</span>
-<span class="gp">&gt;&gt;&gt; </span>                      <span class="n">initial_aperture</span><span class="o">=</span><span class="mf">5.0</span><span class="p">)</span>
-</pre></div>
-</div>
-<dl class="method">
-<dt id="superphot.fit_star_shape.FitStarShape.__del__">
-<code class="descname">__del__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/fit_star_shape.html#FitStarShape.__del__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.fit_star_shape.FitStarShape.__del__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Destroy the configuration object created in <a class="reference internal" href="#superphot.fit_star_shape.FitStarShape.__init__" title="superphot.fit_star_shape.FitStarShape.__init__"><code class="xref py py-meth docutils literal"><span class="pre">__init__()</span></code></a>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="superphot.fit_star_shape.FitStarShape.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>*</em>, <em>mode</em>, <em>shape_terms</em>, <em>grid</em>, <em>initial_aperture</em>, <em>**other_configuration</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/fit_star_shape.html#FitStarShape.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.fit_star_shape.FitStarShape.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set-up an object ready to perform PSF/PRF fitting.</p>
-<p>Args:</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">None</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="superphot.fit_star_shape.FitStarShape._format_config">
-<em class="property">static </em><code class="descname">_format_config</code><span class="sig-paren">(</span><em>param_value</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/fit_star_shape.html#FitStarShape._format_config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.fit_star_shape.FitStarShape._format_config" title="Permalink to this definition">¶</a></dt>
-<dd><p>Format config param for passing to SuperPhot PSF fitting lib.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="superphot.fit_star_shape.FitStarShape.configure">
-<code class="descname">configure</code><span class="sig-paren">(</span><em>**configuration</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/fit_star_shape.html#FitStarShape.configure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.fit_star_shape.FitStarShape.configure" title="Permalink to this definition">¶</a></dt>
-<dd><p>Modify the currently defined configuration.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>**configuration</strong> &#8211; See the keyword arguments of <a class="reference internal" href="#superphot.fit_star_shape.FitStarShape.__init__" title="superphot.fit_star_shape.FitStarShape.__init__"><code class="xref py py-meth docutils literal"><span class="pre">__init__()</span></code></a>.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">None</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="superphot.fit_star_shape.FitStarShape.fit">
-<code class="descname">fit</code><span class="sig-paren">(</span><em>image_sources</em>, <em>backgrounds</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/fit_star_shape.html#FitStarShape.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.fit_star_shape.FitStarShape.fit" title="Permalink to this definition">¶</a></dt>
-<dd><p>Fit for the shape of the sources in a collection of imeges.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>image_sources</strong> (<em>list of 4-tuples</em>) &#8211; <p>Each entry consists of:</p>
-<ol class="arabic">
-<li>The pixel values of the calibratred image</li>
-<li>The error estimates of the pixel values</li>
-<li>Mask flags of the pixel values.</li>
-<li>Sources to process, defining at least the following
-quantities:<blockquote>
-<div><ul>
-<li><strong>ID</strong> (string): some unique identifier for the source</li>
-<li><strong>x</strong> (float): The x coordinate of the source
-center in pixels</li>
-<li><strong>y</strong> (float): See <code class="docutils literal"><span class="pre">x</span></code></li>
-</ul>
-</div></blockquote>
-<p>May define additional quantities on which the PSF shape is
-allowed to depend. This can be either a numy record array
-with field names as keys or a dictionary with field names as
-keys and 1-D numpy arrays of identical lengths as values.</p>
-</li>
-</ol>
-</li>
-<li><strong>backgrounds</strong> &#8211; The measured backgrounds under the sources (instance
-of :class:BackgroundExtractor.</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Use <code class="xref py py-meth docutils literal"><span class="pre">get_last_fit_result()</span></code> to obtain the results.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.7)">None</a></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-</dd></dl>
-
-</div>
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="superphot-fit-star-shape-module">
+<h1>superphot.fit_star_shape module<a class="headerlink" href="#superphot-fit-star-shape-module" title="Permalink to this headline">¶</a></h1>
 </div>
 
 

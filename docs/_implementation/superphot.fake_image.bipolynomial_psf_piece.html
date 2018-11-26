@@ -82,10 +82,9 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../user_documentation/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python_interface/index.html">Python Interface Documentation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">Python Package Implementation</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="superphot.html">superphot package</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="superphot.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="superphot.html#subpackages">Subpackages</a><ul class="current">
 <li class="toctree-l4 current"><a class="reference internal" href="superphot.fake_image.html">superphot.fake_image package</a></li>
 </ul>
@@ -168,61 +167,27 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-superphot.fake_image.bipolynomial_psf_piece">
-<span id="superphot-fake-image-bipolynomial-psf-piece-module"></span><h1>superphot.fake_image.bipolynomial_psf_piece module<a class="headerlink" href="#module-superphot.fake_image.bipolynomial_psf_piece" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="class-inheritance-diagram">
-<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this headline">¶</a></h2>
-<img src="../_images/inheritance-4edc3f9d0243b697a7400e63eacf11ae97cd63b8.png" alt="Inheritance diagram of BipolynomialPSFPiece, PSFPiece" usemap="#inheritanced3021d0d53" class="inheritance"/>
-<map id="inheritanced3021d0d53" name="inheritanced3021d0d53">
-<area shape="rect" id="node1" title="Helper class that provides a standard way to create an ABC using" alt="" coords="197,5,273,31"/>
-<area shape="rect" id="node3" href="superphot.fake_image.psf_piece.html#superphot.fake_image.psf_piece.PSFPiece" target="_top" title="Declare a minimum interface for pieces of PiecewisePSF." alt="" coords="89,79,380,104"/>
-<area shape="rect" id="node2" href="#superphot.fake_image.bipolynomial_psf_piece.BipolynomialPSFPiece" target="_top" title="Class for PSF pieces over which the PSF is a bi&#45;polynomial function." alt="" coords="5,152,464,177"/>
-</map>
-<p>Define the BipolynomialPSFPiece class.</p>
-<dl class="class">
-<dt id="superphot.fake_image.bipolynomial_psf_piece.BipolynomialPSFPiece">
-<em class="property">class </em><code class="descclassname">superphot.fake_image.bipolynomial_psf_piece.</code><code class="descname">BipolynomialPSFPiece</code><span class="sig-paren">(</span><em>coefficients</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/fake_image/bipolynomial_psf_piece.html#BipolynomialPSFPiece"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.fake_image.bipolynomial_psf_piece.BipolynomialPSFPiece" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="superphot.fake_image.psf_piece.html#superphot.fake_image.psf_piece.PSFPiece" title="superphot.fake_image.psf_piece.PSFPiece"><code class="xref py py-class docutils literal"><span class="pre">superphot.fake_image.psf_piece.PSFPiece</span></code></a></p>
-<img src="../_images/inheritance-51f5ebbaa484be454af260403cc17779fa7fa780.png" alt="Inheritance diagram of superphot.fake_image.bipolynomial_psf_piece.BipolynomialPSFPiece" usemap="#inheritance5a6ec5f071" class="inheritance"/>
-<map id="inheritance5a6ec5f071" name="inheritance5a6ec5f071">
-<area shape="rect" id="node1" title="Helper class that provides a standard way to create an ABC using" alt="" coords="197,5,273,31"/>
-<area shape="rect" id="node3" href="superphot.fake_image.psf_piece.html#superphot.fake_image.psf_piece.PSFPiece" target="_top" title="Declare a minimum interface for pieces of PiecewisePSF." alt="" coords="89,79,380,104"/>
-<area shape="rect" id="node2" href="#superphot.fake_image.bipolynomial_psf_piece.BipolynomialPSFPiece" target="_top" title="Class for PSF pieces over which the PSF is a bi&#45;polynomial function." alt="" coords="5,152,464,177"/>
-</map>
-<p>Class for PSF pieces over which the PSF is a bi-polynomial function.</p>
-<dl class="method">
-<dt id="superphot.fake_image.bipolynomial_psf_piece.BipolynomialPSFPiece.__call__">
-<code class="descname">__call__</code><span class="sig-paren">(</span><em>x</em>, <em>y</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/fake_image/bipolynomial_psf_piece.html#BipolynomialPSFPiece.__call__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.fake_image.bipolynomial_psf_piece.BipolynomialPSFPiece.__call__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Evaluate the bi-cubic polynomial at the given position.</p>
-</dd></dl>
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
 
-<dl class="method">
-<dt id="superphot.fake_image.bipolynomial_psf_piece.BipolynomialPSFPiece.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>coefficients</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/fake_image/bipolynomial_psf_piece.html#BipolynomialPSFPiece.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.fake_image.bipolynomial_psf_piece.BipolynomialPSFPiece.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initialize a bi-cubic PSF piece with a set of coefficients.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>coefficients</strong> &#8211; The bi-cubic polynomial coefficients. Should be a
-two-index structure with the first index beige y power of the
-term and the second index the x-power.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">None</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
 
-<dl class="method">
-<dt id="superphot.fake_image.bipolynomial_psf_piece.BipolynomialPSFPiece.integrate">
-<code class="descname">integrate</code><span class="sig-paren">(</span><em>left</em>, <em>bottom</em>, <em>width</em>, <em>height</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/fake_image/bipolynomial_psf_piece.html#BipolynomialPSFPiece.integrate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.fake_image.bipolynomial_psf_piece.BipolynomialPSFPiece.integrate" title="Permalink to this definition">¶</a></dt>
-<dd><p>See documentation of PSFPiece.integrate.</p>
-</dd></dl>
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
 
-</dd></dl>
-
-</div>
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="superphot-fake-image-bipolynomial-psf-piece-module">
+<h1>superphot.fake_image.bipolynomial_psf_piece module<a class="headerlink" href="#superphot-fake-image-bipolynomial-psf-piece-module" title="Permalink to this headline">¶</a></h1>
 </div>
 
 

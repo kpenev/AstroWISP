@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>PSF/PRF Fitting &mdash; SuperPhot Python Interface  documentation</title>
+  <title>Python Interface Documentation &mdash; SuperPhot Python Interface  documentation</title>
   
 
   
@@ -30,8 +30,8 @@
   <link rel="stylesheet" href="../_static/unlimited_width.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="superphot" href="../_implementation/modules.html" />
-    <link rel="prev" title="Measuring Background" href="background.html" /> 
+    <link rel="next" title="Measuring Background" href="background.html" />
+    <link rel="prev" title="Welcome to SuperPhot’s documentation!" href="../index.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -82,13 +82,10 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">User Documentation</a><ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Python Interface Documentation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="background.html">Measuring Background</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">PSF/PRF Fitting</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#fitting-for-source-shapes">Fitting for Source Shapes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#psf-map-utilities">PSF Map utilities</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="fit_star_shape.html">PSF/PRF Fitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fitpsf_example.html">Example of PSF Fitting Using Mock Data</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../_implementation/modules.html">Python Package Implementation</a></li>
@@ -140,15 +137,13 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="index.html">User Documentation</a> &raquo;</li>
-        
-      <li>PSF/PRF Fitting</li>
+      <li>Python Interface Documentation</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/user_documentation/fit_star_shape.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/python_interface/index.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -161,30 +156,42 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="psf-prf-fitting">
-<h1>PSF/PRF Fitting<a class="headerlink" href="#psf-prf-fitting" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="fitting-for-source-shapes">
-<h2>Fitting for Source Shapes<a class="headerlink" href="#fitting-for-source-shapes" title="Permalink to this headline">¶</a></h2>
-<p>Fitting for the shapes of point sources (either their PSF or PRF) and an overall
-scaling constant is one of the methods of extracting photometry supported by
-SuperPhot. This is accomplished using the <a class="reference internal" href="../_implementation/superphot.fit_star_shape.html#module-superphot.fit_star_shape" title="superphot.fit_star_shape"><code class="xref py py-mod docutils literal"><span class="pre">superphot.fit_star_shape</span></code></a>
-module.  Currently only piecewise bi-cubic PSF/PRF models are supported, with
-the shape constrained to depend smoothly on image position and any other
-user-defined parameters, possibly accross multiple images simultaneously and the
-amplitudes (fluxs) of sources being independent of each other. Fitting is done
-by constructing an instance of <a class="reference internal" href="../_implementation/superphot.html#superphot.FitStarShape" title="superphot.FitStarShape"><code class="xref py py-class docutils literal"><span class="pre">superphot.FitStarShape</span></code></a> and calling it on
-a collection of frames to be fit simultaneously and a list of all the sources in
-each frame.  For details on how to specify fitting parameters and source and
-frame listts, see the documentation of <a class="reference internal" href="../_implementation/superphot.html#superphot.FitStarShape" title="superphot.FitStarShape"><code class="xref py py-class docutils literal"><span class="pre">superphot.FitStarShape</span></code></a>.</p>
-</div>
-<div class="section" id="psf-map-utilities">
-<h2>PSF Map utilities<a class="headerlink" href="#psf-map-utilities" title="Permalink to this headline">¶</a></h2>
-<p>Smooth dependence of PSF/PRF on parameters is enforced by modeling the PSF
-parameters as low order polynomials of user specified quantities. SuperPhot
-defines a language for specifying the dependence (see
-<code class="xref py py-attr docutils literal"><span class="pre">superphot.FitStarShape.shape_terms</span></code> for the definition of the language).
-The <a class="reference internal" href="../_implementation/superphot.html#superphot.SmoothDependence" title="superphot.SmoothDependence"><code class="xref py py-class docutils literal"><span class="pre">superphot.SmoothDependence</span></code></a> class offers tools for parsing the
-language, and generating the various terms involved in the dependence.</p>
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="python-interface-documentation">
+<h1>Python Interface Documentation<a class="headerlink" href="#python-interface-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="background.html">Measuring Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fit_star_shape.html">PSF/PRF Fitting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fit_star_shape.html#fitting-for-source-shapes">Fitting for Source Shapes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fit_star_shape.html#psf-map-utilities">PSF Map utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fitpsf_example.html">Example of PSF Fitting Using Mock Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fitpsf_example.html#Step-1:-Prepare-Mock-Input-Data-for-PSF-Fitting">Step 1: Prepare Mock Input Data for PSF Fitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fitpsf_example.html#Step-2:-Perform-the-PSF-Fitting">Step 2: Perform the PSF Fitting</a></li>
+</ul>
+</li>
+</ul>
 </div>
 </div>
 
@@ -196,10 +203,10 @@ language, and generating the various terms involved in the dependence.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../_implementation/modules.html" class="btn btn-neutral float-right" title="superphot" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="background.html" class="btn btn-neutral float-right" title="Measuring Background" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="background.html" class="btn btn-neutral" title="Measuring Background" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../index.html" class="btn btn-neutral" title="Welcome to SuperPhot’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

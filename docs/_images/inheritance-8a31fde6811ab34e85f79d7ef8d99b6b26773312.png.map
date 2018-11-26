@@ -1,5 +1,0 @@
-<map id="inheritance131314dfe9" name="inheritance131314dfe9">
-<area shape="rect" id="node1" href="#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF" target="_top" title="Make sure the PiecewiseBicubicPSF class functions as expected." alt="" coords="5,152,392,177"/>
-<area shape="rect" id="node2" href="tests.utilities.html#tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="101,79,296,104"/>
-<area shape="rect" id="node3" title="A class whose instances are single test cases." alt="" coords="115,5,282,31"/>
-</map>

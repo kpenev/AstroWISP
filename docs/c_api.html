@@ -82,7 +82,7 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="user_documentation/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_interface/index.html">Python Interface Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_implementation/modules.html">Python Package Implementation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cpp_api.html">C++ API</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">C API</a><ul>
@@ -158,7 +158,26 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="c-api">
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="c-api">
 <h1>C API<a class="headerlink" href="#c-api" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="fitpsf">
 <h2>FitPSF<a class="headerlink" href="#fitpsf" title="Permalink to this headline">¶</a></h2>
@@ -167,13 +186,15 @@
 <p class="breathe-sectiondef-title rubric">Functions</p>
 <dl class="function">
 <dt id="_CPPv227create_psffit_configurationv">
-<span id="create_psffit_configuration"></span><span class="target" id="FitPSF_2CInterface_8h_1ae1f79295fdaae971f6b0348a66184137"></span>FittingConfiguration *<code class="descname">create_psffit_configuration</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv227create_psffit_configurationv" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="FitPSF_2CInterface_8h_1ae1f79295fdaae971f6b0348a66184137"></span>FittingConfiguration *<code class="descname">create_psffit_configuration</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv227create_psffit_configurationv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Create an object for holding the configuration for PSF fitting. </p>
+<p>Must be initialized by updated_psffit_configuration() before use.</p>
+<p>Must be destroyed by destroy_psffit_configuration when no longer needed to avoid a memory leak. </p>
 </dd></dl>
 
 <dl class="function">
 <dt id="_CPPv228destroy_psffit_configurationP20FittingConfiguration">
-<span id="destroy_psffit_configuration__FittingConfigurationP"></span><span class="target" id="FitPSF_2CInterface_8h_1a06e4036e8f672394e9ea8689feaaf317"></span>void <code class="descname">destroy_psffit_configuration</code><span class="sig-paren">(</span>FittingConfiguration *<em>configuration</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv228destroy_psffit_configurationP20FittingConfiguration" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="FitPSF_2CInterface_8h_1a06e4036e8f672394e9ea8689feaaf317"></span>void <code class="descname">destroy_psffit_configuration</code><span class="sig-paren">(</span>FittingConfiguration *<em>configuration</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv228destroy_psffit_configurationP20FittingConfiguration" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Destroy a configuration previously created by <a class="reference internal" href="#FitPSF_2CInterface_8h_1ae1f79295fdaae971f6b0348a66184137"><span class="std std-ref">create_psffit_configuration()</span></a> </p>
 <p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>
@@ -187,7 +208,7 @@
 
 <dl class="function">
 <dt id="_CPPv227update_psffit_configurationbP20FittingConfigurationz">
-<span id="update_psffit_configuration__b.FittingConfigurationP.z"></span><span class="target" id="FitPSF_2CInterface_8h_1a68add1e8f40d7e251375a2daf92ce1f1"></span>void <code class="descname">update_psffit_configuration</code><span class="sig-paren">(</span>bool <em>prffit</em>, FittingConfiguration *<em>target_configuration</em>, ...<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv227update_psffit_configurationbP20FittingConfigurationz" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="FitPSF_2CInterface_8h_1a68add1e8f40d7e251375a2daf92ce1f1"></span>void <code class="descname">update_psffit_configuration</code><span class="sig-paren">(</span>bool <em>prffit</em>, FittingConfiguration *<em>target_configuration</em>, ...<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv227update_psffit_configurationbP20FittingConfigurationz" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Update the configuration for PSF fitting. </p>
 <p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>
@@ -202,7 +223,7 @@
 
 <dl class="function">
 <dt id="_CPPv221piecewise_bicubic_fitPPdPPdPPcmmmPPcPPPcPPdPmmPP24BackgroundMeasureAnnulusP20FittingConfigurationPdmmP12H5IODataTree">
-<span id="piecewise_bicubic_fit__doublePP.doublePP.cPP.unsigned-l.unsigned-l.unsigned-l.cPP.cPPP.doublePP.unsigned-lP.unsigned-l.BackgroundMeasureAnnulusPP.FittingConfigurationP.doubleP.unsigned-l.unsigned-l.H5IODataTreeP"></span><span class="target" id="FitPSF_2CInterface_8h_1aba59008ef4f5ad80151647deec68275b"></span>bool <code class="descname">piecewise_bicubic_fit</code><span class="sig-paren">(</span>double **<em>pixel_values</em>, double **<em>pixel_errors</em>, char **<em>pixel_masks</em>, unsigned long <em>number_images</em>, unsigned long <em>image_x_resolution</em>, unsigned long <em>image_y_resolution</em>, char **<em>column_names</em>, char ***<em>source_ids</em>, double **<em>column_data</em>, unsigned long *<em>number_sources</em>, unsigned long <em>number_columns</em>, BackgroundMeasureAnnulus **<em>backgrounds</em>, FittingConfiguration *<em>configuration</em>, double *<em>subpix_sensitivities</em>, unsigned long <em>subpix_x_resolution</em>, unsigned long <em>subpix_y_resolution</em>, H5IODataTree *<em>output_data_tree</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv221piecewise_bicubic_fitPPdPPdPPcmmmPPcPPPcPPdPmmPP24BackgroundMeasureAnnulusP20FittingConfigurationPdmmP12H5IODataTree" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="FitPSF_2CInterface_8h_1aba59008ef4f5ad80151647deec68275b"></span>bool <code class="descname">piecewise_bicubic_fit</code><span class="sig-paren">(</span>double **<em>pixel_values</em>, double **<em>pixel_errors</em>, char **<em>pixel_masks</em>, unsigned long <em>number_images</em>, unsigned long <em>image_x_resolution</em>, unsigned long <em>image_y_resolution</em>, char **<em>column_names</em>, char ***<em>source_ids</em>, double **<em>column_data</em>, unsigned long *<em>number_sources</em>, unsigned long <em>number_columns</em>, BackgroundMeasureAnnulus **<em>backgrounds</em>, FittingConfiguration *<em>configuration</em>, double *<em>subpix_sensitivities</em>, unsigned long <em>subpix_x_resolution</em>, unsigned long <em>subpix_y_resolution</em>, H5IODataTree *<em>output_data_tree</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv221piecewise_bicubic_fitPPdPPdPPcmmmPPcPPPcPPdPmmPP24BackgroundMeasureAnnulusP20FittingConfigurationPdmmP12H5IODataTree" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Fit a smoothly varying piecewise bicubic PSF model. </p>
 <p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>
@@ -239,7 +260,7 @@
 <p class="breathe-sectiondef-title rubric">Functions</p>
 <dl class="function">
 <dt id="_CPPv227create_background_extractordddPK9CoreImaged">
-<span id="create_background_extractor__double.double.double.CoreImageCP.double"></span><span class="target" id="Background_2CInterface_8h_1a41563c302312b2b9c12e4f1a56d1aa5b"></span>BackgroundMeasureAnnulus *<code class="descname">create_background_extractor</code><span class="sig-paren">(</span>double <em>inner_radius</em>, double <em>outer_radius</em>, double <em>exclude_aperture</em>, <em class="property">const</em> CoreImage *<em>image</em>, double <em>error_confidence</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv227create_background_extractordddPK9CoreImaged" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="Background_2CInterface_8h_1a41563c302312b2b9c12e4f1a56d1aa5b"></span>BackgroundMeasureAnnulus *<code class="descname">create_background_extractor</code><span class="sig-paren">(</span>double <em>inner_radius</em>, double <em>outer_radius</em>, double <em>exclude_aperture</em>, <em class="property">const</em> CoreImage *<em>image</em>, double <em>error_confidence</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv227create_background_extractordddPK9CoreImaged" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Create an object for measuring the background in an annulus around each source. </p>
 <p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>
@@ -262,7 +283,7 @@
 
 <dl class="function">
 <dt id="_CPPv228destroy_background_extractorP24BackgroundMeasureAnnulus">
-<span id="destroy_background_extractor__BackgroundMeasureAnnulusP"></span><span class="target" id="Background_2CInterface_8h_1a9677f5b44da96dad70d2a7825f55cabb"></span>void <code class="descname">destroy_background_extractor</code><span class="sig-paren">(</span>BackgroundMeasureAnnulus *<em>extractor</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv228destroy_background_extractorP24BackgroundMeasureAnnulus" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="Background_2CInterface_8h_1a9677f5b44da96dad70d2a7825f55cabb"></span>void <code class="descname">destroy_background_extractor</code><span class="sig-paren">(</span>BackgroundMeasureAnnulus *<em>extractor</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv228destroy_background_extractorP24BackgroundMeasureAnnulus" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Destroy a previously created background extractor. </p>
 <p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>
@@ -276,7 +297,7 @@
 
 <dl class="function">
 <dt id="_CPPv234add_source_to_background_extractorP24BackgroundMeasureAnnulusdd">
-<span id="add_source_to_background_extractor__BackgroundMeasureAnnulusP.double.double"></span><span class="target" id="Background_2CInterface_8h_1a8daac26d63d887ea980b5f3b60d8f64a"></span>void <code class="descname">add_source_to_background_extractor</code><span class="sig-paren">(</span>BackgroundMeasureAnnulus *<em>extractor</em>, double <em>x</em>, double <em>y</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv234add_source_to_background_extractorP24BackgroundMeasureAnnulusdd" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="Background_2CInterface_8h_1a8daac26d63d887ea980b5f3b60d8f64a"></span>void <code class="descname">add_source_to_background_extractor</code><span class="sig-paren">(</span>BackgroundMeasureAnnulus *<em>extractor</em>, double <em>x</em>, double <em>y</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv234add_source_to_background_extractorP24BackgroundMeasureAnnulusdd" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Register another source around which to exclude pixels from background estimation. </p>
 <p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>
@@ -292,7 +313,7 @@
 
 <dl class="function">
 <dt id="_CPPv239add_source_list_to_background_extractorP24BackgroundMeasureAnnulusPdPd6size_t">
-<span id="add_source_list_to_background_extractor__BackgroundMeasureAnnulusP.doubleP.doubleP.s"></span><span class="target" id="Background_2CInterface_8h_1ae0ac670c459a49f2d9060ef21381030f"></span>void <code class="descname">add_source_list_to_background_extractor</code><span class="sig-paren">(</span>BackgroundMeasureAnnulus *<em>extractor</em>, double *<em>x</em>, double *<em>y</em>, size_t <em>num_sources</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv239add_source_list_to_background_extractorP24BackgroundMeasureAnnulusPdPd6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="Background_2CInterface_8h_1ae0ac670c459a49f2d9060ef21381030f"></span>void <code class="descname">add_source_list_to_background_extractor</code><span class="sig-paren">(</span>BackgroundMeasureAnnulus *<em>extractor</em>, double *<em>x</em>, double *<em>y</em>, size_t <em>num_sources</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv239add_source_list_to_background_extractorP24BackgroundMeasureAnnulusPdPd6size_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Add a list of sources to the background. </p>
 <p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>
@@ -309,7 +330,7 @@
 
 <dl class="function">
 <dt id="_CPPv218measure_backgroundP24BackgroundMeasureAnnulusddPdPdPj">
-<span id="measure_background__BackgroundMeasureAnnulusP.double.double.doubleP.doubleP.unsignedP"></span><span class="target" id="Background_2CInterface_8h_1ace2552f773cbe171f9ba3332daf9908e"></span>void <code class="descname">measure_background</code><span class="sig-paren">(</span>BackgroundMeasureAnnulus *<em>extractor</em>, double <em>x</em>, double <em>y</em>, double *<em>value</em>, double *<em>error</em>, unsigned *<em>pixels</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv218measure_backgroundP24BackgroundMeasureAnnulusddPdPdPj" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="Background_2CInterface_8h_1ace2552f773cbe171f9ba3332daf9908e"></span>void <code class="descname">measure_background</code><span class="sig-paren">(</span>BackgroundMeasureAnnulus *<em>extractor</em>, double <em>x</em>, double <em>y</em>, double *<em>value</em>, double *<em>error</em>, unsigned *<em>pixels</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv218measure_backgroundP24BackgroundMeasureAnnulusddPdPdPj" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Estimate the background at a specified position. </p>
 <p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>
@@ -328,7 +349,7 @@
 
 <dl class="function">
 <dt id="_CPPv228restart_background_iterationP24BackgroundMeasureAnnulus">
-<span id="restart_background_iteration__BackgroundMeasureAnnulusP"></span><span class="target" id="Background_2CInterface_8h_1a0dbafc731e43b42a8f68f902e01e90c7"></span>void <code class="descname">restart_background_iteration</code><span class="sig-paren">(</span>BackgroundMeasureAnnulus *<em>extractor</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv228restart_background_iterationP24BackgroundMeasureAnnulus" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="Background_2CInterface_8h_1a0dbafc731e43b42a8f68f902e01e90c7"></span>void <code class="descname">restart_background_iteration</code><span class="sig-paren">(</span>BackgroundMeasureAnnulus *<em>extractor</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv228restart_background_iterationP24BackgroundMeasureAnnulus" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>(Re)start iterating over the sources currently registered with an extractor measuring each one&#8217;s background. </p>
 <p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>
@@ -342,7 +363,7 @@
 
 <dl class="function">
 <dt id="_CPPv219get_next_backgroundP24BackgroundMeasureAnnulusPdPdPj">
-<span id="get_next_background__BackgroundMeasureAnnulusP.doubleP.doubleP.unsignedP"></span><span class="target" id="Background_2CInterface_8h_1a458c979d3aeeced5638b260ce688f085"></span>bool <code class="descname">get_next_background</code><span class="sig-paren">(</span>BackgroundMeasureAnnulus *<em>extractor</em>, double *<em>value</em>, double *<em>error</em>, unsigned *<em>pixels</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv219get_next_backgroundP24BackgroundMeasureAnnulusPdPdPj" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="Background_2CInterface_8h_1a458c979d3aeeced5638b260ce688f085"></span>bool <code class="descname">get_next_background</code><span class="sig-paren">(</span>BackgroundMeasureAnnulus *<em>extractor</em>, double *<em>value</em>, double *<em>error</em>, unsigned *<em>pixels</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv219get_next_backgroundP24BackgroundMeasureAnnulusPdPdPj" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Get the background under the current source and advance to the next source. </p>
 <p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>
@@ -364,7 +385,7 @@
 
 <dl class="function">
 <dt id="_CPPv219get_all_backgroundsP24BackgroundMeasureAnnulusPdPdPj">
-<span id="get_all_backgrounds__BackgroundMeasureAnnulusP.doubleP.doubleP.unsignedP"></span><span class="target" id="Background_2CInterface_8h_1a31cf1eb72bef0fc9aaf0ff856ea67557"></span>void <code class="descname">get_all_backgrounds</code><span class="sig-paren">(</span>BackgroundMeasureAnnulus *<em>extractor</em>, double *<em>values</em>, double *<em>errors</em>, unsigned *<em>pixels</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv219get_all_backgroundsP24BackgroundMeasureAnnulusPdPdPj" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="Background_2CInterface_8h_1a31cf1eb72bef0fc9aaf0ff856ea67557"></span>void <code class="descname">get_all_backgrounds</code><span class="sig-paren">(</span>BackgroundMeasureAnnulus *<em>extractor</em>, double *<em>values</em>, double *<em>errors</em>, unsigned *<em>pixels</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv219get_all_backgroundsP24BackgroundMeasureAnnulusPdPdPj" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Get the backgrounds under all currently added sources. </p>
 <p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>
@@ -388,7 +409,7 @@
 <p class="breathe-sectiondef-title rubric">Functions</p>
 <dl class="function">
 <dt id="_CPPv222expand_term_expressionPcPPPcPj">
-<span id="expand_term_expression__cP.cPPP.unsignedP"></span><span class="target" id="PSF_2CInterface_8h_1a582297026e7afb53563b499cd73a5faf"></span>void <code class="descname">expand_term_expression</code><span class="sig-paren">(</span>char *<em>expansion_term_expression</em>, char ***<em>term_list</em>, unsigned *<em>num_terms</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv222expand_term_expressionPcPPPcPj" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="PSF_2CInterface_8h_1a582297026e7afb53563b499cd73a5faf"></span>void <code class="descname">expand_term_expression</code><span class="sig-paren">(</span>char *<em>expansion_term_expression</em>, char ***<em>term_list</em>, unsigned *<em>num_terms</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv222expand_term_expressionPcPPPcPj" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Expand the given expression into a list of expressions, each defining a single PSF expansion term. </p>
 <p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>
@@ -404,7 +425,7 @@
 
 <dl class="function">
 <dt id="_CPPv214free_term_listPPcj">
-<span id="free_term_list__cPP.unsigned"></span><span class="target" id="PSF_2CInterface_8h_1ab3c3d921fedfa392ab38362307ba3142"></span>void <code class="descname">free_term_list</code><span class="sig-paren">(</span>char **<em>term_list</em>, unsigned <em>num_terms</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv214free_term_listPPcj" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="PSF_2CInterface_8h_1ab3c3d921fedfa392ab38362307ba3142"></span>void <code class="descname">free_term_list</code><span class="sig-paren">(</span>char **<em>term_list</em>, unsigned <em>num_terms</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv214free_term_listPPcj" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Free the memory allocated by a previous call to expand_term_expression. </p>
 <p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>
@@ -419,7 +440,7 @@
 
 <dl class="function">
 <dt id="_CPPv214evaluate_termsPPcjPPcPPdjjPd">
-<span id="evaluate_terms__cPP.unsigned.cPP.doublePP.unsigned.unsigned.doubleP"></span><span class="target" id="PSF_2CInterface_8h_1a48da8f72a7ffeecee3870b7ba381f323"></span>void <code class="descname">evaluate_terms</code><span class="sig-paren">(</span>char **<em>term_list</em>, unsigned <em>num_terms</em>, char **<em>variable_names</em>, double **<em>variable_values</em>, unsigned <em>num_variables</em>, unsigned <em>num_sources</em>, double *<em>result</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv214evaluate_termsPPcjPPcPPdjjPd" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="PSF_2CInterface_8h_1a48da8f72a7ffeecee3870b7ba381f323"></span>void <code class="descname">evaluate_terms</code><span class="sig-paren">(</span>char **<em>term_list</em>, unsigned <em>num_terms</em>, char **<em>variable_names</em>, double **<em>variable_values</em>, unsigned <em>num_variables</em>, unsigned <em>num_sources</em>, double *<em>result</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv214evaluate_termsPPcjPPcPPdjjPd" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Evaluate the given terms for the given list of sources. </p>
 <p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>
@@ -446,7 +467,7 @@
 <p class="breathe-sectiondef-title rubric">Functions</p>
 <dl class="function">
 <dt id="_CPPv214parse_hat_maskPKcllPc">
-<span id="parse_hat_mask__cCP.l.l.cP"></span><span class="target" id="IO_2CInterface_8h_1aeecd6838b4f40b5e82d63aacabda341b"></span>void <code class="descname">parse_hat_mask</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>mask_string</em>, long <em>x_resolution</em>, long <em>y_resolution</em>, char *<em>mask</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv214parse_hat_maskPKcllPc" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="IO_2CInterface_8h_1aeecd6838b4f40b5e82d63aacabda341b"></span>void <code class="descname">parse_hat_mask</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>mask_string</em>, long <em>x_resolution</em>, long <em>y_resolution</em>, char *<em>mask</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv214parse_hat_maskPKcllPc" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>C-binding alias for IO::parse_hat_mask. </p>
 <p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>
@@ -465,7 +486,7 @@
 
 <dl class="function">
 <dt id="_CPPv218create_result_treePvPc">
-<span id="create_result_tree__voidP.cP"></span><span class="target" id="IO_2CInterface_8h_1af40b9ac4b61cc64d382cabc2afe12e04"></span>H5IODataTree *<code class="descname">create_result_tree</code><span class="sig-paren">(</span>void *<em>configuration</em>, char *<em>version_info</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv218create_result_treePvPc" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="IO_2CInterface_8h_1af40b9ac4b61cc64d382cabc2afe12e04"></span>H5IODataTree *<code class="descname">create_result_tree</code><span class="sig-paren">(</span>void *<em>configuration</em>, char *<em>version_info</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv218create_result_treePvPc" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Create a tree to hold the results of SuperPhot processing. </p>
 <p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>
@@ -480,7 +501,7 @@
 
 <dl class="function">
 <dt id="_CPPv219destroy_result_treeP12H5IODataTree">
-<span id="destroy_result_tree__H5IODataTreeP"></span><span class="target" id="IO_2CInterface_8h_1add3644ac7c7a90c87cc708dbd00e1dc9"></span>void <code class="descname">destroy_result_tree</code><span class="sig-paren">(</span>H5IODataTree *<em>tree</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv219destroy_result_treeP12H5IODataTree" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="IO_2CInterface_8h_1add3644ac7c7a90c87cc708dbd00e1dc9"></span>void <code class="descname">destroy_result_tree</code><span class="sig-paren">(</span>H5IODataTree *<em>tree</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv219destroy_result_treeP12H5IODataTree" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Free the memory held by a result tree previously created by <a class="reference internal" href="#IO_2CInterface_8h_1af40b9ac4b61cc64d382cabc2afe12e04"><span class="std std-ref">create_result_tree()</span></a> </p>
 <p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>
@@ -494,7 +515,7 @@
 
 <dl class="function">
 <dt id="_CPPv217query_result_treeP12H5IODataTreePKcPKcPv">
-<span id="query_result_tree__H5IODataTreeP.cCP.cCP.voidP"></span><span class="target" id="IO_2CInterface_8h_1affa433365e41d0dc704dcf1fffa27b47"></span>bool <code class="descname">query_result_tree</code><span class="sig-paren">(</span>H5IODataTree *<em>tree</em>, <em class="property">const</em> char *<em>quantity</em>, <em class="property">const</em> char *<em>format</em>, void *<em>result</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv217query_result_treeP12H5IODataTreePKcPKcPv" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="IO_2CInterface_8h_1affa433365e41d0dc704dcf1fffa27b47"></span>bool <code class="descname">query_result_tree</code><span class="sig-paren">(</span>H5IODataTree *<em>tree</em>, <em class="property">const</em> char *<em>quantity</em>, <em class="property">const</em> char *<em>format</em>, void *<em>result</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv217query_result_treeP12H5IODataTreePKcPKcPv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Query the result tree for a value (NULL if value is undefined). </p>
 <p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>
@@ -512,7 +533,7 @@
 
 <dl class="function">
 <dt id="_CPPv221get_psf_map_variablesP12H5IODataTreejPd">
-<span id="get_psf_map_variables__H5IODataTreeP.unsigned.doubleP"></span><span class="target" id="IO_2CInterface_8h_1acf09b727445cec7020dfb696adc85766"></span>bool <code class="descname">get_psf_map_variables</code><span class="sig-paren">(</span>H5IODataTree *<em>output_data_tree</em>, unsigned <em>image_index</em>, double *<em>column_data</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv221get_psf_map_variablesP12H5IODataTreejPd" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="IO_2CInterface_8h_1acf09b727445cec7020dfb696adc85766"></span>bool <code class="descname">get_psf_map_variables</code><span class="sig-paren">(</span>H5IODataTree *<em>output_data_tree</em>, unsigned <em>image_index</em>, double *<em>column_data</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv221get_psf_map_variablesP12H5IODataTreejPd" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Get the PSF map variables for a given image index from the given result tree. </p>
 <p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>
@@ -532,79 +553,79 @@
 <p class="breathe-sectiondef-title rubric">Variables</p>
 <dl class="member">
 <dt id="_CPPv27MASK_OK">
-<span id="MASK_OK__cC"></span><span class="target" id="IO_2CInterface_8h_1a14c0f248e71bbb781656070d2bba98ad"></span><em class="property">const</em> char <code class="descname">MASK_OK</code><a class="headerlink" href="#_CPPv27MASK_OK" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="IO_2CInterface_8h_1a14c0f248e71bbb781656070d2bba98ad"></span><em class="property">const</em> char <code class="descname">MASK_OK</code><a class="headerlink" href="#_CPPv27MASK_OK" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>See Core::MASK_OK. </p>
 </dd></dl>
 
 <dl class="member">
 <dt id="_CPPv210MASK_CLEAR">
-<span id="MASK_CLEAR__cC"></span><span class="target" id="IO_2CInterface_8h_1ad66cd75dfe1e7e142ebe1b25dfc03de5"></span><em class="property">const</em> char <code class="descname">MASK_CLEAR</code><a class="headerlink" href="#_CPPv210MASK_CLEAR" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="IO_2CInterface_8h_1ad66cd75dfe1e7e142ebe1b25dfc03de5"></span><em class="property">const</em> char <code class="descname">MASK_CLEAR</code><a class="headerlink" href="#_CPPv210MASK_CLEAR" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>See Core::MASK_CLEAR. </p>
 </dd></dl>
 
 <dl class="member">
 <dt id="_CPPv210MASK_FAULT">
-<span id="MASK_FAULT__cC"></span><span class="target" id="IO_2CInterface_8h_1a723d3acde94006c66690f1ad61b15300"></span><em class="property">const</em> char <code class="descname">MASK_FAULT</code><a class="headerlink" href="#_CPPv210MASK_FAULT" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="IO_2CInterface_8h_1a723d3acde94006c66690f1ad61b15300"></span><em class="property">const</em> char <code class="descname">MASK_FAULT</code><a class="headerlink" href="#_CPPv210MASK_FAULT" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>See Core::MASK_FAULT. </p>
 </dd></dl>
 
 <dl class="member">
 <dt id="_CPPv28MASK_HOT">
-<span id="MASK_HOT__cC"></span><span class="target" id="IO_2CInterface_8h_1a26f3f469a9dfdce0e98eeb78cfa8ad3c"></span><em class="property">const</em> char <code class="descname">MASK_HOT</code><a class="headerlink" href="#_CPPv28MASK_HOT" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="IO_2CInterface_8h_1a26f3f469a9dfdce0e98eeb78cfa8ad3c"></span><em class="property">const</em> char <code class="descname">MASK_HOT</code><a class="headerlink" href="#_CPPv28MASK_HOT" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>See Core::MASK_HOT. </p>
 </dd></dl>
 
 <dl class="member">
 <dt id="_CPPv211MASK_COSMIC">
-<span id="MASK_COSMIC__cC"></span><span class="target" id="IO_2CInterface_8h_1a21bfdf0e2dfbaf3b54d55b6d7753ff3b"></span><em class="property">const</em> char <code class="descname">MASK_COSMIC</code><a class="headerlink" href="#_CPPv211MASK_COSMIC" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="IO_2CInterface_8h_1a21bfdf0e2dfbaf3b54d55b6d7753ff3b"></span><em class="property">const</em> char <code class="descname">MASK_COSMIC</code><a class="headerlink" href="#_CPPv211MASK_COSMIC" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>See Core::MASK_COSMIC. </p>
 </dd></dl>
 
 <dl class="member">
 <dt id="_CPPv210MASK_OUTER">
-<span id="MASK_OUTER__cC"></span><span class="target" id="IO_2CInterface_8h_1a0e30822c37ab168dea7232a6811bafea"></span><em class="property">const</em> char <code class="descname">MASK_OUTER</code><a class="headerlink" href="#_CPPv210MASK_OUTER" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="IO_2CInterface_8h_1a0e30822c37ab168dea7232a6811bafea"></span><em class="property">const</em> char <code class="descname">MASK_OUTER</code><a class="headerlink" href="#_CPPv210MASK_OUTER" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>See Core::MASK_OUTER. </p>
 </dd></dl>
 
 <dl class="member">
 <dt id="_CPPv218MASK_OVERSATURATED">
-<span id="MASK_OVERSATURATED__cC"></span><span class="target" id="IO_2CInterface_8h_1a93cb32ad0325e55f03e0aa0c4c7a2697"></span><em class="property">const</em> char <code class="descname">MASK_OVERSATURATED</code><a class="headerlink" href="#_CPPv218MASK_OVERSATURATED" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="IO_2CInterface_8h_1a93cb32ad0325e55f03e0aa0c4c7a2697"></span><em class="property">const</em> char <code class="descname">MASK_OVERSATURATED</code><a class="headerlink" href="#_CPPv218MASK_OVERSATURATED" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>See Core::MASK_OVERSATURATED. </p>
 </dd></dl>
 
 <dl class="member">
 <dt id="_CPPv211MASK_LEAKED">
-<span id="MASK_LEAKED__cC"></span><span class="target" id="IO_2CInterface_8h_1a433b9ead55a8db78ae2b94248cbf2b51"></span><em class="property">const</em> char <code class="descname">MASK_LEAKED</code><a class="headerlink" href="#_CPPv211MASK_LEAKED" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="IO_2CInterface_8h_1a433b9ead55a8db78ae2b94248cbf2b51"></span><em class="property">const</em> char <code class="descname">MASK_LEAKED</code><a class="headerlink" href="#_CPPv211MASK_LEAKED" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>See Core::MASK_LEAKED. </p>
 </dd></dl>
 
 <dl class="member">
 <dt id="_CPPv214MASK_SATURATED">
-<span id="MASK_SATURATED__cC"></span><span class="target" id="IO_2CInterface_8h_1a055e978026b98debf9f84b6ed8f5abcc"></span><em class="property">const</em> char <code class="descname">MASK_SATURATED</code><a class="headerlink" href="#_CPPv214MASK_SATURATED" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="IO_2CInterface_8h_1a055e978026b98debf9f84b6ed8f5abcc"></span><em class="property">const</em> char <code class="descname">MASK_SATURATED</code><a class="headerlink" href="#_CPPv214MASK_SATURATED" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>See Core::MASK_SATURATED. </p>
 </dd></dl>
 
 <dl class="member">
 <dt id="_CPPv217MASK_INTERPOLATED">
-<span id="MASK_INTERPOLATED__cC"></span><span class="target" id="IO_2CInterface_8h_1aa7b364671556215dcc64113fc028b016"></span><em class="property">const</em> char <code class="descname">MASK_INTERPOLATED</code><a class="headerlink" href="#_CPPv217MASK_INTERPOLATED" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="IO_2CInterface_8h_1aa7b364671556215dcc64113fc028b016"></span><em class="property">const</em> char <code class="descname">MASK_INTERPOLATED</code><a class="headerlink" href="#_CPPv217MASK_INTERPOLATED" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>See Core::MASK_INTERPOLATED. </p>
 </dd></dl>
 
 <dl class="member">
 <dt id="_CPPv28MASK_BAD">
-<span id="MASK_BAD__cC"></span><span class="target" id="IO_2CInterface_8h_1a246b9d10513e441bd7554292da690ef6"></span><em class="property">const</em> char <code class="descname">MASK_BAD</code><a class="headerlink" href="#_CPPv28MASK_BAD" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="IO_2CInterface_8h_1a246b9d10513e441bd7554292da690ef6"></span><em class="property">const</em> char <code class="descname">MASK_BAD</code><a class="headerlink" href="#_CPPv28MASK_BAD" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>See Core::MASK_BAD. </p>
 </dd></dl>
 
 <dl class="member">
 <dt id="_CPPv28MASK_ALL">
-<span id="MASK_ALL__cC"></span><span class="target" id="IO_2CInterface_8h_1a899ec8ae1bd8ba7e54893d298af2b393"></span><em class="property">const</em> char <code class="descname">MASK_ALL</code><a class="headerlink" href="#_CPPv28MASK_ALL" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="IO_2CInterface_8h_1a899ec8ae1bd8ba7e54893d298af2b393"></span><em class="property">const</em> char <code class="descname">MASK_ALL</code><a class="headerlink" href="#_CPPv28MASK_ALL" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>See Core::MASK_ALL. </p>
 </dd></dl>
 
 <dl class="member">
 <dt id="_CPPv28MASK_NAN">
-<span id="MASK_NAN__cC"></span><span class="target" id="IO_2CInterface_8h_1a784ae5ef522f037793b8562b2edaeb7a"></span><em class="property">const</em> char <code class="descname">MASK_NAN</code><a class="headerlink" href="#_CPPv28MASK_NAN" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="IO_2CInterface_8h_1a784ae5ef522f037793b8562b2edaeb7a"></span><em class="property">const</em> char <code class="descname">MASK_NAN</code><a class="headerlink" href="#_CPPv28MASK_NAN" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>See Core::MASK_NAN. </p>
 </dd></dl>
 
@@ -617,7 +638,7 @@
 <p class="breathe-sectiondef-title rubric">Functions</p>
 <dl class="function">
 <dt id="_CPPv217create_core_imagemmPdPdPcb">
-<span id="create_core_image__unsigned-l.unsigned-l.doubleP.doubleP.cP.b"></span><span class="target" id="Core_2CInterface_8h_1af4c72e25c4b68a516a7d1fefca6eb265"></span>CoreImage *<code class="descname">create_core_image</code><span class="sig-paren">(</span>unsigned long <em>x_resolution</em>, unsigned long <em>y_resolution</em>, double *<em>values</em>, double *<em>errors</em>, char *<em>mask</em>, bool <em>wrap</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv217create_core_imagemmPdPdPcb" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="Core_2CInterface_8h_1af4c72e25c4b68a516a7d1fefca6eb265"></span>CoreImage *<code class="descname">create_core_image</code><span class="sig-paren">(</span>unsigned long <em>x_resolution</em>, unsigned long <em>y_resolution</em>, double *<em>values</em>, double *<em>errors</em>, char *<em>mask</em>, bool <em>wrap</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv217create_core_imagemmPdPdPcb" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Create and fill image for processing by SuperPhot&#8217;s tools. </p>
 <p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>
@@ -636,7 +657,7 @@
 
 <dl class="function">
 <dt id="_CPPv218destroy_core_imageP9CoreImage">
-<span id="destroy_core_image__CoreImageP"></span><span class="target" id="Core_2CInterface_8h_1afead5c4039ea86727c5393ba2fb41ca1"></span>void <code class="descname">destroy_core_image</code><span class="sig-paren">(</span>CoreImage *<em>image</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv218destroy_core_imageP9CoreImage" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="Core_2CInterface_8h_1afead5c4039ea86727c5393ba2fb41ca1"></span>void <code class="descname">destroy_core_image</code><span class="sig-paren">(</span>CoreImage *<em>image</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv218destroy_core_imageP9CoreImage" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Relese memory for an image created by <a class="reference internal" href="#Core_2CInterface_8h_1af4c72e25c4b68a516a7d1fefca6eb265"><span class="std std-ref">create_core_image()</span></a>. </p>
 <p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>
@@ -650,7 +671,7 @@
 
 <dl class="function">
 <dt id="_CPPv224create_core_subpixel_mapmmPd">
-<span id="create_core_subpixel_map__unsigned-l.unsigned-l.doubleP"></span><span class="target" id="Core_2CInterface_8h_1a16fdf628c3da271b73cd0354b8d91676"></span>CoreSubPixelMap *<code class="descname">create_core_subpixel_map</code><span class="sig-paren">(</span>unsigned long <em>x_resolution</em>, unsigned long <em>y_resolution</em>, double *<em>sensitivities</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv224create_core_subpixel_mapmmPd" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="Core_2CInterface_8h_1a16fdf628c3da271b73cd0354b8d91676"></span>CoreSubPixelMap *<code class="descname">create_core_subpixel_map</code><span class="sig-paren">(</span>unsigned long <em>x_resolution</em>, unsigned long <em>y_resolution</em>, double *<em>sensitivities</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv224create_core_subpixel_mapmmPd" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Create and fill a sub-pixel sensitivity map. </p>
 <p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>
@@ -666,7 +687,7 @@
 
 <dl class="function">
 <dt id="_CPPv225destroy_core_subpixel_mapP15CoreSubPixelMap">
-<span id="destroy_core_subpixel_map__CoreSubPixelMapP"></span><span class="target" id="Core_2CInterface_8h_1a69db046d6d8f1f661ddef7dfeaf2b24b"></span>void <code class="descname">destroy_core_subpixel_map</code><span class="sig-paren">(</span>CoreSubPixelMap *<em>map</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv225destroy_core_subpixel_mapP15CoreSubPixelMap" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="Core_2CInterface_8h_1a69db046d6d8f1f661ddef7dfeaf2b24b"></span>void <code class="descname">destroy_core_subpixel_map</code><span class="sig-paren">(</span>CoreSubPixelMap *<em>map</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv225destroy_core_subpixel_mapP15CoreSubPixelMap" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Release memory for a sub-pixel map created by <a class="reference internal" href="#Core_2CInterface_8h_1a16fdf628c3da271b73cd0354b8d91676"><span class="std std-ref">create_core_subpixel_map()</span></a>. </p>
 <p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>

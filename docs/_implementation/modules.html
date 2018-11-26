@@ -31,7 +31,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="superphot package" href="superphot.html" />
-    <link rel="prev" title="PSF/PRF Fitting" href="../user_documentation/fit_star_shape.html" /> 
+    <link rel="prev" title="Example of PSF Fitting Using Mock Data" href="../python_interface/fitpsf_example.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -82,7 +82,7 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../user_documentation/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python_interface/index.html">Python Interface Documentation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Python Package Implementation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="superphot.html">superphot package</a></li>
 </ul>
@@ -154,12 +154,30 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="superphot">
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="superphot">
 <h1>superphot<a class="headerlink" href="#superphot" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="superphot.html">superphot package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="superphot.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
 <li class="toctree-l2"><a class="reference internal" href="superphot.html#subpackages">Subpackages</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="superphot.fake_image.html">superphot.fake_image package</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="superphot.fake_image.html#submodules">Submodules</a></li>
@@ -168,22 +186,10 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="superphot.html#submodules">Submodules</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="superphot.background.html">superphot.background module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="superphot.background.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="superphot.fit_star_shape.html">superphot.fit_star_shape module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="superphot.fit_star_shape.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="superphot.smooth_dependence.html">superphot.smooth_dependence module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="superphot.smooth_dependence.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="superphot.superphot_io_tree.html">superphot.superphot_io_tree module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="superphot.superphot_io_tree.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="superphot.background.html">superphot.background module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="superphot.fit_star_shape.html">superphot.fit_star_shape module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="superphot.smooth_dependence.html">superphot.smooth_dependence module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="superphot.superphot_io_tree.html">superphot.superphot_io_tree module</a></li>
 </ul>
 </li>
 </ul>
@@ -203,7 +209,7 @@
         <a href="superphot.html" class="btn btn-neutral float-right" title="superphot package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../user_documentation/fit_star_shape.html" class="btn btn-neutral" title="PSF/PRF Fitting" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../python_interface/fitpsf_example.html" class="btn btn-neutral" title="Example of PSF Fitting Using Mock Data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
