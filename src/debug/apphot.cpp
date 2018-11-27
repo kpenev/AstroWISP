@@ -1,6 +1,6 @@
 #include "../SubPixPhot/CInterface.h"
 
-#include "../IO/CommandLineConfig.h" 
+#include "../IO/CommandLineConfig.h"
 
 int main(int argc, char **argv)
 {
@@ -9,4 +9,6 @@ int main(int argc, char **argv)
     update_subpixphot_configuration(
         config
     );
+
+    destroy_subpixphot_configuration(config);
 }
