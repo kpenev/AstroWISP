@@ -85,7 +85,8 @@ class SubPixPhot:
             return (b'ap.aperture',
                     b','.join([repr(ap).encode('ascii') for ap in param_value[1]]))
 
-        return param_value[0].encode('ascii'), repr(param_value[1])
+        return (param_value[0].encode('ascii'),
+                repr(param_value[1]).encode('ascii'))
 
     def __init__(self, **configuration):
         r"""
@@ -143,9 +144,12 @@ class SubPixPhot:
         config_arguments = sum(
             map(self._format_config, self.configuration.items()),
             ()
-        )
+        ) + (b'',)
 
-        superphot_library.update_subpixphot_configuration(*config_arguments)
+        superphot_library.update_subpixphot_configuration(
+            self._library_configuration,
+            *config_arguments
+        )
 
     #No clean way to reduce the number of argumets.
     #pylint: disable=too-many-arguments
