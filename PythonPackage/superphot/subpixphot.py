@@ -1,6 +1,6 @@
 """Define the :class:`SubPixPhot`, which performs aperture photometry."""
 
-from ctypes import c_double
+from ctypes import c_double, c_uint
 
 import numpy
 
@@ -41,6 +41,9 @@ class SubPixPhot:
             magnitude_1adu (float):
                 The magnitude that corresponds to a flux of 1ADU.
 
+            const_error (float):
+                A constant that gets added to all error estimates.
+
         image (dict):    The last image for which aperture photometry was
             extracted. Contains the following entries:
 
@@ -58,7 +61,8 @@ class SubPixPhot:
     _default_configuration = dict(subpixmap=numpy.ones((1, 1), dtype=c_double),
                                   apertures=numpy.arange(1.0, 5.5),
                                   gain=1.0,
-                                  magnitude_1adu=10.0)
+                                  magnitude_1adu=10.0,
+                                  const_error=0.0)
 
     @staticmethod
     def _format_config(param_value):
@@ -85,8 +89,12 @@ class SubPixPhot:
             return (b'ap.aperture',
                     b','.join([repr(ap).encode('ascii') for ap in param_value[1]]))
 
-        return (param_value[0].encode('ascii'),
-                repr(param_value[1]).encode('ascii'))
+        if param_value[0] == 'const_error':
+            param_name = b'ap.const-error'
+        else:
+            param_name = param_value[0].replace('_', '-').encode('ascii')
+
+        return (param_name, repr(param_value[1]).encode('ascii'))
 
     def __init__(self, **configuration):
         r"""
@@ -207,7 +215,8 @@ class SubPixPhot:
             library_image,
             self._library_subpix_map,
             self._library_configuration,
-            image_index
+            fitpsf_io_tree.library_tree,
+            c_uint(image_index)
         )
 
         superphot_library.destroy_core_image(library_image)
