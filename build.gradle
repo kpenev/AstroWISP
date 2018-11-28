@@ -25,9 +25,10 @@ model {
             }
 
             if (toolChain in Gcc || toolChain in Clang) {
-                if (toolChain in Gcc)
+                if (toolChain in Gcc) {
+                    cppCompiler.args "-std=gnu++98"
                     cppCompiler.define "TOOLCHAIN_GCC"
-                else
+                } else
                     cppCompiler.define "TOOLCHAIN_CLANG"
 
                 cppCompiler.args "-W", "-Wall", "-fvisibility=hidden"
