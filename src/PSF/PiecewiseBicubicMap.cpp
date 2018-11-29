@@ -76,16 +76,19 @@ namespace PSF {
                                              double min_psf_span) :
         __coefficients(NULL)
     {
+        std::cerr << "Reading model" << std::endl;
         if(
-            data.get<std::string>("psffit.model", 
+            data.get<std::string>("psffit.model",
                                   "",
                                   IO::translate_string) == "zero"
         ) {
+            std::cerr << "model is 'zero'" << std::endl;
             __x_grid.resize(2);
             __y_grid.resize(2);
             __x_grid[0] = __y_grid[0] = -min_psf_span;
             __x_grid[1] = __y_grid[1] = min_psf_span;
         } else {
+            std::cerr << "Reading grid" << std::endl;
             Grid grid = IO::parse_grid_string(
                 data.get<std::string>("psffit.grid",
                                       "",
@@ -95,12 +98,13 @@ namespace PSF {
             __y_grid=grid.y_grid;
         }
 
+        std::cerr << "Reading coefficients" << std::endl;
         fill_coefficients(
-                data.get< std::vector<double> >(
-                    "psffit.psfmap",
-                    std::vector<double>(),
-                    IO::TranslateToAny< std::vector<double> >()
-                )
+            data.get<Eigen::VectorXd>(
+                "psffit.psfmap",
+                Eigen::VectorXd(),
+                IO::TranslateToAny<Eigen::VectorXd>()
+            )
         );
         if(__x_grid.front()>-min_psf_span) {
             __expanded_left=1;
@@ -126,7 +130,7 @@ namespace PSF {
             const std::vector<double> &y_grid
     ) :
         __x_grid(x_grid),
-        __y_grid(y_grid), 
+        __y_grid(y_grid),
         __coefficients(NULL),
         __expanded_left(0),
         __expanded_right(0),
@@ -142,7 +146,7 @@ namespace PSF {
     ) const
     {
         assert(terms.size() == num_terms());
-        size_t 
+        size_t
             unpadded_rows = (
                 __y_grid.size() - 2 - __expanded_up - __expanded_down
             ),

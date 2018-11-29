@@ -29,10 +29,16 @@ namespace PSF {
             const IO::H5IODataTree &data_tree,
 
             ///The number of apertures to set for the new MapSource objects.
-            unsigned num_apertures
+            unsigned num_apertures,
+
+            ///The string to add to node names when querying data_tree to select
+            ///the entries corresponding to the image being processed within the
+            ///output tree. If no split by image is present, use an empty
+            ///string.
+            const std::string &data_tree_image_id=""
         );
 
-        ///\brief All quantities needed to construct the source list from an 
+        ///\brief All quantities needed to construct the source list from an
         ///I/O data tree.
         static const std::set<std::string> &required_data_tree_quantities();
     };

@@ -808,11 +808,13 @@ namespace FitPSF {
                         *(source[*fname_i]),
                         unsigned_trans
                     );
-                } else output_data_tree.put(
-                    path("projsrc|srcid|name|" + *fname_i, '|'),
-                    *(source_names[*fname_i]),
-                    IO::TranslateToAny< std::vector<std::string> >()
-                );
+                } else {
+                    output_data_tree.put(
+                        path("projsrc|srcid|name|" + *fname_i, '|'),
+                        *(source_names[*fname_i]),
+                        IO::TranslateToAny< std::vector<std::string> >()
+                    );
+                }
                 output_data_tree.put(path("projsrc|x|" + *fname_i, '|'),
                                      *(x[*fname_i]),
                                      double_trans);

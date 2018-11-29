@@ -35,20 +35,23 @@ namespace SubPixPhot {
         ///positions and backgrounds on input.
         IO::H5IODataTree &data_tree,
 
-        ///The string to add to node names when querying data_tree to select the
-        ///entries corresponding to the image being processed within the output
-        ///tree. If no split by image is present, use an empty string.
+        ///See same name argument to
+        ///PSF::MapSourceContainer::MapSourceContainer()
         const std::string &data_tree_image_id=""
     )
     {
         std::string tree_suffix = (data_tree_image_id.empty()
                                    ? ""
                                    : "." + data_tree_image_id);
+        std::cerr << "tree suffix = " << tree_suffix << std::endl;
         unsigned num_apertures = measure_flux.number_apertures();
 
-        PSF::MapSourceContainer psfmap_sources(data_tree, num_apertures);
+        PSF::MapSourceContainer psfmap_sources(data_tree,
+                                               num_apertures,
+                                               data_tree_image_id);
         unsigned num_sources = psfmap_sources.size();
 
+        std::cerr << "Reading background" << std::endl;
         IO::OutputArray<double>
             background(
                 data_tree.get<boost::any>("bg.value" + tree_suffix)

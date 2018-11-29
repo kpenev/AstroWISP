@@ -165,7 +165,9 @@ void prepare_fit_sources(
                 image_sources.columns(),
                 IO::TranslateToAny<PSF::MapVarListType>()
             );
-            std::cerr << "Trying to read back psffit variables." << std::endl;
+            std::cerr << "Trying to read back psffit variables. Node name: "
+                      << "psffit.variables." + image_index_stream.str()
+                      << std::endl;
             output_data_tree.get<PSF::MapVarListType>(
                 "psffit.variables." + image_index_stream.str(),
                 PSF::MapVarListType(),
@@ -246,6 +248,7 @@ LIB_PUBLIC bool local_get_psf_map_variables(
         std::copy(start, end, destination);
         destination += var_i->second.size();
     }
+    return true;
 }
 
 bool piecewise_bicubic_fit(double **pixel_values,

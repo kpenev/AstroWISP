@@ -7,6 +7,7 @@
 #include "../Core/SubPixelCorrectedFlux.h"
 
 #include <cstdarg>
+#include <iostream>
 
 SubPixPhotConfiguration *create_subpixphot_configuration()
 {
@@ -67,13 +68,16 @@ LIB_PUBLIC void subpixphot(const CoreImage *image,
     IO::H5IODataTree *real_io_data_tree =
         reinterpret_cast<IO::H5IODataTree*>(io_data_tree);
 
+    std::cerr << "Setting apertures" << std::endl;
     Core::RealList apertures =
         (*real_configuration)["ap.aperture"].as<Core::RealList>();
     apertures.sort();
 
+    std::cerr << "Reading PSF map" << std::endl;
     PSF::PiecewiseBicubicMap psf_map(*real_io_data_tree,
                                      apertures.back() + 1.0);
 
+    std::cerr << "Creating flux measuring object" << std::endl;
     Core::SubPixelCorrectedFlux<Core::SubPixelMap> measure_flux(
         *real_image,
         *real_subpixmap,
@@ -84,6 +88,9 @@ LIB_PUBLIC void subpixphot(const CoreImage *image,
 
     std::ostringstream image_index_str;
     image_index_str << image_index;
+    std::cerr << "Measuring flux for image "
+              << image_index_str.str()
+              << std::endl;
     SubPixPhot::add_flux_measurements(
         psf_map,
         measure_flux,

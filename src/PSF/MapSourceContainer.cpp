@@ -2,12 +2,19 @@
 
 namespace PSF {
 
-    MapSourceContainer::MapSourceContainer(const IO::H5IODataTree &data_tree,
-                                           unsigned num_apertures)
+    MapSourceContainer::MapSourceContainer(
+        const IO::H5IODataTree &data_tree,
+        unsigned num_apertures,
+        const std::string &data_tree_image_id
+    )
     {
+        std::string tree_suffix = (data_tree_image_id.empty()
+                                   ? ""
+                                   : "." + data_tree_image_id);
+
         const MapVarListType &variables =
             data_tree.get<MapVarListType>(
-                "psffit.variables",
+                "psffit.variables" + tree_suffix,
                 MapVarListType(),
                 IO::TranslateToAny<MapVarListType>()
             );
@@ -21,16 +28,47 @@ namespace PSF {
                 variables.end(),
                 expansion_term_values
         );
+        std::string amplitude_name = (
+            data_tree.count("psffit.amplitude" + tree_suffix)
+            ? "psffit.amplitude"
+            : "psffit.flux"
+        ) + tree_suffix;
         IO::OutputArray<double>
-            x(data_tree.get<boost::any>("projsrc.x")),
-            y(data_tree.get<boost::any>("projsrc.y")),
-            amplitude(data_tree.get<boost::any>("psffit.amplitude")),
-            background(data_tree.get<boost::any>("bg.value")),
-            background_error(data_tree.get<boost::any>("bg.error"));
-        IO::OutputArray<char*>
-            source_name(data_tree.get<boost::any>("projsrc.srcid.name"));
+            x(
+                data_tree.get<boost::any>("projsrc.x" + tree_suffix)
+            ),
+            y(
+                data_tree.get<boost::any>("projsrc.y" + tree_suffix)
+            ),
+            amplitude(
+                data_tree.get<boost::any>(amplitude_name)
+            ),
+            background(
+                data_tree.get<boost::any>("bg.value" + tree_suffix)
+            ),
+            background_error(
+                data_tree.get<boost::any>("bg.error" + tree_suffix)
+            );
+
+        IO::OutputArray<std::string> *source_name = NULL;
+        IO::OutputArray<unsigned> *source_field = NULL,
+                                  *source_id = NULL;
+        if(data_tree.get_child("projsrc.srcid.name").count("0")) {
+            source_name = new IO::OutputArray<std::string>(
+                data_tree.get<boost::any>("projsrc.srcid.name" + tree_suffix)
+            );
+        } else {
+            source_field = new IO::OutputArray<unsigned>(
+                data_tree.get<boost::any>("projsrc.srcid.field" + tree_suffix)
+            );
+            source_id = new IO::OutputArray<unsigned>(
+                data_tree.get<boost::any>("projsrc.srcid.source" + tree_suffix)
+            );
+        }
         IO::OutputArray<unsigned>
-            background_npix(data_tree.get<boost::any>("bg.npix"));
+            background_npix(
+                data_tree.get<boost::any>("bg.npix" + tree_suffix)
+            );
 
         unsigned num_sources = expansion_term_values[0].size(),
                  num_terms = expansion_term_values.size();
@@ -41,11 +79,14 @@ namespace PSF {
         reserve(num_sources);
 
         for(unsigned src_index = 0; src_index < num_sources; ++src_index) {
-            std::cerr << "source " << src_index
-                      << ": " << source_name[src_index] << std::endl;
             push_back(
                 MapSource(
-                    Core::SourceID(source_name[src_index], true),
+                    (
+                        source_name
+                        ? Core::SourceID((*source_name)[src_index], true)
+                        : Core::SourceID((*source_field)[src_index],
+                                         (*source_id)[src_index])
+                    ),
                     num_apertures,
                     x[src_index],
                     y[src_index],
