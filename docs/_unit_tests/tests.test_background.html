@@ -24,9 +24,9 @@
 
   
 
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
   <link rel="stylesheet" href="../_static/unlimited_width.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -187,8 +187,82 @@
     margin-right: 4px;  /* make room for the exclamation icon */
 }
 </style>
-<div class="section" id="tests-test-background-module">
-<h1>tests.test_background module<a class="headerlink" href="#tests-test-background-module" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-tests.test_background">
+<span id="tests-test-background-module"></span><h1>tests.test_background module<a class="headerlink" href="#module-tests.test_background" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="class-inheritance-diagram">
+<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this headline">¶</a></h2>
+<div class="graphviz"><img src="../_images/inheritance-9927054ff4a4731f6c2c4f759996cb89f5e11177.png" alt="Inheritance diagram of BackgroundExtractor, FloatTestCase, TestAnnulusBackground" usemap="#inheritance0c0bad10a6" class="inheritance graphviz" /></div>
+<map id="inheritance0c0bad10a6" name="inheritance0c0bad10a6">
+<area shape="rect" id="node1" href="../_implementation/superphot.background.html#superphot.background.BackgroundExtractor" target="_top" title="Measure the background level for each source in an image." alt="" coords="5,5,312,31"/>
+<area shape="rect" id="node2" href="#tests.test_background.TestAnnulusBackground" target="_top" title="Test background extraction based on annuli around sources." alt="" coords="257,152,583,177"/>
+<area shape="rect" id="node3" href="tests.utilities.html#tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="319,79,521,104"/>
+</map><p>Test SuperPhot’s background extraction.</p>
+<dl class="class">
+<dt id="tests.test_background.TestAnnulusBackground">
+<em class="property">class </em><code class="descclassname">tests.test_background.</code><code class="descname">TestAnnulusBackground</code><span class="sig-paren">(</span><em>methodName='runTest'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_background.html#TestAnnulusBackground"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_background.TestAnnulusBackground" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="tests.utilities.html#tests.utilities.FloatTestCase" title="tests.utilities.FloatTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">tests.utilities.FloatTestCase</span></code></a></p>
+<div class="graphviz"><img src="../_images/inheritance-cd3fadc9af40cc0ec535fa0f05ed08537d2232ea.png" alt="Inheritance diagram of tests.test_background.TestAnnulusBackground" usemap="#inheritance25d02e3b0b" class="inheritance graphviz" /></div>
+<map id="inheritance25d02e3b0b" name="inheritance25d02e3b0b">
+<area shape="rect" id="node1" href="#tests.test_background.TestAnnulusBackground" target="_top" title="Test background extraction based on annuli around sources." alt="" coords="5,152,331,177"/>
+<area shape="rect" id="node2" href="tests.utilities.html#tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="67,79,269,104"/>
+</map><p>Test background extraction based on annuli around sources.</p>
+<dl class="staticmethod">
+<dt id="tests.test_background.TestAnnulusBackground.add_flux_around_sources">
+<em class="property">static </em><code class="descname">add_flux_around_sources</code><span class="sig-paren">(</span><em>source_x</em>, <em>source_y</em>, <em>radius</em>, <em>extra_flux</em>, <em>image</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_background.html#TestAnnulusBackground.add_flux_around_sources"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_background.TestAnnulusBackground.add_flux_around_sources" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add extra flux to image pixels within a radius around sources.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>source_x</strong> – The x coordinates of the sources to add flux around.</li>
+<li><strong>source_x</strong> – The y coordinates of the sources to add flux around.</li>
+<li><strong>radius</strong> – Pixes with centers within this radius get extra flux.</li>
+<li><strong>extra_flux</strong> – The amount of extra flux per pixel to add.</li>
+<li><strong>image</strong> – The image to add flux to.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.test_background.TestAnnulusBackground.test_background_error">
+<code class="descname">test_background_error</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_background.html#TestAnnulusBackground.test_background_error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_background.TestAnnulusBackground.test_background_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test constant gradient background but with known error.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.test_background.TestAnnulusBackground.test_background_gradient">
+<code class="descname">test_background_gradient</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_background.html#TestAnnulusBackground.test_background_gradient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_background.TestAnnulusBackground.test_background_gradient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests where the background has a constant non-zero gradient.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.test_background.TestAnnulusBackground.test_constant_image">
+<code class="descname">test_constant_image</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_background.html#TestAnnulusBackground.test_constant_image"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_background.TestAnnulusBackground.test_constant_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test background extraction on an image with all pixels the same.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.test_background.TestAnnulusBackground.test_crowded_image">
+<code class="descname">test_crowded_image</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_background.html#TestAnnulusBackground.test_crowded_image"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_background.TestAnnulusBackground.test_crowded_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests involving sources for which no BG can be determined.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.test_background.TestAnnulusBackground.test_partially_crowded_image">
+<code class="descname">test_partially_crowded_image</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_background.html#TestAnnulusBackground.test_partially_crowded_image"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_background.TestAnnulusBackground.test_partially_crowded_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>A test where one source is crowded and 4 are not.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
 </div>
 
 
@@ -211,7 +285,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Kaloyan Penev.
+        &copy; Copyright 2018, Kaloyan Penev
 
     </p>
   </div>
@@ -230,28 +304,18 @@
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
 
   
 
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
 
   <script type="text/javascript">
       jQuery(function () {

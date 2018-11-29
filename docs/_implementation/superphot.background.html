@@ -24,9 +24,9 @@
 
   
 
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
   <link rel="stylesheet" href="../_static/unlimited_width.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -85,11 +85,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../python_interface/index.html">Python Interface Documentation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">Python Package Implementation</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="superphot.html">superphot package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="superphot.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
 <li class="toctree-l3"><a class="reference internal" href="superphot.html#subpackages">Subpackages</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="superphot.html#submodules">Submodules</a><ul class="current">
 <li class="toctree-l4 current"><a class="current reference internal" href="#">superphot.background module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="superphot.fit_star_shape.html">superphot.fit_star_shape module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="superphot.smooth_dependence.html">superphot.smooth_dependence module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="superphot.subpixphot.html">superphot.subpixphot module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="superphot.superphot_io_tree.html">superphot.superphot_io_tree module</a></li>
 </ul>
 </li>
@@ -187,8 +189,104 @@
     margin-right: 4px;  /* make room for the exclamation icon */
 }
 </style>
-<div class="section" id="superphot-background-module">
-<h1>superphot.background module<a class="headerlink" href="#superphot-background-module" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-superphot.background">
+<span id="superphot-background-module"></span><h1>superphot.background module<a class="headerlink" href="#module-superphot.background" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="class-inheritance-diagram">
+<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this headline">¶</a></h2>
+<div class="graphviz"><img src="../_images/inheritance-15ecfd6ff5b895e735b6fac9c3846c2f30ed4542.png" alt="Inheritance diagram of BackgroundExtractor, c_double, c_uint" usemap="#inheritance3ef7ba0934" class="inheritance graphviz" /></div>
+<map id="inheritance3ef7ba0934" name="inheritance3ef7ba0934">
+<area shape="rect" id="node3" href="#superphot.background.BackgroundExtractor" target="_top" title="Measure the background level for each source in an image." alt="" coords="289,5,595,31"/>
+</map><p>Interface to the SuperPhot background library.</p>
+<dl class="class">
+<dt id="superphot.background.BackgroundExtractor">
+<em class="property">class </em><code class="descclassname">superphot.background.</code><code class="descname">BackgroundExtractor</code><span class="sig-paren">(</span><em>image</em>, <em>inner_radius</em>, <em>outer_radius</em>, <em>error_confidence=0.68</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/background.html#BackgroundExtractor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.background.BackgroundExtractor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<div class="graphviz"><img src="../_images/inheritance-cae63db934a79086e99cfb7546639412f6d5ffd5.png" alt="Inheritance diagram of superphot.background.BackgroundExtractor" usemap="#inheritanceab57b78b2a" class="inheritance graphviz" /></div>
+<map id="inheritanceab57b78b2a" name="inheritanceab57b78b2a">
+<area shape="rect" id="node1" href="#superphot.background.BackgroundExtractor" target="_top" title="Measure the background level for each source in an image." alt="" coords="5,5,312,31"/>
+</map><p>Measure the background level for each source in an image.</p>
+<dl class="attribute">
+<dt id="superphot.background.BackgroundExtractor.image">
+<code class="descname">image</code><a class="headerlink" href="#superphot.background.BackgroundExtractor.image" title="Permalink to this definition">¶</a></dt>
+<dd><p>The image being processed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="superphot.background.BackgroundExtractor.inner_radius">
+<code class="descname">inner_radius</code><a class="headerlink" href="#superphot.background.BackgroundExtractor.inner_radius" title="Permalink to this definition">¶</a></dt>
+<dd><p>The size of the aperture aronud each source within
+which pixels are excluded from background measurement.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="superphot.background.BackgroundExtractor.outer_radius">
+<code class="descname">outer_radius</code><a class="headerlink" href="#superphot.background.BackgroundExtractor.outer_radius" title="Permalink to this definition">¶</a></dt>
+<dd><p>The outer rim of the aperture around each source within
+which unrejected pixels are included in the background measurement.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="superphot.background.BackgroundExtractor.error_confidence">
+<code class="descname">error_confidence</code><a class="headerlink" href="#superphot.background.BackgroundExtractor.error_confidence" title="Permalink to this definition">¶</a></dt>
+<dd><p>The confidence level to use for estimating the
+background error.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="superphot.background.BackgroundExtractor.__call__">
+<code class="descname">__call__</code><span class="sig-paren">(</span><em>source_x</em>, <em>source_y</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/background.html#BackgroundExtractor.__call__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.background.BackgroundExtractor.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Measure the background under the sources with the given coordinates.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>source_x</strong> – The <cite>x</cite> coordinates of the sources within the image.</li>
+<li><strong>source_y</strong> – The <cite>y</cite> coordinates of the sources within the image.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><dl class="docutils">
+<dt>numpy.array:</dt>
+<dd><p class="first last">The estimate of the background under each source in the same
+order as the input sources.</p>
+</dd>
+<dt>numpy.array:</dt>
+<dd><p class="first last">The estimate of the uncertainty in the background under each
+source in the same order as the input sources.</p>
+</dd>
+<dt>numpy.array:</dt>
+<dd><p class="first last">The number of pixels which were used to derive the
+background and its uncertainty.</p>
+</dd>
+</dl>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.7)">tuple</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="superphot.background.BackgroundExtractor.__del__">
+<code class="descname">__del__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/background.html#BackgroundExtractor.__del__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.background.BackgroundExtractor.__del__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Destroy the image and extractor created in <a class="reference internal" href="#superphot.background.BackgroundExtractor.__init__" title="superphot.background.BackgroundExtractor.__init__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="superphot.background.BackgroundExtractor.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>image</em>, <em>inner_radius</em>, <em>outer_radius</em>, <em>error_confidence=0.68</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/background.html#BackgroundExtractor.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.background.BackgroundExtractor.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a background extractor with the given parameters.</p>
+<p>Args: see class attributes.</p>
+<p>Returns: None</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
 </div>
 
 
@@ -211,7 +309,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Kaloyan Penev.
+        &copy; Copyright 2018, Kaloyan Penev
 
     </p>
   </div>
@@ -230,28 +328,18 @@
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
 
   
 
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
 
   <script type="text/javascript">
       jQuery(function () {

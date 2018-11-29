@@ -24,14 +24,14 @@
 
   
 
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
   <link rel="stylesheet" href="../_static/unlimited_width.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="superphot package" href="superphot.html" />
-    <link rel="prev" title="Example of PSF Fitting Using Mock Data" href="../python_interface/fitpsf_example.html" /> 
+    <link rel="prev" title="Example of PSF Fitting and Aperture Photometry Using Mock Data" href="../python_interface/example_mock_data.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -178,6 +178,7 @@
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="superphot.html">superphot package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="superphot.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
 <li class="toctree-l2"><a class="reference internal" href="superphot.html#subpackages">Subpackages</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="superphot.fake_image.html">superphot.fake_image package</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="superphot.fake_image.html#submodules">Submodules</a></li>
@@ -186,10 +187,26 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="superphot.html#submodules">Submodules</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="superphot.background.html">superphot.background module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="superphot.fit_star_shape.html">superphot.fit_star_shape module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="superphot.smooth_dependence.html">superphot.smooth_dependence module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="superphot.superphot_io_tree.html">superphot.superphot_io_tree module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="superphot.background.html">superphot.background module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="superphot.background.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="superphot.fit_star_shape.html">superphot.fit_star_shape module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="superphot.fit_star_shape.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="superphot.smooth_dependence.html">superphot.smooth_dependence module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="superphot.smooth_dependence.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="superphot.subpixphot.html">superphot.subpixphot module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="superphot.subpixphot.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="superphot.superphot_io_tree.html">superphot.superphot_io_tree module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="superphot.superphot_io_tree.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -209,7 +226,7 @@
         <a href="superphot.html" class="btn btn-neutral float-right" title="superphot package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../python_interface/fitpsf_example.html" class="btn btn-neutral" title="Example of PSF Fitting Using Mock Data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../python_interface/example_mock_data.html" class="btn btn-neutral" title="Example of PSF Fitting and Aperture Photometry Using Mock Data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -218,7 +235,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Kaloyan Penev.
+        &copy; Copyright 2018, Kaloyan Penev
 
     </p>
   </div>
@@ -237,28 +254,18 @@
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
 
   
 
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
 
   <script type="text/javascript">
       jQuery(function () {

@@ -24,9 +24,9 @@
 
   
 
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
   <link rel="stylesheet" href="../_static/unlimited_width.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -85,7 +85,8 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Python Interface Documentation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="background.html">Measuring Background</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fit_star_shape.html">PSF/PRF Fitting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fitpsf_example.html">Example of PSF Fitting Using Mock Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aperture_photometry.html">Aperture Photometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_mock_data.html">Example of PSF Fitting and Aperture Photometry Using Mock Data</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../_implementation/modules.html">Python Package Implementation</a></li>
@@ -186,9 +187,10 @@
 <li class="toctree-l2"><a class="reference internal" href="fit_star_shape.html#psf-map-utilities">PSF Map utilities</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="fitpsf_example.html">Example of PSF Fitting Using Mock Data</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="fitpsf_example.html#Step-1:-Prepare-Mock-Input-Data-for-PSF-Fitting">Step 1: Prepare Mock Input Data for PSF Fitting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fitpsf_example.html#Step-2:-Perform-the-PSF-Fitting">Step 2: Perform the PSF Fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aperture_photometry.html">Aperture Photometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_mock_data.html">Example of PSF Fitting and Aperture Photometry Using Mock Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="example_mock_data.html#PSF-fitting">PSF fitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_mock_data.html#Aperture-Photometry">Aperture Photometry</a></li>
 </ul>
 </li>
 </ul>
@@ -215,7 +217,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Kaloyan Penev.
+        &copy; Copyright 2018, Kaloyan Penev
 
     </p>
   </div>
@@ -234,28 +236,18 @@
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
 
   
 
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
 
   <script type="text/javascript">
       jQuery(function () {

@@ -24,9 +24,9 @@
 
   
 
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
   <link rel="stylesheet" href="../_static/unlimited_width.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -190,22 +190,18 @@
 <span id="tests-utilities-module"></span><h1>tests.utilities module<a class="headerlink" href="#module-tests.utilities" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="class-inheritance-diagram">
 <h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this headline">¶</a></h2>
-<img src="../_images/inheritance-08c51703e0e6f5027f3269f5575c275c71e32f65.png" alt="Inheritance diagram of FloatTestCase" usemap="#inheritance5fbd0abfe6" class="inheritance"/>
+<div class="graphviz"><img src="../_images/inheritance-08c51703e0e6f5027f3269f5575c275c71e32f65.png" alt="Inheritance diagram of FloatTestCase" usemap="#inheritance5fbd0abfe6" class="inheritance graphviz" /></div>
 <map id="inheritance5fbd0abfe6" name="inheritance5fbd0abfe6">
-<area shape="rect" id="node1" href="#tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="5,79,200,104"/>
-<area shape="rect" id="node2" title="A class whose instances are single test cases." alt="" coords="19,5,186,31"/>
-</map>
-<p>A collection of general use testing utilities.</p>
+<area shape="rect" id="node1" href="#tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="5,79,207,104"/>
+</map><p>A collection of general use testing utilities.</p>
 <dl class="class">
 <dt id="tests.utilities.FloatTestCase">
 <em class="property">class </em><code class="descclassname">tests.utilities.</code><code class="descname">FloatTestCase</code><span class="sig-paren">(</span><em>methodName='runTest'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/utilities.html#FloatTestCase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.utilities.FloatTestCase" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">unittest.case.TestCase</span></code></p>
-<img src="../_images/inheritance-3f31eec3e2de326c6e9346cd2a9a7ce80b70a4ba.png" alt="Inheritance diagram of tests.utilities.FloatTestCase" usemap="#inheritance687fbef197" class="inheritance"/>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">unittest.case.TestCase</span></code></p>
+<div class="graphviz"><img src="../_images/inheritance-3f31eec3e2de326c6e9346cd2a9a7ce80b70a4ba.png" alt="Inheritance diagram of tests.utilities.FloatTestCase" usemap="#inheritance687fbef197" class="inheritance graphviz" /></div>
 <map id="inheritance687fbef197" name="inheritance687fbef197">
-<area shape="rect" id="node1" href="#tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="5,79,200,104"/>
-<area shape="rect" id="node2" title="A class whose instances are single test cases." alt="" coords="19,5,186,31"/>
-</map>
-<p>Test case involving floating point comparisons.</p>
+<area shape="rect" id="node1" href="#tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="5,79,207,104"/>
+</map><p>Test case involving floating point comparisons.</p>
 <dl class="method">
 <dt id="tests.utilities.FloatTestCase.approx_equal">
 <code class="descname">approx_equal</code><span class="sig-paren">(</span><em>value_1</em>, <em>value_2</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/utilities.html#FloatTestCase.approx_equal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.utilities.FloatTestCase.approx_equal" title="Permalink to this definition">¶</a></dt>
@@ -226,8 +222,8 @@ tolerange * |value_1 + value_2|  * float_info.epsilon</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>value_1</strong> &#8211; The first of the two values to compare.</li>
-<li><strong>value_2</strong> &#8211; The second of the two values to compare.</li>
+<li><strong>value_1</strong> – The first of the two values to compare.</li>
+<li><strong>value_2</strong> – The second of the two values to compare.</li>
 </ul>
 </td>
 </tr>
@@ -246,7 +242,7 @@ tolerange * |value_1 + value_2|  * float_info.epsilon</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tolerance</strong> &#8211; The maximum fractional difference in units of floating
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tolerance</strong> – The maximum fractional difference in units of floating
 point epsilon to allow when comparing two floating point
 numbers. See assertApprox for more details.</td>
 </tr>
@@ -284,7 +280,7 @@ numbers. See assertApprox for more details.</td>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Kaloyan Penev.
+        &copy; Copyright 2018, Kaloyan Penev
 
     </p>
   </div>
@@ -303,28 +299,18 @@ numbers. See assertApprox for more details.</td>
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
 
   
 
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
 
   <script type="text/javascript">
       jQuery(function () {

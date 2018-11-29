@@ -1,0 +1,265 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>superphot.fake_image.psf_base &mdash; SuperPhot Python Interface  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/unlimited_width.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> SuperPhot Python Interface
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../python_interface/index.html">Python Interface Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_implementation/modules.html">Python Package Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../cpp_api.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../c_api.html">C API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_unit_tests/modules.html">Unit Testing Code</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">SuperPhot Python Interface</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>superphot.fake_image.psf_base</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for superphot.fake_image.psf_base</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Defines a base class for all PSF models: PSFBase.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">abc</span> <span class="k">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+
+<div class="viewcode-block" id="PSFBase"><a class="viewcode-back" href="../../../_implementation/superphot.fake_image.psf_base.html#superphot.fake_image.psf_base.PSFBase">[docs]</a><span class="k">class</span> <span class="nc">PSFBase</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;The base class for all supported PSFs.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="PSFBase.__call__"><a class="viewcode-back" href="../../../_implementation/superphot.fake_image.psf_base.html#superphot.fake_image.psf_base.PSFBase.__call__">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="c1">#(x, y) is a reasonable way to specify the components of an offset vector.</span>
+    <span class="c1">#pylint: disable=invalid-name</span>
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the value of the PSF at the given point.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x:    The horizontal offset from center of the point at which to</span>
+<span class="sd">                return the PSF value.</span>
+
+<span class="sd">            y:    The vertical offset from center of the point at which to</span>
+<span class="sd">                return the PSF value.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The value of the PSF at (x, y) relative to the source center.</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+    <span class="c1">#pylint: enable=invalid-name</span>
+
+<div class="viewcode-block" id="PSFBase.get_left_range"><a class="viewcode-back" href="../../../_implementation/superphot.fake_image.psf_base.html#superphot.fake_image.psf_base.PSFBase.get_left_range">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">get_left_range</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return how far the PSF extends to the left of center.&quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="PSFBase.get_right_range"><a class="viewcode-back" href="../../../_implementation/superphot.fake_image.psf_base.html#superphot.fake_image.psf_base.PSFBase.get_right_range">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">get_right_range</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return how far the PSF extends to the right of center.&quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="PSFBase.get_down_range"><a class="viewcode-back" href="../../../_implementation/superphot.fake_image.psf_base.html#superphot.fake_image.psf_base.PSFBase.get_down_range">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">get_down_range</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return how far the PSF extends downward of center.&quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="PSFBase.get_up_range"><a class="viewcode-back" href="../../../_implementation/superphot.fake_image.psf_base.html#superphot.fake_image.psf_base.PSFBase.get_up_range">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">get_up_range</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return how far the PSF extends upward of center.&quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="PSFBase.integrate"><a class="viewcode-back" href="../../../_implementation/superphot.fake_image.psf_base.html#superphot.fake_image.psf_base.PSFBase.integrate">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">integrate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">bottom</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the integral of the PSF over a rectangle.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            left:    The horizontal offset relative to the center of the left</span>
+<span class="sd">                boundary of the rectangle to integrate over.</span>
+
+<span class="sd">            bottom:    The vertical offset relative to the center of the bottom</span>
+<span class="sd">                boundary of the rectangle to integrate over.</span>
+
+<span class="sd">            width:    The horizontal size of the rectangle to integrate over.</span>
+
+<span class="sd">            height:    The vertical size of the rectangle to integrate over.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            float:</span>
+<span class="sd">                The integral of the PSF over left &lt; x &lt; left + width,</span>
+<span class="sd">                bottom &lt; y &lt; bottom + height</span>
+<span class="sd">        &quot;&quot;&quot;</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Kaloyan Penev
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

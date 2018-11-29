@@ -24,9 +24,9 @@
 
   
 
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
   <link rel="stylesheet" href="../_static/unlimited_width.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -85,6 +85,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../python_interface/index.html">Python Interface Documentation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">Python Package Implementation</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="superphot.html">superphot package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="superphot.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="superphot.html#subpackages">Subpackages</a><ul class="current">
 <li class="toctree-l4 current"><a class="reference internal" href="superphot.fake_image.html">superphot.fake_image package</a></li>
 </ul>
@@ -186,8 +187,117 @@
     margin-right: 4px;  /* make room for the exclamation icon */
 }
 </style>
-<div class="section" id="superphot-fake-image-piecewise-psf-module">
-<h1>superphot.fake_image.piecewise_psf module<a class="headerlink" href="#superphot-fake-image-piecewise-psf-module" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-superphot.fake_image.piecewise_psf">
+<span id="superphot-fake-image-piecewise-psf-module"></span><h1>superphot.fake_image.piecewise_psf module<a class="headerlink" href="#module-superphot.fake_image.piecewise_psf" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="class-inheritance-diagram">
+<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this headline">¶</a></h2>
+<div class="graphviz"><img src="../_images/inheritance-2fe83bebf7d49d847b8285044e8c27dd360ae8a1.png" alt="Inheritance diagram of PSFBase, PiecewisePSF" usemap="#inheritance3586afced9" class="inheritance graphviz" /></div>
+<map id="inheritance3586afced9" name="inheritance3586afced9">
+<area shape="rect" id="node3" href="superphot.fake_image.psf_base.html#superphot.fake_image.psf_base.PSFBase" target="_top" title="The base class for all supported PSFs." alt="" coords="38,79,327,104"/>
+<area shape="rect" id="node2" href="#superphot.fake_image.piecewise_psf.PiecewisePSF" target="_top" title="Base clas for PSFs defined on a grid of pieces." alt="" coords="5,152,360,177"/>
+</map><p>Declares the PiecewisePSF base class for piecewise PSF functions.</p>
+<dl class="class">
+<dt id="superphot.fake_image.piecewise_psf.PiecewisePSF">
+<em class="property">class </em><code class="descclassname">superphot.fake_image.piecewise_psf.</code><code class="descname">PiecewisePSF</code><span class="sig-paren">(</span><em>boundaries</em>, <em>pieces</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/fake_image/piecewise_psf.html#PiecewisePSF"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.fake_image.piecewise_psf.PiecewisePSF" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="superphot.fake_image.psf_base.html#superphot.fake_image.psf_base.PSFBase" title="superphot.fake_image.psf_base.PSFBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">superphot.fake_image.psf_base.PSFBase</span></code></a></p>
+<div class="graphviz"><img src="../_images/inheritance-0452a9845bdb3070d556333ace8ca6016bfcb2b0.png" alt="Inheritance diagram of superphot.fake_image.piecewise_psf.PiecewisePSF" usemap="#inheritance90306a9669" class="inheritance graphviz" /></div>
+<map id="inheritance90306a9669" name="inheritance90306a9669">
+<area shape="rect" id="node3" href="superphot.fake_image.psf_base.html#superphot.fake_image.psf_base.PSFBase" target="_top" title="The base class for all supported PSFs." alt="" coords="38,79,327,104"/>
+<area shape="rect" id="node2" href="#superphot.fake_image.piecewise_psf.PiecewisePSF" target="_top" title="Base clas for PSFs defined on a grid of pieces." alt="" coords="5,152,360,177"/>
+</map><p>Base clas for PSFs defined on a grid of pieces.</p>
+<dl class="method">
+<dt id="superphot.fake_image.piecewise_psf.PiecewisePSF.__call__">
+<code class="descname">__call__</code><span class="sig-paren">(</span><em>x</em>, <em>y</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/fake_image/piecewise_psf.html#PiecewisePSF.__call__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.fake_image.piecewise_psf.PiecewisePSF.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>See the documentation of PSFBase.__call__.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="superphot.fake_image.piecewise_psf.PiecewisePSF.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>boundaries</em>, <em>pieces</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/fake_image/piecewise_psf.html#PiecewisePSF.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.fake_image.piecewise_psf.PiecewisePSF.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Define a PSF with the given boundaries.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>boundaries</strong> – Dictionary with keys <cite>x</cite> and <cite>y</cite> giving the offsets
+relative to the center of the horizontal piece boundaries. The
+PSF is zero left of the first or right of the last x boundary
+as wall as below the first and above the last y boundary.</li>
+<li><strong>pieces</strong> – The pieces making up the PSF should be a class inherited
+from PSFPiece.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Returns: None</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="superphot.fake_image.piecewise_psf.PiecewisePSF.get_down_range">
+<code class="descname">get_down_range</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/fake_image/piecewise_psf.html#PiecewisePSF.get_down_range"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.fake_image.piecewise_psf.PiecewisePSF.get_down_range" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return how far the PSF extends downward of center.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="superphot.fake_image.piecewise_psf.PiecewisePSF.get_left_range">
+<code class="descname">get_left_range</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/fake_image/piecewise_psf.html#PiecewisePSF.get_left_range"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.fake_image.piecewise_psf.PiecewisePSF.get_left_range" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return how far the PSF extends to the left of center.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="superphot.fake_image.piecewise_psf.PiecewisePSF.get_right_range">
+<code class="descname">get_right_range</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/fake_image/piecewise_psf.html#PiecewisePSF.get_right_range"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.fake_image.piecewise_psf.PiecewisePSF.get_right_range" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return how far the PSF extends to the right of center.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="superphot.fake_image.piecewise_psf.PiecewisePSF.get_up_range">
+<code class="descname">get_up_range</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/fake_image/piecewise_psf.html#PiecewisePSF.get_up_range"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.fake_image.piecewise_psf.PiecewisePSF.get_up_range" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return how far the PSF extends upward of center.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="superphot.fake_image.piecewise_psf.PiecewisePSF.integrate">
+<code class="descname">integrate</code><span class="sig-paren">(</span><em>left</em>, <em>bottom</em>, <em>width</em>, <em>height</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/fake_image/piecewise_psf.html#PiecewisePSF.integrate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.fake_image.piecewise_psf.PiecewisePSF.integrate" title="Permalink to this definition">¶</a></dt>
+<dd><p>See documentation of PSFBase.integrate.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="superphot.fake_image.piecewise_psf.get_piece_index">
+<code class="descclassname">superphot.fake_image.piecewise_psf.</code><code class="descname">get_piece_index</code><span class="sig-paren">(</span><em>boundaries</em>, <em>coordinate</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/fake_image/piecewise_psf.html#get_piece_index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.fake_image.piecewise_psf.get_piece_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the index of the piece along one axis containing the given coord.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>boundaries</strong> – The offsets relative to the PSF center where different
+PSF pieces meet along the direction in which we are trying to locate
+the piece index.</li>
+<li><strong>coordinate</strong> – The coordinate we are trying to find the piece index of.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><dl class="docutils">
+<dt>The index along the selected coordinate of the piece</dt>
+<dd><p class="first last">containing x.</p>
+</dd>
+</dl>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ind</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
 </div>
 
 
@@ -210,7 +320,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Kaloyan Penev.
+        &copy; Copyright 2018, Kaloyan Penev
 
     </p>
   </div>
@@ -229,28 +339,18 @@
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
 
   
 
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
 
   <script type="text/javascript">
       jQuery(function () {

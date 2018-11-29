@@ -24,9 +24,9 @@
 
   
 
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
   <link rel="stylesheet" href="../_static/unlimited_width.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -85,6 +85,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../python_interface/index.html">Python Interface Documentation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">Python Package Implementation</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">superphot package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#class-inheritance-diagram">Class Inheritance Diagram</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="superphot.fake_image.html">superphot.fake_image package</a></li>
 </ul>
@@ -93,6 +94,7 @@
 <li class="toctree-l4"><a class="reference internal" href="superphot.background.html">superphot.background module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="superphot.fit_star_shape.html">superphot.fit_star_shape module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="superphot.smooth_dependence.html">superphot.smooth_dependence module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="superphot.subpixphot.html">superphot.subpixphot module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="superphot.superphot_io_tree.html">superphot.superphot_io_tree module</a></li>
 </ul>
 </li>
@@ -188,20 +190,854 @@
     margin-right: 4px;  /* make room for the exclamation icon */
 }
 </style>
-<div class="section" id="superphot-package">
-<h1>superphot package<a class="headerlink" href="#superphot-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-superphot">
+<span id="superphot-package"></span><h1>superphot package<a class="headerlink" href="#module-superphot" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="class-inheritance-diagram">
+<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this headline">¶</a></h2>
+<div class="graphviz"><img src="../_images/inheritance-4d5040003f56e36a989c0efc2a01c89b5aac6d90.png" alt="Inheritance diagram of BackgroundExtractor, FitStarShape, SmoothDependence, SubPixPhot" usemap="#inheritance72684cd3ab" class="inheritance graphviz" /></div>
+<map id="inheritance72684cd3ab" name="inheritance72684cd3ab">
+<area shape="rect" id="node1" href="superphot.background.html#superphot.background.BackgroundExtractor" target="_top" title="Measure the background level for each source in an image." alt="" coords="5,5,312,31"/>
+<area shape="rect" id="node2" href="superphot.fit_star_shape.html#superphot.fit_star_shape.FitStarShape" target="_top" title="Fit for the PSF/PRF of stars and their flux." alt="" coords="336,5,603,31"/>
+<area shape="rect" id="node3" href="superphot.smooth_dependence.html#superphot.smooth_dependence.SmoothDependence" target="_top" title="Utilities for imposing smooth depnedence of one quantity on others." alt="" coords="627,5,989,31"/>
+<area shape="rect" id="node4" href="superphot.subpixphot.html#superphot.subpixphot.SubPixPhot" target="_top" title="Use sub&#45;pixel aware aperture photomotre to measure fluxes of sources." alt="" coords="1013,5,1253,31"/>
+</map><p>SuperPhot python interface.</p>
+<dl class="class">
+<dt id="superphot.BackgroundExtractor">
+<em class="property">class </em><code class="descclassname">superphot.</code><code class="descname">BackgroundExtractor</code><span class="sig-paren">(</span><em>image</em>, <em>inner_radius</em>, <em>outer_radius</em>, <em>error_confidence=0.68</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/background.html#BackgroundExtractor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.BackgroundExtractor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<div class="graphviz"><img src="../_images/inheritance-5c166647fa16d2dd523be4e746a668078f6eca56.png" alt="Inheritance diagram of superphot.BackgroundExtractor" usemap="#inheritance38b9cb4962" class="inheritance graphviz" /></div>
+<map id="inheritance38b9cb4962" name="inheritance38b9cb4962">
+<area shape="rect" id="node1" href="superphot.background.html#superphot.background.BackgroundExtractor" target="_top" title="Measure the background level for each source in an image." alt="" coords="5,5,312,31"/>
+</map><p>Measure the background level for each source in an image.</p>
+<dl class="attribute">
+<dt id="superphot.BackgroundExtractor.image">
+<code class="descname">image</code><a class="headerlink" href="#superphot.BackgroundExtractor.image" title="Permalink to this definition">¶</a></dt>
+<dd><p>The image being processed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="superphot.BackgroundExtractor.inner_radius">
+<code class="descname">inner_radius</code><a class="headerlink" href="#superphot.BackgroundExtractor.inner_radius" title="Permalink to this definition">¶</a></dt>
+<dd><p>The size of the aperture aronud each source within
+which pixels are excluded from background measurement.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="superphot.BackgroundExtractor.outer_radius">
+<code class="descname">outer_radius</code><a class="headerlink" href="#superphot.BackgroundExtractor.outer_radius" title="Permalink to this definition">¶</a></dt>
+<dd><p>The outer rim of the aperture around each source within
+which unrejected pixels are included in the background measurement.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="superphot.BackgroundExtractor.error_confidence">
+<code class="descname">error_confidence</code><a class="headerlink" href="#superphot.BackgroundExtractor.error_confidence" title="Permalink to this definition">¶</a></dt>
+<dd><p>The confidence level to use for estimating the
+background error.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="superphot.BackgroundExtractor.__call__">
+<code class="descname">__call__</code><span class="sig-paren">(</span><em>source_x</em>, <em>source_y</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/background.html#BackgroundExtractor.__call__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.BackgroundExtractor.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Measure the background under the sources with the given coordinates.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>source_x</strong> – The <cite>x</cite> coordinates of the sources within the image.</li>
+<li><strong>source_y</strong> – The <cite>y</cite> coordinates of the sources within the image.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><dl class="docutils">
+<dt>numpy.array:</dt>
+<dd><p class="first last">The estimate of the background under each source in the same
+order as the input sources.</p>
+</dd>
+<dt>numpy.array:</dt>
+<dd><p class="first last">The estimate of the uncertainty in the background under each
+source in the same order as the input sources.</p>
+</dd>
+<dt>numpy.array:</dt>
+<dd><p class="first last">The number of pixels which were used to derive the
+background and its uncertainty.</p>
+</dd>
+</dl>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.7)">tuple</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="superphot.BackgroundExtractor.__del__">
+<code class="descname">__del__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/background.html#BackgroundExtractor.__del__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.BackgroundExtractor.__del__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Destroy the image and extractor created in <a class="reference internal" href="#superphot.BackgroundExtractor.__init__" title="superphot.BackgroundExtractor.__init__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="superphot.BackgroundExtractor.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>image</em>, <em>inner_radius</em>, <em>outer_radius</em>, <em>error_confidence=0.68</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/background.html#BackgroundExtractor.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.BackgroundExtractor.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a background extractor with the given parameters.</p>
+<p>Args: see class attributes.</p>
+<p>Returns: None</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="superphot.FitStarShape">
+<em class="property">class </em><code class="descclassname">superphot.</code><code class="descname">FitStarShape</code><span class="sig-paren">(</span><em>*</em>, <em>mode</em>, <em>shape_terms</em>, <em>grid</em>, <em>initial_aperture</em>, <em>**other_configuration</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/fit_star_shape.html#FitStarShape"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.FitStarShape" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<div class="graphviz"><img src="../_images/inheritance-be71eaaf9368cae707a8b27d2032bf04e57ca67d.png" alt="Inheritance diagram of superphot.FitStarShape" usemap="#inheritance045ece0252" class="inheritance graphviz" /></div>
+<map id="inheritance045ece0252" name="inheritance045ece0252">
+<area shape="rect" id="node1" href="superphot.fit_star_shape.html#superphot.fit_star_shape.FitStarShape" target="_top" title="Fit for the PSF/PRF of stars and their flux." alt="" coords="5,5,272,31"/>
+</map><p>Fit for the PSF/PRF of stars and their flux.</p>
+<p>The PSF and PRF describe the distribution of light from a point source at
+infinity on the imaging device pixels.</p>
+<blockquote>
+<div><ul class="simple">
+<li>PSF is the distribution of light produced by the optical system in the
+plane of the detector for a point source at infinity.</li>
+<li>PRF is the response of a detector pixel at some offset from the
+center of the source. That is, the PRF is the PSF convolved with
+the sensitivity of detector pixels.</li>
+</ul>
+</div></blockquote>
+<p>Both representations use a general piece-wise polynomial model in which the
+area around the source location is split into a rectangular, but in general
+irregular, grid of cells. Over each cell the PSF/PRF is modeled as a
+bi-cubic polynomial. The resulting function is constraned to have continuous
+values, first order derivatives and x-y cross-derivative across cell
+boundaries. Further, it’s value, first derivative and the x-y cross
+derivative are contsrainted to go to zero on the outside boundaries of the
+grid.</p>
+<span class="target" id="attributes"></span><dl class="attribute">
+<dt id="superphot.FitStarShape._library_psf_fitter">
+<code class="descname">_library_psf_fitter</code><a class="headerlink" href="#superphot.FitStarShape._library_psf_fitter" title="Permalink to this definition">¶</a></dt>
+<dd><p>The library object for carrying out PSF/PRF
+fitting.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="superphot.FitStarShape._library_configuration">
+<code class="descname">_library_configuration</code><a class="headerlink" href="#superphot.FitStarShape._library_configuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Library configuration object set per the
+current <a class="reference internal" href="#superphot.FitStarShape.configuration" title="superphot.FitStarShape.configuration"><code class="xref py py-attr docutils literal notranslate"><span class="pre">configuration</span></code></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="superphot.FitStarShape._result_tree">
+<code class="descname">_result_tree</code><a class="headerlink" href="#superphot.FitStarShape._result_tree" title="Permalink to this definition">¶</a></dt>
+<dd><p>The SuperPhotIOTree instance containing the last
+fittintg results, on None, if no fitting has been performed yet.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="superphot.FitStarShape.mode">
+<code class="descname">mode</code><a class="headerlink" href="#superphot.FitStarShape.mode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Are we doing ‘PSF’ or ‘PRF’ fitting (case
+insensitive).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="superphot.FitStarShape.configuration">
+<code class="descname">configuration</code><a class="headerlink" href="#superphot.FitStarShape.configuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>The configuraiton for how to carry out PSF/PRF
+fitting. The following keys are used (others are ignored by this
+class):</p>
+<dl class="docutils">
+<dt>mode (str):</dt>
+<dd>What kind of fitting to do ‘PSF’ or ‘PRF’ (case insensitive).</dd>
+<dt>shape_terms (str):</dt>
+<dd><p class="first">The terms the PSF is allowed to depend on. The EBNF grammar
+defining the language for this parameter is:</p>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">*</span> <span class="n">items</span> <span class="ow">in</span> <span class="n">angle</span> <span class="n">brackets</span> <span class="p">(</span><span class="o">&lt;</span> <span class="ow">or</span> <span class="o">&gt;</span><span class="p">)</span> <span class="n">are</span> <span class="n">assumed</span> <span class="n">to</span> <span class="n">be</span>     <span class="o">*</span><span class="p">)</span>
+<span class="p">(</span><span class="o">*</span> <span class="n">obvious</span> <span class="ow">and</span> <span class="n">thus</span> <span class="n">are</span> <span class="ow">not</span> <span class="n">defined</span><span class="o">.</span>                      <span class="o">*</span><span class="p">)</span>
+
+<span class="n">termchar</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">ascii</span> <span class="n">character</span><span class="o">&gt;</span> <span class="o">-</span> <span class="s2">&quot;,&quot;</span> <span class="o">-</span> <span class="s2">&quot;}&quot;</span> <span class="p">;</span>
+
+<span class="p">(</span><span class="o">*</span> <span class="n">mathematical</span> <span class="n">expressions</span>  <span class="n">involving</span> <span class="n">variables</span><span class="p">,</span>         <span class="o">*</span><span class="p">)</span>
+<span class="p">(</span><span class="o">*</span> <span class="n">floating</span> <span class="n">point</span> <span class="n">numbers</span> <span class="ow">and</span> <span class="n">pi</span><span class="o">.</span> <span class="n">The</span> <span class="n">complete</span> <span class="nb">list</span> <span class="n">of</span>    <span class="o">*</span><span class="p">)</span>
+<span class="p">(</span><span class="o">*</span> <span class="n">mathematical</span> <span class="n">functions</span> <span class="kn">from</span> <span class="nn">c</span><span class="o">++</span><span class="mi">99</span><span class="s1">&#39;s cmath library are  *)</span>
+<span class="p">(</span><span class="o">*</span> <span class="n">supported</span><span class="o">.</span>                                             <span class="o">*</span><span class="p">)</span>
+<span class="n">term</span> <span class="o">=</span> <span class="n">termchar</span> <span class="p">,</span> <span class="p">{</span> <span class="n">termchar</span> <span class="p">}</span> <span class="p">;</span>
+
+
+<span class="p">(</span><span class="o">*</span> <span class="n">simple</span> <span class="n">listing</span> <span class="n">of</span> <span class="n">terms</span> <span class="n">to</span> <span class="n">include</span><span class="o">.</span>                    <span class="o">*</span><span class="p">)</span>
+<span class="nb">list</span> <span class="o">=</span> <span class="s2">&quot;{&quot;</span> <span class="p">,</span> <span class="n">term</span> <span class="p">,</span> <span class="p">{</span> <span class="s2">&quot;,&quot;</span> <span class="p">,</span> <span class="n">term</span> <span class="p">}</span> <span class="p">,</span> <span class="s2">&quot;}&quot;</span> <span class="p">;</span>
+
+<span class="p">(</span><span class="o">*</span> <span class="n">Expands</span> <span class="n">to</span> <span class="nb">all</span> <span class="n">polynomial</span> <span class="n">terms</span> <span class="n">of</span> <span class="n">up</span> <span class="n">to</span> <span class="n">combined</span>      <span class="o">*</span><span class="p">)</span>
+<span class="p">(</span><span class="o">*</span> <span class="n">order</span> <span class="o">&lt;</span><span class="n">integer</span><span class="o">&gt;</span> <span class="n">of</span> <span class="n">the</span> <span class="n">entries</span> <span class="ow">in</span> <span class="nb">list</span>                 <span class="o">*</span><span class="p">)</span>
+<span class="n">poly</span> <span class="o">=</span> <span class="s2">&quot;O&quot;</span> <span class="p">,</span> <span class="o">&lt;</span><span class="n">integer</span><span class="o">&gt;</span> <span class="p">,</span> <span class="nb">list</span> <span class="p">;</span>
+
+<span class="nb">set</span> <span class="o">=</span> <span class="nb">list</span> <span class="o">|</span> <span class="n">poly</span> <span class="p">;</span>
+
+
+<span class="p">(</span><span class="o">*</span> <span class="n">expands</span> <span class="n">to</span> <span class="n">the</span> <span class="n">cross</span> <span class="n">product</span> <span class="n">of</span> <span class="nb">all</span> <span class="n">sets</span><span class="o">.</span>              <span class="o">*</span><span class="p">)</span>
+<span class="n">cross</span> <span class="o">=</span> <span class="nb">set</span> <span class="p">,</span> <span class="p">{</span> <span class="s2">&quot;*&quot;</span> <span class="p">,</span> <span class="nb">set</span> <span class="p">}</span> <span class="p">;</span>
+
+
+<span class="p">(</span><span class="o">*</span> <span class="n">merge</span> <span class="n">the</span> <span class="n">terms</span> <span class="n">of</span> <span class="nb">all</span> <span class="n">cross</span> <span class="n">products</span> <span class="n">together</span><span class="o">.</span>        <span class="o">*</span><span class="p">)</span>
+<span class="n">expression</span> <span class="o">=</span> <span class="n">cross</span> <span class="p">,</span> <span class="p">{</span> <span class="s2">&quot;+&quot;</span> <span class="p">,</span> <span class="n">cross</span> <span class="p">}</span> <span class="p">;</span>
+</pre></div>
+</div>
+</dd>
+<dt>grid (list of floats):</dt>
+<dd>A comma separated list of grid boundaries.  Can either be a
+single list, in which case it is used for both the horizontal
+and vertical boundaries. If different splitting is desired in
+the two directions, two lists should be supplied separated by
+<code class="docutils literal notranslate"><span class="pre">;</span></code>. The first list should contain the vertical (x) boundaries
+and the second list gives the horizontal (y) ones.</dd>
+<dt>initial_aperture (float):</dt>
+<dd>This aperture is used to derive an initial guess for the
+amplitudes of sources when fitting for a piecewise bicubic PSF
+model by doing aperture photometry assuming a perfectly flat
+PSF.</dd>
+<dt>subpixmap (2D numpy array):</dt>
+<dd>The sub-pixel map, for PSF fitting only.</dd>
+<dt>smoothing (float):</dt>
+<dd>How much smoothing penalty to impose when fitting the PSF.
+<code class="docutils literal notranslate"><span class="pre">None</span></code> for no smoothing. Value can be both positive and
+negative and will always result in smoothing (less for negative
+values).</dd>
+<dt>max_chi2 (float):</dt>
+<dd>The value of the reduced chi squared above which sources are
+excluded from the fit. This can indicate non-point sources or
+sources for which the location is wrong among ohter things.</dd>
+<dt>pixel_rejection_threshold (float):</dt>
+<dd>A number defining individual pixels to exclude from the PSF fit.
+Pixels with fitting residuals (normalized by the standard
+deviation) bigger than this value are excluded. If zero, no
+pixels are rejected.</dd>
+<dt>max_abs_amplitude_change (float):</dt>
+<dd>The absolute root of sum squares tolerance of the source
+amplitude changes in order to declare the piecewise bicubic PSF
+fitting converged.</dd>
+<dt>max_rel_amplitude_change (float):</dt>
+<dd>The relative root of sum squares tolerance of the source
+amplitude changes in order to declare the piecewise bicubic PSF
+fitting converged.</dd>
+<dt>min_convergence_rate (float):</dt>
+<dd>If the rate of convergence falls below this threshold,
+iterations are stopped. The rate is calculated as the fractional
+decrease in the difference between the amplitude change and the
+value when it would stop, as determined by the
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">max_abs_amplitude_change</span></code> and
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">max_rel_amplitude_change</span></code> attributes.</dd>
+<dt>max_iterations (int):</dt>
+<dd>No more than this number if iterations will be performed. If
+convergence is not achieved before then, the latest estimates
+are output and an exception is thrown. A negative value allows
+infinite iterations. A value of zero, along with an initial
+guess for the PSF causes only the amplitudes to be fit for PSF
+fitting photometry with a known PSF. It is an error to pass a
+value of zero for this option and not specify and initial guess
+for the PSF.</dd>
+<dt>gain (float):</dt>
+<dd>The gain in electrons per ADU to assume for the input images.</dd>
+<dt>cover_grid (bool):</dt>
+<dd>If this option is true, all pixels that at least partially
+overlap with the grid are assigned to the corresponding source.
+This option is ignored for sdk PSF models.</dd>
+<dt>src_min_signal_to_noise (float):</dt>
+<dd>How far above the background (in units of RMS) should pixels be
+to still be considered part of a source. Ignored if the
+piecewise bibucic PSF grid is used to select source pixels
+(cover-bicubic-grid option).</dd>
+<dt>src_max_aperture (float):</dt>
+<dd>If this option has a positive value, pixels are assigned to
+sources in circular apertures (the smallest such that all pixels
+that pass the signal to noise cut are still assigned to the
+source). If an aperture larger than this value is required, an
+exception is thrown.</dd>
+<dt>src_max_sat_frac (float):</dt>
+<dd>If more than this fraction of the pixels assigned to a source
+are saturated, the source is excluded from the fit.</dd>
+<dt>src_min_pix (int):</dt>
+<dd>The minimum number of pixels that must be assigned to a source
+in order to include the source is the PSF fit.</dd>
+<dt>src_max_pix (int):</dt>
+<dd>The maximum number of pixels that car be assigned to a source
+before excluding the source from the PSF fit.</dd>
+<dt>src_max_count (int):</dt>
+<dd>The maximum number of sources to include in the fit for the PSF
+shape. The rest of the sources get their amplitudes fit and are
+used to determine the overlaps. Sources are ranked according to
+the sum of (background excess)^2/(pixel variance+background
+variance) of their individual non-saturated pixels.</dd>
+<dt>bg_min_pix (int):</dt>
+<dd>The minimum number of pixels a background estimate must be based
+on in order to include the source in shape fitting.</dd>
+<dt>magnitude_1adu (float):</dt>
+<dd>The magnitude that corresponds to a flux of 1ADU.</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p class="rubric">Example</p>
+<p>Create and configure a PRF fitting object, allowing up to third order
+dependence on image position, on a grid which splits the area around the
+source in 16 squares of 2pix by 2pix size each and using an aperture
+with 5 pixel radius for the initial estimate of source amplitudes:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">superphot</span> <span class="k">import</span> <span class="n">FitStarShape</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fitprf</span> <span class="o">=</span> <span class="n">FitStarShape</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;prf&#39;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                      <span class="n">shape_terms</span><span class="o">=</span><span class="s1">&#39;O3{x, y}&#39;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                      <span class="n">grid</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">4.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>                      <span class="n">initial_aperture</span><span class="o">=</span><span class="mf">5.0</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="superphot.FitStarShape.__del__">
+<code class="descname">__del__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/fit_star_shape.html#FitStarShape.__del__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.FitStarShape.__del__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Destroy the configuration object created in <a class="reference internal" href="#superphot.FitStarShape.__init__" title="superphot.FitStarShape.__init__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="superphot.FitStarShape.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>*</em>, <em>mode</em>, <em>shape_terms</em>, <em>grid</em>, <em>initial_aperture</em>, <em>**other_configuration</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/fit_star_shape.html#FitStarShape.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.FitStarShape.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set-up an object ready to perform PSF/PRF fitting.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>the configuration attributes of the class can be configured by</strong> (<em>All</em>) – </li>
+<li><strong>them as keyword arguments.</strong> (<em>passing</em>) – </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="superphot.FitStarShape._format_config">
+<em class="property">static </em><code class="descname">_format_config</code><span class="sig-paren">(</span><em>param_value</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/fit_star_shape.html#FitStarShape._format_config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.FitStarShape._format_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Format config param for passing to SuperPhot PSF fitting lib.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="superphot.FitStarShape.configure">
+<code class="descname">configure</code><span class="sig-paren">(</span><em>**configuration</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/fit_star_shape.html#FitStarShape.configure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.FitStarShape.configure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Modify the currently defined configuration.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>**configuration</strong> – See <a class="reference internal" href="#superphot.FitStarShape.configuration" title="superphot.FitStarShape.configuration"><code class="xref py py-attr docutils literal notranslate"><span class="pre">configuration</span></code></a>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="superphot.FitStarShape.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>image_sources</em>, <em>backgrounds</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/fit_star_shape.html#FitStarShape.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.FitStarShape.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit for the shape of the sources in a collection of imeges.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>image_sources</strong> (<em>list of 4-tuples</em>) – <p>Each entry consists of:</p>
+<ol class="arabic">
+<li>The pixel values of the calibratred image</li>
+<li>The error estimates of the pixel values</li>
+<li>Mask flags of the pixel values.</li>
+<li>Sources to process, defining at least the following
+quantities:<blockquote>
+<div><ul>
+<li><strong>ID</strong> (string): some unique identifier for the source</li>
+<li><strong>x</strong> (float): The x coordinate of the source
+center in pixels</li>
+<li><strong>y</strong> (float): See <code class="docutils literal notranslate"><span class="pre">x</span></code></li>
+</ul>
+</div></blockquote>
+<p>May define additional quantities on which the PSF shape is
+allowed to depend.</p>
+<p>The source list can be either a numy record array with field
+names as keys or a dictionary with field names as keys and
+1-D numpy arrays of identical lengths as values.</p>
+</li>
+</ol>
+</li>
+<li><strong>backgrounds</strong> – The measured backgrounds under the sources (instance
+of <a class="reference internal" href="#superphot.BackgroundExtractor" title="superphot.BackgroundExtractor"><code class="xref py py-class docutils literal notranslate"><span class="pre">BackgroundExtractor</span></code></a>).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A SubPixPhot IO tree containing all the newly derived results.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">_c_h5io_data_tree_p</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="superphot.SmoothDependence">
+<em class="property">class </em><code class="descclassname">superphot.</code><code class="descname">SmoothDependence</code><span class="sig-paren">(</span><em>expression</em>, <em>parameters</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/smooth_dependence.html#SmoothDependence"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.SmoothDependence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<div class="graphviz"><img src="../_images/inheritance-9dd41eefdaef919bf668e8fd6c31f1b2ceff3564.png" alt="Inheritance diagram of superphot.SmoothDependence" usemap="#inheritancec1ba35544c" class="inheritance graphviz" /></div>
+<map id="inheritancec1ba35544c" name="inheritancec1ba35544c">
+<area shape="rect" id="node1" href="superphot.smooth_dependence.html#superphot.smooth_dependence.SmoothDependence" target="_top" title="Utilities for imposing smooth depnedence of one quantity on others." alt="" coords="5,5,367,31"/>
+</map><p>Utilities for imposing smooth depnedence of one quantity on others.</p>
+<dl class="attribute">
+<dt id="superphot.SmoothDependence.expression">
+<code class="descname">expression</code><a class="headerlink" href="#superphot.SmoothDependence.expression" title="Permalink to this definition">¶</a></dt>
+<dd><p>The expression defining the dependence of
+parameters on a set of variables.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="superphot.SmoothDependence.terms">
+<code class="descname">terms</code><a class="headerlink" href="#superphot.SmoothDependence.terms" title="Permalink to this definition">¶</a></dt>
+<dd><p>The terms the depnedence expression expands to.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="superphot.SmoothDependence.parameters">
+<code class="descname">parameters</code><a class="headerlink" href="#superphot.SmoothDependence.parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>The
+parameters that depend smoothly on the variables. If dict-like or
+record array, indexed by the names of the parameters and containing
+the corresponding expansion coefficients. If array, the first
+dimension is assumed to contain the expansion coefficients.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">dict-like, record array or #-D array, #&gt;=2</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<ul>
+<li><p class="first">Find all terms combining up to x^3 and y^4, with only even powers of y
+allowed:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">superphot</span> <span class="k">import</span> <span class="n">SmoothDependence</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">term_list</span> <span class="o">=</span> <span class="n">SmoothDependence</span><span class="o">.</span><span class="n">expand_expression</span><span class="p">(</span><span class="s1">&#39;O3</span><span class="si">{x}</span><span class="s1"> * O2{y^2}&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Evaluate all terms in a polynomial of x and y of up to combined third
+order:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">superphot</span> <span class="k">import</span> <span class="n">SmoothDependence</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">term_values</span> <span class="o">=</span> <span class="n">SmoothDependence</span><span class="o">.</span><span class="n">evaluate_terms</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s1">&#39;O3{x, y}&#39;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">x</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">10.0</span><span class="p">),</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">y</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Define two unnamed parameters smoothly depending on x:</p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="math notranslate nohighlight">\(2.0 x + 4.0 x^2 + 6.0 x^3\)</span></li>
+<li><span class="math notranslate nohighlight">\(1.0 + 3.0 x + 5.0 x^2 + 7.0 x^3\)</span></li>
+</ul>
+</div></blockquote>
+<p>and evaluate them for <span class="math notranslate nohighlight">\(x \in \{0, 0.1, 0.2, 0.3, 0.4\}\)</span>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">superphot</span> <span class="k">import</span> <span class="n">SmoothDependence</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parameters</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">8.0</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">smooth</span> <span class="o">=</span> <span class="n">SmoothDependence</span><span class="p">(</span><span class="s1">&#39;O3</span><span class="si">{x}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">parameters</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">param_values</span> <span class="o">=</span> <span class="n">smooth</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">))</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Same as above, but this time name the parameters <cite>a</cite> and <cite>b</cite>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">superphot</span> <span class="k">import</span> <span class="n">SmoothDependence</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parameters</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="nb">float</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="nb">float</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">smooth</span> <span class="o">=</span> <span class="n">SmoothDependence</span><span class="p">(</span><span class="s1">&#39;O3</span><span class="si">{x}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">parameters</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">param_values</span> <span class="o">=</span> <span class="n">smooth</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">))</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<dl class="method">
+<dt id="superphot.SmoothDependence.__call__">
+<code class="descname">__call__</code><span class="sig-paren">(</span><em>**indep_var</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/smooth_dependence.html#SmoothDependence.__call__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.SmoothDependence.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the <a class="reference internal" href="#superphot.SmoothDependence.parameters" title="superphot.SmoothDependence.parameters"><code class="xref py py-attr docutils literal notranslate"><span class="pre">parameters</span></code></a> for the given variable values.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>**indep_var</strong> (<em>1D arrays</em>) – The values of the independent variables
+to evaluate the dependence at. Must all have the same length.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The values of the parameters evaluated for the indepnedent
+variable values supplied.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">(same type as <a class="reference internal" href="#superphot.SmoothDependence.parameters" title="superphot.SmoothDependence.parameters"><code class="xref py py-attr docutils literal notranslate"><span class="pre">parameters</span></code></a> attribute)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="superphot.SmoothDependence.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>expression</em>, <em>parameters</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/smooth_dependence.html#SmoothDependence.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.SmoothDependence.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set-up a smooth depnednece of a set of parameters on a set of variables.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>expression</strong> – See <a class="reference internal" href="#superphot.SmoothDependence.expression" title="superphot.SmoothDependence.expression"><code class="xref py py-attr docutils literal notranslate"><span class="pre">expression</span></code></a> attribute.</li>
+<li><strong>parameters</strong> – See <a class="reference internal" href="#superphot.SmoothDependence.parameters" title="superphot.SmoothDependence.parameters"><code class="xref py py-attr docutils literal notranslate"><span class="pre">parameters</span></code></a> attribute.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="superphot.SmoothDependence.evaluate_terms">
+<em class="property">classmethod </em><code class="descname">evaluate_terms</code><span class="sig-paren">(</span><em>terms</em>, <em>**indep_var</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/smooth_dependence.html#SmoothDependence.evaluate_terms"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.SmoothDependence.evaluate_terms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluate the given terms or a term expression for the given sources.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>terms</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em> or </em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>]</em>) – Either a single string giving an expression
+which is expanded to a list of terms using expand_expression(),
+or directly a list of terms to evaluate.</li>
+<li><strong>**indep_var</strong> (<em>1D numpy array</em>) – The values of the independent
+variables involved in terms. The argument names must match the
+names used in <cite>terms</cite>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The values of the terms for each entry in indep_var. Each column
+contains a different term.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">2D numpy array</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="superphot.SmoothDependence.expand_expression">
+<em class="property">classmethod </em><code class="descname">expand_expression</code><span class="sig-paren">(</span><em>expression</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/smooth_dependence.html#SmoothDependence.expand_expression"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.SmoothDependence.expand_expression" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the terms expression expands to per SuperPhot smooth grammar.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>expression</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.7)"><em>bytes</em></a>) – The expression to parse.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">List of the term the expression expands to.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="superphot.SubPixPhot">
+<em class="property">class </em><code class="descclassname">superphot.</code><code class="descname">SubPixPhot</code><span class="sig-paren">(</span><em>**configuration</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/subpixphot.html#SubPixPhot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.SubPixPhot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<div class="graphviz"><img src="../_images/inheritance-e2aee43b6bfcc271a32007f311d14469a26d6f16.png" alt="Inheritance diagram of superphot.SubPixPhot" usemap="#inheritancef91020ed5b" class="inheritance graphviz" /></div>
+<map id="inheritancef91020ed5b" name="inheritancef91020ed5b">
+<area shape="rect" id="node1" href="superphot.subpixphot.html#superphot.subpixphot.SubPixPhot" target="_top" title="Use sub&#45;pixel aware aperture photomotre to measure fluxes of sources." alt="" coords="5,5,245,31"/>
+</map><p>Use sub-pixel aware aperture photomotre to measure fluxes of sources.</p>
+<dl class="attribute">
+<dt id="superphot.SubPixPhot._library_configuration">
+<code class="descname">_library_configuration</code><a class="headerlink" href="#superphot.SubPixPhot._library_configuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>The library
+configuration object to use the next aperture photometry
+measurement.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">_c_subpixphot_configuration</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="superphot.SubPixPhot._result_tree">
+<code class="descname">_result_tree</code><a class="headerlink" href="#superphot.SubPixPhot._result_tree" title="Permalink to this definition">¶</a></dt>
+<dd><p>The SuperPhotIOTree instance
+containing PSF fitting and aperture photometry information from the
+last aperture photomtry measurement, or None if no photometry has
+been done yet.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">_c_h5io_data_tree_p</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="superphot.SubPixPhot._library_subpix_map">
+<code class="descname">_library_subpix_map</code><a class="headerlink" href="#superphot.SubPixPhot._library_subpix_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>The library object
+representing the currently set sub-pixel map.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">_c_core_sub_pixel_map_p</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="superphot.SubPixPhot.configuration">
+<code class="descname">configuration</code><a class="headerlink" href="#superphot.SubPixPhot.configuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>The congfiguration for how to perform the
+next aperture photometry. The following keys are used (others are
+ignored by this class).</p>
+<dl class="docutils">
+<dt>subpixmap (2D numpy array):</dt>
+<dd>The sub-pixel map to assume.</dd>
+<dt>apertures ([float, …]):</dt>
+<dd>A list of the apertures to use.</dd>
+<dt>gain (float):</dt>
+<dd>The gain to assume for the input image.</dd>
+<dt>magnitude_1adu (float):</dt>
+<dd>The magnitude that corresponds to a flux of 1ADU.</dd>
+<dt>const_error (float):</dt>
+<dd>A constant that gets added to all error estimates.</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="superphot.SubPixPhot.image">
+<code class="descname">image</code><a class="headerlink" href="#superphot.SubPixPhot.image" title="Permalink to this definition">¶</a></dt>
+<dd><p>The last image for which aperture photometry was
+extracted. Contains the following entries:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>values:</dt>
+<dd>The calibrated pixel values.</dd>
+<dt>errors:</dt>
+<dd>Error estimates for the entries in values.</dd>
+<dt>mask:</dt>
+<dd>Bitmask flags indicating any known problems with image
+pixels.</dd>
+</dl>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="superphot.SubPixPhot.__call__">
+<code class="descname">__call__</code><span class="sig-paren">(</span><em>pixel_values</em>, <em>pixel_errors</em>, <em>pixel_flags</em>, <em>fitpsf_io_tree</em>, <em>image_index=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/subpixphot.html#SubPixPhot.__call__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.SubPixPhot.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Measure the fluxes of all sources in an image using aperture photometry.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pixel_values</strong> (<em>2-D float numpy array</em>) – The calibrated values of
+the pixels in the image.</li>
+<li><strong>pixel_errors</strong> (<em>2-D float numpy array</em>) – Error estimates of the
+pixel values</li>
+<li><strong>pixel_flags</strong> (<em>2-D float byte array</em>) – Bitmask flagging any known
+issues with image pixels (e.g. saturation, hot pixels, etc.).</li>
+<li><strong>fitsf_io_tree</strong> (<em>_c_h5io_data_tree_p</em>) – The result tree returned by
+fit_star_shape.fit(). On output, this variable also contains the
+newly derived aperture photometry measurements.</li>
+<li><strong>image_index</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – The image index within the result tree
+corresponding to the input image. This is the index of the image
+within the list of images passed to <a class="reference internal" href="superphot.fit_star_shape.html#module-superphot.fit_star_shape" title="superphot.fit_star_shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">fit_star_shape</span></code></a>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">None. However, the <code class="docutils literal notranslate"><span class="pre">fitpsf_io_tree</span></code> argument is updated to
+include the newly measured fluxes.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="superphot.SubPixPhot.__del__">
+<code class="descname">__del__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/subpixphot.html#SubPixPhot.__del__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.SubPixPhot.__del__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Destroy any library objects created by this object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="superphot.SubPixPhot.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>**configuration</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/subpixphot.html#SubPixPhot.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.SubPixPhot.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prepare an object for measuring fluxes using aperture photometry.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>**configuration</strong> – See <a class="reference internal" href="#superphot.SubPixPhot.configuration" title="superphot.SubPixPhot.configuration"><code class="xref py py-attr docutils literal notranslate"><span class="pre">configuration</span></code></a>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="superphot.SubPixPhot._format_config">
+<em class="property">static </em><code class="descname">_format_config</code><span class="sig-paren">(</span><em>param_value</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/subpixphot.html#SubPixPhot._format_config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.SubPixPhot._format_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Format config param for passing to SuperPhot aperture photometry func.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>param_value</strong> (<em>pair of values</em>) – One of the recognized keys from
+<a class="reference internal" href="#superphot.SubPixPhot.configuration" title="superphot.SubPixPhot.configuration"><code class="xref py py-attr docutils literal notranslate"><span class="pre">configuration</span></code></a> and the value it should be set to.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
+<li>The name of the option corresponding to the configuration
+parameter being set.</li>
+<li>an ascii string representing the value
+in the format expected by the configuration file parser of the
+subpixphot tool.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.7)">bytes</a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.7)">bytes</a>)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="superphot.SubPixPhot.configure">
+<code class="descname">configure</code><span class="sig-paren">(</span><em>**configuration</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/subpixphot.html#SubPixPhot.configure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.SubPixPhot.configure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Modify the currently defined configuration.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>**configuration</strong> – See <a class="reference internal" href="#superphot.SubPixPhot.configuration" title="superphot.SubPixPhot.configuration"><code class="xref py py-attr docutils literal notranslate"><span class="pre">configuration</span></code></a>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
 <div class="section" id="subpackages">
 <h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="superphot.fake_image.html">superphot.fake_image package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="superphot.fake_image.html#submodules">Submodules</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="superphot.fake_image.bipolynomial_psf_piece.html">superphot.fake_image.bipolynomial_psf_piece module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="superphot.fake_image.image.html">superphot.fake_image.image module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="superphot.fake_image.piecewise_bicubic_psf.html">superphot.fake_image.piecewise_bicubic_psf module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="superphot.fake_image.piecewise_psf.html">superphot.fake_image.piecewise_psf module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="superphot.fake_image.psf_base.html">superphot.fake_image.psf_base module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="superphot.fake_image.psf_piece.html">superphot.fake_image.psf_piece module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="superphot.fake_image.bipolynomial_psf_piece.html">superphot.fake_image.bipolynomial_psf_piece module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="superphot.fake_image.bipolynomial_psf_piece.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="superphot.fake_image.image.html">superphot.fake_image.image module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="superphot.fake_image.image.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="superphot.fake_image.piecewise_bicubic_psf.html">superphot.fake_image.piecewise_bicubic_psf module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="superphot.fake_image.piecewise_bicubic_psf.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="superphot.fake_image.piecewise_psf.html">superphot.fake_image.piecewise_psf module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="superphot.fake_image.piecewise_psf.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="superphot.fake_image.psf_base.html">superphot.fake_image.psf_base module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="superphot.fake_image.psf_base.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="superphot.fake_image.psf_piece.html">superphot.fake_image.psf_piece module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="superphot.fake_image.psf_piece.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -213,10 +1049,26 @@
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="superphot.background.html">superphot.background module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="superphot.fit_star_shape.html">superphot.fit_star_shape module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="superphot.smooth_dependence.html">superphot.smooth_dependence module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="superphot.superphot_io_tree.html">superphot.superphot_io_tree module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="superphot.background.html">superphot.background module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="superphot.background.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="superphot.fit_star_shape.html">superphot.fit_star_shape module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="superphot.fit_star_shape.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="superphot.smooth_dependence.html">superphot.smooth_dependence module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="superphot.smooth_dependence.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="superphot.subpixphot.html">superphot.subpixphot module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="superphot.subpixphot.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="superphot.superphot_io_tree.html">superphot.superphot_io_tree module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="superphot.superphot_io_tree.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -242,7 +1094,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Kaloyan Penev.
+        &copy; Copyright 2018, Kaloyan Penev
 
     </p>
   </div>
@@ -261,28 +1113,18 @@
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
 
   
 
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
 
   <script type="text/javascript">
       jQuery(function () {

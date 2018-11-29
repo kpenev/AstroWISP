@@ -24,9 +24,9 @@
 
   
 
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
   <link rel="stylesheet" href="../_static/unlimited_width.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -187,8 +187,57 @@
     margin-right: 4px;  /* make room for the exclamation icon */
 }
 </style>
-<div class="section" id="tests-test-fit-star-shape-utils-module">
-<h1>tests.test_fit_star_shape.utils module<a class="headerlink" href="#tests-test-fit-star-shape-utils-module" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-tests.test_fit_star_shape.utils">
+<span id="tests-test-fit-star-shape-utils-module"></span><h1>tests.test_fit_star_shape.utils module<a class="headerlink" href="#module-tests.test_fit_star_shape.utils" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="class-inheritance-diagram">
+<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this headline">¶</a></h2>
+<div class="graphviz"><img src="../_images/inheritance-79001489d7d9c059de27b21bd0c5f8d4bf999e0f.png" alt="Inheritance diagram of Image, c_double" usemap="#inheritance60336ee2d5" class="inheritance graphviz" /></div>
+<map id="inheritance60336ee2d5" name="inheritance60336ee2d5">
+<area shape="rect" id="node3" href="../_implementation/superphot.fake_image.image.html#superphot.fake_image.image.Image" target="_top" title="A base class for fake images." alt="" coords="86,79,345,104"/>
+</map><p>A collection of functions used by the fit_star_shape unit tests.</p>
+<dl class="function">
+<dt id="tests.test_fit_star_shape.utils.make_image_and_source_list">
+<code class="descclassname">tests.test_fit_star_shape.utils.</code><code class="descname">make_image_and_source_list</code><span class="sig-paren">(</span><em>sources</em>, <em>extra_variables</em>, <em>subpix_map</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_fit_star_shape/utils.html#make_image_and_source_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_fit_star_shape.utils.make_image_and_source_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an image and a list of the sources in it ready for psf fitting.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>sources</strong> – <p>A list of dictionaries with at least the following keywords:</p>
+<blockquote>
+<div><ul>
+<li>x:    The x coordinate of the source center.</li>
+<li>y:    The y coordinate of the source center.</li>
+<li>psf:    An instance of some sub-class of PSFBase giving the
+sources’s PSF. It should already be scaled to the desired
+flux.</li>
+</ul>
+</div></blockquote>
+<p>Additional keywords may be added to the source list and hence
+available as variables for PSF fitting by listing the names in the
+extra_variables argument.</p>
+</li>
+<li><strong>extra_variables</strong> – A list of additional keywords from sources to add to
+the source list and the order in which those should be added. The
+corresponding entries in sources must be floating point values.</li>
+<li><strong>subpix_map</strong> – The sub-pixel map to impose on the image. For more
+details see same name argument of Image.add_source.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The sources added to the image. The fields give the variables
+defined for the sources.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numpy record array</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
 </div>
 
 
@@ -211,7 +260,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Kaloyan Penev.
+        &copy; Copyright 2018, Kaloyan Penev
 
     </p>
   </div>
@@ -230,28 +279,18 @@
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
 
   
 
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
 
   <script type="text/javascript">
       jQuery(function () {

@@ -24,9 +24,9 @@
 
   
 
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
   <link rel="stylesheet" href="../_static/unlimited_width.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -85,7 +85,8 @@
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Python Interface Documentation</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Measuring Background</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fit_star_shape.html">PSF/PRF Fitting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fitpsf_example.html">Example of PSF Fitting Using Mock Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aperture_photometry.html">Aperture Photometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_mock_data.html">Example of PSF Fitting and Aperture Photometry Using Mock Data</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../_implementation/modules.html">Python Package Implementation</a></li>
@@ -187,21 +188,21 @@ excluding pixels too close to other sources. The user specifies two radii:</p>
 <div><ul class="simple">
 <li>Inner radius, defining pixels that are so close to a source that they
 include not just background, but source light. Pixels with centers within
-this radius around each source do not contribute to any source&#8217;s
+this radius around each source do not contribute to any source’s
 background value.</li>
 <li>Outer radius, defining pixels local enough to the source to represent the
-background under it. Each source&#8217;s background is then the median of all
+background under it. Each source’s background is then the median of all
 pixels within this outer radius that are not within the the inner radius
 of this source or any other source.</li>
 </ul>
 </div></blockquote>
 <p>Background measurement is performed using the
-<code class="xref py py-class docutils literal"><span class="pre">superphot.BackgroundExtractor</span></code> class and requires specifying the image,
+<a class="reference internal" href="../_implementation/superphot.html#superphot.BackgroundExtractor" title="superphot.BackgroundExtractor"><code class="xref py py-class docutils literal notranslate"><span class="pre">superphot.BackgroundExtractor</span></code></a> class and requires specifying the image,
 list of source locations, the inner/outer background radii  and returns
 estimates of the background for each source, its error (standard deviation), and
 the number of pixels that participated in the determination of the background
 value and error:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">superphot</span> <span class="k">import</span> <span class="n">BackgroundExtractor</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">superphot</span> <span class="k">import</span> <span class="n">BackgroundExtractor</span>
 <span class="kn">import</span> <span class="nn">numpy.random</span>
 
 <span class="n">image</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
@@ -236,7 +237,7 @@ value and error:</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Kaloyan Penev.
+        &copy; Copyright 2018, Kaloyan Penev
 
     </p>
   </div>
@@ -255,28 +256,18 @@ value and error:</p>
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
 
   
 
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
 
   <script type="text/javascript">
       jQuery(function () {

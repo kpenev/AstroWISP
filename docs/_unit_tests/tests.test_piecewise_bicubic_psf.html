@@ -24,9 +24,9 @@
 
   
 
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
   <link rel="stylesheet" href="../_static/unlimited_width.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -187,8 +187,72 @@
     margin-right: 4px;  /* make room for the exclamation icon */
 }
 </style>
-<div class="section" id="tests-test-piecewise-bicubic-psf-module">
-<h1>tests.test_piecewise_bicubic_psf module<a class="headerlink" href="#tests-test-piecewise-bicubic-psf-module" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-tests.test_piecewise_bicubic_psf">
+<span id="tests-test-piecewise-bicubic-psf-module"></span><h1>tests.test_piecewise_bicubic_psf module<a class="headerlink" href="#module-tests.test_piecewise_bicubic_psf" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="class-inheritance-diagram">
+<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this headline">¶</a></h2>
+<div class="graphviz"><img src="../_images/inheritance-6baf1e21420633bd1d0a6d10c4ebead6f90ca1e4.png" alt="Inheritance diagram of FloatTestCase, PiecewiseBicubicPSF, TestPiecewiseBicubicPSF" usemap="#inheritance0087abd281" class="inheritance graphviz" /></div>
+<map id="inheritance0087abd281" name="inheritance0087abd281">
+<area shape="rect" id="node4" href="../_implementation/superphot.fake_image.psf_base.html#superphot.fake_image.psf_base.PSFBase" target="_top" title="The base class for all supported PSFs." alt="" coords="88,79,377,104"/>
+<area shape="rect" id="node2" href="../_implementation/superphot.fake_image.piecewise_bicubic_psf.html#superphot.fake_image.piecewise_bicubic_psf.PiecewiseBicubicPSF" target="_top" title="A piecewise PSF class where the PSF over each piece is a bi&#45;cubic function." alt="" coords="5,225,460,251"/>
+<area shape="rect" id="node3" href="../_implementation/superphot.fake_image.piecewise_psf.html#superphot.fake_image.piecewise_psf.PiecewisePSF" target="_top" title="Base clas for PSFs defined on a grid of pieces." alt="" coords="55,152,410,177"/>
+<area shape="rect" id="node5" href="#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF" target="_top" title="Make sure the PiecewiseBicubicPSF class functions as expected." alt="" coords="435,152,833,177"/>
+<area shape="rect" id="node6" href="tests.utilities.html#tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="533,79,735,104"/>
+</map><p>Define unittest test case for the PiecewiseBicubicPSF class.</p>
+<dl class="class">
+<dt id="tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF">
+<em class="property">class </em><code class="descclassname">tests.test_piecewise_bicubic_psf.</code><code class="descname">TestPiecewiseBicubicPSF</code><span class="sig-paren">(</span><em>methodName='runTest'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_piecewise_bicubic_psf.html#TestPiecewiseBicubicPSF"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="tests.utilities.html#tests.utilities.FloatTestCase" title="tests.utilities.FloatTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">tests.utilities.FloatTestCase</span></code></a></p>
+<div class="graphviz"><img src="../_images/inheritance-8a31fde6811ab34e85f79d7ef8d99b6b26773312.png" alt="Inheritance diagram of tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF" usemap="#inheritance131314dfe9" class="inheritance graphviz" /></div>
+<map id="inheritance131314dfe9" name="inheritance131314dfe9">
+<area shape="rect" id="node1" href="#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF" target="_top" title="Make sure the PiecewiseBicubicPSF class functions as expected." alt="" coords="5,152,404,177"/>
+<area shape="rect" id="node2" href="tests.utilities.html#tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="104,79,305,104"/>
+</map><p>Make sure the PiecewiseBicubicPSF class functions as expected.</p>
+<dl class="method">
+<dt id="tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.setUp">
+<code class="descname">setUp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_piecewise_bicubic_psf.html#TestPiecewiseBicubicPSF.setUp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.setUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Define a set of picewise PSF grids to use during tests.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_linear">
+<code class="descname">test_linear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_piecewise_bicubic_psf.html#TestPiecewiseBicubicPSF.test_linear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_linear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test PSFs that is are linear functions of x and/or y work.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_one">
+<code class="descname">test_one</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_piecewise_bicubic_psf.html#TestPiecewiseBicubicPSF.test_one"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_one" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make sure that a PSF = 1 everywhere within the grid works.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_pi">
+<code class="descname">test_pi</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_piecewise_bicubic_psf.html#TestPiecewiseBicubicPSF.test_pi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_pi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make sure that a PSF = 1 everywhere within the grid works.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_random_single_patch">
+<code class="descname">test_random_single_patch</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_piecewise_bicubic_psf.html#TestPiecewiseBicubicPSF.test_random_single_patch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_random_single_patch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test PSFs equal to random bi-cubic polynomials.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_zero">
+<code class="descname">test_zero</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_piecewise_bicubic_psf.html#TestPiecewiseBicubicPSF.test_zero"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_zero" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make sure that all-zero input produces an identically zero PSF.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="tests.test_piecewise_bicubic_psf.point_in_grid">
+<code class="descclassname">tests.test_piecewise_bicubic_psf.</code><code class="descname">point_in_grid</code><span class="sig-paren">(</span><em>point</em>, <em>grid</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_piecewise_bicubic_psf.html#point_in_grid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_piecewise_bicubic_psf.point_in_grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True iff the point is within grid.</p>
+</dd></dl>
+
+</div>
 </div>
 
 
@@ -211,7 +275,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Kaloyan Penev.
+        &copy; Copyright 2018, Kaloyan Penev
 
     </p>
   </div>
@@ -230,28 +294,18 @@
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
 
   
 
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
 
   <script type="text/javascript">
       jQuery(function () {

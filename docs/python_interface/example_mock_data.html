@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Example of PSF Fitting Using Mock Data &mdash; SuperPhot Python Interface  documentation</title>
+  <title>Example of PSF Fitting and Aperture Photometry Using Mock Data &mdash; SuperPhot Python Interface  documentation</title>
   
 
   
@@ -24,14 +24,14 @@
 
   
 
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
   <link rel="stylesheet" href="../_static/unlimited_width.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="superphot" href="../_implementation/modules.html" />
-    <link rel="prev" title="PSF/PRF Fitting" href="fit_star_shape.html" /> 
+    <link rel="prev" title="Aperture Photometry" href="aperture_photometry.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -85,9 +85,18 @@
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Python Interface Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="background.html">Measuring Background</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fit_star_shape.html">PSF/PRF Fitting</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Example of PSF Fitting Using Mock Data</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#Step-1:-Prepare-Mock-Input-Data-for-PSF-Fitting">Step 1: Prepare Mock Input Data for PSF Fitting</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Step-2:-Perform-the-PSF-Fitting">Step 2: Perform the PSF Fitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aperture_photometry.html">Aperture Photometry</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Example of PSF Fitting and Aperture Photometry Using Mock Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#PSF-fitting">PSF fitting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Step-1:-Prepare-Mock-Input-Data-for-PSF-Fitting">Step 1: Prepare Mock Input Data for PSF Fitting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Step-2:-Perform-the-PSF-Fitting">Step 2: Perform the PSF Fitting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Results">Results</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#Aperture-Photometry">Aperture Photometry</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Results">Results</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -143,13 +152,13 @@
         
           <li><a href="index.html">Python Interface Documentation</a> &raquo;</li>
         
-      <li>Example of PSF Fitting Using Mock Data</li>
+      <li>Example of PSF Fitting and Aperture Photometry Using Mock Data</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/python_interface/fitpsf_example.ipynb.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/python_interface/example_mock_data.ipynb.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -345,25 +354,28 @@ div.nboutput div.output_area.stderr {
     margin-right: 4px;  /* make room for the exclamation icon */
 }
 </style>
-<div class="section" id="Example-of-PSF-Fitting-Using-Mock-Data">
-<h1>Example of PSF Fitting Using Mock Data<a class="headerlink" href="#Example-of-PSF-Fitting-Using-Mock-Data" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="Example-of-PSF-Fitting-and-Aperture-Photometry-Using-Mock-Data">
+<h1>Example of PSF Fitting and Aperture Photometry Using Mock Data<a class="headerlink" href="#Example-of-PSF-Fitting-and-Aperture-Photometry-Using-Mock-Data" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="PSF-fitting">
+<h2>PSF fitting<a class="headerlink" href="#PSF-fitting" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="Step-1:-Prepare-Mock-Input-Data-for-PSF-Fitting">
-<h2>Step 1: Prepare Mock Input Data for PSF Fitting<a class="headerlink" href="#Step-1:-Prepare-Mock-Input-Data-for-PSF-Fitting" title="Permalink to this headline">¶</a></h2>
+<h3>Step 1: Prepare Mock Input Data for PSF Fitting<a class="headerlink" href="#Step-1:-Prepare-Mock-Input-Data-for-PSF-Fitting" title="Permalink to this headline">¶</a></h3>
 <p>Import the required objects for creating mock input data to demonstrate
 PSF fitting.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none"><div class="highlight"><pre>
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span>
 <span class="kn">import</span> <span class="nn">numpy</span>
-<span class="kn">from</span> <span class="nn">ctypes</span> <span class="k">import</span> <span class="n">c_ubyte</span>
+<span class="kn">from</span> <span class="nn">ctypes</span> <span class="k">import</span> <span class="n">c_ubyte</span><span class="p">,</span> <span class="n">c_char</span>
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="k">import</span> <span class="n">expanduser</span>
 
 <span class="kn">import</span> <span class="nn">sys</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;/Users/kpenev/projects/git/SuperPhot/PythonPackage&#39;</span><span class="p">)</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;/Users/kpenev/projects/git/SuperPhot/PythonPackage/tests&#39;</span><span class="p">)</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">expanduser</span><span class="p">(</span><span class="s1">&#39;~/projects/git/SuperPhot/PythonPackage&#39;</span><span class="p">))</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">expanduser</span><span class="p">(</span><span class="s1">&#39;~/projects/git/SuperPhot/PythonPackage/tests&#39;</span><span class="p">))</span>
 
 <span class="kn">from</span> <span class="nn">superphot.fake_image.piecewise_bicubic_psf</span> <span class="k">import</span> <span class="n">PiecewiseBicubicPSF</span>
 <span class="kn">from</span> <span class="nn">test_fit_star_shape.utils</span> <span class="k">import</span> <span class="n">make_image_and_source_list</span>
@@ -381,7 +393,7 @@ boundaries -1, 0, 1 relative to the center.</p>
 </li>
 <li><p class="first">The PSF, its first order derivatives and the x-y cross derivative are
 all zero at the boundaries</p>
-<div class="math">
+<div class="math notranslate nohighlight">
 \[x=\pm2 \quad\mathrm{or}\quad y=\pm1\]</div>
 </li>
 <li><p class="first">The first order derivative and the x-y cross derivative are zero at
@@ -389,22 +401,22 @@ the center (x=0, y=0) and the values is 1 ADU.</p>
 </li>
 <li><p class="first">The image has a background of 1 ADU</p>
 </li>
-<li><p class="first">The source list contains exactly the following columns: <code class="docutils literal"><span class="pre">ID</span></code>, <code class="docutils literal"><span class="pre">x</span></code>
-and <code class="docutils literal"><span class="pre">y</span></code> giving a unique Id for the source and the position of its
+<li><p class="first">The source list contains exactly the following columns: <code class="docutils literal notranslate"><span class="pre">ID</span></code>, <code class="docutils literal notranslate"><span class="pre">x</span></code>
+and <code class="docutils literal notranslate"><span class="pre">y</span></code> giving a unique Id for the source and the position of its
 center in the image</p>
 </li>
 <li><p class="first">The sub-pixel map is a good approximation for the effective
 sensitivity map that should be used for DSLR cameras, which stagger 4
-channels on the image, and hence only a quarter of each &#8220;pixel&#8221; is
+channels on the image, and hence only a quarter of each “pixel” is
 sensitive for each channel</p>
 </li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none"><div class="highlight"><pre>
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="n">subpix_map</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">]])</span>
 
 <span class="n">values</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
@@ -450,15 +462,15 @@ Source list:array([(b&#39;000000&#39;, 5., 5.)],
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/python_interface_fitpsf_example_5_1.png" src="../_images/python_interface_fitpsf_example_5_1.png" />
+<img alt="../_images/python_interface_example_mock_data_5_1.png" src="../_images/python_interface_example_mock_data_5_1.png" />
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none"><div class="highlight"><pre>
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="n">pyplot</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">subpix_map</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">pyplot</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">bone</span><span class="p">)</span>
 <span class="n">pyplot</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Sub-pixel sensivity map&#39;</span><span class="p">);</span>
 </pre></div>
@@ -468,30 +480,30 @@ Source list:array([(b&#39;000000&#39;, 5., 5.)],
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/python_interface_fitpsf_example_6_0.png" src="../_images/python_interface_fitpsf_example_6_0.png" />
+<img alt="../_images/python_interface_example_mock_data_6_0.png" src="../_images/python_interface_example_mock_data_6_0.png" />
 </div>
 </div>
 </div>
 <div class="section" id="Step-2:-Perform-the-PSF-Fitting">
-<h2>Step 2: Perform the PSF Fitting<a class="headerlink" href="#Step-2:-Perform-the-PSF-Fitting" title="Permalink to this headline">¶</a></h2>
+<h3>Step 2: Perform the PSF Fitting<a class="headerlink" href="#Step-2:-Perform-the-PSF-Fitting" title="Permalink to this headline">¶</a></h3>
 <p>Import the required objects for PSF fitting and Background extraction</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none"><div class="highlight"><pre>
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">superphot</span> <span class="k">import</span> <span class="n">FitStarShape</span><span class="p">,</span> <span class="n">BackgroundExtractor</span>
 </pre></div>
 </div>
 </div>
 <p>Construct a PSF fitting object</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none"><div class="highlight"><pre>
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="n">fit_star_shape</span> <span class="o">=</span> <span class="n">FitStarShape</span><span class="p">(</span>
     <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;PSF&#39;</span><span class="p">,</span> <span class="c1"># use PSF fitting (as opposed to PRF)</span>
     <span class="n">shape_terms</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{1}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="c1"># Assume the PSF is the same for all sources</span>
@@ -508,11 +520,11 @@ Source list:array([(b&#39;000000&#39;, 5., 5.)],
 </div>
 <p>Measure the background behind the sources.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none"><div class="highlight"><pre>
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="n">background</span> <span class="o">=</span> <span class="n">BackgroundExtractor</span><span class="p">(</span>
     <span class="n">image</span><span class="p">,</span>
     <span class="mi">3</span><span class="p">,</span> <span class="c1"># Include only pixels with centers at least 3 pixels away from the source center.</span>
@@ -527,11 +539,11 @@ Source list:array([(b&#39;000000&#39;, 5., 5.)],
 </div>
 <p>Find the best-fit PSF shape.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none"><div class="highlight"><pre>
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [7]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="n">result_tree</span> <span class="o">=</span> <span class="n">fit_star_shape</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
     <span class="p">[</span>
         <span class="p">(</span>
@@ -546,14 +558,28 @@ Source list:array([(b&#39;000000&#39;, 5., 5.)],
 </pre></div>
 </div>
 </div>
+</div>
+<div class="section" id="Results">
+<h3>Results<a class="headerlink" href="#Results" title="Permalink to this headline">¶</a></h3>
+<p>Let’s look at the coefficients of the polynomial expansion of the PSF
+parameters. In our case, the PSF has 4 free parameters <span class="math notranslate nohighlight">\(f\)</span>,
+<span class="math notranslate nohighlight">\(\frac{\partial f}{\partial x}\)</span>,
+<span class="math notranslate nohighlight">\(\frac{\partial f}{\partial y}\)</span>, and
+<span class="math notranslate nohighlight">\(\frac{\partial^2 f}{\partial x\partial y}\)</span> at the center of the
+grid (all other grid intersections lie on the boundary and hence are
+contsrained to be zero.</p>
+<p>The PSF we used to create the source had: <span class="math notranslate nohighlight">\(f = 1\)</span>, and
+<span class="math notranslate nohighlight">\(\frac{\partial f}{\partial x} = \frac{\partial f}{\partial y} = \frac{\partial^2 f}{\partial x\partial y} = 0\)</span>,
+which we expect to recover.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>In [9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [8]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;PSF map coefficients: &#39;</span> <span class="o">+</span> <span class="nb">repr</span><span class="p">(</span><span class="n">result_tree</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;psffit.psfmap&#39;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,))))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;PSF fit flux: &#39;</span> <span class="o">+</span> <span class="nb">repr</span><span class="p">(</span><span class="n">result_tree</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;psffit.flux.0&#39;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,))))</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;PSF map coefficients: &#39;</span>
+      <span class="o">+</span>
+      <span class="nb">repr</span><span class="p">(</span><span class="n">result_tree</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;psffit.psfmap&#39;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,))))</span>
 </pre></div>
 </div>
 </div>
@@ -563,8 +589,127 @@ Source list:array([(b&#39;000000&#39;, 5., 5.)],
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 PSF map coefficients: array([ 5.00000000e-01,  1.51662586e-16, -1.65018810e-17, -2.77749592e-15])
+</pre></div></div>
+</div>
+<p>The coefficients are half of the values we used to recover, because the
+PSF shape has been normalized to have a flux of exactly 1. The product
+of the flux with the coefficients should give us the values we used at
+construction:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;PSF fit flux: &#39;</span>
+      <span class="o">+</span>
+      <span class="nb">repr</span><span class="p">(</span><span class="n">result_tree</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;psffit.flux.0&#39;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sources</span><span class="p">),))))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
 PSF fit flux: array([2.])
 </pre></div></div>
+</div>
+</div>
+</div>
+<div class="section" id="Aperture-Photometry">
+<h2>Aperture Photometry<a class="headerlink" href="#Aperture-Photometry" title="Permalink to this headline">¶</a></h2>
+<p>Import the aperture photometry object</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">superphot</span> <span class="k">import</span> <span class="n">SubPixPhot</span>
+</pre></div>
+</div>
+</div>
+<p>Construct an aperture photometry object to use the assumed sub-pixel
+sensitivity map, and three apertures. All other configuration options
+are left at their default values.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">do_apphot</span> <span class="o">=</span> <span class="n">SubPixPhot</span><span class="p">(</span><span class="n">subpixmap</span><span class="o">=</span><span class="n">subpix_map</span><span class="p">,</span>
+                       <span class="n">apertures</span><span class="o">=</span><span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<p>Measure the fluxes usinge the specified configuration, assuming the
+input image follows poisson statistics and a clean bad pixel mask.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">do_apphot</span><span class="p">(</span>
+    <span class="n">image</span><span class="p">,</span> <span class="c1"># The measured response of the image pixels</span>
+    <span class="n">image</span><span class="o">**</span><span class="mf">0.5</span><span class="p">,</span> <span class="c1"># Standard deviation estimate for the</span>
+                <span class="c1"># response of image pixels (assume</span>
+                <span class="c1"># Poission statistics)</span>
+    <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">c_char</span><span class="p">),</span> <span class="c1"># Bad pixel mask: all zeros means all pixels are clean.</span>
+    <span class="n">result_tree</span><span class="p">,</span> <span class="c1"># Result object, must contain PSF</span>
+                 <span class="c1"># fitting results already and is</span>
+                 <span class="c1">#updated with aperture photometry</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="Results">
+<h3>Results<a class="headerlink" href="#Results" title="Permalink to this headline">¶</a></h3>
+<p>The first two apertures are not large enough to encompass the entire
+source, so we expect the flux to be underestimated, by a lot and then by
+a little, and the last aperture should recover the exact source flux.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">apertures</span> <span class="o">=</span> <span class="n">do_apphot</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="s1">&#39;apertures&#39;</span><span class="p">]</span>
+<span class="n">magnitudes</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="n">result_tree</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;apphot.mag.0.&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">ap_ind</span><span class="p">),</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,))</span>
+    <span class="k">for</span> <span class="n">ap_ind</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">apertures</span><span class="p">))</span>
+<span class="p">])</span>
+<span class="n">magnitude_errors</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="n">result_tree</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;apphot.mag_err.0.&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">ap_ind</span><span class="p">),</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,))</span>
+    <span class="k">for</span> <span class="n">ap_ind</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">apertures</span><span class="p">))</span>
+<span class="p">])</span>
+<span class="n">fluxes</span> <span class="o">=</span> <span class="mf">10.0</span><span class="o">**</span><span class="p">((</span><span class="n">do_apphot</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="s1">&#39;magnitude_1adu&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">magnitudes</span><span class="p">)</span><span class="o">/</span><span class="mf">2.5</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%-10.10s</span><span class="s1"> </span><span class="si">%10.10s</span><span class="s1"> +- </span><span class="si">%-10.10s</span><span class="s1"> </span><span class="si">%-10.10s</span><span class="s1">&#39;</span>
+      <span class="o">%</span>
+      <span class="p">(</span><span class="s1">&#39;Aperture&#39;</span><span class="p">,</span> <span class="s1">&#39;Magnitude&#39;</span><span class="p">,</span> <span class="s1">&#39;Error&#39;</span><span class="p">,</span> <span class="s1">&#39;Flux&#39;</span><span class="p">))</span>
+<span class="n">line_fmt</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%-10.5g</span><span class="s1"> </span><span class="si">%10.5g</span><span class="s1"> +- </span><span class="si">%-10.5g</span><span class="s1"> </span><span class="si">%-10.5g</span><span class="s1">&#39;</span>
+<span class="k">for</span> <span class="n">source_info</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">apertures</span><span class="p">,</span>
+                       <span class="n">magnitudes</span><span class="p">,</span>
+                       <span class="n">magnitude_errors</span><span class="p">,</span>
+                       <span class="n">fluxes</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">line_fmt</span> <span class="o">%</span> <span class="n">source_info</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Aperture    Magnitude +- Error      Flux
+1               9.531 +- nan        1.5403
+2              9.2475 +- nan        1.9998
+3              9.2474 +- nan        2
+</pre></div></div>
+</div>
 </div>
 </div>
 </div>
@@ -580,7 +725,7 @@ PSF fit flux: array([2.])
         <a href="../_implementation/modules.html" class="btn btn-neutral float-right" title="superphot" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="fit_star_shape.html" class="btn btn-neutral" title="PSF/PRF Fitting" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="aperture_photometry.html" class="btn btn-neutral" title="Aperture Photometry" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -589,7 +734,7 @@ PSF fit flux: array([2.])
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Kaloyan Penev.
+        &copy; Copyright 2018, Kaloyan Penev
 
     </p>
   </div>
@@ -608,28 +753,18 @@ PSF fit flux: array([2.])
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
 
   
 
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
 
   <script type="text/javascript">
       jQuery(function () {

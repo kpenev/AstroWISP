@@ -24,13 +24,13 @@
 
   
 
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
   <link rel="stylesheet" href="../_static/unlimited_width.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Example of PSF Fitting Using Mock Data" href="fitpsf_example.html" />
+    <link rel="next" title="Aperture Photometry" href="aperture_photometry.html" />
     <link rel="prev" title="Measuring Background" href="background.html" /> 
 
   
@@ -89,7 +89,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#psf-map-utilities">PSF Map utilities</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="fitpsf_example.html">Example of PSF Fitting Using Mock Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aperture_photometry.html">Aperture Photometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_mock_data.html">Example of PSF Fitting and Aperture Photometry Using Mock Data</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../_implementation/modules.html">Python Package Implementation</a></li>
@@ -187,25 +188,25 @@
 <h2>Fitting for Source Shapes<a class="headerlink" href="#fitting-for-source-shapes" title="Permalink to this headline">¶</a></h2>
 <p>Fitting for the shapes of point sources (either their PSF or PRF) and an overall
 scaling constant is one of the methods of extracting photometry supported by
-SuperPhot. This is accomplished using the <code class="xref py py-mod docutils literal"><span class="pre">superphot.fit_star_shape</span></code>
+SuperPhot. This is accomplished using the <a class="reference internal" href="../_implementation/superphot.fit_star_shape.html#module-superphot.fit_star_shape" title="superphot.fit_star_shape"><code class="xref py py-mod docutils literal notranslate"><span class="pre">superphot.fit_star_shape</span></code></a>
 module.  Currently only piecewise bi-cubic PSF/PRF models are supported, with
 the shape constrained to depend smoothly on image position and any other
 user-defined parameters, possibly accross multiple images simultaneously and the
 amplitudes (fluxes) of sources being independent of each other. Fitting is done
-by constructing an instance of <code class="xref py py-class docutils literal"><span class="pre">superphot.FitStarShape</span></code> and calling it on
+by constructing an instance of <a class="reference internal" href="../_implementation/superphot.html#superphot.FitStarShape" title="superphot.FitStarShape"><code class="xref py py-class docutils literal notranslate"><span class="pre">superphot.FitStarShape</span></code></a> and calling it on
 a collection of frames to be fit simultaneously and a list of all the sources in
 each frame.  For details on how to specify fitting parameters and source and
-frame listts, see the documentation of <code class="xref py py-class docutils literal"><span class="pre">superphot.FitStarShape</span></code>.</p>
+frame listts, see the documentation of <a class="reference internal" href="../_implementation/superphot.html#superphot.FitStarShape" title="superphot.FitStarShape"><code class="xref py py-class docutils literal notranslate"><span class="pre">superphot.FitStarShape</span></code></a>.</p>
 <p>An example of fitting for the PSF in an image can be found
-<a class="reference internal" href="fitpsf_example.html"><span class="doc">here</span></a></p>
+<a class="reference internal" href="example_mock_data.html#PSF-fitting"><span class="std std-ref">here</span></a></p>
 </div>
 <div class="section" id="psf-map-utilities">
 <h2>PSF Map utilities<a class="headerlink" href="#psf-map-utilities" title="Permalink to this headline">¶</a></h2>
 <p>Smooth dependence of PSF/PRF on parameters is enforced by modeling the PSF/PRF
 parameters as low order polynomials of user specified quantities. SuperPhot
 defines a language for specifying the dependence (see
-<code class="xref py py-attr docutils literal"><span class="pre">superphot.FitStarShape.shape_terms</span></code> for the definition of the language).
-The <code class="xref py py-class docutils literal"><span class="pre">superphot.SmoothDependence</span></code> class offers tools for parsing the
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">superphot.FitStarShape.shape_terms</span></code> for the definition of the language).
+The <a class="reference internal" href="../_implementation/superphot.html#superphot.SmoothDependence" title="superphot.SmoothDependence"><code class="xref py py-class docutils literal notranslate"><span class="pre">superphot.SmoothDependence</span></code></a> class offers tools for parsing the
 language, and generating the various terms involved in the dependence.</p>
 </div>
 </div>
@@ -218,7 +219,7 @@ language, and generating the various terms involved in the dependence.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="fitpsf_example.html" class="btn btn-neutral float-right" title="Example of PSF Fitting Using Mock Data" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="aperture_photometry.html" class="btn btn-neutral float-right" title="Aperture Photometry" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="background.html" class="btn btn-neutral" title="Measuring Background" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -230,7 +231,7 @@ language, and generating the various terms involved in the dependence.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Kaloyan Penev.
+        &copy; Copyright 2018, Kaloyan Penev
 
     </p>
   </div>
@@ -249,28 +250,18 @@ language, and generating the various terms involved in the dependence.</p>
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
 
   
 
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
 
   <script type="text/javascript">
       jQuery(function () {

@@ -24,9 +24,9 @@
 
   
 
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
   <link rel="stylesheet" href="../_static/unlimited_width.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -187,8 +187,149 @@
     margin-right: 4px;  /* make room for the exclamation icon */
 }
 </style>
-<div class="section" id="tests-test-fit-star-shape-noiseless-tests-module">
-<h1>tests.test_fit_star_shape.noiseless_tests module<a class="headerlink" href="#tests-test-fit-star-shape-noiseless-tests-module" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-tests.test_fit_star_shape.noiseless_tests">
+<span id="tests-test-fit-star-shape-noiseless-tests-module"></span><h1>tests.test_fit_star_shape.noiseless_tests module<a class="headerlink" href="#module-tests.test_fit_star_shape.noiseless_tests" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="class-inheritance-diagram">
+<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this headline">¶</a></h2>
+<div class="graphviz"><img src="../_images/inheritance-f7b26f113b3b08f87afdf99e2445ef2d0016b5c6.png" alt="Inheritance diagram of BackgroundExtractor, FitStarShape, FloatTestCase, PiecewiseBicubicPSF, TestFitStarShapeNoiseless, c_ubyte" usemap="#inheritanceb67e7fc920" class="inheritance graphviz" /></div>
+<map id="inheritanceb67e7fc920" name="inheritanceb67e7fc920">
+<area shape="rect" id="node6" href="../_implementation/superphot.fake_image.psf_base.html#superphot.fake_image.psf_base.PSFBase" target="_top" title="The base class for all supported PSFs." alt="" coords="88,79,377,104"/>
+<area shape="rect" id="node3" href="../_implementation/superphot.background.html#superphot.background.BackgroundExtractor" target="_top" title="Measure the background level for each source in an image." alt="" coords="439,5,746,31"/>
+<area shape="rect" id="node4" href="../_implementation/superphot.fake_image.piecewise_bicubic_psf.html#superphot.fake_image.piecewise_bicubic_psf.PiecewiseBicubicPSF" target="_top" title="A piecewise PSF class where the PSF over each piece is a bi&#45;cubic function." alt="" coords="5,225,460,251"/>
+<area shape="rect" id="node5" href="../_implementation/superphot.fake_image.piecewise_psf.html#superphot.fake_image.piecewise_psf.PiecewisePSF" target="_top" title="Base clas for PSFs defined on a grid of pieces." alt="" coords="55,152,410,177"/>
+<area shape="rect" id="node7" href="../_implementation/superphot.fit_star_shape.html#superphot.fit_star_shape.FitStarShape" target="_top" title="Fit for the PSF/PRF of stars and their flux." alt="" coords="770,5,1037,31"/>
+<area shape="rect" id="node8" href="#tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless" target="_top" title="Test piecewise bicubic PSF fitting on noiseless images." alt="" coords="915,152,1374,177"/>
+<area shape="rect" id="node9" href="tests.utilities.html#tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="1044,79,1245,104"/>
+</map><p>Test SuperPhot’s fit_star_shape module.</p>
+<dl class="class">
+<dt id="tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless">
+<em class="property">class </em><code class="descclassname">tests.test_fit_star_shape.noiseless_tests.</code><code class="descname">TestFitStarShapeNoiseless</code><span class="sig-paren">(</span><em>methodName='runTest'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_fit_star_shape/noiseless_tests.html#TestFitStarShapeNoiseless"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="tests.utilities.html#tests.utilities.FloatTestCase" title="tests.utilities.FloatTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">tests.utilities.FloatTestCase</span></code></a></p>
+<div class="graphviz"><img src="../_images/inheritance-c5e3aa109d429b74c30e9a0f5fec4cf165ab08d5.png" alt="Inheritance diagram of tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless" usemap="#inheritance8809a3d541" class="inheritance graphviz" /></div>
+<map id="inheritance8809a3d541" name="inheritance8809a3d541">
+<area shape="rect" id="node1" href="#tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless" target="_top" title="Test piecewise bicubic PSF fitting on noiseless images." alt="" coords="5,152,464,177"/>
+<area shape="rect" id="node2" href="tests.utilities.html#tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="134,79,335,104"/>
+</map><p>Test piecewise bicubic PSF fitting on noiseless images.</p>
+<dl class="method">
+<dt id="tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.check_results">
+<code class="descname">check_results</code><span class="sig-paren">(</span><em>result_tree</em>, <em>image_index</em>, <em>sources</em>, <em>extra_variables</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_fit_star_shape/noiseless_tests.html#TestFitStarShapeNoiseless.check_results"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.check_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assert that fitted PSF map and source fluxes match expectations.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>result_tree</strong> – The result tree containing the PSF fitting
+configuration and results.</li>
+<li><strong>image_index</strong> – The index of the image for which to check results
+within the result tree (the same as the index when fitting was
+called).</li>
+<li><strong>sources</strong> – The sources argument used to generate the image that was
+fit. See same name argument of run_test.</li>
+<li><strong>extra_variables</strong> – A list of the names of any variables in addition
+to <cite>x</cite> and <cite>y</cite> which participate in the PSF fit.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.create_debug_files">
+<code class="descname">create_debug_files</code><span class="sig-paren">(</span><em>image</em>, <em>source_list</em>, <em>fit_config</em>, <em>sub_image=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_fit_star_shape/noiseless_tests.html#TestFitStarShapeNoiseless.create_debug_files"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.create_debug_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create the pair of files used by the C test of PSF fitting.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>image</strong> (<em>2D numpy array</em>) – The image being fit.</li>
+<li><strong>source_list</strong> – The list of sources participating in the fit.</li>
+<li><strong>fit_config</strong> – The <code class="xref py py-attr docutils literal notranslate"><span class="pre">FitStarShape.configuration</span></code> of the PSF
+fitting object used for fitting.</li>
+<li><strong>sub_image</strong> – The index of the image within the list of images being
+fit simultaneously.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.run_test">
+<code class="descname">run_test</code><span class="sig-paren">(</span><em>sources</em>, <em>psffit_terms</em>, <em>extra_variables=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_fit_star_shape/noiseless_tests.html#TestFitStarShapeNoiseless.run_test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.run_test" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assert that a fit of a series of images works exactly.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>sources</strong> – <p>A list of lists of dictionaries specifying the list of
+sources to fit. Each list of dictionaries specifies the sources
+to drop on a single image. Each source must contain the
+following:</p>
+<blockquote>
+<div><ul>
+<li>x:    The x coordinate of the source center.</li>
+<li>y:    The y coordinate of the source center.</li>
+<li>psf_args:    The arguments with which to create the
+PiecewiseBicubicPSF for the source. See
+PiecewiseBicubicPSF.__init__ for details.</li>
+</ul>
+</div></blockquote>
+</li>
+<li><strong>psffit_terms</strong> – The terms on which PSF parameters depend on. See
+–psf.terms argument of the fitpsf command.</li>
+<li><strong>extra_variables</strong> – A list of the variables in addition to x and y
+that participate in the fitting terms.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.test_four_overlapping_sources">
+<code class="descname">test_four_overlapping_sources</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_fit_star_shape/noiseless_tests.html#TestFitStarShapeNoiseless.test_four_overlapping_sources"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.test_four_overlapping_sources" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test fitting an image containing 4 overlapping sources.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.test_isolated_sources">
+<code class="descname">test_isolated_sources</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_fit_star_shape/noiseless_tests.html#TestFitStarShapeNoiseless.test_isolated_sources"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.test_isolated_sources" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test fitting an image containing 8 well isolated sources.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.test_multi_image_with_extra_var">
+<code class="descname">test_multi_image_with_extra_var</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_fit_star_shape/noiseless_tests.html#TestFitStarShapeNoiseless.test_multi_image_with_extra_var"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.test_multi_image_with_extra_var" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test fitting a series of 5 images and non-position variables.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.test_single_source">
+<code class="descname">test_single_source</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_fit_star_shape/noiseless_tests.html#TestFitStarShapeNoiseless.test_single_source"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.test_single_source" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test fitting a single source in the center of the image.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.test_two_overlapping_sources">
+<code class="descname">test_two_overlapping_sources</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_fit_star_shape/noiseless_tests.html#TestFitStarShapeNoiseless.test_two_overlapping_sources"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.test_two_overlapping_sources" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test fitting an image containing 2 sources all overlapping.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
 </div>
 
 
@@ -211,7 +352,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Kaloyan Penev.
+        &copy; Copyright 2018, Kaloyan Penev
 
     </p>
   </div>
@@ -230,28 +371,18 @@
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
 
   
 
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
 
   <script type="text/javascript">
       jQuery(function () {

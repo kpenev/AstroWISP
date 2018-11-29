@@ -1,0 +1,883 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>tests.test_fit_star_shape.noiseless_tests &mdash; SuperPhot Python Interface  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/unlimited_width.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> SuperPhot Python Interface
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../python_interface/index.html">Python Interface Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_implementation/modules.html">Python Package Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../cpp_api.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../c_api.html">C API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_unit_tests/modules.html">Unit Testing Code</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">SuperPhot Python Interface</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>tests.test_fit_star_shape.noiseless_tests</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for tests.test_fit_star_shape.noiseless_tests</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+
+<span class="sd">&quot;&quot;&quot;Test SuperPhot&#39;s fit_star_shape module.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os.path</span>
+<span class="kn">import</span> <span class="nn">unittest</span>
+<span class="kn">from</span> <span class="nn">ctypes</span> <span class="k">import</span> <span class="n">c_ubyte</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+
+<span class="n">_module_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
+
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span>
+    <span class="mi">0</span><span class="p">,</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">_module_path</span><span class="p">,</span>
+            <span class="s1">&#39;..&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;..&#39;</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1">#Needs to be after os.path and sys to allow adding the seach path.</span>
+<span class="c1">#pylint: disable=wrong-import-position</span>
+<span class="kn">from</span> <span class="nn">superphot</span> <span class="k">import</span> <span class="n">FitStarShape</span><span class="p">,</span> <span class="n">BackgroundExtractor</span>
+<span class="kn">from</span> <span class="nn">superphot.fake_image.piecewise_bicubic_psf</span> <span class="k">import</span> <span class="n">PiecewiseBicubicPSF</span>
+
+<span class="kn">from</span> <span class="nn">tests.utilities</span> <span class="k">import</span> <span class="n">FloatTestCase</span>
+<span class="kn">from</span> <span class="nn">tests.test_fit_star_shape.utils</span> <span class="k">import</span> <span class="n">make_image_and_source_list</span>
+<span class="c1">#pylint: enable=wrong-import-position</span>
+
+<div class="viewcode-block" id="TestFitStarShapeNoiseless"><a class="viewcode-back" href="../../../_unit_tests/tests.test_fit_star_shape.noiseless_tests.html#tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless">[docs]</a><span class="k">class</span> <span class="nc">TestFitStarShapeNoiseless</span><span class="p">(</span><span class="n">FloatTestCase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Test piecewise bicubic PSF fitting on noiseless images.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="TestFitStarShapeNoiseless.create_debug_files"><a class="viewcode-back" href="../../../_unit_tests/tests.test_fit_star_shape.noiseless_tests.html#tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.create_debug_files">[docs]</a>    <span class="k">def</span> <span class="nf">create_debug_files</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                           <span class="n">image</span><span class="p">,</span>
+                           <span class="n">source_list</span><span class="p">,</span>
+                           <span class="n">fit_config</span><span class="p">,</span>
+                           <span class="n">sub_image</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create the pair of files used by the C test of PSF fitting.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            image (2D numpy array):    The image being fit.</span>
+
+<span class="sd">            source_list:    The list of sources participating in the fit.</span>
+
+<span class="sd">            fit_config:    The :attr:`FitStarShape.configuration` of the PSF</span>
+<span class="sd">                fitting object used for fitting.</span>
+
+<span class="sd">            sub_image:    The index of the image within the list of images being</span>
+<span class="sd">                fit simultaneously.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">fname_start</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s1">&#39;~/projects/git/SuperPhot/src/debug/&#39;</span><span class="p">)</span>
+            <span class="o">+</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">()</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="o">+</span>
+            <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">sub_image</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname_start</span> <span class="o">+</span> <span class="s1">&#39;_config.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">test_config</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">param_value</span> <span class="ow">in</span> <span class="n">fit_config</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">formatted_config</span> <span class="o">=</span> <span class="n">FitStarShape</span><span class="o">.</span><span class="n">_format_config</span><span class="p">(</span><span class="n">param_value</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">formatted_config</span><span class="p">:</span>
+                    <span class="n">test_config</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">formatted_config</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+                                      <span class="o">+</span>
+                                      <span class="s1">&#39; = &#39;</span>
+                                      <span class="o">+</span>
+                                      <span class="n">formatted_config</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+                                      <span class="o">+</span>
+                                      <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname_start</span> <span class="o">+</span> <span class="s1">&#39;_image.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">test_image</span><span class="p">:</span>
+            <span class="n">test_image</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                             <span class="o">+</span>
+                             <span class="s1">&#39; &#39;</span>
+                             <span class="o">+</span>
+                             <span class="nb">str</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                             <span class="o">+</span>
+                             <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">image</span><span class="o">.</span><span class="n">flatten</span><span class="p">():</span>
+                <span class="n">test_image</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="nb">repr</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname_start</span> <span class="o">+</span> <span class="s1">&#39;_sources.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">test_sources</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">source_list</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">names</span><span class="p">:</span>
+                <span class="n">test_sources</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%25s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">var</span><span class="p">)</span>
+            <span class="n">test_sources</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">source</span> <span class="ow">in</span> <span class="n">source_list</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">source_list</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">names</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">var</span> <span class="o">==</span> <span class="s1">&#39;ID&#39;</span><span class="p">:</span>
+                        <span class="n">test_sources</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%25s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">source</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">test_sources</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%25.16e</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">source</span><span class="p">[</span><span class="n">var</span><span class="p">])</span>
+                <span class="n">test_sources</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestFitStarShapeNoiseless.check_results"><a class="viewcode-back" href="../../../_unit_tests/tests.test_fit_star_shape.noiseless_tests.html#tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.check_results">[docs]</a>    <span class="k">def</span> <span class="nf">check_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result_tree</span><span class="p">,</span> <span class="n">image_index</span><span class="p">,</span> <span class="n">sources</span><span class="p">,</span> <span class="n">extra_variables</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Assert that fitted PSF map and source fluxes match expectations.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            result_tree:    The result tree containing the PSF fitting</span>
+<span class="sd">                configuration and results.</span>
+
+<span class="sd">            image_index:    The index of the image for which to check results</span>
+<span class="sd">                within the result tree (the same as the index when fitting was</span>
+<span class="sd">                called).</span>
+
+<span class="sd">            sources:    The sources argument used to generate the image that was</span>
+<span class="sd">                fit. See same name argument of run_test.</span>
+
+<span class="sd">            extra_variables:    A list of the names of any variables in addition</span>
+<span class="sd">                to `x` and `y` which participate in the PSF fit.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="s1">&#39;enabled&#39;</span> <span class="ow">in</span> <span class="n">extra_variables</span><span class="p">:</span>
+            <span class="n">enabled_sources</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">src</span><span class="p">[</span><span class="s1">&#39;enabled&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">src</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">],</span>
+                                          <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">enabled_sources</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sources</span><span class="p">),</span> <span class="kc">True</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Flagged enabled sources&#39;</span><span class="p">)</span>
+
+        <span class="n">variables</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">var</span><span class="p">:</span> <span class="n">val</span><span class="p">[</span><span class="n">enabled_sources</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">var</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span>
+                <span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">extra_variables</span><span class="p">,</span>
+                <span class="n">result_tree</span><span class="o">.</span><span class="n">get_psfmap_variables</span><span class="p">(</span><span class="n">image_index</span><span class="p">,</span>
+                                                 <span class="nb">len</span><span class="p">(</span><span class="n">extra_variables</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span>
+                                                 <span class="nb">len</span><span class="p">(</span><span class="n">sources</span><span class="p">))</span>
+            <span class="p">)</span>
+        <span class="p">}</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Read PSF map variables:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="nb">repr</span><span class="p">(</span><span class="n">variables</span><span class="p">))</span>
+
+        <span class="n">psffit_terms</span> <span class="o">=</span> <span class="n">result_tree</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;psffit.terms&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">psffit_terms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;{&#39;</span>
+        <span class="k">assert</span> <span class="n">psffit_terms</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;}&#39;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Read PSF map terms&#39;</span><span class="p">)</span>
+
+        <span class="n">num_enabled_sources</span> <span class="o">=</span> <span class="n">variables</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">size</span>
+        <span class="n">num_x_boundaries</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sources</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;psf_args&#39;</span><span class="p">][</span><span class="s1">&#39;boundaries&#39;</span><span class="p">][</span><span class="s1">&#39;x&#39;</span><span class="p">])</span> <span class="o">-</span> <span class="mi">2</span>
+        <span class="n">num_y_boundaries</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sources</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;psf_args&#39;</span><span class="p">][</span><span class="s1">&#39;boundaries&#39;</span><span class="p">][</span><span class="s1">&#39;y&#39;</span><span class="p">])</span> <span class="o">-</span> <span class="mi">2</span>
+
+        <span class="c1">#Using eval here is perfectly reasonable.</span>
+        <span class="c1">#pylint: disable=eval-used</span>
+        <span class="n">term_list</span> <span class="o">=</span> <span class="p">[</span><span class="nb">eval</span><span class="p">(</span><span class="n">term</span><span class="p">,</span> <span class="n">variables</span><span class="p">)</span>
+                     <span class="k">for</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">psffit_terms</span><span class="p">[</span><span class="mi">1</span> <span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)]</span>
+        <span class="c1">#pylint: enable=eval-used</span>
+        <span class="k">for</span> <span class="n">term_index</span><span class="p">,</span> <span class="n">term</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">term_list</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">term</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span>
+                <span class="n">term_list</span><span class="p">[</span><span class="n">term_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">num_enabled_sources</span><span class="p">,</span>
+                                                   <span class="nb">float</span><span class="p">(</span><span class="n">term</span><span class="p">))</span>
+
+        <span class="n">term_list</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">dstack</span><span class="p">(</span><span class="n">term_list</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">coefficients</span> <span class="o">=</span> <span class="n">result_tree</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="s1">&#39;psffit.psfmap&#39;</span><span class="p">,</span>
+            <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span>
+                   <span class="nb">len</span><span class="p">(</span><span class="n">sources</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;psf_args&#39;</span><span class="p">][</span><span class="s1">&#39;boundaries&#39;</span><span class="p">][</span><span class="s1">&#39;x&#39;</span><span class="p">])</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span>
+                   <span class="nb">len</span><span class="p">(</span><span class="n">sources</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;psf_args&#39;</span><span class="p">][</span><span class="s1">&#39;boundaries&#39;</span><span class="p">][</span><span class="s1">&#39;y&#39;</span><span class="p">])</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span>
+                   <span class="nb">len</span><span class="p">(</span><span class="n">term_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Term list shape:&#39;</span> <span class="o">+</span> <span class="nb">repr</span><span class="p">(</span><span class="n">term_list</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;coefficients shape: &#39;</span> <span class="o">+</span> <span class="nb">repr</span><span class="p">(</span><span class="n">coefficients</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Coefficients: &#39;</span> <span class="o">+</span> <span class="nb">repr</span><span class="p">(</span><span class="n">coefficients</span><span class="p">))</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Term list:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="nb">repr</span><span class="p">(</span><span class="n">term_list</span><span class="p">))</span>
+
+        <span class="c1">#Indices are: source index, variable, y boundary ind, x boundary ind</span>
+        <span class="n">fit_params</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">tensordot</span><span class="p">(</span><span class="n">term_list</span><span class="p">,</span> <span class="n">coefficients</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span>
+            <span class="n">fit_params</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span>
+            <span class="p">(</span><span class="n">num_enabled_sources</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">num_x_boundaries</span><span class="p">,</span> <span class="n">num_y_boundaries</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">fluxes</span> <span class="o">=</span> <span class="n">result_tree</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;psffit.flux.&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">image_index</span><span class="p">),</span>
+                                 <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sources</span><span class="p">),))</span>
+
+        <span class="k">for</span> <span class="n">src_ind</span><span class="p">,</span> <span class="n">src</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sources</span><span class="p">):</span>
+            <span class="k">if</span> <span class="s1">&#39;enabled&#39;</span> <span class="ow">in</span> <span class="n">extra_variables</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">src</span><span class="p">[</span><span class="s1">&#39;enabled&#39;</span><span class="p">]:</span>
+                <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="s1">&#39;flux_backup&#39;</span> <span class="ow">in</span> <span class="n">src</span> <span class="ow">and</span> <span class="n">src</span><span class="p">[</span><span class="s1">&#39;flux_backup&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">fluxes</span><span class="p">[</span><span class="n">src_ind</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+                <span class="n">fluxes</span><span class="p">[</span><span class="n">src_ind</span><span class="p">]</span> <span class="o">=</span> <span class="n">src</span><span class="p">[</span><span class="s1">&#39;flux_backup&#39;</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">assertNotEqual</span><span class="p">(</span><span class="n">fluxes</span><span class="p">[</span><span class="n">src_ind</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;fluxes before = &#39;</span> <span class="o">+</span> <span class="nb">repr</span><span class="p">(</span><span class="n">fluxes</span><span class="p">))</span>
+        <span class="n">fluxes</span> <span class="o">=</span> <span class="n">fluxes</span><span class="p">[</span><span class="n">enabled_sources</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;fluxes after = &#39;</span> <span class="o">+</span> <span class="nb">repr</span><span class="p">(</span><span class="n">fluxes</span><span class="p">))</span>
+
+        <span class="n">fit_params</span> <span class="o">*=</span> <span class="n">fluxes</span><span class="p">[:,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+
+        <span class="n">expected_params</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">fit_params</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">src_ind</span><span class="p">,</span> <span class="n">src</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sources</span><span class="p">):</span>
+            <span class="k">if</span> <span class="s1">&#39;enabled&#39;</span> <span class="ow">in</span> <span class="n">extra_variables</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">src</span><span class="p">[</span><span class="s1">&#39;enabled&#39;</span><span class="p">]:</span>
+                <span class="k">continue</span>
+            <span class="k">for</span> <span class="n">var_ind</span><span class="p">,</span> <span class="n">var_name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="s1">&#39;values&#39;</span><span class="p">,</span>
+                                                <span class="s1">&#39;d_dx&#39;</span><span class="p">,</span>
+                                                <span class="s1">&#39;d_dy&#39;</span><span class="p">,</span>
+                                                <span class="s1">&#39;d2_dxdy&#39;</span><span class="p">]):</span>
+                <span class="n">expected_params</span><span class="p">[</span><span class="n">src_ind</span><span class="p">,</span> <span class="n">var_ind</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="n">src</span><span class="p">[</span><span class="s1">&#39;psf_args&#39;</span><span class="p">][</span><span class="s1">&#39;psf_parameters&#39;</span><span class="p">][</span><span class="n">var_name</span><span class="p">][</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="p">)</span>
+
+        <span class="n">plus</span> <span class="o">=</span> <span class="p">(</span><span class="n">expected_params</span> <span class="o">+</span> <span class="n">fit_params</span><span class="p">)</span>
+        <span class="n">minus</span> <span class="o">=</span> <span class="p">(</span><span class="n">expected_params</span> <span class="o">-</span> <span class="n">fit_params</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertLess</span><span class="p">((</span><span class="n">minus</span> <span class="o">*</span> <span class="n">minus</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="p">(</span><span class="n">plus</span> <span class="o">*</span> <span class="n">plus</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span>
+                        <span class="mf">1e-8</span> <span class="o">*</span> <span class="n">minus</span><span class="o">.</span><span class="n">size</span><span class="p">,</span>
+                        <span class="n">msg</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;Expected: &#39;</span> <span class="o">+</span> <span class="nb">repr</span><span class="p">(</span><span class="n">expected_params</span><span class="p">)</span>
+                             <span class="o">+</span>
+                             <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+                             <span class="o">+</span>
+                             <span class="s1">&#39;Got: &#39;</span> <span class="o">+</span> <span class="nb">repr</span><span class="p">(</span><span class="n">fit_params</span><span class="p">)))</span></div>
+
+<div class="viewcode-block" id="TestFitStarShapeNoiseless.run_test"><a class="viewcode-back" href="../../../_unit_tests/tests.test_fit_star_shape.noiseless_tests.html#tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.run_test">[docs]</a>    <span class="k">def</span> <span class="nf">run_test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">sources</span><span class="p">,</span>
+                 <span class="n">psffit_terms</span><span class="p">,</span>
+                 <span class="n">extra_variables</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Assert that a fit of a series of images works exactly.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            sources:    A list of lists of dictionaries specifying the list of</span>
+<span class="sd">                sources to fit. Each list of dictionaries specifies the sources</span>
+<span class="sd">                to drop on a single image. Each source must contain the</span>
+<span class="sd">                following:</span>
+
+<span class="sd">                    * x:    The x coordinate of the source center.</span>
+
+<span class="sd">                    * y:    The y coordinate of the source center.</span>
+
+<span class="sd">                    * psf_args:    The arguments with which to create the</span>
+<span class="sd">                      PiecewiseBicubicPSF for the source. See</span>
+<span class="sd">                      PiecewiseBicubicPSF.__init__ for details.</span>
+
+<span class="sd">            psffit_terms:    The terms on which PSF parameters depend on. See</span>
+<span class="sd">                --psf.terms argument of the fitpsf command.</span>
+
+<span class="sd">            extra_variables:    A list of the variables in addition to x and y</span>
+<span class="sd">                that participate in the fitting terms.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">extra_variables</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">extra_variables</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">subpixmap</span> <span class="ow">in</span> <span class="p">[</span>
+                <span class="n">numpy</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
+                <span class="n">numpy</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)),</span>
+                <span class="n">numpy</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
+                <span class="n">numpy</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)),</span>
+                <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.99</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">1.99</span><span class="p">]]),</span>
+                <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">]]),</span>
+                <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.9</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">]]),</span>
+                <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">]]),</span>
+                <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">]])</span>
+        <span class="p">]:</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Fitting for the PSF.&#39;</span><span class="p">)</span>
+            <span class="n">fit_star_shape</span> <span class="o">=</span> <span class="n">FitStarShape</span><span class="p">(</span>
+                <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;PSF&#39;</span><span class="p">,</span>
+                <span class="n">shape_terms</span><span class="o">=</span><span class="n">psffit_terms</span><span class="p">,</span>
+                <span class="n">grid</span><span class="o">=</span><span class="p">[</span><span class="n">sources</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;psf_args&#39;</span><span class="p">][</span><span class="s1">&#39;boundaries&#39;</span><span class="p">][</span><span class="s1">&#39;x&#39;</span><span class="p">],</span>
+                      <span class="n">sources</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;psf_args&#39;</span><span class="p">][</span><span class="s1">&#39;boundaries&#39;</span><span class="p">][</span><span class="s1">&#39;y&#39;</span><span class="p">]],</span>
+                <span class="n">initial_aperture</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span>
+                <span class="n">subpixmap</span><span class="o">=</span><span class="n">subpixmap</span><span class="p">,</span>
+                <span class="n">smoothing</span><span class="o">=-</span><span class="mf">100.0</span><span class="p">,</span>
+                <span class="n">max_chi2</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span>
+                <span class="n">pixel_rejection_threshold</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span>
+                <span class="n">max_abs_amplitude_change</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+                <span class="n">max_rel_amplitude_change</span><span class="o">=</span><span class="mf">1e-13</span><span class="p">,</span>
+                <span class="n">min_convergence_rate</span><span class="o">=-</span><span class="mf">10.0</span><span class="p">,</span>
+                <span class="n">max_iterations</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>
+                <span class="n">bg_min_pix</span><span class="o">=</span><span class="mi">3</span>
+            <span class="p">)</span>
+
+            <span class="n">fit_images_and_sources</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">measure_backgrounds</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">sub_image</span><span class="p">,</span> <span class="n">image_sources</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sources</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Sub-image #</span><span class="si">%d</span><span class="s1"> sources:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">sub_image</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">src</span> <span class="ow">in</span> <span class="n">image_sources</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="nb">repr</span><span class="p">(</span><span class="n">src</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="n">image</span><span class="p">,</span> <span class="n">source_list</span> <span class="o">=</span> <span class="n">make_image_and_source_list</span><span class="p">(</span>
+                    <span class="n">sources</span><span class="o">=</span><span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">src</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span>
+                                  <span class="n">y</span><span class="o">=</span><span class="n">src</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">],</span>
+                                  <span class="n">psf</span><span class="o">=</span><span class="n">PiecewiseBicubicPSF</span><span class="p">(</span><span class="o">**</span><span class="n">src</span><span class="p">[</span><span class="s1">&#39;psf_args&#39;</span><span class="p">]),</span>
+                                  <span class="o">**</span><span class="p">{</span><span class="n">var</span><span class="p">:</span> <span class="n">src</span><span class="p">[</span><span class="n">var</span><span class="p">]</span> <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">extra_variables</span><span class="p">})</span>
+                             <span class="k">for</span> <span class="n">src</span> <span class="ow">in</span> <span class="n">image_sources</span><span class="p">],</span>
+                    <span class="n">extra_variables</span><span class="o">=</span><span class="n">extra_variables</span><span class="p">,</span>
+                    <span class="n">subpix_map</span><span class="o">=</span><span class="n">subpixmap</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="n">fit_images_and_sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="p">(</span>
+                        <span class="n">image</span><span class="p">,</span>
+                        <span class="n">image</span><span class="o">**</span><span class="mf">0.5</span><span class="p">,</span>
+                        <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">c_ubyte</span><span class="p">),</span>
+                        <span class="n">source_list</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+                <span class="n">measure_backgrounds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="n">BackgroundExtractor</span><span class="p">(</span>
+                        <span class="n">fit_images_and_sources</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
+                        <span class="mf">6.0</span><span class="p">,</span>
+                        <span class="mf">13.0</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+                <span class="n">measure_backgrounds</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">](</span>
+                    <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">src</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">src</span> <span class="ow">in</span> <span class="n">image_sources</span><span class="p">]),</span>
+                    <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">src</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">src</span> <span class="ow">in</span> <span class="n">image_sources</span><span class="p">])</span>
+                <span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">create_debug_files</span><span class="p">(</span><span class="n">image</span><span class="p">,</span>
+                                        <span class="n">source_list</span><span class="p">,</span>
+                                        <span class="n">fit_star_shape</span><span class="o">.</span><span class="n">configuration</span><span class="p">,</span>
+                                        <span class="n">sub_image</span><span class="p">)</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="mi">80</span><span class="o">*</span><span class="s1">&#39;=&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Fitting for star shape&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="mi">80</span><span class="o">*</span><span class="s1">&#39;=&#39;</span><span class="p">)</span>
+            <span class="n">result_tree</span> <span class="o">=</span> <span class="n">fit_star_shape</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+                <span class="n">fit_images_and_sources</span><span class="p">,</span>
+                <span class="n">measure_backgrounds</span>
+            <span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">image_index</span><span class="p">,</span> <span class="n">image_sources</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sources</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">check_results</span><span class="p">(</span>
+                    <span class="n">result_tree</span><span class="p">,</span>
+                    <span class="n">image_index</span><span class="p">,</span>
+                    <span class="n">image_sources</span><span class="p">,</span>
+                    <span class="n">extra_variables</span>
+                <span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Finished checking results for image &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">image_index</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="TestFitStarShapeNoiseless.test_single_source"><a class="viewcode-back" href="../../../_unit_tests/tests.test_fit_star_shape.noiseless_tests.html#tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.test_single_source">[docs]</a>    <span class="k">def</span> <span class="nf">test_single_source</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Test fitting a single source in the center of the image.&quot;&quot;&quot;</span>
+
+        <span class="n">values</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+        <span class="n">d_dx</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+        <span class="n">d_dy</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+        <span class="n">d2_dxdy</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+        <span class="n">values</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">run_test</span><span class="p">(</span>
+            <span class="n">sources</span><span class="o">=</span><span class="p">[[</span>
+                <span class="nb">dict</span><span class="p">(</span>
+                    <span class="n">x</span><span class="o">=</span><span class="mf">15.0</span><span class="p">,</span>
+                    <span class="n">y</span><span class="o">=</span><span class="mf">15.0</span><span class="p">,</span>
+                    <span class="n">psf_args</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                        <span class="n">psf_parameters</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                            <span class="n">values</span><span class="o">=</span><span class="n">values</span><span class="p">,</span>
+                            <span class="n">d_dx</span><span class="o">=</span><span class="n">d_dx</span><span class="p">,</span>
+                            <span class="n">d_dy</span><span class="o">=</span><span class="n">d_dy</span><span class="p">,</span>
+                            <span class="n">d2_dxdy</span><span class="o">=</span><span class="n">d2_dxdy</span>
+                        <span class="p">),</span>
+                        <span class="n">boundaries</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">]),</span>
+                                        <span class="n">y</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]))</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+            <span class="p">]],</span>
+            <span class="n">psffit_terms</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{1}</span><span class="s1">&#39;</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestFitStarShapeNoiseless.test_isolated_sources"><a class="viewcode-back" href="../../../_unit_tests/tests.test_fit_star_shape.noiseless_tests.html#tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.test_isolated_sources">[docs]</a>    <span class="k">def</span> <span class="nf">test_isolated_sources</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Test fitting an image containing 8 well isolated sources.&quot;&quot;&quot;</span>
+
+        <span class="n">psf_parameters</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">values</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)),</span>
+                              <span class="n">d_dx</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)),</span>
+                              <span class="n">d_dy</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)),</span>
+                              <span class="n">d2_dxdy</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
+        <span class="n">boundaries</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">]),</span>
+                          <span class="n">y</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">1.4</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">]))</span>
+
+        <span class="n">sources</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;values&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="n">sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">15.0</span><span class="p">,</span>
+                            <span class="n">y</span><span class="o">=</span><span class="mf">15.0</span><span class="p">,</span>
+                            <span class="n">psf_args</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">psf_parameters</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">psf_parameters</span><span class="p">),</span>
+                                          <span class="n">boundaries</span><span class="o">=</span><span class="n">boundaries</span><span class="p">)))</span>
+        <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d_dx&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+        <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d_dx&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="n">sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">45.0</span><span class="p">,</span>
+                            <span class="n">y</span><span class="o">=</span><span class="mf">15.0</span><span class="p">,</span>
+                            <span class="n">psf_args</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">psf_parameters</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">psf_parameters</span><span class="p">),</span>
+                                          <span class="n">boundaries</span><span class="o">=</span><span class="n">boundaries</span><span class="p">)))</span>
+        <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d_dx&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+        <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d_dy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+        <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d_dy&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="n">sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">15.0</span><span class="p">,</span>
+                            <span class="n">y</span><span class="o">=</span><span class="mf">45.0</span><span class="p">,</span>
+                            <span class="n">psf_args</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">psf_parameters</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">psf_parameters</span><span class="p">),</span>
+                                          <span class="n">boundaries</span><span class="o">=</span><span class="n">boundaries</span><span class="p">)))</span>
+        <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d_dx&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+        <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d_dy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+        <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d_dx&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.75</span>
+        <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d_dy&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.00</span>
+        <span class="n">sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">37.5</span><span class="p">,</span>
+                            <span class="n">y</span><span class="o">=</span><span class="mf">45.0</span><span class="p">,</span>
+                            <span class="n">psf_args</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">psf_parameters</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">psf_parameters</span><span class="p">),</span>
+                                          <span class="n">boundaries</span><span class="o">=</span><span class="n">boundaries</span><span class="p">)))</span>
+        <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d_dx&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+        <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d_dy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+        <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d_dx&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span>
+        <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d_dy&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="n">sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">30.0</span><span class="p">,</span>
+                            <span class="n">y</span><span class="o">=</span><span class="mf">15.0</span><span class="p">,</span>
+                            <span class="n">psf_args</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">psf_parameters</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">psf_parameters</span><span class="p">),</span>
+                                          <span class="n">boundaries</span><span class="o">=</span><span class="n">boundaries</span><span class="p">)))</span>
+        <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d_dx&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+        <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d_dy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+        <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d_dx&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d_dy&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span>
+        <span class="n">sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">15.0</span><span class="p">,</span>
+                            <span class="n">y</span><span class="o">=</span><span class="mf">30.0</span><span class="p">,</span>
+                            <span class="n">psf_args</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">psf_parameters</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">psf_parameters</span><span class="p">),</span>
+                                          <span class="n">boundaries</span><span class="o">=</span><span class="n">boundaries</span><span class="p">)))</span>
+        <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d_dx&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+        <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d_dy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+        <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d_dx&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span>
+        <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d_dy&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="n">sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">30.0</span><span class="p">,</span>
+                            <span class="n">y</span><span class="o">=</span><span class="mf">45.0</span><span class="p">,</span>
+                            <span class="n">psf_args</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">psf_parameters</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">psf_parameters</span><span class="p">),</span>
+                                          <span class="n">boundaries</span><span class="o">=</span><span class="n">boundaries</span><span class="p">)))</span>
+        <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d_dx&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+        <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d_dy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+        <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d_dx&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d_dy&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span>
+        <span class="n">sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">45.0</span><span class="p">,</span>
+                            <span class="n">y</span><span class="o">=</span><span class="mf">30.0</span><span class="p">,</span>
+                            <span class="n">psf_args</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">psf_parameters</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">psf_parameters</span><span class="p">),</span>
+                                          <span class="n">boundaries</span><span class="o">=</span><span class="n">boundaries</span><span class="p">)))</span>
+        <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d_dx&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+        <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d_dy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">run_test</span><span class="p">(</span><span class="n">sources</span><span class="o">=</span><span class="p">[</span><span class="n">sources</span><span class="p">],</span>
+                      <span class="n">psffit_terms</span><span class="o">=</span><span class="s1">&#39;{1, x, y}&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestFitStarShapeNoiseless.test_two_overlapping_sources"><a class="viewcode-back" href="../../../_unit_tests/tests.test_fit_star_shape.noiseless_tests.html#tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.test_two_overlapping_sources">[docs]</a>    <span class="k">def</span> <span class="nf">test_two_overlapping_sources</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Test fitting an image containing 2 sources all overlapping.&quot;&quot;&quot;</span>
+
+        <span class="n">psf_args</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">psf_parameters</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">values</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)),</span>
+                                            <span class="n">d_dx</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)),</span>
+                                            <span class="n">d_dy</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)),</span>
+                                            <span class="n">d2_dxdy</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))),</span>
+                        <span class="n">boundaries</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]),</span>
+                                        <span class="n">y</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">1.4</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">])))</span>
+
+        <span class="n">psf_args</span><span class="p">[</span><span class="s1">&#39;psf_parameters&#39;</span><span class="p">][</span><span class="s1">&#39;values&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+        <span class="n">sources</span> <span class="o">=</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">14.53</span><span class="p">,</span>
+                        <span class="n">y</span><span class="o">=</span><span class="mf">14.02</span><span class="p">,</span>
+                        <span class="n">psf_args</span><span class="o">=</span><span class="n">psf_args</span><span class="p">),</span>
+                   <span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">16.51</span><span class="p">,</span>
+                        <span class="n">y</span><span class="o">=</span><span class="mf">14.03</span><span class="p">,</span>
+                        <span class="n">psf_args</span><span class="o">=</span><span class="n">psf_args</span><span class="p">)]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">run_test</span><span class="p">(</span><span class="n">sources</span><span class="o">=</span><span class="p">[</span><span class="n">sources</span><span class="p">],</span> <span class="n">psffit_terms</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{1}</span><span class="s1">&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestFitStarShapeNoiseless.test_four_overlapping_sources"><a class="viewcode-back" href="../../../_unit_tests/tests.test_fit_star_shape.noiseless_tests.html#tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.test_four_overlapping_sources">[docs]</a>    <span class="k">def</span> <span class="nf">test_four_overlapping_sources</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Test fitting an image containing 4 overlapping sources.&quot;&quot;&quot;</span>
+
+        <span class="n">psf_parameters</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+            <span class="n">values</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)),</span>
+            <span class="n">d_dx</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)),</span>
+            <span class="n">d_dy</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)),</span>
+            <span class="n">d2_dxdy</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+        <span class="p">)</span>
+
+        <span class="n">boundaries</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+            <span class="n">x</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">2.2</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">]),</span>
+            <span class="n">y</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">1.4</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">])</span>
+        <span class="p">)</span>
+
+        <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;values&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+        <span class="n">sources</span> <span class="o">=</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">12.5</span><span class="p">,</span>
+                        <span class="n">y</span><span class="o">=</span><span class="mf">13.5</span><span class="p">,</span>
+                        <span class="n">psf_args</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">psf_parameters</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">psf_parameters</span><span class="p">),</span>
+                                      <span class="n">boundaries</span><span class="o">=</span><span class="n">boundaries</span><span class="p">))]</span>
+
+
+        <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d_dx&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+        <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d_dy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+        <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d_dx&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="n">sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">16.5</span><span class="p">,</span>
+                            <span class="n">y</span><span class="o">=</span><span class="mf">13.5</span><span class="p">,</span>
+                            <span class="n">psf_args</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">psf_parameters</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">psf_parameters</span><span class="p">),</span>
+                                          <span class="n">boundaries</span><span class="o">=</span><span class="n">boundaries</span><span class="p">)))</span>
+
+        <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d_dx&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+        <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d_dy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+        <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d_dy&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="n">sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">12.5</span><span class="p">,</span>
+                            <span class="n">y</span><span class="o">=</span><span class="mf">15.5</span><span class="p">,</span>
+                            <span class="n">psf_args</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">psf_parameters</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">psf_parameters</span><span class="p">),</span>
+                                          <span class="n">boundaries</span><span class="o">=</span><span class="n">boundaries</span><span class="p">)))</span>
+
+        <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d_dx&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+        <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d_dy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+        <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d_dx&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d_dy&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="n">sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">16.5</span><span class="p">,</span>
+                            <span class="n">y</span><span class="o">=</span><span class="mf">15.5</span><span class="p">,</span>
+                            <span class="n">psf_args</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">psf_parameters</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">psf_parameters</span><span class="p">),</span>
+                                          <span class="n">boundaries</span><span class="o">=</span><span class="n">boundaries</span><span class="p">)))</span>
+
+<span class="c1">#        self.run_test(sources=[sources], psffit_terms=&#39;{1, x*x, y*y}&#39;)</span>
+
+        <span class="k">for</span> <span class="n">src</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
+            <span class="n">src</span><span class="p">[</span><span class="s1">&#39;enabled&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d_dx&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+        <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d_dy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+        <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d2_dxdy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+        <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d_dx&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d_dy&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">2.0</span>
+        <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d2_dxdy&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">3.0</span>
+        <span class="n">sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">4.0</span><span class="p">,</span>
+                            <span class="n">y</span><span class="o">=</span><span class="mf">4.0</span><span class="p">,</span>
+                            <span class="n">enabled</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                            <span class="n">psf_args</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">psf_parameters</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">psf_parameters</span><span class="p">),</span>
+                                          <span class="n">boundaries</span><span class="o">=</span><span class="n">boundaries</span><span class="p">)))</span>
+        <span class="n">sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">25.0</span><span class="p">,</span>
+                            <span class="n">y</span><span class="o">=</span><span class="mf">25.0</span><span class="p">,</span>
+                            <span class="n">enabled</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                            <span class="n">psf_args</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">psf_parameters</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">psf_parameters</span><span class="p">),</span>
+                                          <span class="n">boundaries</span><span class="o">=</span><span class="n">boundaries</span><span class="p">)))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">run_test</span><span class="p">(</span><span class="n">sources</span><span class="o">=</span><span class="p">[</span><span class="n">sources</span><span class="p">],</span>
+                      <span class="n">psffit_terms</span><span class="o">=</span><span class="s1">&#39;{1, x*x, y*y}&#39;</span><span class="p">,</span>
+                      <span class="n">extra_variables</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;enabled&#39;</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="TestFitStarShapeNoiseless.test_multi_image_with_extra_var"><a class="viewcode-back" href="../../../_unit_tests/tests.test_fit_star_shape.noiseless_tests.html#tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.test_multi_image_with_extra_var">[docs]</a>    <span class="k">def</span> <span class="nf">test_multi_image_with_extra_var</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Test fitting a series of 5 images and non-position variables.&quot;&quot;&quot;</span>
+
+        <span class="n">boundaries</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">3.02</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">3.02</span><span class="p">]),</span>
+                          <span class="n">y</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">2.04</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">2.04</span><span class="p">]))</span>
+
+        <span class="c1">#t &amp; z are arbitrary and dx and dy seem reasonable</span>
+        <span class="c1">#pylint: disable=invalid-name</span>
+        <span class="k">def</span> <span class="nf">image_sources</span><span class="p">(</span><span class="n">dx_dy_z_fluxbkp</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;Return 3 overlapping sources with slightly different PSFs.&quot;&quot;&quot;</span>
+
+
+            <span class="n">values</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+            <span class="n">d_dx</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+            <span class="n">d_dy</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+            <span class="n">d2_dxdy</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+            <span class="n">values</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">10.0</span>
+
+            <span class="n">sources</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">flux_backup</span> <span class="ow">in</span> <span class="n">dx_dy_z_fluxbkp</span><span class="p">:</span>
+                <span class="n">d_dx</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">((</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">t</span><span class="p">)</span> <span class="o">*</span> <span class="n">dx</span> <span class="o">/</span> <span class="mf">150.0</span>
+                              <span class="o">+</span>
+                              <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">t</span><span class="p">)</span> <span class="o">*</span> <span class="n">dy</span> <span class="o">/</span> <span class="mf">300.0</span><span class="p">)</span>
+                <span class="n">d_dy</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">t</span><span class="p">)</span> <span class="o">*</span> <span class="n">dx</span> <span class="o">/</span> <span class="mf">150.0</span> <span class="o">+</span> <span class="mf">0.01</span> <span class="o">*</span> <span class="n">z</span>
+<span class="c1">#                print(&quot;Dx = &quot; + repr(d_dx[1, 1]) + &quot;, Dy = &quot; + repr(d_dy[1, 1]))</span>
+                <span class="n">sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="nb">dict</span><span class="p">(</span>
+                        <span class="n">x</span><span class="o">=</span><span class="mf">30.0</span> <span class="o">+</span> <span class="n">dx</span><span class="p">,</span>
+                        <span class="n">y</span><span class="o">=</span><span class="mf">30.0</span> <span class="o">+</span> <span class="n">dy</span><span class="p">,</span>
+                        <span class="n">z</span><span class="o">=</span><span class="n">z</span><span class="p">,</span>
+                        <span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">,</span>
+                        <span class="n">flux_backup</span><span class="o">=</span><span class="n">flux_backup</span><span class="p">,</span>
+                        <span class="n">psf_args</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                            <span class="n">psf_parameters</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                                <span class="n">values</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">values</span><span class="p">),</span>
+                                <span class="n">d_dx</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">d_dx</span><span class="p">),</span>
+                                <span class="n">d_dy</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">d_dy</span><span class="p">),</span>
+                                <span class="n">d2_dxdy</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">d2_dxdy</span><span class="p">),</span>
+                            <span class="p">),</span>
+                            <span class="n">boundaries</span><span class="o">=</span><span class="n">boundaries</span>
+                        <span class="p">)</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">sources</span>
+        <span class="c1">#pylint: enable=invalid-name</span>
+
+        <span class="n">sources</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">image_sources</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="p">(</span><span class="o">-</span><span class="mf">17.3</span><span class="p">,</span> <span class="o">-</span><span class="mf">15.3</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+                    <span class="p">(</span><span class="mf">12.3</span><span class="p">,</span> <span class="o">-</span><span class="mf">17.0</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">e</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+                    <span class="p">(</span><span class="o">-</span><span class="mf">15.0</span><span class="p">,</span> <span class="mf">13.0</span><span class="p">,</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">numpy</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+                    <span class="p">(</span><span class="mf">17.3</span><span class="p">,</span> <span class="mf">17.0</span><span class="p">,</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">numpy</span><span class="o">.</span><span class="n">e</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+                <span class="p">],</span>
+                <span class="mf">1.0</span>
+            <span class="p">),</span>
+            <span class="n">image_sources</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+                    <span class="p">(</span><span class="o">-</span><span class="mf">4.0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+                    <span class="p">(</span><span class="mf">4.0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+                <span class="p">],</span>
+                <span class="mf">2.0</span>
+            <span class="p">),</span>
+            <span class="n">image_sources</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="p">(</span><span class="mf">5.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">e</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+                    <span class="p">(</span><span class="mf">5.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">pi</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+                    <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">e</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+                    <span class="p">(</span><span class="o">-</span><span class="mf">5.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">numpy</span><span class="o">.</span><span class="n">e</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+                    <span class="p">(</span><span class="o">-</span><span class="mf">5.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+                <span class="p">],</span>
+                <span class="mf">3.0</span>
+            <span class="p">),</span>
+            <span class="n">image_sources</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="p">(</span><span class="o">-</span><span class="mf">12.0</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="o">-</span><span class="mf">5.0</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="mf">10.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+                    <span class="p">(</span><span class="o">-</span><span class="mf">16.0</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="o">-</span><span class="mf">5.0</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="mf">10.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+                    <span class="p">(</span><span class="mf">14.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">15.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">10.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+                    <span class="p">(</span><span class="mf">16.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">15.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">10.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+                    <span class="p">(</span><span class="o">-</span><span class="mf">15.5</span><span class="p">,</span> <span class="mf">13.15</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+                    <span class="p">(</span><span class="mf">15.5</span><span class="p">,</span> <span class="mf">14.83</span><span class="p">,</span> <span class="o">-</span><span class="mf">10.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+                    <span class="p">(</span><span class="mf">17.8</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+                    <span class="p">(</span><span class="mf">13.0</span><span class="p">,</span> <span class="mf">15.8</span><span class="p">,</span> <span class="o">-</span><span class="mf">10.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+                    <span class="p">(</span><span class="o">-</span><span class="mf">17.8</span><span class="p">,</span> <span class="o">-</span><span class="mf">15.8</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+                <span class="p">],</span>
+                <span class="mf">4.0</span>
+            <span class="p">),</span>
+            <span class="n">image_sources</span><span class="p">(</span><span class="c1">#PROBLEM IMAGE</span>
+                <span class="p">[</span>
+                    <span class="p">(</span>
+                        <span class="n">dx</span><span class="p">,</span>
+                        <span class="n">dy</span><span class="p">,</span>
+                        <span class="mf">1.0</span><span class="p">,</span>
+                        <span class="p">(</span>
+                            <span class="kc">None</span> <span class="k">if</span> <span class="p">(</span>
+                                <span class="n">dx</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mf">12.5</span>
+                                <span class="ow">or</span>
+                                <span class="n">dx</span> <span class="o">&gt;</span> <span class="mf">12.5</span>
+                                <span class="ow">or</span>
+                                <span class="n">dy</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mf">12.5</span>
+                                <span class="ow">or</span>
+                                <span class="n">dy</span> <span class="o">&gt;</span> <span class="mf">12.5</span>
+                            <span class="p">)</span> <span class="k">else</span> <span class="p">(</span>
+                                <span class="mf">10.0</span> <span class="o">*</span> <span class="n">boundaries</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">boundaries</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                            <span class="p">)</span>
+                        <span class="p">)</span>
+                    <span class="p">)</span>
+                    <span class="k">for</span> <span class="n">dx</span> <span class="ow">in</span> <span class="p">[</span><span class="o">-</span><span class="mf">20.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">15.3</span><span class="p">,</span> <span class="o">-</span><span class="mf">10.4</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.5</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">5.7</span><span class="p">,</span> <span class="mf">10.8</span><span class="p">,</span>
+                               <span class="mf">15.9</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">]</span>
+                    <span class="k">for</span> <span class="n">dy</span> <span class="ow">in</span> <span class="p">[</span><span class="o">-</span><span class="mf">20.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">15.3</span><span class="p">,</span> <span class="o">-</span><span class="mf">10.4</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.5</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">5.7</span><span class="p">,</span> <span class="mf">10.8</span><span class="p">,</span>
+                               <span class="mf">15.9</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">]</span>
+                <span class="p">],</span>
+                <span class="mf">5.0</span>
+            <span class="p">),</span>
+            <span class="n">image_sources</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="p">(</span>
+                        <span class="n">dx</span><span class="p">,</span>
+                        <span class="n">dy</span><span class="p">,</span>
+                        <span class="mf">3.0</span><span class="p">,</span>
+                        <span class="kc">None</span>
+                    <span class="p">)</span>
+                    <span class="k">for</span> <span class="n">dx</span> <span class="ow">in</span> <span class="p">[</span><span class="o">-</span><span class="mf">22.8</span><span class="p">,</span> <span class="o">-</span><span class="mf">15.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.6</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">7.6</span><span class="p">,</span> <span class="mf">15.2</span><span class="p">,</span> <span class="mf">22.8</span><span class="p">]</span>
+                    <span class="k">for</span> <span class="n">dy</span> <span class="ow">in</span> <span class="p">[</span><span class="o">-</span><span class="mf">22.8</span><span class="p">,</span> <span class="o">-</span><span class="mf">11.6</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">11.6</span><span class="p">,</span> <span class="mf">22.8</span><span class="p">]</span>
+                <span class="p">],</span>
+                <span class="mf">5.0</span>
+            <span class="p">)</span>
+        <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">run_test</span><span class="p">(</span><span class="n">sources</span><span class="o">=</span><span class="n">sources</span><span class="p">,</span>
+                      <span class="n">psffit_terms</span><span class="o">=</span><span class="s1">&#39;{1, x, y, t, x*t, y*t, z}&#39;</span><span class="p">,</span>
+                      <span class="n">extra_variables</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">])</span></div></div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="n">failfast</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Kaloyan Penev
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

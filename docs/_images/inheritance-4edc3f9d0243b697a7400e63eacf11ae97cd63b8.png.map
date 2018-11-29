@@ -1,0 +1,5 @@
+<map id="inheritanced3021d0d53" name="inheritanced3021d0d53">
+<area shape="rect" id="node1" title="Helper class that provides a standard way to create an ABC using" alt="" coords="205,5,281,31"/>
+<area shape="rect" id="node3" href="superphot.fake_image.psf_piece.html#superphot.fake_image.psf_piece.PSFPiece" target="_top" title="Declare a minimum interface for pieces of PiecewisePSF." alt="" coords="95,79,391,104"/>
+<area shape="rect" id="node2" href="#superphot.fake_image.bipolynomial_psf_piece.BipolynomialPSFPiece" target="_top" title="Class for PSF pieces over which the PSF is a bi&#45;polynomial function." alt="" coords="5,152,480,177"/>
+</map>

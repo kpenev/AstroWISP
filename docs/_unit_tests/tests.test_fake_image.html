@@ -24,9 +24,9 @@
 
   
 
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
   <link rel="stylesheet" href="../_static/unlimited_width.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -187,8 +187,61 @@
     margin-right: 4px;  /* make room for the exclamation icon */
 }
 </style>
-<div class="section" id="tests-test-fake-image-module">
-<h1>tests.test_fake_image module<a class="headerlink" href="#tests-test-fake-image-module" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-tests.test_fake_image">
+<span id="tests-test-fake-image-module"></span><h1>tests.test_fake_image module<a class="headerlink" href="#module-tests.test_fake_image" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="class-inheritance-diagram">
+<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this headline">¶</a></h2>
+<div class="graphviz"><img src="../_images/inheritance-857d7817f0bb86bea56796a02cd80aa44b5f9833.png" alt="Inheritance diagram of FloatTestCase, Image, PiecewiseBicubicPSF, TestImage" usemap="#inheritance5be4968c28" class="inheritance graphviz" /></div>
+<map id="inheritance5be4968c28" name="inheritance5be4968c28">
+<area shape="rect" id="node6" href="../_implementation/superphot.fake_image.psf_base.html#superphot.fake_image.psf_base.PSFBase" target="_top" title="The base class for all supported PSFs." alt="" coords="88,79,377,104"/>
+<area shape="rect" id="node3" href="../_implementation/superphot.fake_image.image.html#superphot.fake_image.image.Image" target="_top" title="A base class for fake images." alt="" coords="402,79,661,104"/>
+<area shape="rect" id="node4" href="../_implementation/superphot.fake_image.piecewise_bicubic_psf.html#superphot.fake_image.piecewise_bicubic_psf.PiecewiseBicubicPSF" target="_top" title="A piecewise PSF class where the PSF over each piece is a bi&#45;cubic function." alt="" coords="5,225,460,251"/>
+<area shape="rect" id="node5" href="../_implementation/superphot.fake_image.piecewise_psf.html#superphot.fake_image.piecewise_psf.PiecewisePSF" target="_top" title="Base clas for PSFs defined on a grid of pieces." alt="" coords="55,152,410,177"/>
+<area shape="rect" id="node7" href="#tests.test_fake_image.TestImage" target="_top" title="Make sure the Image class functions as expected." alt="" coords="667,152,905,177"/>
+<area shape="rect" id="node8" href="tests.utilities.html#tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="685,79,887,104"/>
+</map><p>Unittest test case for the superphot.fake_image.image.Image class.</p>
+<dl class="class">
+<dt id="tests.test_fake_image.TestImage">
+<em class="property">class </em><code class="descclassname">tests.test_fake_image.</code><code class="descname">TestImage</code><span class="sig-paren">(</span><em>methodName='runTest'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_fake_image.html#TestImage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_fake_image.TestImage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="tests.utilities.html#tests.utilities.FloatTestCase" title="tests.utilities.FloatTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">tests.utilities.FloatTestCase</span></code></a></p>
+<div class="graphviz"><img src="../_images/inheritance-d5a056c0dedde948e3e1d4fe08eb3aa13a6d766d.png" alt="Inheritance diagram of tests.test_fake_image.TestImage" usemap="#inheritancedeed27bb82" class="inheritance graphviz" /></div>
+<map id="inheritancedeed27bb82" name="inheritancedeed27bb82">
+<area shape="rect" id="node1" href="#tests.test_fake_image.TestImage" target="_top" title="Make sure the Image class functions as expected." alt="" coords="5,152,244,177"/>
+<area shape="rect" id="node2" href="tests.utilities.html#tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="24,79,225,104"/>
+</map><p>Make sure the Image class functions as expected.</p>
+<dl class="method">
+<dt id="tests.test_fake_image.TestImage.assertExpectedImage">
+<code class="descname">assertExpectedImage</code><span class="sig-paren">(</span><em>got</em>, <em>expected</em>, <em>message</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_fake_image.html#TestImage.assertExpectedImage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_fake_image.TestImage.assertExpectedImage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if an image is the same as expected.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.test_fake_image.TestImage.setUp">
+<code class="descname">setUp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_fake_image.html#TestImage.setUp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_fake_image.TestImage.setUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set tolerance to 100 x epsilon.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.test_fake_image.TestImage.test_misaligned_source">
+<code class="descname">test_misaligned_source</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_fake_image.html#TestImage.test_misaligned_source"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_fake_image.TestImage.test_misaligned_source" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test behavior with a single source not alinged with pixels.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.test_fake_image.TestImage.test_no_source">
+<code class="descname">test_no_source</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_fake_image.html#TestImage.test_no_source"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_fake_image.TestImage.test_no_source" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test behavior of images with no sources.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.test_fake_image.TestImage.test_pix_aligned_source">
+<code class="descname">test_pix_aligned_source</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_fake_image.html#TestImage.test_pix_aligned_source"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_fake_image.TestImage.test_pix_aligned_source" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test behavior with a single source covering exact pixels.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
 </div>
 
 
@@ -211,7 +264,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Kaloyan Penev.
+        &copy; Copyright 2018, Kaloyan Penev
 
     </p>
   </div>
@@ -230,28 +283,18 @@
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
 
   
 
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
 
   <script type="text/javascript">
       jQuery(function () {

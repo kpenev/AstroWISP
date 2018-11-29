@@ -1,0 +1,347 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>superphot.superphot_io_tree &mdash; SuperPhot Python Interface  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/unlimited_width.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> SuperPhot Python Interface
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../python_interface/index.html">Python Interface Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_implementation/modules.html">Python Package Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cpp_api.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../c_api.html">C API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_unit_tests/modules.html">Unit Testing Code</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">SuperPhot Python Interface</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>superphot.superphot_io_tree</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for superphot.superphot_io_tree</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Define a function for intefracing with the superphotio library.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">ctypes</span> <span class="k">import</span>\
+    <span class="n">c_bool</span><span class="p">,</span>\
+    <span class="n">c_double</span><span class="p">,</span>\
+    <span class="n">c_int</span><span class="p">,</span>\
+    <span class="n">c_short</span><span class="p">,</span>\
+    <span class="n">c_long</span><span class="p">,</span>\
+    <span class="n">c_byte</span><span class="p">,</span>\
+    <span class="n">c_uint</span><span class="p">,</span>\
+    <span class="n">c_ulong</span><span class="p">,</span>\
+    <span class="n">c_ushort</span><span class="p">,</span>\
+    <span class="n">c_ubyte</span><span class="p">,</span>\
+    <span class="n">c_char_p</span><span class="p">,</span>\
+    <span class="n">c_void_p</span><span class="p">,</span>\
+    <span class="n">pointer</span><span class="p">,</span>\
+    <span class="n">cast</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span>
+
+<span class="kn">from</span> <span class="nn">superphot._initialize_library</span> <span class="k">import</span> <span class="n">superphot_library</span>
+
+<span class="c1">#Sufficient functionality to justify a class.</span>
+<span class="c1">#pylint: disable=too-few-public-methods</span>
+<div class="viewcode-block" id="SuperPhotIOTree"><a class="viewcode-back" href="../../_implementation/superphot.superphot_io_tree.html#superphot.superphot_io_tree.SuperPhotIOTree">[docs]</a><span class="k">class</span> <span class="nc">SuperPhotIOTree</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Interface for extracting entries from an IO::H5IODataTree.&quot;&quot;&quot;</span>
+
+    <span class="n">type_string</span> <span class="o">=</span> <span class="p">{</span><span class="n">c_bool</span><span class="p">:</span> <span class="s1">&#39;bool&#39;</span><span class="p">,</span>
+                   <span class="n">c_double</span><span class="p">:</span> <span class="s1">&#39;double&#39;</span><span class="p">,</span>
+                   <span class="n">c_int</span><span class="p">:</span> <span class="s1">&#39;int&#39;</span><span class="p">,</span>
+                   <span class="n">c_short</span><span class="p">:</span> <span class="s1">&#39;short&#39;</span><span class="p">,</span>
+                   <span class="n">c_long</span><span class="p">:</span> <span class="s1">&#39;long&#39;</span><span class="p">,</span>
+                   <span class="n">c_byte</span><span class="p">:</span> <span class="s1">&#39;char&#39;</span><span class="p">,</span>
+                   <span class="n">c_uint</span><span class="p">:</span> <span class="s1">&#39;uint&#39;</span><span class="p">,</span>
+                   <span class="n">c_ulong</span><span class="p">:</span> <span class="s1">&#39;ulong&#39;</span><span class="p">,</span>
+                   <span class="n">c_ushort</span><span class="p">:</span> <span class="s1">&#39;ushort&#39;</span><span class="p">,</span>
+                   <span class="n">c_ubyte</span><span class="p">:</span> <span class="s1">&#39;uchar&#39;</span><span class="p">}</span>
+
+<div class="viewcode-block" id="SuperPhotIOTree.__init__"><a class="viewcode-back" href="../../_implementation/superphot.superphot_io_tree.html#superphot.superphot_io_tree.SuperPhotIOTree.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">library_configuration</span><span class="p">,</span> <span class="n">version_info</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a tree with just the given configuration.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            library_configuration:    The configuration object created by the</span>
+<span class="sd">                library for the tool which will be using the configuration tree.</span>
+
+<span class="sd">            version_info:    Information about the version of the</span>
+<span class="sd">                tool/scripts/... using this tree. It is safe to leave this</span>
+<span class="sd">                empty, if it is not required as an entry in the tree.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">library_tree</span> <span class="o">=</span> <span class="n">superphot_library</span><span class="o">.</span><span class="n">create_result_tree</span><span class="p">(</span>
+            <span class="n">library_configuration</span><span class="p">,</span>
+            <span class="p">(</span>
+                <span class="n">version_info</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">version_info</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">)</span>
+                <span class="k">else</span> <span class="n">version_info</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="SuperPhotIOTree.get"><a class="viewcode-back" href="../../_implementation/superphot.superphot_io_tree.html#superphot.superphot_io_tree.SuperPhotIOTree.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">quantity</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">c_double</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the given quantity as a proper python object.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            quantity (str):    The quantity to extract from the tree.</span>
+
+<span class="sd">            dtype:    The data type of individual values of the quantity.</span>
+
+<span class="sd">            shape (tulpe of ints):    The shape of the array of values</span>
+<span class="sd">                to expect. Use None for scalar quantities.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.ndarray(shape=shape, dtype=dtype):</span>
+<span class="sd">                The values of the quantity. The return type is always an array,</span>
+<span class="sd">                even for sintgle valued quantities. In the latter case, the</span>
+<span class="sd">                shape is (1,).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">byte_quantity</span> <span class="o">=</span> <span class="p">(</span><span class="n">quantity</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">quantity</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">)</span>
+                         <span class="k">else</span> <span class="n">quantity</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">dtype</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="n">library_result</span> <span class="o">=</span> <span class="n">pointer</span><span class="p">(</span><span class="n">c_char_p</span><span class="p">())</span>
+            <span class="n">defined</span> <span class="o">=</span> <span class="n">superphot_library</span><span class="o">.</span><span class="n">query_result_tree</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">library_tree</span><span class="p">,</span>
+                <span class="n">byte_quantity</span><span class="p">,</span>
+                <span class="sa">b</span><span class="s1">&#39;str&#39;</span><span class="p">,</span>
+                <span class="n">cast</span><span class="p">(</span><span class="n">library_result</span><span class="p">,</span> <span class="n">c_void_p</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">library_result</span><span class="o">.</span><span class="n">contents</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+            <span class="n">superphot_library</span><span class="o">.</span><span class="n">free</span><span class="p">(</span><span class="n">library_result</span><span class="o">.</span><span class="n">contents</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+
+            <span class="n">type_string_arg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">type_string</span><span class="p">[</span><span class="n">dtype</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">shape</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">type_string_arg</span> <span class="o">=</span> <span class="s1">&#39;[&#39;</span> <span class="o">+</span> <span class="n">type_string_arg</span> <span class="o">+</span> <span class="s1">&#39;]&#39;</span>
+
+            <span class="n">defined</span> <span class="o">=</span> <span class="n">superphot_library</span><span class="o">.</span><span class="n">query_result_tree</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">library_tree</span><span class="p">,</span>
+                <span class="n">byte_quantity</span><span class="p">,</span>
+                <span class="n">type_string_arg</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">),</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data_as</span><span class="p">(</span><span class="n">c_void_p</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">defined</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
+                <span class="s1">&#39;Given result tree does not contain a quantity named: &#39;</span>
+                <span class="o">+</span>
+                <span class="nb">repr</span><span class="p">(</span><span class="n">quantity</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span></div>
+
+<div class="viewcode-block" id="SuperPhotIOTree.get_psfmap_variables"><a class="viewcode-back" href="../../_implementation/superphot.superphot_io_tree.html#superphot.superphot_io_tree.SuperPhotIOTree.get_psfmap_variables">[docs]</a>    <span class="k">def</span> <span class="nf">get_psfmap_variables</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image_index</span><span class="p">,</span> <span class="n">num_variables</span><span class="p">,</span> <span class="n">num_sources</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the values of the PSF map variables for all sources in an image.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            image_index:    The index of the image for which to return the</span>
+<span class="sd">                values of the variables as supplied to PSF fitting.</span>
+
+<span class="sd">            num_variables:    The number of variables used for PSF fitting.</span>
+
+<span class="sd">            num_sources:    The number of sources in the selected image.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.ndarray(dtype=float, shape=(num_variables, num_sources):</span>
+<span class="sd">                Array with records named as the PSF map variables and entries</span>
+<span class="sd">                containing the values of the variables for all sources in the</span>
+<span class="sd">                image identified by image_index.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">num_variables</span><span class="p">,</span> <span class="n">num_sources</span><span class="p">))</span>
+        <span class="n">superphot_library</span><span class="o">.</span><span class="n">get_psf_map_variables</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">library_tree</span><span class="p">,</span>
+                                                <span class="n">image_index</span><span class="p">,</span>
+                                                <span class="n">result</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span></div>
+
+<div class="viewcode-block" id="SuperPhotIOTree.__del__"><a class="viewcode-back" href="../../_implementation/superphot.superphot_io_tree.html#superphot.superphot_io_tree.SuperPhotIOTree.__del__">[docs]</a>    <span class="k">def</span> <span class="nf">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Destroy the tree allocated by __init__.&quot;&quot;&quot;</span>
+
+        <span class="n">superphot_library</span><span class="o">.</span><span class="n">destroy_result_tree</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">library_tree</span><span class="p">)</span></div></div>
+<span class="c1">#pylint: enable=too-few-public-methods</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Kaloyan Penev
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

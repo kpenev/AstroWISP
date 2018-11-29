@@ -1,0 +1,845 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>superphot.fit_star_shape &mdash; SuperPhot Python Interface  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/unlimited_width.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> SuperPhot Python Interface
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../python_interface/index.html">Python Interface Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_implementation/modules.html">Python Package Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cpp_api.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../c_api.html">C API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_unit_tests/modules.html">Unit Testing Code</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">SuperPhot Python Interface</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>superphot.fit_star_shape</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for superphot.fit_star_shape</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="sd">&quot;&quot;&quot;Define the :class:`FitStarShape`, which performs PSF/PRF fitting.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">numbers</span> <span class="k">import</span> <span class="n">Number</span>
+<span class="kn">from</span> <span class="nn">ctypes</span> <span class="k">import</span>\
+    <span class="n">c_bool</span><span class="p">,</span>\
+    <span class="n">POINTER</span><span class="p">,</span>\
+    <span class="n">c_double</span><span class="p">,</span>\
+    <span class="n">c_char_p</span><span class="p">,</span>\
+    <span class="n">c_char</span><span class="p">,</span>\
+    <span class="n">c_ulong</span><span class="p">,</span>\
+    <span class="n">c_int</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+
+<span class="kn">from</span> <span class="nn">superphot._initialize_library</span> <span class="k">import</span> <span class="n">superphot_library</span>
+<span class="kn">from</span> <span class="nn">superphot.superphot_io_tree</span> <span class="k">import</span> <span class="n">SuperPhotIOTree</span>
+
+<div class="viewcode-block" id="FitStarShape"><a class="viewcode-back" href="../../_implementation/superphot.fit_star_shape.html#superphot.FitStarShape">[docs]</a><span class="k">class</span> <span class="nc">FitStarShape</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Fit for the PSF/PRF of stars and their flux.</span>
+
+<span class="sd">    The PSF and PRF describe the distribution of light from a point source at</span>
+<span class="sd">    infinity on the imaging device pixels.</span>
+
+<span class="sd">        * PSF is the distribution of light produced by the optical system in the</span>
+<span class="sd">          plane of the detector for a point source at infinity.</span>
+
+<span class="sd">        * PRF is the response of a detector pixel at some offset from the</span>
+<span class="sd">          center of the source. That is, the PRF is the PSF convolved with</span>
+<span class="sd">          the sensitivity of detector pixels.</span>
+
+<span class="sd">    Both representations use a general piece-wise polynomial model in which the</span>
+<span class="sd">    area around the source location is split into a rectangular, but in general</span>
+<span class="sd">    irregular, grid of cells. Over each cell the PSF/PRF is modeled as a</span>
+<span class="sd">    bi-cubic polynomial. The resulting function is constraned to have continuous</span>
+<span class="sd">    values, first order derivatives and x-y cross-derivative across cell</span>
+<span class="sd">    boundaries. Further, it&#39;s value, first derivative and the x-y cross</span>
+<span class="sd">    derivative are contsrainted to go to zero on the outside boundaries of the</span>
+<span class="sd">    grid.</span>
+
+<span class="sd">    .. _attributes:</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        _library_psf_fitter:    The library object for carrying out PSF/PRF</span>
+<span class="sd">            fitting.</span>
+
+<span class="sd">        _library_configuration:    Library configuration object set per the</span>
+<span class="sd">            current :attr:`configuration`</span>
+
+<span class="sd">        _result_tree:    The SuperPhotIOTree instance containing the last</span>
+<span class="sd">            fittintg results, on None, if no fitting has been performed yet.</span>
+
+<span class="sd">        mode(str):    Are we doing &#39;PSF&#39; or &#39;PRF&#39; fitting (case</span>
+<span class="sd">            insensitive).</span>
+
+<span class="sd">        configuration (dict):    The configuraiton for how to carry out PSF/PRF</span>
+<span class="sd">            fitting. The following keys are used (others are ignored by this</span>
+<span class="sd">            class):</span>
+
+<span class="sd">            mode (str):</span>
+<span class="sd">                What kind of fitting to do &#39;PSF&#39; or &#39;PRF&#39; (case insensitive).</span>
+
+<span class="sd">            shape_terms (str):</span>
+<span class="sd">                The terms the PSF is allowed to depend on. The EBNF grammar</span>
+<span class="sd">                defining the language for this parameter is::</span>
+
+<span class="sd">                    (* items in angle brackets (&lt; or &gt;) are assumed to be     *)</span>
+<span class="sd">                    (* obvious and thus are not defined.                      *)</span>
+
+<span class="sd">                    termchar = &lt;ascii character&gt; - &quot;,&quot; - &quot;}&quot; ;</span>
+
+<span class="sd">                    (* mathematical expressions  involving variables,         *)</span>
+<span class="sd">                    (* floating point numbers and pi. The complete list of    *)</span>
+<span class="sd">                    (* mathematical functions from c++99&#39;s cmath library are  *)</span>
+<span class="sd">                    (* supported.                                             *)</span>
+<span class="sd">                    term = termchar , { termchar } ;</span>
+
+
+<span class="sd">                    (* simple listing of terms to include.                    *)</span>
+<span class="sd">                    list = &quot;{&quot; , term , { &quot;,&quot; , term } , &quot;}&quot; ;</span>
+
+<span class="sd">                    (* Expands to all polynomial terms of up to combined      *)</span>
+<span class="sd">                    (* order &lt;integer&gt; of the entries in list                 *)</span>
+<span class="sd">                    poly = &quot;O&quot; , &lt;integer&gt; , list ;</span>
+
+<span class="sd">                    set = list | poly ;</span>
+
+
+<span class="sd">                    (* expands to the cross product of all sets.              *)</span>
+<span class="sd">                    cross = set , { &quot;*&quot; , set } ;</span>
+
+
+<span class="sd">                    (* merge the terms of all cross products together.        *)</span>
+<span class="sd">                    expression = cross , { \&quot;+\&quot; , cross } ;</span>
+
+<span class="sd">            grid (list of floats):</span>
+<span class="sd">                A comma separated list of grid boundaries.  Can either be a</span>
+<span class="sd">                single list, in which case it is used for both the horizontal</span>
+<span class="sd">                and vertical boundaries. If different splitting is desired in</span>
+<span class="sd">                the two directions, two lists should be supplied separated by</span>
+<span class="sd">                ``;``. The first list should contain the vertical (x) boundaries</span>
+<span class="sd">                and the second list gives the horizontal (y) ones.</span>
+
+<span class="sd">            initial_aperture (float):</span>
+<span class="sd">                This aperture is used to derive an initial guess for the</span>
+<span class="sd">                amplitudes of sources when fitting for a piecewise bicubic PSF</span>
+<span class="sd">                model by doing aperture photometry assuming a perfectly flat</span>
+<span class="sd">                PSF.</span>
+
+<span class="sd">            subpixmap (2D numpy array):</span>
+<span class="sd">                The sub-pixel map, for PSF fitting only.</span>
+
+<span class="sd">            smoothing (float):</span>
+<span class="sd">                How much smoothing penalty to impose when fitting the PSF.</span>
+<span class="sd">                ``None`` for no smoothing. Value can be both positive and</span>
+<span class="sd">                negative and will always result in smoothing (less for negative</span>
+<span class="sd">                values).</span>
+
+<span class="sd">            max_chi2 (float):</span>
+<span class="sd">                The value of the reduced chi squared above which sources are</span>
+<span class="sd">                excluded from the fit. This can indicate non-point sources or</span>
+<span class="sd">                sources for which the location is wrong among ohter things.</span>
+
+<span class="sd">            pixel_rejection_threshold (float):</span>
+<span class="sd">                A number defining individual pixels to exclude from the PSF fit.</span>
+<span class="sd">                Pixels with fitting residuals (normalized by the standard</span>
+<span class="sd">                deviation) bigger than this value are excluded. If zero, no</span>
+<span class="sd">                pixels are rejected.</span>
+
+<span class="sd">            max_abs_amplitude_change (float):</span>
+<span class="sd">                The absolute root of sum squares tolerance of the source</span>
+<span class="sd">                amplitude changes in order to declare the piecewise bicubic PSF</span>
+<span class="sd">                fitting converged.</span>
+
+<span class="sd">            max_rel_amplitude_change (float):</span>
+<span class="sd">                The relative root of sum squares tolerance of the source</span>
+<span class="sd">                amplitude changes in order to declare the piecewise bicubic PSF</span>
+<span class="sd">                fitting converged.</span>
+
+<span class="sd">            min_convergence_rate (float):</span>
+<span class="sd">                If the rate of convergence falls below this threshold,</span>
+<span class="sd">                iterations are stopped. The rate is calculated as the fractional</span>
+<span class="sd">                decrease in the difference between the amplitude change and the</span>
+<span class="sd">                value when it would stop, as determined by the</span>
+<span class="sd">                :attr:`max_abs_amplitude_change` and</span>
+<span class="sd">                :attr:`max_rel_amplitude_change` attributes.</span>
+
+<span class="sd">            max_iterations (int):</span>
+<span class="sd">                No more than this number if iterations will be performed. If</span>
+<span class="sd">                convergence is not achieved before then, the latest estimates</span>
+<span class="sd">                are output and an exception is thrown. A negative value allows</span>
+<span class="sd">                infinite iterations. A value of zero, along with an initial</span>
+<span class="sd">                guess for the PSF causes only the amplitudes to be fit for PSF</span>
+<span class="sd">                fitting photometry with a known PSF. It is an error to pass a</span>
+<span class="sd">                value of zero for this option and not specify and initial guess</span>
+<span class="sd">                for the PSF.</span>
+
+<span class="sd">            gain (float):</span>
+<span class="sd">                The gain in electrons per ADU to assume for the input images.</span>
+
+<span class="sd">            cover_grid (bool):</span>
+<span class="sd">                If this option is true, all pixels that at least partially</span>
+<span class="sd">                overlap with the grid are assigned to the corresponding source.</span>
+<span class="sd">                This option is ignored for sdk PSF models.</span>
+
+<span class="sd">            src_min_signal_to_noise (float):</span>
+<span class="sd">                How far above the background (in units of RMS) should pixels be</span>
+<span class="sd">                to still be considered part of a source. Ignored if the</span>
+<span class="sd">                piecewise bibucic PSF grid is used to select source pixels</span>
+<span class="sd">                (cover-bicubic-grid option).</span>
+
+<span class="sd">            src_max_aperture (float):</span>
+<span class="sd">                If this option has a positive value, pixels are assigned to</span>
+<span class="sd">                sources in circular apertures (the smallest such that all pixels</span>
+<span class="sd">                that pass the signal to noise cut are still assigned to the</span>
+<span class="sd">                source). If an aperture larger than this value is required, an</span>
+<span class="sd">                exception is thrown.</span>
+
+<span class="sd">            src_max_sat_frac (float):</span>
+<span class="sd">                If more than this fraction of the pixels assigned to a source</span>
+<span class="sd">                are saturated, the source is excluded from the fit.</span>
+
+<span class="sd">            src_min_pix (int):</span>
+<span class="sd">                The minimum number of pixels that must be assigned to a source</span>
+<span class="sd">                in order to include the source is the PSF fit.</span>
+
+<span class="sd">            src_max_pix (int):</span>
+<span class="sd">                The maximum number of pixels that car be assigned to a source</span>
+<span class="sd">                before excluding the source from the PSF fit.</span>
+
+<span class="sd">            src_max_count (int):</span>
+<span class="sd">                The maximum number of sources to include in the fit for the PSF</span>
+<span class="sd">                shape. The rest of the sources get their amplitudes fit and are</span>
+<span class="sd">                used to determine the overlaps. Sources are ranked according to</span>
+<span class="sd">                the sum of (background excess)^2/(pixel variance+background</span>
+<span class="sd">                variance) of their individual non-saturated pixels.</span>
+
+<span class="sd">            bg_min_pix (int):</span>
+<span class="sd">                The minimum number of pixels a background estimate must be based</span>
+<span class="sd">                on in order to include the source in shape fitting.</span>
+
+<span class="sd">            magnitude_1adu (float):</span>
+<span class="sd">                The magnitude that corresponds to a flux of 1ADU.</span>
+
+
+<span class="sd">    Example:</span>
+<span class="sd">        Create and configure a PRF fitting object, allowing up to third order</span>
+<span class="sd">        dependence on image position, on a grid which splits the area around the</span>
+<span class="sd">        source in 16 squares of 2pix by 2pix size each and using an aperture</span>
+<span class="sd">        with 5 pixel radius for the initial estimate of source amplitudes:</span>
+
+<span class="sd">        &gt;&gt;&gt; from superphot import FitStarShape</span>
+<span class="sd">        &gt;&gt;&gt; fitprf = FitStarShape(mode=&#39;prf&#39;,</span>
+<span class="sd">        &gt;&gt;&gt;                       shape_terms=&#39;O3{x, y}&#39;,</span>
+<span class="sd">        &gt;&gt;&gt;                       grid=[-4.0, -2.0, 0.0, 2.0, 4.0],</span>
+<span class="sd">        &gt;&gt;&gt;                       initial_aperture=5.0)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_default_configuration</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">subpixmap</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">c_double</span><span class="p">),</span>
+                                  <span class="n">smoothing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                  <span class="n">max_chi2</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span>
+                                  <span class="n">pixel_rejection_threshold</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span>
+                                  <span class="n">max_abs_amplitude_change</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+                                  <span class="n">max_rel_amplitude_change</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span>
+                                  <span class="n">min_convergence_rate</span><span class="o">=-</span><span class="n">numpy</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
+                                  <span class="n">max_iterations</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+                                  <span class="n">gain</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+                                  <span class="n">cover_grid</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                  <span class="n">src_min_signal_to_noise</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span>
+                                  <span class="n">src_max_aperture</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span>
+                                  <span class="n">src_max_sat_frac</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+                                  <span class="n">src_min_pix</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                                  <span class="n">src_max_pix</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+                                  <span class="n">src_max_count</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>
+                                  <span class="n">bg_min_pix</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+                                  <span class="n">magnitude_1adu</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
+
+    <span class="c1">#Many return statements make sense in this case.</span>
+    <span class="c1">#pylint: disable=too-many-return-statements</span>
+<div class="viewcode-block" id="FitStarShape._format_config"><a class="viewcode-back" href="../../_implementation/superphot.fit_star_shape.html#superphot.FitStarShape._format_config">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_format_config</span><span class="p">(</span><span class="n">param_value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Format config param for passing to SuperPhot PSF fitting lib.&quot;&quot;&quot;</span>
+
+        <span class="n">prefix</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">param_value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;src_&#39;</span><span class="p">):</span>
+            <span class="n">param_value</span> <span class="o">=</span> <span class="p">(</span><span class="n">param_value</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">4</span><span class="p">:],</span> <span class="n">param_value</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">prefix</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;src.&#39;</span>
+        <span class="k">if</span> <span class="n">param_value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;bg_&#39;</span><span class="p">):</span>
+            <span class="n">param_value</span> <span class="o">=</span> <span class="p">(</span><span class="n">param_value</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">3</span><span class="p">:],</span> <span class="n">param_value</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">prefix</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;bg.&#39;</span>
+
+        <span class="k">elif</span> <span class="n">param_value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;cover_grid&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="sa">b</span><span class="s1">&#39;src.cover-bicubic-grid&#39;</span><span class="p">,</span>
+                    <span class="nb">repr</span><span class="p">(</span><span class="n">param_value</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">param_value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;grid&#39;</span><span class="p">:</span>
+            <span class="n">grid</span> <span class="o">=</span> <span class="n">param_value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">return</span> <span class="p">(</span>
+                <span class="sa">b</span><span class="s1">&#39;psf.bicubic.grid&#39;</span><span class="p">,</span>
+                <span class="p">(</span>
+                    <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">grid</span><span class="p">))</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">grid</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Number</span><span class="p">)</span>
+                    <span class="k">else</span> <span class="s1">&#39;;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">repr</span><span class="p">,</span> <span class="n">grid_part</span><span class="p">))</span>
+                                   <span class="k">for</span> <span class="n">grid_part</span> <span class="ow">in</span> <span class="n">grid</span><span class="p">])</span>
+                <span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="k">elif</span> <span class="n">param_value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;subpixmap&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">()</span>
+        <span class="k">elif</span> <span class="n">param_value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;smoothing&#39;</span> <span class="ow">and</span> <span class="n">param_value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">()</span>
+        <span class="k">elif</span> <span class="n">param_value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;shape_terms&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="sa">b</span><span class="s1">&#39;psf.terms&#39;</span><span class="p">,</span> <span class="n">param_value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">param_value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;pixel_rejection_threshold&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="sa">b</span><span class="s1">&#39;psf.bicubic.pixrej&#39;</span><span class="p">,</span>
+                    <span class="nb">repr</span><span class="p">(</span><span class="n">param_value</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">param_value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;max_iterations&#39;</span><span class="p">,</span>
+                                <span class="s1">&#39;max_chi2&#39;</span><span class="p">,</span>
+                                <span class="s1">&#39;min_convergence_rate&#39;</span><span class="p">]:</span>
+            <span class="n">prefix</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;psf.&#39;</span>
+        <span class="k">elif</span> <span class="n">param_value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;max_abs_amplitude_change&#39;</span><span class="p">,</span>
+                                <span class="s1">&#39;max_rel_amplitude_change&#39;</span><span class="p">,</span>
+                                <span class="s1">&#39;initial_aperture&#39;</span><span class="p">,</span>
+                                <span class="s1">&#39;grid&#39;</span><span class="p">,</span>
+                                <span class="s1">&#39;smoothing&#39;</span><span class="p">]:</span>
+            <span class="n">prefix</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;psf.bicubic.&#39;</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="n">prefix</span> <span class="o">+</span> <span class="n">param_value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">),</span>
+            <span class="p">(</span>
+                <span class="n">param_value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">param_value</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nb">str</span><span class="p">)</span>
+                <span class="k">else</span> <span class="nb">repr</span><span class="p">(</span><span class="n">param_value</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+        <span class="p">)</span></div>
+    <span class="c1">#pylint: enable=too-many-return-statements</span>
+
+<div class="viewcode-block" id="FitStarShape.__init__"><a class="viewcode-back" href="../../_implementation/superphot.fit_star_shape.html#superphot.FitStarShape.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="o">*</span><span class="p">,</span>
+                 <span class="n">mode</span><span class="p">,</span>
+                 <span class="n">shape_terms</span><span class="p">,</span>
+                 <span class="n">grid</span><span class="p">,</span>
+                 <span class="n">initial_aperture</span><span class="p">,</span>
+                 <span class="o">**</span><span class="n">other_configuration</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set-up an object ready to perform PSF/PRF fitting.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            All the configuration attributes of the class can be configured by</span>
+<span class="sd">            passing them as keyword arguments.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">mode</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;PSF&#39;</span><span class="p">,</span> <span class="s1">&#39;PRF&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">configuration</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_default_configuration</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">shape_terms</span><span class="o">=</span><span class="n">shape_terms</span><span class="p">,</span>
+                                  <span class="n">grid</span><span class="o">=</span><span class="n">grid</span><span class="p">,</span>
+                                  <span class="n">initial_aperture</span><span class="o">=</span><span class="n">initial_aperture</span><span class="p">,</span>
+                                  <span class="o">**</span><span class="n">other_configuration</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_library_configuration</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">superphot_library</span><span class="o">.</span><span class="n">create_psffit_configuration</span><span class="p">()</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">configure</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_result_tree</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="FitStarShape.configure"><a class="viewcode-back" href="../../_implementation/superphot.fit_star_shape.html#superphot.FitStarShape.configure">[docs]</a>    <span class="k">def</span> <span class="nf">configure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">configuration</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Modify the currently defined configuration.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            **configuration:    See :attr:`configuration`\ .</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">configuration</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">configuration</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s1">&#39;Unrecognized configuration parameter: &#39;</span>
+                               <span class="o">+</span>
+                               <span class="nb">repr</span><span class="p">(</span><span class="n">k</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="s1">&#39;mode&#39;</span> <span class="ow">in</span> <span class="n">configuration</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">configuration</span><span class="p">[</span><span class="s1">&#39;mode&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+            <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;PSF&#39;</span><span class="p">,</span> <span class="s1">&#39;PRF&#39;</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span>
+
+        <span class="n">config_arguments</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
+            <span class="nb">map</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_format_config</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">items</span><span class="p">()),</span>
+            <span class="p">(</span>
+                <span class="n">c_bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;PRF&#39;</span><span class="p">),</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_library_configuration</span><span class="p">,</span>
+                <span class="sa">b</span><span class="s1">&#39;psf.model&#39;</span><span class="p">,</span>
+                <span class="sa">b</span><span class="s1">&#39;bicubic&#39;</span>
+            <span class="p">)</span>
+        <span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">,)</span>
+        <span class="n">superphot_library</span><span class="o">.</span><span class="n">update_psffit_configuration</span><span class="p">(</span><span class="o">*</span><span class="n">config_arguments</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="FitStarShape.fit"><a class="viewcode-back" href="../../_implementation/superphot.fit_star_shape.html#superphot.FitStarShape.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image_sources</span><span class="p">,</span> <span class="n">backgrounds</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fit for the shape of the sources in a collection of imeges.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            image_sources (list of 4-tuples):    Each entry consists of:</span>
+
+<span class="sd">                1. The pixel values of the calibratred image</span>
+
+<span class="sd">                2. The error estimates of the pixel values</span>
+
+<span class="sd">                3. Mask flags of the pixel values.</span>
+
+<span class="sd">                4. Sources to process, defining at least the following</span>
+<span class="sd">                   quantities:</span>
+
+<span class="sd">                       * **ID** (string): some unique identifier for the source</span>
+
+<span class="sd">                       * **x** (float): The x coordinate of the source</span>
+<span class="sd">                         center in pixels</span>
+
+<span class="sd">                       * **y** (float): See ``x``</span>
+
+<span class="sd">                   May define additional quantities on which the PSF shape is</span>
+<span class="sd">                   allowed to depend.</span>
+
+<span class="sd">                   The source list can be either a numy record array with field</span>
+<span class="sd">                   names as keys or a dictionary with field names as keys and</span>
+<span class="sd">                   1-D numpy arrays of identical lengths as values.</span>
+
+<span class="sd">            backgrounds:    The measured backgrounds under the sources (instance</span>
+<span class="sd">                of :class:`BackgroundExtractor`\ ).</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            _c_h5io_data_tree_p:</span>
+<span class="sd">                A SubPixPhot IO tree containing all the newly derived results.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">def</span> <span class="nf">create_image_arguments</span><span class="p">():</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Create the three image arguments for piecewise_bicubic_fit.</span>
+
+<span class="sd">            Args:</span>
+<span class="sd">                None</span>
+
+<span class="sd">            Returns:</span>
+<span class="sd">                tuple:</span>
+<span class="sd">                    POINTER(POINTER(c_double)):</span>
+<span class="sd">                        The pixel_values argument to the piecewise_bicubic_fit</span>
+<span class="sd">                        library function</span>
+
+<span class="sd">                    POINTER(POINTER(c_double)):</span>
+<span class="sd">                        The pixel_errors argument to the piecewise_bicubic_fit</span>
+<span class="sd">                        library function</span>
+
+<span class="sd">                    POINTER(POINTER(c_char)):</span>
+<span class="sd">                        The pixel_masks argument to the piecewise_bicubic_fit</span>
+<span class="sd">                        library function</span>
+
+<span class="sd">                    int:</span>
+<span class="sd">                        The number of images to simultaneously process.</span>
+
+<span class="sd">                    int:</span>
+<span class="sd">                        The common x resolution of the images.</span>
+
+<span class="sd">                    int:</span>
+<span class="sd">                        The common y resolution of the images.</span>
+
+<span class="sd">                Raises:</span>
+<span class="sd">                    AssertionError:    If the shapes of the images do not all</span>
+<span class="sd">                        match.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+
+            <span class="n">number_images</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">image_sources</span><span class="p">)</span>
+            <span class="n">image_y_resolution</span><span class="p">,</span> <span class="n">image_x_resolution</span> <span class="o">=</span> <span class="n">image_sources</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+
+            <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">image_sources</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">entry</span><span class="p">[:</span><span class="mi">3</span><span class="p">]:</span>
+                    <span class="k">assert</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">image_y_resolution</span><span class="p">,</span>
+                                           <span class="n">image_x_resolution</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="p">(</span>
+                <span class="p">(</span><span class="n">POINTER</span><span class="p">(</span><span class="n">c_double</span><span class="p">)</span> <span class="o">*</span> <span class="n">number_images</span><span class="p">)(</span>
+                    <span class="o">*</span><span class="p">(</span>
+                        <span class="n">entry</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data_as</span><span class="p">(</span><span class="n">POINTER</span><span class="p">(</span><span class="n">c_double</span><span class="p">))</span>
+                        <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">image_sources</span>
+                    <span class="p">)</span>
+                <span class="p">),</span>
+                <span class="p">(</span><span class="n">POINTER</span><span class="p">(</span><span class="n">c_double</span><span class="p">)</span> <span class="o">*</span> <span class="n">number_images</span><span class="p">)(</span>
+                    <span class="o">*</span><span class="p">(</span>
+                        <span class="n">entry</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data_as</span><span class="p">(</span><span class="n">POINTER</span><span class="p">(</span><span class="n">c_double</span><span class="p">))</span>
+                        <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">image_sources</span>
+                    <span class="p">)</span>
+                <span class="p">),</span>
+                <span class="p">(</span><span class="n">POINTER</span><span class="p">(</span><span class="n">c_char</span><span class="p">)</span> <span class="o">*</span> <span class="n">number_images</span><span class="p">)(</span>
+                    <span class="o">*</span><span class="p">(</span>
+                        <span class="n">entry</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data_as</span><span class="p">(</span><span class="n">POINTER</span><span class="p">(</span><span class="n">c_char</span><span class="p">))</span>
+                        <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">image_sources</span>
+                    <span class="p">)</span>
+                <span class="p">),</span>
+                <span class="n">number_images</span><span class="p">,</span>
+                <span class="n">image_x_resolution</span><span class="p">,</span>
+                <span class="n">image_y_resolution</span>
+            <span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">get_column_names</span><span class="p">():</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Return the list of columns defined for the input sources.</span>
+
+<span class="sd">            Args:</span>
+<span class="sd">                None</span>
+
+<span class="sd">            Returns:</span>
+<span class="sd">                list:</span>
+<span class="sd">                    The column names which participate in the PSF expansion.</span>
+
+<span class="sd">            Raises:</span>
+<span class="sd">                AssertionError:    If the columns defined for all images do not</span>
+<span class="sd">                    match or if any of the minimum required columns: &#39;ID&#39;, &#39;x&#39;,</span>
+<span class="sd">                    &#39;y&#39; is missing.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">image_sources</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">3</span><span class="p">],</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+                <span class="n">column_names</span> <span class="o">=</span> <span class="n">image_sources</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">names</span>
+                <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">image_sources</span><span class="p">:</span>
+                    <span class="k">assert</span> <span class="n">entry</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">names</span> <span class="o">==</span> <span class="n">column_names</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">column_names</span> <span class="o">=</span> <span class="n">image_sources</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+                <span class="n">column_name_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">column_names</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">image_sources</span><span class="p">:</span>
+                    <span class="k">assert</span> <span class="nb">set</span><span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">==</span> <span class="n">column_name_set</span>
+
+            <span class="n">column_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">column_names</span><span class="p">)</span>
+
+            <span class="k">assert</span> <span class="s1">&#39;ID&#39;</span> <span class="ow">in</span> <span class="n">column_names</span>
+            <span class="k">assert</span> <span class="s1">&#39;x&#39;</span> <span class="ow">in</span> <span class="n">column_names</span>
+            <span class="k">assert</span> <span class="s1">&#39;y&#39;</span> <span class="ow">in</span> <span class="n">column_names</span>
+
+
+            <span class="n">column_names</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;ID&#39;</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">column_names</span>
+
+        <span class="k">def</span> <span class="nf">create_column_data</span><span class="p">(</span><span class="n">column_names</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Create the column_data array required by create_source_arguments.</span>
+
+<span class="sd">            Args:</span>
+<span class="sd">                column_names([str]):    The columns, other than ID defined for</span>
+<span class="sd">                    the input list of sources.</span>
+
+<span class="sd">            Returns:</span>
+<span class="sd">                [numpy.ndarray]:</span>
+<span class="sd">                    See column_data argument of create_source_arguments.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+
+            <span class="n">column_data</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">numpy</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">column_names</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="s1">&#39;ID&#39;</span><span class="p">])),</span>
+                            <span class="n">dtype</span><span class="o">=</span><span class="n">c_double</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">image_sources</span>
+            <span class="p">]</span>
+            <span class="k">for</span> <span class="n">image_index</span><span class="p">,</span> <span class="n">entry</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">image_sources</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">column_index</span><span class="p">,</span> <span class="n">column_name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">column_names</span><span class="p">):</span>
+                    <span class="n">column_data</span><span class="p">[</span><span class="n">image_index</span><span class="p">][</span><span class="n">column_index</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="p">(</span>
+                        <span class="n">entry</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="n">column_name</span><span class="p">]</span>
+                    <span class="p">)</span>
+            <span class="k">return</span> <span class="n">column_data</span>
+
+        <span class="k">def</span> <span class="nf">create_source_arguments</span><span class="p">(</span><span class="n">column_names</span><span class="p">,</span> <span class="n">column_data</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Create the arguments defining the sources for piecewise_bicubic_fit.</span>
+
+<span class="sd">            Args:</span>
+<span class="sd">                column_names([str]):    The columns, other than ID defined for</span>
+<span class="sd">                    the input list of sources.</span>
+
+<span class="sd">                column_data([numpy.ndarray]):    List of one 2-D array for each</span>
+<span class="sd">                    image with the first array index going accross columns and</span>
+<span class="sd">                    the second array index going accross sources.</span>
+
+<span class="sd">            Returns:</span>
+<span class="sd">                tuple:</span>
+<span class="sd">                    POINTER(c_char_p):    The column_names argument to the</span>
+<span class="sd">                        piecewise_bicubic_fit library function.</span>
+
+<span class="sd">                    POINTER(POINTER(c_char_p)):    The source_ids argument to</span>
+<span class="sd">                        the piecewise_bicubic_fit library function.</span>
+
+<span class="sd">                    POINTER(POINTER(c_double)):    The column_data argument to</span>
+<span class="sd">                        the piecewise_bicubic_fit library function.</span>
+
+<span class="sd">                    numpy.array(c_ulong):    1-D array contining the number of</span>
+<span class="sd">                        sources in each image.</span>
+
+<span class="sd">                    int:    The number of columns in the column_data.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+
+            <span class="n">number_images</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">image_sources</span><span class="p">)</span>
+            <span class="n">number_columns</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">column_names</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="p">(</span>
+                <span class="p">(</span><span class="n">c_char_p</span> <span class="o">*</span> <span class="n">number_columns</span><span class="p">)(</span>
+                    <span class="o">*</span><span class="p">(</span>
+                        <span class="n">c_char_p</span><span class="p">(</span><span class="n">colname</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">))</span>
+                        <span class="k">for</span> <span class="n">colname</span> <span class="ow">in</span> <span class="n">column_names</span>
+                    <span class="p">)</span>
+                <span class="p">),</span>
+                <span class="p">(</span><span class="n">POINTER</span><span class="p">(</span><span class="n">c_char_p</span><span class="p">)</span> <span class="o">*</span> <span class="n">number_images</span><span class="p">)(</span>
+                    <span class="o">*</span><span class="p">(</span>
+                        <span class="p">(</span><span class="n">c_char_p</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="s1">&#39;ID&#39;</span><span class="p">]))(</span>
+                            <span class="o">*</span><span class="p">(</span>
+                                <span class="p">(</span>
+                                    <span class="n">source_id</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">source_id</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">)</span>
+                                    <span class="k">else</span> <span class="n">source_id</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+                                <span class="p">)</span>
+                                <span class="k">for</span> <span class="n">source_id</span> <span class="ow">in</span> <span class="n">entry</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="s1">&#39;ID&#39;</span><span class="p">]</span>
+                            <span class="p">)</span>
+                        <span class="p">)</span>
+                        <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">image_sources</span>
+                    <span class="p">)</span>
+                <span class="p">),</span>
+                <span class="p">(</span><span class="n">POINTER</span><span class="p">(</span><span class="n">c_double</span><span class="p">)</span> <span class="o">*</span> <span class="n">number_images</span><span class="p">)(</span>
+                    <span class="o">*</span><span class="p">(</span>
+                        <span class="n">columns</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data_as</span><span class="p">(</span><span class="n">POINTER</span><span class="p">(</span><span class="n">c_double</span><span class="p">))</span>
+                        <span class="k">for</span> <span class="n">columns</span> <span class="ow">in</span> <span class="n">column_data</span>
+                    <span class="p">)</span>
+                <span class="p">),</span>
+                <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="s1">&#39;ID&#39;</span><span class="p">])</span> <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">image_sources</span><span class="p">],</span>
+                            <span class="n">dtype</span><span class="o">=</span><span class="n">c_ulong</span><span class="p">),</span>
+                <span class="n">number_columns</span>
+            <span class="p">)</span>
+
+        <span class="n">column_names</span> <span class="o">=</span> <span class="n">get_column_names</span><span class="p">()</span>
+        <span class="n">column_data</span> <span class="o">=</span> <span class="n">create_column_data</span><span class="p">(</span><span class="n">column_names</span><span class="p">)</span>
+        <span class="n">result_tree</span> <span class="o">=</span> <span class="n">SuperPhotIOTree</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_library_configuration</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">superphot_library</span><span class="o">.</span><span class="n">piecewise_bicubic_fit</span><span class="p">(</span>
+                <span class="o">*</span><span class="n">create_image_arguments</span><span class="p">(),</span>
+                <span class="o">*</span><span class="n">create_source_arguments</span><span class="p">(</span><span class="n">column_names</span><span class="p">,</span> <span class="n">column_data</span><span class="p">),</span>
+                <span class="p">(</span>
+                    <span class="nb">len</span><span class="p">(</span><span class="n">backgrounds</span><span class="p">)</span>
+                    <span class="o">*</span>
+                    <span class="n">superphot_library</span><span class="o">.</span><span class="n">create_background_extractor</span><span class="o">.</span><span class="n">restype</span>
+                <span class="p">)(</span>
+                    <span class="o">*</span><span class="p">(</span><span class="n">bg</span><span class="o">.</span><span class="n">library_extractor</span> <span class="k">for</span> <span class="n">bg</span> <span class="ow">in</span> <span class="n">backgrounds</span><span class="p">)</span>
+                <span class="p">),</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_library_configuration</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="s1">&#39;subpixmap&#39;</span><span class="p">],</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="s1">&#39;subpixmap&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="s1">&#39;subpixmap&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">result_tree</span><span class="o">.</span><span class="n">library_tree</span>
+        <span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Star shape fitting failed to converge!&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result_tree</span></div>
+
+<div class="viewcode-block" id="FitStarShape.__del__"><a class="viewcode-back" href="../../_implementation/superphot.fit_star_shape.html#superphot.FitStarShape.__del__">[docs]</a>    <span class="k">def</span> <span class="nf">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Destroy the configuration object created in :meth:`__init__`\ .&quot;&quot;&quot;</span>
+
+        <span class="n">superphot_library</span><span class="o">.</span><span class="n">destroy_psffit_configuration</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_library_configuration</span>
+        <span class="p">)</span></div></div>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">fitprf</span> <span class="o">=</span> <span class="n">FitStarShape</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;prf&#39;</span><span class="p">,</span>
+                          <span class="n">shape_terms</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{1}</span><span class="s1">&#39;</span><span class="p">,</span>
+                          <span class="n">grid</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
+                          <span class="n">initial_aperture</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span>
+                          <span class="n">smoothing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                          <span class="n">min_convergence_rate</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+
+    <span class="c1">#Debugging code</span>
+    <span class="c1">#pylint: disable=protected-access</span>
+    <span class="n">tree</span> <span class="o">=</span> <span class="n">SuperPhotIOTree</span><span class="p">(</span><span class="n">fitprf</span><span class="o">.</span><span class="n">_library_configuration</span><span class="p">)</span>
+    <span class="c1">#pylint: enable=protected-access</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;BG tool: &#39;</span> <span class="o">+</span> <span class="nb">repr</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;bg.tool&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;PSF terms: &#39;</span> <span class="o">+</span> <span class="nb">repr</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;psffit.terms&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Max chi squared: &#39;</span>
+          <span class="o">+</span>
+          <span class="nb">repr</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;psffit.max_chi2&#39;</span><span class="p">,</span> <span class="n">c_double</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Maximum iterations: &#39;</span>
+          <span class="o">+</span>
+          <span class="nb">repr</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;psffit.max_iterations&#39;</span><span class="p">,</span> <span class="n">c_int</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Pixel rejection threshold: &#39;</span>
+          <span class="o">+</span>
+          <span class="nb">repr</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;psffit.pixrej&#39;</span><span class="p">,</span> <span class="n">c_double</span><span class="p">)))</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Kaloyan Penev
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
