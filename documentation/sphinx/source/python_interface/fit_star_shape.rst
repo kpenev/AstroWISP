@@ -18,7 +18,7 @@ each frame.  For details on how to specify fitting parameters and source and
 frame listts, see the documentation of :class:`superphot.FitStarShape`.
 
 An example of fitting for the PSF in an image can be found
-`here <fitpsf_example.ipynb>`_
+`here <example_mock_data.ipynb#PSF-fitting>`_
 
 PSF Map utilities
 =================

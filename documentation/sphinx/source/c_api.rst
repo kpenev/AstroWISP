@@ -7,6 +7,11 @@ FitPSF
 
 .. doxygenfile:: /FitPSF/CInterface.h
 
+SubPixPhot
+==========
+
+.. doxygenfile:: /SubPixPhot/CInterface.h
+
 Background
 ==========
 
