@@ -364,4 +364,53 @@ LIB_PUBLIC bool get_psf_map_variables(H5IODataTree *output_data_tree,
         std::copy(start, end, destination);
         destination += var_i->second.size();
     }
+    return true;
+}
+
+///\brief Add the names of all quantities that currently have a value in a
+///data tree to a user supplied list.
+void append_quantities_to_list(
+    ///The tree to list the quantities of.
+    const IO::IOTreeBase &tree,
+
+    ///The list to add the names to.
+    std::list<std::string> quantities
+)
+{
+    for(
+        IO::IOTreeBase::const_iterator node_i = tree.begin();
+        node_i != tree.end();
+        ++node_i
+    ) {
+        if(!node_i->second.data().empty()) {
+            quantities.push_back(node_i->first);
+        }
+        append_quantities_to_list(node_i->second, quantities);
+    }
+}
+
+LIB_PUBLIC unsigned list_tree_quantities(H5IODataTree *tree,
+                                         char **quantities)
+{
+    IO::H5IODataTree *real_tree = reinterpret_cast<IO::H5IODataTree*>(tree);
+
+    std::list<std::string> quantities_list;
+
+    append_quantities_to_list(*real_tree, quantities_list);
+
+    quantities = new char*[quantities_list.size()];
+    char **destination = quantities;
+    for(
+        std::list<std::string>::const_iterator
+            quantity_i = quantities_list.begin();
+        quantity_i != quantities_list.end();
+        ++quantity_i
+    ) {
+        *destination = reinterpret_cast<char*>(
+            malloc(sizeof(char) * (quantity_i->size() + 1))
+        );
+        strcpy(*destination, quantity_i->c_str());
+        ++destination;
+    }
+    return quantities_list.size();
 }

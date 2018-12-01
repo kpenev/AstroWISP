@@ -124,4 +124,17 @@ extern "C" {
         double *column_data
     );
 
+    ///\brief List the names of all quantities that currently have a value in a
+    ///data tree.
+    ///
+    ///The return value is the number of defined quantities found.
+    LIB_PUBLIC unsigned list_tree_quantities(
+        ///The tree to extract the quantity from.
+        H5IODataTree *tree,
+
+        ///A newly allocated array containing all the quantity names. The caller
+        ///is responsible for free-ing it when no longer needed.
+        char **quantities
+    );
+
 } //End Extern "C".
