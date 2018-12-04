@@ -130,6 +130,12 @@ def _setup_io_interface(library):
     ]
     library.get_psf_map_variables.restype = None
 
+    library.list_tree_quantities.argtypes = [
+        library.create_result_tree.restype,
+        POINTER(POINTER(c_char_p)),
+    ]
+    library.list_tree_quantities.restype = c_uint
+
     library.free.argtypes = [c_void_p]
     library.free.restype = None
 

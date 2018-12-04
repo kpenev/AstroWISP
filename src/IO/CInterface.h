@@ -134,7 +134,7 @@ extern "C" {
 
         ///A newly allocated array containing all the quantity names. The caller
         ///is responsible for free-ing it when no longer needed.
-        char **quantities
+        char ***quantities
     );
 
 } //End Extern "C".

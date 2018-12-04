@@ -374,23 +374,32 @@ void append_quantities_to_list(
     const IO::IOTreeBase &tree,
 
     ///The list to add the names to.
-    std::list<std::string> quantities
+    std::list<std::string> &quantities,
+
+    ///The prefix to place before all entries (the path to the parent node).
+    const std::string &prefix=""
 )
 {
+    std::cerr << "Searching for quantities under " << prefix << std::endl;
     for(
         IO::IOTreeBase::const_iterator node_i = tree.begin();
         node_i != tree.end();
         ++node_i
     ) {
         if(!node_i->second.data().empty()) {
-            quantities.push_back(node_i->first);
+            std::cerr << "Adding quantity named "
+                      << prefix + node_i->first
+                      << std::endl;
+            quantities.push_back(prefix + node_i->first);
         }
-        append_quantities_to_list(node_i->second, quantities);
+        append_quantities_to_list(node_i->second,
+                                  quantities,
+                                  prefix + node_i->first + ".");
     }
 }
 
 LIB_PUBLIC unsigned list_tree_quantities(H5IODataTree *tree,
-                                         char **quantities)
+                                         char ***quantities)
 {
     IO::H5IODataTree *real_tree = reinterpret_cast<IO::H5IODataTree*>(tree);
 
@@ -398,8 +407,10 @@ LIB_PUBLIC unsigned list_tree_quantities(H5IODataTree *tree,
 
     append_quantities_to_list(*real_tree, quantities_list);
 
-    quantities = new char*[quantities_list.size()];
-    char **destination = quantities;
+    std::cerr << "Found " << quantities_list.size() << " quantities" << std::endl;
+
+    *quantities = new char*[quantities_list.size()];
+    char **destination = *quantities;
     for(
         std::list<std::string>::const_iterator
             quantity_i = quantities_list.begin();

@@ -14,6 +14,8 @@ from ctypes import\
     c_char_p,\
     c_void_p,\
     pointer,\
+    POINTER,\
+    byref,\
     cast
 
 import numpy
@@ -59,6 +61,28 @@ class SuperPhotIOTree:
                 else version_info.encode('ascii')
             )
         )
+
+    def defined_quantity_names(self):
+        """
+        Return a list of the quantities with non-empty values in the tree.
+
+        Args:
+            None
+
+        Returns:
+            [str]:
+                The full names of the quantities with available data using dot
+                as a separator between leves in the tree.
+        """
+
+        library_type = POINTER(c_char_p)
+        library_result = library_type()
+        num_quantities = superphot_library.list_tree_quantities(
+            self.library_tree,
+            byref(library_result)
+        )
+        return [library_result[index].decode()
+                for index in range(num_quantities)]
 
     def get(self, quantity, dtype=c_double, shape=None):
         """
