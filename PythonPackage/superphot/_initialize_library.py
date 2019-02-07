@@ -10,6 +10,8 @@ from ctypes import\
     c_char,\
     c_uint,\
     c_char_p,\
+    c_long,\
+    c_byte,\
     POINTER
 from ctypes.util import find_library
 import numpy.ctypeslib
@@ -135,6 +137,33 @@ def _setup_io_interface(library):
         POINTER(POINTER(c_char_p)),
     ]
     library.list_tree_quantities.restype = c_uint
+
+    library.parse_hat_mask.argtypes = [
+        c_char_p,
+        c_long,
+        c_long,
+        numpy.ctypeslib.ndpointer(dtype=c_byte,
+                                  ndim=1,
+                                  flags='C_CONTIGUOUS')
+    ]
+    library.parse_hat_mask.restype = None
+
+    library.mask_flags = {
+        flag: c_byte.in_dll(library, 'MASK_' + flag).value
+        for flag in ['OK',
+                     'CLEAR',
+                     'FAULT',
+                     'HOT',
+                     'COSMIC',
+                     'OUTER',
+                     'OVERSATURATED',
+                     'LEAKED',
+                     'SATURATED',
+                     'INTERPOLATED',
+                     'BAD',
+                     'ALL',
+                     'NAN']
+    }
 
     library.free.argtypes = [c_void_p]
     library.free.restype = None
