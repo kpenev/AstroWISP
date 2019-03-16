@@ -93,7 +93,7 @@ class SuperPhotIOTree:
 
             dtype:    The data type of individual values of the quantity.
 
-            shape (tulpe of ints):    The shape of the array of values
+            shape (tuple of ints):    The shape of the array of values
                 to expect. Use None for scalar quantities.
 
         Returns:

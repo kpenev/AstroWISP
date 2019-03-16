@@ -391,7 +391,7 @@ class FitStarShape:
                 of :class:`BackgroundExtractor`\ ).
 
         Returns:
-            _c_h5io_data_tree_p:
+            SuperPhotIOTree:
                 A SubPixPhot IO tree containing all the newly derived results.
         """
 
