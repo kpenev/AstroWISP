@@ -8,7 +8,9 @@
 #define BUILDING_LIBRARY
 #include "CInterface.h"
 #include "H5IODataTree.h"
+#include "OutputArray.h"
 #include "../Core/Image.h"
+#include <string>
 
 const char MASK_OK = Core::MASK_OK;
 const char MASK_CLEAR = Core::MASK_CLEAR;
@@ -216,10 +218,34 @@ template<typename UNIT_TYPE> void copy_array(
 #endif
 }
 
+///Copy an array of strings to a C-style array of char*.
+void copy_string_array(
+    ///The input array of values to copy from.
+    const boost::any &value,
+
+    ///The destination to fill with the values. Must be pre-allocated.
+    void *result,
+
+    ///The number of character in a single entry in result (entries are expected
+    ///to be consecutive.
+    int result_string_size
+)
+{
+    IO::OutputArray<std::string> source_names(value);
+    char *destination = reinterpret_cast<char*>(result);
+    for(size_t i = 0; i < source_names.size(); ++i) {
+#ifdef VERBOSE_DEBUG
+        std::cerr << "Copying string " << source_names[i] << std::endl;
+#endif
+        strcpy(destination, source_names[i].c_str());
+        destination += result_string_size;
+    }
+}
+
 bool query_result_tree(H5IODataTree *tree,
-                              const char *quantity,
-                              const char *format,
-                              void *result)
+                       const char *quantity,
+                       const char *format,
+                       void *result)
 {
 
     const boost::any &value =
@@ -272,7 +298,26 @@ bool query_result_tree(H5IODataTree *tree,
         copy_array<bool>(value, result);
     else if(strcmp(format, "[double]") == 0)
         copy_array<double>(value, result);
-    else {
+    else if(
+        format[0] == '['
+        &&
+        format[1] == 'S'
+    ) {
+        char *last_character;
+        long result_string_size = std::strtol(format + 2,
+                                              &last_character,
+                                              0);
+        if(
+            last_character != format + strlen(format) - 1
+            ||
+            *last_character != ']'
+        )
+            throw Error::InvalidArgument(
+                "query_result_tree",
+                "invalid format: " + std::string(format)
+            );
+        copy_string_array(value, result, result_string_size);
+    } else {
         int split_position = 0;
         while(format[split_position]!=':') {
             if(format[split_position] == '\0')
@@ -347,7 +392,7 @@ LIB_PUBLIC bool get_psf_map_variables(H5IODataTree *output_data_tree,
     }
 #ifdef VERBOSE_DEBUG
     else
-        std::cerr << "Finished reading back psffit variables with zise:"
+        std::cerr << "Finished reading back psffit variables with size:"
                   << variables.size() << "x" << variables.begin()->second.size()
                   << std::endl;
 #endif

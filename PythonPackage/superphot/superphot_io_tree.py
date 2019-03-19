@@ -7,6 +7,8 @@ from ctypes import\
     c_short,\
     c_long,\
     c_byte,\
+    c_ubyte,\
+    c_char,\
     c_uint,\
     c_ulong,\
     c_ushort,\
@@ -33,6 +35,8 @@ class SuperPhotIOTree:
                    c_short: 'short',
                    c_long: 'long',
                    c_byte: 'char',
+                   c_ubyte: 'uchar',
+                   c_char: 'char',
                    c_uint: 'uint',
                    c_ulong: 'ulong',
                    c_ushort: 'ushort',
@@ -119,7 +123,10 @@ class SuperPhotIOTree:
         else:
             result = numpy.empty(shape=shape, dtype=dtype)
 
-            type_string_arg = self.type_string[dtype]
+            if dtype in self.type_string:
+                type_string_arg = self.type_string[dtype]
+            else:
+                type_string_arg = dtype.str.lstrip('|')
             if shape is not None:
                 type_string_arg = '[' + type_string_arg + ']'
 
