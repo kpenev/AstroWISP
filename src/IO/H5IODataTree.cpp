@@ -201,7 +201,7 @@ namespace IO {
                                    unsigned length)
     {
         if(format == "str")
-            add_1d_string_entry(reinterpret_cast<char**>(&value),
+            add_1d_string_entry(reinterpret_cast<char**>(value),
                          length,
                          quantity);
         else if(format == "int")
