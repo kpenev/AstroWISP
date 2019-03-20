@@ -106,6 +106,25 @@ extern "C" {
         void *result
     );
 
+    ///\brief Add or overwrite a quantity in/to the result tree.
+    ///
+    ///If a new quantity was created, the return value is true, if a quantity
+    ///was overwritten it is false.
+    LIB_PUBLIC void update_result_tree(
+        ///Which quantity to add/overwrite.
+        const char *quantity,
+
+        ///The value(s) to set for the quantity.
+        void *value,
+
+        ///Data type of quantity. See same name argument of query_result_tree()
+        ///for details.
+        const char *format,
+
+        ///The tree to update.
+        H5IODataTree *tree
+    );
+
     ///\brief Get the PSF map variables for a given image index from the given
     ///result tree.
     ///

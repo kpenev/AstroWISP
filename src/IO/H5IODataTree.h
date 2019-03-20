@@ -54,6 +54,73 @@ namespace IO {
         ///The PSF model used (for PSF fitting only).
         std::string __psf_model;
 
+        ///A list of allocated vectors containing string to destroy when the
+        ///tree is destroyed;
+        std::list< std::vector<std::string> *> __strings_to_destroy;
+
+        ///See __strings_to_destroy;
+        std::list< std::vector<int>* > __ints_to_destroy;
+
+        ///See __strings_to_destroy;
+        std::list< std::vector<unsigned>* > __uints_to_destroy;
+
+        ///See __strings_to_destroy;
+        std::list< std::vector<long>* > __longs_to_destroy;
+
+        ///See __strings_to_destroy;
+        std::list< std::vector<unsigned long>* > __ulongs_to_destroy;
+
+        ///See __strings_to_destroy;
+        std::list< std::vector<short>* > __shorts_to_destroy;
+
+        ///See __strings_to_destroy;
+        std::list< std::vector<unsigned short>* > __ushorts_to_destroy;
+
+        ///See __strings_to_destroy;
+        std::list< std::vector<char>* > __chars_to_destroy;
+
+        ///See __strings_to_destroy;
+        std::list< std::vector<unsigned char>* > __uchars_to_destroy;
+
+        ///See __strings_to_destroy;
+        std::list< std::vector<bool>* > __bools_to_destroy;
+
+        ///See __strings_to_destroy;
+        std::list< std::vector<double>* > __doubles_to_destroy;
+
+        ///Destroy one of the __*_to_destroy lists.
+        template<typename UNIT_TYPE>
+            void destroy_allocated(std::list< std::vector<UNIT_TYPE>* > &target);
+
+        ///Add values from a C-style array to the tree.
+        template<typename UNIT_TYPE>
+            void add_1d_entry(
+                ///C-style array of the values to add.
+                UNIT_TYPE *value,
+
+                ///The number of entries value
+                unsigned length,
+
+                ///The path within the tree to add/update
+                const std::string &quantity,
+
+                ///A list to add the newly allocated data to. Should be one of
+                //the __*_to_destroy lists.
+                std::list< std::vector<UNIT_TYPE>* > &destroy_list
+            );
+
+        ///Add values from a C-style array of strings to the tree.
+        void add_1d_string_entry(
+            ///The C-style array of stings to add
+            char **value,
+
+            ///How many stings are in the array
+            unsigned length,
+
+            ///the path within the tree to add/update.
+            const std::string &path
+        );
+
         ///\brief Prepares the tree for the specific tool used.
         void initialize_command_line(
             ///The number of command line tokens.
@@ -116,11 +183,23 @@ namespace IO {
             const boost::program_options::variables_map& options
         );
 
-#ifdef VERBOSE_DEBUG
-        ~H5IODataTree() {
-            std::cerr << "Destroying H5IODataTree at " << this << std::endl;
-        }
-#endif
+        ///Add a C-style array of values to the tree.
+        void add_c_array(
+            ///The path within  the tree to add/update.
+            const std::string &quantity,
+
+            ///The beginning of the memory where the values are to be found.
+            void *value,
+
+            ///Identifier for the type of values being added. For example 'str'
+            ///or 'int'.
+            const std::string &format,
+
+            ///How many values are in the array.
+            unsigned length
+        );
+
+        ~H5IODataTree();
     }; //End H5IODataTree class.
 
     ///\brief List the entries in an IO tree flagging which are filled and which
@@ -128,10 +207,49 @@ namespace IO {
     LIB_PUBLIC std::ostream &operator<<(
         ///The stream to print to.
         std::ostream &os,
-        
+
         ///The tree to report on.
         const IOTreeBase &tree
     );
+
+    template<typename UNIT_TYPE>
+        void H5IODataTree::destroy_allocated(std::list< std::vector<UNIT_TYPE>* > &target)
+        {
+            for(
+                typename std::list< std::vector<UNIT_TYPE>* >::iterator
+                target_i = target.begin();
+                target_i != target.end();
+                ++target_i
+            )
+                delete *target_i;
+        }
+
+    template<typename UNIT_TYPE>
+        void H5IODataTree::add_1d_entry(UNIT_TYPE *value,
+                                        unsigned length,
+                                        const std::string &quantity,
+                                        std::list< std::vector<UNIT_TYPE>* > &destroy_list)
+        {
+            std::vector<UNIT_TYPE> *entry=new std::vector<UNIT_TYPE>(
+                value,
+                value + length
+            );
+            if(length > 1) {
+                put(quantity,
+                    entry,
+                    IO::TranslateToAny< std::vector<UNIT_TYPE> >());
+                destroy_list.push_back(entry);
+            } else if(length == 1) {
+                put(quantity,
+                    (*entry)[0],
+                    IO::TranslateToAny< UNIT_TYPE >());
+                delete entry;
+            } else
+                throw Error::InvalidArgument(
+                    "add_1d_tree_entry",
+                    "Attempting to add zero length dataset to I/O tree!"
+                );
+        }
 
 } //End IO namespace.
 

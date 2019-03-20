@@ -75,7 +75,7 @@ namespace IO {
                 std::string sub_sub_key = sub_key.substr(subkey_split + 1);
                 std::cout << "Setting " << __prefix + sub_sub_key << std::endl;
                 if(sub_sub_key == "grid")
-                    put(__prefix + sub_sub_key, 
+                    put(__prefix + sub_sub_key,
                         represent_grid(value.as<PSF::Grid>()),
                         translate_string);
                 else
@@ -123,7 +123,7 @@ namespace IO {
         } else if(key == "ap.aperture") {
             Core::RealList aperture_list = value.as<Core::RealList>();
             aperture_list.sort();
-            std::valarray<double> 
+            std::valarray<double>
                 *apertures = new std::valarray<double>(aperture_list.size());
             unsigned index = 0;
             for(
@@ -144,12 +144,12 @@ namespace IO {
 
     void H5IODataTree::fill_configuration(const opt::variables_map& options)
     {
-        if(__tool==FITPSF || __tool==FITPRF) 
+        if(__tool==FITPSF || __tool==FITPRF)
             switch(options["psf.model"].as<PSF::ModelType>()) {
                 case PSF::SDK : __psf_model="sdk"; break;
                 case PSF::BICUBIC : __psf_model="bicubic"; break;
                 case PSF::ZERO : __psf_model="zero";
-            } 
+            }
         else __psf_model="";
         for(
                 opt::variables_map::const_iterator option_i=options.begin();
@@ -160,7 +160,7 @@ namespace IO {
                 case FITPSF : case FITPRF :
                     process_psffit_option(option_i->first, option_i->second);
                     break;
-                case SUBPIXPHOT : 
+                case SUBPIXPHOT :
                     process_subpixphot_option(option_i->first,
                                               option_i->second);
                     break;
@@ -169,6 +169,117 @@ namespace IO {
                             "HDF5 I/O for fitsubpix not implemented!"
                     );
             }
+    }
+
+    void H5IODataTree::add_1d_string_entry(char **value,
+                                           unsigned length,
+                                           const std::string &path)
+    {
+        if(length > 1) {
+            std::vector<std::string> *entry = new std::vector<std::string>(
+                value,
+                value + length
+            );
+            __strings_to_destroy.push_back(entry);
+            put(path,
+                entry,
+                IO::TranslateToAny< std::vector<std::string> >());
+        } else if(length == 1)
+            put(path,
+                std::string(value[0]),
+                IO::TranslateToAny<std::string>());
+        else
+            throw Error::InvalidArgument(
+                "add_1d_tree_entry",
+                "Attempting to add zero length string dataset to I/O tree!"
+            );
+    }
+
+    void H5IODataTree::add_c_array(const std::string &quantity,
+                                   void *value,
+                                   const std::string &format,
+                                   unsigned length)
+    {
+        if(format == "str")
+            add_1d_string_entry(reinterpret_cast<char**>(&value),
+                         length,
+                         quantity);
+        else if(format == "int")
+            add_1d_entry(reinterpret_cast<int*>(value),
+                         length,
+                         quantity,
+                         __ints_to_destroy);
+        else if(format == "long")
+            add_1d_entry(reinterpret_cast<long*>(value),
+                         length,
+                         quantity,
+                         __longs_to_destroy);
+        else if(format == "short")
+            add_1d_entry(reinterpret_cast<short*>(value),
+                         length,
+                         quantity,
+                         __shorts_to_destroy);
+        else if(format == "char")
+            add_1d_entry(reinterpret_cast<char*>(value),
+                         length,
+                         quantity,
+                         __chars_to_destroy);
+        else if(format == "uint")
+            add_1d_entry(reinterpret_cast<unsigned*>(value),
+                         length,
+                         quantity,
+                         __uints_to_destroy);
+        else if(format == "ulong")
+            add_1d_entry(reinterpret_cast<unsigned long*>(value),
+                         length,
+                         quantity,
+                         __ulongs_to_destroy);
+        else if(format == "ushort")
+            add_1d_entry(reinterpret_cast<unsigned short*>(value),
+                         length,
+                         quantity,
+                         __ushorts_to_destroy);
+        else if(format == "uchar")
+            add_1d_entry(reinterpret_cast<unsigned char*>(value),
+                         length,
+                         quantity,
+                         __uchars_to_destroy);
+        else if(format == "bool")
+            add_1d_entry(reinterpret_cast<bool*>(value),
+                         length,
+                         quantity,
+                         __bools_to_destroy);
+        else if(format == "double")
+            add_1d_entry(reinterpret_cast<double*>(value),
+                         length,
+                         quantity,
+                         __doubles_to_destroy);
+        else
+            throw Error::InvalidArgument(
+                "update_result_tree",
+                "invalid format: " + std::string(format)
+            );
+
+    }
+
+
+
+    H5IODataTree::~H5IODataTree()
+    {
+#ifdef VERBOSE_DEBUG
+        std::cerr << "Destroying H5IODataTree at " << this << std::endl;
+#endif
+        destroy_allocated(__strings_to_destroy);
+        destroy_allocated(__ints_to_destroy);
+        destroy_allocated(__uints_to_destroy);
+        destroy_allocated(__longs_to_destroy);
+        destroy_allocated(__ulongs_to_destroy);
+        destroy_allocated(__shorts_to_destroy);
+        destroy_allocated(__ushorts_to_destroy);
+        destroy_allocated(__chars_to_destroy);
+        destroy_allocated(__uchars_to_destroy);
+        destroy_allocated(__bools_to_destroy);
+        destroy_allocated(__doubles_to_destroy);
     }
 
     std::ostream &operator<<(std::ostream &os, const IOTreeBase &tree)

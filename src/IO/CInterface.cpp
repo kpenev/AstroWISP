@@ -361,6 +361,18 @@ bool query_result_tree(H5IODataTree *tree,
     return true;
 }
 
+void update_result_tree(const char *quantity,
+                        void *value,
+                        const char *format,
+                        unsigned length,
+                        H5IODataTree *tree)
+{
+    reinterpret_cast<IO::H5IODataTree*>(tree)->add_c_array(quantity,
+                                                           value,
+                                                           format,
+                                                           length);
+}
+
 LIB_PUBLIC bool get_psf_map_variables(H5IODataTree *output_data_tree,
                                       unsigned image_index,
                                       double *column_data)
@@ -464,3 +476,4 @@ LIB_PUBLIC unsigned list_tree_quantities(H5IODataTree *tree,
     }
     return quantities_list.size();
 }
+
