@@ -162,25 +162,23 @@ class SubPixPhot:
     #No clean way to reduce the number of argumets.
     #pylint: disable=too-many-arguments
     def __call__(self,
-                 pixel_values,
-                 pixel_errors,
-                 pixel_flags,
+                 image,
                  fitpsf_io_tree,
                  image_index=0):
         r"""
         Measure the fluxes of all sources in an image using aperture photometry.
 
         Args:
-            pixel_values (2-D float numpy array):    The calibrated values of
-                the pixels in the image.
+            image(2-D numpy.array, 2-D numpy.array, 2-D numpy.array): entries:
 
-            pixel_errors (2-D float numpy array):    Error estimates of the
-                pixel values
+                1. The calibrated values of the pixels in the image.
 
-            pixel_flags (2-D float byte array):    Bitmask flagging any known
-                issues with image pixels (e.g. saturation, hot pixels, etc.).
+                2. Error estimates of the pixel values
 
-            fitsf_io_tree (_c_h5io_data_tree_p):    The result tree returned by
+                3. Bitmask flagging any known issues with image pixels (e.g.
+                   saturation, hot pixels, etc.).
+
+            fitsf_io_tree (SuperPhotIOTree):    The result tree returned by
                 fit_star_shape.fit(). On output, this variable also contains the
                 newly derived aperture photometry measurements.
 
@@ -193,21 +191,15 @@ class SubPixPhot:
             include the newly measured fluxes.
         """
 
-        assert pixel_values.shape == pixel_errors.shape
-        assert pixel_values.shape == pixel_flags.shape
+        assert image[1].shape == image[0].shape
+        assert image[2].shape == image[0].shape
 
-        self.image = dict(
-            values=pixel_values,
-            errors=pixel_errors,
-            mask=pixel_flags
-        )
+        self.image = image
 
         library_image = superphot_library.create_core_image(
-            pixel_values.shape[1],
-            pixel_values.shape[0],
-            pixel_values,
-            pixel_errors,
-            pixel_flags,
+            image[0].shape[1],
+            image[0].shape[0],
+            *image
             True
         )
 

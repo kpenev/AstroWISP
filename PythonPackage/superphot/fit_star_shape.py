@@ -362,7 +362,7 @@ class FitStarShape:
         Fit for the shape of the sources in a collection of imeges.
 
         Args:
-            image_sources (list of 4-tuples):    Each entry consists of:
+            image_sources ([4-tuples]):    Each entry consists of:
 
                 1. The pixel values of the calibratred image
 
@@ -387,8 +387,8 @@ class FitStarShape:
                    names as keys or a dictionary with field names as keys and
                    1-D numpy arrays of identical lengths as values.
 
-            backgrounds:    The measured backgrounds under the sources (instance
-                of :class:`BackgroundExtractor`\ ).
+            backgrounds ([BackgroundExtractor]):    The measured backgrounds
+                under the sources.
 
         Returns:
             SuperPhotIOTree:
