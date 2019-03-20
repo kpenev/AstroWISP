@@ -10,3 +10,6 @@ noiseless_psffit: noiseless_psffit.cpp
 
 apphot: apphot.cpp
 	g++ $(FLAGS) apphot.cpp -o apphot $(LIBS)
+
+io_tree_updates: test_io_tree_updates.cpp
+	g++ $(FLAGS) test_io_tree_updates.cpp -o test_io_tree_updates $(LIBS)
