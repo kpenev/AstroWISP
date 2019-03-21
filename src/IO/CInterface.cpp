@@ -493,6 +493,11 @@ LIB_PUBLIC void set_psf_map_variables(char **map_variable_names,
                 std::valarray<double>(this_map_variable, num_sources)
             )
         );
+        std::cerr << "Added map variable: " << variables.back().first
+                  << " = ";
+        for(size_t i = 0; i < variables.back().second.size(); ++i)
+            std::cerr << variables.back().second[i] << ", ";
+        std::cerr << std::endl;
         this_map_variable += num_sources;
     }
 

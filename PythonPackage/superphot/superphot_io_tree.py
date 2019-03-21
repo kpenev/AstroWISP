@@ -12,7 +12,6 @@ from ctypes import\
     c_uint,\
     c_ulong,\
     c_ushort,\
-    c_ubyte,\
     c_char_p,\
     c_void_p,\
     pointer,\
@@ -169,11 +168,116 @@ class SuperPhotIOTree:
                                                 result)
         return result
 
+    def set_star_shape_map_variables(self, source_data, image_index):
+        """
+        Add the variables the star shape map depends on to the tree.
+
+        Args:
+            source_data (structured numpy.array):    The data to build the
+                variables from. All floating point fields except 'bg' and
+                'bg_err' are added as PSF map variables.
+
+        Returns:
+            None
+        """
+
+        def get_variable_names():
+            """Identify and return the variable names directly as c_char_p."""
+
+            result = []
+            for var_name in source_data.dtype.names:
+                if (
+                        source_data[var_name].dtype.kind == 'f'
+                        and
+                        var_name not in ['bg', 'bg_err']
+                ):
+                    result.append(var_name)
+            return result
+
+        def get_variable_values(variable_names):
+            """Return a properly laid out array of the variable values."""
+
+            result = numpy.empty(shape=(len(variable_names), source_data.shape[0]),
+                                 dtype=float)
+            for var_index, var_name in enumerate(variable_names):
+                result[var_index] = source_data[var_name]
+            return result
+
+        variable_names = get_variable_names()
+        c_variable_names = (c_char_p * len(variable_names))(
+            *(c_char_p(var_name.encode('ascii')) for var_name in variable_names)
+        )
+        superphot_library.set_psf_map_variables(
+            c_variable_names,
+            get_variable_values(variable_names),
+            len(variable_names),
+            source_data.shape[0],
+            image_index,
+            self.library_tree
+        )
+
+    def set_star_shape_map(self, grid, map_terms, coefficients):
+        """
+        Add to tree all entries that define the star shape map.
+
+        Args:
+            grid (2-D iterable):    The grid on which the star shape is
+                represented.
+
+            map_terms (str):    The expression defining the terms the star shape
+                parameters depend on.
+
+            coefficients (4-D numpy.array):    The coefficients of the map. See
+                :class:fit_star_shape for details.
+
+        Returns:
+            None
+        """
+
+        def get_grid_str():
+            """Return the ascii representation of the grid to add to self."""
+
+            return ';'.join(
+                [
+                    ', '.join([repr(boundary) for boundary in sub_grid])
+                    for sub_grid in grid
+                ]
+            ).encode('ascii')
+
+        superphot_library.update_result_tree(
+            b'psffit.grid',
+            (c_char_p * 1)(c_char_p(get_grid_str())),
+            b'str',
+            1,
+            self.library_tree
+        )
+        superphot_library.update_result_tree(
+            b'psffit.terms',
+            (c_char_p * 1)(
+                c_char_p(
+                    map_terms if isinstance(map_terms, bytes)
+                    else map_terms.encode('ascii')
+                )
+            ),
+            b'str',
+            1,
+            self.library_tree
+        )
+        superphot_library.update_result_tree(
+            b'psffit.psfmap',
+            coefficients.ctypes.data_as(c_void_p),
+            b'double',
+            coefficients.size,
+            self.library_tree
+        )
+
     def set_aperture_photometry_inputs(self,
+                                       *,
                                        source_data,
                                        star_shape_grid,
                                        star_shape_map_terms,
-                                       star_shape_map_coefficients):
+                                       star_shape_map_coefficients,
+                                       image_index=0):
         """
         Add to the tree all the information required for aperture photometry.
 
@@ -187,7 +291,7 @@ class SuperPhotIOTree:
             star_shape_grid:    The grid boundaries on which the star shape is
                 being modeled.
 
-            star_shape_terms:    The expression defining all terms to include in
+            star_shape_map_terms:    The expression defining all terms to include in
                 the star shape dependence.
 
             star_shape_map_coefficients(4-D numpy.array):    The coefficients
@@ -197,9 +301,18 @@ class SuperPhotIOTree:
             None
         """
 
+        image_index_str = str(image_index)
         for var_name in ['x', 'y']:
             superphot_library.update_result_tree(
-                b'projsrc.' + var_name.encode('ascii'),
+                (
+                    'projsrc.'
+                    +
+                    var_name
+                    +
+                    '.'
+                    +
+                    image_index_str
+                ).encode('ascii'),
                 source_data[var_name].ctypes.data_as(c_void_p),
                 b'double',
                 source_data.shape[0],
@@ -207,34 +320,35 @@ class SuperPhotIOTree:
             )
 
         superphot_library.update_result_tree(
-            b'bg.value'
-            source_data['bg'].ctypes.data_as(c_void_p),
+            b'projsrc.srcid.name.' + image_index_str.encode('ascii'),
+            (c_char_p * source_data.shape[0])(*source_data['id']),
+            b'str',
+            source_data.shape[0],
+            self.library_tree
+        )
+
+        superphot_library.update_result_tree(
+            b'bg.value.' + image_index_str.encode('ascii'),
+            numpy.copy(source_data['bg']).ctypes.data_as(c_void_p),
             b'double',
             source_data.shape[0],
             self.library_tree
         )
 
         superphot_library.update_result_tree(
-            b'bg.error'
-            source_data['bg_err'].ctypes.data_as(c_void_p),
+            b'bg.error.' + image_index_str.encode('ascii'),
+            numpy.copy(source_data['bg_err']).ctypes.data_as(c_void_p),
             b'double',
             source_data.shape[0],
             self.library_tree
         )
 
-        for var_name in source_data.dtype.names:
-            if (
-                    source_data[var_name].dtype.kind == 'f':
-                    and
-                    var_name not in ['bg', 'bg_err']
-            ):
-                    superphot_library.update_result_tree(
-                        b'psffit.variables.0',
-                        source_data[var_name].ctypes.data_as(c_void_p),
-                        b'double',
-                        source_data.shape[0],
-                        self.library_tree
-                    )
+        self.set_star_shape_map_variables(source_data, image_index)
+
+        self.set_star_shape_map(star_shape_grid,
+                                star_shape_map_terms,
+                                star_shape_map_coefficients)
+
     def __del__(self):
         """Destroy the tree allocated by __init__."""
 

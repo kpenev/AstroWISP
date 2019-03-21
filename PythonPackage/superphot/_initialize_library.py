@@ -166,22 +166,31 @@ def _setup_io_interface(library):
     }
 
     library.update_result_tree.argtypes = [
+        #Which quantity to add/overwrite.
         c_char_p,
+
+        #The value(s) to set for the quantity.
         c_void_p,
+
+        # Data type of quantity.
         c_char_p,
+
+        #The number of entries in the quantity
         c_uint,
+
+        #The tree to update
         library.create_result_tree.restype
     ]
     library.update_result_tree.restype = None
 
-    library.set_psf_map_variables.argtype = [
+    library.set_psf_map_variables.argtypes = [
         #variblae names
         POINTER(c_char_p),
 
         #variable values
         numpy.ctypeslib.ndpointer(dtype=c_double,
                                   ndim=2,
-                                  flags='C_CONTIGUOUS')
+                                  flags='C_CONTIGUOUS'),
         #number of variables
         c_uint,
 
@@ -193,7 +202,8 @@ def _setup_io_interface(library):
 
         #The tree to update
         library.create_result_tree.restype
-    );
+    ]
+    library.set_psf_map_variables.restype = None
 
 
     library.free.argtypes = [c_void_p]

@@ -175,6 +175,7 @@ namespace IO {
                                            unsigned length,
                                            const std::string &path)
     {
+        std::cerr << "Adding string(s) to " << path << std::endl;
         if(length > 1) {
             std::vector<std::string> *entry = new std::vector<std::string>(
                 value,
@@ -184,10 +185,11 @@ namespace IO {
             put(path,
                 entry,
                 IO::TranslateToAny< std::vector<std::string> >());
-        } else if(length == 1)
+        } else if(length == 1) {
             put(path,
                 std::string(value[0]),
                 IO::TranslateToAny<std::string>());
+        }
         else
             throw Error::InvalidArgument(
                 "add_1d_tree_entry",
