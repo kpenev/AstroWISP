@@ -477,3 +477,31 @@ LIB_PUBLIC unsigned list_tree_quantities(H5IODataTree *tree,
     return quantities_list.size();
 }
 
+LIB_PUBLIC void set_psf_map_variables(char **map_variable_names,
+                                      double *map_variable_values,
+                                      unsigned num_map_variables,
+                                      unsigned num_sources,
+                                      unsigned image_index,
+                                      H5IODataTree *tree)
+{
+    PSF::MapVarListType variables;
+    double *this_map_variable = map_variable_values;
+    for(unsigned var_index = 0; var_index < num_map_variables; ++var_index) {
+        variables.push_back(
+            PSF::MapVariableType(
+                map_variable_names[var_index],
+                std::valarray<double>(this_map_variable, num_sources)
+            )
+        );
+        this_map_variable += num_sources;
+    }
+
+    std::ostringstream tree_path;
+    tree_path << "psffit.variables." << image_index;
+
+    reinterpret_cast<IO::H5IODataTree*>(tree)->put<PSF::MapVarListType>(
+        tree_path.str(),
+        variables,
+        IO::TranslateToAny<PSF::MapVarListType>()
+    );
+}

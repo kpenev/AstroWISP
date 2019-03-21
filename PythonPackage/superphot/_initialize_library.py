@@ -165,6 +165,37 @@ def _setup_io_interface(library):
                      'NAN']
     }
 
+    library.update_result_tree.argtypes = [
+        c_char_p,
+        c_void_p,
+        c_char_p,
+        c_uint,
+        library.create_result_tree.restype
+    ]
+    library.update_result_tree.restype = None
+
+    library.set_psf_map_variables.argtype = [
+        #variblae names
+        POINTER(c_char_p),
+
+        #variable values
+        numpy.ctypeslib.ndpointer(dtype=c_double,
+                                  ndim=2,
+                                  flags='C_CONTIGUOUS')
+        #number of variables
+        c_uint,
+
+        #number of sources
+        c_uint,
+
+        #The index of the image to set the PSF map for.
+        c_uint,
+
+        #The tree to update
+        library.create_result_tree.restype
+    );
+
+
     library.free.argtypes = [c_void_p]
     library.free.restype = None
 

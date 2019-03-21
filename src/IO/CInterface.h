@@ -121,6 +121,9 @@ extern "C" {
         ///for details.
         const char *format,
 
+        ///The number of entries in the quantity
+        unsigned length,
+
         ///The tree to update.
         H5IODataTree *tree
     );
@@ -141,6 +144,26 @@ extern "C" {
         ///each varibale are consecutive in memory. All required storage must
         ///already be allocated.
         double *column_data
+    );
+
+    LIB_PUBLIC void set_psf_map_variables(
+        ///The names of the variables required by the map.
+        char **map_variable_names,
+
+        ///The values of the variables required by the map for each source.
+        double *map_variable_values,
+
+        ///The number of map variables
+        unsigned num_map_variables,
+
+        ///The number of sources.
+        unsigned num_sources,
+
+        ///The index of the image to set the PSF map for.
+        unsigned image_index,
+
+        ///The tree to update.
+        H5IODataTree *tree
     );
 
     ///\brief List the names of all quantities that currently have a value in a
