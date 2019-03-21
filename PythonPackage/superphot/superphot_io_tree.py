@@ -169,6 +169,72 @@ class SuperPhotIOTree:
                                                 result)
         return result
 
+    def set_aperture_photometry_inputs(self,
+                                       source_data,
+                                       star_shape_grid,
+                                       star_shape_map_terms,
+                                       star_shape_map_coefficients):
+        """
+        Add to the tree all the information required for aperture photometry.
+
+        Args:
+            source_data(structured numpy.array):    Should contain informaiton
+                about all sources to do apreture photometry on as fields. At
+                least the following floating point fields must be present: `x`,
+                `y`, `bg`, `bg_err` + any variables used by the PSF map. It must
+                also contain a string field `id` of source IDs.
+
+            star_shape_grid:    The grid boundaries on which the star shape is
+                being modeled.
+
+            star_shape_terms:    The expression defining all terms to include in
+                the star shape dependence.
+
+            star_shape_map_coefficients(4-D numpy.array):    The coefficients
+                in front of all terms. See bicubic PSf model for details.
+
+        Returns:
+            None
+        """
+
+        for var_name in ['x', 'y']:
+            superphot_library.update_result_tree(
+                b'projsrc.' + var_name.encode('ascii'),
+                source_data[var_name].ctypes.data_as(c_void_p),
+                b'double',
+                source_data.shape[0],
+                self.library_tree
+            )
+
+        superphot_library.update_result_tree(
+            b'bg.value'
+            source_data['bg'].ctypes.data_as(c_void_p),
+            b'double',
+            source_data.shape[0],
+            self.library_tree
+        )
+
+        superphot_library.update_result_tree(
+            b'bg.error'
+            source_data['bg_err'].ctypes.data_as(c_void_p),
+            b'double',
+            source_data.shape[0],
+            self.library_tree
+        )
+
+        for var_name in source_data.dtype.names:
+            if (
+                    source_data[var_name].dtype.kind == 'f':
+                    and
+                    var_name not in ['bg', 'bg_err']
+            ):
+                    superphot_library.update_result_tree(
+                        b'psffit.variables.0',
+                        source_data[var_name].ctypes.data_as(c_void_p),
+                        b'double',
+                        source_data.shape[0],
+                        self.library_tree
+                    )
     def __del__(self):
         """Destroy the tree allocated by __init__."""
 
