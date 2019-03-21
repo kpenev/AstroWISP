@@ -199,7 +199,7 @@ class SubPixPhot:
         library_image = superphot_library.create_core_image(
             image[0].shape[1],
             image[0].shape[0],
-            *image
+            *image,
             True
         )
 
