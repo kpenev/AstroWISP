@@ -189,7 +189,9 @@ class SuperPhotIOTree:
                 if (
                         source_data[var_name].dtype.kind == 'f'
                         and
-                        var_name not in ['bg', 'bg_err']
+                        var_name not in ['bg', 'bg_err',
+                                         'flux', 'flux_err',
+                                         'mag', 'mag_err']
                 ):
                     result.append(var_name)
             return result
@@ -265,7 +267,7 @@ class SuperPhotIOTree:
         )
         superphot_library.update_result_tree(
             b'psffit.psfmap',
-            coefficients.ctypes.data_as(c_void_p),
+            coefficients.astype(c_double, 'C').ctypes.data_as(c_void_p),
             b'double',
             coefficients.size,
             self.library_tree
@@ -285,8 +287,10 @@ class SuperPhotIOTree:
             source_data(structured numpy.array):    Should contain informaiton
                 about all sources to do apreture photometry on as fields. At
                 least the following floating point fields must be present: `x`,
-                `y`, `bg`, `bg_err` + any variables used by the PSF map. It must
-                also contain a string field `id` of source IDs.
+                `y`, `bg`, `bg_err`, any variables used by the PSF map, and
+                either `flux` and `flux_err` or `mag` and `mag_err`. It must
+                also contain a string field `id` of source IDs and an unsigned
+                integer field `bg_npix`.
 
             star_shape_grid:    The grid boundaries on which the star shape is
                 being modeled.
@@ -302,22 +306,40 @@ class SuperPhotIOTree:
         """
 
         image_index_str = str(image_index)
-        for var_name in ['x', 'y']:
-            superphot_library.update_result_tree(
-                (
-                    'projsrc.'
-                    +
-                    var_name
-                    +
-                    '.'
-                    +
-                    image_index_str
-                ).encode('ascii'),
-                source_data[var_name].ctypes.data_as(c_void_p),
-                b'double',
-                source_data.shape[0],
-                self.library_tree
-            )
+        source_var_set = set(source_data.dtype.names)
+        assert (
+            ('flux' in source_var_set and 'flux_err' in source_var_set)
+            or
+            ('mag' in source_var_set and 'mag_err' in source_var_set)
+        )
+        for prefix, prefix_vars in [('projsrc', ['x',
+                                                 'y']),
+                                    ('psffit', ['flux',
+                                                'flux_err',
+                                                'mag',
+                                                'mag_err'])]:
+            for var_name in prefix_vars:
+                if (
+                        prefix == 'projsrc'
+                        or
+                        var_name in source_data.dtype.names
+                ):
+                    dtype = source_data[var_name].dtype
+                    assert dtype.kind == 'f'
+                    assert dtype.itemsize == 8
+                    superphot_library.update_result_tree(
+                        '.'.join(
+                            [prefix, var_name, image_index_str]
+                        ).encode('ascii'),
+                        source_data[var_name].astype(
+                            c_double
+                        ).ctypes.data_as(
+                            c_void_p
+                        ),
+                        b'double',
+                        source_data.shape[0],
+                        self.library_tree
+                    )
 
         superphot_library.update_result_tree(
             b'projsrc.srcid.name.' + image_index_str.encode('ascii'),
@@ -329,16 +351,22 @@ class SuperPhotIOTree:
 
         superphot_library.update_result_tree(
             b'bg.value.' + image_index_str.encode('ascii'),
-            numpy.copy(source_data['bg']).ctypes.data_as(c_void_p),
+            source_data['bg'].astype(c_double).ctypes.data_as(c_void_p),
             b'double',
             source_data.shape[0],
             self.library_tree
         )
-
         superphot_library.update_result_tree(
             b'bg.error.' + image_index_str.encode('ascii'),
-            numpy.copy(source_data['bg_err']).ctypes.data_as(c_void_p),
+            source_data['bg_err'].astype(c_double).ctypes.data_as(c_void_p),
             b'double',
+            source_data.shape[0],
+            self.library_tree
+        )
+        superphot_library.update_result_tree(
+            b'bg.npix.' + image_index_str.encode('ascii'),
+            source_data['bg_npix'].astype(c_uint).ctypes.data_as(c_void_p),
+            b'uint',
             source_data.shape[0],
             self.library_tree
         )
