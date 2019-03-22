@@ -279,6 +279,7 @@ class SuperPhotIOTree:
                                        star_shape_grid,
                                        star_shape_map_terms,
                                        star_shape_map_coefficients,
+                                       magnitude_1adu=None,
                                        image_index=0):
         """
         Add to the tree all the information required for aperture photometry.
@@ -292,11 +293,15 @@ class SuperPhotIOTree:
                 also contain a string field `id` of source IDs and an unsigned
                 integer field `bg_npix`.
 
-            star_shape_grid:    The grid boundaries on which the star shape is
-                being modeled.
+            star_shape_grid(2-D iterable):    The grid boundaries on which the
+                star shape is being modeled.
 
-            star_shape_map_terms:    The expression defining all terms to include in
-                the star shape dependence.
+            star_shape_map_terms(str):    The expression defining all terms to
+                include in the star shape dependence.
+
+            magnitude_1adu(float):    The magnitude that corresponds to a flux
+                of 1ADU. Only required if relying on magnitudes to get star
+                shape amplitudes.
 
             star_shape_map_coefficients(4-D numpy.array):    The coefficients
                 in front of all terms. See bicubic PSf model for details.
@@ -310,7 +315,13 @@ class SuperPhotIOTree:
         assert (
             ('flux' in source_var_set and 'flux_err' in source_var_set)
             or
-            ('mag' in source_var_set and 'mag_err' in source_var_set)
+            (
+                'mag' in source_var_set
+                and
+                'mag_err' in source_var_set
+                and
+                magnitude_1adu is not None
+            )
         )
         for prefix, prefix_vars in [('projsrc', ['x',
                                                  'y']),
@@ -370,6 +381,22 @@ class SuperPhotIOTree:
             source_data.shape[0],
             self.library_tree
         )
+        superphot_library.update_result_tree(
+            b'psffit.magnitude_1adu',
+            numpy.array([magnitude_1adu],
+                        dtype=c_double).ctypes.data_as(c_void_p),
+            b'double',
+            1,
+            self.library_tree
+        )
+        superphot_library.update_result_tree(
+            b'psffit.model',
+            (c_char_p * 1)(b'bicubic'),
+            b'str',
+            1,
+            self.library_tree
+        )
+
 
         self.set_star_shape_map_variables(source_data, image_index)
 
