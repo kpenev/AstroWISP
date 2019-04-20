@@ -65,6 +65,33 @@ class SuperPhotIOTree:
             )
         )
 
+        bg_values = numpy.ones((9607,))
+        print('INIT: Adding BG values(shape=%s, dtype=%s): %s'
+              %
+              (repr(bg_values.shape), repr(bg_values.dtype), repr(bg_values)))
+        superphot_library.update_result_tree(
+            b'bg.value.0',
+            bg_values.astype(c_double).ctypes.data_as(c_void_p),
+            b'double',
+            bg_values.shape[0],
+            self.library_tree
+        )
+        check_bg = numpy.zeros(shape=bg_values.shape, dtype=c_double)
+        superphot_library.query_result_tree(
+            self.library_tree,
+            b'bg.value.0',
+            b'[double]',
+            check_bg.ctypes.data_as(c_void_p)
+        )
+        print('Check retrieving BG values (shape: %s, dtype=%s): %si\norig: %s'
+              %
+              (
+                  repr(check_bg.shape),
+                  repr(check_bg.dtype),
+                  repr(check_bg),
+                  repr(bg_values)
+              ))
+
     def defined_quantity_names(self):
         """
         Return a list of the quantities with non-empty values in the tree.
@@ -108,6 +135,7 @@ class SuperPhotIOTree:
 
         byte_quantity = (quantity if isinstance(quantity, bytes)
                          else quantity.encode('ascii'))
+        print('Reading quantity: ' + repr(byte_quantity))
 
         if dtype == str:
             library_result = pointer(c_char_p())
@@ -117,7 +145,11 @@ class SuperPhotIOTree:
                 b'str',
                 cast(library_result, c_void_p)
             )
-            result = library_result.contents.value.decode()
+            result = library_result.contents.value
+            if result is None:
+                defined=False
+            else:
+                result=result.decode()
             superphot_library.free(library_result.contents)
         else:
             result = numpy.empty(shape=shape, dtype=dtype)
@@ -168,7 +200,10 @@ class SuperPhotIOTree:
                                                 result)
         return result
 
-    def set_star_shape_map_variables(self, source_data, image_index):
+    def set_star_shape_map_variables(self,
+                                     source_data,
+                                     image_index,
+                                     variable_names):
         """
         Add the variables the star shape map depends on to the tree.
 
@@ -181,21 +216,6 @@ class SuperPhotIOTree:
             None
         """
 
-        def get_variable_names():
-            """Identify and return the variable names directly as c_char_p."""
-
-            result = []
-            for var_name in source_data.dtype.names:
-                if (
-                        source_data[var_name].dtype.kind == 'f'
-                        and
-                        var_name not in ['bg', 'bg_err',
-                                         'flux', 'flux_err',
-                                         'mag', 'mag_err']
-                ):
-                    result.append(var_name)
-            return result
-
         def get_variable_values(variable_names):
             """Return a properly laid out array of the variable values."""
 
@@ -205,7 +225,6 @@ class SuperPhotIOTree:
                 result[var_index] = source_data[var_name]
             return result
 
-        variable_names = get_variable_names()
         c_variable_names = (c_char_p * len(variable_names))(
             *(c_char_p(var_name.encode('ascii')) for var_name in variable_names)
         )
@@ -279,6 +298,7 @@ class SuperPhotIOTree:
                                        star_shape_grid,
                                        star_shape_map_terms,
                                        star_shape_map_coefficients,
+                                       star_shape_map_varnames=('x', 'y'),
                                        magnitude_1adu=None,
                                        image_index=0):
         """
@@ -310,7 +330,35 @@ class SuperPhotIOTree:
             None
         """
 
+        bg_values = numpy.ones((9607,))
+        print('SET: Adding BG values(shape=%s, dtype=%s): %s'
+              %
+              (repr(bg_values.shape), repr(bg_values.dtype), repr(bg_values)))
+        superphot_library.update_result_tree(
+            b'bg.value.0',
+            bg_values.astype(c_double).ctypes.data_as(c_void_p),
+            b'double',
+            bg_values.shape[0],
+            self.library_tree
+        )
+        check_bg = numpy.zeros(shape=bg_values.shape, dtype=c_double)
+        superphot_library.query_result_tree(
+            self.library_tree,
+            b'bg.value.0',
+            b'[double]',
+            check_bg.ctypes.data_as(c_void_p)
+        )
+        print('Check retrieving BG values (shape: %s, dtype=%s): %si\norig: %s'
+              %
+              (
+                  repr(check_bg.shape),
+                  repr(check_bg.dtype),
+                  repr(check_bg),
+                  repr(bg_values)
+              ))
+
         image_index_str = str(image_index)
+
         source_var_set = set(source_data.dtype.names)
         assert (
             ('flux' in source_var_set and 'flux_err' in source_var_set)
@@ -324,7 +372,8 @@ class SuperPhotIOTree:
             )
         )
         for prefix, prefix_vars in [('projsrc', ['x',
-                                                 'y']),
+                                                 'y',
+                                                 'enabled']),
                                     ('psffit', ['flux',
                                                 'flux_err',
                                                 'mag',
@@ -336,8 +385,8 @@ class SuperPhotIOTree:
                         var_name in source_data.dtype.names
                 ):
                     dtype = source_data[var_name].dtype
-                    assert dtype.kind == 'f'
-                    assert dtype.itemsize == 8
+                    assert var_name == 'enabled' or dtype.kind == 'f'
+                    assert var_name == 'enabled' or dtype.itemsize == 8
                     superphot_library.update_result_tree(
                         '.'.join(
                             [prefix, var_name, image_index_str]
@@ -354,19 +403,41 @@ class SuperPhotIOTree:
 
         superphot_library.update_result_tree(
             b'projsrc.srcid.name.' + image_index_str.encode('ascii'),
-            (c_char_p * source_data.shape[0])(*source_data['id']),
+            (c_char_p * source_data.shape[0])(*source_data['ID']),
             b'str',
             source_data.shape[0],
             self.library_tree
         )
 
+        bg_values = numpy.copy(source_data['bg'], order='C')
+        print('Adding BG values(shape=%s, dtype=%s): %s'
+              %
+              (repr(bg_values.shape), repr(bg_values.dtype), repr(bg_values)))
         superphot_library.update_result_tree(
             b'bg.value.' + image_index_str.encode('ascii'),
-            source_data['bg'].astype(c_double).ctypes.data_as(c_void_p),
+            bg_values.astype(c_double).ctypes.data_as(c_void_p),
             b'double',
             source_data.shape[0],
             self.library_tree
         )
+        check_bg = numpy.zeros(shape=bg_values.shape, dtype=c_double)
+        superphot_library.query_result_tree(
+            self.library_tree,
+            b'bg.value.' + image_index_str.encode('ascii'),
+            b'[double]',
+            check_bg.ctypes.data_as(c_void_p)
+        )
+#        check_bg = self.get('bg.value.0',
+#                            c_double,
+#                            shape=source_data.shape)
+        print('Check retrieving BG values (shape: %s, dtype=%s): %si\norig: %s'
+              %
+              (
+                  repr(check_bg.shape),
+                  repr(check_bg.dtype),
+                  repr(check_bg),
+                  repr(bg_values)
+              ))
         superphot_library.update_result_tree(
             b'bg.error.' + image_index_str.encode('ascii'),
             source_data['bg_err'].astype(c_double).ctypes.data_as(c_void_p),
@@ -398,7 +469,9 @@ class SuperPhotIOTree:
         )
 
 
-        self.set_star_shape_map_variables(source_data, image_index)
+        self.set_star_shape_map_variables(source_data,
+                                          image_index,
+                                          star_shape_map_varnames)
 
         self.set_star_shape_map(star_shape_grid,
                                 star_shape_map_terms,
