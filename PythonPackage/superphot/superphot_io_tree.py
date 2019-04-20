@@ -220,9 +220,11 @@ class SuperPhotIOTree:
             """Return a properly laid out array of the variable values."""
 
             result = numpy.empty(shape=(len(variable_names), source_data.shape[0]),
-                                 dtype=float)
+                                 dtype=float,
+                                 order='C')
             for var_index, var_name in enumerate(variable_names):
                 result[var_index] = source_data[var_name]
+            print('Variable values: ' + repr(result))
             return result
 
         c_variable_names = (c_char_p * len(variable_names))(
@@ -392,7 +394,8 @@ class SuperPhotIOTree:
                             [prefix, var_name, image_index_str]
                         ).encode('ascii'),
                         source_data[var_name].astype(
-                            c_double
+                            c_double,
+                            order='C'
                         ).ctypes.data_as(
                             c_void_p
                         ),
@@ -440,14 +443,16 @@ class SuperPhotIOTree:
               ))
         superphot_library.update_result_tree(
             b'bg.error.' + image_index_str.encode('ascii'),
-            source_data['bg_err'].astype(c_double).ctypes.data_as(c_void_p),
+            source_data['bg_err'].astype(c_double,
+                                         order='C').ctypes.data_as(c_void_p),
             b'double',
             source_data.shape[0],
             self.library_tree
         )
         superphot_library.update_result_tree(
             b'bg.npix.' + image_index_str.encode('ascii'),
-            source_data['bg_npix'].astype(c_uint).ctypes.data_as(c_void_p),
+            source_data['bg_npix'].astype(c_uint,
+                                          order='C').ctypes.data_as(c_void_p),
             b'uint',
             source_data.shape[0],
             self.library_tree
