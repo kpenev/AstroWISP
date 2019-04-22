@@ -175,7 +175,6 @@ namespace IO {
                                            unsigned length,
                                            const std::string &path)
     {
-        std::cerr << "Adding string(s) to " << path << std::endl;
         if(length > 1) {
             std::vector<std::string> *entry = new std::vector<std::string>(
                 value,

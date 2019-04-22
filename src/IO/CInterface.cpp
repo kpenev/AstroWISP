@@ -251,6 +251,7 @@ bool query_result_tree(H5IODataTree *tree,
     const boost::any &value =
         reinterpret_cast<IO::H5IODataTree*>(tree)->get<boost::any>(quantity,
                                                                    boost::any());
+
     if(value.empty()) {
         std::cout << "Empty quantity: " << quantity << std::endl;
         return false;
@@ -493,11 +494,6 @@ LIB_PUBLIC void set_psf_map_variables(char **map_variable_names,
                 std::valarray<double>(this_map_variable, num_sources)
             )
         );
-        std::cerr << "Added map variable: " << variables.back().first
-                  << " = ";
-        for(size_t i = 0; i < variables.back().second.size(); ++i)
-            std::cerr << variables.back().second[i] << ", ";
-        std::cerr << std::endl;
         this_map_variable += num_sources;
     }
 
