@@ -86,11 +86,11 @@ namespace IO {
         std::list< std::vector<bool>* > __bools_to_destroy;
 
         ///See __strings_to_destroy;
-        std::list< std::vector<double>* > __doubles_to_destroy;
+        std::list< Eigen::VectorXd* > __doubles_to_destroy;
 
         ///Destroy one of the __*_to_destroy lists.
-        template<typename UNIT_TYPE>
-            void destroy_allocated(std::list< std::vector<UNIT_TYPE>* > &target);
+        template<typename ARRAY_TYPE>
+            void destroy_allocated(std::list< ARRAY_TYPE* > &target);
 
         ///Add values from a C-style array to the tree.
         template<typename UNIT_TYPE>
@@ -108,6 +108,18 @@ namespace IO {
                 //the __*_to_destroy lists.
                 std::list< std::vector<UNIT_TYPE>* > &destroy_list
             );
+
+        ///\brief Add values from a C-style double array to the tree.
+        void add_1d_entry(
+            ///C-style array of the values to add.
+            double *value,
+
+            ///The number of entries value
+            unsigned length,
+
+            ///The path within the tree to add/update
+            const std::string &quantity
+        );
 
         ///Add values from a C-style array of strings to the tree.
         void add_1d_string_entry(
@@ -212,11 +224,11 @@ namespace IO {
         const IOTreeBase &tree
     );
 
-    template<typename UNIT_TYPE>
-        void H5IODataTree::destroy_allocated(std::list< std::vector<UNIT_TYPE>* > &target)
+    template<typename ARRAY_TYPE>
+        void H5IODataTree::destroy_allocated(std::list< ARRAY_TYPE* > &target)
         {
             for(
-                typename std::list< std::vector<UNIT_TYPE>* >::iterator
+                typename std::list< ARRAY_TYPE* >::iterator
                 target_i = target.begin();
                 target_i != target.end();
                 ++target_i
@@ -225,10 +237,12 @@ namespace IO {
         }
 
     template<typename UNIT_TYPE>
-        void H5IODataTree::add_1d_entry(UNIT_TYPE *value,
-                                        unsigned length,
-                                        const std::string &quantity,
-                                        std::list< std::vector<UNIT_TYPE>* > &destroy_list)
+        void H5IODataTree::add_1d_entry(
+            UNIT_TYPE *value,
+            unsigned length,
+            const std::string &quantity,
+            std::list< std::vector<UNIT_TYPE>* > &destroy_list
+        )
         {
             std::vector<UNIT_TYPE> *entry=new std::vector<UNIT_TYPE>(
                 value,

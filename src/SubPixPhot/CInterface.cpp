@@ -5,6 +5,7 @@
 #include "../Core/SubPixelMap.h"
 #include "../Core/Image.h"
 #include "../Core/SubPixelCorrectedFlux.h"
+#include "../PSF/DataTreeCalculations.h"
 
 #include <cstdarg>
 #include <iostream>
@@ -65,8 +66,13 @@ LIB_PUBLIC void subpixphot(const CoreImage *image,
     const SubPixPhot::Config *real_configuration =
         reinterpret_cast<const SubPixPhot::Config *>(configuration);
 
+    std::ostringstream image_index_str;
+    image_index_str << image_index;
+
     IO::H5IODataTree *real_io_data_tree =
         reinterpret_cast<IO::H5IODataTree*>(io_data_tree);
+
+    PSF::fill_psf_amplitudes(*real_io_data_tree, image_index_str.str());
 
     std::cerr << "Setting apertures" << std::endl;
     Core::RealList apertures =
@@ -86,8 +92,6 @@ LIB_PUBLIC void subpixphot(const CoreImage *image,
         (*real_configuration)["gain"].as<double>()
     );
 
-    std::ostringstream image_index_str;
-    image_index_str << image_index;
     std::cerr << "Measuring flux for image "
               << image_index_str.str()
               << std::endl;

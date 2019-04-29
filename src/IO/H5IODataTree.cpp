@@ -10,6 +10,32 @@
 
 namespace IO {
 
+    void H5IODataTree::add_1d_entry(
+        double *value,
+        unsigned length,
+        const std::string &quantity
+    )
+    {
+        if(length > 1) {
+            Eigen::VectorXd *entry=new Eigen::VectorXd(length);
+            for(unsigned i=0; i<length; ++i)
+                (*entry)[i] = value[i];
+
+            put(quantity,
+                entry,
+                IO::TranslateToAny< Eigen::VectorXd >());
+            __doubles_to_destroy.push_back(entry);
+        } else if(length == 1) {
+            put(quantity,
+                value[0],
+                IO::TranslateToAny< double >());
+        } else
+            throw Error::InvalidArgument(
+                "add_1d_tree_entry",
+                "Attempting to add zero length dataset to I/O tree!"
+            );
+    }
+
     void H5IODataTree::initialize_command_line(int argc,
                                                char** argv,
                                                const std::string &executable,
@@ -253,8 +279,7 @@ namespace IO {
         else if(format == "double")
             add_1d_entry(reinterpret_cast<double*>(value),
                          length,
-                         quantity,
-                         __doubles_to_destroy);
+                         quantity);
         else
             throw Error::InvalidArgument(
                 "update_result_tree",
