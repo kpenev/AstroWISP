@@ -269,8 +269,7 @@ namespace Core {
             ///\brief Was an error estimate provided for this image.
             bool has_errors() const {return __errors != NULL;}
 
-            ///\brief A place-holder for future development where each pixel
-            ///may have an error estimate.
+            ///\brief An estimate of the error of the given pixel.
             DATA_TYPE &error(unsigned long x, unsigned long y)
             {
                 assert(__errors != NULL);

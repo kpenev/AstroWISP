@@ -57,9 +57,8 @@ namespace Core {
         std::valarray<int> __scaling_ind;
 
         ///\brief Whether to assume the presence of Poisson noise in pixel
-        ///fluxes (disabling is useful for tests).
+        ///fluxes (disabled if pixel error estimates are available).
         bool __photon_noise;
-
 
         ///\brief Return the sum of the integrals of the PSF over each
         ///subpixel weighted and not weighted by the subpixel sensitivity.
@@ -171,7 +170,13 @@ namespace Core {
             __gain(gain),
             __subpix_scaling(apertures.size()),
             __scaling_ind(apertures.size()),
-            __photon_noise(!assume_no_photon_noise)
+            __photon_noise(
+                !(
+                    assume_no_photon_noise
+                    ||
+                    image.has_errors()
+                )
+            )
         {}
 
         ///\brief Adds another aperture to the current list of apertures used
@@ -188,7 +193,10 @@ namespace Core {
 
         ///Specifies the image over which photometry will be performed.
         void set_image(const Core::Image<double> &image)
-        {__image = &(image);}
+        {
+            __image = &(image);
+            if(image.has_errors()) __photon_noise = false;
+        }
 
         ///\brief Actually measure the flux in the current set of apertures
         ///centered on the given coordinates.
@@ -480,9 +488,13 @@ namespace Core {
                             if(__photon_noise)
                                 measured_counts_variance +=
                                     measured_counts / __gain;
-                            //					measured_counts-=background;
-                        } else continue;//measured_counts=0;
-                        //				if(measured_counts==0) continue;
+                            else if(__image->has_errors())
+                                measured_counts_variance += std::pow(
+                                    __image->error(x_i, y_i),
+                                    2
+                                );
+                        } else continue;
+
                         int pixel_status = 1;
                         double pix_min_x = static_cast<double>(x_i) - x,
                                pix_min_y = static_cast<double>(y_i) - y;
