@@ -1,4 +1,5 @@
 plugins {
+    id 'com.gradle.build-scan' version '2.2.1'
     id 'cpp'
     id "org.ysb33r.doxygen" version "0.4"
 }
@@ -143,6 +144,13 @@ doxygen {
     include "**/*.cpp"
     include "**/*.py"
     include "**/*.md"
+}
+
+buildScan {
+    termsOfServiceUrl = 'https://gradle.com/terms-of-service'     
+    termsOfServiceAgree = 'yes'                                   
+
+    publishAlways()                                               
 }
 
 def findLibraryLinux(String libNameStart)
