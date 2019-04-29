@@ -41,13 +41,14 @@ class SuperPhotIOTree:
                    c_ushort: 'ushort',
                    c_ubyte: 'uchar'}
 
-    def __init__(self, library_configuration, version_info=''):
+    def __init__(self, tool_or_configuration, version_info=''):
         """
         Create a tree with just the given configuration.
 
         Args:
-            library_configuration:    The configuration object created by the
-                library for the tool which will be using the configuration tree.
+            tool_or_configuration:    The configuration object created by the
+                library for the tool which will be using the configuration tree
+                or the tool itself.
 
             version_info:    Information about the version of the
                 tool/scripts/... using this tree. It is safe to leave this
@@ -58,7 +59,11 @@ class SuperPhotIOTree:
         """
 
         self.library_tree = superphot_library.create_result_tree(
-            library_configuration,
+            getattr(
+                tool_or_configuration,
+                '_library_configuration',
+                tool_or_configuration
+            ),
             (
                 version_info if isinstance(version_info, bytes)
                 else version_info.encode('ascii')
