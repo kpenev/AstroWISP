@@ -1,4 +1,3 @@
-=========
 SuperPhot
 =========
 
@@ -42,9 +41,3 @@ Aperture photometry
 Sum-up the flux in a circular aperture centered around each source. Superphot
 handles pixels that span the aperture boundary by properly integrating the
 product of th PSF and the sub-pixel sensitivity.
-
-=========================================
-Relevant articles for future development:
-=========================================
-
-  * `The shape of the Photon Transfer Curve of CCD sensors <https://ui.adsabs.harvard.edu/abs/2019arXiv190508677A/abstract>`_
