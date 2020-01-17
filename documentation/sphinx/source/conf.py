@@ -89,7 +89,7 @@ language = None
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
-# This pattern also affects html_static_path and html_extra_path .
+# This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = []
 
 # The name of the Pygments (syntax highlighting) style to use.
@@ -155,8 +155,13 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'SuperPhot.tex', 'SuperPhot Documentation',
-     'Kaloyan Penev', 'manual'),
+    (
+        master_doc,
+        'SuperPhot.tex',
+        'SuperPhot Documentation',
+        'Kaloyan Penev',
+        'manual'
+    ),
 ]
 
 
@@ -165,8 +170,13 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'superphot', 'SuperPhot Documentation',
-     [author], 1)
+    (
+        master_doc,
+        'superphot',
+        'SuperPhot Documentation',
+        [author],
+        1
+    )
 ]
 
 
@@ -176,9 +186,15 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'SuperPhot', 'SuperPhot Documentation',
-     author, 'SuperPhot', 'One line description of project.',
-     'Miscellaneous'),
+    (
+        master_doc,
+        'SuperPhot',
+        'SuperPhot Documentation',
+        author,
+        'SuperPhot',
+        'One line description of project.',
+        'Miscellaneous'
+    ),
 ]
 
 
