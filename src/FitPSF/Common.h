@@ -22,8 +22,6 @@
 #include "Eigen/Dense"
 #include <list>
 #include <set>
-#include <gsl/gsl_multimin.h>
-#include <gsl/gsl_poly.h>
 #include <iostream>
 
 namespace FitPSF {

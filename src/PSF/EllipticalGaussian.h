@@ -5,11 +5,11 @@
  * The elliptical gaussian %PSF is such that the intensity of light from an
  * isolated source falling on the detector at a location (x,y) relative to the
  * center of light for the source is given by:
- * 
+ *
  * \f$ I(x,y) = B + A\exp\left\{ -\frac{1}{2} \left[S(x^2 + y^2) +
  * D(x^2-y^2) + 2Kxy\right]\right\}\f$
  *
- * where S, D and K are shape parameters, B is the background under the 
+ * where S, D and K are shape parameters, B is the background under the
  * source and A is the amplitude (how bright) of the source. For more details
  * see: <a href="http://arxiv.org/abs/0906.3486"> Pal, A.\ 2009, Ph.D.~Thesis
  * </a>
@@ -31,7 +31,6 @@
 #include "../Core/NaN.h"
 #include <vector>
 #include <iostream>
-#include <gsl/gsl_sf_lambert.h>
 
 namespace PSF {
 
@@ -51,19 +50,19 @@ namespace PSF {
             ///Default for __max_exp_coef
             __default_max_exp_coef;
 
-        double __spd,	///< S+D 
+        double __spd,	///< S+D
                __smd,	///< S-D
                __k, 	///< K
                __bg,	///< background (divided by the actual amplitude).
 
-               ///\brief The maximum value individual exponent arguments are 
+               ///\brief The maximum value individual exponent arguments are
                ///allowed to take.
                ///
                ///Higher values result in faster calculation of integrals,
                ///but worse precision. Should always be of order unity.
                __max_exp_coef;
 
-        mutable double 
+        mutable double
             __abs_precision,///< The absolute precision required
             __rel_precision, ///< The relative precision required
 
@@ -74,11 +73,11 @@ namespace PSF {
         ///The integrals over individiual pieces of the integration area.
         mutable std::vector<EllipticalGaussianIntegralByOrder*> __pieces;
 
-        ///\brief The current best estimate for the integral and its S,D,K 
+        ///\brief The current best estimate for the integral and its S,D,K
         ///derivatives.
         mutable std::valarray<double> __integral_values;
 
-        ///Whether to calculate first order derivatives of integrals. 
+        ///Whether to calculate first order derivatives of integrals.
         mutable bool __first_deriv,
 
              ///Whether to calculate second order derivatives of integrals.
@@ -93,14 +92,14 @@ namespace PSF {
         void update_values() const;
 
         ///\brief Increments one of I,J,K,L,M
-        ///(see <a href="SubPixPhot.pdf">description</a>) by 1 for a single 
+        ///(see <a href="SubPixPhot.pdf">description</a>) by 1 for a single
         ///integration piece.
         ///
-        ///Updates the approximations (of the integral and its derivatives) 
+        ///Updates the approximations (of the integral and its derivatives)
         ///and errors.
         void refine() const;
 
-        ///\brief Returns the maximum value the PSF minus background takes 
+        ///\brief Returns the maximum value the PSF minus background takes
         ///over a rectangle.
         ///
         ///The rectangle is between x1 and x2 in the horizontal direction and
@@ -108,7 +107,7 @@ namespace PSF {
         double find_max(
                 double x1, double y1, double x2, double y2) const;
 
-        ///\brief Returns the minimum value the PSF minus background takes 
+        ///\brief Returns the minimum value the PSF minus background takes
         ///over a rectangle.
         ///
         ///The rectangle is between x1 and x2 in the horizontal direction and
@@ -140,17 +139,17 @@ namespace PSF {
                                        bool left = false,
                                        bool bottom = false) const;
     public:
-        ///\brief Construct an elliptical Gaussian PSF with the given 
+        ///\brief Construct an elliptical Gaussian PSF with the given
         ///parameters.
         ///
         ///Integrals are calculated to the less stringent of the absolute or
         ///relative precisions given.
         EllipticalGaussian(
-                ///The coefficient in front of \f$(x^2+y^2)/2\f$ in the 
+                ///The coefficient in front of \f$(x^2+y^2)/2\f$ in the
                 ///exponent
                 double s,
 
-                ///The coefficient in front of \f$(x^2-y^2)/2\f$ in the 
+                ///The coefficient in front of \f$(x^2-y^2)/2\f$ in the
                 ///exponent
                 double d,
 
@@ -159,9 +158,9 @@ namespace PSF {
 
                 ///Background to add under the PSF.
                 double background=0,
-                    
+
                 ///The relative precision to impose on integrals.
-                double relative_precision=__default_rel_precision, 
+                double relative_precision=__default_rel_precision,
 
                 ///The absolute precision to impose on integrals.
                 double absolute_precision=__default_abs_precision,
@@ -176,7 +175,7 @@ namespace PSF {
             __rel_precision(relative_precision),
             __integral_values(KK_DERIV+1) {}
 
-        ///\brief Change the precision requirements from what was set at 
+        ///\brief Change the precision requirements from what was set at
         ///construction.
         void set_precision(double relative, double absolute) const
         {__abs_precision=absolute; __rel_precision=relative;}
@@ -185,7 +184,7 @@ namespace PSF {
         static void set_default_precision(double relative, double absolute)
         {__default_abs_precision=absolute; __default_rel_precision=relative;}
 
-        ///\brief Change the default max exponent arguments allowed during 
+        ///\brief Change the default max exponent arguments allowed during
         ///calculations.
         static void set_default_max_exp_coef(double value)
         {__default_max_exp_coef=value;}
@@ -197,27 +196,27 @@ namespace PSF {
         ///Calculates the PSF and its derivatives at the given position
         template<class ITERABLE>
         void evaluate(
-                ///The x coordinate where to evaluate the PSF (and 
+                ///The x coordinate where to evaluate the PSF (and
                 ///derivatives).
                 double x,
 
-                ///The y coordinate where to evaluate the PSF (and 
+                ///The y coordinate where to evaluate the PSF (and
                 ///derivatives).
                 double y,
 
                 ///An array to place the result in.
                 ITERABLE result,
-                
+
                 ///Should first order derivatives w.r.t S, D, K be calculated.
                 bool calculate_first_deriv=false,
 
-                ///Should secord order derivatives w.r.t. S, D, K be 
+                ///Should secord order derivatives w.r.t. S, D, K be
                 ///calculated
                 bool calculate_second_deriv=false
         ) const;
 
         ///The polynomial coefficients of the taylor expansion around x, y.
-        double poly_coef(double x, double y, unsigned x_power, 
+        double poly_coef(double x, double y, unsigned x_power,
                 unsigned y_power) const;
 
         ///Sets the background for this PSF to the given value
@@ -227,12 +226,12 @@ namespace PSF {
         ///overlap with a circle).
         ///
         ///Uses the local polynomial approximation around the center of the
-        ///rectangle. Subdiving into smaller rectangles if necessary in order 
+        ///rectangle. Subdiving into smaller rectangles if necessary in order
         ///to achive the desired precision.
         ///
-        ///The rectangle is defined by center_x - dx/2 < x < center_x + dx/2 
-        ///and center_y - dy/2 < y < center_y + dy/2. The circle is always 
-        ///centered on (0, 0) and has the given radius. If the circle radius 
+        ///The rectangle is defined by center_x - dx/2 < x < center_x + dx/2
+        ///and center_y - dy/2 < y < center_y + dy/2. The circle is always
+        ///centered on (0, 0) and has the given radius. If the circle radius
         ///is zero, the integral over the full rectangle is calculated.
         double integrate(
             double center_x,
@@ -240,7 +239,7 @@ namespace PSF {
             double dx,
             double dy,
             double circle_radius=0
-#ifdef DEBUG	
+#ifdef DEBUG
 #ifdef SHOW_PSF_PIECES
             ,
             bool reset_piece_id=false,

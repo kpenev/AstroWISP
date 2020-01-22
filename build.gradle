@@ -117,6 +117,7 @@ model {
                 }
                 exportedHeaders {
                     srcDir "src/FitPSF/"
+                    exclude "**/*SDK*.h"
                 }
             }
         }
