@@ -34,6 +34,9 @@ model {
 
                 cppCompiler.args "-W", "-Wall", "-fvisibility=hidden"
 
+                linker.args "-l" + ensureLibraryVersion(
+                    "boost_program_options",
+                )
                 linker.args "-l" + ensureLibraryVersion("gfortran")
                 linker.args "-l" + ensureLibraryVersion("cfitsio")
                 linker.args "-l" + ensureLibraryVersion("hdf5")

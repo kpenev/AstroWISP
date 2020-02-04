@@ -91,12 +91,12 @@ namespace SubPixPhot {
                     x < 0 || x > x_resolution || y < 0 || y > y_resolution
                     ||
                     std::isnan(psfmap_src_iter->background().value())
-            )
+            ) {
                 measured_flux_values.resize(
                     num_apertures,
                     Core::Flux(Core::NaN, Core::NaN, Core::BAD)
                 );
-            else {
+            } else {
                 PSF::PSF *psf = psf_map(
                     psfmap_src_iter->expansion_terms(),
                     psfmap_src_iter->background().value()

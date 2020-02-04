@@ -116,7 +116,7 @@ class SubPixPhot:
 
         self.configuration = dict(self._default_configuration)
         self.configuration.update(**configuration)
-        self.configure(**configuration)
+        self.configure(**self.configuration)
         self._result_tree = None
 
     def configure(self, **configuration):
