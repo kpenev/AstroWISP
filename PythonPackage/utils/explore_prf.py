@@ -50,11 +50,11 @@ def parse_command_line():
                              '..',
                              'ASTROM',
                              '%(frame_id)s.trans'),
-        help="A pattern with substitutions `'%(frame_dir)s'` (directory "
-        "containing the frame), and `'%(frame_id)s'` (base filename of the "
+        help="A pattern with substitutions `'%%(frame_dir)s'` (directory "
+        "containing the frame), and `'%%(frame_id)s'` (base filename of the "
         "frame without the `fits` or `fits.fz` extension) that expands to "
         "the `.trans` file corresponding to the input frame. Default: "
-        "'%(defalut)s'."
+        "'%(default)s'."
     )
     parser.add_argument(
         '--catalogue', '-c',
@@ -89,8 +89,8 @@ def parse_command_line():
         '--slice', '-s',
         type=parse_slice,
         action='append',
-        default=[parse_slice('x = 0 +- 0.1'),
-                 parse_slice('y = 0 +- 0.1')],
+        default=[parse_slice('x = 0 +- 0.2'),
+                 parse_slice('y = 0 +- 0.2')],
         help='Add more slices to show. Each slice is specified as an offset '
         'along one if the demensions (x or y) and a range around that to '
         'include in the plot. White space around tokens is allowed and '
@@ -111,7 +111,7 @@ def parse_command_line():
         type=float,
         default=0.1,
         help='Scale the error bars by this value when plotting to make a more '
-        'readable plot. Default: %(defalut)s.'
+        'readable plot. Default: %(default)s.'
     )
     parser.add_argument(
         '--error_threshold',
@@ -539,6 +539,11 @@ def plot_prf_slice(pixel_values,
     plot_y = plot_y[finite]
     plot_err_y = plot_err_y[finite]
 
+    if plot_x.size == 0:
+        return
+
+    print('Plot x: ' + repr(plot_x))
+
     binned_x = scipy.stats.binned_statistic(plot_x,
                                             plot_x,
                                             statistic='median',
@@ -552,7 +557,7 @@ def plot_prf_slice(pixel_values,
                     plot_y,
                     plot_err_y * error_scale,
                     fmt='o' + points_color)
-    pyplot.plot(binned_x, binned_y, '-ok', markersize=10, linewidth=3)
+    pyplot.plot(binned_x, binned_y, '-o' + points_color, markersize=15, linewidth=3)
 
 def get_image_slices(splits):
     """Return a list of (x-slice, y-slice) tuples per `--split-image` arg."""
@@ -611,7 +616,7 @@ def main():
                     get_image_slices(
                         cmdline_args.split_image
                     ),
-                    'rgb'
+                    'rgbcmy'
             ):
                 plot_prf_slice(
                     frame[first_hdu].data[y_image_slice, x_image_slice],
