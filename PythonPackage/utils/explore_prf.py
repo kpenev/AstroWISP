@@ -2,7 +2,7 @@
 
 """Create some plots helpful for picking PSF grid."""
 
-from argparse import ArgumentParser
+from argparse import ArgumentParser, Action as ArgparseAction
 import os.path
 import subprocess
 from ctypes import c_double, c_char
@@ -17,6 +17,21 @@ from superphot import BackgroundExtractor, FitStarShape, SubPixPhot
 
 def parse_command_line():
     """Return the command line arguments as attributes of an object."""
+
+    #Interface mandated by argparse.
+    #pylint: disable=too-few-public-methods
+    class ValidateBinning(ArgparseAction):
+        """Properly parse the different type arguments specifying binning."""
+
+        def __call__(self, parser, namespace, values, option_string=None):
+            """Add dictionary with binning configuration to namespace."""
+
+            assert len(values) == 2
+
+            setattr(namespace,
+                    self.dest,
+                    dict(statistic=values[0], bins=int(values[1])))
+    #pylint: enable=too-few-public-methods
 
     def parse_image_split(split_str):
         """Parse the image split argument to a tuple of (direction, value)."""
@@ -114,12 +129,21 @@ def parse_command_line():
         'readable plot. Default: %(default)s.'
     )
     parser.add_argument(
-        '--error_threshold',
+        '--error-threshold',
         type=float,
         default=0.1,
         help='Points with error bars larger than this are not included in the '
         'plot. Intended to avoid introducing points that are too noisy. '
         'Default: %(default)s'
+    )
+    parser.add_argument(
+        '--add-binned',
+        nargs=2,
+        default=dict(),
+        action=ValidateBinning,
+        metavar=('STATISTIC', 'NBINS'),
+        help='If supplied, in addition to pixel values, a binned curve is also '
+        'displayed using the specified binning statistic and number of bins.'
     )
 
     return parser.parse_args()
@@ -461,7 +485,8 @@ def plot_prf_slice(pixel_values,
                    thickness=0.1,
                    error_scale=0.1,
                    error_threshold=0.1,
-                   points_color='k'):
+                   points_color='k',
+                   **binning):
     """
     Plot a slice of the PRF.
 
@@ -544,20 +569,23 @@ def plot_prf_slice(pixel_values,
 
     print('Plot x: ' + repr(plot_x))
 
-    binned_x = scipy.stats.binned_statistic(plot_x,
-                                            plot_x,
-                                            statistic='median',
-                                            bins=50)[0]
-    binned_y = scipy.stats.binned_statistic(plot_x,
-                                            plot_y,
-                                            statistic='median',
-                                            bins=50)[0]
 
     pyplot.errorbar(plot_x,
                     plot_y,
                     plot_err_y * error_scale,
                     fmt='o' + points_color)
-    pyplot.plot(binned_x, binned_y, '-o' + points_color, markersize=15, linewidth=3)
+    if binning:
+        pyplot.plot(
+            scipy.stats.binned_statistic(plot_x,
+                                         plot_x,
+                                         **binning)[0],
+            scipy.stats.binned_statistic(plot_x,
+                                         plot_y,
+                                         **binning)[0],
+            '-o' + points_color,
+            markersize=15,
+            linewidth=3
+        )
 
 def get_image_slices(splits):
     """Return a list of (x-slice, y-slice) tuples per `--split-image` arg."""
@@ -625,7 +653,8 @@ def main():
                     error_scale=cmdline_args.error_scale,
                     error_threshold=cmdline_args.error_threshold,
                     points_color=color,
-                    **plot_slice
+                    **plot_slice,
+                    **cmdline_args.add_binned
                 )
             pyplot.axhline(y=0)
             pyplot.show()
