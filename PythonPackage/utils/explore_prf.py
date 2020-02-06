@@ -10,6 +10,7 @@ from ctypes import c_double, c_char
 import scipy
 import scipy.spatial
 import scipy.stats
+from scipy.interpolate import SmoothBivariateSpline
 from matplotlib import pyplot
 from astropy.io import fits
 
@@ -476,19 +477,12 @@ def find_pixel_offsets(sources,
     return result
 #pylint: enable=too-many-locals
 
-def plot_prf_slice(pixel_values,
-                   pixel_stddev,
-                   pixel_offsets,
-                   *,
-                   x_offset=None,
-                   y_offset=None,
-                   thickness=0.1,
-                   error_scale=0.1,
-                   error_threshold=0.1,
-                   points_color='k',
-                   **binning):
+def get_prf_data(pixel_values,
+                 pixel_stddev,
+                 pixel_offsets,
+                 error_threshold=0.1):
     """
-    Plot a slice of the PRF.
+    Return the PRF measurements for (a subset of) the image.
 
     Args:
         pixel_values(2-D float array):    The calibrated pixel responses from
@@ -499,6 +493,61 @@ def plot_prf_slice(pixel_values,
 
         pixel_offsets:    The slice of the return value of find_pixel_offsets()
             corresponding to `pixel_values`.
+
+    Returns:
+        (2-D float array, 2-D float array, 2-D float array, 2-D float array):
+
+            * The x-offsets of the points at which PRF measurements are
+              available.
+
+            * The y-offsets of the points at which PRF measurements are
+              available.
+
+            * The measured normalized PRF at the available offsets
+
+            * estimated errors of the PRF measurements.
+    """
+
+    prf_measurements = (
+        (
+            pixel_values
+            -
+            pixel_offsets['zero_point']
+        )
+        /
+        pixel_offsets['norm']
+    )
+
+    prf_errors = (
+        pixel_stddev
+        /
+        pixel_offsets['norm']
+    )
+
+    #False positive
+    #pylint: disable=assignment-from-no-return
+    include = scipy.logical_and(scipy.isfinite(prf_measurements),
+                                scipy.isfinite(prf_errors))
+    include = scipy.logical_and(include, prf_errors < error_threshold)
+    #pylint: enable=assignment-from-no-return
+    return (pixel_offsets['x_off'][include],
+            pixel_offsets['y_off'][include],
+            prf_measurements[include],
+            prf_errors[include])
+
+def plot_prf_slice(prf_data,
+                   *,
+                   x_offset=None,
+                   y_offset=None,
+                   thickness=0.1,
+                   error_scale=0.1,
+                   points_color='k',
+                   **binning):
+    """
+    Plot a slice of the PRF.
+
+    Args:
+        prf_data:    The return value of get_prf_data().
 
         x_offset/y_offset(float):    Plot a slice of constant x or y (determined
             by the argument name) offset from the source center.
@@ -521,48 +570,28 @@ def plot_prf_slice(pixel_values,
         (x_offset is not None and y_offset is None)
     )
 
-    assert pixel_values.shape == pixel_stddev.shape
-    assert pixel_values.shape == pixel_offsets.shape
+    assert len(prf_data) == 4
+    for entry in prf_data[1:]:
+        assert entry.shape == prf_data[0].shape
 
     if x_offset is None:
         plot_pixel_indices = scipy.nonzero(
-            scipy.fabs(pixel_offsets['y_off'] - y_offset) < thickness
+            scipy.fabs(prf_data[1] - y_offset) < thickness
         )
     else:
         plot_pixel_indices = scipy.nonzero(
-            scipy.fabs(pixel_offsets['x_off'] - x_offset) < thickness
+            scipy.fabs(prf_data[0] - x_offset) < thickness
         )
 
-    plot_x = pixel_offsets[
-        'x_off' if x_offset is None else 'y_off'
+    plot_x = prf_data[
+        0 if x_offset is None else 1
     ][
         plot_pixel_indices
     ]
 
-    plot_y = (
-        (
-            pixel_values[plot_pixel_indices]
-            -
-            pixel_offsets['zero_point'][plot_pixel_indices]
-        )
-        /
-        pixel_offsets['norm'][plot_pixel_indices]
-    )
+    plot_y = prf_data[2][plot_pixel_indices]
 
-    plot_err_y = (pixel_stddev[plot_pixel_indices]
-                  /
-                  pixel_offsets['norm'][plot_pixel_indices])
-
-    #False positive
-    #pylint: disable=assignment-from-no-return
-    finite = scipy.logical_and(scipy.isfinite(plot_x),
-                               scipy.isfinite(plot_y))
-    finite = scipy.logical_and(finite, plot_err_y < error_threshold)
-    #pylint: enable=assignment-from-no-return
-
-    plot_x = plot_x[finite]
-    plot_y = plot_y[finite]
-    plot_err_y = plot_err_y[finite]
+    plot_err_y = prf_data[3][plot_pixel_indices]
 
     if plot_x.size == 0:
         return
@@ -646,12 +675,15 @@ def main():
                     ),
                     'rgbcmy'
             ):
-                plot_prf_slice(
+                prf_data = get_prf_data(
                     frame[first_hdu].data[y_image_slice, x_image_slice],
                     frame[first_hdu + 1].data[y_image_slice, x_image_slice],
                     pixel_offsets[y_image_slice, x_image_slice],
+                    cmdline_args.error_threshold,
+                )
+                plot_prf_slice(
+                    prf_data,
                     error_scale=cmdline_args.error_scale,
-                    error_threshold=cmdline_args.error_threshold,
                     points_color=color,
                     **plot_slice,
                     **cmdline_args.add_binned
