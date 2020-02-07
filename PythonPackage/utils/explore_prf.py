@@ -147,7 +147,27 @@ def parse_command_line():
         help='If supplied, in addition to pixel values, a binned curve is also '
         'displayed using the specified binning statistic and number of bins.'
     )
-    parser.add_argument(
+    spline_config = parser.add_argument_group(
+        title='Spline configuration',
+        description='Options controlling the bicubic spline interpolation used '
+        'to represent the PRF in each image piece.'
+    )
+    spline_config.add_argument(
+        '--spline-method',
+        choices=['alglib', 'scipy'],
+        default='alglib',
+        help='Which of the supported spline fitting methods to use. Default: '
+        '%(default)s'
+    )
+    spline_config.add_argument(
+        '--spline-resolution',
+        nargs=2,
+        type=int,
+        default=(20, 20),
+        help="The grid to use if the spline method is 'alglib'. Ignored if the "
+        "method is 'scipy'. Default: %(default)s."
+    )
+    spline_config.add_argument(
         '--spline-smoothing',
         type=float,
         default=1.0,
@@ -155,6 +175,20 @@ def parse_command_line():
         'factor equal to this value times the number of points at which PRF '
         'measurements are available. For alglib splines, this is directly '
         'the smoothing penalty used. Default: %(default)s.'
+    )
+    spline_config.add_argument(
+        '--spline-pad-fraction',
+        type=float,
+        default=0.01,
+        help='The fraction of the PRF grid box to add with zero-valued padding '
+        'past the edges. Default: %(default)s.'
+    )
+    spline_config.add_argument(
+        '--spline-pad-npoints',
+        type=int,
+        default=100,
+        help='The number of zero valued points, in each direction to add within'
+        'each padding region. Default: %(default)s.'
     )
 
     return parser.parse_args()
@@ -644,7 +678,7 @@ def get_image_slices(splits):
 class AlglibSpline:
     """Wrap alglib based splines so they can be evaluated on scipy arrays."""
 
-    def __init__(self, prf_data, resolution, penalty):
+    def __init__(self, prf_data, resolution, penalty, domain):
         """
         Fit the spline on the given data.
 
@@ -656,6 +690,9 @@ class AlglibSpline:
 
             penalty(float):    The nonlinearity penalty when fitting the spline.
 
+            domain(float, float, float, float):    The area (xmin, xmax, ymin,
+                ymax) over which the spline will be derived.
+
         Returns:
             None
         """
@@ -665,11 +702,14 @@ class AlglibSpline:
                                          prf_data[:3].T.tolist(),
                                          prf_data[0].size)
         xalglib.spline2dbuildersetgrid(builder, *resolution)
+        xalglib.spline2dbuildersetarea(builder, *domain)
         xalglib.spline2dbuildersetalgoblocklls(builder, penalty)
 
-        spline, rep = xalglib.spline2dfit(builder)
+        spline = xalglib.spline2dfit(builder)[0]
 
         ny_nodes, nx_nodes, nvals, coef_table = xalglib.spline2dunpackv(spline)
+
+        assert nvals == 1
 
         self.x_nodes = (
             [coef_table[i][0] for i in range(nx_nodes - 1)]
@@ -706,6 +746,158 @@ class AlglibSpline:
         for node in getattr(self, direction + '_nodes'):
             pyplot.axvline(x=node, color=color)
 
+
+def pad_prf_data(prf_data, cmdline_args):
+    """Return PRF data zero-padded for fitting and the spline fit domain."""
+
+    #False positive
+    #pylint: disable=assignment-from-no-return
+    keep_prf_data = scipy.logical_and(
+        scipy.logical_and(
+            prf_data[0] > -cmdline_args.prf_range[2],
+            prf_data[0] < cmdline_args.prf_range[0] - cmdline_args.prf_range[2]
+        ),
+        scipy.logical_and(
+            prf_data[1] > -cmdline_args.prf_range[3],
+            prf_data[1] < cmdline_args.prf_range[1] - cmdline_args.prf_range[3]
+        )
+    )
+    #pylint: enable=assignment-from-no-return
+    num_keep = keep_prf_data.sum()
+
+    x_padding = cmdline_args.prf_range[0] * cmdline_args.spline_pad_fraction
+    y_padding = cmdline_args.prf_range[1] * cmdline_args.spline_pad_fraction
+    domain = (
+        -cmdline_args.prf_range[2] - x_padding,
+        cmdline_args.prf_range[0] - cmdline_args.prf_range[2] + x_padding,
+        -cmdline_args.prf_range[3] - y_padding,
+        cmdline_args.prf_range[1]-cmdline_args.prf_range[3] + y_padding
+    )
+    middle_npoints = int(cmdline_args.spline_pad_npoints
+                         /
+                         cmdline_args.spline_pad_fraction)
+    padded_prf_data = scipy.empty(
+        (
+            4,
+            (
+                num_keep
+                +
+                4
+                *
+                cmdline_args.spline_pad_npoints
+                *
+                (
+                    middle_npoints
+                    +
+                    cmdline_args.spline_pad_npoints
+                )
+            )
+        ),
+        dtype=float
+    )
+    padded_prf_data[:, : num_keep] = prf_data[:, keep_prf_data]
+    padded_prf_data[2, num_keep : ] = 0.0
+    padded_prf_data[3, num_keep : ] = (
+        prf_data[3, keep_prf_data].min()
+        /
+        num_keep
+    )
+    xy_padding_start = num_keep
+    corner_x, corner_y = scipy.meshgrid(
+        scipy.linspace(0, x_padding, cmdline_args.spline_pad_npoints),
+        scipy.linspace(0, y_padding, cmdline_args.spline_pad_npoints)
+    )
+
+    mid_x_x, mid_x_y = scipy.meshgrid(
+        scipy.linspace(
+            -cmdline_args.prf_range[2],
+            cmdline_args.prf_range[0] - cmdline_args.prf_range[2],
+            middle_npoints + 2
+        )[1:-1],
+        scipy.linspace(
+            0,
+            y_padding,
+            cmdline_args.spline_pad_npoints
+        )
+    )
+
+    mid_y_x, mid_y_y = scipy.meshgrid(
+        scipy.linspace(
+            0,
+            x_padding,
+            cmdline_args.spline_pad_npoints
+        ),
+        scipy.linspace(
+            -cmdline_args.prf_range[3],
+            cmdline_args.prf_range[1] - cmdline_args.prf_range[3],
+            middle_npoints + 2
+        )[1:-1]
+    )
+
+    corner_x = corner_x.flatten()
+    corner_y = corner_y.flatten()
+    mid_x_x = mid_x_x.flatten()
+    mid_x_y = mid_x_y.flatten()
+    mid_y_x = mid_y_x.flatten()
+    mid_y_y = mid_y_y.flatten()
+
+    add_mid_x = True
+    for x_offset in [domain[0], domain[1] - x_padding]:
+        padded_prf_data[
+            0,
+            xy_padding_start: xy_padding_start + mid_y_x.size
+        ] = mid_y_x + x_offset
+        padded_prf_data[
+            1,
+            xy_padding_start: xy_padding_start + mid_y_x.size
+        ] = mid_y_y
+        xy_padding_start += mid_y_x.size
+        for y_offset in [domain[2], domain[3] - y_padding]:
+            if add_mid_x:
+                padded_prf_data[
+                    0,
+                    xy_padding_start: xy_padding_start + mid_x_x.size
+                ] = mid_x_x
+                padded_prf_data[
+                    1,
+                    xy_padding_start: xy_padding_start + mid_x_x.size
+                ] = mid_x_y + y_offset
+                xy_padding_start += mid_x_x.size
+            padded_prf_data[
+                0,
+                xy_padding_start: xy_padding_start + corner_x.size
+            ] = corner_x + x_offset
+            padded_prf_data[
+                1,
+                xy_padding_start: xy_padding_start + corner_x.size
+            ] = corner_y + y_offset
+            xy_padding_start += corner_x.size
+        add_mid_x = False
+
+    return padded_prf_data, domain
+
+def fit_spline(prf_data, domain, cmdline_args):
+    """Return the best-fit spline to the PRF per the command line config."""
+
+
+    print('PRF data: ' + repr(prf_data))
+    if cmdline_args.spline_method == 'scipy':
+        return SmoothBivariateSpline(
+            prf_data[0],
+            prf_data[1],
+            prf_data[2],
+            1.0 / prf_data[3],
+            s=cmdline_args.spline_smoothing * prf_data[3].size,
+            bbox=domain
+        )
+
+    return AlglibSpline(
+        prf_data,
+        cmdline_args.spline_resolution,
+        cmdline_args.spline_smoothing,
+        domain=domain
+    )
+
 def main():
     """Avoid polluting global namespace."""
 
@@ -741,30 +933,28 @@ def main():
                                            cmdline_args.prf_range,
                                            image_resolution,
                                            2.0 * cmdline_args.flux_aperture)
+        image_slices = get_image_slices(cmdline_args.split_image)
 
-        for plot_slice in cmdline_args.slice:
-            for (x_image_slice, y_image_slice), color in zip(
-                    get_image_slices(
-                        cmdline_args.split_image
-                    ),
-                    'rgbcmy'
-            ):
-                prf_data = get_prf_data(
+        slice_prf_data, slice_splines = [], []
+
+        for x_image_slice, y_image_slice in image_slices:
+            prf_data, domain = pad_prf_data(
+                get_prf_data(
                     frame[first_hdu].data[y_image_slice, x_image_slice],
                     frame[first_hdu + 1].data[y_image_slice, x_image_slice],
                     pixel_offsets[y_image_slice, x_image_slice],
                     cmdline_args.error_threshold,
-                )
-#                spline = SmoothBivariateSpline(
-#                    prf_data[0],
-#                    prf_data[1],
-#                    prf_data[2],
-#                    1.0 / prf_data[3],
-#                    s=cmdline_args.spline_smoothing * prf_data[3].size
-#                )
-                spline = AlglibSpline(prf_data,
-                                      (20, 20),
-                                      cmdline_args.spline_smoothing)
+                ),
+                cmdline_args
+            )
+            slice_prf_data.append(prf_data)
+
+            slice_splines.append(fit_spline(prf_data, domain, cmdline_args))
+
+        for plot_slice in cmdline_args.slice:
+            for prf_data, spline, color in zip(slice_prf_data,
+                                               slice_splines,
+                                               'rgbcmy'):
                 plot_prf_slice(
                     prf_data,
                     spline,
