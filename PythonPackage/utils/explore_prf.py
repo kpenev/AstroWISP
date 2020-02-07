@@ -7,11 +7,12 @@ import os.path
 import subprocess
 from ctypes import c_double, c_char
 
+from matplotlib import pyplot
 import scipy
 import scipy.spatial
 import scipy.stats
 from scipy.interpolate import SmoothBivariateSpline
-from matplotlib import pyplot
+import xalglib
 from astropy.io import fits
 
 from superphot import BackgroundExtractor, FitStarShape, SubPixPhot
@@ -145,6 +146,15 @@ def parse_command_line():
         metavar=('STATISTIC', 'NBINS'),
         help='If supplied, in addition to pixel values, a binned curve is also '
         'displayed using the specified binning statistic and number of bins.'
+    )
+    parser.add_argument(
+        '--spline-smoothing',
+        type=float,
+        default=1.0,
+        help='For scipy splines, the bi-cubic spline derived has a smoothing '
+        'factor equal to this value times the number of points at which PRF '
+        'measurements are available. For alglib splines, this is directly '
+        'the smoothing penalty used. Default: %(default)s.'
     )
 
     return parser.parse_args()
@@ -308,8 +318,6 @@ def get_source_info(*,
             src_min_signal_to_noise=0.0,
             src_max_aperture=1000.0
         )
-        print('Created zero PSF fitter')
-
         result_tree = fit_star_shape.fit(
             [
                 (
@@ -321,8 +329,6 @@ def get_source_info(*,
             ],
             [measure_background]
         )
-        print('Finished zero PSF mock fit.')
-        print('Mask array: ' + repr(mask_array))
 
         get_flux = SubPixPhot(apertures=[aperture])
         get_flux(
@@ -360,8 +366,6 @@ def get_source_info(*,
         src_x,
         src_y
     )
-
-    print('Adding flux to sources: ' + repr(result))
 
     add_flux_info(result, measure_background)
 
@@ -530,12 +534,15 @@ def get_prf_data(pixel_values,
                                 scipy.isfinite(prf_errors))
     include = scipy.logical_and(include, prf_errors < error_threshold)
     #pylint: enable=assignment-from-no-return
-    return (pixel_offsets['x_off'][include],
-            pixel_offsets['y_off'][include],
-            prf_measurements[include],
-            prf_errors[include])
+    return scipy.stack((
+        pixel_offsets['x_off'][include],
+        pixel_offsets['y_off'][include],
+        prf_measurements[include],
+        prf_errors[include]
+    ))
 
 def plot_prf_slice(prf_data,
+                   spline,
                    *,
                    x_offset=None,
                    y_offset=None,
@@ -578,10 +585,14 @@ def plot_prf_slice(prf_data,
         plot_pixel_indices = scipy.nonzero(
             scipy.fabs(prf_data[1] - y_offset) < thickness
         )
+        spline_x = scipy.linspace(prf_data[0].min(), prf_data[0].max(), 1000)
+        spline_y = spline(spline_x, y_offset).flatten()
     else:
         plot_pixel_indices = scipy.nonzero(
             scipy.fabs(prf_data[0] - x_offset) < thickness
         )
+        spline_x = scipy.linspace(prf_data[1].min(), prf_data[1].max(), 1000)
+        spline_y = spline(x_offset, spline_x).flatten()
 
     plot_x = prf_data[
         0 if x_offset is None else 1
@@ -596,13 +607,12 @@ def plot_prf_slice(prf_data,
     if plot_x.size == 0:
         return
 
-    print('Plot x: ' + repr(plot_x))
-
-
     pyplot.errorbar(plot_x,
                     plot_y,
                     plot_err_y * error_scale,
-                    fmt='o' + points_color)
+                    fmt='o' + points_color,
+                    zorder=10)
+    pyplot.plot(spline_x, spline_y, '-' + points_color, linewidth=5)
     if binning:
         pyplot.plot(
             scipy.stats.binned_statistic(plot_x,
@@ -630,6 +640,71 @@ def get_image_slices(splits):
         for x_split in split_slices['x']
         for y_split in split_slices['y']
     ]
+
+class AlglibSpline:
+    """Wrap alglib based splines so they can be evaluated on scipy arrays."""
+
+    def __init__(self, prf_data, resolution, penalty):
+        """
+        Fit the spline on the given data.
+
+        Args:
+            prf_data:    The return value of get_prf_data().
+
+            resolution(int, int):    The grid resolution to use when building
+                the spline.
+
+            penalty(float):    The nonlinearity penalty when fitting the spline.
+
+        Returns:
+            None
+        """
+
+        builder = xalglib.spline2dbuildercreate(1)
+        xalglib.spline2dbuildersetpoints(builder,
+                                         prf_data[:3].T.tolist(),
+                                         prf_data[0].size)
+        xalglib.spline2dbuildersetgrid(builder, *resolution)
+        xalglib.spline2dbuildersetalgoblocklls(builder, penalty)
+
+        spline, rep = xalglib.spline2dfit(builder)
+
+        ny_nodes, nx_nodes, nvals, coef_table = xalglib.spline2dunpackv(spline)
+
+        self.x_nodes = (
+            [coef_table[i][0] for i in range(nx_nodes - 1)]
+            +
+            [coef_table[nx_nodes - 2][1]]
+        )
+        self.y_nodes = (
+            [coef_table[j * (nx_nodes - 1)][2] for j in range(ny_nodes - 1)]
+            +
+            [coef_table[(ny_nodes - 2) * (nx_nodes - 1)][3]]
+        )
+
+        self.spline_eval = scipy.vectorize(
+            lambda x, y: xalglib.spline2dcalc(spline, x, y)
+        )
+
+    def __call__(self, x, y):
+        """Evaluate the spline."""
+
+        return self.spline_eval(x, y)
+
+    def plot_grid_boundaries(self, direction, color):
+        """
+        Add vertical lines to the current axis showing the grid along direction.
+
+        Args:
+            direction(str):    Either `'x'`, or `'y'`, selecting which direction
+                to show the grid lines along.
+
+        Returns:
+            None
+        """
+
+        for node in getattr(self, direction + '_nodes'):
+            pyplot.axvline(x=node, color=color)
 
 def main():
     """Avoid polluting global namespace."""
@@ -667,7 +742,6 @@ def main():
                                            image_resolution,
                                            2.0 * cmdline_args.flux_aperture)
 
-
         for plot_slice in cmdline_args.slice:
             for (x_image_slice, y_image_slice), color in zip(
                     get_image_slices(
@@ -681,12 +755,27 @@ def main():
                     pixel_offsets[y_image_slice, x_image_slice],
                     cmdline_args.error_threshold,
                 )
+#                spline = SmoothBivariateSpline(
+#                    prf_data[0],
+#                    prf_data[1],
+#                    prf_data[2],
+#                    1.0 / prf_data[3],
+#                    s=cmdline_args.spline_smoothing * prf_data[3].size
+#                )
+                spline = AlglibSpline(prf_data,
+                                      (20, 20),
+                                      cmdline_args.spline_smoothing)
                 plot_prf_slice(
                     prf_data,
+                    spline,
                     error_scale=cmdline_args.error_scale,
                     points_color=color,
                     **plot_slice,
                     **cmdline_args.add_binned
+                )
+                spline.plot_grid_boundaries(
+                    ('x' if 'y_offset' in plot_slice else 'y'),
+                    color=color
                 )
             pyplot.axhline(y=0)
             pyplot.show()
