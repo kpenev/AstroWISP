@@ -2,7 +2,7 @@
 
 from bisect import bisect
 
-from superphot.fake_image.psf_base import PSFBase
+from superphot.psf_base import PSFBase
 
 def get_piece_index(boundaries, coordinate):
     """

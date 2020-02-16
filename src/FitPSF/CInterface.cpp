@@ -369,26 +369,26 @@ bool piecewise_bicubic_fit(double **pixel_values,
 #endif
     bool converged = false;
     if(grid.x_grid.size() > 2 && grid.y_grid.size() > 2)
-      converged = FitPSF::fit_piecewise_bicubic_psf(
-          fit_sources,
-          (ignore_dropped ? empty_source_list : dropped_sources),
-          (*fit_configuration)["gain"].as<double>(),
-          grid.x_grid,
-          grid.y_grid,
-          subpix_map,
-          (*fit_configuration)[
-          "psf.bicubic.max-abs-amplitude-change"
-          ].as<double>(),
-          (*fit_configuration)[
-          "psf.bicubic.max-rel-amplitude-change"
-          ].as<double>(),
-          (*fit_configuration)["psf.max-chi2"].as<double>(),
-          (*fit_configuration)["psf.bicubic.pixrej"].as<double>(),
-          (*fit_configuration)["psf.min-convergence-rate"].as<double>(),
-          (*fit_configuration)["psf.max-iterations"].as<int>(),
-          (*fit_configuration)["psf.bicubic.smoothing"].as<double>(),
-          best_fit_coef
-      );
+        converged = FitPSF::fit_piecewise_bicubic_psf(
+            fit_sources,
+            (ignore_dropped ? empty_source_list : dropped_sources),
+            (*fit_configuration)["gain"].as<double>(),
+            grid.x_grid,
+            grid.y_grid,
+            subpix_map,
+            (*fit_configuration)[
+            "psf.bicubic.max-abs-amplitude-change"
+            ].as<double>(),
+            (*fit_configuration)[
+            "psf.bicubic.max-rel-amplitude-change"
+            ].as<double>(),
+            (*fit_configuration)["psf.max-chi2"].as<double>(),
+            (*fit_configuration)["psf.bicubic.pixrej"].as<double>(),
+            (*fit_configuration)["psf.min-convergence-rate"].as<double>(),
+            (*fit_configuration)["psf.max-iterations"].as<int>(),
+            (*fit_configuration)["psf.bicubic.smoothing"].as<double>(),
+            best_fit_coef
+        );
     else {
         converged = true;
         for(

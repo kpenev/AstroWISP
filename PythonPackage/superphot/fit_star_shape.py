@@ -355,9 +355,10 @@ class FitStarShape:
                 b'bicubic'
             )
         ) + (b'',)
+        print('Configuration arguments: ' + repr(config_arguments))
         superphot_library.update_psffit_configuration(*config_arguments)
 
-    def fit(self, image_sources, backgrounds):
+    def fit(self, image_sources, backgrounds, require_convergence=True):
         r"""
         Fit for the shape of the sources in a collection of imeges.
 
@@ -389,6 +390,9 @@ class FitStarShape:
 
             backgrounds ([BackgroundExtractor]):    The measured backgrounds
                 under the sources.
+
+            require_convergence(bool):    If set to `False`, even non-converged
+                fits are saved. If `True`, an exception is raised.
 
         Returns:
             SuperPhotIOTree:
@@ -592,22 +596,23 @@ class FitStarShape:
         column_names = get_column_names()
         column_data = create_column_data(column_names)
         result_tree = SuperPhotIOTree(self._library_configuration)
-        if not superphot_library.piecewise_bicubic_fit(
-                *create_image_arguments(),
-                *create_source_arguments(column_names, column_data),
-                (
-                    len(backgrounds)
-                    *
-                    superphot_library.create_background_extractor.restype
-                )(
-                    *(bg.library_extractor for bg in backgrounds)
-                ),
-                self._library_configuration,
-                self.configuration['subpixmap'],
-                self.configuration['subpixmap'].shape[1],
-                self.configuration['subpixmap'].shape[0],
-                result_tree.library_tree
-        ):
+        fit_converged = superphot_library.piecewise_bicubic_fit(
+            *create_image_arguments(),
+            *create_source_arguments(column_names, column_data),
+            (
+                len(backgrounds)
+                *
+                superphot_library.create_background_extractor.restype
+            )(
+                *(bg.library_extractor for bg in backgrounds)
+            ),
+            self._library_configuration,
+            self.configuration['subpixmap'],
+            self.configuration['subpixmap'].shape[1],
+            self.configuration['subpixmap'].shape[0],
+            result_tree.library_tree
+        )
+        if not fit_converged and require_convergence:
             raise RuntimeError("Star shape fitting failed to converge!")
         return result_tree
 

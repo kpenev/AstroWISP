@@ -6,6 +6,8 @@
  */
 
 #include "CInterface.h"
+#include "PiecewiseBicubicMap.h"
+#include "PiecewiseBicubic.h"
 
 void expand_term_expression(char *expansion_term_expression,
                             char ***term_list,
@@ -81,7 +83,7 @@ void evaluate_terms(char **term_expressions,
     }
     std::vector<PSF::TermValarray> expansion_term_values(num_terms);
     std::vector<std::string> string_expressions(num_terms);
-    for(unsigned term_index = 0; term_index < num_terms; ++term_index) 
+    for(unsigned term_index = 0; term_index < num_terms; ++term_index)
         string_expressions[term_index] = term_expressions[term_index];
     evaluate_terms(string_expressions.begin(),
                    string_expressions.end(),
@@ -93,4 +95,53 @@ void evaluate_terms(char **term_expressions,
         for(unsigned term_index = 0; term_index < num_terms; ++term_index)
                 result[source_index * num_terms + term_index] =
                     expansion_term_values[term_index][source_index];
+}
+
+PiecewiseBicubicPSFMap *create_piecewise_bicubic_psf_map(
+    H5IODataTree *fit_result_tree
+)
+{
+    return reinterpret_cast<PiecewiseBicubicPSFMap*>(
+        new PSF::PiecewiseBicubicMap(
+            *reinterpret_cast<IO::H5IODataTree*>(fit_result_tree)
+        )
+    );
+}
+
+void destroy_piecewise_bicubic_psf_map(PiecewiseBicubicPSFMap *map)
+{
+    delete reinterpret_cast<PSF::PiecewiseBicubicMap*>(map);
+}
+
+PiecewiseBicubicPSF *evaluate_piecewise_bicubic_psf_map(
+    PiecewiseBicubicPSFMap *map,
+    double *term_values
+)
+{
+    PSF::PiecewiseBicubicMap *real_map =
+        reinterpret_cast<PSF::PiecewiseBicubicMap*>(map);
+    return reinterpret_cast<PiecewiseBicubicPSF*>(
+        real_map->get_psf(
+            Eigen::Map<const Eigen::VectorXd>(term_values, real_map->num_terms())
+        )
+    );
+}
+
+void destroy_piecewise_bicubic_psf(PiecewiseBicubicPSF *psf)
+{
+    delete reinterpret_cast<PSF::PiecewiseBicubic*>(psf);
+}
+
+void evaluate_piecewise_bicubic_psf(PiecewiseBicubicPSF *psf,
+                                    double *x_offsets,
+                                    double *y_offsets,
+                                    unsigned num_points,
+                                    double *result)
+{
+    PSF::PiecewiseBicubic *real_psf = reinterpret_cast<PSF::PiecewiseBicubic*>(
+        psf
+    );
+    for(unsigned i = 0; i < num_points; ++i) {
+        result[i] = (*real_psf)(x_offsets[i], y_offsets[i]);
+    }
 }

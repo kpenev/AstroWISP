@@ -21,24 +21,24 @@ namespace PSF {
     ///Simplify statements requiring this type.
     typedef Eigen::Map< const Eigen::Matrix<double,
                                             Eigen::Dynamic,
-                                            Eigen::Dynamic, 
+                                            Eigen::Dynamic,
                                             Eigen::RowMajor> > RowMajorMap;
 
     ///Smoothly varying over an image piecewise bicubic PSF.
     class LIB_PUBLIC PiecewiseBicubicMap : public Map {
     private:
-        std::vector<double> 
+        std::vector<double>
             ///The horizontal boundaries between PSF grid cells.
             __x_grid,
 
             ///The vertical boundaries between PSF grid cells.
             __y_grid;
 
-        ///A direct pointer to the coefficients as read from a file.
+        ///A direct pointer to the coefficients defining the map.
         const double *__coefficients;
 
         Eigen::MatrixXd
-            ///\brief Apply to a vector of polynomial terms to get the values 
+            ///\brief Apply to a vector of polynomial terms to get the values
             ///of the PSF at the grid intersections.
             __value_expansion,
 
@@ -59,7 +59,7 @@ namespace PSF {
 
              ///Was the x grid expanded to the right  (1: yes, 0: no)?
              __expanded_right,
-             
+
              ///Was the y grid expanded upward  (1: yes, 0: no)?
              __expanded_up,
 
@@ -85,7 +85,7 @@ namespace PSF {
             double min_psf_span = 0
         );
 
-        ///\brief Create a PSF map from a given polynomial expansion of the 
+        ///\brief Create a PSF map from a given polynomial expansion of the
         ///PSF parameters.
         PiecewiseBicubicMap(
             ///The coefficients of the polynomial expansion of the PSF
@@ -113,7 +113,7 @@ namespace PSF {
         ///The underlying PSF fit coefficients (as given by PSF fitting)
         const double *coefficients() const {return __coefficients;}
 
-        ///\brief Evaluate the PSF map for a particular set of values of the 
+        ///\brief Evaluate the PSF map for a particular set of values of the
         ///terms and return the PSF.
         PiecewiseBicubic *get_psf(
             ///The values of the terms on which the PSF map depends.
@@ -135,7 +135,7 @@ namespace PSF {
         ) const
         {return get_psf(terms, background);}
 
-        ///\brief All quantities needed to construct the PSF map from an I/O 
+        ///\brief All quantities needed to construct the PSF map from an I/O
         ///data tree.
         static const std::set<std::string> &required_data_tree_quantities();
     }; //End PiecewiseBicubicMap class.

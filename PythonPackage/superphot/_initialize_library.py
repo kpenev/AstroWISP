@@ -39,6 +39,12 @@ class _c_fitting_configuration(c_void_p):
 class _c_subpixphot_configuration(c_void_p):
     """Placeholder for the SubPixPhotConfiguration opaque struct."""
 
+class _c_piecewise_bicubic_psf_map_p(c_void_p):
+    """Placeholder for the PiecewiseBicubicPSFMap opaque struct."""
+
+class _c_piecewise_bicubic_psf_p(c_void_p):
+    """Placeholder for the PiecewiseBicubicPSF opaque struct."""
+
 #pylint: enable=invalid-name
 #pylint: enable=too-few-public-methods
 
@@ -278,6 +284,47 @@ def _setup_psf_interface(library):
         c_uint,
         numpy.ctypeslib.ndpointer(dtype=c_double,
                                   ndim=2,
+                                  flags='C_CONTIGUOUS')
+    ]
+
+    library.create_piecewise_bicubic_psf_map.argtypes = [
+        library.create_result_tree.restype
+    ]
+    library.create_piecewise_bicubic_psf_map.restype = (
+        _c_piecewise_bicubic_psf_map_p
+    )
+
+    library.destroy_piecewise_bicubic_psf_map.argtypes = [
+        library.create_piecewise_bicubic_psf_map.restype
+    ]
+    library.destroy_piecewise_bicubic_psf_map.restype = None
+
+    library.evaluate_piecewise_bicubic_psf_map.argtypes = [
+        library.create_piecewise_bicubic_psf_map.restype,
+        numpy.ctypeslib.ndpointer(dtype=c_double,
+                                  ndim=1,
+                                  flags='C_CONTIGUOUS')
+    ]
+    library.evaluate_piecewise_bicubic_psf_map.restype = (
+        _c_piecewise_bicubic_psf_p
+    )
+
+    library.destroy_piecewise_bicubic_psf.argtypes = [
+        library.evaluate_piecewise_bicubic_psf_map.restype
+    ]
+    library.destroy_piecewise_bicubic_psf.restype = None
+
+    library.evaluate_piecewise_bicubic_psf.argtypes = [
+        library.evaluate_piecewise_bicubic_psf_map.restype,
+        numpy.ctypeslib.ndpointer(dtype=c_double,
+                                  ndim=1,
+                                  flags='C_CONTIGUOUS'),
+        numpy.ctypeslib.ndpointer(dtype=c_double,
+                                  ndim=1,
+                                  flags='C_CONTIGUOUS'),
+        c_uint,
+        numpy.ctypeslib.ndpointer(dtype=c_double,
+                                  ndim=1,
                                   flags='C_CONTIGUOUS')
     ]
 

@@ -19,6 +19,7 @@ model {
 
             if(buildType == buildTypes.release) {
                 cppCompiler.define "NDEBUG"
+                cppCompiler.define "TRACK_PROGRESS"
             } else if(buildType == buildTypes.debug) {
                 cppCompiler.define "DEBUG"
                 cppCompiler.define "VERBOSE_DEBUG"

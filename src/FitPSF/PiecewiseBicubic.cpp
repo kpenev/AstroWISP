@@ -2,7 +2,7 @@
 
 namespace FitPSF {
 
-    void time_this(const std::string 
+    void time_this(const std::string
 #ifdef TRACK_PROGRESS
                    message
 #endif
@@ -348,7 +348,7 @@ namespace FitPSF {
     void fill_poly_coef_matrix(const LinearSourceList &fit_sources,
                                Eigen::MatrixXd &poly_coef_matrix)
     {
-        unsigned 
+        unsigned
             source_ind = 0,
             num_poly_terms = fit_sources.front()->expansion_terms().size();
 #ifdef DEBUG
@@ -437,7 +437,7 @@ namespace FitPSF {
         Eigen::VectorXd &flux_scaled_modified_rhs
     )
     {
-        unsigned 
+        unsigned
             num_poly_terms = fit_sources.front()->expansion_terms().size(),
             num_param_sets = (modified_pixel_excesses.size()
                               /
@@ -556,7 +556,7 @@ namespace FitPSF {
             ++si
         ) {
             if((*si)->overlaps().size()) continue;
-            PSF::PiecewiseBicubic 
+            PSF::PiecewiseBicubic
                 *psf = psf_map.get_psf((*si)->expansion_terms());
             (*si)->fit_flux(*psf);
             delete psf;
@@ -1056,7 +1056,7 @@ namespace FitPSF {
                                       << ") = "
                                       << subpix_map(subpix_x, subpix_y)
                                       << "; "
-                                      << "PSF integral (" 
+                                      << "PSF integral ("
                                       << x0 - x_step / 2.0
                                       << " < x < "
                                       << x0 + x_step / 2.0
@@ -1064,7 +1064,7 @@ namespace FitPSF {
                                       << y0 - y_step / 2.0
                                       << " < x < "
                                       << y0 + y_step / 2.0
-                                      << ") = " 
+                                      << ") = "
                                       << unit_psf.integrate(x0,
                                                             y0,
                                                             x_step,
@@ -1159,7 +1159,7 @@ namespace FitPSF {
         }
     }
 
-    ///\brief PSF fitting, but assumed that sources have their initial 
+    ///\brief PSF fitting, but assumed that sources have their initial
     ///amplitudes set.
     bool fit_piecewise_bicubic_psf(LinearSourceList &fit_sources,
                                    OverlapGroupList &overlap_groups,
@@ -1213,8 +1213,8 @@ namespace FitPSF {
                                         y_grid,
                                         basis_parameter_sets);
             time_this("Preparing smoothing");
-        }
-        time_this("No smoothing");
+        } else
+            time_this("No smoothing");
 
         bool discard_by_chi2 = false;
         bool converged = true;
