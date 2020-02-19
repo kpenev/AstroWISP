@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+#pylint: disable=too-many-lines
+
 """Create some plots helpful for picking PSF grid."""
 
 from argparse import ArgumentParser, Action as ArgparseAction
@@ -757,7 +759,8 @@ class AlglibSpline:
         for node in getattr(self, direction + '_nodes'):
             pyplot.axvline(x=node, color=color)
 
-
+#TODO: simplify later
+#pylint: disable=too-many-locals
 def pad_prf_data(prf_data, cmdline_args):
     """Return PRF data zero-padded for fitting and the spline fit domain."""
 
@@ -886,12 +889,11 @@ def pad_prf_data(prf_data, cmdline_args):
         add_mid_x = False
 
     return padded_prf_data, domain
+#pylint: enable=too-many-locals
 
 def fit_spline(prf_data, domain, cmdline_args):
     """Return the best-fit spline to the PRF per the command line config."""
 
-
-    print('PRF data: ' + repr(prf_data))
     if cmdline_args.spline_method == 'scipy':
         return SmoothBivariateSpline(
             prf_data[0],
@@ -909,10 +911,57 @@ def fit_spline(prf_data, domain, cmdline_args):
         domain=domain
     )
 
-def main():
-    """Avoid polluting global namespace."""
+def show_plots(slice_prf_data, slice_splines, cmdline_args):
+    """
+    Generate the plots and display them to the user.
 
-    cmdline_args = parse_command_line()
+    Args:
+        slice_prf_data(iterable):    List of the result of either get_prf_data()
+            or pad_prf_data() for each image slice.
+
+        slice_splines(iterable):    List of best-fit splines to the data for
+            each image slice. Must support evaluation using arrays of x & y
+            positions.
+
+    Returns
+        None
+    """
+
+    for plot_slice in cmdline_args.slice:
+        for prf_data, spline, color in zip(slice_prf_data,
+                                           slice_splines,
+                                           'rgbcmy'):
+            plot_prf_slice(
+                prf_data,
+                spline,
+                error_scale=cmdline_args.error_scale,
+                points_color=color,
+                **plot_slice,
+                **cmdline_args.add_binned
+            )
+            try:
+                spline.plot_grid_boundaries(
+                    ('x' if 'y_offset' in plot_slice else 'y'),
+                    color=color
+                )
+            except AttributeError:
+                pass
+        pyplot.axhline(y=0)
+        pyplot.show()
+
+def extract_pixel_data(cmdline_args, image_slices):
+    """
+    Get the pixel level data from the input image required for the plot.
+
+    Args:
+        cmdline_args:    The parsed command line arguments.
+
+    Returns:
+        List:
+            A list of the PRF data (see return of get_prf_data()) for each
+            image slice.
+    """
+
     trans_fname = get_trans_fname(cmdline_args.frame_fname,
                                   cmdline_args.trans_pattern)
     with fits.open(cmdline_args.frame_fname, 'readonly') as frame:
@@ -944,12 +993,9 @@ def main():
                                            cmdline_args.prf_range,
                                            image_resolution,
                                            2.0 * cmdline_args.flux_aperture)
-        image_slices = get_image_slices(cmdline_args.split_image)
 
-        slice_prf_data, slice_splines = [], []
-
-        for x_image_slice, y_image_slice in image_slices:
-            prf_data, domain = pad_prf_data(
+        return [
+            pad_prf_data(
                 get_prf_data(
                     frame[first_hdu].data[y_image_slice, x_image_slice],
                     frame[first_hdu + 1].data[y_image_slice, x_image_slice],
@@ -958,28 +1004,25 @@ def main():
                 ),
                 cmdline_args
             )
-            slice_prf_data.append(prf_data)
+            for x_image_slice, y_image_slice in image_slices
+        ]
 
-            slice_splines.append(fit_spline(prf_data, domain, cmdline_args))
+def main(cmdline_args):
+    """Avoid polluting global namespace."""
 
-        for plot_slice in cmdline_args.slice:
-            for prf_data, spline, color in zip(slice_prf_data,
-                                               slice_splines,
-                                               'rgbcmy'):
-                plot_prf_slice(
-                    prf_data,
-                    spline,
-                    error_scale=cmdline_args.error_scale,
-                    points_color=color,
-                    **plot_slice,
-                    **cmdline_args.add_binned
-                )
-                spline.plot_grid_boundaries(
-                    ('x' if 'y_offset' in plot_slice else 'y'),
-                    color=color
-                )
-            pyplot.axhline(y=0)
-            pyplot.show()
+
+    image_slices = get_image_slices(cmdline_args.split_image)
+
+    slice_prf_data = extract_pixel_data(cmdline_args, image_slices)
+
+    slice_splines = [
+        fit_spline(prf_data, domain, cmdline_args)
+        for prf_data, domain in slice_prf_data
+    ]
+
+    show_plots([entry[0] for entry in slice_prf_data],
+               slice_splines,
+               cmdline_args)
 
 if __name__ == '__main__':
-    main()
+    main(parse_command_line())

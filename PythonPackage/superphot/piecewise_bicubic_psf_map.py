@@ -23,7 +23,7 @@ class PiecewiseBicubicPSFMap:
             star_shape_map_tree.library_tree
         )
         self._map_terms = SmoothDependence.expand_expression(
-            star_shape_map_tree.get('psf.terms')
+            star_shape_map_tree.get('psffit.terms', str)
         )
 
     def __call__(self, **map_variables):
@@ -42,6 +42,7 @@ class PiecewiseBicubicPSFMap:
         term_values = SmoothDependence.evaluate_terms(self._map_terms,
                                                       **map_variables)
         assert term_values.shape[0] == 1
+        term_values = term_values.flatten()
         return PiecewiseBicubicPSF(
             superphot_library.evaluate_piecewise_bicubic_psf_map(
                 self._library_map,

@@ -32,9 +32,17 @@ class PiecewiseBicubicPSF(PSFBase):
                 The value(s) of the PSF at (x, y) relative to the source center.
         """
 
-        if not isinstance(x, numpy.ndarray):
-            x = numpy.array([x])
-            y = numpy.array([y])
+        print('Evaluating PRF at x: ' + repr(x))
+        print('Evaluating PRF at y: ' + repr(y))
+        if isinstance(x, numpy.ndarray):
+            if not isinstance(y, numpy.ndarray):
+                y = numpy.full(x.shape, y)
+        else:
+            if isinstance(y, numpy.ndarray):
+                x = numpy.full(y.shape, x)
+            else:
+                x = numpy.array([float(x)])
+                y = numpy.array([float(y)])
 
         assert x.size == y.size
 
@@ -44,6 +52,7 @@ class PiecewiseBicubicPSF(PSFBase):
             self._library_psf,
             x,
             y,
+            x.size,
             result
         )
 
