@@ -1,9 +1,10 @@
 """A wrapper class for working with PSF/PRF maps from the C/C++ library."""
 
+from superphot.piecewise_bicubic_psf import PiecewiseBicubicPSF
+from superphot.smooth_dependence import SmoothDependence
 from superphot._initialize_library import superphot_library
-from superphot. smooth_dependence import SmoothDependence
 
-class PSFMap:
+class PiecewiseBicubicPSFMap:
     """Provide convenient python interface to shape fitting results."""
 
     def __init__(self, star_shape_map_tree):
@@ -40,6 +41,13 @@ class PSFMap:
 
         term_values = SmoothDependence.evaluate_terms(self._map_terms,
                                                       **map_variables)
+        assert term_values.shape[0] == 1
+        return PiecewiseBicubicPSF(
+            superphot_library.evaluate_piecewise_bicubic_psf_map(
+                self._library_map,
+                term_values
+            )
+        )
 
     def __del__(self):
         """Delete any objects allocated by the library."""

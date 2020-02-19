@@ -6,7 +6,7 @@ import numpy
 from superphot.psf_base import PSFBase
 from superphot._initialize_library import superphot_library
 
-class PSF(PSFBase):
+class PiecewiseBicubicPSF(PSFBase):
     """Implement the PSFBase methods for libary PSFs."""
 
     def __init__(self, library_psf):
@@ -49,6 +49,11 @@ class PSF(PSFBase):
 
         return result
     #pylint: enable=invalid-name
+
+    def __del__(self):
+        """Delete the underlying library PSF."""
+
+        superphot_library.destroy_piecewise_bicubic_psf(self._library_psf)
 
     def get_left_range(self):
         raise NotImplementedError

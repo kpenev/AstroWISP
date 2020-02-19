@@ -17,8 +17,17 @@ from astropy.io import fits
 
 from superphot import BackgroundExtractor, FitStarShape, SubPixPhot
 
-def parse_command_line():
-    """Return the command line arguments as attributes of an object."""
+def parse_command_line(parser=None):
+    """
+    Return the command line arguments as attributes of an object.
+
+    Args:
+        parser(ArgumentParser):    If not None, should be a valid command line
+            parser to which further arguments are addded by this method.
+
+    Returns:
+        See ArgumentParser.parse_args().
+    """
 
     #Interface mandated by argparse.
     #pylint: disable=too-few-public-methods
@@ -56,7 +65,9 @@ def parse_command_line():
         return {direction + '_offset': offset,
                 'thickness': thickness}
 
-    parser = ArgumentParser(description=__doc__)
+    if parser is None:
+        parser = ArgumentParser(description=__doc__)
+
     parser.add_argument(
         'frame_fname',
         help='The full path of the FITS file to use for creating the plots.'
