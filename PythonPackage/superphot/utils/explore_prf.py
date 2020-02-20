@@ -305,6 +305,11 @@ def get_source_positions(catalogue_fname, trans_fname, image_resolution):
         )
     )
 
+def flux_from_magnitude(magnitude, magnitude_1adu):
+    """Return the flux corresponding to the given magnitude."""
+
+    return 10.0**((magnitude_1adu - magnitude) / 2.5)
+
 def get_source_info(*,
                     pixel_array,
                     stddev_array,
@@ -382,13 +387,10 @@ def get_source_info(*,
             (pixel_array, stddev_array, mask_array),
             result_tree,
         )
-        result['flux'] = 10.0**(
-            (
-                get_flux.configuration['magnitude_1adu']
-                -
-                result_tree.get(quantity='apphot.mag.0.0',
-                                shape=result.shape)
-            ) / 2.5
+        result['flux'] = flux_from_magnitude(
+            result_tree.get(quantity='apphot.mag.0.0',
+                            shape=result.shape),
+            get_flux.configuration['magnitude_1adu']
         )
 
     result = scipy.empty(len(source_positions),
@@ -949,12 +951,19 @@ def show_plots(slice_prf_data, slice_splines, cmdline_args):
         pyplot.axhline(y=0)
         pyplot.show()
 
-def extract_pixel_data(cmdline_args, image_slices):
+def extract_pixel_data(cmdline_args, image_slices, sources=None):
     """
     Get the pixel level data from the input image required for the plot.
 
     Args:
         cmdline_args:    The parsed command line arguments.
+
+        image_slices:    How to split the image when plotting (the return value
+            of get_image_slices()).
+
+        sources(scipy.array or None):    If not None, it should be an array with
+            equivalent structure to get_source_info(). If None,
+            get_source_info() is used to initialize it.
 
     Returns:
         List:
@@ -976,18 +985,19 @@ def extract_pixel_data(cmdline_args, image_slices):
                                 frame[1].header['NAXIS1'])
             first_hdu = 1
 
-        #pylint: enable=no-member
-        sources = get_source_info(
-            pixel_array=frame[first_hdu].data,
-            stddev_array=frame[first_hdu + 1].data,
-            mask_array=frame[first_hdu + 2].data.astype(c_char),
-            source_positions=get_source_positions(cmdline_args.catalogue,
-                                                  trans_fname,
-                                                  image_resolution),
-            aperture=cmdline_args.flux_aperture,
-            bg_radii=cmdline_args.background_annulus
-        )
-        #pylint: disable=no-member
+        if sources is None:
+            #pylint: enable=no-member
+            sources = get_source_info(
+                pixel_array=frame[first_hdu].data,
+                stddev_array=frame[first_hdu + 1].data,
+                mask_array=frame[first_hdu + 2].data.astype(c_char),
+                source_positions=get_source_positions(cmdline_args.catalogue,
+                                                      trans_fname,
+                                                      image_resolution),
+                aperture=cmdline_args.flux_aperture,
+                bg_radii=cmdline_args.background_annulus
+            )
+            #pylint: disable=no-member
 
         pixel_offsets = find_pixel_offsets(sources,
                                            cmdline_args.prf_range,
