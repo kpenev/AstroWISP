@@ -637,13 +637,13 @@ def plot_prf_slice(prf_data,
         plot_pixel_indices = scipy.nonzero(
             scipy.fabs(prf_data[1] - y_offset) < thickness
         )
-        spline_x = scipy.linspace(prf_data[0].min(), prf_data[0].max(), 1000)
+        spline_x = scipy.linspace(prf_data[0].min(), prf_data[0].max(), 300)
         spline_y = spline(spline_x, y_offset).flatten()
     else:
         plot_pixel_indices = scipy.nonzero(
             scipy.fabs(prf_data[0] - x_offset) < thickness
         )
-        spline_x = scipy.linspace(prf_data[1].min(), prf_data[1].max(), 1000)
+        spline_x = scipy.linspace(prf_data[1].min(), prf_data[1].max(), 300)
         spline_y = spline(x_offset, spline_x).flatten()
 
     plot_x = prf_data[
