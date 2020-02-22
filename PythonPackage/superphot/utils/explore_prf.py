@@ -206,6 +206,30 @@ def parse_command_line(parser=None):
         'each padding region. Default: %(default)s.'
     )
 
+    plot_config = parser.add_argument_group(
+        title='Plotting configuration',
+        description='Options that control the layout and other aspects of the '
+        'plots generated.'
+    )
+    plot_config.add_argument(
+        '--plot-y-range',
+        default=None,
+        type=float,
+        nargs=2,
+        help='If specified, the generated plot displays exactly the given range'
+        ' of y values.'
+    )
+    plot_config.add_argument(
+        '--save-plot',
+        default=None,
+        help='If this option is not specified, plots will be displayed, '
+        'otherwise, this should be a template for the filename involving '
+        '%%(dir) and %%(offset) substitutions which get substituted by the '
+        'direction (`\'x\'` or `\'y\'`) and the offset of the slice in the '
+        'plot.'
+    )
+
+
     return parser.parse_args()
 
 def get_trans_fname(frame_fname, trans_pattern):
@@ -670,7 +694,9 @@ def plot_prf_slice(prf_data,
                 spline_y,
                 '-',
                 color=points_color,
-                linewidth=5)
+                linewidth=5,
+                zorder=20,
+                alpha=0.85)
     if binning:
         pyplot.plot(
             scipy.stats.binned_statistic(plot_x,
@@ -679,12 +705,13 @@ def plot_prf_slice(prf_data,
             scipy.stats.binned_statistic(plot_x,
                                          plot_y,
                                          **binning)[0],
-            '-',
-            color=points_color,
+            'o',
             markerfacecolor=points_color,
-            markeredgecolor=points_color,
+            markeredgecolor='black',
             markersize=15,
-            linewidth=3
+            linewidth=3,
+            zorder=30,
+            alpha=0.7
         )
 
 def get_image_slices(splits):
@@ -943,9 +970,11 @@ def show_plots(slice_prf_data, slice_splines, cmdline_args):
     """
 
     for plot_slice in cmdline_args.slice:
+
         for (prf_data, label), spline, color in zip(slice_prf_data,
                                                     slice_splines,
-                                                    kelly_colors):
+                                                    kelly_colors[1:]):
+
             plot_prf_slice(
                 prf_data[0],
                 spline,
@@ -962,9 +991,22 @@ def show_plots(slice_prf_data, slice_splines, cmdline_args):
                 )
             except AttributeError:
                 pass
+
+        if cmdline_args.plot_y_range is not None:
+            pyplot.ylim(*cmdline_args.plot_y_range)
+
         pyplot.axhline(y=0)
         pyplot.legend()
-        pyplot.show()
+        if cmdline_args.save_plot is None:
+            pyplot.show()
+        else:
+            direction = ('x' if 'x_offset' in plot_slice else 'y')
+            plot_fname = cmdline_args.save_plot % dict(
+                dir=direction,
+                offset=plot_slice[direction + '_offset']
+            )
+            pyplot.savefig(plot_fname)
+            pyplot.cla()
 
 def extract_pixel_data(cmdline_args, image_slices, sources=None):
     """
