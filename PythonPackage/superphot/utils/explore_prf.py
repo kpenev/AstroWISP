@@ -17,6 +17,8 @@ from scipy.interpolate import SmoothBivariateSpline
 import xalglib
 from astropy.io import fits
 
+from kelly_colors import kelly_colors
+
 from superphot import BackgroundExtractor, FitStarShape, SubPixPhot
 
 def parse_command_line(parser=None):
@@ -203,6 +205,30 @@ def parse_command_line(parser=None):
         help='The number of zero valued points, in each direction to add within'
         'each padding region. Default: %(default)s.'
     )
+
+    plot_config = parser.add_argument_group(
+        title='Plotting configuration',
+        description='Options that control the layout and other aspects of the '
+        'plots generated.'
+    )
+    plot_config.add_argument(
+        '--plot-y-range',
+        default=None,
+        type=float,
+        nargs=2,
+        help='If specified, the generated plot displays exactly the given range'
+        ' of y values.'
+    )
+    plot_config.add_argument(
+        '--save-plot',
+        default=None,
+        help='If this option is not specified, plots will be displayed, '
+        'otherwise, this should be a template for the filename involving '
+        '%%(dir) and %%(offset) substitutions which get substituted by the '
+        'direction (`\'x\'` or `\'y\'`) and the offset of the slice in the '
+        'plot.'
+    )
+
 
     return parser.parse_args()
 
@@ -593,6 +619,7 @@ def get_prf_data(pixel_values,
 def plot_prf_slice(prf_data,
                    spline,
                    *,
+                   label,
                    x_offset=None,
                    y_offset=None,
                    thickness=0.1,
@@ -634,13 +661,13 @@ def plot_prf_slice(prf_data,
         plot_pixel_indices = scipy.nonzero(
             scipy.fabs(prf_data[1] - y_offset) < thickness
         )
-        spline_x = scipy.linspace(prf_data[0].min(), prf_data[0].max(), 1000)
+        spline_x = scipy.linspace(prf_data[0].min(), prf_data[0].max(), 300)
         spline_y = spline(spline_x, y_offset).flatten()
     else:
         plot_pixel_indices = scipy.nonzero(
             scipy.fabs(prf_data[0] - x_offset) < thickness
         )
-        spline_x = scipy.linspace(prf_data[1].min(), prf_data[1].max(), 1000)
+        spline_x = scipy.linspace(prf_data[1].min(), prf_data[1].max(), 300)
         spline_y = spline(x_offset, spline_x).flatten()
 
     plot_x = prf_data[
@@ -659,9 +686,17 @@ def plot_prf_slice(prf_data,
     pyplot.errorbar(plot_x,
                     plot_y,
                     plot_err_y * error_scale,
-                    fmt='o' + points_color,
-                    zorder=10)
-    pyplot.plot(spline_x, spline_y, '-' + points_color, linewidth=5)
+                    fmt='o',
+                    color=points_color,
+                    zorder=10,
+                    label=label)
+    pyplot.plot(spline_x,
+                spline_y,
+                '-',
+                color=points_color,
+                linewidth=5,
+                zorder=20,
+                alpha=0.85)
     if binning:
         pyplot.plot(
             scipy.stats.binned_statistic(plot_x,
@@ -670,9 +705,13 @@ def plot_prf_slice(prf_data,
             scipy.stats.binned_statistic(plot_x,
                                          plot_y,
                                          **binning)[0],
-            '-o' + points_color,
+            'o',
+            markerfacecolor=points_color,
+            markeredgecolor='black',
             markersize=15,
-            linewidth=3
+            linewidth=3,
+            zorder=30,
+            alpha=0.7
         )
 
 def get_image_slices(splits):
@@ -684,6 +723,7 @@ def get_image_slices(splits):
         split_slices[direction][-1] = slice(split_slices[direction][-1].start,
                                             value)
         split_slices[direction].append(slice(value, None))
+    print('Split slices: ' + repr(split_slices))
     return [
         (x_split, y_split)
         for x_split in split_slices['x']
@@ -930,12 +970,15 @@ def show_plots(slice_prf_data, slice_splines, cmdline_args):
     """
 
     for plot_slice in cmdline_args.slice:
-        for prf_data, spline, color in zip(slice_prf_data,
-                                           slice_splines,
-                                           'rgbcmy'):
+
+        for (prf_data, label), spline, color in zip(slice_prf_data,
+                                                    slice_splines,
+                                                    kelly_colors[1:]):
+
             plot_prf_slice(
-                prf_data,
+                prf_data[0],
                 spline,
+                label=label,
                 error_scale=cmdline_args.error_scale,
                 points_color=color,
                 **plot_slice,
@@ -948,8 +991,22 @@ def show_plots(slice_prf_data, slice_splines, cmdline_args):
                 )
             except AttributeError:
                 pass
+
+        if cmdline_args.plot_y_range is not None:
+            pyplot.ylim(*cmdline_args.plot_y_range)
+
         pyplot.axhline(y=0)
-        pyplot.show()
+        pyplot.legend()
+        if cmdline_args.save_plot is None:
+            pyplot.show()
+        else:
+            direction = ('x' if 'x_offset' in plot_slice else 'y')
+            plot_fname = cmdline_args.save_plot % dict(
+                dir=direction,
+                offset=plot_slice[direction + '_offset']
+            )
+            pyplot.savefig(plot_fname)
+            pyplot.cla()
 
 def extract_pixel_data(cmdline_args, image_slices, sources=None):
     """
@@ -985,6 +1042,8 @@ def extract_pixel_data(cmdline_args, image_slices, sources=None):
                                 frame[1].header['NAXIS1'])
             first_hdu = 1
 
+        assert image_resolution == frame[first_hdu].data.shape
+
         if sources is None:
             #pylint: enable=no-member
             sources = get_source_info(
@@ -1005,14 +1064,32 @@ def extract_pixel_data(cmdline_args, image_slices, sources=None):
                                            2.0 * cmdline_args.flux_aperture)
 
         return [
-            pad_prf_data(
-                get_prf_data(
-                    frame[first_hdu].data[y_image_slice, x_image_slice],
-                    frame[first_hdu + 1].data[y_image_slice, x_image_slice],
-                    pixel_offsets[y_image_slice, x_image_slice],
-                    cmdline_args.error_threshold,
+            (
+                pad_prf_data(
+                    get_prf_data(
+                        frame[first_hdu].data[y_image_slice, x_image_slice],
+                        frame[first_hdu + 1].data[y_image_slice, x_image_slice],
+                        pixel_offsets[y_image_slice, x_image_slice],
+                        cmdline_args.error_threshold,
+                    ),
+                    cmdline_args
                 ),
-                cmdline_args
+                (
+                    '(%f, %f)'
+                    %
+                    (
+                        (
+                            x_image_slice.start
+                            +
+                            (x_image_slice.stop or image_resolution[1])
+                        ) / 2.0,
+                        (
+                            y_image_slice.start
+                            +
+                            (y_image_slice.stop or image_resolution[0])
+                        ) / 2.0
+                    )
+                )
             )
             for x_image_slice, y_image_slice in image_slices
         ]
@@ -1030,7 +1107,7 @@ def main(cmdline_args):
         for prf_data, domain in slice_prf_data
     ]
 
-    show_plots([entry[0] for entry in slice_prf_data],
+    show_plots(slice_prf_data,
                slice_splines,
                cmdline_args)
 
