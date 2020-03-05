@@ -29,7 +29,6 @@ model {
             if (toolChain in Gcc || toolChain in Clang) {
                 if (toolChain in Gcc) {
                     cppCompiler.args "-std=gnu++98"
-                    cppCompiler.args "-I/usr/include/hdf5/serial/"
                     cppCompiler.define "TOOLCHAIN_GCC"
                 } else
                     cppCompiler.define "TOOLCHAIN_CLANG"
@@ -41,7 +40,7 @@ model {
                 )
                 linker.args "-l" + ensureLibraryVersion("gfortran")
                 linker.args "-l" + ensureLibraryVersion("cfitsio")
-                linker.args "-l" + ensureLibraryVersion("hdf5_serial")
+                linker.args "-l" + ensureLibraryVersion("hdf5")
                 linker.args "-l" + ensureLibraryVersion("hdf5_cpp")
                 linker.args "-l" + ensureLibraryVersion("z")
 
