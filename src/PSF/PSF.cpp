@@ -3,20 +3,18 @@
 #include <cmath>
 #include <limits>
 #include <algorithm>
-#include <gsl/gsl_poly.h>
-#include <gsl/gsl_errno.h>
 #include <sstream>
 #include <iostream>
 
 namespace PSF {
 
     double PSF::line_circle_intersections(
-            double x1, double x2, double y, double r, bool left_on_circle, 
+            double x1, double x2, double y, double r, bool left_on_circle,
             bool right_on_circle) const
     {
         if(y>r) return 0;
         if(left_on_circle && right_on_circle) return Core::NaN;
-        double r_2=r*r, y_2=y*y, left_dist_2=x1*x1+y_2, 
+        double r_2=r*r, y_2=y*y, left_dist_2=x1*x1+y_2,
                right_dist_2=x2*x2+y_2;
         if(left_on_circle) return (right_dist_2>r_2 ? 0 : Core::NaN);
         if(right_on_circle) return (left_dist_2>r_2 ? 0 : Core::NaN);
@@ -32,22 +30,22 @@ namespace PSF {
         double y1,
         double x2,
         double y2,
-        double rc, 
+        double rc,
         std::valarray<bool> on_circle,
         std::valarray<double> &intersections
     ) const
     {
         if(y1>=0 || intersections[2]==0) return 0.0;//entirely outside circ
-        else if(on_circle[2] || on_circle[3] || 
+        else if(on_circle[2] || on_circle[3] ||
                 !std::isnan(intersections[2])) {//2 sides entirely outside
-            if(x2>0) return (on_circle[3] ? 0.0 : 
+            if(x2>0) return (on_circle[3] ? 0.0 :
                     integrate_wedge(x1, y2, rc, false, true));
-            else return (on_circle[2] ? 0.0 : 
+            else return (on_circle[2] ? 0.0 :
                     integrate_wedge(x2, y2, rc, true, true));
         } else { //1 side entirely out 1 side entirely in
             double y_split=std::numeric_limits<double>::infinity();
             if(!std::isnan(intersections[1])) y_split=intersections[1];
-            if(!std::isnan(intersections[3])) 
+            if(!std::isnan(intersections[3]))
                     y_split=std::min(y_split, intersections[3]);
             y_split*=-1;
             return (integrate_rectangle((x1+x2)/2, (y2+y_split)/2,
@@ -62,13 +60,13 @@ namespace PSF {
         double y1,
         double x2,
         double y2,
-        double rc, 
+        double rc,
         std::valarray<bool> on_circle,
         std::valarray<double> &intersections
     ) const
     {
         double result=0;
-        if(y1<0 || (std::isnan(intersections[1]) && x2>0) || 
+        if(y1<0 || (std::isnan(intersections[1]) && x2>0) ||
            (std::isnan(intersections[3]) && x1<0)) {//entirely inside circle
             double result = integrate_rectangle((x1 + x2) / 2,
                                                 (y1 + y2) / 2,
@@ -90,7 +88,7 @@ namespace PSF {
                     y2=intersections[1];
                     on_circle[2]=true;
                 }
-            } 
+            }
             if(!std::isnan(intersections[3])) {
                 if(x2>0) {
                     y2=intersections[3];
@@ -113,7 +111,7 @@ namespace PSF {
                                         intersections[2]-x1, y2-y1);
             if(std::isnan(result)) {
                 std::ostringstream msg;
-                msg << "Rectangle integral over (" << x1 << ", " << y1 
+                msg << "Rectangle integral over (" << x1 << ", " << y1
                     <<" ), (" << intersections[2] << ", " << y2
                     << ") returned NaN";
                 throw Error::Runtime(msg.str());
@@ -156,7 +154,7 @@ namespace PSF {
     }
 
     double PSF::integrate_overlap(
-            double x1, double y1, double x2, double y2, double rc, 
+            double x1, double y1, double x2, double y2, double rc,
             const std::valarray<bool> &on_circle) const
     {
         if(x1*x2<0) {
@@ -199,24 +197,24 @@ namespace PSF {
 
         //Now entire rectangle is restricted to a single quadrant
         std::valarray<double> intersections(4);
-        intersections[0]=line_circle_intersections(x1, x2, std::abs(y1), rc, 
+        intersections[0]=line_circle_intersections(x1, x2, std::abs(y1), rc,
                 on_circle[0], on_circle[1]);
-        intersections[1]=line_circle_intersections(y1, y2, std::abs(x2), rc, 
+        intersections[1]=line_circle_intersections(y1, y2, std::abs(x2), rc,
                         on_circle[1], on_circle[2]);
-        intersections[2]=line_circle_intersections(x1, x2, std::abs(y2), rc, 
+        intersections[2]=line_circle_intersections(x1, x2, std::abs(y2), rc,
                         on_circle[3], on_circle[2]);
-        intersections[3]=line_circle_intersections(y1, y2, std::abs(x1), rc, 
+        intersections[3]=line_circle_intersections(y1, y2, std::abs(x1), rc,
                         on_circle[0], on_circle[3]);
-        if(intersections[0]==0) 
+        if(intersections[0]==0)
             return integrate_overlap_bottom_out(x1,
                                                 y1,
                                                 x2,
                                                 y2,
                                                 rc,
-                                                on_circle, 
+                                                on_circle,
                                                 intersections);
-        else if(std::isnan(intersections[0])) 
-            return integrate_overlap_bottom_in(x1, y1, x2, y2, rc, on_circle, 
+        else if(std::isnan(intersections[0]))
+            return integrate_overlap_bottom_in(x1, y1, x2, y2, rc, on_circle,
                     intersections);
         else {
             std::valarray<bool> on_circle_copy(on_circle);
@@ -251,7 +249,7 @@ namespace PSF {
                                                            y1,
                                                            x2,
                                                            y2,
-                                                           rc, 
+                                                           rc,
                                                            on_circle_copy,
                                                            intersections);
             }
@@ -261,10 +259,10 @@ namespace PSF {
     double PSF::integrate(
         double center_x,
         double center_y,
-        double dx, 
+        double dx,
         double dy,
         double circle_radius
-#ifdef DEBUG	
+#ifdef DEBUG
 #ifdef SHOW_PSF_PIECES
         ,
         bool reset_piece_id,
