@@ -125,4 +125,35 @@ extern "C" {
         double *result
     );
 
+    ///\brief See PSF::PSF::integrate, but calculates multiple integrals.
+    LIB_PUBLIC void integrate_piecewise_bicubic_psf(
+        ///The PSF to integrate.
+        PiecewiseBicubicPSF *psf,
+
+        ///The x coordinates of the centers of the rectangles to integrate
+        ///over.
+        double *center_x,
+
+        ///The y coordinates of the centers of the rectangles to integrate
+        ///over.
+        double *center_y,
+
+        ///The widths of the rectangles.
+        double *dx,
+
+        ///The heights of the rectangles.
+        double *dy,
+
+        ///The radii of the circles. For zero entries, the integral is over the
+        ///full rectangle.
+        double *circle_radii,
+
+        ///The number of integrations requested.
+        unsigned num_integrals,
+
+        ///The location to fill with the values of the calculated integrals.
+        ///Must already be allocated with a size of num_integrals.
+        double *result
+    );
+
 };//End extern "C".

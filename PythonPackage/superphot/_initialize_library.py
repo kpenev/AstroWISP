@@ -327,6 +327,31 @@ def _setup_psf_interface(library):
                                   ndim=1,
                                   flags='C_CONTIGUOUS')
     ]
+    library.evaluate_piecewise_bicubic_psf.restype = None
+
+    library.integrate_piecewise_bicubic_psf.argtypes = [
+        library.evaluate_piecewise_bicubic_psf_map.restype,
+        numpy.ctypeslib.ndpointer(dtype=c_double,
+                                  ndim=1,
+                                  flags='C_CONTIGUOUS'),
+        numpy.ctypeslib.ndpointer(dtype=c_double,
+                                  ndim=1,
+                                  flags='C_CONTIGUOUS'),
+        numpy.ctypeslib.ndpointer(dtype=c_double,
+                                  ndim=1,
+                                  flags='C_CONTIGUOUS'),
+        numpy.ctypeslib.ndpointer(dtype=c_double,
+                                  ndim=1,
+                                  flags='C_CONTIGUOUS'),
+        numpy.ctypeslib.ndpointer(dtype=c_double,
+                                  ndim=1,
+                                  flags='C_CONTIGUOUS'),
+        c_uint,
+        numpy.ctypeslib.ndpointer(dtype=c_double,
+                                  ndim=1,
+                                  flags='C_CONTIGUOUS'),
+    ]
+    library.integrate_piecewise_bicubic_psf.restype = None
 
 def _setup_fitpsf_interface(library):
     """Set-up the argument and return types of the PSF fitting library funcs."""

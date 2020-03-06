@@ -145,3 +145,24 @@ void evaluate_piecewise_bicubic_psf(PiecewiseBicubicPSF *psf,
         result[i] = (*real_psf)(x_offsets[i], y_offsets[i]);
     }
 }
+
+void integrate_piecewise_bicubic_psf(PiecewiseBicubicPSF *psf,
+                                     double *center_x,
+                                     double *center_y,
+                                     double *dx,
+                                     double *dy,
+                                     double *circle_radii,
+                                     unsigned num_integrals,
+                                     double *result)
+{
+    PSF::PiecewiseBicubic *real_psf = reinterpret_cast<PSF::PiecewiseBicubic*>(
+        psf
+    );
+    for(unsigned i = 0; i < num_integrals; ++i) {
+        result[i] = (*real_psf).integrate(center_x[i],
+                                          center_y[i],
+                                          dx[i],
+                                          dy[i],
+                                          circle_radii[i]);
+    }
+}
