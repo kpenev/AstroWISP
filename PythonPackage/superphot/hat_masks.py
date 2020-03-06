@@ -4,7 +4,7 @@ import numpy
 
 from superphot._initialize_library import get_superphot_library
 
-mask_flags = None
+mask_flags = dict(get_superphot_library().mask_flags)
 
 def parse_hat_mask(header):
     """
@@ -44,9 +44,6 @@ def parse_hat_mask(header):
     #pylint: disable=global-statement
     global mask_flags
     #pylint: enable=global-statement
-
-    if mask_flags is None:
-        mask_flags = dict(get_superphot_library().mask_flags)
 
     mask_string = ''.join((c[1] + ' ') if c[0] == 'MASKINFO' else ''
                           for c in header.items()).encode('ascii')
