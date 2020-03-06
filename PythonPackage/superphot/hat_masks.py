@@ -2,7 +2,7 @@
 
 import numpy
 
-from superphot._initialize_library import superphot_library
+from superphot._initialize_library import get_superphot_library
 
 def parse_hat_mask(header):
     """
@@ -41,10 +41,10 @@ def parse_hat_mask(header):
     mask_string = ''.join((c[1] + ' ') if c[0] == 'MASKINFO' else ''
                           for c in header.items()).encode('ascii')
     mask = numpy.zeros((header['NAXIS2'], header['NAXIS1']), dtype='int8')
-    superphot_library.parse_hat_mask(mask_string,
-                                     header['NAXIS1'],
-                                     header['NAXIS2'],
-                                     mask.ravel())
+    get_superphot_library().parse_hat_mask(mask_string,
+                                           header['NAXIS1'],
+                                           header['NAXIS2'],
+                                           mask.ravel())
     return mask
 
-mask_flags = dict(superphot_library.mask_flags)
+mask_flags = dict(get_superphot_library().mask_flags)

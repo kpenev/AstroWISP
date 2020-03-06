@@ -2,7 +2,7 @@
 
 from superphot.piecewise_bicubic_psf import PiecewiseBicubicPSF
 from superphot.smooth_dependence import SmoothDependence
-from superphot._initialize_library import superphot_library
+from superphot._initialize_library import get_superphot_library
 
 class PiecewiseBicubicPSFMap:
     """Provide convenient python interface to shape fitting results."""
@@ -19,8 +19,11 @@ class PiecewiseBicubicPSFMap:
             None
         """
 
-        self._library_map = superphot_library.create_piecewise_bicubic_psf_map(
-            star_shape_map_tree.library_tree
+        self._superphot_library = get_superphot_library()
+        self._library_map = (
+            self._superphot_library.create_piecewise_bicubic_psf_map(
+                star_shape_map_tree.library_tree
+            )
         )
         self._map_terms = SmoothDependence.expand_expression(
             star_shape_map_tree.get('psffit.terms', str)
@@ -44,7 +47,7 @@ class PiecewiseBicubicPSFMap:
         assert term_values.shape[0] == 1
         term_values = term_values.flatten()
         return PiecewiseBicubicPSF(
-            superphot_library.evaluate_piecewise_bicubic_psf_map(
+            self._superphot_library.evaluate_piecewise_bicubic_psf_map(
                 self._library_map,
                 term_values
             )
@@ -53,4 +56,6 @@ class PiecewiseBicubicPSFMap:
     def __del__(self):
         """Delete any objects allocated by the library."""
 
-        superphot_library.destroy_piecewise_bicubic_psf_map(self._library_map)
+        self._superphot_library.destroy_piecewise_bicubic_psf_map(
+            self._library_map
+        )
