@@ -4,7 +4,7 @@ from ctypes import c_double, c_uint
 
 import numpy
 
-from superphot._initialize_library import superphot_library
+from superphot._initialize_library import get_superphot_library
 
 #This only makes sense as a class.
 #pylint: disable=too-few-public-methods
@@ -107,11 +107,12 @@ class SubPixPhot:
             None
         """
 
+        self._superphot_library = get_superphot_library()
         self.image = None
         self._library_subpix_map = None
 
         self._library_configuration = (
-            superphot_library.create_subpixphot_configuration()
+            self._superphot_library.create_subpixphot_configuration()
         )
 
         self.configuration = dict(self._default_configuration)
@@ -137,11 +138,11 @@ class SubPixPhot:
                                repr(k))
             if k == 'subpixmap':
                 if self._library_subpix_map is not None:
-                    superphot_library.destroy_core_subpixel_map(
+                    self._superphot_library.destroy_core_subpixel_map(
                         self._library_subpix_map
                     )
                 self._library_subpix_map = (
-                    superphot_library.create_core_subpixel_map(
+                    self._superphot_library.create_core_subpixel_map(
                         *configuration[k].shape,
                         configuration[k]
                     )
@@ -154,7 +155,7 @@ class SubPixPhot:
             ()
         ) + (b'',)
 
-        superphot_library.update_subpixphot_configuration(
+        self._superphot_library.update_subpixphot_configuration(
             self._library_configuration,
             *config_arguments
         )
@@ -196,14 +197,14 @@ class SubPixPhot:
 
         self.image = image
 
-        library_image = superphot_library.create_core_image(
+        library_image = self._superphot_library.create_core_image(
             image[0].shape[1],
             image[0].shape[0],
             *image,
             True
         )
 
-        superphot_library.subpixphot(
+        self._superphot_library.subpixphot(
             library_image,
             self._library_subpix_map,
             self._library_configuration,
@@ -211,18 +212,18 @@ class SubPixPhot:
             c_uint(image_index)
         )
 
-        superphot_library.destroy_core_image(library_image)
+        self._superphot_library.destroy_core_image(library_image)
 
     #pylint: enable=too-many-arguments
 
     def __del__(self):
         r"""Destroy any library objects created by this object."""
 
-        superphot_library.destroy_subpixphot_configuration(
+        self._superphot_library.destroy_subpixphot_configuration(
             self._library_configuration
         )
         if self._library_subpix_map is not None:
-            superphot_library.destroy_core_subpixel_map(
+            self._superphot_library.destroy_core_subpixel_map(
                 self._library_subpix_map
             )
 

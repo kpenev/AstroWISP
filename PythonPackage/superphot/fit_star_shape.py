@@ -12,7 +12,7 @@ from ctypes import\
     c_int
 import numpy
 
-from superphot._initialize_library import superphot_library
+from superphot._initialize_library import get_superphot_library
 from superphot.superphot_io_tree import SuperPhotIOTree
 
 class FitStarShape:
@@ -308,6 +308,7 @@ class FitStarShape:
             None
         """
 
+        self._superphot_library = get_superphot_library()
         self.mode = mode.upper()
         assert self.mode in ['PSF', 'PRF']
         self.configuration = dict(self._default_configuration)
@@ -317,7 +318,7 @@ class FitStarShape:
                                   **other_configuration)
 
         self._library_configuration = (
-            superphot_library.create_psffit_configuration()
+            self._superphot_library.create_psffit_configuration()
         )
         self.configure()
 
@@ -356,7 +357,7 @@ class FitStarShape:
             )
         ) + (b'',)
         print('Configuration arguments: ' + repr(config_arguments))
-        superphot_library.update_psffit_configuration(*config_arguments)
+        self._superphot_library.update_psffit_configuration(*config_arguments)
 
     def fit(self, image_sources, backgrounds, require_convergence=True):
         r"""
@@ -596,13 +597,13 @@ class FitStarShape:
         column_names = get_column_names()
         column_data = create_column_data(column_names)
         result_tree = SuperPhotIOTree(self._library_configuration)
-        fit_converged = superphot_library.piecewise_bicubic_fit(
+        fit_converged = self._superphot_library.piecewise_bicubic_fit(
             *create_image_arguments(),
             *create_source_arguments(column_names, column_data),
             (
                 len(backgrounds)
                 *
-                superphot_library.create_background_extractor.restype
+                self._superphot_library.create_background_extractor.restype
             )(
                 *(bg.library_extractor for bg in backgrounds)
             ),
@@ -619,7 +620,7 @@ class FitStarShape:
     def __del__(self):
         r"""Destroy the configuration object created in :meth:`__init__`\ ."""
 
-        superphot_library.destroy_psffit_configuration(
+        self._superphot_library.destroy_psffit_configuration(
             self._library_configuration
         )
 

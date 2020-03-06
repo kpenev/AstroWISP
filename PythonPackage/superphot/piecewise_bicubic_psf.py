@@ -4,7 +4,7 @@ from ctypes import c_double
 import numpy
 
 from superphot.psf_base import PSFBase
-from superphot._initialize_library import superphot_library
+from superphot._initialize_library import get_superphot_library
 
 class PiecewiseBicubicPSF(PSFBase):
     """Implement the PSFBase methods for libary PSFs."""
@@ -12,6 +12,7 @@ class PiecewiseBicubicPSF(PSFBase):
     def __init__(self, library_psf):
         """Wrap the given library PSF in a convenient python interface."""
 
+        self._superphot_library = get_superphot_library()
         self._library_psf = library_psf
 
     #(x, y) is a reasonable way to specify the components of an offset vector.
@@ -48,7 +49,7 @@ class PiecewiseBicubicPSF(PSFBase):
 
         result = numpy.empty(x.size, dtype=c_double)
 
-        superphot_library.evaluate_piecewise_bicubic_psf(
+        self._superphot_library.evaluate_piecewise_bicubic_psf(
             self._library_psf,
             x,
             y,
@@ -62,7 +63,7 @@ class PiecewiseBicubicPSF(PSFBase):
     def __del__(self):
         """Delete the underlying library PSF."""
 
-        superphot_library.destroy_piecewise_bicubic_psf(self._library_psf)
+        self._superphot_library.destroy_piecewise_bicubic_psf(self._library_psf)
 
     def get_left_range(self):
         raise NotImplementedError

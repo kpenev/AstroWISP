@@ -4,7 +4,7 @@ from ctypes import c_double, c_uint, c_char_p, POINTER, byref
 
 import numpy
 
-from superphot._initialize_library import superphot_library
+from superphot._initialize_library import get_superphot_library
 
 class SmoothDependence:
     r"""
@@ -83,13 +83,13 @@ class SmoothDependence:
         num_terms = c_uint()
         c_expression = c_char_p(expression if isinstance(expression, bytes)
                                 else expression.encode('ascii'))
-        superphot_library.expand_term_expression(c_expression,
-                                                 byref(terms),
-                                                 byref(num_terms))
+        get_superphot_library().expand_term_expression(c_expression,
+                                                       byref(terms),
+                                                       byref(num_terms))
         result = [terms[term_index].decode()
                   for term_index in range(num_terms.value)]
 
-        superphot_library.free_term_list(terms, num_terms)
+        get_superphot_library().free_term_list(terms, num_terms)
         return result
 
     @classmethod
@@ -135,13 +135,13 @@ class SmoothDependence:
 
         result = numpy.empty((num_sources, num_terms), dtype=c_double)
 
-        superphot_library.evaluate_terms(term_list,
-                                         num_terms,
-                                         variable_names,
-                                         variable_values,
-                                         num_variables,
-                                         num_sources,
-                                         result)
+        get_superphot_library().evaluate_terms(term_list,
+                                               num_terms,
+                                               variable_names,
+                                               variable_values,
+                                               num_variables,
+                                               num_sources,
+                                               result)
         return result
 
     def __init__(self, expression, parameters):

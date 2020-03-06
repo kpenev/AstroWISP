@@ -21,7 +21,7 @@ from ctypes import\
 
 import numpy
 
-from superphot._initialize_library import superphot_library
+from superphot._initialize_library import get_superphot_library
 
 #Sufficient functionality to justify a class.
 #pylint: disable=too-few-public-methods
@@ -58,7 +58,8 @@ class SuperPhotIOTree:
             None
         """
 
-        self.library_tree = superphot_library.create_result_tree(
+        self._superphot_library = get_superphot_library()
+        self.library_tree = self._superphot_library.create_result_tree(
             getattr(
                 tool_or_configuration,
                 '_library_configuration',
@@ -85,7 +86,7 @@ class SuperPhotIOTree:
 
         library_type = POINTER(c_char_p)
         library_result = library_type()
-        num_quantities = superphot_library.list_tree_quantities(
+        num_quantities = self._superphot_library.list_tree_quantities(
             self.library_tree,
             byref(library_result)
         )
@@ -116,7 +117,7 @@ class SuperPhotIOTree:
 
         if dtype == str:
             library_result = pointer(c_char_p())
-            defined = superphot_library.query_result_tree(
+            defined = self._superphot_library.query_result_tree(
                 self.library_tree,
                 byte_quantity,
                 b'str',
@@ -124,10 +125,10 @@ class SuperPhotIOTree:
             )
             result = library_result.contents.value
             if result is None:
-                defined=False
+                defined = False
             else:
-                result=result.decode()
-            superphot_library.free(library_result.contents)
+                result = result.decode()
+            self._superphot_library.free(library_result.contents)
         else:
             result = numpy.empty(shape=shape, dtype=dtype)
 
@@ -138,7 +139,7 @@ class SuperPhotIOTree:
             if shape is not None:
                 type_string_arg = '[' + type_string_arg + ']'
 
-            defined = superphot_library.query_result_tree(
+            defined = self._superphot_library.query_result_tree(
                 self.library_tree,
                 byte_quantity,
                 type_string_arg.encode('ascii'),
@@ -172,9 +173,9 @@ class SuperPhotIOTree:
         """
 
         result = numpy.empty(dtype=float, shape=(num_variables, num_sources))
-        superphot_library.get_psf_map_variables(self.library_tree,
-                                                image_index,
-                                                result)
+        self._superphot_library.get_psf_map_variables(self.library_tree,
+                                                      image_index,
+                                                      result)
         return result
 
     def set_star_shape_map_variables(self,
@@ -206,7 +207,7 @@ class SuperPhotIOTree:
         c_variable_names = (c_char_p * len(variable_names))(
             *(c_char_p(var_name.encode('ascii')) for var_name in variable_names)
         )
-        superphot_library.set_psf_map_variables(
+        self._superphot_library.set_psf_map_variables(
             c_variable_names,
             get_variable_values(variable_names),
             len(variable_names),
@@ -243,14 +244,14 @@ class SuperPhotIOTree:
                 ]
             ).encode('ascii')
 
-        superphot_library.update_result_tree(
+        self._superphot_library.update_result_tree(
             b'psffit.grid',
             (c_char_p * 1)(c_char_p(get_grid_str())),
             b'str',
             1,
             self.library_tree
         )
-        superphot_library.update_result_tree(
+        self._superphot_library.update_result_tree(
             b'psffit.terms',
             (c_char_p * 1)(
                 c_char_p(
@@ -263,7 +264,7 @@ class SuperPhotIOTree:
             self.library_tree
         )
         c_coefficients = coefficients.astype(c_double, 'C')
-        superphot_library.update_result_tree(
+        self._superphot_library.update_result_tree(
             b'psffit.psfmap',
             c_coefficients.ctypes.data_as(c_void_p),
             b'double',
@@ -344,7 +345,7 @@ class SuperPhotIOTree:
                         c_double,
                         order='C'
                     )
-                    superphot_library.update_result_tree(
+                    self._superphot_library.update_result_tree(
                         '.'.join(
                             [prefix, var_name, image_index_str]
                         ).encode('ascii'),
@@ -356,7 +357,7 @@ class SuperPhotIOTree:
                         self.library_tree
                     )
 
-        superphot_library.update_result_tree(
+        self._superphot_library.update_result_tree(
             b'projsrc.srcid.name.' + image_index_str.encode('ascii'),
             (c_char_p * source_data.shape[0])(*source_data['ID']),
             b'str',
@@ -365,7 +366,7 @@ class SuperPhotIOTree:
         )
 
         c_data = source_data['bg'].astype(c_double)
-        superphot_library.update_result_tree(
+        self._superphot_library.update_result_tree(
             b'bg.value.' + image_index_str.encode('ascii'),
             c_data.ctypes.data_as(c_void_p),
             b'double',
@@ -373,7 +374,7 @@ class SuperPhotIOTree:
             self.library_tree
         )
         c_data = source_data['bg_err'].astype(c_double)
-        superphot_library.update_result_tree(
+        self._superphot_library.update_result_tree(
             b'bg.error.' + image_index_str.encode('ascii'),
             c_data.ctypes.data_as(c_void_p),
             b'double',
@@ -381,14 +382,14 @@ class SuperPhotIOTree:
             self.library_tree
         )
         c_data = source_data['bg_npix'].astype(c_uint)
-        superphot_library.update_result_tree(
+        self._superphot_library.update_result_tree(
             b'bg.npix.' + image_index_str.encode('ascii'),
             c_data.ctypes.data_as(c_void_p),
             b'uint',
             source_data.shape[0],
             self.library_tree
         )
-        superphot_library.update_result_tree(
+        self._superphot_library.update_result_tree(
             b'psffit.magnitude_1adu',
             numpy.array([magnitude_1adu],
                         dtype=c_double).ctypes.data_as(c_void_p),
@@ -396,7 +397,7 @@ class SuperPhotIOTree:
             1,
             self.library_tree
         )
-        superphot_library.update_result_tree(
+        self._superphot_library.update_result_tree(
             b'psffit.model',
             (c_char_p * 1)(b'bicubic'),
             b'str',
@@ -416,5 +417,5 @@ class SuperPhotIOTree:
     def __del__(self):
         """Destroy the tree allocated by __init__."""
 
-        superphot_library.destroy_result_tree(self.library_tree)
+        self._superphot_library.destroy_result_tree(self.library_tree)
 #pylint: enable=too-few-public-methods

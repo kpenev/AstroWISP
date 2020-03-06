@@ -3,7 +3,7 @@
 from ctypes import c_double, c_uint
 import numpy
 
-from superphot._initialize_library import superphot_library
+from superphot._initialize_library import get_superphot_library
 
 #The __init__, __del__ and __call__ methods justify making this a class.
 #pylint: disable=too-few-public-methods
@@ -37,11 +37,12 @@ class BackgroundExtractor:
         Returns: None
         """
 
+        self._superphot_library = get_superphot_library()
         self.image = image
         self.inner_radius = inner_radius
         self.outer_radius = outer_radius
         self.error_confidence = error_confidence
-        self._library_image = superphot_library.create_core_image(
+        self._library_image = self._superphot_library.create_core_image(
             self.image.shape[1],
             self.image.shape[0],
             self.image,
@@ -49,12 +50,14 @@ class BackgroundExtractor:
             None,
             True
         )
-        self.library_extractor = superphot_library.create_background_extractor(
-            inner_radius,
-            outer_radius,
-            inner_radius,
-            self._library_image,
-            error_confidence
+        self.library_extractor = (
+            self._superphot_library.create_background_extractor(
+                inner_radius,
+                outer_radius,
+                inner_radius,
+                self._library_image,
+                error_confidence
+            )
         )
 
         self._set_sources = False
@@ -89,7 +92,7 @@ class BackgroundExtractor:
 
         self._set_sources = True
 
-        superphot_library.add_source_list_to_background_extractor(
+        self._superphot_library.add_source_list_to_background_extractor(
             self.library_extractor,
             source_x,
             source_y,
@@ -99,7 +102,7 @@ class BackgroundExtractor:
         bg_value = numpy.empty(source_x.size, dtype=c_double)
         bg_error = numpy.empty(source_x.size, dtype=c_double)
         bg_numpix = numpy.empty(source_x.size, dtype=c_uint)
-        superphot_library.get_all_backgrounds(
+        self._superphot_library.get_all_backgrounds(
             self.library_extractor,
             bg_value,
             bg_error,
@@ -110,7 +113,7 @@ class BackgroundExtractor:
     def __del__(self):
         r"""Destroy the image and extractor created in :meth:`__init__`\ ."""
 
-        superphot_library.destroy_core_image(self._library_image)
-        superphot_library.destroy_background_extractor(self.library_extractor)
+        self._superphot_library.destroy_core_image(self._library_image)
+        self._superphot_library.destroy_background_extractor(self.library_extractor)
 
 #pylint: enable=too-few-public-methods

@@ -441,4 +441,10 @@ def _initialize_library():
 
     return library
 
-superphot_library = _initialize_library()
+def get_superphot_library():
+    """Return the shared superphot library."""
+
+    if not hasattr(get_superphot_library, 'result'):
+        get_superphot_library.result = _initialize_library()
+
+    return get_superphot_library.result
