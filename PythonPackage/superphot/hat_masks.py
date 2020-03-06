@@ -4,6 +4,8 @@ import numpy
 
 from superphot._initialize_library import get_superphot_library
 
+mask_flags = None
+
 def parse_hat_mask(header):
     """
     Extract the HAT-style mask contained in header.
@@ -38,6 +40,14 @@ def parse_hat_mask(header):
         >>>         print('%4d %4d %15d' % (x, y, f[1].data[y, x]))
     """
 
+    #The intent is to export this for use by other modules/scripts
+    #pylint: disable=global-statement
+    global mask_flags
+    #pylint: enable=global-statement
+
+    if mask_flags is None:
+        mask_flags = dict(get_superphot_library().mask_flags)
+
     mask_string = ''.join((c[1] + ' ') if c[0] == 'MASKINFO' else ''
                           for c in header.items()).encode('ascii')
     mask = numpy.zeros((header['NAXIS2'], header['NAXIS1']), dtype='int8')
@@ -46,5 +56,3 @@ def parse_hat_mask(header):
                                            header['NAXIS2'],
                                            mask.ravel())
     return mask
-
-mask_flags = dict(get_superphot_library().mask_flags)
