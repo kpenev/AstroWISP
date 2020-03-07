@@ -60,6 +60,72 @@ class PiecewiseBicubicPSF(PSFBase):
         return result
     #pylint: enable=invalid-name
 
+    def integrate(self,
+                  *,
+                  center_x,
+                  center_y,
+                  width,
+                  height,
+                  circle_radius=None):
+        """
+        Return integrals of the PSF over circle-rectangle overlaps.
+
+        Args:
+            center_x(float or array):    The x coordinate(s) of the center(s) of
+                the rectangle(s) to integrate over.
+
+            center_y(float or array):    The y coordinate(s) of the center(s) of
+                the rectangle(s) to integrate over.
+
+            width(float or array):    The width(s) of the rectangle(s).
+
+            height(float or array):    The height(s) of the rectangle(s).
+
+            circle_radius(float or array):    The rad(ii/us) of the circle(s).
+                For zero entries or None, the integral is over the full
+                rectangle(s).
+
+        Returns:
+            float or array:
+                The integral of the PSF over the specified area(s).
+        """
+
+        if not isinstance(center_x, numpy.ndarray):
+            center_x = numpy.array([center_x])
+            center_y = numpy.array([center_y])
+            width = numpy.array([width])
+            height = numpy.array([height])
+            circle_radius = numpy.array(
+                [0.0 if circle_radius is None else circle_radius]
+            )
+        else:
+            assert center_x.shape == center_y.shape
+            assert center_x.shape == width.shape
+            assert center_x.shape == height.shape
+
+        if circle_radius is None:
+            circle_radius = numpy.full(center_x.shape, 0.0)
+        else:
+            assert center_x.shape == circle_radius.shape
+
+        result = numpy.empty(center_x.shape, dtype=float, order='C')
+
+        self._superphot_library.integrate_piecewise_bicubic_psf(
+            self._library_psf,
+            center_x.astype(c_double, order='C', copy=False).ravel(),
+            center_y.astype(c_double, order='C', copy=False).ravel(),
+            width.astype(c_double, order='C', copy=False).ravel(),
+            height.astype(c_double, order='C', copy=False).ravel(),
+            circle_radius.astype(c_double, order='C', copy=False).ravel(),
+            result.size,
+            result.astype(c_double, order='C', copy=False).ravel()
+        )
+
+        if not isinstance(center_x, numpy.ndarray):
+            result = float(result)
+
+        return result
+
     def __del__(self):
         """Delete the underlying library PSF."""
 
@@ -75,7 +141,4 @@ class PiecewiseBicubicPSF(PSFBase):
         raise NotImplementedError
 
     def get_up_range(self):
-        raise NotImplementedError
-
-    def integrate(self, left, bottom, width, height):
         raise NotImplementedError
