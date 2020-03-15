@@ -228,7 +228,13 @@ def parse_command_line(parser=None):
         'direction (`\'x\'` or `\'y\'`) and the offset of the slice in the '
         'plot.'
     )
-
+    parser.add_argument(
+        '--skip-existing-plots',
+        action='store_true',
+        help='If this argument is enabled, if the output file for a plot '
+        'exists, the plot is not re-generated. This allows saving the time to '
+        'calculate the required data if all plots exist.'
+    )
 
     return parser.parse_args()
 
@@ -953,6 +959,18 @@ def fit_spline(prf_data, domain, cmdline_args):
         domain=domain
     )
 
+def list_plot_filenames(cmdline_args):
+    """List the filenames of all the plots that will be generated."""
+
+    assert cmdline_args.save_plot is not None
+    return [
+        plot_fname = cmdline_args.save_plot % dict(
+            dir=('x' if 'x_offset' in plot_slice else 'y'),
+            offset=plot_slice[direction + '_offset']
+        )
+        for plot_slice in cmdline_args.slice:
+    ]
+
 def show_plots(slice_prf_data, slice_splines, cmdline_args):
     """
     Generate the plots and display them to the user.
@@ -970,6 +988,22 @@ def show_plots(slice_prf_data, slice_splines, cmdline_args):
     """
 
     for plot_slice in cmdline_args.slice:
+        direction = ('x' if 'x_offset' in plot_slice else 'y')
+        plot_fname = (
+            None if cmdline_args.save_plot is None
+            else cmdline_args.save_plot % dict(
+                dir=direction,
+                offset=plot_slice[direction + '_offset']
+            )
+        )
+        if (
+                cmdline_args.skip_existing_plots
+                and
+                cmdline_args.plot_fname is not None
+                and
+                os.path.exists(plot_fname)
+        ):
+            continue
 
         for (prf_data, label), spline, color in zip(slice_prf_data,
                                                     slice_splines,
@@ -997,14 +1031,9 @@ def show_plots(slice_prf_data, slice_splines, cmdline_args):
 
         pyplot.axhline(y=0)
         pyplot.legend()
-        if cmdline_args.save_plot is None:
+        if plot_fname is None:
             pyplot.show()
         else:
-            direction = ('x' if 'x_offset' in plot_slice else 'y')
-            plot_fname = cmdline_args.save_plot % dict(
-                dir=direction,
-                offset=plot_slice[direction + '_offset']
-            )
             pyplot.savefig(plot_fname)
             pyplot.cla()
 
