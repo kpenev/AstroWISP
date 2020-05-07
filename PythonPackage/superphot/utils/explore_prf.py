@@ -964,11 +964,11 @@ def list_plot_filenames(cmdline_args):
 
     assert cmdline_args.save_plot is not None
     return [
-        plot_fname = cmdline_args.save_plot % dict(
+        cmdline_args.save_plot % dict(
             dir=('x' if 'x_offset' in plot_slice else 'y'),
             offset=plot_slice[direction + '_offset']
         )
-        for plot_slice in cmdline_args.slice:
+        for plot_slice in cmdline_args.slice
     ]
 
 def show_plots(slice_prf_data, slice_splines, cmdline_args):
