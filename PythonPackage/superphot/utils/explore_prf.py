@@ -667,14 +667,16 @@ def plot_prf_slice(prf_data,
         plot_pixel_indices = scipy.nonzero(
             scipy.fabs(prf_data[1] - y_offset) < thickness
         )
-        spline_x = scipy.linspace(prf_data[0].min(), prf_data[0].max(), 300)
-        spline_y = spline(spline_x, y_offset).flatten()
+        if spline is not None:
+            spline_x = scipy.linspace(prf_data[0].min(), prf_data[0].max(), 300)
+            spline_y = spline(spline_x, y_offset).flatten()
     else:
         plot_pixel_indices = scipy.nonzero(
             scipy.fabs(prf_data[0] - x_offset) < thickness
         )
-        spline_x = scipy.linspace(prf_data[1].min(), prf_data[1].max(), 300)
-        spline_y = spline(x_offset, spline_x).flatten()
+        if spline is not None:
+            spline_x = scipy.linspace(prf_data[1].min(), prf_data[1].max(), 300)
+            spline_y = spline(x_offset, spline_x).flatten()
 
     plot_x = prf_data[
         0 if x_offset is None else 1
@@ -696,13 +698,15 @@ def plot_prf_slice(prf_data,
                     color=points_color,
                     zorder=10,
                     label=label)
-    pyplot.plot(spline_x,
-                spline_y,
-                '-',
-                color=points_color,
-                linewidth=5,
-                zorder=20,
-                alpha=0.85)
+    if spline is not None:
+        pyplot.plot(spline_x,
+                    spline_y,
+                    '-',
+                    color=points_color,
+                    linewidth=5,
+                    zorder=20,
+                    alpha=0.85)
+
     if binning:
         pyplot.plot(
             scipy.stats.binned_statistic(plot_x,
