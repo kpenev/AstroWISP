@@ -14,7 +14,10 @@ import scipy
 import scipy.spatial
 import scipy.stats
 from scipy.interpolate import SmoothBivariateSpline
-import xalglib
+try:
+    import xalglib
+except:
+    pass
 from astropy.io import fits
 
 from kelly_colors import kelly_colors
@@ -296,37 +299,40 @@ def get_source_positions(catalogue_fname, trans_fname, image_resolution):
         )
         #pylint: enable=invalid-name
 
-    with open(trans_fname) as trans:
-        for line in trans:
-            if line.startswith('# 2MASS:'):
-                field_center = tuple(line.split()[2:4])
+    if trans_fname:
+        with open(trans_fname) as trans:
+            for line in trans:
+                if line.startswith('# 2MASS:'):
+                    field_center = tuple(line.split()[2:4])
 
-    get_xi_eta_cmd = subprocess.Popen(
-        [
-            'grtrans',
-            '--input', catalogue_fname,
-            '--wcs', 'tan,degrees,ra=%s,dec=%s' % field_center,
-            '--col-radec', '2,3',
-            '--col-out', '2,3',
-            '--output', '-'
-        ],
-        stdout=subprocess.PIPE
-    )
+        get_xi_eta_cmd = subprocess.Popen(
+            [
+                'grtrans',
+                '--input', catalogue_fname,
+                '--wcs', 'tan,degrees,ra=%s,dec=%s' % field_center,
+                '--col-radec', '2,3',
+                '--col-out', '2,3',
+                '--output', '-'
+            ],
+            stdout=subprocess.PIPE
+        )
 
-    get_x_y_cmd = subprocess.Popen(
-        [
-            'grtrans',
-            '--input', '-',
-            '--col-xy', '2,3',
-            '--input-transformation', trans_fname,
-            '--col-out', '2,3',
-            '--output', '-'
-        ],
-        stdin=get_xi_eta_cmd.stdout,
-        stdout=subprocess.PIPE
-    )
-    get_xi_eta_cmd.stdout.close()
-    projected_sources = get_x_y_cmd.communicate()[0]
+        get_x_y_cmd = subprocess.Popen(
+            [
+                'grtrans',
+                '--input', '-',
+                '--col-xy', '2,3',
+                '--input-transformation', trans_fname,
+                '--col-out', '2,3',
+                '--output', '-'
+            ],
+            stdin=get_xi_eta_cmd.stdout,
+            stdout=subprocess.PIPE
+        )
+        get_xi_eta_cmd.stdout.close()
+        projected_sources = get_x_y_cmd.communicate()[0]
+    else:
+        projected_sources = open(catalogue_fname, 'r').read()
     return list(
         filter(
             in_image,
@@ -1067,8 +1073,6 @@ def extract_pixel_data(cmdline_args, image_slices, sources=None):
             image slice.
     """
 
-    trans_fname = get_trans_fname(cmdline_args.frame_fname,
-                                  cmdline_args.trans_pattern)
     with fits.open(cmdline_args.frame_fname, 'readonly') as frame:
         #False positive
         #pylint: disable=no-member
@@ -1084,14 +1088,19 @@ def extract_pixel_data(cmdline_args, image_slices, sources=None):
         assert image_resolution == frame[first_hdu].data.shape
 
         if sources is None:
+            source_positions = get_source_positions(
+                cmdline_args.catalogue,
+                get_trans_fname(cmdline_args.frame_fname,
+                                cmdline_args.trans_pattern),
+                image_resolution
+            )
+
             #pylint: enable=no-member
             sources = get_source_info(
                 pixel_array=frame[first_hdu].data.astype(float),
                 stddev_array=frame[first_hdu + 1].data.astype(float),
                 mask_array=frame[first_hdu + 2].data.astype(c_char),
-                source_positions=get_source_positions(cmdline_args.catalogue,
-                                                      trans_fname,
-                                                      image_resolution),
+                source_positions=source_positions,
                 aperture=cmdline_args.flux_aperture,
                 bg_radii=cmdline_args.background_annulus
             )

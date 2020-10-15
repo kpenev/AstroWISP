@@ -1,5 +1,4 @@
 plugins {
-    id 'com.gradle.build-scan' version '2.2.1'
     id 'cpp'
     id "org.ysb33r.doxygen" version "0.4"
 }
@@ -147,13 +146,6 @@ doxygen {
     include "**/*.md"
 }
 
-buildScan {
-    termsOfServiceUrl = 'https://gradle.com/terms-of-service'     
-    termsOfServiceAgree = 'yes'                                   
-
-    publishAlways()                                               
-}
-
 def findLibraryLinux(String libNameStart)
 {
     def libInfoList
@@ -205,13 +197,25 @@ def findLibraryLinux(String libNameStart)
 
 def findLibraryMacOS(String libName)
 {
+    return [libName, 0, 0]
     def libFullPath
-    def ldCommand = "ld -l${libName} -dylib -t"
-    for(String path : System.env.LIBRARY_PATH.split(':')) {
-        if(path) ldCommand += " -L${path}"
+    def sout = new ByteArrayOutputStream()
+    def serr = new ByteArrayOutputStream()
+    exec {
+        commandLine "/usr/bin/ld"
+        args "-l${libName}", "-dylib", "-arch", "x86_64", "-t", "-w"
+        for(String path : System.env.LIBRARY_PATH.split(':')) {
+            if(path) args "-L${path}"
+        }
+        standardOutput = sout
+        errorOutput = serr
     }
 
-    libFullPath = ldCommand.execute().text.trim()
+    logger.debug("Out: '" + sout.toString() + "'")
+    logger.debug("Err: '" + serr.toString() + "'")
+
+    libFullPath = sout.toString().trim()
+    logger.debug("Result: '" + libFullPath + "'")
     if(!libFullPath) 
         throw new ProjectConfigurationException(
             "No candidate ${libName} library found!",
