@@ -142,6 +142,12 @@ def parse_command_line(parser=None):
         ' times.'
     )
     parser.add_argument(
+        '--discard-image-boundary',
+        action='store_true',
+        help='If passed, slices on the outside boundary of the image are not '
+        'plotted.'
+    )
+    parser.add_argument(
         '--error-scale',
         type=float,
         default=0.1,
@@ -172,7 +178,7 @@ def parse_command_line(parser=None):
     )
     spline_config.add_argument(
         '--spline-method',
-        choices=['alglib', 'scipy'],
+        choices=['alglib', 'scipy', ''],
         default='alglib',
         help='Which of the supported spline fitting methods to use. Default: '
         '%(default)s'
@@ -264,7 +270,10 @@ def get_trans_fname(frame_fname, trans_pattern):
     frame_dir, frame_id = os.path.split(frame_fname)
     trans_fname = trans_pattern % dict(frame_dir=frame_dir,
                                        frame_id=frame_id)
-    assert os.path.exists(trans_fname)
+    if not os.path.exists(trans_fname):
+        raise IOError('Transformation file %s does not exist!'
+                      %
+                      trans_fname)
     return trans_fname
 
 def get_source_positions(catalogue_fname, trans_fname, image_resolution):
@@ -724,13 +733,13 @@ def plot_prf_slice(prf_data,
             'o',
             markerfacecolor=points_color,
             markeredgecolor='black',
-            markersize=15,
+            markersize=12,
             linewidth=3,
             zorder=30,
             alpha=0.7
         )
 
-def get_image_slices(splits):
+def get_image_slices(splits, inner_only):
     """Return a list of (x-slice, y-slice) tuples per `--split-image` arg."""
 
     split_slices = dict(x=[slice(0, None)], y=[slice(0, None)])
@@ -739,6 +748,11 @@ def get_image_slices(splits):
         split_slices[direction][-1] = slice(split_slices[direction][-1].start,
                                             value)
         split_slices[direction].append(slice(value, None))
+
+    if inner_only:
+        for direction in 'xy':
+            split_slices[direction] = split_slices[direction][1:-1]
+
     print('Split slices: ' + repr(split_slices))
     return [
         (x_split, y_split)
@@ -952,6 +966,9 @@ def pad_prf_data(prf_data, cmdline_args):
 def fit_spline(prf_data, domain, cmdline_args):
     """Return the best-fit spline to the PRF per the command line config."""
 
+    if not cmdline_args.spline_method:
+        return
+
     if cmdline_args.spline_method == 'scipy':
         return SmoothBivariateSpline(
             prf_data[0],
@@ -1017,11 +1034,7 @@ def show_plots(slice_prf_data, slice_splines, cmdline_args):
 
         for (prf_data, label), spline, color in zip(slice_prf_data,
                                                     slice_splines,
-                                                    [
-                                                        '#ff0000',
-                                                        '#00ff00',
-                                                        '#0000ff'
-                                                    ]):#kelly_colors[2:]):
+                                                    kelly_colors[2:]):
 
             plot_prf_slice(
                 prf_data[0],
@@ -1046,7 +1059,7 @@ def show_plots(slice_prf_data, slice_splines, cmdline_args):
         pyplot.axhline(y=0)
         pyplot.xlabel('pixel center - source center [pix]')
         pyplot.ylabel('normalized pixel response')
-#        pyplot.legend()
+        pyplot.legend()
         if plot_fname is None:
             pyplot.show()
         else:
@@ -1146,7 +1159,8 @@ def main(cmdline_args):
     """Avoid polluting global namespace."""
 
 
-    image_slices = get_image_slices(cmdline_args.split_image)
+    image_slices = get_image_slices(cmdline_args.split_image,
+                                    cmdline_args.discard_image_boundary)
 
     slice_prf_data = extract_pixel_data(cmdline_args, image_slices)
 
