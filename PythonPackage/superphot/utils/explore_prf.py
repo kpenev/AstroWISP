@@ -1011,7 +1011,11 @@ def show_plots(slice_prf_data, slice_splines, cmdline_args):
 
         for (prf_data, label), spline, color in zip(slice_prf_data,
                                                     slice_splines,
-                                                    kelly_colors[1:]):
+                                                    [
+                                                        '#ff0000',
+                                                        '#00ff00',
+                                                        '#0000ff'
+                                                    ]):#kelly_colors[2:]):
 
             plot_prf_slice(
                 prf_data[0],
@@ -1034,7 +1038,9 @@ def show_plots(slice_prf_data, slice_splines, cmdline_args):
             pyplot.ylim(*cmdline_args.plot_y_range)
 
         pyplot.axhline(y=0)
-        pyplot.legend()
+        pyplot.xlabel('pixel center - source center [pix]')
+        pyplot.ylabel('normalized pixel response')
+#        pyplot.legend()
         if plot_fname is None:
             pyplot.show()
         else:
@@ -1080,8 +1086,8 @@ def extract_pixel_data(cmdline_args, image_slices, sources=None):
         if sources is None:
             #pylint: enable=no-member
             sources = get_source_info(
-                pixel_array=frame[first_hdu].data,
-                stddev_array=frame[first_hdu + 1].data,
+                pixel_array=frame[first_hdu].data.astype(float),
+                stddev_array=frame[first_hdu + 1].data.astype(float),
                 mask_array=frame[first_hdu + 2].data.astype(c_char),
                 source_positions=get_source_positions(cmdline_args.catalogue,
                                                       trans_fname,
@@ -1137,7 +1143,7 @@ def main(cmdline_args):
 
     slice_splines = [
         fit_spline(prf_data, domain, cmdline_args)
-        for prf_data, domain in slice_prf_data
+        for (prf_data, domain), label in slice_prf_data
     ]
 
     show_plots(slice_prf_data,
