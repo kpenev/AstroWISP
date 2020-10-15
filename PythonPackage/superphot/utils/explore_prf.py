@@ -3,13 +3,17 @@
 #pylint: disable=too-many-lines
 
 """Create some plots helpful for picking PSF grid."""
+import matplotlib
+matplotlib.use('TkAgg')
 
 from argparse import ArgumentParser, Action as ArgparseAction
 import os.path
 import subprocess
 from ctypes import c_double, c_char
-
+import numpy
 from matplotlib import pyplot
+from matplotlib import cm
+from mpl_toolkits import mplot3d
 import scipy
 import scipy.spatial
 import scipy.stats
@@ -23,6 +27,7 @@ from astropy.io import fits
 from kelly_colors import kelly_colors
 
 from superphot import BackgroundExtractor, FitStarShape, SubPixPhot
+
 
 def parse_command_line(parser=None):
     """
@@ -82,9 +87,10 @@ def parse_command_line(parser=None):
     parser.add_argument(
         '--trans-pattern', '-t',
         default=os.path.join('%(frame_dir)s',
-                             '..',
+                             '../..',
                              'ASTROM',
-                             '%(frame_id)s.trans'),
+                             '10-20170306',
+                             '%(frame_id)s.fistar.trans'),
         help="A pattern with substitutions `'%%(frame_dir)s'` (directory "
         "containing the frame), and `'%%(frame_id)s'` (base filename of the "
         "frame without the `fits` or `fits.fz` extension) that expands to "
@@ -99,7 +105,7 @@ def parse_command_line(parser=None):
     )
     parser.add_argument(
         '--prf-range', '-r',
-        default=(11.0, 8.0, 4.0, 4.0),
+        default=(8.0, 8.0, 4.0, 4.0),
         nargs=4,
         type=float,
         help="Width, height, x and y offset of the source extraction center "
@@ -229,13 +235,32 @@ def parse_command_line(parser=None):
         ' of y values.'
     )
     plot_config.add_argument(
+        '--plot-multi-image',
+        action='store_true',
+        help='If true, the plots will be generated as multiple separate images, '
+             'instead of stacked on top of one another'
+    )
+    plot_config.add_argument(
+        '--plot-entire-prf',
+        action='store_true',
+        help='If true, will generate a plot of the entire prf on a 3d scale.'
+    )
+    plot_config.add_argument(
+        '--save-prf-plot',
+        default=None,
+        help='This should be a template for the filename for plotting the entire prf '
+             'involving%%(x_split)s and%%(y_split)s which get substituted by the image '
+             'slices given.'
+    )
+    plot_config.add_argument(
         '--save-plot',
         default=None,
         help='If this option is not specified, plots will be displayed, '
         'otherwise, this should be a template for the filename involving '
         '%%(dir) and %%(offset) substitutions which get substituted by the '
         'direction (`\'x\'` or `\'y\'`) and the offset of the slice in the '
-        'plot.'
+        'plot. If using plot-multi-image option include %%(x_split)s and'
+        '%%(y_split)s which get substituted by the image slices given.'
     )
     parser.add_argument(
         '--skip-existing-plots',
@@ -244,8 +269,9 @@ def parse_command_line(parser=None):
         'exists, the plot is not re-generated. This allows saving the time to '
         'calculate the required data if all plots exist.'
     )
-
+    #TODO write common line argument for markersize for plots
     return parser.parse_args()
+
 
 def get_trans_fname(frame_fname, trans_pattern):
     """
@@ -268,13 +294,14 @@ def get_trans_fname(frame_fname, trans_pattern):
     assert frame_fname.lower().endswith('.fits')
     frame_fname = frame_fname[:-len('.fits')]
     frame_dir, frame_id = os.path.split(frame_fname)
-    trans_fname = trans_pattern % dict(frame_dir=frame_dir,
-                                       frame_id=frame_id)
+    trans_fname = os.path.abspath(trans_pattern % dict(frame_dir=frame_dir,
+                                                       frame_id=frame_id))
     if not os.path.exists(trans_fname):
         raise IOError('Transformation file %s does not exist!'
                       %
                       trans_fname)
     return trans_fname
+
 
 def get_source_positions(catalogue_fname, trans_fname, image_resolution):
     """
@@ -308,40 +335,38 @@ def get_source_positions(catalogue_fname, trans_fname, image_resolution):
         )
         #pylint: enable=invalid-name
 
-    if trans_fname:
-        with open(trans_fname) as trans:
-            for line in trans:
-                if line.startswith('# 2MASS:'):
-                    field_center = tuple(line.split()[2:4])
+    with open(trans_fname) as trans:
+        for line in trans:
+            if line.startswith('# 2MASS:'):
+                field_center = tuple(line.split()[2:4])
 
-        get_xi_eta_cmd = subprocess.Popen(
-            [
-                'grtrans',
-                '--input', catalogue_fname,
-                '--wcs', 'tan,degrees,ra=%s,dec=%s' % field_center,
-                '--col-radec', '2,3',
-                '--col-out', '2,3',
-                '--output', '-'
-            ],
-            stdout=subprocess.PIPE
-        )
+    get_xi_eta_cmd = subprocess.Popen(
+        [
+            'grtrans',
+            '--input', catalogue_fname,
+            '--wcs', 'tan,degrees,ra=%s,dec=%s' % field_center,
+            '--col-radec', '2,3',
+            '--col-out', '2,3',
+            '--output', '-'
+        ],
+        stdout=subprocess.PIPE
+    )
 
-        get_x_y_cmd = subprocess.Popen(
-            [
-                'grtrans',
-                '--input', '-',
-                '--col-xy', '2,3',
-                '--input-transformation', trans_fname,
-                '--col-out', '2,3',
-                '--output', '-'
-            ],
-            stdin=get_xi_eta_cmd.stdout,
-            stdout=subprocess.PIPE
-        )
-        get_xi_eta_cmd.stdout.close()
-        projected_sources = get_x_y_cmd.communicate()[0]
-    else:
-        projected_sources = open(catalogue_fname, 'r').read()
+    get_x_y_cmd = subprocess.Popen(
+        [
+            'grtrans',
+            '--input', '-',
+            '--col-xy', '2,3',
+            '--input-transformation', trans_fname,
+            '--col-out', '2,3',
+            '--output', '-'
+        ],
+        stdin=get_xi_eta_cmd.stdout,
+        stdout=subprocess.PIPE
+    )
+    get_xi_eta_cmd.stdout.close()
+    projected_sources = get_x_y_cmd.communicate()[0]
+
     return list(
         filter(
             in_image,
@@ -352,10 +377,12 @@ def get_source_positions(catalogue_fname, trans_fname, image_resolution):
         )
     )
 
+
 def flux_from_magnitude(magnitude, magnitude_1adu):
     """Return the flux corresponding to the given magnitude."""
 
     return 10.0**((magnitude_1adu - magnitude) / 2.5)
+
 
 def get_source_info(*,
                     pixel_array,
@@ -428,7 +455,6 @@ def get_source_info(*,
             ],
             [measure_background]
         )
-
         get_flux = SubPixPhot(apertures=[aperture])
         get_flux(
             (pixel_array, stddev_array, mask_array),
@@ -467,6 +493,7 @@ def get_source_info(*,
 
     return result
 
+
 #No clean way to simplify found.
 #pylint: disable=too-many-locals
 def find_pixel_offsets(sources,
@@ -504,7 +531,6 @@ def find_pixel_offsets(sources,
             Pixels that are not within range of any PSF or that are within more
             than one PSF's range have `nan` entries.
     """
-
     result = scipy.full(
         image_resolution,
         scipy.nan,
@@ -561,7 +587,6 @@ def find_pixel_offsets(sources,
         result_patch['zero_point'] = this_source['bg']
         result_patch['norm'] = this_source['flux']
     result[shared] = scipy.nan
-
     if plot:
         pyplot.imshow(result['x_off'], origin='lower')
         pyplot.colorbar()
@@ -574,8 +599,10 @@ def find_pixel_offsets(sources,
         pyplot.imshow(result['norm'], origin='lower')
         pyplot.colorbar()
         pyplot.show()
+
     return result
 #pylint: enable=too-many-locals
+
 
 def get_prf_data(pixel_values,
                  pixel_stddev,
@@ -593,6 +620,9 @@ def get_prf_data(pixel_values,
 
         pixel_offsets:    The slice of the return value of find_pixel_offsets()
             corresponding to `pixel_values`.
+
+        error_threshold(float):    See `--error-threshold` command line
+            argument
 
     Returns:
         (2-D float array, 2-D float array, 2-D float array, 2-D float array):
@@ -623,7 +653,6 @@ def get_prf_data(pixel_values,
         /
         pixel_offsets['norm']
     )
-
     #False positive
     #pylint: disable=assignment-from-no-return
     include = scipy.logical_and(scipy.isfinite(prf_measurements),
@@ -636,6 +665,7 @@ def get_prf_data(pixel_values,
         prf_measurements[include],
         prf_errors[include]
     ))
+
 
 def plot_prf_slice(prf_data,
                    spline,
@@ -711,14 +741,15 @@ def plot_prf_slice(prf_data,
                     plot_err_y * error_scale,
                     fmt='o',
                     color=points_color,
+                    markersize=2,  #TODO make this common line later
                     zorder=10,
                     label=label)
     if spline is not None:
         pyplot.plot(spline_x,
                     spline_y,
                     '-',
-                    color=points_color,
-                    linewidth=5,
+                    color='black',
+                    linewidth=3,
                     zorder=20,
                     alpha=0.85)
 
@@ -739,8 +770,136 @@ def plot_prf_slice(prf_data,
             alpha=0.7
         )
 
+
+def plot_entire_prf(cmdline_args,
+                    image_slices,
+                    grid_x,
+                    grid_y,
+                    sources=None):
+    """
+        Generates the plots of the entire PRF on a 3d axes and displays it to the user.
+
+        Args:
+            cmdline_args:    The parsed command line arguments.
+
+            image_slices:    How to split the image when plotting (the return value
+            of get_image_slices())
+
+            grid_x:     The PSF x-grid, pulled from star_shape_grid
+
+            grid_y:     The PSF y-grid, pulled from star_shape_grid
+
+            sources(scipy.array or None):    If not None, it should be an array with
+            equivalent structure to get_source_info(). If None, get_source_info()
+            is used to initialize it.
+
+
+        Returns:
+            None
+        """
+
+    trans_fname = get_trans_fname(cmdline_args.frame_fname,
+                                  cmdline_args.trans_pattern)
+    with fits.open(cmdline_args.frame_fname, 'readonly') as frame:
+        # False positive
+        # pylint: disable=no-member
+        if frame[0].header['NAXIS']:
+            image_resolution = (frame[0].header['NAXIS2'],
+                                frame[0].header['NAXIS1'])
+            first_hdu = 0
+        else:
+            image_resolution = (frame[1].header['NAXIS2'],
+                                frame[1].header['NAXIS1'])
+            first_hdu = 1
+
+        assert image_resolution == frame[first_hdu].data.shape
+
+        if sources is None:
+            # pylint: enable=no-member
+            sources = get_source_info(
+                pixel_array=frame[first_hdu].data,
+                stddev_array=frame[first_hdu + 1].data,
+                mask_array=frame[first_hdu + 2].data.astype(c_char),
+                source_positions=get_source_positions(cmdline_args.catalogue,
+                                                      trans_fname,
+                                                      image_resolution),
+                aperture=cmdline_args.flux_aperture,
+                bg_radii=cmdline_args.background_annulus
+            )
+            # pylint: disable=no-member
+
+        pixel_offsets = find_pixel_offsets(sources,
+                                           cmdline_args.prf_range,
+                                           image_resolution,
+                                           2.0 * cmdline_args.flux_aperture)
+
+        for x_image_slice, y_image_slice, x_index, y_index in image_slices:
+            print('first_hdu='+repr(first_hdu))
+            print('x_image_slice='+repr(x_image_slice))
+            print('y_image_slice='+repr(y_image_slice))
+            print('frame_length='+repr(len(frame)))
+
+            prf_data = get_prf_data(frame[first_hdu].data[y_image_slice, x_image_slice],
+                                    frame[first_hdu + 1].data[y_image_slice, x_image_slice],
+                                    pixel_offsets[y_image_slice, x_image_slice],
+                                    cmdline_args.error_threshold)
+            plot_x = prf_data[0]
+            plot_y = prf_data[1]
+            plot_z = prf_data[2]
+            if cmdline_args.save_prf_plot is not None:
+                plot_fname = (cmdline_args.save_prf_plot % dict(
+                    x_split=(str(x_image_slice) + '_' + str(x_index)),
+                    y_split=(str(y_image_slice) + '_' + str(y_index)))
+                              )
+            else:
+                plot_fname = None
+
+            # 3D
+            # minz = numpy.amin(plot_z)
+            # maxz = numpy.amax(plot_z)
+            # norm_z = (plot_z - plot_z.min()) / plot_z.max()
+            # colors = cm.hsv(norm_z)
+            # ax = pyplot.axes(projection='3d')
+            # ax.scatter3D(plot_x,
+            #              plot_y,
+            #              plot_z,
+            #              cmap=colors,
+            #              c=colors,
+            #              s=10,
+            #              marker='o',
+            #              alpha=0.3,
+            #              vmin=minz,
+            #              vmax=maxz
+            #              )
+
+            pyplot.scatter(plot_x,
+                           plot_y,
+                           cmap='hsv',
+                           c=plot_z,
+                           s=10,
+                           marker='o',
+                           alpha=0.3,
+                           vmin=-0.001,
+                           vmax=0.15
+                           )
+            pyplot.colorbar()
+            pyplot.xticks(grid_x)
+            pyplot.yticks(grid_y)
+            pyplot.grid(grid_y, linestyle='--', color='k')
+            pyplot.grid(grid_x, linestyle='--', color='k')
+
+            if plot_fname is None:
+                pyplot.show()
+            else:
+                pyplot.savefig(plot_fname)
+                pyplot.cla()
+
+            #TODO need to manually set vmin and vmax make color have a wider
+            # range try to find color limit, should make them quantiles functions
+
+
 def get_image_slices(splits, inner_only):
-    """Return a list of (x-slice, y-slice) tuples per `--split-image` arg."""
+    """Return a list of (x-slice, y-slice, x_index, y_index) tuples per `--split-image` arg."""
 
     split_slices = dict(x=[slice(0, None)], y=[slice(0, None)])
 
@@ -754,11 +913,13 @@ def get_image_slices(splits, inner_only):
             split_slices[direction] = split_slices[direction][1:-1]
 
     print('Split slices: ' + repr(split_slices))
+
     return [
-        (x_split, y_split)
-        for x_split in split_slices['x']
-        for y_split in split_slices['y']
+        (x_split, y_split, x_index, y_index)
+        for x_index, x_split in enumerate(split_slices['x'])
+        for y_index, y_split in enumerate(split_slices['y'])
     ]
+
 
 class AlglibSpline:
     """Wrap alglib based splines so they can be evaluated on scipy arrays."""
@@ -830,6 +991,7 @@ class AlglibSpline:
 
         for node in getattr(self, direction + '_nodes'):
             pyplot.axvline(x=node, color=color)
+
 
 #TODO: simplify later
 #pylint: disable=too-many-locals
@@ -963,6 +1125,7 @@ def pad_prf_data(prf_data, cmdline_args):
     return padded_prf_data, domain
 #pylint: enable=too-many-locals
 
+
 def fit_spline(prf_data, domain, cmdline_args):
     """Return the best-fit spline to the PRF per the command line config."""
 
@@ -986,19 +1149,36 @@ def fit_spline(prf_data, domain, cmdline_args):
         domain=domain
     )
 
+
 def list_plot_filenames(cmdline_args):
     """List the filenames of all the plots that will be generated."""
 
     assert cmdline_args.save_plot is not None
-    return [
-        cmdline_args.save_plot % dict(
-            dir=('x' if 'x_offset' in plot_slice else 'y'),
-            offset=plot_slice[direction + '_offset']
-        )
-        for plot_slice in cmdline_args.slice
-    ]
+    if cmdline_args.plot_multi_image is True:
+        return [
+            cmdline_args.save_plot % dict(
+                dir=('x' if 'x_offset' in plot_slice else 'y'),
+                offset=plot_slice[direction + '_offset'],
+                x_split=(str(x_image_slice) + str(x_index) if x_image_slice else None),
+                y_split=(str(y_image_slice) + str(y_index) if y_image_slice else None)
+            )
+            for plot_slice in cmdline_args.slice
+            for (x_image_slice,
+                 y_image_slice,
+                 x_index,
+                 y_index) in get_image_slices(cmdline_args.split_image)
+        ]
+    else:
+        return [
+            cmdline_args.save_plot % dict(
+                dir=('x' if 'x_offset' in plot_slice else 'y'),
+                offset=plot_slice[direction + '_offset'],
+            )
+            for plot_slice in cmdline_args.slice
+        ]
 
-def show_plots(slice_prf_data, slice_splines, cmdline_args):
+
+def show_plots(slice_prf_data, slice_splines, image_slices, cmdline_args):
     """
     Generate the plots and display them to the user.
 
@@ -1010,32 +1190,43 @@ def show_plots(slice_prf_data, slice_splines, cmdline_args):
             each image slice. Must support evaluation using arrays of x & y
             positions.
 
+        image_slices:    How to split the image when plotting (the return value
+            of get_image_slices())
+
+        cmdline_args:    The parsed command line arguments.
+
     Returns
         None
     """
 
     for plot_slice in cmdline_args.slice:
         direction = ('x' if 'x_offset' in plot_slice else 'y')
-        plot_fname = (
-            None if cmdline_args.save_plot is None
-            else cmdline_args.save_plot % dict(
-                dir=direction,
-                offset=plot_slice[direction + '_offset']
+        if cmdline_args.plot_multi_image is False:
+            plot_fname = (
+                None if cmdline_args.save_plot is None
+                else cmdline_args.save_plot % dict(
+                    dir=direction,
+                    offset=plot_slice[direction + '_offset']
+                )
             )
-        )
-        if (
-                cmdline_args.skip_existing_plots
-                and
-                cmdline_args.plot_fname is not None
-                and
-                os.path.exists(plot_fname)
-        ):
-            continue
+            if (
+                    cmdline_args.skip_existing_plots
+                    and
+                    cmdline_args.plot_fname is not None
+                    and
+                    os.path.exists(plot_fname)
+            ):
+                continue
+        if cmdline_args.plot_y_range is not None:
+            pyplot.ylim(*cmdline_args.plot_y_range)
 
-        for (prf_data, label), spline, color in zip(slice_prf_data,
-                                                    slice_splines,
-                                                    kelly_colors[2:]):
-
+        for (prf_data, label),\
+            spline,\
+            (x_image_slice, y_image_slice, x_index, y_index),\
+            color in zip(slice_prf_data,
+                         slice_splines,
+                         image_slices,
+                         kelly_colors[2:]):
             plot_prf_slice(
                 prf_data[0],
                 spline,
@@ -1052,19 +1243,40 @@ def show_plots(slice_prf_data, slice_splines, cmdline_args):
                 )
             except AttributeError:
                 pass
+            if cmdline_args.plot_multi_image:
+                plot_fname = (cmdline_args.save_plot % dict(dir=direction,
+                                                            offset=plot_slice[direction + '_offset'],
+                                                            x_split=(str(x_image_slice) + '_' + str(x_index)),
+                                                            y_split=(str(y_image_slice) + '_' + str(y_index))))
+                if (cmdline_args.skip_existing_plots and
+                        cmdline_args.plot_fname is not None and
+                        os.path.exists(plot_fname)):
+                    continue
 
-        if cmdline_args.plot_y_range is not None:
-            pyplot.ylim(*cmdline_args.plot_y_range)
+                pyplot.axhline(y=0)
+                pyplot.legend()
+                if plot_fname is None:
+                    pyplot.show()
+                else:
+                    pyplot.savefig(plot_fname)
+                    pyplot.xlabel('pixel center - source center [pix]')
+                    pyplot.ylabel('normalized pixel response')
+                    pyplot.cla()
+
+        if cmdline_args.plot_multi_image is False:
+            continue
 
         pyplot.axhline(y=0)
         pyplot.xlabel('pixel center - source center [pix]')
         pyplot.ylabel('normalized pixel response')
         pyplot.legend()
+
         if plot_fname is None:
             pyplot.show()
         else:
             pyplot.savefig(plot_fname)
             pyplot.cla()
+
 
 def extract_pixel_data(cmdline_args, image_slices, sources=None):
     """
@@ -1086,6 +1298,8 @@ def extract_pixel_data(cmdline_args, image_slices, sources=None):
             image slice.
     """
 
+    trans_fname = get_trans_fname(cmdline_args.frame_fname,
+                                  cmdline_args.trans_pattern)
     with fits.open(cmdline_args.frame_fname, 'readonly') as frame:
         #False positive
         #pylint: disable=no-member
@@ -1101,19 +1315,14 @@ def extract_pixel_data(cmdline_args, image_slices, sources=None):
         assert image_resolution == frame[first_hdu].data.shape
 
         if sources is None:
-            source_positions = get_source_positions(
-                cmdline_args.catalogue,
-                get_trans_fname(cmdline_args.frame_fname,
-                                cmdline_args.trans_pattern),
-                image_resolution
-            )
-
             #pylint: enable=no-member
             sources = get_source_info(
-                pixel_array=frame[first_hdu].data.astype(float),
-                stddev_array=frame[first_hdu + 1].data.astype(float),
+                pixel_array=frame[first_hdu].data,
+                stddev_array=frame[first_hdu + 1].data,
                 mask_array=frame[first_hdu + 2].data.astype(c_char),
-                source_positions=source_positions,
+                source_positions=get_source_positions(cmdline_args.catalogue,
+                                                      trans_fname,
+                                                      image_resolution),
                 aperture=cmdline_args.flux_aperture,
                 bg_radii=cmdline_args.background_annulus
             )
@@ -1123,7 +1332,6 @@ def extract_pixel_data(cmdline_args, image_slices, sources=None):
                                            cmdline_args.prf_range,
                                            image_resolution,
                                            2.0 * cmdline_args.flux_aperture)
-
         return [
             (
                 pad_prf_data(
@@ -1152,26 +1360,34 @@ def extract_pixel_data(cmdline_args, image_slices, sources=None):
                     )
                 )
             )
-            for x_image_slice, y_image_slice in image_slices
+            for x_image_slice, y_image_slice, x_index, y_index in image_slices
         ]
+
 
 def main(cmdline_args):
     """Avoid polluting global namespace."""
 
-
     image_slices = get_image_slices(cmdline_args.split_image,
                                     cmdline_args.discard_image_boundary)
-
+    prf_data = get_prf_data
     slice_prf_data = extract_pixel_data(cmdline_args, image_slices)
-
     slice_splines = [
         fit_spline(prf_data, domain, cmdline_args)
-        for (prf_data, domain), label in slice_prf_data
+        for prf_data, domain in slice_prf_data
     ]
 
     show_plots(slice_prf_data,
                slice_splines,
+               image_slices,
                cmdline_args)
+
+    #TODO fix this to, broken atm fix sources
+
+    # if cmdline_args.plot_entire_prf:
+    #     plot_entire_prf(cmdline_args,
+    #                     image_slices,
+    #                     sources=None)
+
 
 if __name__ == '__main__':
     main(parse_command_line())
