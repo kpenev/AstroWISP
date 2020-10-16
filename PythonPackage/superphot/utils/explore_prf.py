@@ -817,8 +817,8 @@ def plot_entire_prf(cmdline_args,
         if sources is None:
             # pylint: enable=no-member
             sources = get_source_info(
-                pixel_array=frame[first_hdu].data,
-                stddev_array=frame[first_hdu + 1].data,
+                pixel_array=frame[first_hdu].data.astype(float),
+                stddev_array=frame[first_hdu + 1].data.astype(float),
                 mask_array=frame[first_hdu + 2].data.astype(c_char),
                 source_positions=get_source_positions(cmdline_args.catalogue,
                                                       trans_fname,
