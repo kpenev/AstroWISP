@@ -12,14 +12,14 @@ _logger = logging.getLogger(__name__)
 from astropy.io import fits
 
 def prepare_file_output(fname,
-                        allow_overwrite,
+                        allow_existing,
                         allow_dir_creation,
                         delete_existing=False):
     """Ger ready to create/overwrite a file with the given name."""
 
     result = False
     if os.path.exists(fname):
-        if not allow_overwrite:
+        if not allow_existing:
             raise OSError(
                 'Destination file %s already exists and overwritting not '
                 'allowed!'
@@ -68,3 +68,20 @@ def get_fits_fname_root(fits_fname):
         result, extension = os.path.splitext(result)
         if not extension:
             return result
+
+def get_fname_pattern_substitutions(fits_fname, fits_header=None):
+    """Return a dictionary that can be used to complete a filename pattern."""
+
+    if fits_header is None:
+        with fits.open(fits_fname, 'readonly') as fits_file:
+            fits_header = fits_file[
+                0 if fits_file[0].header['NAXIS'] else 1
+            ].header
+
+    return dict(
+        fits_header,
+        FITS_ROOT=get_fits_fname_root(fits_fname),
+        FITS_DIR=os.path.dirname(fits_fname)
+    )
+
+
