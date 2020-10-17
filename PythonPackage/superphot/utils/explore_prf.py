@@ -3,26 +3,26 @@
 #pylint: disable=too-many-lines
 
 """Create some plots helpful for picking PSF grid."""
-import matplotlib
-matplotlib.use('TkAgg')
 
-from argparse import ArgumentParser, Action as ArgparseAction
 import os.path
 import subprocess
 from ctypes import c_double, c_char
-import numpy
+
 from matplotlib import pyplot
-from matplotlib import cm
-from mpl_toolkits import mplot3d
 import scipy
 import scipy.spatial
 import scipy.stats
 from scipy.interpolate import SmoothBivariateSpline
 try:
     import xalglib
-except:
+finally:
     pass
 from astropy.io import fits
+from configargparse import\
+    ArgumentParser,\
+    Action as ArgparseAction,\
+    DefaultsFormatter
+
 
 from kelly_colors import kelly_colors
 
@@ -78,7 +78,12 @@ def parse_command_line(parser=None):
                 'thickness': thickness}
 
     if parser is None:
-        parser = ArgumentParser(description=__doc__)
+        parser = ArgumentParser(
+            description=__doc__,
+            default_config_files=['explore_prf.cfg'],
+            formatter_class=DefaultsFormatter,
+            ignore_unknown_config_file_keys=False
+        )
 
     parser.add_argument(
         'frame_fname',
@@ -97,7 +102,7 @@ def parse_command_line(parser=None):
         "'%(default)s'."
     )
     parser.add_argument(
-        '--catalogue', '-c',
+        '--catalogue',
         default='/data/ETS_HATP32/ASTROM/catalogue.ucac4',
         help='The full path of the catalogue containing all sources in the '
         'image. Default: \'%(default)s\'.'
@@ -236,8 +241,8 @@ def parse_command_line(parser=None):
     plot_config.add_argument(
         '--plot-multi-image',
         action='store_true',
-        help='If true, the plots will be generated as multiple separate images, '
-             'instead of stacked on top of one another'
+        help='If true, the plots will be generated as multiple separate images,'
+             ' instead of stacked on top of one another'
     )
     plot_config.add_argument(
         '--plot-entire-prf',
@@ -247,9 +252,9 @@ def parse_command_line(parser=None):
     plot_config.add_argument(
         '--save-prf-plot',
         default=None,
-        help='This should be a template for the filename for plotting the entire prf '
-             'involving%%(x_split)s and%%(y_split)s which get substituted by the image '
-             'slices given.'
+        help='This should be a template for the filename for plotting the '
+        'entire prf involving%%(x_split)s and%%(y_split)s which get substituted'
+        ' by the image slices given.'
     )
     plot_config.add_argument(
         '--save-plot',
@@ -268,6 +273,13 @@ def parse_command_line(parser=None):
         'exists, the plot is not re-generated. This allows saving the time to '
         'calculate the required data if all plots exist.'
     )
+
+    parser.add_argument(
+        '--config', '-c',
+        is_config_file=True,
+        help='Config file to use instead of default.'
+    )
+
     #TODO write common line argument for markersize for plots
     return parser.parse_args()
 
@@ -776,26 +788,26 @@ def plot_entire_prf(cmdline_args,
                     grid_y,
                     sources=None):
     """
-        Generates the plots of the entire PRF on a 3d axes and displays it to the user.
+    Plots the entire PRF on a 3d axes and displays it to the user.
 
-        Args:
-            cmdline_args:    The parsed command line arguments.
+    Args:
+        cmdline_args:    The parsed command line arguments.
 
-            image_slices:    How to split the image when plotting (the return value
-            of get_image_slices())
+        image_slices:    How to split the image when plotting (the return
+            value of get_image_slices())
 
-            grid_x:     The PSF x-grid, pulled from star_shape_grid
+        grid_x:     The PSF x-grid, pulled from star_shape_grid
 
-            grid_y:     The PSF y-grid, pulled from star_shape_grid
+        grid_y:     The PSF y-grid, pulled from star_shape_grid
 
-            sources(scipy.array or None):    If not None, it should be an array with
-            equivalent structure to get_source_info(). If None, get_source_info()
-            is used to initialize it.
+        sources(scipy.array or None):    If not None, it should be an array with
+            equivalent structure to get_source_info(). If None,
+            get_source_info() is used to initialize it.
 
 
-        Returns:
-            None
-        """
+    Returns:
+        None
+    """
 
     trans_fname = get_trans_fname(cmdline_args.frame_fname,
                                   cmdline_args.trans_pattern)
@@ -838,10 +850,12 @@ def plot_entire_prf(cmdline_args,
             print('y_image_slice='+repr(y_image_slice))
             print('frame_length='+repr(len(frame)))
 
-            prf_data = get_prf_data(frame[first_hdu].data[y_image_slice, x_image_slice],
-                                    frame[first_hdu + 1].data[y_image_slice, x_image_slice],
-                                    pixel_offsets[y_image_slice, x_image_slice],
-                                    cmdline_args.error_threshold)
+            prf_data = get_prf_data(
+                frame[first_hdu].data[y_image_slice, x_image_slice],
+                frame[first_hdu + 1].data[y_image_slice, x_image_slice],
+                pixel_offsets[y_image_slice, x_image_slice],
+                cmdline_args.error_threshold
+            )
             plot_x = prf_data[0]
             plot_y = prf_data[1]
             plot_z = prf_data[2]
@@ -893,12 +907,26 @@ def plot_entire_prf(cmdline_args,
                 pyplot.savefig(plot_fname)
                 pyplot.cla()
 
-            #TODO need to manually set vmin and vmax make color have a wider
-            # range try to find color limit, should make them quantiles functions
+            #TODO need to manually set vmin and vmax make color have a
+            #wider range try to find color limit, should make them quantiles
+            #functions
 
 
 def get_image_slices(splits, inner_only):
-    """Return a list of (x-slice, y-slice, x_index, y_index) tuples per `--split-image` arg."""
+    """
+    Return [(x-slice, y-slice, x_index, y_index), ...] per `--split-image` arg.
+
+    Args:
+        splits:    The parsed image splits directly from the command line.
+
+        inner_only(bool):    If True, slices in contact with the outer border
+            of the image are discarded.
+
+    Returns:
+        [(x-slice, y-slice, x_index, y_index), ...]:
+            Array slices directly useable to index the image implementing the
+            splitting specified on the command line.
+    """
 
     split_slices = dict(x=[slice(0, None)], y=[slice(0, None)])
 
@@ -1129,7 +1157,7 @@ def fit_spline(prf_data, domain, cmdline_args):
     """Return the best-fit spline to the PRF per the command line config."""
 
     if not cmdline_args.spline_method:
-        return
+        return None
 
     if cmdline_args.spline_method == 'scipy':
         return SmoothBivariateSpline(
@@ -1154,27 +1182,42 @@ def list_plot_filenames(cmdline_args):
 
     assert cmdline_args.save_plot is not None
     if cmdline_args.plot_multi_image is True:
-        return [
-            cmdline_args.save_plot % dict(
-                dir=('x' if 'x_offset' in plot_slice else 'y'),
-                offset=plot_slice[direction + '_offset'],
-                x_split=(str(x_image_slice) + str(x_index) if x_image_slice else None),
-                y_split=(str(y_image_slice) + str(y_index) if y_image_slice else None)
-            )
-            for plot_slice in cmdline_args.slice
-            for (x_image_slice,
-                 y_image_slice,
-                 x_index,
-                 y_index) in get_image_slices(cmdline_args.split_image)
-        ]
-    else:
-        return [
-            cmdline_args.save_plot % dict(
-                dir=('x' if 'x_offset' in plot_slice else 'y'),
-                offset=plot_slice[direction + '_offset'],
-            )
-            for plot_slice in cmdline_args.slice
-        ]
+        result = []
+        for plot_slice in cmdline_args.slice:
+            for (
+                    x_image_slice,
+                    y_image_slice,
+                    x_index,
+                    y_index
+            ) in get_image_slices(
+                cmdline_args.split_image,
+                cmdline_args.discard_image_boundary
+            ):
+                direction = ('x' if 'x_offset' in plot_slice else 'y')
+
+                result.append(
+                    cmdline_args.save_plot % dict(
+                        dir=direction,
+                        offset=plot_slice[direction + '_offset'],
+                        x_split=(
+                            str(x_image_slice) + str(x_index) if x_image_slice
+                            else None
+                        ),
+                        y_split=(
+                            str(y_image_slice) + str(y_index) if y_image_slice
+                            else None
+                        )
+                    )
+                )
+        return result
+
+    return [
+        cmdline_args.save_plot % dict(
+            dir=('x' if 'x_offset' in plot_slice else 'y'),
+            offset=plot_slice[direction + '_offset'],
+        )
+        for plot_slice in cmdline_args.slice
+    ]
 
 
 def show_plots(slice_prf_data, slice_splines, image_slices, cmdline_args):
@@ -1219,13 +1262,17 @@ def show_plots(slice_prf_data, slice_splines, image_slices, cmdline_args):
         if cmdline_args.plot_y_range is not None:
             pyplot.ylim(*cmdline_args.plot_y_range)
 
-        for (prf_data, label),\
-            spline,\
-            (x_image_slice, y_image_slice, x_index, y_index),\
-            color in zip(slice_prf_data,
-                         slice_splines,
-                         image_slices,
-                         kelly_colors[2:]):
+        for (
+                (prf_data, label),
+                spline,
+                (x_image_slice, y_image_slice, x_index, y_index),
+                color
+        ) in zip(
+            slice_prf_data,
+            slice_splines,
+            image_slices,
+            kelly_colors[2:]
+        ):
             plot_prf_slice(
                 prf_data[0],
                 spline,
@@ -1243,10 +1290,16 @@ def show_plots(slice_prf_data, slice_splines, image_slices, cmdline_args):
             except AttributeError:
                 pass
             if cmdline_args.plot_multi_image:
-                plot_fname = (cmdline_args.save_plot % dict(dir=direction,
-                                                            offset=plot_slice[direction + '_offset'],
-                                                            x_split=(str(x_image_slice) + '_' + str(x_index)),
-                                                            y_split=(str(y_image_slice) + '_' + str(y_index))))
+                plot_fname = (
+                    cmdline_args.save_plot
+                    %
+                    dict(
+                        dir=direction,
+                        offset=plot_slice[direction + '_offset'],
+                        x_split=(str(x_image_slice) + '_' + str(x_index)),
+                        y_split=(str(y_image_slice) + '_' + str(y_index))
+                    )
+                )
                 if (cmdline_args.skip_existing_plots and
                         cmdline_args.plot_fname is not None and
                         os.path.exists(plot_fname)):
@@ -1368,7 +1421,6 @@ def main(cmdline_args):
 
     image_slices = get_image_slices(cmdline_args.split_image,
                                     cmdline_args.discard_image_boundary)
-    prf_data = get_prf_data
     slice_prf_data = extract_pixel_data(cmdline_args, image_slices)
     slice_splines = [
         fit_spline(prf_data, domain, cmdline_args)
