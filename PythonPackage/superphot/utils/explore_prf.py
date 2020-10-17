@@ -87,10 +87,9 @@ def parse_command_line(parser=None):
     parser.add_argument(
         '--trans-pattern', '-t',
         default=os.path.join('%(frame_dir)s',
-                             '../..',
+                             '..',
                              'ASTROM',
-                             '10-20170306',
-                             '%(frame_id)s.fistar.trans'),
+                             '%(frame_id)s.trans'),
         help="A pattern with substitutions `'%%(frame_dir)s'` (directory "
         "containing the frame), and `'%%(frame_id)s'` (base filename of the "
         "frame without the `fits` or `fits.fz` extension) that expands to "
