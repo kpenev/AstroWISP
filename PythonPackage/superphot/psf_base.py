@@ -113,8 +113,8 @@ class PSFBase(ABC):
             numpy.arange(-0.5, 0.5, width) + width / 2.0,
             numpy.arange(-0.5, 0.5, height) + height / 2.0
         )
-        subpix_center_x = center_x.ravel()[:, None] + subpix_center_x
-        subpix_center_y = center_y.ravel()[:, None] + subpix_center_y
+        subpix_center_x = center_x.ravel()[:, None] + subpix_center_x.ravel()
+        subpix_center_y = center_y.ravel()[:, None] + subpix_center_y.ravel()
         return self.integrate(
             center_x=subpix_center_x,
             center_y=subpix_center_y,
