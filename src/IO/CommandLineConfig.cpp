@@ -6,7 +6,6 @@
  */
 
 #include "CommandLineConfig.h"
-#include "SubPixHDF5File.h"
 #include <cstdarg>
 
 namespace IO {
@@ -94,11 +93,6 @@ namespace IO {
                 *this
             );
             opt::notify(*this);
-        }
-        if(count("io.hdf5_structure")) {
-            SubPixHDF5File::configure(
-                operator[]("io.hdf5_structure").as<std::string>().c_str()
-            );
         }
 
         __executable = argv[0];

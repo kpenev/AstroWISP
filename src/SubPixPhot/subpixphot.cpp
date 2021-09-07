@@ -18,7 +18,6 @@
 #include "../Background/MeasureAnnulus.h"
 #include "../Background/Annulus.h"
 #include "../Background/CommandLineUtil.h"
-#include "../IO/SubPixHDF5File.h"
 #include "../IO/CommandLineConfig.h"
 #include "../IO/FitsImage.h"
 #include "../Core/SubPixelCorrectedFlux.h"
@@ -127,12 +126,6 @@ namespace SubPixPhot {
         quantities_to_read.insert("psffit.mag");
         quantities_to_read.insert("projsrc.x");
         quantities_to_read.insert("projsrc.y");
-        IO::SubPixHDF5File psfmap_file(psfmap_filename.c_str(),
-                                       H5F_ACC_RDONLY);
-        psfmap_file.read(quantities_to_read.begin(),
-                         quantities_to_read.end(),
-                         psf_data,
-                         false);
         std::string psf_model=psf_data.get<std::string>(
             "psffit.model",
             "",
@@ -168,144 +161,5 @@ namespace SubPixPhot {
         }
     }
 
-    ///\brief Reads the positions and background (if available) of the source to
-    ///photometer.
-    ///
-    ///If backgrounds are not available in the input file they are measured.
-    void read_input_sources(
-        ///The name of the HDF5 file to read the sources from.
-        const std::string &source_filename,
-
-        ///The data tree to fill.
-        IO::H5IODataTree &data_tree)
-    {
-        std::set<std::string> quantities_to_read;
-        quantities_to_read.insert("projsrc.x");
-        quantities_to_read.insert("projsrc.y");
-        quantities_to_read.insert("bg.value");
-        quantities_to_read.insert("bg.error");
-        quantities_to_read.insert("psffit.flux");
-        quantities_to_read.insert("psffit.amplitude");
-        quantities_to_read.insert("psffit.magnitude_1adu");
-        quantities_to_read.insert("psffit.mag");
-        quantities_to_read.insert("psffit.model");
-        IO::SubPixHDF5File source_list_file(source_filename.c_str(),
-                                            H5F_ACC_RDONLY);
-        source_list_file.read(quantities_to_read.begin(),
-                              quantities_to_read.end(),
-                              data_tree,
-                              false);
-        PSF::fill_psf_amplitudes(data_tree);
-    }
-
 } //End SubPixPhot namespace.
 
-///Perform the photometry specified through the command line.
-int main(int argc, char **argv)
-{
-#ifndef DEBUG
-//	try {
-#endif
-    SubPixPhot::Config options(argc, argv);
-    if(!options.proceed()) return 1;
-#ifdef TRACK_PROGRESS
-    std::cerr << "Parsed command line." << std::endl;
-#endif
-    IO::FitsImage<double> image(options["io.image"].as<std::string>());
-    IO::FitsImage<double> subpix_map(options["io.subpix"].as<std::string>());
-    Core::SubPixelMap default_subpix_map(1, 1, "constant");
-    default_subpix_map(0, 0)=1;
-    if(options["io.sources"].as<std::string>()=="-")
-        throw Error::CommandLine("Reading source from stdin not "
-                                 "supported.");
-
-    Core::RealList apertures=options["ap.aperture"].as<Core::RealList>();
-    apertures.sort();
-
-    IO::H5IODataTree data_tree(argc, argv, SUB_PIX_PHOT_VERSION, options);
-
-    PSF::Map *psf_map=SubPixPhot::get_psf_map(
-        options["io.psfmap"].as<std::string>(),
-        apertures.back(),
-        data_tree
-    );
-
-
-    SubPixPhot::read_input_sources(options["io.sources"].as<std::string>(),
-                                   data_tree);
-    bool output_background=false;
-    if(!data_tree.get_optional<boost::any>("bg.value")) {
-        SubPixPhot::add_background_measurements(
-            options["bg.value"].as<Background::Annulus>(),
-            image,
-            data_tree
-        );
-        output_background=true;
-    }
-
-    if(options["io.subpix"].as<std::string>()=="") {
-        Core::SubPixelCorrectedFlux<Core::SubPixelMap> measure_flux(
-            image,
-            default_subpix_map,
-            options["ap.const-error"].as<double>(),
-            apertures,
-            options["gain"].as<double>()
-        );
-        SubPixPhot::add_flux_measurements(
-            *psf_map,
-            measure_flux,
-            options["magnitude-1adu"].as<double>(),
-            data_tree
-        );
-    } else {
-        Core::SubPixelCorrectedFlux< IO::FitsImage<double> >
-            measure_flux(
-                image,
-                subpix_map,
-                options["ap.const-error"].as<double>(),
-                apertures,
-                options["gain"].as<double>()
-            );
-        SubPixPhot::add_flux_measurements(
-            *psf_map,
-            measure_flux,
-            options["magnitude-1adu"].as<double>(),
-            data_tree
-        );
-    }
-
-    if(!output_background) {
-        data_tree.erase("bg");
-    }
-    data_tree.erase("psffit");
-    data_tree.erase("projsrc");
-
-    IO::SubPixHDF5File *file;
-    try {
-        file=new IO::SubPixHDF5File(
-            options["io.output"].as<std::string>().c_str(),
-            H5F_ACC_RDWR
-        );
-    } catch(H5::FileIException) {
-        try {
-            file=new IO::SubPixHDF5File(
-                options["io.output"].as<std::string>().c_str(),
-                H5F_ACC_TRUNC
-            );
-        } catch(H5::FileIException &ex) {
-            ex.printErrorStack();
-            return 1;
-        }
-    }
-    file->write(data_tree, false);
-    file->close();
-    delete file;
-    delete psf_map;
-    return 0;
-#ifndef DEBUG
-    /*	} catch(Error::General &ex) {
-        std::cerr << ex.what() << ": " << ex.get_message() << std::endl;
-        return 2;
-        }*/
-#endif
-}

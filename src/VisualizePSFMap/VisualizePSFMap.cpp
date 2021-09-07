@@ -492,10 +492,6 @@ int main(int argc, char *argv[])
 		VisualizePSFMapConfig options(argc, argv);
 		if(!options.proceed()) return 1;
 		H5IODataTree psfmap_data;
-		SubPixHDF5File psfmap_file(
-				options["io.psfmap-file"].as<std::string>().c_str(),
-				H5F_ACC_RDONLY
-		);
 		std::set<std::string> required_quantities(
 				PiecewiseBicubicPSFMap::required_data_tree_quantities()
 		);
