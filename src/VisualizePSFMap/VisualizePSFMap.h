@@ -14,7 +14,6 @@
 #include "CommandLineUtil.h"
 #include "Typedefs.h"
 #include "Error.h"
-#include <H5Cpp.h>
 #include <list>
 #include <iostream>
 #include <string>

@@ -29,7 +29,6 @@
 #include "../Core/CommandLineUtil.h"
 #include "Config.h"
 #include "Common.h"
-#include <H5Cpp.h>
 #include <string>
 #include <list>
 #include <ctime>

@@ -12,7 +12,6 @@
 #include "TranslateToAny.h"
 #include "../Core/Typedefs.h"
 #include "Eigen/Dense"
-#include <H5Cpp.h>
 #include <boost/property_tree/ptree.hpp>
 #include <vector>
 #include <valarray>
