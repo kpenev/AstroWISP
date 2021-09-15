@@ -27,7 +27,7 @@ namespace IO {
     template<typename UNIT_TYPE>
         class LIB_PUBLIC OutputArray {
         private:
-            hsize_t __size;				///< The size of the array.
+            size_t __size;				///< The size of the array.
             const UNIT_TYPE *__data;	///< The first element.
             UNIT_TYPE *__allocated_data;///< Data allocated by this class.
 
@@ -65,7 +65,7 @@ namespace IO {
             );
 
             ///The number of elements in the array.
-            const hsize_t &size() const {return __size;}
+            const size_t &size() const {return __size;}
 
             ///\brief A pointer to the first element in the array, the rest 
             ///are contiguous.
@@ -74,7 +74,7 @@ namespace IO {
             ///Constant reference to an array element.
             const UNIT_TYPE &operator[](
                 ///The index within the array to return.
-                hsize_t index
+                size_t index
             ) const
             {assert(index < __size); return __data[index];}
 
@@ -154,7 +154,7 @@ namespace IO {
     template<typename UNIT_TYPE>
         bool LIB_PUBLIC OutputArray<UNIT_TYPE>::operator==(const OutputArray &rhs)
         {
-            for(hsize_t i = 0; i < __size; ++i)
+            for(size_t i = 0; i < __size; ++i)
                 if(__data[i] != rhs.__data[i]) return false;
             return true;
         }
