@@ -37,11 +37,7 @@ model {
                 linker.args "-l" + ensureLibraryVersion(
                     "boost_program_options",
                 )
-                linker.args "-l" + ensureLibraryVersion("gfortran")
                 linker.args "-l" + ensureLibraryVersion("cfitsio")
-                linker.args "-l" + ensureLibraryVersion("hdf5")
-                linker.args "-l" + ensureLibraryVersion("hdf5_cpp")
-                linker.args "-l" + ensureLibraryVersion("z")
 
                 if(buildType == buildTypes.release) {
                     cppCompiler.args "-O3"

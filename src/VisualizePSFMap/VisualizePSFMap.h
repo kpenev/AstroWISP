@@ -9,13 +9,11 @@
 #include "../Core/SharedLibraryExportMacros.h"
 #include "FitsImage.h"
 #include "PiecewiseBicubicPSFMap.h"
-#include "EllipticalGaussianPSFMap.h"
-#include "../IO/SubPixHDF5File.h"
+#include "EllipticalGaussianPSFMap.h
 #include "H5IODataTree.h"
 #include "CommandLineUtil.h"
 #include "Typedefs.h"
 #include "Error.h"
-#include <H5Cpp.h>
 #include <list>
 #include <iostream>
 #include <string>

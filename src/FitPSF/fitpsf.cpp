@@ -12,7 +12,6 @@
 #include "Source.h"
 #include "../PSF/TermCalculator.h"
 #include "../PSF/PiecewiseBicubic.h"
-#include "../IO/SubPixHDF5File.h"
 #include "../IO/FitsImage.h"
 #include "../IO/parse_grid.h"
 #include "../Background/Measure.h"
@@ -602,57 +601,28 @@ namespace FitPSF {
                                &&
                                options["psf.ignore-dropped"].as<bool>());
         LinearSourceList empty_source_list;
-        if(options["io.initial-guess"].as<std::string>() != "") {
-            IO::H5IODataTree initial_guess_data;
-            IO::SubPixHDF5File initial_guess_file(
-                options["io.initial-guess"].as<std::string>().c_str(),
-                H5F_ACC_RDONLY
-            );
-            initial_guess_file.read(
-                PSF::PiecewiseBicubicMap::required_data_tree_quantities().begin(),
-                PSF::PiecewiseBicubicMap::required_data_tree_quantities().end(),
-                initial_guess_data
-            );
-            PSF::PiecewiseBicubicMap psf_map(initial_guess_data);
-            converged = fit_piecewise_bicubic_psf(
+
+        converged=fit_piecewise_bicubic_psf(
                 fit_sources,
                 (ignore_dropped ? empty_source_list : dropped_sources),
-                psf_map,
+                gain,
                 grid.x_grid,
                 grid.y_grid,
                 subpix_map,
-                options["psf.bicubic.max-abs-amplitude-change"].as<double>(),
-                options["psf.bicubic.max-rel-amplitude-change"].as<double>(),
+                options[
+                    "psf.bicubic.max-abs-amplitude-change"
+                ].as<double>(),
+                options[
+                    "psf.bicubic.max-rel-amplitude-change"
+                ].as<double>(),
                 options["psf.max-chi2"].as<double>(),
                 options["psf.bicubic.pixrej"].as<double>(),
                 options["psf.min-convergence-rate"].as<double>(),
                 options["psf.max-iterations"].as<int>(),
                 options["psf.bicubic.smoothing"].as<double>(),
-                best_fit_coef,
-                gain
-            );
-        } else {
-            converged=fit_piecewise_bicubic_psf(
-                    fit_sources,
-                    (ignore_dropped ? empty_source_list : dropped_sources),
-                    gain,
-                    grid.x_grid,
-                    grid.y_grid,
-                    subpix_map,
-                    options[
-                        "psf.bicubic.max-abs-amplitude-change"
-                    ].as<double>(),
-                    options[
-                        "psf.bicubic.max-rel-amplitude-change"
-                    ].as<double>(),
-                    options["psf.max-chi2"].as<double>(),
-                    options["psf.bicubic.pixrej"].as<double>(),
-                    options["psf.min-convergence-rate"].as<double>(),
-                    options["psf.max-iterations"].as<int>(),
-                    options["psf.bicubic.smoothing"].as<double>(),
-                    best_fit_coef
-            );
-        }
+                best_fit_coef
+        );
+
 #ifdef TRACK_PROGRESS
         std::cerr << "Adding dropped sources." << std::endl;
 #endif
@@ -743,99 +713,6 @@ namespace FitPSF {
 #ifdef DEBUG
             std::cout << "Output file name: " << var_i->first << std::endl;
 #endif
-            IO::SubPixHDF5File *file;
-            try {
-                file = new IO::SubPixHDF5File(var_i->first.c_str(),
-                                              H5F_ACC_RDWR);
-            } catch(H5::FileIException) {
-                try {
-                    file=new IO::SubPixHDF5File(var_i->first.c_str(),
-                                                H5F_ACC_TRUNC);
-                } catch(H5::FileIException &ex) {
-                    ex.printErrorStack();
-                    continue;
-                }
-            }
-            file->write(output_data_tree, false);
-            file->close();
-            delete file;
-        }
     }
 
 } //End FitPSF namespace.
-
-///Perform the PSF fitting according to the command line options.
-int main(int argc, char *argv[])
-{
-    std::cerr.setf(std::ios::scientific);
-    std::cerr.precision(16);
-#ifndef DEBUG
-	try {
-#endif
-        FitPSF::Config options(argc, argv);
-		if(!options.proceed()) return 1;
-#ifdef TRACK_PROGRESS
-		std::cerr << "Parsed command line." << std::endl;
-#endif
-
-        Core::SubPixelMap subpix_map(0, 0, "");
-        FitPSF::fill_subpix_map(options, subpix_map);
-
-#ifdef TRACK_PROGRESS
-		std::cerr << "Created sub-pixel map." << std::endl;
-#endif
-
-        IO::H5IODataTree output_data_tree(argc,
-                                          argv,
-                                          FIT_PSF_VERSION,
-                                          options);
-
-#ifdef TRACK_PROGRESS
-		std::cerr << "Constructed output data tree." << std::endl;
-#endif
-
-		bool converged;
-        if (options["psf.model"].as<PSF::ModelType>() == PSF::ZERO)
-            converged = FitPSF::zero_fit(options,
-                                         subpix_map,
-                                         output_data_tree);
-/*        else if(options["psf.model"].as<PSF::ModelType>() == PSF::SDK)
-			converged = sdk_fit(options, subpix_map, output_data_tree);*/
-		else
-            converged = piecewise_bicubic_fit(options,
-                                              subpix_map,
-                                              output_data_tree);
-
-#ifdef TRACK_PROGRESS
-		std::cerr << "Writing output HDF5 file." << std::endl;
-#endif
-
-        FitPSF::output(output_data_tree);
-        if(converged) return 0;
-        else
-            throw Error::Fitting(
-                "PSF fitting failed to converge! Accepting last iteration."
-            );
-
-        return 0;
-#ifdef TRACK_PROGRESS
-		std::cerr << "Done" << std::endl;
-#endif
-
-#ifndef DEBUG
-	} catch(Error::General &ex) {
-		std::cerr << ex.what() << ":" << ex.get_message() << std::endl;
-		return 2;
-    } catch(H5::Exception &ex) {
-        std::cerr
-            << ex.getFuncName()
-            << ": "
-            << ex.getDetailMsg()
-            << std::endl;
-        return 3;
-	} catch(std::exception &ex) {
-		std::cerr << ex.what() << std::endl;
-		return 4;
-	}
-#endif
-}

@@ -191,56 +191,6 @@ namespace Error {
 		{return "Failed I/O operation";}
 	};
 
-	///\brief Input/Output error with an HDF5 file.
-	class LIB_PUBLIC HDF5 : public IO {
-	private:
-		std::string __path, __message;
-	public:
-		HDF5(
-				///The path (including the filename) where the error
-				///occurred.
-				const std::string &path="",
-
-				///Message about what went wrong.
-				const std::string &error_message="") :
-			IO(error_message + " at " + path),
-			__path(path),
-			__message(error_message)
-            {}
-
-		virtual const char *what() const throw()
-		{return "Failed HDF5 file I/O operation:";}
-
-		const std::string &get_path() const {return __path;}
-		void set_path(const std::string &path)
-		{
-			__path=path;
-			set_message(__message + " at " + path);
-		}
-
-		virtual ~HDF5() throw() {}
-	};
-
-	///Signal that an expected component does not exist.
-	class LIB_PUBLIC HDF5NotFound : public HDF5 {
-	public:
-		HDF5NotFound(
-				///The path (including the filename) where the error
-				///occurred.
-				const std::string &path,
-
-				///The key this component is identified by.
-				const std::string &key,
-
-				///The component missing (e.g. "group" or "dataset" or ...)
-				const std::string &component_type) :
-			HDF5(path, component_type + "with key '" + key + "' not found!")
-			{}
-
-		virtual const char *what() const throw()
-		{return "Component missing from HDF5 file.";}
-	};
-
 	///\brief %Error in a <a href="http://www.gnu.org/software/gsl/">
 	///GNU Scientific Library function.</a>
 	///\ingroup SubPixPhot
