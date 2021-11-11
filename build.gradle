@@ -33,7 +33,6 @@ model {
                     cppCompiler.define "TOOLCHAIN_CLANG"
 
                 cppCompiler.args "-W", "-Wall", "-fvisibility=hidden"
-
                 linker.args "-l" + ensureLibraryVersion(
                     "boost_program_options",
                 )
@@ -49,8 +48,12 @@ model {
                     }
                 }
             } else if (toolChain in VisualCpp ) {
+                cppCompiler.define 'TOOLCHAIN_MSVC'
+                cppCompiler.define '_USE_MATH_DEFINES'
+                cppCompiler.args "/IC:\\Users\\Errox\\cfitsio\\include" , "/IC:\\Program Files\\boost\\boost_1_77_0" , '/EHsc'
+                cppCompiler.args '/std:c++17'
                 if(buildType == buildTypes.debug) {
-                    cppCompiler.args '/Zi'
+                    cppCompiler.args '/Zi', '/FS'
                     cppCompiler.define 'DEBUG'
                     linker.args '/DEBUG'
                 }
@@ -58,7 +61,9 @@ model {
 
         }
         withType(StaticLibraryBinarySpec) {
+          if (toolChain in Gcc || toolChain in Clang){
             cppCompiler.args '-fPIC'
+          }
         }
 
     }
@@ -191,7 +196,7 @@ def findLibraryLinux(String libNameStart)
     }
 }
 
-def findLibraryMacOS(String libName)
+def findLibraryMacOS(String libNameStart)
 {
     return [libName, 0, 0]
     def libFullPath
@@ -212,7 +217,7 @@ def findLibraryMacOS(String libName)
 
     libFullPath = sout.toString().trim()
     logger.debug("Result: '" + libFullPath + "'")
-    if(!libFullPath) 
+    if(!libFullPath)
         throw new ProjectConfigurationException(
             "No candidate ${libName} library found!",
             new NullPointerException()
@@ -235,12 +240,19 @@ def findLibraryMacOS(String libName)
     );
 }
 
+def findLibraryWindows(String libNameStart)
+{
+
+}
+
 def findLibrary(String libNameStart)
 {
     if(OperatingSystem.current().isLinux())
         return findLibraryLinux(libNameStart)
     else if(OperatingSystem.current().isMacOsX())
         return findLibraryMacOS(libNameStart)
+    else if(OperatingSystem.current().isWindows)
+        return findLibraryWindows(libNameStart)
     else {
         throw new ProjectConfigurationException(
             "Compiling on non-linux or Mac operating systems not currently "

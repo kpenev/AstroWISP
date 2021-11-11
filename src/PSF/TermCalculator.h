@@ -8,18 +8,18 @@
 #include <boost/config/warning_disable.hpp>
 #include <boost/spirit/include/qi.hpp>
 #include <boost/lambda/lambda.hpp>
-#include <boost/bind.hpp>
 #include <boost/spirit/include/phoenix_core.hpp>
 #include <boost/spirit/include/phoenix_operator.hpp>
 #include <boost/spirit/include/phoenix_stl.hpp>
 #include <boost/spirit/include/phoenix_fusion.hpp>
-#include <boost/spirit/include/phoenix_bind.hpp>
+#include <valarray>
+#include <functional>
 
 #include <iostream>
 #include <vector>
 #include <string>
 #include <cmath>
-#include <valarray>
+
 #include <sstream>
 
 namespace PSF {
@@ -39,7 +39,7 @@ namespace PSF {
     ///
     ///Also adds debugging information if compiled with VERBOSE_DEBUG
     ///pre-processing directive defined
-    class LIB_PUBLIC TermValarray : public std::valarray<double> {
+    class LIB_LOCAL TermValarray : public std::valarray<double> {
         private:
             ///The largest ID assigned to any TermValarray. Debugging only.
             static unsigned __max_id;
@@ -446,8 +446,8 @@ namespace PSF {
         {
             using qi::double_;
             using qi::_val;
-            using qi::_1;
-            using boost::phoenix::bind;
+            using std::placeholders::_1;
+            using std::bind;
 
             __exponentiation = (
                     __value[_val = _1]
@@ -721,13 +721,13 @@ namespace PSF {
             using phoenix::push_back;
             using phoenix::ref;
             using phoenix::at_c;
-            using phoenix::bind;
+            using std::bind;
 
             using qi::char_;
             using qi::uint_;
             using qi::_val;
-            using qi::_1;
-            using qi::_2;
+            using std::placeholders::_1;
+            using std::placeholders::_2;
 
             __simple_term = +( char_ - ',' - '}');
 

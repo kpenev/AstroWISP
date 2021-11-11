@@ -45,7 +45,7 @@ namespace PSF {
                                    result);
                     std::cout << result.back() << std::endl;
                 } catch(Error::ParsingError &error) {
-                    std::cout << error.what() << ":" 
+                    std::cout << error.what() << ":"
                               << error.get_message()
                               << std::endl;
                 }
@@ -79,10 +79,10 @@ namespace PSF {
 
                 if ( parser_status && parse_start == parse_end ) {
                     std::cout << "Terms:" << std::endl;
-                    for ( 
+                    for (
                             ResultType::const_iterator i=result.begin();
                             i!=result.end();
-                            ++i 
+                            ++i
                     ) std::cout << "    " << *i << std::endl;
                 } else
                     std::cout << "Parsing failed at "
@@ -105,7 +105,7 @@ namespace PSF {
 
             std::vector<TermValarray> result(terms.size());
 
-            if ( to_parse != "" ) 
+            if ( to_parse != "" )
                 try {
                     evaluate_term_expression(to_parse);
                     for(
@@ -117,7 +117,7 @@ namespace PSF {
                                   << result[term_i] << std::endl;
                     }
                 } catch(Error::ParsingError &error) {
-                    std::cout << error.what() << ":" 
+                    std::cout << error.what() << ":"
                               << error.get_message()
                               << std::endl;
                 } catch(Error::CommandLine &error) {
@@ -129,7 +129,7 @@ namespace PSF {
 
     int main()
     {
-        std::cout << "Term generator grammar: \n\n" 
+        std::cout << "Term generator grammar: \n\n"
                   << TermGenerator::ebnf_definition
                   << std::endl;
         exercise();

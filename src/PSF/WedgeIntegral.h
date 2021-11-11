@@ -39,7 +39,7 @@ namespace PSF {
      */
     class LIB_LOCAL WedgeIntegral {
     private:
-        ///\brief How many entries to allocate storage for in the __values and 
+        ///\brief How many entries to allocate storage for in the __values and
         ///__q attributes at construction.
         static const Core::vector_size_type __initial_storage = 30;
 

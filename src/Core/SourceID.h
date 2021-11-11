@@ -126,10 +126,10 @@ namespace Core {
             return __source;
         }
 
-        friend std::istream& operator>>( std::istream& is, SourceID& id );
+        LIB_PUBLIC_IMPL friend std::istream& operator>>( std::istream& is, SourceID& id );
 
 
-        friend std::ostream& operator<<(std::ostream& os,
+        LIB_PUBLIC_IMPL friend std::ostream& operator<<(std::ostream& os,
                                         const SourceID& id);
     }; //End SourceID class.
 

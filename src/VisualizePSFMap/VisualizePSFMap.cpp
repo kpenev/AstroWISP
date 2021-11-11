@@ -99,26 +99,26 @@ void VisualizePSFMapConfig::describe_options()
 template<class EIGEN_MATRIX>
 void add_psf(
 		///The PSF to visualize
-		const PSF &psf, 
+		const PSF &psf,
 
 		///The visualization matrix to add the PSF to.
 		EIGEN_MATRIX &visualization,
-		
+
 		///The left boundary of the visualized PSF in the visualization
 		///matrix.
-		unsigned xmin, 
+		unsigned xmin,
 
 		///The right boundary of the visualized PSF in the visualization
 		///matrix.
-		unsigned xmax, 
+		unsigned xmax,
 
 		///The bottom boundary of the visualized PSF in the visualizaton
 		///matrix.
-		unsigned ymin, 
+		unsigned ymin,
 
 		///The top boundary of the visualized PSF in the visualization
 		///matrix.
-		unsigned ymax, 
+		unsigned ymax,
 
 		///The factor by which to zoom in the PSF in the x direction.
 		double xzoom,
@@ -126,12 +126,12 @@ void add_psf(
 		///The factor by which to zoom in the PSF in the x direction.
 		double yzoom,
 
-		///The x coordinate of the point relative to which the PSF is 
+		///The x coordinate of the point relative to which the PSF is
 		///defined in the visualization matrix. If NaN, the middle of the x
 		///range is used.
 		double x0=NaN,
 
-		///The y coordinate of the point relative to which the PSF is 
+		///The y coordinate of the point relative to which the PSF is
 		///defined in the visualization matrix. If NaN, the middle of the y
 		///range is used.
 		double y0=NaN)
@@ -166,7 +166,7 @@ void visualize_map(
 		unsigned x_resolution,
 
 		///The resolution of each individual diplayed PSF along y.
-		unsigned y_resolution, 
+		unsigned y_resolution,
 
 		///The flux to give each source image.
 		double flux,
@@ -185,7 +185,7 @@ void visualize_map(
 
 		///The maximum offset in y from the center of the PSF to display.
 		double psf_ymax,
-		
+
 		///The name of the file to generate (overwritten if already exists).
 		const std::string &outfname)
 {
@@ -236,16 +236,16 @@ void save_boundaries(
 		const std::vector<double> y_boundaries,
 
 		///The number of different x positions to sample the PSF at.
-		unsigned x_splits, 
+		unsigned x_splits,
 
 		///The number of different x positions to sample the PSF at.
-		unsigned y_splits, 
-		
+		unsigned y_splits,
+
 		///The resolution of each individual diplayed PSF along x.
 		unsigned x_resolution,
 
 		///The resolution of each individual diplayed PSF along y.
-		unsigned y_resolution, 
+		unsigned y_resolution,
 
 		///The minimum offset in x from the center of the PSF displayed.
 		double psf_xmin,
@@ -261,7 +261,7 @@ void save_boundaries(
 
 		///The color to use for the regions.
 		const std::string &color,
-		
+
 		///The name of the file to create/overwrite.
 		const std::string &filename)
 {
@@ -298,16 +298,16 @@ void save_boundaries(
 
 void create_pixel_regions(
 		///The number of different x positions to sample the PSF at.
-		unsigned x_splits, 
+		unsigned x_splits,
 
 		///The number of different x positions to sample the PSF at.
-		unsigned y_splits, 
-		
+		unsigned y_splits,
+
 		///The resolution of each individual diplayed PSF along x.
 		unsigned x_resolution,
 
 		///The resolution of each individual diplayed PSF along y.
-		unsigned y_resolution, 
+		unsigned y_resolution,
 
 		///The minimum offset in x from the center of the PSF displayed.
 		double psf_xmin,
@@ -352,16 +352,16 @@ void create_grid_regions(
 		const PiecewiseBicubicPSFMap &psf_map,
 
 		///The number of different x positions to sample the PSF at.
-		unsigned x_splits, 
+		unsigned x_splits,
 
 		///The number of different x positions to sample the PSF at.
-		unsigned y_splits, 
-		
+		unsigned y_splits,
+
 		///The resolution of each individual diplayed PSF along x.
 		unsigned x_resolution,
 
 		///The resolution of each individual diplayed PSF along y.
-		unsigned y_resolution, 
+		unsigned y_resolution,
 
 		///The name of the file to create/overwrite.
 		const std::string &filename)
@@ -406,9 +406,9 @@ unsigned fill_psfmap_variables(
 
         ///The object to fill with the variables.
         PSFMapVarListType &variables
-)                   
+)
 {
-    RealList::const_iterator 
+    RealList::const_iterator
         eval_iter = options["visualize.eval-x"].as<RealList>().begin();
     double x_min = *eval_iter++,
            x_max = *eval_iter++,
@@ -446,11 +446,11 @@ unsigned fill_psfmap_variables(
     const StringList &psf_var_strings =
         options["visualize.psfmap-variables"].as<StringList>();
     for(
-            std::list<std::string>::const_iterator 
+            std::list<std::string>::const_iterator
                 var_str_i = psf_var_strings.begin();
             var_str_i != psf_var_strings.end();
             ++var_str_i
-    ) 
+    )
         variables.push_back(parse_variable_expression(*var_str_i,
                                                       num_display_psfs));
     return num_display_cols;
@@ -509,7 +509,7 @@ int main(int argc, char *argv[])
 														   "",
 														   translate_string);
         std::vector<TermValarray> expansion_term_arrays;
-        unsigned 
+        unsigned
             num_display_cols = fill_psfmap_terms(
                     options,
                     psfmap_data.get<std::string>("psffit.terms",
@@ -530,10 +530,10 @@ int main(int argc, char *argv[])
 		PSFMap *psf_map;
 		double psf_xmin, psf_xmax, psf_ymin, psf_ymax;
 		if(psf_model=="bicubic") {
-			PiecewiseBicubicPSFMap 
+			PiecewiseBicubicPSFMap
 				*bicubic_map=new PiecewiseBicubicPSFMap(psfmap_data);
 			psf_map=bicubic_map;
-			psf_xmin=bicubic_map->x_grid().front(); 
+			psf_xmin=bicubic_map->x_grid().front();
 			psf_xmax=bicubic_map->x_grid().back();
 			psf_ymin=bicubic_map->y_grid().front();
 			psf_ymax=bicubic_map->y_grid().back();
@@ -542,7 +542,7 @@ int main(int argc, char *argv[])
 			if(grid_regions_fname != "")
                 create_grid_regions(*bicubic_map,
                                     num_display_cols, num_display_rows,
-                                    psf_x_resolution, psf_y_resolution, 
+                                    psf_x_resolution, psf_y_resolution,
                                     grid_regions_fname);
 		} else  {
 			assert(psf_model=="sdk");
@@ -560,9 +560,9 @@ int main(int argc, char *argv[])
                       options["visualize.bg"].as<double>(),
                       psf_xmin, psf_xmax, psf_ymin, psf_ymax,
                       options["io.psfmap-image"].as<std::string>());
-		std::string 
+		std::string
 			pixel_regions_fname=options["io.pixels-ds9"].as<std::string>();
-		if(pixel_regions_fname != "") 
+		if(pixel_regions_fname != "")
             create_pixel_regions(num_display_cols, num_display_rows,
                                  psf_x_resolution, psf_y_resolution,
                                  psf_xmin, psf_xmax, psf_ymin, psf_ymax,

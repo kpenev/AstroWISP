@@ -23,10 +23,21 @@
 #include <list>
 #include <valarray>
 #include <vector>
+#include <cmath>
+
+namespace boost {
+  template<class T,
+    typename std::enable_if<std::is_same<T, any>{}, bool>::type =true
+  >
+  bool operator == (const T& lhs, const T& rhs){
+    throw Error::NotImplemented("Comparison of boost any is undefined");
+  }
+}
 
 namespace IO {
 
     namespace opt = boost::program_options;
+
 
     ///Convenience alias for the boost base class for the IO tree.
     typedef boost::property_tree::basic_ptree<std::string, boost::any>
