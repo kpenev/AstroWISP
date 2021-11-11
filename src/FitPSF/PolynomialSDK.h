@@ -16,6 +16,7 @@
 #include "../IO/OutputSDKSource.h"
 #include <gsl/gsl_vector.h>
 #include <gsl/gsl_multimin.h>
+#include <cmath> 
 
 namespace FitPSF {
 

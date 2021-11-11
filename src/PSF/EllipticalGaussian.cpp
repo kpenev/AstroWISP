@@ -92,7 +92,7 @@ namespace PSF {
         update_values();
     }
 
-    double EllipticalGaussian::poly_coef(double x, double y, 
+    double EllipticalGaussian::poly_coef(double x, double y,
             unsigned x_power, unsigned y_power) const
     {
         double f0 = operator()(x, y);
@@ -203,7 +203,7 @@ namespace PSF {
                                    split.sub_dx(),
                                    split.sub_dy(),
                                    radius);
-        } else 
+        } else
             __pieces.push_back(
                 new EllipticalGaussianIntegralWedge(__spd,
                                                     __smd,
@@ -222,13 +222,13 @@ namespace PSF {
         return 0;
     }
 
-    double EllipticalGaussian::find_max(double x1, double y1, double x2, 
+    double EllipticalGaussian::find_max(double x1, double y1, double x2,
                     double y2) const
     {
         if(x1 * x2 <= 0 && y1 * y2 <= 0) return 1.0;
         double mk_spd = -__k / __spd,
                mk_smd = -__k / __smd,
-               max_x1 = mk_spd * y1, 
+               max_x1 = mk_spd * y1,
                max_x2 = mk_spd * y2,
                max_y1 = mk_smd * x1,
                max_y2 = mk_smd * x2,
@@ -246,13 +246,13 @@ namespace PSF {
         else if(max_x2 < x2) max_arg = std::max(max_arg,
                                                 exp_argument(max_x2, y2));
 
-        if(max_y1 > y1 && max_y1 < y2) 
+        if(max_y1 > y1 && max_y1 < y2)
             max_arg = std::max(max_arg, exp_argument(x1, max_y1));
 
         return std::exp(max_arg);
     }
 
-    double EllipticalGaussian::find_min(double x1, double y1, double x2, 
+    double EllipticalGaussian::find_min(double x1, double y1, double x2,
                     double y2) const
     {
         return std::exp(std::min(
@@ -261,7 +261,7 @@ namespace PSF {
     }
 
     double EllipticalGaussian::integrate(double center_x,
-                                            double center_y, 
+                                            double center_y,
                                             double dx,
                                             double dy,
                                             double circle_radius,

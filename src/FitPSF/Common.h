@@ -111,7 +111,7 @@ namespace FitPSF {
                 last_source.drop(MANY_SATURATED);
             else if(last_source.pixel_count() < min_pixels_per_source)
                 last_source.drop(FEW_PIXELS);
-            else if(not ignore_overlaps && last_source.overlaps().size()) {
+            else if(! ignore_overlaps && last_source.overlaps().size()) {
                 for(
                     typename std::set< SOURCE_TYPE* >::const_iterator
                         overlap_iter = last_source.overlaps().begin();

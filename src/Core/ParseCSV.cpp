@@ -176,22 +176,19 @@ namespace Core {
             if(
                 csv_stream.eof()
                 &&
-                (std::isnan(min_count) || result.size()>=min_count)
+                result.size()>=min_count
                 &&
-                (std::isnan(max_count) || result.size()<=max_count)
+                result.size()<=max_count
             )
                 return result;
         }
         std::ostringstream error_msg;
         error_msg << "Malformatted " << optname << " option: " << csv
-                  << "expected comma separated list of ";
-        if(!std::isnan(min_count))
-            error_msg << "at least " << min_count << " ";
-        if(!std::isnan(min_count) && !std::isnan(max_count))
-            error_msg << "and ";
-        if(!std::isnan(max_count))
-            error_msg << "at most " << max_count << " ";
-        error_msg << "real values.";
+                  << "expected comma separated list of "
+                  << "at least " << min_count << " "
+                  << "and "
+                  << "at most " << max_count << " "
+                  << "real values.";
         throw Error::CommandLine(error_msg.str());
     }
 

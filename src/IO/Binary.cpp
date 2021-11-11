@@ -1,4 +1,5 @@
 #include "Binary.h"
+#include <limits>
 #include <math.h>
 #include <stdlib.h>
 #include <stdarg.h>
@@ -34,8 +35,8 @@ namespace IO {
      * which was applied to the double values before rescaling and truncating,
      * and the maximum integer value in the resulting array (the minimum is zero
      * by definition).*/
-    int double_to_int(double *values, size_t val_count, double precision, 
-            unsigned long int *converted, long *offset, 
+    int double_to_int(double *values, size_t val_count, double precision,
+            unsigned long int *converted, long *offset,
             unsigned long int *max, int *has_nan)
     {
         double min_val, max_val;
@@ -54,7 +55,7 @@ namespace IO {
     }
 
     /*Returns the values that should be used to denote nan.*/
-    unsigned long int nan_value(int num_bits) 
+    unsigned long int nan_value(int num_bits)
     {
         return pow(2, num_bits)-1;
     }
@@ -77,7 +78,7 @@ namespace IO {
     }
 
     /*Packs the values to the given file  as tightly as possible.*/
-    void pack(unsigned long *values, FILE *outfile, unsigned long val_count, 
+    void pack(unsigned long *values, FILE *outfile, unsigned long val_count,
             unsigned long max_value, int has_nan)
     {
         int bit_offset=0;
@@ -97,7 +98,7 @@ namespace IO {
         packed=(char*)(malloc(num_bytes));
         for(i=0; i<num_bytes; i++) packed[i]=0;
         for (i=0; i<val_count; i++) {
-            if (values[i]>max_value) 
+            if (values[i]>max_value)
                 push(nan_repr, num_bits, bit_offset, &packed[dest]);
             else push(values[i], num_bits, bit_offset, &packed[dest]);
             dest+=(num_bits+bit_offset)/8;
@@ -157,7 +158,7 @@ namespace IO {
 
         /*add packed values*/
         for (i=0; i<val_count; i++) {
-            if (truncated[i]>max_value) 
+            if (truncated[i]>max_value)
                 push(nan_repr, num_bits, bit_offset, &(*packed)[val_dest]);
             else push(truncated[i], num_bits, bit_offset, &(*packed)[val_dest]);
             val_dest+=(num_bits+bit_offset)/8;
@@ -167,7 +168,7 @@ namespace IO {
         return 0;
     }
 
-    /* Packs the given integer values to an array of characters, along with all 
+    /* Packs the given integer values to an array of characters, along with all
      * the information required to read that array from a file. */
     int int_to_binary(int *values, size_t val_count,
             unsigned long int *num_bytes, char **packed)
@@ -200,11 +201,11 @@ namespace IO {
         return 0;
     }
 
-    /*Adds the given array of values to the file preserving values to 
+    /*Adds the given array of values to the file preserving values to
      * the given precision. The extra arguments are only used for floating point
      * values and they should be the desired precision and whether a special nan
      * value should be created.*/
-    int bin_output(FILE *outfile, void *values, size_t val_count, int type_id, 
+    int bin_output(FILE *outfile, void *values, size_t val_count, int type_id,
             ...)
     {
         double precision;
@@ -219,7 +220,7 @@ namespace IO {
             has_nan=0;
             MIN_MAX_NONAN((int *)(values), val_count, offset, max_value, i);
             max_truncated=max_value-offset;
-            for (i=0; i<val_count; i++) 
+            for (i=0; i<val_count; i++)
                 truncated[i]=((int *)(values))[i]-offset;
         } else {
             va_list prec_arg;
@@ -227,21 +228,21 @@ namespace IO {
             precision=va_arg(prec_arg, double);
             has_nan=va_arg(prec_arg, int);
             va_end(prec_arg);
-            if (double_to_int((double *)(values), val_count, precision, 
+            if (double_to_int((double *)(values), val_count, precision,
                         truncated, &offset, &max_truncated, &has_nan)) return 1;
         }
         fputc((char)(2*type_id+has_nan), outfile);
-        if (type_id==DOUBLE_ID) 
+        if (type_id==DOUBLE_ID)
             fwrite((char*)(&precision), sizeof(double), 1, outfile);
         coded_offset=2*abs(offset)+(offset<0 ? 1 : 0);
-        if (!fwrite((char*)(&coded_offset), MIN_ULONG_BYTES, 1, outfile)) 
+        if (!fwrite((char*)(&coded_offset), MIN_ULONG_BYTES, 1, outfile))
             return 1;
         pack(truncated, outfile, val_count, max_truncated, has_nan);
         free(truncated);
         return 0;
     }
 
-    /* Reads an array of values from the file and sets type_id according to the 
+    /* Reads an array of values from the file and sets type_id according to the
      * type of data read. If indices is not null, it should contain a sorted list
      * of numbers of length val_count, which select which values to return. If
      * indices is NULL all values are read and val_count is set to their number.
@@ -267,11 +268,11 @@ namespace IO {
         int_val=0;
         if (!fread((char*)(&int_val), MIN_ULONG_BYTES, 1, infile)) return NULL;
         offset=(int_val%2 ? -1 : 1)*(long)(int_val)/2;
-        if (!fread((char*)(&array_size), MIN_ULONG_BYTES, 1, infile)) 
+        if (!fread((char*)(&array_size), MIN_ULONG_BYTES, 1, infile))
             return NULL;
         if (indices==NULL) *val_count=array_size;
         num_bits=0;
-        if (!fread((char*)(&num_bits), 1, 1, infile)) 
+        if (!fread((char*)(&num_bits), 1, 1, infile))
             return NULL;
         num_bytes=0;
         if (!fread((char*)(&num_bytes), MIN_ULONG_BYTES, 1, infile))
@@ -289,9 +290,9 @@ namespace IO {
             if (indices==NULL || i==indices[result_ind]) {
                 if (!num_bits) int_val=0;
                 else int_val=pop(num_bits, bit_offset, &packed[source]);
-                if (int_val==nan_repr && has_nan) 
-                    ((double *)(result))[result_ind]=0.0/0.0;
-                else if (*type_id==INT_ID) 
+                if (int_val==nan_repr && has_nan)
+                    ((double *)(result))[result_ind]=std::numeric_limits<double>::quiet_NaN();
+                else if (*type_id==INT_ID)
                     ((int *)(result))[result_ind]=int_val+offset;
                 else if (*type_id==DOUBLE_ID)
                     ((double *)(result))[result_ind]=precision*((long)int_val+

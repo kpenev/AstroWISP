@@ -43,6 +43,9 @@ namespace PSF {
                 const Background::Source &background
         ) : Source(id, num_apertures, x0, y0, background) {}
 
+        MapSource() : Source(Core::SourceID())
+        {throw Error::Runtime("Using default MapSource constructor");}
+
         ///Modifiable reference to the terms PSF is a function of.
         Eigen::VectorXd &expansion_terms()
         {return __expansion_terms;}
