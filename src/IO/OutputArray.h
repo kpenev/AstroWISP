@@ -23,7 +23,7 @@ namespace IO {
     ///\brief Prepares to write an array of values from from boost::any.
     ///
     ///Each element of the array moust have UNIT_TYPE type, otherwise
-    ///boost::bad_any_cast is thrown. The original data should have been 
+    ///boost::bad_any_cast is thrown. The original data should have been
     ///either a std::vector<UNIT_TYPE> or an std::valarray<UNIT_TYPE>.
     template<typename UNIT_TYPE>
         class LIB_PUBLIC OutputArray {
@@ -68,7 +68,7 @@ namespace IO {
             ///The number of elements in the array.
             const hsize_t &size() const {return __size;}
 
-            ///\brief A pointer to the first element in the array, the rest 
+            ///\brief A pointer to the first element in the array, the rest
             ///are contiguous.
             const UNIT_TYPE *data() const {return __data;}
 
@@ -79,7 +79,7 @@ namespace IO {
             ) const
             {assert(index < __size); return __data[index];}
 
-            ///\brief Compares two arrays element by element (empty arrays 
+            ///\brief Compares two arrays element by element (empty arrays
             ///compare equal).
             bool operator==(
                 ///The original array to copy.
