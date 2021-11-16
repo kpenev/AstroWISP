@@ -17,7 +17,7 @@
 namespace PSF {
 
     ///A container full of MapSource objects.
-    class LIB_PUBLIC MapSourceContainer : public std::vector<MapSource> {
+    class LIB_LOCAL MapSourceContainer : public std::vector<MapSource> {
     public:
         ///Create an empty container.
         MapSourceContainer() {}

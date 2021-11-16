@@ -50,8 +50,10 @@ model {
             } else if (toolChain in VisualCpp ) {
                 cppCompiler.define 'TOOLCHAIN_MSVC'
                 cppCompiler.define '_USE_MATH_DEFINES'
-                cppCompiler.args "/IC:\\Users\\Errox\\cfitsio\\include" , "/IC:\\Program Files\\boost\\boost_1_77_0" , '/EHsc'
-                cppCompiler.args '/std:c++17'
+                cppCompiler.define 'BOOST_RESULT_OF_USE_TR1'
+                linker.args "/LIBPATH:C:\\Program Files\\boost\\boost_1_65_1\\stage\\lib"
+                cppCompiler.args "/IC:\\Users\\Errox\\cfitsio\\include" , "/IC:\\Program Files\\boost\\boost_1_65_1" , '/EHsc'
+                cppCompiler.args '/std:c++14'
                 if(buildType == buildTypes.debug) {
                     cppCompiler.args '/Zi', '/FS'
                     cppCompiler.define 'DEBUG'
