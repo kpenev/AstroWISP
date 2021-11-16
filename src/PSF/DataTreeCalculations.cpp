@@ -89,6 +89,7 @@ namespace PSF {
                 s_array[i]=psf->s();
                 d_array[i]=psf->d();
                 k_array[i]=psf->k();
+                ++src_i;
             }
             new (&s) MapType(s_array.data(), num_sources, 1);
             new (&d) MapType(d_array.data(), num_sources, 1);
