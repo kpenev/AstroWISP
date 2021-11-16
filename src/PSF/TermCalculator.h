@@ -12,9 +12,9 @@
 #include <boost/spirit/include/phoenix_operator.hpp>
 #include <boost/spirit/include/phoenix_stl.hpp>
 #include <boost/spirit/include/phoenix_fusion.hpp>
-#include <valarray>
-#include <functional>
+#include <boost/spirit/include/phoenix_bind.hpp>
 
+#include <valarray>
 #include <iostream>
 #include <vector>
 #include <string>
@@ -446,8 +446,8 @@ namespace PSF {
         {
             using qi::double_;
             using qi::_val;
-            using std::placeholders::_1;
-            using std::bind;
+            using qi::_1;
+            using boost::phoenix::bind;
 
             __exponentiation = (
                     __value[_val = _1]
@@ -721,13 +721,13 @@ namespace PSF {
             using phoenix::push_back;
             using phoenix::ref;
             using phoenix::at_c;
-            using std::bind;
+            using phoenix::bind;
 
             using qi::char_;
             using qi::uint_;
             using qi::_val;
-            using std::placeholders::_1;
-            using std::placeholders::_2;
+            using qi::_1;
+            using qi::_2;
 
             __simple_term = +( char_ - ',' - '}');
 
