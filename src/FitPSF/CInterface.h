@@ -70,24 +70,33 @@ extern "C" {
         ///The common y resolution of the images being processed.
         unsigned long image_y_resolution,
 
-        ///The names of the source columns.
-        char **column_names,
-
         ///The IDs to assign to the sources in each image. The first index is
         ///the image index the second index is the source index within each
         ///image.
         char ***source_ids,
 
-        ///The values of each column for each source. The first index is the
-        ///image index, the remaining array is organized as described by the
-        ///column_data argument of FitPSF::IOSources::IOSources().
-        double **column_data,
+        ///The cordinates of the source centroids. The first index is the image
+        ///index, the remaining array is organized as described by the
+        ///source_coordinates argument of FitPSF::IOSources::IOSources().
+        double **source_coordinates,
+
+        ///The values of each term PSF parameters depend on for each source. The
+        ///first index is the image index, the remaining array is organized as
+        ///described by the psf_terms argument of
+        ///FitPSF::IOSources::IOSources().
+        double **psf_terms,
+
+        ///Flag indicating whether each source is allowed to participate in
+        ///shape fitting or not. The first index is the image index, the
+        ///remaining array is organized as described by the
+        ///enabled argument of FitPSF::IOSources::IOSources().
+        bool **enabled,
 
         ///How many sources are in column_data for each image.
         unsigned long *number_sources,
 
-        ///How many columns are used in PSF fitting.
-        unsigned long number_columns,
+        ///How many terms are used in PSF fitting.
+        unsigned long number_terms,
 
         ///Pointers to the measured background for the input sources indexed by
         ///the image index.

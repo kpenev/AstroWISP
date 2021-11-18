@@ -9,7 +9,6 @@
 #define __PSF_MAP_SOURCE_H
 
 #include "../Core/SharedLibraryExportMacros.h"
-#include "TermCalculator.h"
 #include "../IO/H5IODataTree.h"
 #include "../Core/Source.h"
 #include "../PSF/Typedefs.h"
