@@ -19,7 +19,7 @@ namespace PSF {
 
     ///\brief Class for evaluating a collection of smooth dependencies for a
     ///collection of sources.
-    class LIB_PUBLIC MapSource : public Core::Source {
+    class LIB_LOCAL MapSource : public Core::Source {
     private:
         ///The values of the terms participating in the PSF map.
         Eigen::VectorXd __expansion_terms;
