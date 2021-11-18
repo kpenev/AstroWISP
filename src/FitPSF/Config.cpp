@@ -49,7 +49,7 @@ namespace FitPSF {
                 opt::value<std::string>()->default_value(""),
                 "Use the primary HDU in the given FITS file as the error "
                 "estimate for the pixel fluxes. This option supercedes "
-                "io.expect-error-hdu." 
+                "io.expect-error-hdu."
             );
 
         opt::options_description psffit_options("Options defining the fit");
@@ -59,16 +59,6 @@ namespace FitPSF {
                 opt::value<PSF::ModelType>(),
                 "The PSF/PRF model to fit. Case insensitive. One of: sdk, "
                 "bicubic."
-            )
-            (
-                "psf.terms",
-                opt::value<std::string>()->default_value(""),
-                ("The terms the PSF is allowed to depend on. The EBNF "
-                 "grammar defining the language for this variable is:\n\n"
-                 +
-                 PSF::TermGenerator::ebnf_definition
-                 +
-                 '\n').c_str()
             )
             (
                 "psf.max-chi2",

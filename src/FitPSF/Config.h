@@ -11,7 +11,6 @@
 #include "../Core/SharedLibraryExportMacros.h"
 #include "../PSF/Grid.h"
 #include "../PSF/Typedefs.h"
-#include "../PSF/TermCalculator.h"
 #include "../Background/Annulus.h"
 #include "../IO/CommandLineConfig.h"
 #include "../PSF/CommandLineUtil.h"
