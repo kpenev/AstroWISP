@@ -8,6 +8,12 @@
 #include "H5IODataTree.h"
 #include <iostream>
 
+namespace boost {
+  bool operator==(const any& lhs, const any& rhs){
+    throw Error::NotImplemented("Comparison of boost any is undefined");
+  }
+}
+
 namespace IO {
 
     void H5IODataTree::add_1d_entry(

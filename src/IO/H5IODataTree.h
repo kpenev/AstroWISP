@@ -25,13 +25,17 @@
 #include <vector>
 #include <cmath>
 
+// namespace boost {
+//   template<class T,
+//     typename std::enable_if<std::is_same<T, any>{}, bool>::type =true
+//   >
+//   bool operator == (const T& lhs, const T& rhs){
+//     throw Error::NotImplemented("Comparison of boost any is undefined");
+//   }
+// }
+
 namespace boost {
-  template<class T,
-    typename std::enable_if<std::is_same<T, any>{}, bool>::type =true
-  >
-  bool operator == (const T& lhs, const T& rhs){
-    throw Error::NotImplemented("Comparison of boost any is undefined");
-  }
+  bool operator==(const any& lhs, const any& rhs);
 }
 
 namespace IO {
