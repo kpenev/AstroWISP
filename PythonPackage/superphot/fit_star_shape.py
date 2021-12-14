@@ -16,6 +16,7 @@ from superphot._initialize_library import get_superphot_library
 from superphot.superphot_io_tree import SuperPhotIOTree
 
 class FitStarShape:
+    #TODO fix this documentation
     """
     Fit for the PSF/PRF of stars and their flux.
 
@@ -372,8 +373,6 @@ class FitStarShape:
                 A SubPixPhot IO tree containing all the newly derived results.
         """
 
-        #TODO add 5, should be expansion term
-
         def create_image_arguments():
             """
             Create the three image arguments for piecewise_bicubic_fit.
@@ -449,6 +448,7 @@ class FitStarShape:
                 None
 
             Returns:
+            #TODO fix documentation
                 tuple:
                     POINTER(c_char_p):    The column_names argument to the
                         piecewise_bicubic_fit library function.
@@ -456,13 +456,12 @@ class FitStarShape:
                     POINTER(POINTER(c_char_p)):    The source_ids argument to
                         the piecewise_bicubic_fit library function.
 
-                    POINTER(POINTER(c_double)):    The column_data argument to
-                        the piecewise_bicubic_fit library function. #TODO this will become positions
+                    #TODO a bunch of pointers belong here
 
                     numpy.array(c_ulong):    1-D array contining the number of
                         sources in each image.
 
-                    int:    The number of columns in the column_data. #TODO this will become number of terms
+                    numpy.array(c_ulong):    The number of terms in the psf. #TODO this will become number of terms
             """
             #TODO properly add source_coordinates (replace column_data with source_coordinates), psf_terms, **enabled, in that specific order to this source arguments generator
             number_images = len(image_sources)
@@ -552,7 +551,7 @@ if __name__ == '__main__':
     tree = SuperPhotIOTree(fitprf._library_configuration)
     #pylint: enable=protected-access
     print('BG tool: ' + repr(tree.get('bg.tool', str)))
-    print('PSF terms: ' + repr(tree.get('psffit.terms', str)))
+    # print('PSF terms: ' + repr(tree.get('psffit.terms', str)))
     print('Max chi squared: '
           +
           repr(tree.get('psffit.max_chi2', c_double)))
