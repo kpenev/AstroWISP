@@ -321,7 +321,7 @@ class TestFitStarShapeNoiseless(FloatTestCase):
                 )
                 print('Finished checking results for image ' + str(image_index))
 
-    def test_single_source(self):
+    def dont_test_single_source(self):
         """Test fitting a single source in the center of the image."""
 
         values = numpy.zeros((3, 3))
@@ -350,7 +350,7 @@ class TestFitStarShapeNoiseless(FloatTestCase):
             psffit_terms=['1']
         )
 
-    def test_isolated_sources(self):
+    def dont_test_isolated_sources(self):
         """Test fitting an image containing 8 well isolated sources."""
 
         psf_parameters = dict(values=numpy.zeros((3, 3)),
@@ -433,7 +433,7 @@ class TestFitStarShapeNoiseless(FloatTestCase):
         self.run_test(sources=[sources],
                       psffit_terms=['1', 'x', 'y'])
 
-    def test_two_overlapping_sources(self):
+    def dont_test_two_overlapping_sources(self):
         """Test fitting an image containing 2 sources all overlapping."""
 
         psf_args = dict(psf_parameters=dict(values=numpy.zeros((3, 3)),
@@ -453,7 +453,7 @@ class TestFitStarShapeNoiseless(FloatTestCase):
                         psf_args=psf_args)]
         self.run_test(sources=[sources], psffit_terms=['1'])
 
-    def test_four_overlapping_sources(self):
+    def dont_test_four_overlapping_sources(self):
         """Test fitting an image containing 4 overlapping sources."""
 
         psf_parameters = dict(
@@ -523,7 +523,7 @@ class TestFitStarShapeNoiseless(FloatTestCase):
         self.run_test(sources=[sources],
                       psffit_terms=['1', 'x*x', 'y*y'])
 
-    def dont_test_multi_image_with_extra_var(self):
+    def test_multi_image_with_extra_var(self):
         """Test fitting a series of 5 images and non-position variables."""
 
         boundaries = dict(x=numpy.array([-3.02, 0.0, 3.02]),
@@ -655,7 +655,7 @@ class TestFitStarShapeNoiseless(FloatTestCase):
             )
         ]
         self.run_test(sources=sources,
-                      psffit_terms='{1, x, y, t, x*t, y*t, z}')
+                      psffit_terms=['1', 'x', 'y', 't', 'x*t', 'y*t', 'z'])
 
 
 
