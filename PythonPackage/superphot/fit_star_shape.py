@@ -16,6 +16,7 @@ from superphot._initialize_library import get_superphot_library
 from superphot.superphot_io_tree import SuperPhotIOTree
 
 class FitStarShape:
+    #TODO fix this documentation
     """
     Fit for the PSF/PRF of stars and their flux.
 
@@ -59,39 +60,6 @@ class FitStarShape:
 
             mode (str):
                 What kind of fitting to do 'PSF' or 'PRF' (case insensitive).
-
-            shape_terms (str):
-                The terms the PSF is allowed to depend on. The EBNF grammar
-                defining the language for this parameter is::
-
-                    (* items in angle brackets (< or >) are assumed to be     *)
-                    (* obvious and thus are not defined.                      *)
-
-                    termchar = <ascii character> - "," - "}" ;
-
-                    (* mathematical expressions  involving variables,         *)
-                    (* floating point numbers and pi. The complete list of    *)
-                    (* mathematical functions from c++99's cmath library are  *)
-                    (* supported.                                             *)
-                    term = termchar , { termchar } ;
-
-
-                    (* simple listing of terms to include.                    *)
-                    list = "{" , term , { "," , term } , "}" ;
-
-                    (* Expands to all polynomial terms of up to combined      *)
-                    (* order <integer> of the entries in list                 *)
-                    poly = "O" , <integer> , list ;
-
-                    set = list | poly ;
-
-
-                    (* expands to the cross product of all sets.              *)
-                    cross = set , { "*" , set } ;
-
-
-                    (* merge the terms of all cross products together.        *)
-                    expression = cross , { \"+\" , cross } ;
 
             grid (list of floats):
                 A comma separated list of grid boundaries.  Can either be a
@@ -211,7 +179,6 @@ class FitStarShape:
 
         >>> from superphot import FitStarShape
         >>> fitprf = FitStarShape(mode='prf',
-        >>>                       shape_terms='O3{x, y}',
         >>>                       grid=[-4.0, -2.0, 0.0, 2.0, 4.0],
         >>>                       initial_aperture=5.0)
     """
@@ -266,8 +233,6 @@ class FitStarShape:
             return ()
         elif param_value[0] == 'smoothing' and param_value[1] is None:
             return ()
-        elif param_value[0] == 'shape_terms':
-            return b'psf.terms', param_value[1].encode('ascii')
         elif param_value[0] == 'pixel_rejection_threshold':
             return (b'psf.bicubic.pixrej',
                     repr(param_value[1]).encode('ascii'))
@@ -357,12 +322,13 @@ class FitStarShape:
         print('Configuration arguments: ' + repr(config_arguments))
         self._superphot_library.update_psffit_configuration(*config_arguments)
 
+
     def fit(self, image_sources, backgrounds, require_convergence=True):
-        r"""
+        """
         Fit for the shape of the sources in a collection of imeges.
 
         Args:
-            image_sources ([4-tuples]):    Each entry consists of:
+            image_sources ([5-tuples]):    Each entry consists of:
 
                 0. The pixel values of the calibratred image
 
@@ -476,6 +442,7 @@ class FitStarShape:
                 None
 
             Returns:
+            #TODO fix documentation
                 tuple:
                     POINTER(POINTER(c_char_p)):    The source_ids argument to
                         the piecewise_bicubic_fit library function.
@@ -499,7 +466,7 @@ class FitStarShape:
                     int:    The number of terms the PSF parameters are allowed
                         to depend on.
             """
-
+            #TODO properly add source_coordinates (replace column_data with source_coordinates), psf_terms, **enabled, in that specific order to this source arguments generator
             number_images = len(image_sources)
             number_terms = image_sources[0][4].shape[1]
 
@@ -579,7 +546,7 @@ class FitStarShape:
         return result_tree
 
     def __del__(self):
-        r"""Destroy the configuration object created in :meth:`__init__`\ ."""
+        """Destroy the configuration object created in :meth:`__init__`\ ."""
 
         self._superphot_library.destroy_psffit_configuration(
             self._library_configuration
@@ -587,7 +554,6 @@ class FitStarShape:
 
 if __name__ == '__main__':
     fitprf = FitStarShape(mode='prf',
-                          shape_terms='{1}',
                           grid=[-1.0, 0.0, 1.0],
                           initial_aperture=2.0,
                           smoothing=None,
@@ -598,7 +564,7 @@ if __name__ == '__main__':
     tree = SuperPhotIOTree(fitprf._library_configuration)
     #pylint: enable=protected-access
     print('BG tool: ' + repr(tree.get('bg.tool', str)))
-    print('PSF terms: ' + repr(tree.get('psffit.terms', str)))
+    # print('PSF terms: ' + repr(tree.get('psffit.terms', str)))
     print('Max chi squared: '
           +
           repr(tree.get('psffit.max_chi2', c_double)))
