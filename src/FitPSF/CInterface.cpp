@@ -168,6 +168,7 @@ void prepare_fit_sources(
             IO::TranslateToAny< std::vector<double> >()
         );
 
+#ifndef NDEBUG
         std::cerr << "Trying to read back psffit terms. Node name: "
                   << "psffit.terms." + image_index_stream.str()
                   << std::endl;
@@ -177,6 +178,8 @@ void prepare_fit_sources(
             IO::TranslateToAny< std::vector<double> >()
         );
         std::cerr << "Finished reading back psffit terms." << std::endl;
+#endif
+
 #ifdef TRACK_PROGRESS
         std::cerr << "Added PSF fit terms to result tree." << std::endl;
 #endif

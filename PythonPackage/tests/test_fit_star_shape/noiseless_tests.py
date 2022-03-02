@@ -103,7 +103,7 @@ class TestFitStarShapeNoiseless(FloatTestCase):
 
     #TODO: See if breaking up makes sense
     #pylint: disable=too-many-locals
-    def check_results(self, result_tree, image_index, sources, extra_variables):
+    def check_results(self, result_tree, image_index, sources, num_terms):
         """
         Assert that fitted PSF map and source fluxes match expectations.
 
@@ -118,67 +118,42 @@ class TestFitStarShapeNoiseless(FloatTestCase):
             sources:    The sources argument used to generate the image that was
                 fit. See same name argument of run_test.
 
-            extra_variables:    A list of the names of any variables in addition
-                to `x` and `y` which participate in the PSF fit.
+            num_terms(int):    The number of terms the PSF map depends on.
 
         Returns:
             None
         """
 
-        if 'enabled' in extra_variables:
-            enabled_sources = numpy.array([src['enabled'] for src in sources],
-                                          dtype=bool)
-        else:
-            enabled_sources = numpy.full(len(sources), True, dtype=bool)
+        enabled_sources = numpy.array(
+            [src.get('enabled', True) for src in sources],
+            dtype=bool
+        )
+        num_enabled_sources = enabled_sources.sum()
         print('Flagged enabled sources')
 
-        variables = {
-            var: val[enabled_sources]
-            for var, val in zip(
-                ['x', 'y'] + extra_variables,
-                result_tree.get_psfmap_variables(image_index,
-                                                 len(extra_variables) + 2,
-                                                 len(sources))
-            )
-        }
-        print('Read PSF map variables:\n' + repr(variables))
+        psffit_terms = result_tree.get('psffit.terms.%d' % image_index,
+                                       shape=(num_enabled_sources, num_terms))
 
-        psffit_terms = result_tree.get('psffit.terms', str)
-        assert psffit_terms[0] == '{'
-        assert psffit_terms[-1] == '}'
-        print('Read PSF map terms')
+        print('PSF fit terms: ' + repr(psffit_terms))
 
-        num_enabled_sources = variables['x'].size
         num_x_boundaries = len(sources[0]['psf_args']['boundaries']['x']) - 2
         num_y_boundaries = len(sources[0]['psf_args']['boundaries']['y']) - 2
 
-        #Using eval here is perfectly reasonable.
-        #pylint: disable=eval-used
-        term_list = [eval(term, variables)
-                     for term in psffit_terms[1 : -1].split(',')]
-        #pylint: enable=eval-used
-        for term_index, term in enumerate(term_list):
-            if isinstance(term, (float, int)):
-                term_list[term_index] = numpy.full(num_enabled_sources,
-                                                   float(term))
-
-        term_list = numpy.dstack(term_list)[0]
         coefficients = result_tree.get(
             'psffit.psfmap',
             shape=(4,
                    len(sources[0]['psf_args']['boundaries']['x']) - 2,
                    len(sources[0]['psf_args']['boundaries']['y']) - 2,
-                   len(term_list[0]))
+                   num_terms)
         )
 
-        print('Term list shape:' + repr(term_list.shape))
         print('coefficients shape: ' + repr(coefficients.shape))
         print('Coefficients: ' + repr(coefficients))
 
-        print('Term list:\n' + repr(term_list))
+        print('Term list:\n' + repr(psffit_terms))
 
         #Indices are: source index, variable, y boundary ind, x boundary ind
-        fit_params = numpy.tensordot(term_list, coefficients, [1, 3])
+        fit_params = numpy.tensordot(psffit_terms, coefficients, [1, 3])
         self.assertEqual(
             fit_params.shape,
             (num_enabled_sources, 4, num_x_boundaries, num_y_boundaries)
@@ -187,7 +162,7 @@ class TestFitStarShapeNoiseless(FloatTestCase):
                                  shape=(len(sources),))
 
         for src_ind, src in enumerate(sources):
-            if 'enabled' in extra_variables and not src['enabled']:
+            if not enabled_sources[src_ind]:
                 continue
 
             if 'flux_backup' in src and src['flux_backup'] is not None:
@@ -204,7 +179,7 @@ class TestFitStarShapeNoiseless(FloatTestCase):
 
         expected_params = numpy.empty(fit_params.shape)
         for src_ind, src in enumerate(sources):
-            if 'enabled' in extra_variables and not src['enabled']:
+            if not enabled_sources[src_ind]:
                 continue
             for var_ind, var_name in enumerate(['values',
                                                 'd_dx',
@@ -339,6 +314,7 @@ class TestFitStarShapeNoiseless(FloatTestCase):
                     result_tree,
                     image_index,
                     image_sources,
+                    len(psffit_terms[image_index])
                 )
                 print('Finished checking results for image ' + str(image_index))
 
