@@ -3,8 +3,10 @@
 from math import ceil
 import os.path
 import sys
-from ctypes import c_double
+from ctypes import c_double, c_bool
 import numpy
+
+from asteval import Interpreter
 
 sys.path.insert(
     0,
@@ -23,7 +25,6 @@ from superphot.fake_image.image import Image
 #pylint: enable=wrong-import-position
 
 def make_image_and_source_list(sources,
-                               extra_variables,
                                subpix_map):
     """
     Create an image and a list of the sources in it ready for psf fitting.
@@ -39,13 +40,8 @@ def make_image_and_source_list(sources,
                   sources's PSF. It should already be scaled to the desired
                   flux.
 
-            Additional keywords may be added to the source list and hence
-            available as variables for PSF fitting by listing the names in the
-            extra_variables argument.
-
-        extra_variables:    A list of additional keywords from sources to add to
-            the source list and the order in which those should be added. The
-            corresponding entries in sources must be floating point values.
+                * enabled(optional):    True/False flag of whether to include
+                    this source in shape fitting.
 
         subpix_map:    The sub-pixel map to impose on the image. For more
             details see same name argument of Image.add_source.
@@ -65,14 +61,17 @@ def make_image_and_source_list(sources,
                   int(ceil(max_y + min_y)),
                   background=1.0)
 
-    src_list_vars = ['x', 'y'] + extra_variables
+    src_list_dtype = (
+        [('ID', '|S6')]
+        +
+        [(var, c_double) for var in 'xy']
+    )
+    if 'enabled' in sources[0]:
+        src_list_dtype.append(('enabled', c_bool))
+
     src_list = numpy.empty(
         len(sources),
-        dtype=(
-            [('ID', '|S6')]
-            +
-            [(var, c_double) for var in src_list_vars]
-        )
+        dtype=src_list_dtype
     )
 
 
@@ -84,7 +83,37 @@ def make_image_and_source_list(sources,
                          subpix_map=subpix_map)
 
         src_list[src_id]['ID'] = b'%06d' % src_id
-        for var in src_list_vars:
+        for var in src_list.dtype.names[1:]:
             src_list[src_id][var] = src[var]
 
     return image, src_list
+
+def evaluate_psffit_terms(sources, terms_str):
+    """
+    Evaluate the specified terms to properly formatted array for PSF fitting.
+
+    Args:
+        sources:    See `sources` argument to `make_image_and_source_list()`.
+
+        terms_str([str]):    List of strings to evaluate using entries in
+            sources.
+
+    Returns:
+        2-D numpy array:
+            The terms the PSF map is allowed to depend on evaluated for each
+            source, organized suitably to pass as the fifth argument to
+            `FitStarShape.fit()`.
+    """
+
+    num_sources = len(sources)
+    num_terms = len(terms_str)
+
+    result = numpy.empty((num_sources, num_terms), dtype=c_double)
+
+    evaluate = Interpreter()
+    for src_ind, src in enumerate(sources):
+        evaluate.symtable.update(src)
+        for term_ind, term in enumerate(terms_str):
+            result[src_ind, term_ind] = evaluate(term)
+
+    return result
