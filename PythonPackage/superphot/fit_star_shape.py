@@ -466,7 +466,6 @@ class FitStarShape:
                     int:    The number of terms the PSF parameters are allowed
                         to depend on.
             """
-            #TODO properly add source_coordinates (replace column_data with source_coordinates), psf_terms, **enabled, in that specific order to this source arguments generator
             number_images = len(image_sources)
             number_terms = image_sources[0][4].shape[1]
 
@@ -482,7 +481,7 @@ class FitStarShape:
             for image_i, image_data in enumerate(image_sources):
                 source_coordinates[image_i][:, 0] = image_data[3]['x']
                 source_coordinates[image_i][:, 1] = image_data[3]['y']
-                if 'enabled' in image_data[3]:
+                if 'enabled' in image_data[3].dtype.names:
                     enabled[image_i][:] = image_data[3]['enabled']
                 assert image_sources[image_i][4].shape[1] == number_terms
 

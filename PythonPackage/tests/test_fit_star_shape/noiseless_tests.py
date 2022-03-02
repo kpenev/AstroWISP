@@ -132,7 +132,8 @@ class TestFitStarShapeNoiseless(FloatTestCase):
         print('Flagged enabled sources')
 
         psffit_terms = result_tree.get('psffit.terms.%d' % image_index,
-                                       shape=(num_enabled_sources, num_terms))
+                                       shape=(len(sources), num_terms))
+        psffit_terms = psffit_terms[enabled_sources]
 
         print('PSF fit terms: ' + repr(psffit_terms))
 
@@ -178,16 +179,19 @@ class TestFitStarShapeNoiseless(FloatTestCase):
         fit_params *= fluxes[:, numpy.newaxis, numpy.newaxis, numpy.newaxis]
 
         expected_params = numpy.empty(fit_params.shape)
-        for src_ind, src in enumerate(sources):
-            if not enabled_sources[src_ind]:
+
+        enabled_ind = 0
+        for src in sources:
+            if not src.get('enabled', True):
                 continue
             for var_ind, var_name in enumerate(['values',
                                                 'd_dx',
                                                 'd_dy',
                                                 'd2_dxdy']):
-                expected_params[src_ind, var_ind, :, :] = (
+                expected_params[enabled_ind, var_ind, :, :] = (
                     src['psf_args']['psf_parameters'][var_name][1:-1, 1:-1]
                 )
+            enabled_ind += 1
 
         plus = (expected_params + fit_params)
         minus = (expected_params - fit_params)
@@ -496,8 +500,6 @@ class TestFitStarShapeNoiseless(FloatTestCase):
                             y=15.5,
                             psf_args=dict(psf_parameters=dict(psf_parameters),
                                           boundaries=boundaries)))
-
-#        self.run_test(sources=[sources], psffit_terms='{1, x*x, y*y}')
 
         for src in sources:
             src['enabled'] = True

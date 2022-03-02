@@ -500,7 +500,7 @@ namespace FitPSF {
                 ) {
                     typename std::list<FIT_SOURCE_TYPE *>::iterator
                         drop_iter = src_i++;
-                    if(!(enabled)[(*drop_iter)->source_assignment_id() - 1]) {
+                    if(!enabled[(*drop_iter)->source_assignment_id() - 1]) {
                         (*drop_iter)->exclude_from_shape_fit();
                         dropped_sources.splice(dropped_sources.end(),
                                                fit_sources,
