@@ -116,4 +116,6 @@ def evaluate_psffit_terms(sources, terms_str):
         for term_ind, term in enumerate(terms_str):
             result[src_ind, term_ind] = evaluate(term)
 
+    print('PSF fit terms: ' + repr(result))
+
     return result

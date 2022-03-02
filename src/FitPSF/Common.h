@@ -347,7 +347,7 @@ namespace FitPSF {
                 input_source_list.output_fname(),
                 cover_psf,
                 *location,
-                input_source_list.psf_terms().col(source_assignment_id),
+                input_source_list.psf_terms().col(source_assignment_id - 1),
                 srcbg,
                 source_assignment_id,
                 psf_fit_sources
@@ -370,6 +370,7 @@ namespace FitPSF {
                       << ") based on "
                       << last_source.background_pixels()
                       << " pixels (" << srcbg.pixels() << ")"
+                      << " PSF map terms: " << last_source.expansion_terms()
                       << std::endl;
 #endif
             check_fit_source(last_source,

@@ -281,8 +281,7 @@ class TestFitStarShapeNoiseless(FloatTestCase):
                         image**0.5,
                         numpy.zeros(image.shape, dtype=c_ubyte),
                         source_list,
-                        evaluate_psffit_terms(image_sources,
-                                              psffit_terms[sub_image])
+                        evaluate_psffit_terms(image_sources, psffit_terms)
                     )
                 )
                 measure_backgrounds.append(
@@ -314,7 +313,7 @@ class TestFitStarShapeNoiseless(FloatTestCase):
                     result_tree,
                     image_index,
                     image_sources,
-                    len(psffit_terms[image_index])
+                    len(psffit_terms)
                 )
                 print('Finished checking results for image ' + str(image_index))
 
@@ -347,7 +346,7 @@ class TestFitStarShapeNoiseless(FloatTestCase):
             psffit_terms=['1']
         )
 
-    def dont_test_isolated_sources(self):
+    def test_isolated_sources(self):
         """Test fitting an image containing 8 well isolated sources."""
 
         psf_parameters = dict(values=numpy.zeros((3, 3)),
@@ -428,9 +427,9 @@ class TestFitStarShapeNoiseless(FloatTestCase):
         psf_parameters['d_dy'] = numpy.zeros((3, 3))
 
         self.run_test(sources=[sources],
-                      psffit_terms='{1, x, y}')
+                      psffit_terms=['1', 'x', 'y'])
 
-    def dont_test_two_overlapping_sources(self):
+    def test_two_overlapping_sources(self):
         """Test fitting an image containing 2 sources all overlapping."""
 
         psf_args = dict(psf_parameters=dict(values=numpy.zeros((3, 3)),
@@ -448,9 +447,9 @@ class TestFitStarShapeNoiseless(FloatTestCase):
                    dict(x=16.51,
                         y=14.03,
                         psf_args=psf_args)]
-        self.run_test(sources=[sources], psffit_terms='{1}')
+        self.run_test(sources=[sources], psffit_terms=['1'])
 
-    def dont_test_four_overlapping_sources(self):
+    def test_four_overlapping_sources(self):
         """Test fitting an image containing 4 overlapping sources."""
 
         psf_parameters = dict(
