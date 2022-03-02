@@ -293,7 +293,6 @@ class FitStarShape:
     def __init__(self,
                  *,
                  mode,
-                 shape_terms,
                  grid,
                  initial_aperture,
                  **other_configuration):
@@ -312,8 +311,7 @@ class FitStarShape:
         self.mode = mode.upper()
         assert self.mode in ['PSF', 'PRF']
         self.configuration = dict(self._default_configuration)
-        self.configuration.update(shape_terms=shape_terms,
-                                  grid=grid,
+        self.configuration.update(grid=grid,
                                   initial_aperture=initial_aperture,
                                   **other_configuration)
 
@@ -366,14 +364,14 @@ class FitStarShape:
         Args:
             image_sources ([4-tuples]):    Each entry consists of:
 
-                1. The pixel values of the calibratred image
+                0. The pixel values of the calibratred image
 
-                2. The error estimates of the pixel values
+                1. The error estimates of the pixel values
 
-                3. Mask flags of the pixel values.
+                2. Mask flags of the pixel values.
 
-                4. Sources to process, defining at least the following
-                   quantities:
+                3. Sources to process, defining at least the following
+                   quantities in a dictionary:
 
                        * **ID** (string): some unique identifier for the source
 
@@ -382,12 +380,15 @@ class FitStarShape:
 
                        * **y** (float): See ``x``
 
-                   May define additional quantities on which the PSF shape is
-                   allowed to depend.
+                   May also define **enabled** to flag only some sources for
+                   inclusion in the shape fit.
 
-                   The source list can be either a numy record array with field
+                   The source list can be either a numyy record array with field
                    names as keys or a dictionary with field names as keys and
                    1-D numpy arrays of identical lengths as values.
+
+                4. List of the terms on which PSF parameters are allowed to
+                   depend on.
 
             backgrounds ([BackgroundExtractor]):    The measured backgrounds
                 under the sources.
@@ -467,108 +468,58 @@ class FitStarShape:
                 image_y_resolution
             )
 
-        def get_column_names():
+        def create_source_arguments():
             """
-            Return the list of columns defined for the input sources.
+            Create the arguments defining the sources for piecewise_bicubic_fit.
 
             Args:
                 None
 
             Returns:
-                list:
-                    The column names which participate in the PSF expansion.
-
-            Raises:
-                AssertionError:    If the columns defined for all images do not
-                    match or if any of the minimum required columns: 'ID', 'x',
-                    'y' is missing.
-            """
-
-            if isinstance(image_sources[0][3], numpy.ndarray):
-                column_names = image_sources[0][3].dtype.names
-                for entry in image_sources:
-                    assert entry[3].dtype.names == column_names
-            else:
-                column_names = image_sources[0][3].keys()
-                column_name_set = set(column_names)
-                for entry in image_sources:
-                    assert set(entry[3].keys()) == column_name_set
-
-            column_names = list(column_names)
-
-            assert 'ID' in column_names
-            assert 'x' in column_names
-            assert 'y' in column_names
-
-
-            column_names.remove('ID')
-
-            return column_names
-
-        def create_column_data(column_names):
-            """
-            Create the column_data array required by create_source_arguments.
-
-            Args:
-                column_names([str]):    The columns, other than ID defined for
-                    the input list of sources.
-
-            Returns:
-                [numpy.ndarray]:
-                    See column_data argument of create_source_arguments.
-            """
-
-            column_data = [
-                numpy.empty((len(column_names), len(entry[3]['ID'])),
-                            dtype=c_double)
-                for entry in image_sources
-            ]
-            for image_index, entry in enumerate(image_sources):
-                for column_index, column_name in enumerate(column_names):
-                    column_data[image_index][column_index, :] = (
-                        entry[3][column_name]
-                    )
-            return column_data
-
-        def create_source_arguments(column_names, column_data):
-            """
-            Create the arguments defining the sources for piecewise_bicubic_fit.
-
-            Args:
-                column_names([str]):    The columns, other than ID defined for
-                    the input list of sources.
-
-                column_data([numpy.ndarray]):    List of one 2-D array for each
-                    image with the first array index going accross columns and
-                    the second array index going accross sources.
-
-            Returns:
                 tuple:
-                    POINTER(c_char_p):    The column_names argument to the
-                        piecewise_bicubic_fit library function.
-
                     POINTER(POINTER(c_char_p)):    The source_ids argument to
                         the piecewise_bicubic_fit library function.
 
-                    POINTER(POINTER(c_double)):    The column_data argument to
+                    POINTER(POINTER(c_double)):    The coordinates of the
+                        centers of the sources in pixels. Orginazed as required
+                        by the library.
+
+                    POINTER(POINTER(c_double)):    The terms the PSF parameters
+                        are allowed to depend on.
+
+                    POINTER(POINTER(c_bool)):    The `enabled` flag for each
+                        source in each image.
+
+                    column_data argument to
                         the piecewise_bicubic_fit library function.
 
                     numpy.array(c_ulong):    1-D array contining the number of
                         sources in each image.
 
-                    int:    The number of columns in the column_data.
+                    int:    The number of terms the PSF parameters are allowed
+                        to depend on.
             """
 
             number_images = len(image_sources)
-            number_columns = len(column_names)
+            number_terms = image_sources[0][4].shape[1]
+
+            source_coordinates = [
+                numpy.empty((sources[4].shape[0], 2), dtype=c_double)
+                for sources in image_sources
+            ]
+            enabled = [
+                numpy.ones((sources[4].shape[0],), dtype=c_bool)
+                for sources in image_sources
+            ]
+
+            for image_i, image_data in enumerate(image_sources):
+                source_coordinates[image_i][:, 0] = image_data[3]['x']
+                source_coordinates[image_i][:, 1] = image_data[3]['y']
+                if 'enabled' in image_data[3]:
+                    enabled[image_i][:] = image_data[3]['enabled']
+                assert image_sources[image_i][4].shape[1] == number_terms
 
             return (
-                (c_char_p * number_columns)(
-                    *(
-                        c_char_p(colname.encode('ascii'))
-                        for colname in column_names
-                    )
-                ),
                 (POINTER(c_char_p) * number_images)(
                     *(
                         (c_char_p * len(entry[3]['ID']))(
@@ -585,21 +536,31 @@ class FitStarShape:
                 ),
                 (POINTER(c_double) * number_images)(
                     *(
-                        columns.ctypes.data_as(POINTER(c_double))
-                        for columns in column_data
+                        image_coords.ravel().ctypes.data_as(POINTER(c_double))
+                        for image_coords in source_coordinates
+                    )
+                ),
+                (POINTER(c_double) * number_images)(
+                    *(
+                        entry[4].ravel().ctypes.data_as(POINTER(c_double))
+                        for entry in image_sources
+                    )
+                ),
+                (POINTER(c_bool) * number_images)(
+                    *(
+                        image_enabled.ctypes.data_as(POINTER(c_bool))
+                        for image_enabled in enabled
                     )
                 ),
                 numpy.array([len(entry[3]['ID']) for entry in image_sources],
                             dtype=c_ulong),
-                number_columns
+                number_terms
             )
 
-        column_names = get_column_names()
-        column_data = create_column_data(column_names)
         result_tree = SuperPhotIOTree(self._library_configuration)
         fit_converged = self._superphot_library.piecewise_bicubic_fit(
             *create_image_arguments(),
-            *create_source_arguments(column_names, column_data),
+            *create_source_arguments(),
             (
                 len(backgrounds)
                 *
