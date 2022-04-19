@@ -336,6 +336,12 @@ namespace FitPSF {
             location != input_source_list.locations().end();
             source_assignment_id++
         ) {
+#ifndef NDEBUG
+            std::cerr << "Adding source #" << source_assignment_id
+                      << ", x = " << location->x()
+                      << ", y = " << location->y()
+                      << std::endl;
+#endif
             Background::Source srcbg = bg();
 
             add_new_source(
@@ -356,11 +362,13 @@ namespace FitPSF {
             FIT_SOURCE_TYPE &last_source = *(psf_fit_sources.back());
             if ( source_assignment_id == 1 )
                 first_new_source = --psf_fit_sources.end();
-#ifdef TRACK_PROGRESS
+#ifndef NDEBUG
             std::cerr << "Added source #"
                       << psf_fit_sources.size()
                       << "("
                       << &last_source
+                      << ", x=" << last_source.x()
+                      << ", y=" << last_source.y()
                       << "), contaning "
                       << last_source.pixel_count()
                       << " pixels, with background = "
@@ -498,6 +506,14 @@ namespace FitPSF {
                     src_i = fit_sources.begin();
                     src_i != fit_sources.end();
                 ) {
+#ifndef NDEBUG
+                    std::cerr << "Checking if source at x = "
+                              << (*src_i)->x()
+                              << ", y = "
+                              << (*src_i)->y()
+                              << " is enabled."
+                              << std::endl;
+#endif
                     typename std::list<FIT_SOURCE_TYPE *>::iterator
                         drop_iter = src_i++;
                     if(!enabled[(*drop_iter)->source_assignment_id() - 1]) {

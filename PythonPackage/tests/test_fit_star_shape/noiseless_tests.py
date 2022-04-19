@@ -129,13 +129,10 @@ class TestFitStarShapeNoiseless(FloatTestCase):
             dtype=bool
         )
         num_enabled_sources = enabled_sources.sum()
-        print('Flagged enabled sources')
 
         psffit_terms = result_tree.get('psffit.terms.%d' % image_index,
                                        shape=(len(sources), num_terms))
         psffit_terms = psffit_terms[enabled_sources]
-
-        print('PSF fit terms: ' + repr(psffit_terms))
 
         num_x_boundaries = len(sources[0]['psf_args']['boundaries']['x']) - 2
         num_y_boundaries = len(sources[0]['psf_args']['boundaries']['y']) - 2
@@ -147,11 +144,6 @@ class TestFitStarShapeNoiseless(FloatTestCase):
                    len(sources[0]['psf_args']['boundaries']['y']) - 2,
                    num_terms)
         )
-
-        print('coefficients shape: ' + repr(coefficients.shape))
-        print('Coefficients: ' + repr(coefficients))
-
-        print('Term list:\n' + repr(psffit_terms))
 
         #Indices are: source index, variable, y boundary ind, x boundary ind
         fit_params = numpy.tensordot(psffit_terms, coefficients, [1, 3])
@@ -172,9 +164,7 @@ class TestFitStarShapeNoiseless(FloatTestCase):
             else:
                 self.assertNotEqual(fluxes[src_ind], 0)
 
-        print('fluxes before = ' + repr(fluxes))
         fluxes = fluxes[enabled_sources]
-        print('fluxes after = ' + repr(fluxes))
 
         fit_params *= fluxes[:, numpy.newaxis, numpy.newaxis, numpy.newaxis]
 
@@ -269,14 +259,15 @@ class TestFitStarShapeNoiseless(FloatTestCase):
                 print('Sub-image #%d sources:\n' % sub_image)
                 for src in image_sources:
                     print('\t' + repr(src) + '\n')
+                psf_sources = [
+                    dict(x=src['x'],
+                         y=src['y'],
+                         enabled=src.get('enabled', True),
+                         psf=PiecewiseBicubicPSF(**src['psf_args']))
+                    for src in image_sources
+                ]
                 image, source_list = make_image_and_source_list(
-                    sources=[
-                        dict(x=src['x'],
-                             y=src['y'],
-                             enabled=src.get('enabled', True),
-                             psf=PiecewiseBicubicPSF(**src['psf_args']))
-                        for src in image_sources
-                    ],
+                    sources=psf_sources,
                     subpix_map=subpixmap,
                 )
                 fit_images_and_sources.append(
@@ -321,7 +312,7 @@ class TestFitStarShapeNoiseless(FloatTestCase):
                 )
                 print('Finished checking results for image ' + str(image_index))
 
-    def dont_test_single_source(self):
+    def test_single_source(self):
         """Test fitting a single source in the center of the image."""
 
         values = numpy.zeros((3, 3))
@@ -350,7 +341,7 @@ class TestFitStarShapeNoiseless(FloatTestCase):
             psffit_terms=['1']
         )
 
-    def dont_test_isolated_sources(self):
+    def test_isolated_sources(self):
         """Test fitting an image containing 8 well isolated sources."""
 
         psf_parameters = dict(values=numpy.zeros((3, 3)),
@@ -433,7 +424,7 @@ class TestFitStarShapeNoiseless(FloatTestCase):
         self.run_test(sources=[sources],
                       psffit_terms=['1', 'x', 'y'])
 
-    def dont_test_two_overlapping_sources(self):
+    def test_two_overlapping_sources(self):
         """Test fitting an image containing 2 sources all overlapping."""
 
         psf_args = dict(psf_parameters=dict(values=numpy.zeros((3, 3)),
@@ -453,7 +444,7 @@ class TestFitStarShapeNoiseless(FloatTestCase):
                         psf_args=psf_args)]
         self.run_test(sources=[sources], psffit_terms=['1'])
 
-    def dont_test_four_overlapping_sources(self):
+    def test_four_overlapping_sources(self):
         """Test fitting an image containing 4 overlapping sources."""
 
         psf_parameters = dict(

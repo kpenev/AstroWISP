@@ -434,12 +434,21 @@ class FitStarShape:
                 image_y_resolution
             )
 
-        def create_source_arguments():
+        def create_source_arguments(source_coordinates, enabled):
             """
             Create the arguments defining the sources for piecewise_bicubic_fit.
 
+            The arguments are not created here because they must not go out of
+            scope before fitting completes.
+
             Args:
-                None
+                source_coordinates([array]):    List of 2-D arrays with each
+                    array containing the coordinates the sources in a given
+                    image.
+
+                enabled([array]):    List of 1-D boolean arrays with each array
+                    containing flags of whether each source should be included
+                    in the fit.
 
             Returns:
             #TODO fix documentation
@@ -468,15 +477,6 @@ class FitStarShape:
             """
             number_images = len(image_sources)
             number_terms = image_sources[0][4].shape[1]
-
-            source_coordinates = [
-                numpy.empty((sources[4].shape[0], 2), dtype=c_double)
-                for sources in image_sources
-            ]
-            enabled = [
-                numpy.ones((sources[4].shape[0],), dtype=c_bool)
-                for sources in image_sources
-            ]
 
             for image_i, image_data in enumerate(image_sources):
                 source_coordinates[image_i][:, 0] = image_data[3]['x']
@@ -523,10 +523,19 @@ class FitStarShape:
                 number_terms
             )
 
+        source_coordinates = [
+            numpy.empty((sources[4].shape[0], 2), dtype=c_double)
+            for sources in image_sources
+        ]
+        enabled = [
+            numpy.ones((sources[4].shape[0],), dtype=c_bool)
+            for sources in image_sources
+        ]
+
         result_tree = SuperPhotIOTree(self._library_configuration)
         fit_converged = self._superphot_library.piecewise_bicubic_fit(
             *create_image_arguments(),
-            *create_source_arguments(),
+            *create_source_arguments(source_coordinates, enabled),
             (
                 len(backgrounds)
                 *

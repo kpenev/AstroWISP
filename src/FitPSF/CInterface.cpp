@@ -124,11 +124,21 @@ void prepare_fit_sources(
                                         enabled[image_index],
                                         number_sources[image_index],
                                         number_terms);
-#ifdef TRACK_PROGRESS
+#ifndef NDEBUG
         std::cerr << "List contains "
                   << image_sources.locations().size()
-                  << " sources"
-                  << std::endl;
+                  << " sources";
+
+        std::cerr << " located at: " << std::endl;
+        for(unsigned i = 0; i < number_sources[image_index]; ++i)
+            std::cerr << std::setw(25)
+                      << source_coordinates[image_index][2 * i]
+                      << ", "
+                      << std::setw(25)
+                      << source_coordinates[image_index][2 * i + 1]
+                      << std::endl;
+
+        std::cerr << std::endl;
 #endif
 
         FitPSF::LinearSourceList section_fit_sources,
@@ -153,8 +163,18 @@ void prepare_fit_sources(
                   << std::endl;
 #endif
 
+#ifndef NDEBUG
+        std::cerr << "Selected section source locations: " << std::endl;
+        for(
+                FitPSF::LinearSourceList::const_iterator
+                si = section_fit_sources.begin();
+                si != section_fit_sources.end();
+                ++si
+        )
+            std::cerr << (*si)->x() << ", " << (*si)->y() << std::endl;
+#endif
 
-        typedef IO::IOTreeBase::path_type path;
+
         output_data_tree.put(
             "psffit.terms." + image_index_stream.str(),
             std::vector<double>(
@@ -277,6 +297,25 @@ bool piecewise_bicubic_fit(double **pixel_values,
 {
 #ifdef TRACK_PROGRESS
     std::cerr << "Starting piecewise bicubic fit." << std::endl;
+#endif
+
+#ifndef NDEBUG
+    std::cerr << "Source locations: " << std::endl;
+    for(unsigned image_i = 0; image_i < number_images; ++image_i) {
+        std::cerr << "Image " << image_i << std::endl;
+        for(
+                unsigned source_i = 0;
+                source_i < number_sources[image_i];
+                ++source_i
+        )
+            std::cerr << "\t"
+                      << std::setw(25)
+                      << source_coordinates[image_i][2 * source_i]
+                      << ", "
+                      << std::setw(25)
+                      << source_coordinates[image_i][2 * source_i + 1]
+                      << std::endl;
+    }
 #endif
     Core::SubPixelMap subpix_map(subpix_sensitivities,
                                  subpix_x_resolution,
