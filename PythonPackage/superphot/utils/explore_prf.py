@@ -26,7 +26,7 @@ from configargparse import\
     DefaultsFormatter
 
 
-from general_purpose_python_modules.kelly_colors import kelly_colors
+from kelly_colors import kelly_colors
 
 from superphot import BackgroundExtractor, FitStarShape, SubPixPhot
 from superphot.utils.file_utilities import\
