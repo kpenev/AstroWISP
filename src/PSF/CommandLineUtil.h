@@ -20,7 +20,7 @@ namespace opt = boost::program_options;
 namespace PSF {
 
     ///Parse a string defining a grid over which piecewise PSFs are defined.
-    void LIB_PUBLIC validate(
+    void LIB_LOCAL validate(
         ///The value to parse into.
         boost::any& value,
 
@@ -35,7 +35,7 @@ namespace PSF {
     );
 
     ///Parse a string identifying a PSF model to use.
-    void LIB_PUBLIC validate(
+    void LIB_LOCAL validate(
         ///The value to parse into.
         boost::any& value,
 

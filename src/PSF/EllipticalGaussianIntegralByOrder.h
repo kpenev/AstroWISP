@@ -30,10 +30,10 @@ namespace PSF {
         KK_DERIV	///< Second derivative with respect to K
     };
 
-    ///\brief Elliptical gaussian integrals refined by incrementing the 
+    ///\brief Elliptical gaussian integrals refined by incrementing the
     ///expansion order.
     ///
-    ///The area over which integrals are being calculated is assumed to be 
+    ///The area over which integrals are being calculated is assumed to be
     ///small enough for the error bounds in the
     ///<a href="SubPixPhot.pdf">description</a> to apply.
     ///
@@ -45,13 +45,13 @@ namespace PSF {
 
         std::valarray<double>
             ///The current S values from the description
-            __sum, 
+            __sum,
 
             ///The current upper limits on the values of the delta quantities
             __delta;
 
     protected:
-        ///\brief The %PSF at the center of the rectangle times the area of 
+        ///\brief The %PSF at the center of the rectangle times the area of
         ///the rectangle.
         double __psf_area,
 
@@ -73,18 +73,18 @@ namespace PSF {
                __dy
 #endif
                    ;
-        
-        ///\brief The values of the integral and its up to second S, D, K 
+
+        ///\brief The values of the integral and its up to second S, D, K
         ///derivatives.
         std::valarray<double> __value;
 
-        ///\brief The orders up to which the terms of equations (59)-(63) 
+        ///\brief The orders up to which the terms of equations (59)-(63)
         ///are estiamted
         std::valarray<unsigned> __orders;
 
         bool __first_deriv, ///< Calculate first order S,D,K derivatives?
              __second_deriv;///< Calculate 2nd order S,D,K derivatives?
-        
+
         std::valarray<double>
             ///\brief \f$ C_{20}/2 \f$, \f$ C_{11}/2 \f$, \f$ C_{02}/2 \f$,
             /// \f$ C_{10}/2 \f$, \f$ C_{01}/2 \f$
@@ -99,8 +99,8 @@ namespace PSF {
         ///\brief Adds what needs to be added to the integral and derivatives
         ///if to_add is being added to the integral.
         ///
-        ///Regardless of the region being integrated, updates to the 
-        ///derivatives depend only on the update to the value of the 
+        ///Regardless of the region being integrated, updates to the
+        ///derivatives depend only on the update to the value of the
         ///integral.
         void fill_new_terms(
                 ///The value being added to the estimate of the integral.
@@ -125,10 +125,10 @@ namespace PSF {
                 ///indexed by SDKDerivative.
                 std::valarray<double> &new_terms);
 
-        ///\brief An upper limit to the error in the current integral 
+        ///\brief An upper limit to the error in the current integral
         ///estimate.
         ///
-        ///Assumes that all members are consistently initialized, sets the 
+        ///Assumes that all members are consistently initialized, sets the
         ///value of __error and returns the tightest error bound.
         double calculate_error();
 
@@ -139,11 +139,11 @@ namespace PSF {
         ///Returns the index of the best term to refine.
         unsigned refine_index();
 
-        ///\brief Increment the order of the index-th term by 1 updating all 
+        ///\brief Increment the order of the index-th term by 1 updating all
         ///members.
         void next_order(unsigned index);
     public:
-        ///\brief Default constructor, set_parameters must be called before 
+        ///\brief Default constructor, set_parameters must be called before
         ///first use.
         EllipticalGaussianIntegralByOrder(bool calculate_first_deriv=false,
                 bool calculate_second_deriv=false) :
@@ -152,8 +152,8 @@ namespace PSF {
 
         ///\brief Sets the parameters of the integral to calculate.
         ///
-        ///The protected member __psf_area must already conain the value of 
-        ///the PSF at the point arounf which the expansion is performed 
+        ///The protected member __psf_area must already conain the value of
+        ///the PSF at the point arounf which the expansion is performed
         ///times the area being integrated.
         void set_parameters(double spd, double smd, double k,
                 double x0, double y0, double dx, double dy, double bg_area);
@@ -161,11 +161,11 @@ namespace PSF {
         ///\brief Increments one of I,J,K,L,M
         ///(see <a href="SubPixPhot.pdf">description</a>) by 1.
         ///
-        ///Updates the approximations (of the integral and its derivatives) 
+        ///Updates the approximations (of the integral and its derivatives)
         ///and errors, returning the new best estimate value of the integral.
         double refine();
 
-        ///\brief Returns the best estimate for the value of the integral 
+        ///\brief Returns the best estimate for the value of the integral
         ///or a derivative.
         double value(SDKDerivative deriv=NO_DERIV) const;
 
@@ -173,13 +173,13 @@ namespace PSF {
         ///(or a derivative).
         double max_error() const {return __error;}
 
-        ///\brief Returns the orders to which the various sums have been 
+        ///\brief Returns the orders to which the various sums have been
         ///approximated.
         const std::valarray<unsigned> &orders() const {return __orders;}
 
 #ifdef DEBUG
-        ///Output a string describing the integral to a stream. 
-        virtual void describe(std::ostream &os) const =0; 
+        ///Output a string describing the integral to a stream.
+        virtual void describe(std::ostream &os) const =0;
 #endif
 
         virtual ~EllipticalGaussianIntegralByOrder() {}

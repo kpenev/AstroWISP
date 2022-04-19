@@ -29,6 +29,7 @@ namespace FitPSF {
             const std::string                       &output_fname,
             bool                                     cover_psf,
             const Core::SourceLocation              &location,
+            const Eigen::VectorXd                   &psf_terms,
             const Background::Source                &srcbg,
             size_t                                   source_assignment_id,
             LinearSourceList                        &destination
@@ -67,6 +68,9 @@ namespace FitPSF {
                                  output_fname)
             );
         }
-
+        Eigen::VectorXd &source_expansion_terms =
+            destination.back()->expansion_terms();
+        source_expansion_terms.resize(psf_terms.size());
+        source_expansion_terms = psf_terms;
     }
 } //End FitPSF namespace.

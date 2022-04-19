@@ -20,7 +20,6 @@
 #include "../PSF/PiecewiseBicubic.h"
 #include "../IO/H5IODataTree.h"
 #include "Eigen/Dense"
-#include <list>
 #include <set>
 #include <iostream>
 
@@ -74,7 +73,7 @@ namespace FitPSF {
 
     ///\brief Checks of whether a source should be used for PSF fitting.
     ///
-    ///See get_fit_sources for a description of the arguments.
+    ///See select_fit_sources for a description of the arguments.
     template<class SOURCE_TYPE>
         LIB_LOCAL void check_fit_source(
             SOURCE_TYPE&              last_source,
@@ -111,7 +110,7 @@ namespace FitPSF {
                 last_source.drop(MANY_SATURATED);
             else if(last_source.pixel_count() < min_pixels_per_source)
                 last_source.drop(FEW_PIXELS);
-            else if(not ignore_overlaps && last_source.overlaps().size()) {
+            else if(! ignore_overlaps && last_source.overlaps().size()) {
                 for(
                     typename std::set< SOURCE_TYPE* >::const_iterator
                         overlap_iter = last_source.overlaps().begin();
@@ -133,7 +132,7 @@ namespace FitPSF {
             ///The first newly extracted source in the above list.
             typename std::list< FIT_SOURCE_TYPE * >::iterator check_start,
 
-            ///See get_fit_sources.
+            ///See select_fit_sources.
             std::list< FIT_SOURCE_TYPE * > &dropped_sources,
 
             ///An output array filled with how many sources were dropped for
@@ -178,7 +177,7 @@ namespace FitPSF {
 
     ///\brief Drop excess sources from PSF shape fitting.
     ///
-    ///See get_fit_sources for a description of the arguments.
+    ///See select_fit_sources for a description of the arguments.
     template<class FIT_SOURCE_TYPE>
         LIB_LOCAL void trim_fit_sources(
             std::list< FIT_SOURCE_TYPE * >     &psf_fit_sources,
@@ -218,31 +217,34 @@ namespace FitPSF {
 
     ///\brief Add a newly constructed PiecewiseBidcubic source to a list.
     ///
-    ///See get_fit_sources for descrption of undocumented arguments.
+    ///See select_fit_sources for descrption of undocumented arguments.
     LIB_LOCAL void add_new_source(
-            ///See same name argument to get_fit_sources().
-            Image<LinearSource>                     &image,
+            ///See same name argument to select_fit_sources().
+            Image<LinearSource> &image,
 
-            ///See same name argument to get_fit_sources().
-            const Core::SubPixelMap                 *subpix_map,
+            ///See same name argument to select_fit_sources().
+            const Core::SubPixelMap *subpix_map,
 
-            ///See same name argument to get_fit_sources().
-            const PSF::PiecewiseBicubic             &psf,
+            ///See same name argument to select_fit_sources().
+            const PSF::PiecewiseBicubic &psf,
 
-            ///See same name argument to get_fit_sources().
-            double                                   alpha,
+            ///See same name argument to select_fit_sources().
+            double alpha,
 
-            ///See same name argument to get_fit_sources().
-            double                                   max_circular_aperture,
+            ///See same name argument to select_fit_sources().
+            double max_circular_aperture,
 
-            ///See same name argument to get_fit_sources().
-            const std::string                       &output_fname,
+            ///See same name argument to select_fit_sources().
+            const std::string &output_fname,
 
-            ///See same name argument to get_fit_sources().
-            bool                                     cover_psf,
+            ///See same name argument to select_fit_sources().
+            bool cover_psf,
 
             ///The location of the source to add.
             const Core::SourceLocation &location,
+
+            ///The values of the PSF expansion terms for this source.
+            const Eigen::VectorXd &psf_terms,
 
             ///The backgruond to assume under the source.
             const Background::Source &srcbg,
@@ -256,7 +258,7 @@ namespace FitPSF {
 
     ///Select the sources to use for PSF fitting.
     template<class FIT_SOURCE_TYPE, class PSF_TYPE>
-        LIB_PUBLIC void get_fit_sources(
+        LIB_PUBLIC void select_fit_sources(
             ///The image being processed. Should be a reference to the exact
             ///same variable for all sources in a single image!
             Image<FIT_SOURCE_TYPE>                 &image,
@@ -266,7 +268,7 @@ namespace FitPSF {
             const Core::SubPixelMap                *subpix_map,
 
             ///The cental PSF coordinates of the sources in the image.
-            const std::list<Core::SourceLocation>  &source_locations,
+            const IOSources                        &input_source_list,
 
             ///The PSF to assume for the sources. Obviously parameters cannot
             ///be correctly set-up since those are being fitted, but should
@@ -275,36 +277,32 @@ namespace FitPSF {
 
             ///The minimum S/N threshold to considering a pixel above the
             ///background
-            double                                  alpha,
+            double                                 alpha,
 
             ///The maximum fraction of saturated pixels for a source to be
             ///used.
-            double                                  max_saturated_fraction,
+            double                                 max_saturated_fraction,
 
             ///The minimum number of pixels a source must have to be used.
-            unsigned                                min_pixels_per_source,
+            unsigned                               min_pixels_per_source,
 
             ///The maximum number of pixels allowed before excluding a
             ///source.
-            unsigned                                max_pixels_per_source,
+            unsigned                               max_pixels_per_source,
 
             ///The background estimate of the sources.
-            Background::Measure                     &bg,
+            Background::Measure                    &bg,
 
             ///The minimum number of pixels required in the background
             ///determination.
-            unsigned                                min_bg_pixels,
+            unsigned                               min_bg_pixels,
 
             ///The largest number of sources allowed in the final list.
-            unsigned                                max_sources,
+            unsigned                               max_sources,
 
             ///If source pixels outside this radius are found, the source is
             ///excluded
-            double                                  max_circular_aperture,
-
-            ///The name of the file where this source should be saved after
-            ///the fit.
-            const std::string                      &output_fname,
+            double                                 max_circular_aperture,
 
             ///The output list of sources selected for PSF shape fitting.
             std::list< FIT_SOURCE_TYPE * >         &psf_fit_sources,
@@ -328,38 +326,49 @@ namespace FitPSF {
         )
     {
         bg.jump_to_first_source();
-        std::list<Core::SourceLocation>::const_iterator
-            location = source_locations.begin();
+        std::vector<Core::SourceLocation>::const_iterator
+            location = input_source_list.locations().begin();
         typedef typename std::list< FIT_SOURCE_TYPE *>::iterator SourceIter;
         SourceIter first_new_source;
 
         for(
             size_t source_assignment_id = 1;
-            location != source_locations.end();
+            location != input_source_list.locations().end();
             source_assignment_id++
         ) {
+#ifndef NDEBUG
+            std::cerr << "Adding source #" << source_assignment_id
+                      << ", x = " << location->x()
+                      << ", y = " << location->y()
+                      << std::endl;
+#endif
             Background::Source srcbg = bg();
 
-            add_new_source(image,
-                           subpix_map,
-                           psf,
-                           alpha,
-                           max_circular_aperture,
-                           output_fname,
-                           cover_psf,
-                           *location,
-                           srcbg,
-                           source_assignment_id,
-                           psf_fit_sources);
+            add_new_source(
+                image,
+                subpix_map,
+                psf,
+                alpha,
+                max_circular_aperture,
+                input_source_list.output_fname(),
+                cover_psf,
+                *location,
+                input_source_list.psf_terms().col(source_assignment_id - 1),
+                srcbg,
+                source_assignment_id,
+                psf_fit_sources
+            );
 
             FIT_SOURCE_TYPE &last_source = *(psf_fit_sources.back());
             if ( source_assignment_id == 1 )
                 first_new_source = --psf_fit_sources.end();
-#ifdef TRACK_PROGRESS
+#ifndef NDEBUG
             std::cerr << "Added source #"
                       << psf_fit_sources.size()
                       << "("
                       << &last_source
+                      << ", x=" << last_source.x()
+                      << ", y=" << last_source.y()
                       << "), contaning "
                       << last_source.pixel_count()
                       << " pixels, with background = "
@@ -369,6 +378,7 @@ namespace FitPSF {
                       << ") based on "
                       << last_source.background_pixels()
                       << " pixels (" << srcbg.pixels() << ")"
+                      << " PSF map terms: " << last_source.expansion_terms()
                       << std::endl;
 #endif
             check_fit_source(last_source,
@@ -380,11 +390,11 @@ namespace FitPSF {
                              min_bg_pixels,
                              ignore_overlaps);
             ++location;
-            if(location!=source_locations.end())
+            if(location!=input_source_list.locations().end())
                 if(!bg.next_source())
                     throw Error::Runtime("Smaller number of background "
                                          "measurements than sources in "
-                                         "get_fit_sources!");
+                                         "select_fit_sources!");
         }
 #ifdef TRACK_PROGRESS
         std::cerr << "Done extracting source pixels, starting source selection"
@@ -429,7 +439,7 @@ namespace FitPSF {
             ///The configuration with which to perform PSF fitting.
             const Config                    &options,
 
-            ///The sources in the image, location and all variables requried for
+            ///The sources in the image, location and all terms requried for
             ///PSF fitting.
             const IOSources                 &source_list,
 
@@ -439,13 +449,13 @@ namespace FitPSF {
             ///The sub-pixel sensitivity map to assume.
             const Core::SubPixelMap         &subpix_map,
 
-            ///See same name argument to get_fit_sources.
+            ///See same name argument to select_fit_sources.
             const PSF_TYPE                  &psf,
 
-            ///See same name argument to get_fit_sources.
+            ///See same name argument to select_fit_sources.
             std::list<FIT_SOURCE_TYPE *>    &fit_sources,
 
-            ///See same name argument to get_fit_sources.
+            ///See same name argument to select_fit_sources.
             std::list<FIT_SOURCE_TYPE *>    &dropped_sources
         )
         {
@@ -470,10 +480,10 @@ namespace FitPSF {
                       << std::endl;
 #endif
 
-            get_fit_sources<FIT_SOURCE_TYPE, PSF_TYPE>(
+            select_fit_sources<FIT_SOURCE_TYPE, PSF_TYPE>(
                 image,
                 &subpix_map,
-                source_list.locations(),
+                source_list,
                 psf,
                 min_ston,
                 max_sat_frac,
@@ -483,33 +493,30 @@ namespace FitPSF {
                 options["bg.min-pix"].as<unsigned>(),
                 max_src_count,
                 max_aperture,
-                source_list.output_fname(),
                 fit_sources,
                 dropped_sources,
                 options.count("src.cover-bicubic-grid"),
                 options["psf.model"].as<PSF::ModelType>() == PSF::ZERO
             );
 
-            const PSF::MapVarListType &psfmap_variables = source_list.columns();
-            const std::valarray<double> *enabled = NULL;
-            for(
-                PSF::MapVarListType::const_iterator
-                    var_i = psfmap_variables.begin();
-                (var_i != psfmap_variables.end() && enabled==NULL);
-                ++var_i
-            )
-                if(var_i->first == "enabled")
-                    enabled = &(var_i->second);
-
-            if(enabled != NULL)
+            const std::vector<bool> &enabled = source_list.enabled();
+            if(enabled.size())
                 for(
                     typename std::list<FIT_SOURCE_TYPE *>::iterator
                     src_i = fit_sources.begin();
                     src_i != fit_sources.end();
                 ) {
+#ifndef NDEBUG
+                    std::cerr << "Checking if source at x = "
+                              << (*src_i)->x()
+                              << ", y = "
+                              << (*src_i)->y()
+                              << " is enabled."
+                              << std::endl;
+#endif
                     typename std::list<FIT_SOURCE_TYPE *>::iterator
                         drop_iter = src_i++;
-                    if(!(*enabled)[(*drop_iter)->source_assignment_id() - 1]) {
+                    if(!enabled[(*drop_iter)->source_assignment_id() - 1]) {
                         (*drop_iter)->exclude_from_shape_fit();
                         dropped_sources.splice(dropped_sources.end(),
                                                fit_sources,
@@ -517,77 +524,6 @@ namespace FitPSF {
                     }
                 }
         }
-
-    ///\brief For each selected and dropped source subject to PSF fitting, add
-    ///the terms the PSF is allowed to depend on.
-    template<class SOURCE_LIST_TYPE>
-        void add_expansion_terms(
-            ///A list of the source locations within the image.
-            const IOSources &source_list,
-
-            ///The expression giving the PSF dependence on source variables.
-            const std::string &expansion_term_expression,
-
-            ///The sources which will participate in the shape fit.
-            SOURCE_LIST_TYPE &fit_sources,
-
-            ///The sources discarded from the shape fit.
-            SOURCE_LIST_TYPE &dropped_sources
-        )
-    {
-        std::vector<PSF::TermValarray> expansion_term_values;
-        const PSF::MapVarListType &psfmap_variables = source_list.columns();
-        if(expansion_term_expression != "")
-            evaluate_term_expression(expansion_term_expression,
-                                     psfmap_variables.begin(),
-                                     psfmap_variables.end(),
-                                     expansion_term_values);
-
-        typename SOURCE_LIST_TYPE::iterator last_source = (
-            dropped_sources.size() > 0 ? dropped_sources.end()
-                                       : fit_sources.end()
-        );
-        for(
-            typename SOURCE_LIST_TYPE::iterator src_i = fit_sources.begin();
-            src_i != last_source;
-            ++src_i
-        ) {
-            if(src_i == fit_sources.end()) src_i = dropped_sources.begin();
-
-            Eigen::VectorXd &expansion_terms = (*src_i)->expansion_terms();
-            expansion_terms.resize(expansion_term_expression == ""
-                                   ? 1
-                                   : expansion_term_values.size());
-            for(
-                unsigned term_i = 0;
-                term_i < expansion_terms.size();
-                ++term_i
-            )
-                if(expansion_term_expression == "") {
-                    expansion_terms[term_i] = 1;
-                } else {
-                    expansion_terms[term_i] = expansion_term_values[term_i][
-                        (*src_i)->source_assignment_id() - 1
-                    ];
-                }
-#ifdef VERBOSE_DEBUG
-            std::cerr << "Source("
-                      << (*src_i)->x()
-                      << ", "
-                      << (*src_i)->y()
-                      << ") terms("
-                      << (*src_i)->expansion_terms().size()
-                      << "):";
-            for(
-                unsigned term_i = 0;
-                term_i < (*src_i)->expansion_terms().size();
-                ++term_i
-            )
-                std::cerr << " " << (*src_i)->expansion_terms()[term_i];
-            std::cerr << std::endl;
-#endif
-        }
-    }
 
     ///True if and only if the given source is not identified by a HAT ID.
     inline bool sourceid_not_hat(const Core::SourceLocation *source)

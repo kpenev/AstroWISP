@@ -23,11 +23,13 @@ sys.path.insert(
 
 #Needs to be after os.path and sys to allow adding the seach path.
 #pylint: disable=wrong-import-position
+from tests.utilities import FloatTestCase
+from tests.test_fit_star_shape.utils import\
+    make_image_and_source_list,\
+    evaluate_psffit_terms
+
 from superphot import FitStarShape, BackgroundExtractor
 from superphot.fake_image.piecewise_bicubic_psf import PiecewiseBicubicPSF
-
-from tests.utilities import FloatTestCase
-from tests.test_fit_star_shape.utils import make_image_and_source_list
 #pylint: enable=wrong-import-position
 
 class TestFitStarShapeNoiseless(FloatTestCase):
@@ -63,7 +65,10 @@ class TestFitStarShapeNoiseless(FloatTestCase):
 
         with open(fname_start + '_config.txt', 'w') as test_config:
             for param_value in fit_config.items():
+                #Needed for debugging purposes
+                #pylint: disable=protected-access
                 formatted_config = FitStarShape._format_config(param_value)
+                #pylint: enable=protected-access
                 if formatted_config:
                     test_config.write(formatted_config[0].decode()
                                       +
@@ -96,7 +101,9 @@ class TestFitStarShapeNoiseless(FloatTestCase):
                         test_sources.write('%25.16e' % source[var])
                 test_sources.write('\n')
 
-    def check_results(self, result_tree, image_index, sources, extra_variables):
+    #TODO: See if breaking up makes sense
+    #pylint: disable=too-many-locals
+    def check_results(self, result_tree, image_index, sources, num_terms):
         """
         Assert that fitted PSF map and source fluxes match expectations.
 
@@ -111,67 +118,35 @@ class TestFitStarShapeNoiseless(FloatTestCase):
             sources:    The sources argument used to generate the image that was
                 fit. See same name argument of run_test.
 
-            extra_variables:    A list of the names of any variables in addition
-                to `x` and `y` which participate in the PSF fit.
+            num_terms(int):    The number of terms the PSF map depends on.
 
         Returns:
             None
         """
 
-        if 'enabled' in extra_variables:
-            enabled_sources = numpy.array([src['enabled'] for src in sources],
-                                          dtype=bool)
-        else:
-            enabled_sources = numpy.full(len(sources), True, dtype=bool)
-        print('Flagged enabled sources')
+        enabled_sources = numpy.array(
+            [src.get('enabled', True) for src in sources],
+            dtype=bool
+        )
+        num_enabled_sources = enabled_sources.sum()
 
-        variables = {
-            var: val[enabled_sources]
-            for var, val in zip(
-                ['x', 'y'] + extra_variables,
-                result_tree.get_psfmap_variables(image_index,
-                                                 len(extra_variables) + 2,
-                                                 len(sources))
-            )
-        }
-        print('Read PSF map variables:\n' + repr(variables))
+        psffit_terms = result_tree.get('psffit.terms.%d' % image_index,
+                                       shape=(len(sources), num_terms))
+        psffit_terms = psffit_terms[enabled_sources]
 
-        psffit_terms = result_tree.get('psffit.terms', str)
-        assert psffit_terms[0] == '{'
-        assert psffit_terms[-1] == '}'
-        print('Read PSF map terms')
-
-        num_enabled_sources = variables['x'].size
         num_x_boundaries = len(sources[0]['psf_args']['boundaries']['x']) - 2
         num_y_boundaries = len(sources[0]['psf_args']['boundaries']['y']) - 2
 
-        #Using eval here is perfectly reasonable.
-        #pylint: disable=eval-used
-        term_list = [eval(term, variables)
-                     for term in psffit_terms[1 : -1].split(',')]
-        #pylint: enable=eval-used
-        for term_index, term in enumerate(term_list):
-            if isinstance(term, (float, int)):
-                term_list[term_index] = numpy.full(num_enabled_sources,
-                                                   float(term))
-
-        term_list = numpy.dstack(term_list)[0]
         coefficients = result_tree.get(
             'psffit.psfmap',
             shape=(4,
                    len(sources[0]['psf_args']['boundaries']['x']) - 2,
                    len(sources[0]['psf_args']['boundaries']['y']) - 2,
-                   len(term_list[0]))
+                   num_terms)
         )
 
-        print('Term list shape:' + repr(term_list.shape))
-        print('coefficients shape: ' + repr(coefficients.shape))
-        print('Coefficients: ' + repr(coefficients))
-
-        print('Term list:\n' + repr(term_list))
-
         #Indices are: source index, variable, y boundary ind, x boundary ind
-        fit_params = numpy.tensordot(term_list, coefficients, [1, 3])
+        fit_params = numpy.tensordot(psffit_terms, coefficients, [1, 3])
         self.assertEqual(
             fit_params.shape,
             (num_enabled_sources, 4, num_x_boundaries, num_y_boundaries)
@@ -180,7 +155,7 @@ class TestFitStarShapeNoiseless(FloatTestCase):
                                  shape=(len(sources),))
 
         for src_ind, src in enumerate(sources):
-            if 'enabled' in extra_variables and not src['enabled']:
+            if not enabled_sources[src_ind]:
                 continue
 
             if 'flux_backup' in src and src['flux_backup'] is not None:
@@ -189,23 +164,24 @@ class TestFitStarShapeNoiseless(FloatTestCase):
             else:
                 self.assertNotEqual(fluxes[src_ind], 0)
 
-        print('fluxes before = ' + repr(fluxes))
         fluxes = fluxes[enabled_sources]
-        print('fluxes after = ' + repr(fluxes))
 
         fit_params *= fluxes[:, numpy.newaxis, numpy.newaxis, numpy.newaxis]
 
         expected_params = numpy.empty(fit_params.shape)
-        for src_ind, src in enumerate(sources):
-            if 'enabled' in extra_variables and not src['enabled']:
+
+        enabled_ind = 0
+        for src in sources:
+            if not src.get('enabled', True):
                 continue
             for var_ind, var_name in enumerate(['values',
                                                 'd_dx',
                                                 'd_dy',
                                                 'd2_dxdy']):
-                expected_params[src_ind, var_ind, :, :] = (
+                expected_params[enabled_ind, var_ind, :, :] = (
                     src['psf_args']['psf_parameters'][var_name][1:-1, 1:-1]
                 )
+            enabled_ind += 1
 
         plus = (expected_params + fit_params)
         minus = (expected_params - fit_params)
@@ -216,19 +192,20 @@ class TestFitStarShapeNoiseless(FloatTestCase):
                              '\n'
                              +
                              'Got: ' + repr(fit_params)))
+    #pylint: enable=too-many-locals
 
     def run_test(self,
                  sources,
-                 psffit_terms,
-                 extra_variables=None):
+                 psffit_terms):
         """
         Assert that a fit of a series of images works exactly.
 
         Args:
             sources:    A list of lists of dictionaries specifying the list of
                 sources to fit. Each list of dictionaries specifies the sources
-                to drop on a single image. Each source must contain the
-                following:
+                to drop on a single image. Each source must contain at least the
+                following, as well as additional variables needed to evaluate
+                `psffit_terms`:
 
                     * x:    The x coordinate of the source center.
 
@@ -238,18 +215,15 @@ class TestFitStarShapeNoiseless(FloatTestCase):
                       PiecewiseBicubicPSF for the source. See
                       PiecewiseBicubicPSF.__init__ for details.
 
-            psffit_terms:    The terms on which PSF parameters depend on. See
-                --psf.terms argument of the fitpsf command.
-
-            extra_variables:    A list of the variables in addition to x and y
-                that participate in the fitting terms.
+            psffit_terms[str]:    List of expressions involving entries in
+                sources the PSF map will depend linearly on (e.g. `'x**2 + y'`).
+                See :mod:`asteval` documentation for a list of available
+                functions.
 
         Returns:
             None
         """
 
-        if extra_variables is None:
-            extra_variables = []
         for subpixmap in [
                 numpy.ones((1, 1)),
                 numpy.ones((1, 2)),
@@ -265,7 +239,6 @@ class TestFitStarShapeNoiseless(FloatTestCase):
             print('Fitting for the PSF.')
             fit_star_shape = FitStarShape(
                 mode='PSF',
-                shape_terms=psffit_terms,
                 grid=[sources[0][0]['psf_args']['boundaries']['x'],
                       sources[0][0]['psf_args']['boundaries']['y']],
                 initial_aperture=5.0,
@@ -286,13 +259,15 @@ class TestFitStarShapeNoiseless(FloatTestCase):
                 print('Sub-image #%d sources:\n' % sub_image)
                 for src in image_sources:
                     print('\t' + repr(src) + '\n')
+                psf_sources = [
+                    dict(x=src['x'],
+                         y=src['y'],
+                         enabled=src.get('enabled', True),
+                         psf=PiecewiseBicubicPSF(**src['psf_args']))
+                    for src in image_sources
+                ]
                 image, source_list = make_image_and_source_list(
-                    sources=[dict(x=src['x'],
-                                  y=src['y'],
-                                  psf=PiecewiseBicubicPSF(**src['psf_args']),
-                                  **{var: src[var] for var in extra_variables})
-                             for src in image_sources],
-                    extra_variables=extra_variables,
+                    sources=psf_sources,
                     subpix_map=subpixmap,
                 )
                 fit_images_and_sources.append(
@@ -300,7 +275,8 @@ class TestFitStarShapeNoiseless(FloatTestCase):
                         image,
                         image**0.5,
                         numpy.zeros(image.shape, dtype=c_ubyte),
-                        source_list
+                        source_list,
+                        evaluate_psffit_terms(image_sources, psffit_terms)
                     )
                 )
                 measure_backgrounds.append(
@@ -332,7 +308,7 @@ class TestFitStarShapeNoiseless(FloatTestCase):
                     result_tree,
                     image_index,
                     image_sources,
-                    extra_variables
+                    len(psffit_terms)
                 )
                 print('Finished checking results for image ' + str(image_index))
 
@@ -362,7 +338,7 @@ class TestFitStarShapeNoiseless(FloatTestCase):
                     )
                 )
             ]],
-            psffit_terms='{1}'
+            psffit_terms=['1']
         )
 
     def test_isolated_sources(self):
@@ -446,7 +422,7 @@ class TestFitStarShapeNoiseless(FloatTestCase):
         psf_parameters['d_dy'] = numpy.zeros((3, 3))
 
         self.run_test(sources=[sources],
-                      psffit_terms='{1, x, y}')
+                      psffit_terms=['1', 'x', 'y'])
 
     def test_two_overlapping_sources(self):
         """Test fitting an image containing 2 sources all overlapping."""
@@ -466,7 +442,7 @@ class TestFitStarShapeNoiseless(FloatTestCase):
                    dict(x=16.51,
                         y=14.03,
                         psf_args=psf_args)]
-        self.run_test(sources=[sources], psffit_terms='{1}')
+        self.run_test(sources=[sources], psffit_terms=['1'])
 
     def test_four_overlapping_sources(self):
         """Test fitting an image containing 4 overlapping sources."""
@@ -516,10 +492,9 @@ class TestFitStarShapeNoiseless(FloatTestCase):
                             psf_args=dict(psf_parameters=dict(psf_parameters),
                                           boundaries=boundaries)))
 
-#        self.run_test(sources=[sources], psffit_terms='{1, x*x, y*y}')
-
         for src in sources:
-            src['enabled'] = 1
+            src['enabled'] = True
+
         psf_parameters['d_dx'] = numpy.zeros((3, 3))
         psf_parameters['d_dy'] = numpy.zeros((3, 3))
         psf_parameters['d2_dxdy'] = numpy.zeros((3, 3))
@@ -528,17 +503,16 @@ class TestFitStarShapeNoiseless(FloatTestCase):
         psf_parameters['d2_dxdy'][1, 1] = 3.0
         sources.append(dict(x=4.0,
                             y=4.0,
-                            enabled=0,
+                            enabled=False,
                             psf_args=dict(psf_parameters=dict(psf_parameters),
                                           boundaries=boundaries)))
         sources.append(dict(x=25.0,
                             y=25.0,
-                            enabled=0,
+                            enabled=False,
                             psf_args=dict(psf_parameters=dict(psf_parameters),
                                           boundaries=boundaries)))
         self.run_test(sources=[sources],
-                      psffit_terms='{1, x*x, y*y}',
-                      extra_variables=['enabled'])
+                      psffit_terms=['1', 'x*x', 'y*y'])
 
     def test_multi_image_with_extra_var(self):
         """Test fitting a series of 5 images and non-position variables."""
@@ -565,7 +539,7 @@ class TestFitStarShapeNoiseless(FloatTestCase):
                               +
                               (1.0 - t) * dy / 300.0)
                 d_dy[1, 1] = (1.0 - t) * dx / 150.0 + 0.01 * z
-#                print("Dx = " + repr(d_dx[1, 1]) + ", Dy = " + repr(d_dy[1, 1]))
+#               print("Dx = " + repr(d_dx[1, 1]) + ", Dy = " + repr(d_dy[1, 1]))
                 sources.append(
                     dict(
                         x=30.0 + dx,
@@ -672,8 +646,7 @@ class TestFitStarShapeNoiseless(FloatTestCase):
             )
         ]
         self.run_test(sources=sources,
-                      psffit_terms='{1, x, y, t, x*t, y*t, z}',
-                      extra_variables=['t', 'z'])
+                      psffit_terms=['1', 'x', 'y', 't', 'x*t', 'y*t', 'z'])
 
 
 

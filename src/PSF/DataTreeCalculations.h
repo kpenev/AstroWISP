@@ -8,12 +8,15 @@
 
 #ifndef __DATA_TREE_CALCULATIONS_H
 #define __DATA_TREE_CALCULATIONS_H
+#define _USE_MATH_DEFINES
 
 #include "../Core/SharedLibraryExportMacros.h"
 #include "../IO/H5IODataTree.h"
 #include "../IO/OutputArray.h"
 #include "../PSF/EllipticalGaussianMap.h"
 #include "../PSF/MapSourceContainer.h"
+
+#include <cmath>
 
 namespace PSF {
 

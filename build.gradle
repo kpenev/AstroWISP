@@ -5,6 +5,7 @@ plugins {
 
 import org.gradle.internal.os.OperatingSystem;
 
+
 model {
     buildTypes {
         debug
@@ -12,6 +13,11 @@ model {
         profile
     }
 
+    platforms {
+        x64 {
+              architecture "x64"
+        }
+    }
     //Common configuration for all binaries
     binaries {
         all {
@@ -33,7 +39,6 @@ model {
                     cppCompiler.define "TOOLCHAIN_CLANG"
 
                 cppCompiler.args "-W", "-Wall", "-fvisibility=hidden"
-
                 linker.args "-l" + ensureLibraryVersion(
                     "boost_program_options",
                 )
@@ -48,9 +53,18 @@ model {
                         cppCompiler.define "TRACK_PROGRESS"
                     }
                 }
-            } else if (toolChain in VisualCpp ) {
+            } else if (toolChain in VisualCpp) {
+                cppCompiler.define 'TOOLCHAIN_MSVC'
+                cppCompiler.define '_USE_MATH_DEFINES'
+                cppCompiler.define 'BOOST_RESULT_OF_USE_TR1'
+                linker.args "/LIBPATH:C:\\Program Files\\boost\\boost_1_65_1_test\\lib64-msvc-14.1"
+                linker.args "/DEFAULTLIB:C:\\Program Files\\cfitsio\\lib\\cfitsio.lib"
+                cppCompiler.args "/IC:\\Users\\Errox\\cfitsio\\include" , "/IC:\\Program Files\\boost\\boost_1_65_1_test" , '/EHsc'
+                cppCompiler.args '/std:c++14'
+                cppCompiler.args '/arch (x64)'
+                cppCompiler.args '/MT'
                 if(buildType == buildTypes.debug) {
-                    cppCompiler.args '/Zi'
+                    cppCompiler.args '/Zi', '/FS'
                     cppCompiler.define 'DEBUG'
                     linker.args '/DEBUG'
                 }
@@ -58,13 +72,16 @@ model {
 
         }
         withType(StaticLibraryBinarySpec) {
+          if (toolChain in Gcc || toolChain in Clang){
             cppCompiler.args '-fPIC'
+          }
         }
 
     }
 
     components {
         eigen(NativeLibrarySpec) {
+            targetPlatform "x64"
             sources.cpp {
                 source {}
                 exportedHeaders {
@@ -73,6 +90,7 @@ model {
             }
         }
         superphot(NativeLibrarySpec) {
+            targetPlatform "x64"
             sources.cpp {
                 lib library: "eigen"
                 source {
@@ -191,7 +209,7 @@ def findLibraryLinux(String libNameStart)
     }
 }
 
-def findLibraryMacOS(String libName)
+def findLibraryMacOS(String libNameStart)
 {
     return [libName, 0, 0]
     def libFullPath
@@ -212,7 +230,7 @@ def findLibraryMacOS(String libName)
 
     libFullPath = sout.toString().trim()
     logger.debug("Result: '" + libFullPath + "'")
-    if(!libFullPath) 
+    if(!libFullPath)
         throw new ProjectConfigurationException(
             "No candidate ${libName} library found!",
             new NullPointerException()
@@ -235,12 +253,19 @@ def findLibraryMacOS(String libName)
     );
 }
 
+def findLibraryWindows(String libNameStart)
+{
+
+}
+
 def findLibrary(String libNameStart)
 {
     if(OperatingSystem.current().isLinux())
         return findLibraryLinux(libNameStart)
     else if(OperatingSystem.current().isMacOsX())
         return findLibraryMacOS(libNameStart)
+    else if(OperatingSystem.current().isWindows())
+        return findLibraryWindows(libNameStart)
     else {
         throw new ProjectConfigurationException(
             "Compiling on non-linux or Mac operating systems not currently "
