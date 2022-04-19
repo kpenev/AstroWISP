@@ -40,13 +40,14 @@ namespace PSF {
     /// \ingroup PSF
     class LIB_PUBLIC EllipticalGaussian : public PSF {
     private:
+      ///Changed these to be an independent declaration each
         static double
             ///Default for __abs_precision
-            __default_abs_precision,
-
+            __default_abs_precision;
+        static double
             ///Default for __rel_precision
-            __default_rel_precision,
-
+            __default_rel_precision;
+        static double
             ///Default for __max_exp_coef
             __default_max_exp_coef;
 

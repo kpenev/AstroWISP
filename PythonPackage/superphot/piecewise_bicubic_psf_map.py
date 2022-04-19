@@ -30,6 +30,7 @@ class PiecewiseBicubicPSFMap:
         )
 
     def __call__(self, **map_variables):
+        #TODO need to pass the terms instead of the map_variables, this needs to change accordingly
         """
         Evaluate the map for a given set of values of the map variables.
 
@@ -43,7 +44,7 @@ class PiecewiseBicubicPSFMap:
         """
 
         term_values = SmoothDependence.evaluate_terms(self._map_terms,
-                                                      **map_variables)
+                                                      **map_variables) #TODO remove this piece and directly call the terms
         assert term_values.shape[0] == 1
         term_values = term_values.flatten()
         return PiecewiseBicubicPSF(

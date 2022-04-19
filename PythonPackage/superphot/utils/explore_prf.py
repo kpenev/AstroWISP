@@ -86,7 +86,7 @@ def parse_command_line(parser=None):
             description=__doc__,
             default_config_files=['explore_prf.cfg'],
             formatter_class=DefaultsFormatter,
-            ignore_unknown_config_file_keys=False
+            ignore_unknown_config_file_keys=True
         )
 
     parser.add_argument(
@@ -339,6 +339,8 @@ def parse_command_line(parser=None):
 
     #TODO write common line argument for markersize for plots
     cmdline_args = parser.parse_args()
+    print('Patterns substitutions: ' +
+          repr(get_fname_pattern_substitutions(cmdline_args.frame_fname)))
     cmdline_args.catalogue = (
         cmdline_args.catalogue_pattern
         %
@@ -1455,8 +1457,8 @@ def get_plot_tasks(cmdline_args):
 def list_plot_filenames(cmdline_args):
     """List the filenames of all the plots that will be generated."""
 
-    assert cmdline_args.save_plot is not None
-    if cmdline_args.plot_multi_image:
+    assert cmdline_args.save_plot_pattern is not None
+    if not cmdline_args.plot_multi_image:
         return [task[1] for task in get_plot_tasks(cmdline_args)]
 
     result = []
@@ -1490,6 +1492,9 @@ def show_plots(slice_prf_data, slice_splines, cmdline_args):
     for plot_slice, slice_fnames, combined_fname in get_plot_tasks(
             cmdline_args
     ):
+        print('plot_slice: ' + repr(plot_slice))
+        print('Slice filenames: ' + repr(slice_fnames))
+        print('combined_fname: ' + repr(combined_fname))
         if (
                 combined_fname is not None
                 and
@@ -1503,6 +1508,8 @@ def show_plots(slice_prf_data, slice_splines, cmdline_args):
         if cmdline_args.plot_y_range is not None:
             pyplot.ylim(*cmdline_args.plot_y_range)
 
+        if len(slice_fnames) == 1 and slice_fnames[0] is None:
+            slice_fnames *= len(slice_prf_data)
         for (
                 (prf_data, label),
                 spline,
@@ -1584,7 +1591,7 @@ def extract_pixel_data(cmdline_args, image_slices, sources=None):
     Returns:
         List:
             A list of the PRF data (see return of get_prf_data()) for each
-            image slice.
+            image slice each entry contains the data and a plot label.
     """
 
     trans_fname = get_trans_fname(cmdline_args.frame_fname,

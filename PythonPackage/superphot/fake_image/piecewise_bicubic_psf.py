@@ -1,6 +1,7 @@
 """Defines the PiecewiseBicubicPSF class."""
 
 import scipy.linalg
+import numpy
 
 from superphot.fake_image.piecewise_psf import PiecewisePSF
 from superphot.fake_image.bipolynomial_psf_piece import BipolynomialPSFPiece
@@ -27,7 +28,7 @@ class PiecewiseBicubicPSF(PiecewisePSF):
                 `psf_parameters`.
         """
 
-        matrix = scipy.empty((16, 16))
+        matrix = numpy.empty((16, 16))
         row_offset = 0
         for vert_index in range(2):
             #y is a reasonable name for position vector y-component.
@@ -64,7 +65,7 @@ class PiecewiseBicubicPSF(PiecewisePSF):
                     y_term *= y
                 row_offset += 1
 
-        rhs = scipy.empty(16)
+        rhs = numpy.empty(16)
         rhs[0 : 4] = psf_parameters['values'].flatten()
         rhs[4 : 8] = psf_parameters['d_dx'].flatten()
         rhs[8 : 12] = psf_parameters['d_dy'].flatten()

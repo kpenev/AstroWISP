@@ -90,7 +90,7 @@ namespace IO {
 
     template<typename UNIT_TYPE>
         template<class INPUT_ARRAY_TYPE>
-        bool LIB_PUBLIC OutputArray<UNIT_TYPE>::try_container_type(const boost::any &value)
+        bool OutputArray<UNIT_TYPE>::try_container_type(const boost::any &value) ///This has different linkage need to figure out what exactly
         {
             try {
                 const INPUT_ARRAY_TYPE &
@@ -111,7 +111,7 @@ namespace IO {
 
     template<typename UNIT_TYPE>
         template<class INPUT_ARRAY_TYPE>
-        bool LIB_PUBLIC OutputArray<UNIT_TYPE>::try_array_type(const boost::any &value)
+        bool OutputArray<UNIT_TYPE>::try_array_type(const boost::any &value)
         {
             try {
                 const INPUT_ARRAY_TYPE &

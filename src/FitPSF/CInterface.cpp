@@ -64,19 +64,22 @@ void prepare_fit_sources(
     std::vector< FitPSF::Image<FitPSF::LinearSource> > &fit_images,
 
     ///See same name argument to piecewise_bicubic_fit()
-    char **column_names,
-
-    ///See same name argument to piecewise_bicubic_fit()
     char ***source_ids,
 
     ///See same name argument to piecewise_bicubic_fit()
-    double **column_data,
+    double **source_coordinates,
+
+    ///See same name argument to piecewise_bicubic_fit()
+    double **psf_terms,
+
+    ///See same name argument to piecewise_bicubic_fit()
+    bool **enabled,
 
     ///See same name argument to piecewise_bicubic_fit()
     unsigned long *number_sources,
 
     ///See same name argument to piecewise_bicubic_fit()
-    unsigned long number_columns,
+    unsigned long number_terms,
 
     ///The measured background for the sources in each image, indexed by the
     ///image index.
@@ -97,7 +100,7 @@ void prepare_fit_sources(
     ///grid, obviously no coefficients.
     const PSF::PiecewiseBicubic &psf,
 
-    ///The object to add result data to (e.g. PSF map variables).
+    ///The object to add result data to (e.g. PSF map terms).
     IO::H5IODataTree &output_data_tree
 )
 {
@@ -116,15 +119,26 @@ void prepare_fit_sources(
 
         FitPSF::IOSources image_sources(image_index_stream.str().c_str(),
                                         source_ids[image_index],
-                                        column_data[image_index],
-                                        column_names,
+                                        source_coordinates[image_index],
+                                        psf_terms[image_index],
+                                        enabled[image_index],
                                         number_sources[image_index],
-                                        number_columns);
-#ifdef TRACK_PROGRESS
+                                        number_terms);
+#ifndef NDEBUG
         std::cerr << "List contains "
                   << image_sources.locations().size()
-                  << " sources"
-                  << std::endl;
+                  << " sources";
+
+        std::cerr << " located at: " << std::endl;
+        for(unsigned i = 0; i < number_sources[image_index]; ++i)
+            std::cerr << std::setw(25)
+                      << source_coordinates[image_index][2 * i]
+                      << ", "
+                      << std::setw(25)
+                      << source_coordinates[image_index][2 * i + 1]
+                      << std::endl;
+
+        std::cerr << std::endl;
 #endif
 
         FitPSF::LinearSourceList section_fit_sources,
@@ -148,35 +162,46 @@ void prepare_fit_sources(
                   << " sources."
                   << std::endl;
 #endif
-        FitPSF::add_expansion_terms(
-            image_sources,
-            configuration["psf.terms"].as<std::string>(),
-            section_fit_sources,
-            section_dropped_sources
-        );
-#ifdef TRACK_PROGRESS
-        std::cerr << "Added expansion terms." << std::endl;
+
+#ifndef NDEBUG
+        std::cerr << "Selected section source locations: " << std::endl;
+        for(
+                FitPSF::LinearSourceList::const_iterator
+                si = section_fit_sources.begin();
+                si != section_fit_sources.end();
+                ++si
+        )
+            std::cerr << (*si)->x() << ", " << (*si)->y() << std::endl;
 #endif
 
-        if(configuration["psf.terms"].as<std::string>() != "") {
-            typedef IO::IOTreeBase::path_type path;
-            output_data_tree.put(
-                "psffit.variables." + image_index_stream.str(),
-                image_sources.columns(),
-                IO::TranslateToAny<PSF::MapVarListType>()
-            );
-            std::cerr << "Trying to read back psffit variables. Node name: "
-                      << "psffit.variables." + image_index_stream.str()
-                      << std::endl;
-            output_data_tree.get<PSF::MapVarListType>(
-                "psffit.variables." + image_index_stream.str(),
-                PSF::MapVarListType(),
-                IO::TranslateToAny<PSF::MapVarListType>()
-            );
-            std::cerr << "Finished reading back psffit variables." << std::endl;
-        }
+
+        output_data_tree.put(
+            "psffit.terms." + image_index_stream.str(),
+            std::vector<double>(
+                image_sources.psf_terms().data(),
+                (
+                    image_sources.psf_terms().data()
+                    +
+                    number_sources[image_index] * number_terms
+                )
+            ),
+            IO::TranslateToAny< std::vector<double> >()
+        );
+
+#ifndef NDEBUG
+        std::cerr << "Trying to read back psffit terms. Node name: "
+                  << "psffit.terms." + image_index_stream.str()
+                  << std::endl;
+        output_data_tree.get< std::vector<double> >(
+            "psffit.terms." + image_index_stream.str(),
+            std::vector<double>(),
+            IO::TranslateToAny< std::vector<double> >()
+        );
+        std::cerr << "Finished reading back psffit terms." << std::endl;
+#endif
+
 #ifdef TRACK_PROGRESS
-        std::cerr << "Added PSF fit variables to result tree." << std::endl;
+        std::cerr << "Added PSF fit terms to result tree." << std::endl;
 #endif
         fit_sources.splice(fit_sources.end(), section_fit_sources);
         dropped_sources.splice(dropped_sources.end(), section_dropped_sources);
@@ -257,11 +282,12 @@ bool piecewise_bicubic_fit(double **pixel_values,
                            unsigned long number_images,
                            unsigned long image_x_resolution,
                            unsigned long image_y_resolution,
-                           char **column_names,
                            char ***source_ids,
-                           double **column_data,
+                           double **source_coordinates,
+                           double **psf_terms,
+                           bool **enabled,
                            unsigned long *number_sources,
-                           unsigned long number_columns,
+                           unsigned long number_terms,
                            BackgroundMeasureAnnulus** backgrounds,
                            FittingConfiguration *configuration,
                            double *subpix_sensitivities,
@@ -271,6 +297,25 @@ bool piecewise_bicubic_fit(double **pixel_values,
 {
 #ifdef TRACK_PROGRESS
     std::cerr << "Starting piecewise bicubic fit." << std::endl;
+#endif
+
+#ifndef NDEBUG
+    std::cerr << "Source locations: " << std::endl;
+    for(unsigned image_i = 0; image_i < number_images; ++image_i) {
+        std::cerr << "Image " << image_i << std::endl;
+        for(
+                unsigned source_i = 0;
+                source_i < number_sources[image_i];
+                ++source_i
+        )
+            std::cerr << "\t"
+                      << std::setw(25)
+                      << source_coordinates[image_i][2 * source_i]
+                      << ", "
+                      << std::setw(25)
+                      << source_coordinates[image_i][2 * source_i + 1]
+                      << std::endl;
+    }
 #endif
     Core::SubPixelMap subpix_map(subpix_sensitivities,
                                  subpix_x_resolution,
@@ -332,11 +377,12 @@ bool piecewise_bicubic_fit(double **pixel_values,
     prepare_fit_sources(
         *fit_configuration,
         fit_images,
-        column_names,
         source_ids,
-        column_data,
+        source_coordinates,
+        psf_terms,
+        enabled,
         number_sources,
-        number_columns,
+        number_terms,
         backgrounds,
         fit_sources,
         dropped_sources,

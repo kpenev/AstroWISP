@@ -265,28 +265,6 @@ def _setup_background_interface(library):
 def _setup_psf_interface(library):
     """Set-up the argument and return types of the PSF library funcs."""
 
-    library.expand_term_expression.argtypes = [
-        c_char_p,
-        POINTER(POINTER(c_char_p)),
-        POINTER(c_uint)
-    ]
-    library.expand_term_expression.restype = None
-
-    library.free_term_list.argtypes = [POINTER(c_char_p), c_uint]
-    library.free_term_list.restype = None
-
-    library.evaluate_terms.argtypes = [
-        POINTER(c_char_p),
-        c_uint,
-        POINTER(c_char_p),
-        POINTER(POINTER(c_double)),
-        c_uint,
-        c_uint,
-        numpy.ctypeslib.ndpointer(dtype=c_double,
-                                  ndim=2,
-                                  flags='C_CONTIGUOUS')
-    ]
-
     library.create_piecewise_bicubic_psf_map.argtypes = [
         library.create_result_tree.restype
     ]
@@ -386,21 +364,24 @@ def _setup_fitpsf_interface(library):
         #image_y_resolution
         c_ulong,
 
-        #column_names
-        POINTER(c_char_p),
-
         #source_ids
         POINTER(POINTER(c_char_p)),
 
-        #column_data
+        #source_coordinates
         POINTER(POINTER(c_double)),
+
+        #psf_terms
+        POINTER(POINTER(c_double)),
+
+        #enabled
+        POINTER(POINTER(c_bool)),
 
         #number_sources
         numpy.ctypeslib.ndpointer(dtype=c_ulong,
                                   ndim=1,
                                   flags='C_CONTIGUOUS'),
 
-        #number_columns
+        #number_terms
         c_ulong,
 
         #backgrounds

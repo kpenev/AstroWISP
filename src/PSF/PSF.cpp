@@ -1,6 +1,5 @@
 #include "PSF.h"
 #include "../Core/NaN.h"
-#include <cmath>
 #include <limits>
 #include <algorithm>
 #include <sstream>

@@ -12,22 +12,6 @@ namespace PSF {
                                    ? ""
                                    : "." + data_tree_image_id);
 
-        const MapVarListType &variables =
-            data_tree.get<MapVarListType>(
-                "psffit.variables" + tree_suffix,
-                MapVarListType(),
-                IO::TranslateToAny<MapVarListType>()
-            );
-
-        std::vector<TermValarray> expansion_term_values;
-        evaluate_term_expression(
-                data_tree.get<std::string>("psffit.terms",
-                                           "",
-                                           IO::translate_string),
-                variables.begin(),
-                variables.end(),
-                expansion_term_values
-        );
         std::string amplitude_name = (
             data_tree.count("psffit.amplitude" + tree_suffix)
             ? "psffit.amplitude"
@@ -48,7 +32,19 @@ namespace PSF {
             ),
             background_error(
                 data_tree.get<boost::any>("bg.error" + tree_suffix)
+            ),
+            expansion_term_values(
+                data_tree.get<boost::any>("psffit.terms" + tree_suffix)
             );
+
+        unsigned num_sources = x.size(),
+                 num_terms = expansion_term_values.size() / num_sources;
+
+        assert(y.size() == num_sources);
+        assert(amplitude.size() == num_sources);
+        assert(background.size() == num_sources);
+        assert(background_error.size() == num_sources);
+        assert(expansion_term_values.size() == num_sources * num_terms);
 
         IO::OutputArray<std::string> *source_name = NULL;
         IO::OutputArray<unsigned> *source_field = NULL,
@@ -57,6 +53,7 @@ namespace PSF {
             source_name = new IO::OutputArray<std::string>(
                 data_tree.get<boost::any>("projsrc.srcid.name" + tree_suffix)
             );
+            assert(source_name->size() == num_sources);
         } else {
             source_field = new IO::OutputArray<unsigned>(
                 data_tree.get<boost::any>("projsrc.srcid.field" + tree_suffix)
@@ -64,18 +61,26 @@ namespace PSF {
             source_id = new IO::OutputArray<unsigned>(
                 data_tree.get<boost::any>("projsrc.srcid.source" + tree_suffix)
             );
+
+            assert(source_field->size() == num_sources);
+            assert(source_id->size() == num_sources);
         }
         IO::OutputArray<unsigned>
             background_npix(
                 data_tree.get<boost::any>("bg.npix" + tree_suffix)
             );
+        assert(background_npix.size() == num_sources);
 
-        unsigned num_sources = expansion_term_values[0].size(),
-                 num_terms = expansion_term_values.size();
-        if(data_tree.get<std::string>("psffit.model",
-                                      "",
-                                      IO::translate_string) == "zero")
-            num_terms = 0;
+
+        assert(
+            (
+                data_tree.get<std::string>("psffit.model",
+                                           "",
+                                           IO::translate_string) != "zero"
+            )
+            ||
+            num_terms == 0
+        );
         reserve(num_sources);
 
         for(unsigned src_index = 0; src_index < num_sources; ++src_index) {
@@ -100,7 +105,9 @@ namespace PSF {
             Eigen::VectorXd &new_terms = back().expansion_terms();
             new_terms.resize(num_terms);
             for(unsigned term_i = 0; term_i < num_terms; ++term_i)
-                new_terms[term_i] = expansion_term_values[term_i][src_index];
+                new_terms[term_i] = expansion_term_values[src_index * num_terms
+                                                          +
+                                                          term_i];
         }
     }
 

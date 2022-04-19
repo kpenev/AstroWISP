@@ -43,7 +43,14 @@ namespace Core {
                           Eigen::Dynamic,
                           Eigen::Dynamic,
                           Eigen::ColMajor> DoubleImageMatrix;
+    ///
+    class DoubleValarray : public std::valarray<double> {
+    public:
+      DoubleValarray & operator>>=(const double&){return *this;}
+      DoubleValarray & operator>>=(const DoubleValarray&){return *this;}
+    };
 
+    ///When valarray is done, it tries to do two versions of the operator, the one that takes the entire array is defined in std but it apparently is falling back on the valarray version of it, so maybe change it to take std::valarray<double>&
 } //End Core namespace.
 
 
