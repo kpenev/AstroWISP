@@ -211,7 +211,7 @@ def findLibraryLinux(String libNameStart)
 
 def findLibraryMacOS(String libNameStart)
 {
-    return [libName, 0, 0]
+    return [libNameStart, 0, 0]
     def libFullPath
     def sout = new ByteArrayOutputStream()
     def serr = new ByteArrayOutputStream()
