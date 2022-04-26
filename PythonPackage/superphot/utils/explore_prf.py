@@ -32,6 +32,7 @@ from superphot import BackgroundExtractor, FitStarShape, SubPixPhot
 from superphot.utils.file_utilities import\
     get_fname_pattern_substitutions,\
     prepare_file_output
+from superphot.utils import flux_from_magnitude
 
 def parse_command_line(parser=None):
     """
@@ -451,12 +452,6 @@ def get_source_positions(catalogue_fname, trans_fname, image_resolution):
             )
         )
     )
-
-
-def flux_from_magnitude(magnitude, magnitude_1adu):
-    """Return the flux corresponding to the given magnitude."""
-
-    return 10.0**((magnitude_1adu - magnitude) / 2.5)
 
 
 def get_source_info(*,

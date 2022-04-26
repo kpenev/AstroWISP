@@ -27,7 +27,7 @@ class PiecewiseBicubicPSFMap:
 
     def __call__(self, term_values):
         """
-        Evaluate the map for a given set of values of the map variables.
+        Evaluate the map for a given set of terms.
 
         Args:
             term_values:    The terms that PSF parameters depend on evaluated
