@@ -34,7 +34,7 @@ from superphot.utils.file_utilities import\
     prepare_file_output
 from superphot.utils import flux_from_magnitude
 
-def parse_command_line(parser=None):
+def parse_command_line(parser=None, assume_sources=False):
     """
     Return the command line arguments as attributes of an object.
 
@@ -93,30 +93,6 @@ def parse_command_line(parser=None):
     parser.add_argument(
         'frame_fname',
         help='The full path of the FITS file to use for creating the plots.'
-    )
-    parser.add_argument(
-        '--trans-pattern', '-t',
-        default=os.path.join('%(FITS_DIR)s',
-                             '..',
-                             'ASTROM',
-                             '%(FITS_ROOT)s.trans'),
-        help="A pattern with substitutions involving any FITS header "
-        "keywordd, `'%%(FITS_DIR)s'` (directory containing the frame), and/or "
-        "`'%%(FITS_ROOT)s'` (base filename of the frame without the `fits` or "
-        "`fits.fz` extension) that expands to the `.trans` file corresponding "
-        "to the input frame. Default: '%(default)s'."
-    )
-    parser.add_argument(
-        '--catalogue-pattern',
-        default=os.path.join('%(FITS_DIR)s',
-                             '..',
-                             'MASTERS',
-                             '%(FILTER)c_catalogue.ucac4'),
-        help="A pattern with substitutions involving any FITS header "
-        "keywordd, `'%%(FITS_DIR)s'` (directory containing the frame), and/or "
-        "`'%%(FITS_ROOT)s'` (base filename of the frame without the `fits` or "
-        "`fits.fz` extension) that expands to the full path of the catalogue "
-        "containing all sources in the image. Default: '%(default)s'."
     )
     parser.add_argument(
         '--prf-range', '-r',
@@ -192,6 +168,33 @@ def parse_command_line(parser=None):
         help='If supplied, in addition to pixel values, a binned curve is also '
         'displayed using the specified binning statistic and number of bins.'
     )
+    if not assume_sources:
+        parser.add_argument(
+            '--trans-pattern', '-t',
+            default=os.path.join('%(FITS_DIR)s',
+                                 '..',
+                                 'ASTROM',
+                                 '%(FITS_ROOT)s.trans'),
+            help="A pattern with substitutions involving any FITS header "
+            "keyword, `'%%(FITS_DIR)s'` (directory containing the frame), "
+            "and/or `'%%(FITS_ROOT)s'` (base filename of the frame without the "
+            "`fits` or `fits.fz` extension) that expands to the `.trans` file "
+            "corresponding to the input frame. Default: '%(default)s'."
+        )
+        parser.add_argument(
+            '--catalogue-pattern',
+            default=os.path.join('%(FITS_DIR)s',
+                                 '..',
+                                 'MASTERS',
+                                 '%(FILTER)c_catalogue.ucac4'),
+            help="A pattern with substitutions involving any FITS header "
+            "keywordd, `'%%(FITS_DIR)s'` (directory containing the frame), "
+            "and/or `'%%(FITS_ROOT)s'` (base filename of the frame without the "
+            "`fits` or `fits.fz` extension) that expands to the full path of "
+            "the catalogue containing all sources in the image. Default: "
+            "'%(default)s'."
+        )
+
     spline_config = parser.add_argument_group(
         title='Spline configuration',
         description='Options controlling the bicubic spline interpolation used '
@@ -342,11 +345,12 @@ def parse_command_line(parser=None):
     cmdline_args = parser.parse_args()
     print('Patterns substitutions: ' +
           repr(get_fname_pattern_substitutions(cmdline_args.frame_fname)))
-    cmdline_args.catalogue = (
-        cmdline_args.catalogue_pattern
-        %
-        get_fname_pattern_substitutions(cmdline_args.frame_fname)
-    )
+    if not assume_sources:
+        cmdline_args.catalogue = (
+            cmdline_args.catalogue_pattern
+            %
+            get_fname_pattern_substitutions(cmdline_args.frame_fname)
+        )
     return cmdline_args
 
 
@@ -601,6 +605,7 @@ def find_pixel_offsets(sources,
             Pixels that are not within range of any PSF or that are within more
             than one PSF's range have `nan` entries.
     """
+
     result = scipy.full(
         image_resolution,
         scipy.nan,
@@ -1589,8 +1594,6 @@ def extract_pixel_data(cmdline_args, image_slices, sources=None):
             image slice each entry contains the data and a plot label.
     """
 
-    trans_fname = get_trans_fname(cmdline_args.frame_fname,
-                                  cmdline_args.trans_pattern)
     with fits.open(cmdline_args.frame_fname, 'readonly') as frame:
         #False positive
         #pylint: disable=no-member
@@ -1606,6 +1609,8 @@ def extract_pixel_data(cmdline_args, image_slices, sources=None):
         assert image_resolution == frame[first_hdu].data.shape
 
         if sources is None:
+            trans_fname = get_trans_fname(cmdline_args.frame_fname,
+                                          cmdline_args.trans_pattern)
             #pylint: enable=no-member
             sources = get_source_info(
                 pixel_array=frame[first_hdu].data.astype(float),

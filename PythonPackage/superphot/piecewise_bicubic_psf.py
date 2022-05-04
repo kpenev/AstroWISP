@@ -33,8 +33,12 @@ class PiecewiseBicubicPSF(PSFBase):
                 The value(s) of the PSF at (x, y) relative to the source center.
         """
 
-        print('Evaluating PRF at x: ' + repr(x))
-        print('Evaluating PRF at y: ' + repr(y))
+        print('Evaluating PRF at x with shape '
+              +
+              repr(numpy.atleast_1d(x).shape))
+        print('Evaluating PRF at y with shape '
+              +
+              repr(numpy.atleast_1d(y).shape))
         if isinstance(x, numpy.ndarray):
             if not isinstance(y, numpy.ndarray):
                 y = numpy.full(x.shape, y)
@@ -51,13 +55,13 @@ class PiecewiseBicubicPSF(PSFBase):
 
         self._superphot_library.evaluate_piecewise_bicubic_psf(
             self._library_psf,
-            x,
-            y,
+            x.flatten(),
+            y.flatten(),
             x.size,
             result
         )
 
-        return result
+        return result.reshape(x.shape)
     #pylint: enable=invalid-name
 
     def integrate(self,
