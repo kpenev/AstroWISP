@@ -36,7 +36,7 @@ from superphot.utils import flux_from_magnitude
 
 def parse_command_line(parser=None,
                        assume_sources=False,
-                       add_config_file=True):
+                       sub_parser=False):
     """
     Return the command line arguments as attributes of an object.
 
@@ -92,10 +92,11 @@ def parse_command_line(parser=None,
             ignore_unknown_config_file_keys=True
         )
 
-    parser.add_argument(
-        'frame_fname',
-        help='The full path of the FITS file to use for creating the plots.'
-    )
+    if not sub_parser:
+        parser.add_argument(
+            'frame_fname',
+            help='The full path of the FITS file to use for creating the plots.'
+        )
     parser.add_argument(
         '--prf-range', '-r',
         default=(8.0, 8.0, 4.0, 4.0),
@@ -345,7 +346,7 @@ def parse_command_line(parser=None,
         ' the script exists with an error.'
     )
 
-    if add_config_file:
+    if not sub_parser:
         parser.add_argument(
             '--config', '-c',
             is_config_file=True,
