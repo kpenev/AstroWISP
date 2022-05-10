@@ -34,7 +34,9 @@ from superphot.utils.file_utilities import\
     prepare_file_output
 from superphot.utils import flux_from_magnitude
 
-def parse_command_line(parser=None, assume_sources=False):
+def parse_command_line(parser=None,
+                       assume_sources=False,
+                       add_config_file=True):
     """
     Return the command line arguments as attributes of an object.
 
@@ -343,11 +345,12 @@ def parse_command_line(parser=None, assume_sources=False):
         ' the script exists with an error.'
     )
 
-    parser.add_argument(
-        '--config', '-c',
-        is_config_file=True,
-        help='Config file to use instead of default.'
-    )
+    if add_config_file:
+        parser.add_argument(
+            '--config', '-c',
+            is_config_file=True,
+            help='Config file to use instead of default.'
+        )
 
     #TODO write common line argument for markersize for plots
     cmdline_args = parser.parse_args()
