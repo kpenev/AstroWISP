@@ -36,7 +36,7 @@ from superphot.utils import flux_from_magnitude
 
 def parse_command_line(parser=None,
                        assume_sources=False,
-                       sub_parser=False):
+                       add_config_file=True):
     """
     Return the command line arguments as attributes of an object.
 
@@ -92,11 +92,11 @@ def parse_command_line(parser=None,
             ignore_unknown_config_file_keys=True
         )
 
-    if not sub_parser:
-        parser.add_argument(
-            'frame_fname',
-            help='The full path of the FITS file to use for creating the plots.'
-        )
+    parser.add_argument(
+        'frame_fname',
+        nargs='+',
+        help='The full path of the FITS file to use for creating the plots.'
+    )
     parser.add_argument(
         '--prf-range', '-r',
         default=(8.0, 8.0, 4.0, 4.0),
@@ -346,7 +346,7 @@ def parse_command_line(parser=None,
         ' the script exists with an error.'
     )
 
-    if not sub_parser:
+    if add_config_file:
         parser.add_argument(
             '--config', '-c',
             is_config_file=True,
@@ -355,8 +355,6 @@ def parse_command_line(parser=None,
 
     #TODO write common line argument for markersize for plots
     cmdline_args = parser.parse_args()
-    print('Patterns substitutions: ' +
-          repr(get_fname_pattern_substitutions(cmdline_args.frame_fname)))
     if not assume_sources:
         cmdline_args.catalogue = (
             cmdline_args.catalogue_pattern
