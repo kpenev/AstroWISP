@@ -36,7 +36,8 @@ from superphot.utils import flux_from_magnitude
 
 def parse_command_line(parser=None,
                        assume_sources=False,
-                       add_config_file=True):
+                       add_config_file=True,
+                       add_frame_arg=True):
     """
     Return the command line arguments as attributes of an object.
 
@@ -92,11 +93,11 @@ def parse_command_line(parser=None,
             ignore_unknown_config_file_keys=True
         )
 
-    parser.add_argument(
-        'frame_fname',
-        nargs='+',
-        help='The full path of the FITS file to use for creating the plots.'
-    )
+    if add_frame_arg:
+        parser.add_argument(
+            'frame_fname',
+            help='The full path of the FITS file to use for creating the plots.'
+        )
     parser.add_argument(
         '--prf-range', '-r',
         default=(8.0, 8.0, 4.0, 4.0),
@@ -124,12 +125,12 @@ def parse_command_line(parser=None,
         '--slice', '-s',
         type=parse_slice,
         action='append',
-        default=[parse_slice('x = 0 +- 0.2'),
-                 parse_slice('y = 0 +- 0.2')],
+        default=None,
         help='Add more slices to show. Each slice is specified as an offset '
         'along one if the demensions (x or y) and a range around that to '
         'include in the plot. White space around tokens is allowed and '
-        'ignored. Example: "x = 0 +- 0.1". Default: %(default)s.'
+        'ignored. Example: "x = 0 +- 0.1". By default plot slices at x=0 and '
+        'y=0 with width of 0.2.'
     )
     parser.add_argument(
         '--split-image',
@@ -261,6 +262,12 @@ def parse_command_line(parser=None,
         help='The resolution to set for generated plots.'
     )
     plot_config.add_argument(
+        '--marker-size',
+        type=float,
+        default=2.0,
+        help='The size of the markers to use in plots.'
+    )
+    plot_config.add_argument(
         '--plot-y-range',
         default=None,
         type=float,
@@ -361,6 +368,9 @@ def parse_command_line(parser=None,
             %
             get_fname_pattern_substitutions(cmdline_args.frame_fname)
         )
+    if cmdline_args.slice is None:
+        cmdline_args.slice = [parse_slice('x = 0 +- 0.2'),
+                              parse_slice('y = 0 +- 0.2')]
     return cmdline_args
 
 
@@ -761,6 +771,7 @@ def plot_prf_slice(prf_data,
                    thickness=0.1,
                    error_scale=0.1,
                    points_color='k',
+                   marker_size=2,
                    **binning):
     """
     Plot a slice of the PRF.
@@ -826,7 +837,8 @@ def plot_prf_slice(prf_data,
                     plot_err_y * error_scale,
                     fmt='o',
                     color=points_color,
-                    markersize=2,  #TODO make this common line later
+                    markersize=1.5 * marker_size,
+                    elinewidth=(marker_size / 2),
                     zorder=10,
                     label=label)
     if spline is not None:
@@ -834,7 +846,7 @@ def plot_prf_slice(prf_data,
                     spline_y,
                     '-',
                     color='black',
-                    linewidth=3,
+                    linewidth=marker_size,
                     zorder=20,
                     alpha=0.85)
 
@@ -849,7 +861,7 @@ def plot_prf_slice(prf_data,
             'o',
             markerfacecolor=points_color,
             markeredgecolor='black',
-            markersize=12,
+            markersize=(5 * marker_size),
             linewidth=3,
             zorder=30,
             alpha=0.7
@@ -1488,7 +1500,7 @@ def list_plot_filenames(cmdline_args):
 
     return result
 
-def show_plots(slice_prf_data, slice_splines, cmdline_args):
+def show_plots(slice_prf_data, slice_splines, cmdline_args, append=False):
     """
     Generate the plots and display them to the user.
 
@@ -1554,9 +1566,10 @@ def show_plots(slice_prf_data, slice_splines, cmdline_args):
             plot_prf_slice(
                 prf_data[0],
                 spline,
-                label=label,
+                label=(label if not append else None),
                 error_scale=cmdline_args.error_scale,
                 points_color=color,
+                marker_size=cmdline_args.marker_size,
                 **plot_slice,
                 **cmdline_args.add_binned
             )
@@ -1568,6 +1581,7 @@ def show_plots(slice_prf_data, slice_splines, cmdline_args):
             except AttributeError:
                 pass
             if cmdline_args.plot_multi_image:
+                assert not append
                 pyplot.axhline(y=0)
                 pyplot.legend()
                 pyplot.xlabel('pixel center - source center [pix]')
@@ -1580,9 +1594,10 @@ def show_plots(slice_prf_data, slice_splines, cmdline_args):
                                    dpi=cmdline_args.figure_dpi)
                     pyplot.cla()
 
-        if cmdline_args.plot_multi_image:
+        if cmdline_args.plot_multi_image or append:
             continue
 
+        print('Saving: ' + repr(combined_fname))
         pyplot.axhline(y=0)
         pyplot.xlabel('pixel center - source center [pix]')
         pyplot.ylabel('normalized pixel response')
