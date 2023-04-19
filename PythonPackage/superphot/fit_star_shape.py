@@ -485,6 +485,12 @@ class FitStarShape:
                     enabled[image_i][:] = image_data[3]['enabled']
                 assert image_sources[image_i][4].shape[1] == number_terms
 
+            create_source_arguments.image_xy = [
+                image_coords.ravel() for image_coords in source_coordinates
+            ]
+            create_source_arguments.image_psf_terms = [
+                entry[4].ravel() for entry in image_sources
+            ]
             return (
                 (POINTER(c_char_p) * number_images)(
                     *(
@@ -502,14 +508,14 @@ class FitStarShape:
                 ),
                 (POINTER(c_double) * number_images)(
                     *(
-                        image_coords.ravel().ctypes.data_as(POINTER(c_double))
-                        for image_coords in source_coordinates
+                        xy.ctypes.data_as(POINTER(c_double))
+                        for xy in create_source_arguments.image_xy
                     )
                 ),
                 (POINTER(c_double) * number_images)(
                     *(
-                        entry[4].ravel().ctypes.data_as(POINTER(c_double))
-                        for entry in image_sources
+                        psf_terms.ctypes.data_as(POINTER(c_double))
+                        for psf_terms in create_source_arguments.image_psf_terms
                     )
                 ),
                 (POINTER(c_bool) * number_images)(
@@ -554,7 +560,7 @@ class FitStarShape:
         return result_tree
 
     def __del__(self):
-        """Destroy the configuration object created in :meth:`__init__`\ ."""
+        r"""Destroy the configuration object created in :meth:`__init__`\ ."""
 
         self._superphot_library.destroy_psffit_configuration(
             self._library_configuration

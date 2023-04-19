@@ -300,21 +300,31 @@ bool piecewise_bicubic_fit(double **pixel_values,
 #endif
 
 #ifndef NDEBUG
-    std::cerr << "Source locations: " << std::endl;
+    std::cerr << "Source locations and PSF terms: " << std::endl;
     for(unsigned image_i = 0; image_i < number_images; ++image_i) {
         std::cerr << "Image " << image_i << std::endl;
         for(
                 unsigned source_i = 0;
                 source_i < number_sources[image_i];
                 ++source_i
-        )
+        ) {
             std::cerr << "\t"
                       << std::setw(25)
                       << source_coordinates[image_i][2 * source_i]
                       << ", "
                       << std::setw(25)
-                      << source_coordinates[image_i][2 * source_i + 1]
-                      << std::endl;
+                      << source_coordinates[image_i][2 * source_i + 1];
+            for(
+                unsigned term_i = 0;
+                term_i < number_terms;
+                ++term_i
+            )
+                std::cerr
+                    << ", "
+                    << std::setw(25)
+                    << psf_terms[image_i][number_terms * source_i + term_i];
+            std::cerr << std::endl;
+        }
     }
 #endif
     Core::SubPixelMap subpix_map(subpix_sensitivities,
