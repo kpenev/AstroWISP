@@ -183,24 +183,24 @@ class FitStarShape:
         >>>                       initial_aperture=5.0)
     """
 
-    _default_configuration = dict(subpixmap=numpy.ones((1, 1), dtype=c_double),
-                                  smoothing=None,
-                                  max_chi2=100.0,
-                                  pixel_rejection_threshold=100.0,
-                                  max_abs_amplitude_change=0.0,
-                                  max_rel_amplitude_change=1e-6,
-                                  min_convergence_rate=-numpy.inf,
-                                  max_iterations=1000,
-                                  gain=1.0,
-                                  cover_grid=True,
-                                  src_min_signal_to_noise=3.0,
-                                  src_max_aperture=10.0,
-                                  src_max_sat_frac=1.0,
-                                  src_min_pix=5,
-                                  src_max_pix=1000,
-                                  src_max_count=10000,
-                                  bg_min_pix=50,
-                                  magnitude_1adu=10.0)
+    _default_configuration = {'subpixmap': numpy.ones((1, 1), dtype=c_double),
+                              'smoothing': None,
+                              'max_chi2': 100.0,
+                              'pixel_rejection_threshold': 100.0,
+                              'max_abs_amplitude_change': 0.0,
+                              'max_rel_amplitude_change': 1e-6,
+                              'min_convergence_rate': -numpy.inf,
+                              'max_iterations': 1000,
+                              'gain': 1.0,
+                              'cover_grid': True,
+                              'src_min_signal_to_noise': 3.0,
+                              'src_max_aperture': 10.0,
+                              'src_max_sat_frac': 1.0,
+                              'src_min_pix': 5,
+                              'src_max_pix': 1000,
+                              'src_max_count': 10000,
+                              'bg_min_pix': 50,
+                              'magnitude_1adu': 10.0}
 
     #Many return statements make sense in this case.
     #pylint: disable=too-many-return-statements

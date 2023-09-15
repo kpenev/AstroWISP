@@ -403,6 +403,7 @@ bool piecewise_bicubic_fit(double **pixel_values,
 
 #ifdef TRACK_PROGRESS
     std::cerr << "Got " << fit_sources.size() << " fit sources:" << std::endl;
+#ifndef NDEBUG
     for(
         FitPSF::LinearSourceList::const_iterator src_i = fit_sources.begin();
         src_i != fit_sources.end();
@@ -410,6 +411,7 @@ bool piecewise_bicubic_fit(double **pixel_values,
     )
         std::cerr << "x=" << (*src_i)->x() << ", y=" << (*src_i)->y()
                   << std::endl;
+#endif
 #endif
 
     Eigen::VectorXd best_fit_coef;
