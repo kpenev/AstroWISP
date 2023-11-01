@@ -27,6 +27,7 @@
 #include <list>
 #include <set>
 #include <valarray>
+#include <iostream>
 #include <iomanip>
 
 namespace FitPSF {
@@ -224,15 +225,6 @@ namespace FitPSF {
             ///Teh sub-pixel map supplied on input.
             const Core::SubPixelMap &subpix_map() const {return *__subpix_map;}
 
-            ///\brief Comparison between this and RHS, ordering by the
-            ///respective merit function.
-            bool operator<(const Source<PSF_TYPE> &rhs) const
-            {return merit()<rhs.merit();}
-
-            ///Opposite of operator<()
-            bool operator>(const Source<PSF_TYPE> &rhs) const
-            {return merit()>rhs.merit();}
-
             ///Reject the source as non-point.
             void set_nonpoint() {__nonpoint=true;}
 
@@ -282,7 +274,20 @@ namespace FitPSF {
                 ///as necessary.
                 Eigen::VectorXd &psf_params
             );
+
         }; //End Source class.
+
+    ///\brief Comparison between this and RHS, ordering by the
+    ///respective merit function.
+    template<class PSF_TYPE>
+        bool operator<(const Source<PSF_TYPE> &lhs, const Source<PSF_TYPE> &rhs)
+        {return lhs.merit()<rhs.merit();}
+
+    ///Opposite of operator<()
+    template<class PSF_TYPE>
+        bool operator>(const Source<PSF_TYPE> &lhs, const Source<PSF_TYPE> &rhs)
+        {return lhs.merit()>rhs.merit();}
+
 
     template<class PSF_TYPE>
         double Source<PSF_TYPE>::fit_flux(

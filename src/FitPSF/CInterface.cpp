@@ -164,14 +164,15 @@ void prepare_fit_sources(
 #endif
 
 #ifndef NDEBUG
-        std::cerr << "Selected section source locations: " << std::endl;
+        std::cerr << "Selected section source locations and S/N: " << std::endl;
         for(
                 FitPSF::LinearSourceList::const_iterator
                 si = section_fit_sources.begin();
                 si != section_fit_sources.end();
                 ++si
         )
-            std::cerr << (*si)->x() << ", " << (*si)->y() << std::endl;
+            std::cerr << (*si)->x() << ", " << (*si)->y() << ": "
+                << (*si)->signal_to_noise() << std::endl;
 #endif
 
 
