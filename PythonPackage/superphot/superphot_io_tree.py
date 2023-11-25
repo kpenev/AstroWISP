@@ -214,13 +214,14 @@ class SuperPhotIOTree:
             self.library_tree
         )
         c_coefficients = coefficients.astype(c_double, 'C')
-        self._superphot_library.update_result_tree(
-            b'psffit.psfmap',
-            c_coefficients.ctypes.data_as(c_void_p),
-            b'double',
-            coefficients.size,
-            self.library_tree
-        )
+        if coefficients.size:
+            self._superphot_library.update_result_tree(
+                b'psffit.psfmap',
+                c_coefficients.ctypes.data_as(c_void_p),
+                b'double',
+                coefficients.size,
+                self.library_tree
+            )
 
     def set_aperture_photometry_inputs(self,
                                        *,
