@@ -453,9 +453,10 @@ namespace FitPSF {
             }
 #endif
 
-            trim_fit_sources(psf_fit_sources,
-                             max_sources,
-                             dropped_sources);
+            if(max_sources)
+                trim_fit_sources(psf_fit_sources,
+                                 max_sources,
+                                 dropped_sources);
         }
     }
 
