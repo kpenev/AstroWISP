@@ -175,6 +175,16 @@ namespace FitPSF {
             }
         }
 
+    template<class FIT_SOURCE_TYPE>
+        LIB_LOCAL bool order_src_pointer(
+            const FIT_SOURCE_TYPE *a,
+            const FIT_SOURCE_TYPE *b
+        )
+        {
+            return *a < *b;
+        }
+
+
     ///\brief Drop excess sources from PSF shape fitting.
     ///
     ///See select_fit_sources for a description of the arguments.
@@ -186,12 +196,31 @@ namespace FitPSF {
         )
         {
             typedef typename std::list< FIT_SOURCE_TYPE * >::iterator SourceIter;
+            typedef typename std::list< FIT_SOURCE_TYPE * >::const_iterator ConstSourceIter;
+
             if(psf_fit_sources.size() > max_sources) {
 #ifdef TRACK_PROGRESS
                 std::cerr << "Trimming the source list to " << max_sources
                           << " sources" << std::endl;
 #endif
-                psf_fit_sources.sort();
+                psf_fit_sources.sort(order_src_pointer<FIT_SOURCE_TYPE>);
+
+#ifndef NDEBUG
+                ConstSourceIter previous = psf_fit_sources.begin();
+                std::cerr << "Sorted sources (x, y: S/N): " << std::endl;
+                for(
+                        ConstSourceIter si = psf_fit_sources.begin();
+                        si != psf_fit_sources.end();
+                        ++si
+                ) {
+                    std::cerr << (*si)->x() << ", " << (*si)->y() << ": "
+                        << (*si)->signal_to_noise() << " "
+                        << ((**si) < (**previous))
+                        << std::endl;
+                    previous = si;
+                }
+#endif
+
 #ifdef TRACK_PROGRESS
                 std::cerr << "Sorted by signal to noise" << std::endl;
 #endif
@@ -424,9 +453,10 @@ namespace FitPSF {
             }
 #endif
 
-            trim_fit_sources(psf_fit_sources,
-                             max_sources,
-                             dropped_sources);
+            if(max_sources)
+                trim_fit_sources(psf_fit_sources,
+                                 max_sources,
+                                 dropped_sources);
         }
     }
 

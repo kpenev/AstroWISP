@@ -80,7 +80,7 @@ namespace SubPixPhot {
                 source_index < num_sources;
                 ++source_index
         ) {
-#ifdef TRACK_PROGRESS
+#ifndef NDEBUG
             clock_t t1_clock = std::clock();
             time_t t1_time = std::time(0);
 #endif
@@ -123,7 +123,7 @@ namespace SubPixPhot {
                     );
                 (*(flags[ap_index]))[source_index] = measured.flag();
             }
-#ifdef TRACK_PROGRESS
+#ifndef NDEBUG
             clock_t t2_clock = std::clock();
             time_t t2_time = std::time(0);
             std::cerr << "Source " << source_index << " took "

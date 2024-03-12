@@ -67,7 +67,19 @@ class FitStarShape:
                 and vertical boundaries. If different splitting is desired in
                 the two directions, two lists should be supplied separated by
                 ``;``. The first list should contain the vertical (x) boundaries
-                and the second list gives the horizontal (y) ones.
+                and the second list gives the horizontal (y) ones. Sometimes it
+                is desirable to treat the PSF as a uniform distribution of light
+                over pixels. This is accomplished by setting a grid with just
+                outer boundaries (e.g. ``-5,5``) which automatically makes the
+                PSF equal to zero everywhere, leaving only the background (i.e.
+                flat light distribution). If such a grid is set, this also
+                changes how stars excluded from shape fitting are treated.
+                Normally, the fluxes of these stars are fit after the shape is
+                determined using the "good" stars, but if zero PSF model is
+                used, any sources excluded from the shape fit through the other
+                configurations have their flux set to NaN to exclude them from
+                further processing. If you want to keep all sources with zero
+                PSF model, then make sure none are excluded from shape fitting.
 
             initial_aperture (float):
                 This aperture is used to derive an initial guess for the
@@ -183,24 +195,24 @@ class FitStarShape:
         >>>                       initial_aperture=5.0)
     """
 
-    _default_configuration = dict(subpixmap=numpy.ones((1, 1), dtype=c_double),
-                                  smoothing=None,
-                                  max_chi2=100.0,
-                                  pixel_rejection_threshold=100.0,
-                                  max_abs_amplitude_change=0.0,
-                                  max_rel_amplitude_change=1e-6,
-                                  min_convergence_rate=-numpy.inf,
-                                  max_iterations=1000,
-                                  gain=1.0,
-                                  cover_grid=True,
-                                  src_min_signal_to_noise=3.0,
-                                  src_max_aperture=10.0,
-                                  src_max_sat_frac=1.0,
-                                  src_min_pix=5,
-                                  src_max_pix=1000,
-                                  src_max_count=10000,
-                                  bg_min_pix=50,
-                                  magnitude_1adu=10.0)
+    _default_configuration = {'subpixmap': numpy.ones((1, 1), dtype=c_double),
+                              'smoothing': None,
+                              'max_chi2': 100.0,
+                              'pixel_rejection_threshold': 100.0,
+                              'max_abs_amplitude_change': 0.0,
+                              'max_rel_amplitude_change': 1e-6,
+                              'min_convergence_rate': -numpy.inf,
+                              'max_iterations': 1000,
+                              'gain': 1.0,
+                              'cover_grid': True,
+                              'src_min_signal_to_noise': 3.0,
+                              'src_max_aperture': 10.0,
+                              'src_max_sat_frac': 1.0,
+                              'src_min_pix': 5,
+                              'src_max_pix': 1000,
+                              'src_max_count': 10000,
+                              'bg_min_pix': 50,
+                              'magnitude_1adu': 10.0}
 
     #Many return statements make sense in this case.
     #pylint: disable=too-many-return-statements
