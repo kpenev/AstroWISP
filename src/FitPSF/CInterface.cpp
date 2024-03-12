@@ -346,7 +346,8 @@ bool piecewise_bicubic_fit(double **pixel_values,
             pixel_masks[image_index],
             image_x_resolution,
             image_y_resolution,
-            pixel_errors[image_index]
+            pixel_errors[image_index],
+            image_index
         );
 #ifdef TRACK_PROGRESS
     std::cerr << "Created fit images" << std::endl;

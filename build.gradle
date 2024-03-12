@@ -42,7 +42,6 @@ model {
                 linker.args "-l" + ensureLibraryVersion(
                     "boost_program_options",
                 )
-                linker.args "-l" + ensureLibraryVersion("cfitsio")
 
                 if(buildType == buildTypes.release) {
                     cppCompiler.args "-O3"

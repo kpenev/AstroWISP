@@ -31,7 +31,7 @@ class TestImage(FloatTestCase):
         self.assertTrue(
             numpy.vectorize(
                 self.approx_equal,
-                otypes=[numpy.float]
+                otypes=[float]
             )(got, expected).all(),
             (
                 message

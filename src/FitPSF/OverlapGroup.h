@@ -44,7 +44,7 @@ namespace FitPSF {
             typedef typename PixelList::iterator PixelIter;
 
             ///The filename of the image this group is part of.
-            std::string __image_filename;
+            unsigned __image_id;
 
             ///\brief The sources that belong to this group (as found in a
             ///list of dropped sources).
@@ -91,7 +91,7 @@ namespace FitPSF {
         public:
             ///Create a new group including the given source.
             OverlapGroup(SOURCE_TYPE *first_source) :
-                __image_filename(first_source->image_filename())
+                __image_id(first_source->image_id())
             {
                 add_source(first_source);
             }
@@ -104,6 +104,9 @@ namespace FitPSF {
                         __sources.end());
             }
 
+            ///The ID of the image this group of sources belongs to
+            unsigned image_id() const {return __image_id;}
+
             ///\brief Add the given source to the group (and all its overlaps
             ///to the IDs)
             void add_source(
@@ -111,7 +114,7 @@ namespace FitPSF {
                 SOURCE_TYPE *source
             )
             {
-                assert(source->image_filename() == __image_filename);
+                assert(source->image_id() == __image_id);
 
                 if(__sources.insert(source).second)
                     for(
@@ -133,11 +136,6 @@ namespace FitPSF {
             ///
             ///Only valid after prepare_fitting() is called.
             unsigned pixel_count() const {return __pixel_count;}
-
-            ///\brief The filename of the image from which this source was
-            ///extracted.
-            const std::string &image_filename() const
-            {return __image_filename;}
 
             ///Merge with the given group (and empty it).
             void merge(OverlapGroup<SOURCE_TYPE, PSF_TYPE> &group)
@@ -676,8 +674,7 @@ namespace FitPSF {
 #endif
 
                 if((*source_i)->overlaps().size()) {
-                    const std::string&
-                        image_filename = (*source_i)->image_filename();
+                    unsigned image_id = (*source_i)->image_id();
                     bool new_group = true;
                     for(
                             GroupIterator
@@ -686,9 +683,9 @@ namespace FitPSF {
                             ++group_iter
                     ) {
                         if(
-                            image_filename
+                            image_id
                             ==
-                            group_iter->image_filename()
+                            group_iter->image_id()
                         )
                             new_group = !(group_iter->contains(**source_i));
                     }

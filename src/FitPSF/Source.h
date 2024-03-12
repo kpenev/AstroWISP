@@ -59,7 +59,10 @@ namespace FitPSF {
 
                      ///\brief The number of sources which were combined with this
                      ///source when fitting for the amplitude.
-                     __group_sources;
+                     __group_sources,
+
+                     ///Identifier of the image this source is part of
+                     __image_id;
 
             ///See subpix_map argument of the constructors.
             const Core::SubPixelMap *__subpix_map;
@@ -72,9 +75,6 @@ namespace FitPSF {
             Core::Flux __mask_flux;
 
             std::string
-                ///See image_filename().
-                __image_filename,
-
                 ///See output_filename().
                 __output_filename;
 
@@ -147,7 +147,7 @@ namespace FitPSF {
 
                 ///The file name of the image from which this source was
                 ///extracted.
-                const std::string &image_fname,
+                unsigned image_id,
 
                 ///The name of the file where this source should be saved after
                 ///the fit.
@@ -246,7 +246,7 @@ namespace FitPSF {
             void drop(SourceDropReason reason) {__drop_reason = reason;}
 
             ///The filename of the image from which this source was extracted.
-            const std::string &image_filename() const {return __image_filename;}
+            unsigned image_id() const {return __image_id;}
 
             ///The output filename where this source should be saved.
             const std::string &output_filename() const {return __output_filename;}
@@ -325,7 +325,7 @@ namespace FitPSF {
             const Background::Source &background,
             int                       source_assignment_id,
             const Core::SubPixelMap  *subpix_map,
-            const std::string        &image_fname,
+            unsigned                  image_id,
             const std::string        &output_fname
         )
         : PSF::MapSource(id, 1, x0, y0, background),
@@ -337,10 +337,10 @@ namespace FitPSF {
         __amplitude(Core::NaN),
         __source_assignment_id(source_assignment_id),
         __group_sources(1),
+        __image_id(image_id),
         __subpix_map(subpix_map),
         __nonpoint(false),
         __mask_flux(Core::NaN),
-        __image_filename(image_fname),
         __output_filename(output_fname),
         __chi2(Core::NaN),
         __drop_reason(NOT_DROPPED)

@@ -20,37 +20,4 @@ std::ostream &operator<<(std::ostream &os,
 
 namespace Core {
 
-    ///Saves the sub-pixel map to a FITS image with the given name.
-    void SubPixelMap::save_to_fits(const std::string &filename)
-    {
-        fitsfile *fptr;
-        int fits_status = 0;
-        fits_create_file(&fptr, filename.c_str(), &fits_status);
-        if(fits_status)
-            throw Error::Fits(("Failed to create " + filename).c_str());
-        long naxes[] = {__x_res, __y_res};
-        fits_create_img(fptr, DOUBLE_IMG, 2, naxes, &fits_status);
-        if(fits_status)
-            throw Error::Fits(
-                ("Failed to create image HDU in " + filename).c_str()
-            );
-        long first_pixel[] = {1, 1};
-        fits_write_pix(fptr,
-                       TDOUBLE,
-                       first_pixel,
-                       __x_res * __y_res,
-                       &(__sensitivities[0]),
-                       &fits_status);
-        if(fits_status)
-            throw Error::Fits(
-                (
-                    "Failed to write sub-pixel sensitivities to the first "
-                    "HDU (Image) in " + filename
-                ).c_str()
-            );
-        fits_close_file(fptr, &fits_status);
-        if(fits_status)
-            throw Error::Fits(("Failed to close " + filename).c_str());
-    }
-
 } //End Core namespace.

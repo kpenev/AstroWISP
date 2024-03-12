@@ -107,12 +107,6 @@ namespace Core {
             __sensitivities=RHS.__sensitivities;
             __x_res=RHS.__x_res; __y_res=RHS.__y_res; return *this;}
 
-        ///Saves the sub-pixel map to a FITS image with the given name.
-        ///
-        ///If a file with the given name already exists and the filename does
-        ///not start with '!', an exception is raised.
-        void save_to_fits(const std::string &filename);
-
         ///The minimum sensitivity in any part of the map.
         double min() const {return __sensitivities.min();}
 

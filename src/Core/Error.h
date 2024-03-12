@@ -15,7 +15,6 @@
 #define __ERROR_H
 
 #include "../Core/SharedLibraryExportMacros.h"
-#include "fitsio.h"
 #include <sstream>
 #include <iostream>
 
@@ -57,7 +56,8 @@ namespace Error {
         NotImplemented(const std::string &error_message="")
             : General(error_message)
             {}
-		virtual const char *what() const throw() {return "Fits file error";}
+		virtual const char *what() const throw()
+        {return "Not implemented error";}
     };
 
 	///\brief The parent of all fits library related errors.
@@ -80,23 +80,20 @@ namespace Error {
 		virtual const char *what() const throw () {return "Fits image error";}
 	};
 
-	///\brief An attempt was made to access a pixel outside a fits image area.
+	///\brief An attempt was made to access a pixel outside the image area.
 	///\ingroup SubPixPhot
 	///\ingroup FitSubpix
 	///\ingroup FitPSF
-	class LIB_PUBLIC FitsImageOutside : public FitsImage {
+	class LIB_PUBLIC ImageOutside : public FitsImage {
 	public:
-		FitsImageOutside(unsigned long x, unsigned long y, unsigned long xres,
-				unsigned long yres,
-				const std::string &filename="unknown fits file",
-				int hdu_number=0)
+		ImageOutside(unsigned long x,
+                     unsigned long y,
+                     unsigned long xres,
+                     unsigned long yres)
 		{
 			std::ostringstream msg;
 			msg << "Attempting to access outside the image area ("
-				<< xres << " by " << yres << "of HDU ";
-			if(hdu_number) msg << hdu_number;
-			else msg << "unknown";
-			msg << " of '" << filename << "': " << x << ", " << y;
+				<< xres << " by " << yres << "): " << x << ", " << y;
 			set_message(msg.str());
 		}
 		virtual const char *what() const throw() {return "Outside fits image error";}
@@ -201,35 +198,6 @@ namespace Error {
 		GSLError(const std::string &error_message="") :
 			Runtime(error_message) {}
 		virtual const char *what() const throw() {return "GSL Error";}
-	};
-
-	///\brief %Error related to the
-	///<a href="http://heasarc.gsfc.nasa.gov/fitsio/">
-	///CFITSIO.</a> library.
-	///\ingroup SubPixPhot
-	///\ingroup FitSubpix
-	///\ingroup FitPSF
-	class LIB_PUBLIC CFITSIO : public Runtime {
-	public:
-        ///Create the error.
-		CFITSIO(
-            ///The error code returned by CFITSIO
-            int cfitsio_error_code,
-
-            ///A message describing the error.
-            const std::string &error_message=""
-        )
-		{
-			std::ostringstream msg;
-			char cfitsio_msg[81];
-			fits_get_errstatus(cfitsio_error_code, cfitsio_msg);
-			msg << error_message << "CFITSIO Error code "
-				<< cfitsio_error_code << ": " << cfitsio_msg;
-			while(fits_read_errmsg(cfitsio_msg))
-				msg << ": " << cfitsio_msg;
-			set_message(msg.str());
-		}
-		virtual const char *what() const throw() {return "CFITSIO Error";}
 	};
 
 	///%Error while fitting.
