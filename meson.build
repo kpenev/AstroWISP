@@ -1,4 +1,6 @@
-project('superphot', 'cpp')
+project('superphot', 
+        'cpp',
+        default_options: ['optimization=3', 'cpp_std=c++98'])
 
 src_files = ['src/Core/ParseCSV.cpp', 
              'src/Core/SDKSource.cpp', 
@@ -54,9 +56,9 @@ toolchain = {
 }[compiler_id]
 dependencies = [
   dependency('boost', modules: ['program_options']),
+  dependency('eigen3')
 ]
 add_project_arguments('-D' + toolchain, language : 'cpp')
-add_project_arguments('-std=gnu++98', language : 'cpp')
 add_project_arguments('-fvisibility=hidden', language : 'cpp')
 
 
