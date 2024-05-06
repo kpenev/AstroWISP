@@ -12,6 +12,7 @@
 #include <cstring>
 #include <sstream>
 #include <iomanip>
+#include <stdlib.h>
 
 namespace Core {
 

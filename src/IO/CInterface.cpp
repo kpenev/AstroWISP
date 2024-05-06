@@ -124,7 +124,7 @@ bool try_copying_container(
         std::copy(input_container.begin(), input_container.end(), destination);
 
         return true;
-    } catch(boost::bad_any_cast) {
+    } catch(const boost::bad_any_cast &) {
         return false;
     }
 }
@@ -151,7 +151,7 @@ bool try_copying_array(
         std::copy(start, end, destination);
 
         return true;
-    } catch(boost::bad_any_cast) {
+    } catch(const boost::bad_any_cast &) {
         return false;
     }
 }
