@@ -1,6 +1,6 @@
 project('superphot', 
         'cpp',
-        default_options: ['optimization=3', 'cpp_std=c++98'])
+        default_options: ['optimization=3', 'cpp_std=c++14'])
 
 src_files = ['src/Core/ParseCSV.cpp', 
              'src/Core/SDKSource.cpp', 
@@ -48,18 +48,28 @@ src_files = ['src/Core/ParseCSV.cpp',
              'src/FitPSF/Common.cpp', 
              'src/FitPSF/Pixel.cpp', 
              'src/FitPSF/Config.cpp', 
-             'src/FitPSF/PiecewiseBicubic.cpp']
+             'src/FitPSF/PiecewiseBicubic.cpp',
+             'src/SubPixPhot/CInterface.cpp',
+             'src/SubPixPhot/Config.cpp',
+             'src/SubPixPhot/SourceInput.cpp',
+             'src/SubPixPhot/SubPixPhotIO.cpp']
 compiler_id = meson.get_compiler('cpp').get_id()
 toolchain = {
   'gcc': 'TOOLCHAIN_GCC', 
-  'clang': 'TOOLCHAIN_CLANG'
+  'clang': 'TOOLCHAIN_CLANG',
+  'msvc': 'TOOLCHAIN_MSVC'
 }[compiler_id]
 dependencies = [
   dependency('boost', modules: ['program_options']),
   dependency('eigen3')
 ]
 add_project_arguments('-D' + toolchain, language : 'cpp')
-add_project_arguments('-fvisibility=hidden', language : 'cpp')
+if compiler_id == 'msvc'
+  add_project_arguments('-D_USE_MATH_DEFINES', language: 'cpp')
+  add_project_arguments('-DBOOST_RESULT_OF_USE_TR1', language: 'cpp')
+elif 
+  add_project_arguments('-fvisibility=hidden', language : 'cpp')
+endif
 
 
 library('superphot', src_files, dependencies: dependencies)

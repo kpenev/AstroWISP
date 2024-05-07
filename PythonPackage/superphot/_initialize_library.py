@@ -212,8 +212,8 @@ def _setup_io_interface(library):
     library.set_psf_map_variables.restype = None
 
 
-    library.free.argtypes = [c_void_p]
-    library.free.restype = None
+    library.export_free.argtypes = [c_void_p]
+    library.export_free.restype = None
 
 def _setup_background_interface(library):
     """Set-up the argument and return types of the background library funcs."""
@@ -433,7 +433,8 @@ def _setup_subpixphot_interface(library):
 def _initialize_library():
     """Prepare the superphot library for use."""
 
-    library_fname = find_library('superphot')
+    # library_fname = find_library('superphot')
+    library_fname = r"B:\Github\Superphot_2\build\superphot.dll"
     if library_fname is None:
         raise OSError('Unable to find the SuperPhot library.')
     library = cdll.LoadLibrary(library_fname)

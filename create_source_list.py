@@ -8,7 +8,7 @@ if __name__ == '__main__':
     remove = len(this_dir) + 1
     sources = [
         fname[remove:]
-        for dirname in ['Core', 'IO', 'Background', 'PSF', 'FitPSF']
+        for dirname in ['Core', 'IO', 'Background', 'PSF', 'FitPSF','SubPixPhot']
         for fname in glob(path.join(this_dir, 'src', dirname, '*.cpp'))
     ]
     for exclude in ['src/FitPSF/SDKSourceBase.cpp',

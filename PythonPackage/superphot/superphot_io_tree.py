@@ -128,7 +128,7 @@ class SuperPhotIOTree:
                 defined = False
             else:
                 result = result.decode()
-            self._superphot_library.free(library_result.contents)
+            self._superphot_library.export_free(library_result.contents)
         else:
             result = numpy.empty(shape=shape, dtype=dtype)
 

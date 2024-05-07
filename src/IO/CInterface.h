@@ -179,4 +179,6 @@ extern "C" {
         char ***quantities
     );
 
+    LIB_PUBLIC void export_free(void *);
+
 } //End Extern "C".

@@ -135,7 +135,7 @@ namespace FitPSF {
 #ifdef TOOLCHAIN_CLANG
     #pragma clang diagnostic push
     #pragma clang diagnostic ignored "-Woverloaded-virtual"
-#else
+#elif TOOLCHAIN_GCC
     #pragma GCC diagnostic push
     #pragma GCC diagnostic ignored "-Woverloaded-virtual"
 #endif
@@ -215,7 +215,7 @@ namespace FitPSF {
 
 #ifdef TOOLCHAIN_CLANG
     #pragma clang diagnostic pop
-#else
+#elif TOOLCHAIN_GCC
     #pragma GCC diagnostic pop
 #endif
 
