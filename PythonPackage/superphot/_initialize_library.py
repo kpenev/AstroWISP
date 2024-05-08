@@ -433,8 +433,7 @@ def _setup_subpixphot_interface(library):
 def _initialize_library():
     """Prepare the superphot library for use."""
 
-    # library_fname = find_library('superphot')
-    library_fname = r"B:\Github\Superphot_2\build\superphot.dll"
+    library_fname = find_library('superphot')
     if library_fname is None:
         raise OSError('Unable to find the SuperPhot library.')
     library = cdll.LoadLibrary(library_fname)
