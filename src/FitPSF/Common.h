@@ -436,7 +436,6 @@ namespace FitPSF {
         )
             (*src_i)->finalize_pixels();
 
-
         unsigned drop_statistics[NUM_DROP_REASONS];
         if ( ! do_not_drop ) {
             drop_unsuitable_fit_sources(psf_fit_sources,
