@@ -1,6 +1,6 @@
 project('superphot', 
         'cpp',
-        default_options: ['optimization=3', 'cpp_std=c++14'])
+        default_options: ['optimization=3', 'cpp_std=c++14', 'prefer_static=true'])
 
 src_files = ['src/Core/ParseCSV.cpp', 
              'src/Core/SDKSource.cpp', 
@@ -66,6 +66,11 @@ dependencies = [
 add_project_arguments('-D' + toolchain,
                       '-DTRACK_PROGRESS', 
                       language : 'cpp')
+if get_option('buildtype') == 'debug'
+  add_project_arguments('-DVERBOSE_DEBUG', '-DDEBUG', language: 'cpp')
+elif get_option('buildtype') == 'release'
+  add_project_arguments('-DNDEBUG', language: 'cpp')
+endif
 if compiler_id == 'msvc'
   add_project_arguments('-D_USE_MATH_DEFINES', language: 'cpp')
   add_project_arguments('-DBOOST_RESULT_OF_USE_TR1', language: 'cpp')

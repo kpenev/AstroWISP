@@ -196,7 +196,9 @@ namespace FitPSF {
         )
         {
             typedef typename std::list< FIT_SOURCE_TYPE * >::iterator SourceIter;
+#ifndef NDEBUG
             typedef typename std::list< FIT_SOURCE_TYPE * >::const_iterator ConstSourceIter;
+#endif
 
             if(psf_fit_sources.size() > max_sources) {
 #ifdef TRACK_PROGRESS
