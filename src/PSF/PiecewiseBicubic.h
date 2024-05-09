@@ -1,5 +1,5 @@
 /**\file
- * 
+ *
  * \brief Defines a continuously differentiable PSF where each cell is a
  * bicubic function.
  */
@@ -73,7 +73,7 @@ namespace PSF {
         ///Deallocate any cells that were allocated.
         ~PiecewiseBicubic()
         {
-            for(size_t i = 0; i < __cells.size(); ++i) 
+            for(size_t i = 0; i < __cells.size(); ++i)
                 if(__cells[i]) delete __cells[i];
         }
     };
@@ -129,7 +129,7 @@ namespace PSF {
                width3 = width2 * width,
                height2 = std::pow(height, 2),
                height3 = height2 * height;
-        
+
         //x0y0 - OK
         cell_coef[cell_coef_offset] = v00;
 
@@ -138,7 +138,7 @@ namespace PSF {
 
         //x2y0 - OK
         cell_coef[cell_coef_offset+2] = (3.0 * (v10 - v00) / width2
-                                         - 
+                                         -
                                          (2.0 * dx00 + dx10) / width);
 
         //x3y0 - OK
@@ -164,7 +164,7 @@ namespace PSF {
                                            +
                                            (dxy00 + dxy10) / width2);
 
-        //x0y2 - OK 
+        //x0y2 - OK
         cell_coef[cell_coef_offset + 8] = (3.0 * (v01 - v00) / height2
                                            -
                                            (2.0 * dy00 + dy01) / height);
@@ -180,7 +180,7 @@ namespace PSF {
             9.0 * (v11 - v01)
             -
             6.0 * dx01 * width
-            + 
+            +
             (2.0 * dxy01 + dxy11) * width * height
             -
             2.0 * cell_coef[cell_coef_offset + 6] * width2 * height
@@ -195,8 +195,8 @@ namespace PSF {
         //x3y2 - OK
         cell_coef[cell_coef_offset + 11] = (
             (dx11 - dx10) / height2
-            - 
-            (	
+            -
+            (
                 (2.0 * dxy10 + dxy11) / height
                 +
                 (
@@ -228,13 +228,13 @@ namespace PSF {
             dy11
             -
             dy01
-            - 
-            (	
+            -
+            (
                 (2.0 * dxy01 + dxy11) * width
                 +
                 (
                     2.0 * cell_coef[cell_coef_offset + 10] * height
-                    + 
+                    +
                     cell_coef[cell_coef_offset + 6]
                 ) * width2
             ) / 3.0
@@ -290,7 +290,7 @@ namespace PSF {
                     cell_width,
                     cell_height,
                     &(cell_coef[0]),
-                    &(cell_coef[16])
+                    &(cell_coef[0]) + 16
                 );
                 ++first_value;
                 ++first_x_deriv;

@@ -212,8 +212,8 @@ def _setup_io_interface(library):
     library.set_psf_map_variables.restype = None
 
 
-    library.free.argtypes = [c_void_p]
-    library.free.restype = None
+    library.export_free.argtypes = [c_void_p]
+    library.export_free.restype = None
 
 def _setup_background_interface(library):
     """Set-up the argument and return types of the background library funcs."""

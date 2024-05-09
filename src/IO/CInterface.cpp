@@ -124,7 +124,7 @@ bool try_copying_container(
         std::copy(input_container.begin(), input_container.end(), destination);
 
         return true;
-    } catch(boost::bad_any_cast) {
+    } catch(const boost::bad_any_cast &) {
         return false;
     }
 }
@@ -151,7 +151,7 @@ bool try_copying_array(
         std::copy(start, end, destination);
 
         return true;
-    } catch(boost::bad_any_cast) {
+    } catch(const boost::bad_any_cast &) {
         return false;
     }
 }
@@ -312,27 +312,30 @@ bool query_result_tree(H5IODataTree *tree,
             last_character != format + strlen(format) - 1
             ||
             *last_character != ']'
-        )
-            throw Error::InvalidArgument(
-                "query_result_tree",
-                "invalid format: " + std::string(format)
-            );
+        ) {
+            std::cerr << "Error: invalid argument to query_result_tree:"
+                      << "invalid format: " << std::string(format)
+                      << std::endl;
+            return false;
+        }
         copy_string_array(value, result, result_string_size);
     } else {
         int split_position = 0;
         while(format[split_position]!=':') {
-            if(format[split_position] == '\0')
-                throw Error::InvalidArgument(
-                    "query_result_tree",
-                    "invalid format: " + std::string(format)
-                );
+            if(format[split_position] == '\0'){
+                std::cerr << "Error: invalid argument to query_result_tree:"
+                        << "invalid format: " << std::string(format)
+                        << std::endl;
+                return false;
+            }
             ++split_position;
         }
-        if(strncmp(format, format + split_position + 1, split_position) != 0)
-            throw Error::InvalidArgument(
-                "query_result_tree",
-                "invalid format: " + std::string(format)
-            );
+        if(strncmp(format, format + split_position + 1, split_position) != 0){
+            std::cerr << "Error: invalid argument to query_result_tree:"
+                    << "invalid format: " << std::string(format)
+                    << std::endl;
+            return false;
+        };
         if(strncmp(format, "int", split_position) == 0)
             get_value_pair<int>(value, result);
         else if(strncmp(format, "long", split_position) == 0)
@@ -353,11 +356,12 @@ bool query_result_tree(H5IODataTree *tree,
             get_value_pair<bool>(value, result);
         else if(strncmp(format, "double", split_position) == 0)
             get_value_pair<double>(value, result);
-        else
-            throw Error::InvalidArgument(
-                "query_result_tree",
-                "invalid format: " + std::string(format)
-            );
+        else {
+            std::cerr << "Error: invalid argument to query_result_tree:"
+                    << "invalid format: " << std::string(format)
+                    << std::endl;
+            return false;
+        }
     }
     return true;
 }
@@ -450,6 +454,13 @@ void append_quantities_to_list(
                                   quantities,
                                   prefix + node_i->first + ".");
     }
+}
+
+void export_free(
+    void *arg
+)
+{
+    free(arg);
 }
 
 LIB_PUBLIC unsigned list_tree_quantities(H5IODataTree *tree,

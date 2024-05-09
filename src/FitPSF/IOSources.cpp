@@ -9,9 +9,9 @@ namespace FitPSF {
                          unsigned long num_sources,
                          unsigned long num_terms) :
         __locations(num_sources),
+        __psf_terms(num_terms, num_sources),
         __fits_fname(fits_fname),
-        __output_fname(fits_fname),
-        __psf_terms(num_terms, num_sources)
+        __output_fname(fits_fname)
     {
         __psf_terms = Eigen::Map<Eigen::MatrixXd>(
             const_cast<double*>(psf_terms),

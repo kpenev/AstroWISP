@@ -931,6 +931,7 @@ namespace FitPSF {
     template<class FIT_SOURCE_TYPE, class PSF_TYPE>
         void OverlapSource<FIT_SOURCE_TYPE, PSF_TYPE>::finalize_pixels()
         {
+            if(__ready_to_fit) return;
 #ifdef VERBOSE_DEBUG
             std::cerr << "Finalizing pixels of source ("
                       << this
@@ -1193,6 +1194,10 @@ namespace FitPSF {
         )
         {
             if(!__ready_to_fit) return;
+#ifndef NDEBUG
+            std::cerr << "Source at (x=" << this->x() << ", y=" << this->y()
+                      << ") unreadied to fit" << std::endl;
+#endif
             if(from_shape_fit) {
                 assert(!pixel->shape_fit());
                 __merit -= background_excess(

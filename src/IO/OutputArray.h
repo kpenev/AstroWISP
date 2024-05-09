@@ -104,7 +104,7 @@ namespace IO {
                 __size = input_array.size();
                 __data = __allocated_data;
                 return true;
-            } catch(boost::bad_any_cast) {
+            } catch(const boost::bad_any_cast &) {
                 return false;
             }
         }
@@ -125,7 +125,7 @@ namespace IO {
 
                 std::copy(start, start + __size, __allocated_data);
                 return true;
-            } catch(boost::bad_any_cast) {
+            } catch(const boost::bad_any_cast &) {
                 return false;
             }
         }

@@ -63,7 +63,9 @@ class TestFitStarShapeNoiseless(FloatTestCase):
             '_' + str(sub_image)
         )
 
-        with open(fname_start + '_config.txt', 'w') as test_config:
+        with open(fname_start + '_config.txt',
+                  'w',
+                  encoding='utf-8') as test_config:
             for param_value in fit_config.items():
                 #Needed for debugging purposes
                 #pylint: disable=protected-access
@@ -78,7 +80,9 @@ class TestFitStarShapeNoiseless(FloatTestCase):
                                       +
                                       '\n')
 
-        with open(fname_start + '_image.txt', 'w') as test_image:
+        with open(fname_start + '_image.txt',
+                  'w',
+                  encoding='utf-8') as test_image:
             test_image.write(str(image.shape[1])
                              +
                              ' '
@@ -89,16 +93,18 @@ class TestFitStarShapeNoiseless(FloatTestCase):
             for value in image.flatten():
                 test_image.write('\n' + repr(value))
 
-        with open(fname_start + '_sources.txt', 'w') as test_sources:
+        with open(fname_start + '_sources.txt',
+                  'w',
+                  encoding='utf-8') as test_sources:
             for var in source_list.dtype.names:
-                test_sources.write('%25s' % var)
+                test_sources.write(f'{var:25s}')
             test_sources.write('\n')
             for source in source_list:
                 for var in source_list.dtype.names:
                     if var == 'ID':
-                        test_sources.write('%25s' % source[var].decode())
+                        test_sources.write(f'{source[var].decode():25s}')
                     else:
-                        test_sources.write('%25.16e' % source[var])
+                        test_sources.write(f'{source[var]:25.16e}')
                 test_sources.write('\n')
 
     #TODO: See if breaking up makes sense

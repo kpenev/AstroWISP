@@ -9,7 +9,6 @@
 #define __SUBPIXEL_MAP_H
 
 #include "../Core/SharedLibraryExportMacros.h"
-#include "fitsio.h"
 #include "Error.h"
 #include <valarray>
 #include <iostream>

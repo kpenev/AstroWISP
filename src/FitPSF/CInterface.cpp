@@ -165,15 +165,27 @@ void prepare_fit_sources(
 
 #ifndef NDEBUG
         std::cerr << "Selected section source locations and S/N: " << std::endl;
+#endif
         for(
                 FitPSF::LinearSourceList::const_iterator
                 si = section_fit_sources.begin();
-                si != section_fit_sources.end();
+                si != section_dropped_sources.end();
                 ++si
-        )
-            std::cerr << (*si)->x() << ", " << (*si)->y() << ": "
-                << (*si)->signal_to_noise() << std::endl;
+        ) {
+            if(si == section_fit_sources.end()) {
+                si = section_dropped_sources.begin();
+#ifndef NDEBUG
+                std::cerr << "Dropped sources: " << std::endl;
 #endif
+            }
+            if(si != section_dropped_sources.end()) {
+                (*si)->finalize_pixels();
+#ifndef NDEBUG
+                std::cerr << (*si)->x() << ", " << (*si)->y()
+                          << ": " << (*si)->signal_to_noise() << std::endl;
+#endif
+            }
+        }
 
 
         output_data_tree.put(
