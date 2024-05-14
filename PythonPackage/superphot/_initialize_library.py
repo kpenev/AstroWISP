@@ -1,5 +1,7 @@
 """Load the C library and define the function interface."""
 
+from os import path
+
 from ctypes import\
     cdll,\
     c_double,\
@@ -13,7 +15,6 @@ from ctypes import\
     c_long,\
     c_byte,\
     POINTER
-from ctypes.util import find_library
 import numpy.ctypeslib
 
 #Naming convention imitates the one by ctypes.
@@ -433,10 +434,12 @@ def _setup_subpixphot_interface(library):
 def _initialize_library():
     """Prepare the superphot library for use."""
 
-    library_fname = find_library('superphot')
-    if library_fname is None:
-        raise OSError('Unable to find the SuperPhot library.')
-    library = cdll.LoadLibrary(library_fname)
+    library = cdll.LoadLibrary(
+        path.join(
+            path.dirname(__file__),
+            'libsuperphot.so'
+        )
+    )
 
     _setup_core_interface(library)
     _setup_io_interface(library)

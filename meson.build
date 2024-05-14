@@ -92,9 +92,6 @@ cpp_src = [
     'src/SubPixPhot/SubPixPhotIO.cpp'
 ]
 
-py_src = [
-]
-
 shared_library(
     'superphot', 
     cpp_src, 
@@ -103,7 +100,4 @@ shared_library(
     install_dir: py.get_install_dir() / 'superphot',
 )
 
-py.install_sources(
-    py_src,
-    subdir: 'superphot'
-)
+subdir('PythonPackage/superphot')
