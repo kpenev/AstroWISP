@@ -8,8 +8,10 @@ import unittest
 from ctypes import c_ubyte
 import numpy
 
-_module_path = os.path.abspath(os.path.dirname(__file__))
 
+from superphot import FitStarShape, BackgroundExtractor
+
+_module_path = os.path.abspath(os.path.dirname(__file__))
 sys.path.insert(
     0,
     os.path.abspath(
@@ -28,7 +30,6 @@ from tests.test_fit_star_shape.utils import\
     make_image_and_source_list,\
     evaluate_psffit_terms
 
-from superphot import FitStarShape, BackgroundExtractor
 from superphot.fake_image.piecewise_bicubic_psf import PiecewiseBicubicPSF
 #pylint: enable=wrong-import-position
 

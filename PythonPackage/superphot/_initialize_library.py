@@ -434,12 +434,13 @@ def _setup_subpixphot_interface(library):
 def _initialize_library():
     """Prepare the superphot library for use."""
 
-    library = cdll.LoadLibrary(
-        path.join(
-            path.dirname(__file__),
-            'libsuperphot.so'
-        )
-    )
+    lib_fname = path.join(path.dirname(__file__), 'libsuperphot.')
+    library = None
+    for ext in ['so', 'dylib']:
+        if path.exists(lib_fname + ext):
+            assert library is None
+            library = cdll.LoadLibrary(lib_fname + ext)
+    assert library is not None
 
     _setup_core_interface(library)
     _setup_io_interface(library)

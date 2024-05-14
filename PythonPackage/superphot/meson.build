@@ -17,3 +17,4 @@ py.install_sources(
 )
 
 subdir('utils')
+subdir('fake_image')
