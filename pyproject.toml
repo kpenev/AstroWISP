@@ -3,7 +3,7 @@ build-backend = 'mesonpy'
 requires = ['meson-python']
 
 [tool.cibuildwheel]
-before-build = 'printenv'
+before-build = 'ls "$BOOST_ROOT"'
 build = ['cp311-macosx_x86_64']
 
 [tool.meson-python.args]
