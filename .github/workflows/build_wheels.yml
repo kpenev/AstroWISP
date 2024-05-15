@@ -3,24 +3,6 @@ name: Build
 on: [push]
 
 jobs:
-  install_boost_mac:
-    name: Install Boost on MacOS
-    uses: MarkusJx/install-boost@v2.4.5
-    with:
-        # REQUIRED: Specify the required boost version
-        # A list of supported versions can be found here:
-        # https://github.com/MarkusJx/prebuilt-boost/blob/main/versions-manifest.json
-        boost_version: 1.71.0
-        # OPTIONAL: Specify a platform version
-        platform_version: 11
-        # OPTIONAL: Specify a custom install location
-        boost_install_dir: /home/lib/boost
-        # OPTIONAL: Specify a toolset
-        toolset: clang
-
-        # NOTE: If a boost version matching all requirements cannot be found,
-        # this build step will fail
-
   build_wheels_mac:
     name: Build wheels on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
@@ -30,6 +12,23 @@ jobs:
         os: [macos-12]
 
     steps:
+      - name: Install Boost on MacOS
+        id: install-boost-mac
+        uses: MarkusJx/install-boost@v2.4.5
+        with:
+            # REQUIRED: Specify the required boost version
+            # A list of supported versions can be found here:
+            # https://github.com/MarkusJx/prebuilt-boost/blob/main/versions-manifest.json
+            boost_version: 1.71.0
+            # OPTIONAL: Specify a platform version
+            platform_version: 11
+            # OPTIONAL: Specify a custom install location
+            boost_install_dir: /home/lib/boost
+            # OPTIONAL: Specify a toolset
+            toolset: clang
+            # NOTE: If a boost version matching all requirements cannot be found,
+            # this build step will fail
+    
       - uses: actions/checkout@v4
 
       - name: Build wheels
