@@ -12,6 +12,8 @@ jobs:
         os: [macos-12]
 
     steps:
+      - uses: actions/checkout@v4
+
       - name: Install Boost on MacOS
         id: install-boost-mac
         uses: MarkusJx/install-boost@v2.4.5
@@ -24,12 +26,10 @@ jobs:
             platform_version: 10.15
             # OPTIONAL: Specify a toolset
             toolset: clang
-            boost_install_dir: /Users/runner/work/SuperPhot
+            boost_install_dir: external
             # NOTE: If a boost version matching all requirements cannot be found,
             # this build step will fail
     
-      - uses: actions/checkout@v4
-
       - name: Build wheels
         uses: pypa/cibuildwheel@v2.18.0
         env:
