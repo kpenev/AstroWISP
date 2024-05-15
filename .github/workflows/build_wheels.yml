@@ -23,8 +23,6 @@ jobs:
             platform: macos
             # OPTIONAL: Specify a platform version
             platform_version: 12
-            # OPTIONAL: Specify a custom install location
-            boost_install_dir: /home/lib/boost
             # OPTIONAL: Specify a toolset
             toolset: clang
             # NOTE: If a boost version matching all requirements cannot be found,
