@@ -1,6 +1,6 @@
 name: Build
 
-on: [push]
+on: []
 
 jobs:
   build_wheels_mac:
@@ -24,7 +24,7 @@ jobs:
             platform_version: 12
             # OPTIONAL: Specify a toolset
             toolset: clang
-            boost_install_dir: /Users/runner/work/SuperPhot/boost
+            boost_install_dir: /Users/runner/work/SuperPhot
             # NOTE: If a boost version matching all requirements cannot be found,
             # this build step will fail
     
