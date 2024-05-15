@@ -115,7 +115,7 @@ shared_library(
     dependencies: dependencies,
     install: true,
     install_dir: py.get_install_dir() / 'superphot',
-    include_directories: incdir
+    include_directories: incdir,
     link_args: linkargs
 )
 
