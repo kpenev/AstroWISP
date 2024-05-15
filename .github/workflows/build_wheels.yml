@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Boost on MacOS
+      - name: Install Boost
         id: install-boost-mac
         uses: MarkusJx/install-boost@v2.4.5
         with:
@@ -24,7 +24,7 @@ jobs:
             boost_version: 1.79.0
             # OPTIONAL: Specify a platform version
             platform_version: ${{ startsWith(matrix.os, 'mac') && '10.15' || '2019' }}
-            toolset: ${{ startsWith(matrix.os, 'mac') && 'clang' || 'msvc' }}
+            toolset: ${{ startsWith(matrix.os, 'mac') && 'clang' || 'mingw' }}
             boost_install_dir: ${{github.workspace}}/external
             # NOTE: If a boost version matching all requirements cannot be found,
             # this build step will fail
