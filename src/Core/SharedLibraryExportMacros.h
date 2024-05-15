@@ -1,16 +1,10 @@
-#if defined TOOLCHAIN_MSVC
+#if defined WINDOWS_VISIBILITY
 
     #define LIB_PUBLIC __declspec(dllexport)
     #define LIB_PUBLIC_IMPL __declspec(dllexport)
     #define LIB_LOCAL
 
-#elif defined TOOLCHAIN_GCC
-
-    #define LIB_PUBLIC __attribute__ ((visibility ("default")))
-    #define LIB_PUBLIC_IMPL
-    #define LIB_LOCAL  __attribute__ ((visibility ("hidden")))
-
-#elif defined TOOLCHAIN_CLANG
+#elif defined NIX_VISIBILITY
 
     #define LIB_PUBLIC __attribute__ ((visibility ("default")))
     #define LIB_PUBLIC_IMPL
