@@ -24,6 +24,7 @@ jobs:
             platform_version: 12
             # OPTIONAL: Specify a toolset
             toolset: clang
+            boost_install_dir: ${{ matrix.boost_install_dir }}
             # NOTE: If a boost version matching all requirements cannot be found,
             # this build step will fail
     
