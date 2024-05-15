@@ -23,9 +23,8 @@ jobs:
             # https://github.com/MarkusJx/prebuilt-boost/blob/main/versions-manifest.json
             boost_version: 1.79.0
             # OPTIONAL: Specify a platform version
-            platform_version: 10.15
-            # OPTIONAL: Specify a toolset
-            toolset: clang
+            platform_version: ${{ startsWith(matrix.os, 'mac') && '10.15' || '2019' }}
+            toolset: ${{ startsWith(matrix.os, 'mac') && 'clang' || 'msvc' }}
             boost_install_dir: ${{github.workspace}}/external
             # NOTE: If a boost version matching all requirements cannot be found,
             # this build step will fail
