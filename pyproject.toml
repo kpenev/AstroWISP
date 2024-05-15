@@ -6,4 +6,4 @@ requires = ['meson-python']
 build = ['cp37-macosx_x86_64', 'cp37-win_amd64']
 
 [tool.meson-python.args]
-compile = ['-v']
+compile = ['-vvv']

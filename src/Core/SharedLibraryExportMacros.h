@@ -10,8 +10,14 @@
     #define LIB_PUBLIC_IMPL
     #define LIB_LOCAL  __attribute__ ((visibility ("hidden")))
 
+#elif defined NO_VISIBILITY
+
+    #define LIB_PUBLIC
+    #define LIB_PUBLIC_IMPL
+    #define LIB_LOCAL
+
 #else
 
-//    #warning "No toolchain defined"
+    #warning "No toolchain defined"
 
 #endif
