@@ -9,7 +9,7 @@ jobs:
     strategy:
       matrix:
         # macos-13 is an intel runner, macos-14 is apple silicon
-        os: [macos-11]
+        os: [macos-12]
 
     steps:
       - name: Install Boost on MacOS
@@ -19,9 +19,10 @@ jobs:
             # REQUIRED: Specify the required boost version
             # A list of supported versions can be found here:
             # https://github.com/MarkusJx/prebuilt-boost/blob/main/versions-manifest.json
-            boost_version: 1.71.0
+            boost_version: 1.78.0
+            platform: macos
             # OPTIONAL: Specify a platform version
-            platform_version: 11
+            platform_version: 12
             # OPTIONAL: Specify a custom install location
             boost_install_dir: /home/lib/boost
             # OPTIONAL: Specify a toolset
