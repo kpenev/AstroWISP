@@ -33,7 +33,9 @@ jobs:
       - name: Build wheels
         uses: pypa/cibuildwheel@v2.18.0
         env:
+            MACOSX_DEPLOYMENT_TARGET: 12.0
             BOOST_ROOT: ${{ steps.install-boost-mac.outputs.BOOST_ROOT }}
+            #Work around MacOS idiocy per https://github.com/pypa/cibuildwheel/issues/816
             CIBW_REPAIR_WHEEL_COMMAND_MACOS: >
               DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:$BOOST_ROOT/lib delocate-listdeps {wheel} &&
               DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:$BOOST_ROOT/lib delocate-wheel --require-archs {delocate_archs} -w {dest_dir} {wheel}
