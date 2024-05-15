@@ -12,6 +12,6 @@
 
 #else
 
-    #warning "No toolchain defined"
+//    #warning "No toolchain defined"
 
 #endif

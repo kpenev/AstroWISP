@@ -33,7 +33,7 @@ if host_machine.system() == 'windows'
     add_project_arguments(
       '-DBOOST_RESULT_OF_USE_TR1', 
       '-D_USE_MATH_DEFINES',
-      '-DWINDOWS_VISIBILITY',
+      '-DNO_VISIBILITY',
       language: 'cpp'
     )
     dependencies = [
