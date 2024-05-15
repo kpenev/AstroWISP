@@ -52,6 +52,7 @@ else
       dependency('eigen3')
     ]
     incdir = []
+    linkargs = []
 endif
 
 cpp_src = [
@@ -115,6 +116,7 @@ shared_library(
     install: true,
     install_dir: py.get_install_dir() / 'superphot',
     include_directories: incdir
+    link_args: linkargs
 )
 
 subdir('PythonPackage/superphot')
