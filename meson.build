@@ -39,6 +39,7 @@ if host_machine.system() == 'windows'
     dependencies = [
       dependency('eigen3')
     ]
+    incdir = include_directories('external/boost/boost/include')
 else
     add_project_arguments(
       '-fvisibility=hidden', 
@@ -49,6 +50,7 @@ else
       dependency('boost', modules: ['program_options']),
       dependency('eigen3')
     ]
+    incdir = []
 endif
 
 cpp_src = [
@@ -111,6 +113,7 @@ shared_library(
     dependencies: dependencies,
     install: true,
     install_dir: py.get_install_dir() / 'superphot',
+    include_directories: incdir
 )
 
 subdir('PythonPackage/superphot')
