@@ -4,7 +4,7 @@ requires = ['meson-python']
 
 [tool.cibuildwheel]
 before-build = 'ls "$BOOST_ROOT"'
-build = ['cp311-macosx_x86_64']
+build = ['cp37-macosx_x86_64']
 
 [tool.meson-python.args]
 compile = ['-v']
