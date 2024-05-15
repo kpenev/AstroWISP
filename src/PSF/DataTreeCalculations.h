@@ -8,7 +8,6 @@
 
 #ifndef __DATA_TREE_CALCULATIONS_H
 #define __DATA_TREE_CALCULATIONS_H
-#define _USE_MATH_DEFINES
 
 #include "../Core/SharedLibraryExportMacros.h"
 #include "../IO/H5IODataTree.h"
