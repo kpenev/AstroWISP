@@ -25,6 +25,7 @@ dependencies = [
 ]
 add_project_arguments('-D' + toolchain,
                       '-DTRACK_PROGRESS', 
+                      '-D_USE_MATH_DEFINES',
                       language : 'cpp')
 if get_option('buildtype') == 'debug'
     add_project_arguments('-DVERBOSE_DEBUG', '-DDEBUG', language: 'cpp')
@@ -32,7 +33,6 @@ elif get_option('buildtype') == 'release'
     add_project_arguments('-DNDEBUG', language: 'cpp')
 endif
 if compiler_id == 'msvc'
-    add_project_arguments('-D_USE_MATH_DEFINES', language: 'cpp')
     add_project_arguments('-DBOOST_RESULT_OF_USE_TR1', language: 'cpp')
 else
     add_project_arguments('-fvisibility=hidden', language : 'cpp')
