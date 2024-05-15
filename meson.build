@@ -40,6 +40,7 @@ if host_machine.system() == 'windows'
       dependency('eigen3')
     ]
     incdir = include_directories('external/boost/boost/include')
+    linkargs = ['-Lexternal/boost/boost/lib']
 else
     add_project_arguments(
       '-fvisibility=hidden', 
