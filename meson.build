@@ -29,6 +29,12 @@ elif get_option('buildtype') == 'release'
     add_project_arguments('-DNDEBUG', language: 'cpp')
 endif
 
+dependencies = [
+    dependency('boost', modules: ['program_options']),
+    dependency('eigen3')
+]
+
+
 if host_machine.system() == 'windows'
     add_project_arguments(
       '-DBOOST_RESULT_OF_USE_TR1', 
@@ -36,24 +42,12 @@ if host_machine.system() == 'windows'
       '-DNO_VISIBILITY',
       language: 'cpp'
     )
-    dependencies = [
-      dependency('eigen3')
-    ]
-    incdir = include_directories('external/boost/boost/include')
-    linkargs = ['-LD:\a\SuperPhot\SuperPhot\external\boost\boost\lib', 
-                '-lboost_program_options.dll']
 else
     add_project_arguments(
       '-fvisibility=hidden', 
       '-DNIX_VISIBILITY',
       language : 'cpp'
     )
-    dependencies = [
-      dependency('boost', modules: ['program_options']),
-      dependency('eigen3')
-    ]
-    incdir = []
-    linkargs = []
 endif
 
 cpp_src = [
@@ -115,9 +109,7 @@ shared_library(
     cpp_src, 
     dependencies: dependencies,
     install: true,
-    install_dir: py.get_install_dir() / 'superphot',
-    include_directories: incdir,
-    link_args: linkargs
+    install_dir: py.get_install_dir() / 'superphot'
 )
 
 subdir('PythonPackage/superphot')
