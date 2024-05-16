@@ -3,7 +3,7 @@ build-backend = 'mesonpy'
 requires = ['meson-python']
 
 [tool.cibuildwheel]
-before-build = "dir D:\a\SuperPhot\SuperPhot\external\boost\boost\lib"
+before-build = "dir D:\\a\\SuperPhot\\SuperPhot\\external\\boost\\boost\\lib"
 build = ['cp37-macosx_x86_64', 'cp37-win_amd64']
 
 [tool.meson-python.args]
