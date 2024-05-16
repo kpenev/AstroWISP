@@ -1,3 +1,5 @@
+#Control file for meson/meson-python (compiling and PIP packaging)
+
 project(
     'superphot', 
     'cpp',

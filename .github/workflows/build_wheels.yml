@@ -9,13 +9,13 @@ jobs:
     strategy:
       matrix:
         # macos-13 is an intel runner, macos-14 is apple silicon
-        os: [windows-2019]
+        os: [linux-latest]
 
     steps:
       - uses: actions/checkout@v4
 
       - name: Install Boost
-        id: install-boost-mac
+        id: install-boost
         uses: MarkusJx/install-boost@v2.4.5
         with:
             # REQUIRED: Specify the required boost version
@@ -35,6 +35,7 @@ jobs:
             MACOSX_DEPLOYMENT_TARGET: 10.15
             BOOST_ROOT: ${{ steps.install-boost-mac.outputs.BOOST_ROOT }}
             #Work around MacOS idiocy per https://github.com/pypa/cibuildwheel/issues/816
+            CIBW_BEFORE_BUILD_LINUX: echo $BOOST_ROOT && ls && pwd
             CIBW_REPAIR_WHEEL_COMMAND_MACOS: >
               DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:$BOOST_ROOT/lib delocate-listdeps {wheel} &&
               DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:$BOOST_ROOT/lib delocate-wheel --require-archs {delocate_archs} -w {dest_dir} {wheel}
