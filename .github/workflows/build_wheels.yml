@@ -14,7 +14,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Boost
+      - name: Install Boost Mac/Windows
+        if: ${{ startsWith(matrix.os, 'mac') || startsWith(matrix.os, 'windows') }}
         id: install-boost
         uses: MarkusJx/install-boost@v2.4.5
         with:
