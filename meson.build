@@ -41,7 +41,7 @@ if host_machine.system() == 'windows'
     ]
     incdir = include_directories('external/boost/boost/include')
     linkargs = ['-LD:\a\SuperPhot\SuperPhot\external\boost\boost\lib', 
-                '-lboost_program_options']
+                '-lboost_program_options.dll']
 else
     add_project_arguments(
       '-fvisibility=hidden', 
