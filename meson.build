@@ -40,7 +40,8 @@ if host_machine.system() == 'windows'
       dependency('eigen3')
     ]
     incdir = include_directories('external/boost/boost/include')
-    linkargs = ['-L../external/boost/boost/lib', '-lboost_program_options']
+    linkargs = ['-LD:\\a\\SuperPhot\\SuperPhot\\external\\boost\\boost\\lib', 
+                '-lboost_program_options']
 else
     add_project_arguments(
       '-fvisibility=hidden', 
