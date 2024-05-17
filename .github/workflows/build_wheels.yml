@@ -9,7 +9,7 @@ jobs:
     strategy:
       matrix:
         # macos-13 is an intel runner, macos-14 is apple silicon
-        os: [ubuntu-latest]
+        os: [windows-2019]
 
     steps:
       - uses: actions/checkout@v4
@@ -48,7 +48,15 @@ jobs:
         #   output-dir: wheelhouse
         #   config-file: "{package}/pyproject.toml"
 
-      - uses: actions/upload-artifact@v4
+      - name: Upload meson-python install plan
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: install-plan-${{ matrix.os }}-${{ strategy.job-index }}
+          path: ${{github.workspace}}\.mesonpy-*/meson-info/intro-install_plan.json
+
+      - name: Upload wheels
+        uses: actions/upload-artifact@v4
         with:
           name: cibw-wheels-${{ matrix.os }}-${{ strategy.job-index }}
           path: ./wheelhouse/*.whl
