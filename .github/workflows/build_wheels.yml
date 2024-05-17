@@ -34,7 +34,8 @@ jobs:
         uses: pypa/cibuildwheel@v2.18.0
         env:
             MACOSX_DEPLOYMENT_TARGET: 10.15
-            BOOST_ROOT: ${{ steps.install-boost-mac.outputs.BOOST_ROOT }}
+            BOOST_ROOT: ${{ steps.install-boost.outputs.BOOST_ROOT }}
+            CIBW_DEBUG_KEEP_CONTAINER: True
             #Work around MacOS idiocy per https://github.com/pypa/cibuildwheel/issues/816
             CIBW_BEFORE_BUILD_LINUX: yum -y -v install boost boost-thread boost-devel
             CIBW_REPAIR_WHEEL_COMMAND_MACOS: >
