@@ -49,6 +49,12 @@ jobs:
         #   output-dir: wheelhouse
         #   config-file: "{package}/pyproject.toml"
 
+      - name: Manual build
+        if: ${{ !cancelled() }}
+        run: |
+          cd ${{github.workspace}}
+          python -m pip wheel -w dist -vvv --config-settings builddir=build
+
       - name: Look around
         if: ${{ !cancelled() }}
         run: |
