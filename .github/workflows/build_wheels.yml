@@ -52,8 +52,7 @@ jobs:
       - name: Manual build
         if: ${{ !cancelled() }}
         run: |
-          cd ${{github.workspace}}
-          python -m pip wheel -w dist -vvv --config-settings builddir=build
+          python -m pip wheel ${{github.workspace}} -w dist -vvv --config-settings builddir=${{github.workspace}}\build
 
       - name: Look around
         if: ${{ !cancelled() }}
