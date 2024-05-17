@@ -50,11 +50,8 @@ jobs:
 
       - name: Look around:
         if: ${{ !cancelled() }}
-        run: |
-          pwd
-          cd ${{github.workspace}}
-          ls
-          ls -a
+        run: pwd
+        run: cd ${{github.workspace}}; ls; ls -a
 
       - name: Upload meson-python install plan
         if: ${{ !cancelled() }}
