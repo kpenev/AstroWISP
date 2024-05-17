@@ -49,26 +49,19 @@ jobs:
         #   output-dir: wheelhouse
         #   config-file: "{package}/pyproject.toml"
 
-      - name: Manual build
-        if: ${{ !cancelled() }}
-        env:
-            BOOST_ROOT: ${{ steps.install-boost.outputs.BOOST_ROOT }}
-        run: |
-          python -m pip wheel ${{github.workspace}} -w dist -vvv --config-settings builddir=${{github.workspace}}\build
+              #- name: Manual build
+              #  if: ${{ !cancelled() }}
+              #  env:
+              #      BOOST_ROOT: ${{ steps.install-boost.outputs.BOOST_ROOT }}
+              #  run: |
+              #    python -m pip wheel ${{github.workspace}} -w dist -vvv --config-settings builddir=${{github.workspace}}\build
 
-      - name: Look around
-        if: ${{ !cancelled() }}
-        run: |
-          pwd
-          cd ${{github.workspace}}
-          ls
-
-      - name: Upload meson-python install plan
-        if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v4
-        with:
-          name: install-plan-${{ matrix.os }}-${{ strategy.job-index }}
-          path: ${{github.workspace}}\build\meson-info\intro-install_plan.json
+              #- name: Upload meson-python install plan
+              #  if: ${{ !cancelled() }}
+              #  uses: actions/upload-artifact@v4
+              #  with:
+              #    name: install-plan-${{ matrix.os }}-${{ strategy.job-index }}
+              #    path: ${{github.workspace}}\build\meson-info\intro-install_plan.json
 
       - name: Upload wheels
         uses: actions/upload-artifact@v4
