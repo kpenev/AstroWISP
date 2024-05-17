@@ -16,3 +16,4 @@ build = ['cp38-manylinux_x86_64']
 
 [tool.meson-python.args]
 compile = ['-vvv']
+install = ['--skip-subprojects=eigen']
