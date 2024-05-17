@@ -51,6 +51,8 @@ jobs:
 
       - name: Manual build
         if: ${{ !cancelled() }}
+        env:
+            BOOST_ROOT: ${{ steps.install-boost.outputs.BOOST_ROOT }}
         run: |
           python -m pip wheel ${{github.workspace}} -w dist -vvv --config-settings builddir=${{github.workspace}}\build
 
@@ -66,7 +68,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: install-plan-${{ matrix.os }}-${{ strategy.job-index }}
-          path: ${{github.workspace}}\.mesonpy-*\meson-info\intro-install_plan.json
+          path: ${{github.workspace}}\build\meson-info\intro-install_plan.json
 
       - name: Upload wheels
         uses: actions/upload-artifact@v4
