@@ -48,12 +48,20 @@ jobs:
         #   output-dir: wheelhouse
         #   config-file: "{package}/pyproject.toml"
 
+      - name: Look around:
+        if: ${{ !cancelled() }}
+        run: |
+          pwd
+          cd ${{github.workspace}}
+          ls
+          ls -a
+
       - name: Upload meson-python install plan
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
         with:
           name: install-plan-${{ matrix.os }}-${{ strategy.job-index }}
-          path: ${{github.workspace}}\.mesonpy-*/meson-info/intro-install_plan.json
+          path: ${{github.workspace}}\.mesonpy-*\meson-info\intro-install_plan.json
 
       - name: Upload wheels
         uses: actions/upload-artifact@v4
