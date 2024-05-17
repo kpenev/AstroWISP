@@ -49,7 +49,7 @@ jobs:
         #   config-file: "{package}/pyproject.toml"
 
       - name: Look around
-        if: ${{ !canceled() }}
+        if: ${{ !cancelled() }}
         run: |
           pwd
           cd ${{github.workspace}}
