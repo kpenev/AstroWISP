@@ -96,4 +96,4 @@ def make_image_and_source_list(sources,
     src_list.close()
 
     hdu_list = pyfits.HDUList([pyfits.PrimaryHDU(image)])
-    hdu_list.writeto(filenames['image'], clobber=True)
+    hdu_list.writeto(filenames['image'], overwrite=True)

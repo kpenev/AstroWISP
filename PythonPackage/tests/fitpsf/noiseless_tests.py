@@ -247,7 +247,7 @@ class TestPiecewiseBicubicNoiseless(unittest.TestCase):
                 [pyfits.PrimaryHDU(subpix_map)]
             ).writeto(
                 subpix_fname,
-                clobber=True
+                overwrite=True
             )
             files_to_cleanup.append(subpix_fname)
 
