@@ -15,6 +15,7 @@ from ctypes import\
     c_long,\
     c_byte,\
     POINTER
+from ctypes.util import find_library
 import numpy.ctypeslib
 
 #Naming convention imitates the one by ctypes.
@@ -436,11 +437,14 @@ def _initialize_library():
 
     lib_fname = path.join(path.dirname(__file__), 'libsuperphot.')
     library = None
-    for ext in ['so', 'dylib']:
+    for ext in ['so', 'dylib', 'dll']:
         if path.exists(lib_fname + ext):
             assert library is None
             library = cdll.LoadLibrary(lib_fname + ext)
-    assert library is not None
+    if library is None:
+        lib_fname = find_library('superphot')
+        assert lib_fname is not None
+        library = cdll.LoadLibrary(lib_fname)
 
     _setup_core_interface(library)
     _setup_io_interface(library)

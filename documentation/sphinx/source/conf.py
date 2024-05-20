@@ -64,7 +64,6 @@ extensions = [
     'sphinx.ext.githubpages',
     'sphinx.ext.napoleon',
     'sphinx.ext.inheritance_diagram',
-    'breathe',
     'nbsphinx'
 ]
 
@@ -85,7 +84,7 @@ master_doc = 'index'
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = None
+language = 'en'
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -256,7 +255,7 @@ def add_inheritance_diagram(app, what, name, obj, options, lines):
 def setup(app):
     """Connect handler for adding inheritance diagrams."""
 
-    app.add_stylesheet('unlimited_width.css')
+    app.add_css_file('unlimited_width.css')
     app.connect('autodoc-process-docstring', add_inheritance_diagram)
 
 
@@ -266,15 +265,3 @@ doxygen_xml = os.path.abspath(
         '../../doxygen/build/xml'
     )
 )
-
-breathe_projects = {
-    'C++ library': doxygen_xml
-}
-
-
-breathe_default_project = "C++ library"
-
-breathe_default_members = ('members',
-                           'protected-members',
-                           'private-members',
-                           'undoc-members')

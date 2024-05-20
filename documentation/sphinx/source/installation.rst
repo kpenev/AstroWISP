@@ -24,18 +24,27 @@ Installing Java JDK 8+
 Installing Gradle
 =================
 
-#. `Download <https://gradle.org/releases/>`_ the latest gradle distribution which comes in two flavors:
-    * Binary-only (bin)
-    * Complete (all), with documents and sources
-   Our recommendation is to download the binary-only version as the documents and sources can be viewed online.
-#. Unpack the distribution; unzip the distribution zip file in the directory of your choosing, e.g.: ::
+#. `Download <https://gradle.org/releases/>`_ the latest gradle distribution
+   which comes in two flavors:
+
+     * Binary-only (bin)
+
+     * Complete (all), with documents and sources
+
+   Our recommendation is to download the binary-only version as the documents
+   and sources can be viewed online.
+
+#. Unpack the distribution; unzip the distribution zip file in the directory of
+   your choosing, e.g.: ::
 
     $ mkdir /opt/gradle
     $ unzip -d /opt/gradle gradle-7.1-bin.zip
     $ ls /opt/gradle/gradle-7.1
     bin  init.d  lib  LICENSE  NOTICE  README
 
-#. Configure the system environment; configure your ``PATH`` environment variable to include the ``bin`` directory of the unzipped distribution by editing your bashrc or bash_profile file, e.g.: ::
+#. Configure the system environment; configure your ``PATH`` environment
+   variable to include the ``bin`` directory of the unzipped distribution by
+   editing your bashrc or bash_profile file, e.g.: ::
 
     $ gedit ~/.bashrc
 
@@ -66,32 +75,35 @@ Installing Libraries Dependencies
 
 The CFITSIO library should be tested by building and running
 the testprog.c program that is included with the release.
-On Unix systems, type:
--
+On Unix systems, type::
+ 
     % make testprog
     % testprog > testprog.lis
     % diff testprog.lis testprog.out
     % cmp testprog.fit testprog.std
--
- On VMS systems,
-(assuming cc is the name of the C compiler command), type:
--
+
+On VMS systems, (assuming cc is the name of the C compiler command), type::
+ 
     $ cc testprog.c
     $ link testprog, cfitsio/lib
     $ run testprog
--
-The testprog program should produce a FITS file called `testprog.fit'
+ 
+The testprog program should produce a FITS file called `testprog.fit`
 that is identical to the testprog.std FITS file included in this
 release.  The diagnostic messages (which were piped to the file
 testprog.lis in the Unix example) should be identical to the listing
-contained in the file testprog.out.  The 'diff' and 'cmp' commands
+contained in the file testprog.out.  The `diff` and `cmp` commands
 shown above should not report any differences in the files.
 
-Try typing |echo $LD_LIBRARY_PATH|
+Try typing `echo $LD_LIBRARY_PATH`
+
 - If it returns nothing, then type
-|export LD_LIBRARY_PATH=/usr/local/lib|
+
+`export LD_LIBRARY_PATH=/usr/local/lib`
+
 - If it returns something, then type
-|export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/lib|
+
+`export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/lib`
 
 ldconfig
 
@@ -101,7 +113,8 @@ Installing SuperPhot
 Make sure the following libraries are installed:
     * cfitsio
 
-Navigate to the path where the SuperPhot repository was downloaded and run the following commands::
+Navigate to the path where the SuperPhot repository was downloaded and run the
+following commands::
 
     $ ./gradlew clean
     $ ./gradlew build
