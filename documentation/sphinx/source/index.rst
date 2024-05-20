@@ -10,6 +10,8 @@ Welcome to SuperPhot's documentation!
     :maxdepth: 2
     :caption: Contents:
 
+    installation
+    unit_tests
     python_interface/index
     Python Package Implementation <_implementation/modules>
     cpp_api
