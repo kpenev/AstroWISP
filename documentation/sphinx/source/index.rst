@@ -14,8 +14,7 @@ Welcome to SuperPhot's documentation!
     unit_tests
     python_interface/index
     Python Package Implementation <_implementation/modules>
-    cpp_api
-    c_api
+    C/C++ API <doxygen/index.xhtml#http://>
     Unit Testing Code <_unit_tests/modules>
 
 Indices and tables
