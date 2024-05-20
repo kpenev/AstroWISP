@@ -1,0 +1,5 @@
+<map id="FitPSF::Source&lt; PSF_TYPE &gt;" name="FitPSF::Source&lt; PSF_TYPE &gt;">
+<area shape="rect" id="node1" title="An abstract base class for sources which participate in PSF fitting." alt="" coords="13,393,245,953"/>
+<area shape="rect" id="node2" href="$classCore_1_1Flux.xhtml" title="A class representing the flux measurement for a source, including an error estimate and a flag." alt="" coords="5,56,101,277"/>
+<area shape="rect" id="node3" href="$classCore_1_1SubPixelMap.xhtml" title="The base class for all sub&#45;pixel maps." alt="" coords="125,5,285,328"/>
+</map>

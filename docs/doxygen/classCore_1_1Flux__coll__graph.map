@@ -1,0 +1,3 @@
+<map id="Core::Flux" name="Core::Flux">
+<area shape="rect" id="node1" title="A class representing the flux measurement for a source, including an error estimate and a flag." alt="" coords="5,5,101,226"/>
+</map>

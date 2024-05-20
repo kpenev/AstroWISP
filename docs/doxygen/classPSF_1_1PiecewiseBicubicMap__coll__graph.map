@@ -1,0 +1,4 @@
+<map id="PSF::PiecewiseBicubicMap" name="PSF::PiecewiseBicubicMap">
+<area shape="rect" id="node1" title="Smoothly varying over an image piecewise bicubic PSF." alt="" coords="5,257,225,664"/>
+<area shape="rect" id="node2" href="$classPSF_1_1Map.xhtml" title="Interface for working with smooth dependenc of PSF/PRF on source parameters." alt="" coords="30,5,200,209"/>
+</map>

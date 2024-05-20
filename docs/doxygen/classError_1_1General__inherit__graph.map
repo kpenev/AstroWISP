@@ -1,0 +1,16 @@
+<map id="Error::General" name="Error::General">
+<area shape="rect" id="node1" title="The parent of all errors raised anywhere in the code." alt="" coords="376,138,516,290"/>
+<area shape="rect" id="node3" href="$classError_1_1Fits.xhtml" title="The parent of all fits library related errors." alt="" coords="169,338,259,439"/>
+<area shape="rect" id="node6" href="$classError_1_1NotImplemented.xhtml" title="An error indicating a feature has not been implemented yet." alt="" coords="355,338,536,439"/>
+<area shape="rect" id="node7" href="$classError_1_1Runtime.xhtml" title="The parent of all run&#45;time errors." alt="" coords="597,338,721,439"/>
+<area shape="rect" id="node2" title=" " alt="" coords="386,5,505,90"/>
+<area shape="rect" id="node4" href="$classError_1_1FitsImage.xhtml" title="Errors related an the actual fits image." alt="" coords="20,496,154,597"/>
+<area shape="rect" id="node5" href="$classError_1_1ImageOutside.xhtml" title="An attempt was made to access a pixel outside the image area." alt="" coords="5,654,169,755"/>
+<area shape="rect" id="node8" href="$classError_1_1CommandLine.xhtml" title="Error while parsing the command line." alt="" coords="178,496,348,597"/>
+<area shape="rect" id="node9" href="$classError_1_1Fitting.xhtml" title=" " alt="" coords="372,496,480,597"/>
+<area shape="rect" id="node10" href="$classError_1_1GSLError.xhtml" title="Error in a GNU Scientific Library function." alt="" coords="504,496,635,597"/>
+<area shape="rect" id="node11" href="$classError_1_1InvalidArgument.xhtml" title="A function (or method) received an argument with an invalid value." alt="" coords="660,487,840,606"/>
+<area shape="rect" id="node12" href="$classError_1_1IO.xhtml" title="Input/Output error." alt="" coords="864,496,945,597"/>
+<area shape="rect" id="node13" href="$classError_1_1ParsingError.xhtml" title="Error while parsing the configuration." alt="" coords="969,496,1123,597"/>
+<area shape="rect" id="node14" href="$classError_1_1Type.xhtml" title="The type of something was not what was expected." alt="" coords="1147,496,1246,597"/>
+</map>

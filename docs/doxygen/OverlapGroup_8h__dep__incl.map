@@ -1,0 +1,5 @@
+<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/FitPSF/OverlapGroup.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/FitPSF/OverlapGroup.h">
+<area shape="rect" id="node1" title="Defines a class for working with groups of overlapping sources." alt="" coords="19,5,211,68"/>
+<area shape="rect" id="node2" href="$FitPSF_2PiecewiseBicubic_8h.xhtml" title="The declarations of the functions related to fitting piecewise bicubic PSFs." alt="" coords="5,116,225,179"/>
+<area shape="rect" id="node3" href="$FitPSF_2CInterface_8cpp.xhtml" title="Define the C&#45;interface functions for the FitPSF library." alt="" coords="23,227,207,290"/>
+</map>

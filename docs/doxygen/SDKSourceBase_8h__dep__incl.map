@@ -1,0 +1,8 @@
+<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/FitPSF/SDKSourceBase.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/FitPSF/SDKSourceBase.h">
+<area shape="rect" id="node1" title="Declares a base class for sources participating in SDK fitting." alt="" coords="227,5,441,68"/>
+<area shape="rect" id="node2" href="$FitPSF_2SDKSource_8h_source.xhtml" title=" " alt="" coords="126,116,310,179"/>
+<area shape="rect" id="node6" href="$SDKSourceBase_8cpp.xhtml" title="Defines some of the methods of the SDKSourceBase class." alt="" coords="334,116,566,179"/>
+<area shape="rect" id="node3" href="$SDKUtil_8h.xhtml" title="Declare functions used during elliptical Gaussian PSF fitting." alt="" coords="126,227,310,290"/>
+<area shape="rect" id="node4" href="$PolynomialSDK_8h.xhtml" title="Declares a class for fitting elliptical gaussian PSFs as a smooth function of image position." alt="" coords="5,338,212,401"/>
+<area shape="rect" id="node5" href="$SDKUtil_8cpp.xhtml" title="Define the functions from SDKUtil.h." alt="" coords="236,338,419,401"/>
+</map>

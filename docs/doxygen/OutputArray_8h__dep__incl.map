@@ -1,0 +1,8 @@
+<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/IO/OutputArray.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/IO/OutputArray.h">
+<area shape="rect" id="node1" title="Declares a class for writing array of values held in boost::any." alt="" coords="209,5,393,68"/>
+<area shape="rect" id="node2" href="$IO_2CInterface_8cpp.xhtml" title="The definitions of the functinos from CInterface.h." alt="" coords="5,116,189,179"/>
+<area shape="rect" id="node3" href="$DataTreeCalculations_8h.xhtml" title="Declare functions that calculate some entries of I/O data trees from others." alt="" coords="145,227,374,290"/>
+<area shape="rect" id="node5" href="$MapSourceContainer_8h.xhtml" title="Declares a container for holding MapSource objects." alt="" coords="264,116,490,179"/>
+<area shape="rect" id="node6" href="$SubPixPhot_2Common_8h.xhtml" title="Declare functions used by both the C&#45;interface and the command line interface." alt="" coords="414,227,607,290"/>
+<area shape="rect" id="node4" href="$DataTreeCalculations_8cpp.xhtml" title="The definitions of the functions declared in DataTreeCalculations.h." alt="" coords="137,338,383,401"/>
+</map>

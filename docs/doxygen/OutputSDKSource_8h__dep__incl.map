@@ -1,0 +1,7 @@
+<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/IO/OutputSDKSource.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/IO/OutputSDKSource.h">
+<area shape="rect" id="node1" title="The class of sources with Ellptical gaussian PSFs used for output." alt="" coords="129,5,320,68"/>
+<area shape="rect" id="node2" href="$PolynomialSDK_8h.xhtml" title="Declares a class for fitting elliptical gaussian PSFs as a smooth function of image position." alt="" coords="5,116,212,179"/>
+<area shape="rect" id="node3" href="$SourceInput_8h.xhtml" title="Declare an input stream for sources class." alt="" coords="235,116,449,179"/>
+<area shape="rect" id="node4" href="$SourceInput_8cpp.xhtml" title="Define some of the methods of the SourceInput class." alt="" coords="100,227,330,290"/>
+<area shape="rect" id="node5" href="$SubPixPhotIO_8h.xhtml" title="Defines I/O utilities for the subpixphot executable." alt="" coords="354,227,583,290"/>
+</map>

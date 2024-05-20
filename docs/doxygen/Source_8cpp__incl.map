@@ -1,0 +1,23 @@
+<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/Background/Source.cpp" name="/Users/kpenev/projects/git/SuperPhot/doc_src/Background/Source.cpp">
+<area shape="rect" id="node1" title="Defines human readable output of background sources." alt="" coords="328,5,524,68"/>
+<area shape="rect" id="node2" href="$Background_2Source_8h.xhtml" title="Declares the base class for background extract(ion/ed) from an astronomical image." alt="" coords="383,116,468,145"/>
+<area shape="rect" id="node3" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="201,424,421,470"/>
+<area shape="rect" id="node4" href="$Core_2Image_8h.xhtml" title="Declares a base class for images to be processed." alt="" coords="277,193,406,222"/>
+<area shape="rect" id="node7" title=" " alt="" coords="921,347,962,376"/>
+<area shape="rect" id="node19" href="$Point_8h.xhtml" title="Defines a point class in two dimensions." alt="" coords="70,193,192,222"/>
+<area shape="rect" id="node20" href="$NaN_8h.xhtml" title="Defines not&#45;a&#45;number and infinity." alt="" coords="452,193,570,222"/>
+<area shape="rect" id="node21" title=" " alt="" coords="673,270,731,299"/>
+<area shape="rect" id="node5" href="$Core_2Typedefs_8h.xhtml" title="Some useful typedef statements." alt="" coords="549,270,649,299"/>
+<area shape="rect" id="node13" href="$Error_8h.xhtml" title="The hierarchy of exceptions for this project." alt="" coords="119,270,188,299"/>
+<area shape="rect" id="node15" title=" " alt="" coords="65,347,147,376"/>
+<area shape="rect" id="node16" title=" " alt="" coords="402,270,474,299"/>
+<area shape="rect" id="node17" title=" " alt="" coords="213,270,281,299"/>
+<area shape="rect" id="node18" title=" " alt="" coords="306,270,378,299"/>
+<area shape="rect" id="node6" title=" " alt="" coords="652,433,717,462"/>
+<area shape="rect" id="node8" title=" " alt="" coords="845,433,905,462"/>
+<area shape="rect" id="node9" title=" " alt="" coords="563,347,641,376"/>
+<area shape="rect" id="node10" href="$PhotColumns_8h.xhtml" title="Defines constants to denote the various columns that can be input or output by the various tools and ..." alt="" coords="715,347,846,376"/>
+<area shape="rect" id="node12" title=" " alt="" coords="425,347,539,376"/>
+<area shape="rect" id="node11" title=" " alt="" coords="748,433,813,462"/>
+<area shape="rect" id="node14" title=" " alt="" coords="171,347,248,376"/>
+</map>

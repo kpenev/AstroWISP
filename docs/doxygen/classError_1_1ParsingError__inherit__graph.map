@@ -1,0 +1,6 @@
+<map id="Error::ParsingError" name="Error::ParsingError">
+<area shape="rect" id="node1" title="Error while parsing the configuration." alt="" coords="5,487,160,589"/>
+<area shape="rect" id="node2" href="$classError_1_1Runtime.xhtml" title="The parent of all run&#45;time errors." alt="" coords="20,338,145,439"/>
+<area shape="rect" id="node3" href="$classError_1_1General.xhtml" title="The parent of all errors raised anywhere in the code." alt="" coords="12,138,153,290"/>
+<area shape="rect" id="node4" title=" " alt="" coords="23,5,142,90"/>
+</map>

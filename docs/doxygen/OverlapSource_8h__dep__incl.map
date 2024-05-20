@@ -1,0 +1,8 @@
+<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/FitPSF/OverlapSource.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/FitPSF/OverlapSource.h">
+<area shape="rect" id="node1" title="Defines the overlap&#45;related features of PSF fitting sources." alt="" coords="105,5,305,68"/>
+<area shape="rect" id="node2" href="$LinearSource_8h.xhtml" title="Declares a class used for PSF fitting where pixel responses are linear functions of the shape paramet..." alt="" coords="111,116,299,179"/>
+<area shape="rect" id="node3" href="$FitPSF_2CInterface_8cpp.xhtml" title="Define the C&#45;interface functions for the FitPSF library." alt="" coords="44,449,227,512"/>
+<area shape="rect" id="node4" href="$LinearSource_8cpp.xhtml" title="Define some of the methods of LinearSource class." alt="" coords="33,227,238,290"/>
+<area shape="rect" id="node5" href="$FitPSF_2PiecewiseBicubic_8h.xhtml" title="The declarations of the functions related to fitting piecewise bicubic PSFs." alt="" coords="166,338,385,401"/>
+<area shape="rect" id="node6" href="$PiecewiseBicubicPSFSmoothing_8h_source.xhtml" title=" " alt="" coords="313,227,641,290"/>
+</map>

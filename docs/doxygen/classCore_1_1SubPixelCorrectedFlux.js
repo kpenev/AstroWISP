@@ -1,0 +1,27 @@
+var classCore_1_1SubPixelCorrectedFlux =
+[
+    [ "SubPixelCorrectedFlux", "classCore_1_1SubPixelCorrectedFlux.xhtml#a8364693b2af0cebcbb4764cf7fe67542", null ],
+    [ "SubPixelCorrectedFlux", "classCore_1_1SubPixelCorrectedFlux.xhtml#a2ad29b63c79188261692c1b0e442cdb3", null ],
+    [ "SubPixelCorrectedFlux", "classCore_1_1SubPixelCorrectedFlux.xhtml#a03993a9d0b6022ab9c0d8b1104ef0949", null ],
+    [ "add_aperture", "classCore_1_1SubPixelCorrectedFlux.xhtml#ae53790e832e8a5000d8faffa4897f1b8", null ],
+    [ "classify_pixel", "classCore_1_1SubPixelCorrectedFlux.xhtml#af249c604d01591fecc337d03c1e93745", null ],
+    [ "get_subpix_scaling", "classCore_1_1SubPixelCorrectedFlux.xhtml#ac6a353dddefcb944ea9d55be1a6d2639", null ],
+    [ "image", "classCore_1_1SubPixelCorrectedFlux.xhtml#a4e53256dc9cca1557cb104736adeaf64", null ],
+    [ "in_image", "classCore_1_1SubPixelCorrectedFlux.xhtml#a80377e774555290a5a33934a43d5fa60", null ],
+    [ "init_subpix_scaling", "classCore_1_1SubPixelCorrectedFlux.xhtml#a6ed51618503e01b054d8fcec013c837e", null ],
+    [ "number_apertures", "classCore_1_1SubPixelCorrectedFlux.xhtml#acebcf94088d90a46fd9125222f3cf2b4", null ],
+    [ "operator()", "classCore_1_1SubPixelCorrectedFlux.xhtml#a946d0c821fff67bd6f4badfcd2c73d0b", null ],
+    [ "pixel_fluxes", "classCore_1_1SubPixelCorrectedFlux.xhtml#a9b231f38fd3373d34733e3bbb7010914", null ],
+    [ "set_gain", "classCore_1_1SubPixelCorrectedFlux.xhtml#a94dc70a8513a11a58c7afae926a7430b", null ],
+    [ "set_image", "classCore_1_1SubPixelCorrectedFlux.xhtml#a6e9d5faa0caeae5abe434e96c511f8dc", null ],
+    [ "set_subpixel_map", "classCore_1_1SubPixelCorrectedFlux.xhtml#a351035399b23644694b125df36949de6", null ],
+    [ "variance", "classCore_1_1SubPixelCorrectedFlux.xhtml#a9433ff4a271bccbc8ca265bab5b155f2", null ],
+    [ "__apertures", "classCore_1_1SubPixelCorrectedFlux.xhtml#a3d9e99c1a21d197133ad2e4e5d2517a2", null ],
+    [ "__gain", "classCore_1_1SubPixelCorrectedFlux.xhtml#a85fea3e014f9cba4aa3d77a28d65c8d8", null ],
+    [ "__image", "classCore_1_1SubPixelCorrectedFlux.xhtml#a68a5e1bf6e82e39560c78b66632eb67d", null ],
+    [ "__photon_noise", "classCore_1_1SubPixelCorrectedFlux.xhtml#a5d4097784c6499a564aaf9241bcb5940", null ],
+    [ "__scaling_ind", "classCore_1_1SubPixelCorrectedFlux.xhtml#aa3b6c77507de42b045b4b5d8f4eaa800", null ],
+    [ "__subpix_scaling", "classCore_1_1SubPixelCorrectedFlux.xhtml#a3970e8e495b25fae56688b0a6af28604", null ],
+    [ "__subpixel_map", "classCore_1_1SubPixelCorrectedFlux.xhtml#a5eb1402ba6dbb6d82c50729ef398a9de", null ],
+    [ "__var_offset", "classCore_1_1SubPixelCorrectedFlux.xhtml#a3677959c572d737ef9296977ceadc298", null ]
+];

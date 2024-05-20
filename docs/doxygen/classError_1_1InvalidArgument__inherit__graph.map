@@ -1,0 +1,6 @@
+<map id="Error::InvalidArgument" name="Error::InvalidArgument">
+<area shape="rect" id="node1" title="A function (or method) received an argument with an invalid value." alt="" coords="5,487,186,606"/>
+<area shape="rect" id="node2" href="$classError_1_1Runtime.xhtml" title="The parent of all run&#45;time errors." alt="" coords="33,338,158,439"/>
+<area shape="rect" id="node3" href="$classError_1_1General.xhtml" title="The parent of all errors raised anywhere in the code." alt="" coords="25,138,166,290"/>
+<area shape="rect" id="node4" title=" " alt="" coords="36,5,155,90"/>
+</map>

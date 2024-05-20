@@ -1,0 +1,23 @@
+<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/Background/Measure.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/Background/Measure.h">
+<area shape="rect" id="node1" title="Declares the minimum requirements for a background extractor class." alt="" coords="70,5,260,68"/>
+<area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="157,424,376,470"/>
+<area shape="rect" id="node3" href="$Background_2Source_8h.xhtml" title="Declares the base class for background extract(ion/ed) from an astronomical image." alt="" coords="269,116,355,145"/>
+<area shape="rect" id="node19" href="$Point_8h.xhtml" title="Defines a point class in two dimensions." alt="" coords="5,193,128,222"/>
+<area shape="rect" id="node4" href="$Core_2Image_8h.xhtml" title="Declares a base class for images to be processed." alt="" coords="758,193,887,222"/>
+<area shape="rect" id="node7" title=" " alt="" coords="305,347,346,376"/>
+<area shape="rect" id="node20" href="$NaN_8h.xhtml" title="Defines not&#45;a&#45;number and infinity." alt="" coords="253,193,371,222"/>
+<area shape="rect" id="node21" title=" " alt="" coords="333,270,392,299"/>
+<area shape="rect" id="node5" href="$Core_2Typedefs_8h.xhtml" title="Some useful typedef statements." alt="" coords="538,270,638,299"/>
+<area shape="rect" id="node13" href="$Error_8h.xhtml" title="The hierarchy of exceptions for this project." alt="" coords="693,270,763,299"/>
+<area shape="rect" id="node15" title=" " alt="" coords="1069,347,1152,376"/>
+<area shape="rect" id="node16" title=" " alt="" coords="786,270,859,299"/>
+<area shape="rect" id="node17" title=" " alt="" coords="883,270,951,299"/>
+<area shape="rect" id="node18" title=" " alt="" coords="976,270,1048,299"/>
+<area shape="rect" id="node6" title=" " alt="" coords="812,433,876,462"/>
+<area shape="rect" id="node8" title=" " alt="" coords="900,433,961,462"/>
+<area shape="rect" id="node9" title=" " alt="" coords="421,347,499,376"/>
+<area shape="rect" id="node10" href="$PhotColumns_8h.xhtml" title="Defines constants to denote the various columns that can be input or output by the various tools and ..." alt="" coords="712,347,843,376"/>
+<area shape="rect" id="node12" title=" " alt="" coords="523,347,637,376"/>
+<area shape="rect" id="node11" title=" " alt="" coords="724,433,788,462"/>
+<area shape="rect" id="node14" title=" " alt="" coords="968,347,1045,376"/>
+</map>

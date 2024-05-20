@@ -1,0 +1,6 @@
+<map id="IO::CommandLineConfig" name="IO::CommandLineConfig">
+<area shape="rect" id="node1" title="A base class for configuration of tools using the command line." alt="" coords="91,138,305,443"/>
+<area shape="rect" id="node3" href="$classFitPSF_1_1Config.xhtml" title="Default configuration from file but overwritten by command line options." alt="" coords="5,500,188,635"/>
+<area shape="rect" id="node4" href="$classSubPixPhot_1_1Config.xhtml" title="Default configuration from file but overwritten by command line options." alt="" coords="212,491,387,643"/>
+<area shape="rect" id="node2" title=" " alt="" coords="120,5,276,90"/>
+</map>

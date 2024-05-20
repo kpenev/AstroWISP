@@ -1,0 +1,52 @@
+<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/PSF/PiecewiseBicubicMap.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/PSF/PiecewiseBicubicMap.h">
+<area shape="rect" id="node1" title="Declares a smoothly varying over an image piecewise bicubic PSF map class." alt="" coords="2195,5,2427,68"/>
+<area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="2098,749,2318,795"/>
+<area shape="rect" id="node3" href="$parse__grid_8h.xhtml" title="Define functions for converting between string and PSF::Grid." alt="" coords="3688,356,3830,385"/>
+<area shape="rect" id="node13" title=" " alt="" coords="52,672,167,701"/>
+<area shape="rect" id="node16" title=" " alt="" coords="3690,758,3772,787"/>
+<area shape="rect" id="node17" href="$PSF_2PiecewiseBicubic_8h.xhtml" title="Defines a continuously differentiable PSF where each cell is a bicubic function." alt="" coords="1282,270,1443,299"/>
+<area shape="rect" id="node26" href="$Map_8h.xhtml" title="Declarations of the Map class and some related functions." alt="" coords="2278,116,2343,145"/>
+<area shape="rect" id="node34" href="$NaN_8h.xhtml" title="Defines not&#45;a&#45;number and infinity." alt="" coords="3428,595,3546,624"/>
+<area shape="rect" id="node4" href="$Grid_8h.xhtml" title="Some useful typedef statements." alt="" coords="2513,441,2626,470"/>
+<area shape="rect" id="node9" title=" " alt="" coords="3379,758,3440,787"/>
+<area shape="rect" id="node5" href="$ParseCSV_8h.xhtml" title="Declarations of functions for parsing strings of comma separated values to lists." alt="" coords="2452,518,2612,547"/>
+<area shape="rect" id="node8" title=" " alt="" coords="328,758,392,787"/>
+<area shape="rect" id="node11" title=" " alt="" coords="2547,672,2589,701"/>
+<area shape="rect" id="node15" title=" " alt="" coords="3895,758,3972,787"/>
+<area shape="rect" id="node6" href="$PhotColumns_8h.xhtml" title="Defines constants to denote the various columns that can be input or output by the various tools and ..." alt="" coords="1344,672,1475,701"/>
+<area shape="rect" id="node10" href="$Core_2Typedefs_8h.xhtml" title="Some useful typedef statements." alt="" coords="1376,595,1475,624"/>
+<area shape="rect" id="node14" href="$Error_8h.xhtml" title="The hierarchy of exceptions for this project." alt="" coords="3573,672,3643,701"/>
+<area shape="rect" id="node7" title=" " alt="" coords="1037,758,1102,787"/>
+<area shape="rect" id="node12" title=" " alt="" coords="1090,672,1169,701"/>
+<area shape="rect" id="node18" href="$Piecewise_8h.xhtml" title="Defines the PSF::Piecewise PSF model." alt="" coords="1082,518,1190,547"/>
+<area shape="rect" id="node23" href="$PiecewiseBicubicCell_8h.xhtml" title="Defines a PSF cell with intensity given by a bi&#45;cubic polynomial." alt="" coords="878,356,1069,385"/>
+<area shape="rect" id="node19" href="$PiecewiseCell_8h.xhtml" title="Defines a base class for the cells comprising a Piecewise." alt="" coords="798,595,935,624"/>
+<area shape="rect" id="node20" href="$PSF_8h.xhtml" title="Defines the base class of all PSF models." alt="" coords="1651,595,1717,624"/>
+<area shape="rect" id="node21" title=" " alt="" coords="651,595,723,624"/>
+<area shape="rect" id="node22" title=" " alt="" coords="1011,595,1098,624"/>
+<area shape="rect" id="node24" href="$CirclePieceIntegral_8h.xhtml" title="Declares a class that calculates x^my^n integrals over circle pieces." alt="" coords="642,441,812,470"/>
+<area shape="rect" id="node25" href="$IntegralUtil_8h.xhtml" title="Useful functions for calculating PSF integrals." alt="" coords="575,518,686,547"/>
+<area shape="rect" id="node27" href="$MapSource_8h.xhtml" title="Defines a source class which can be passed directly to a PSF map." alt="" coords="2301,193,2417,222"/>
+<area shape="rect" id="node28" href="$H5IODataTree_8h.xhtml" title="A structure to hold any output data produced by subpixtools." alt="" coords="2007,270,2177,299"/>
+<area shape="rect" id="node45" href="$Point_8h.xhtml" title="Defines a point class in two dimensions." alt="" coords="3282,595,3353,624"/>
+<area shape="rect" id="node50" title=" " alt="" coords="3904,193,3947,222"/>
+<area shape="rect" id="node39" href="$PSF_2Typedefs_8h.xhtml" title="Some useful typedef statements." alt="" coords="2604,595,2751,624"/>
+<area shape="rect" id="node42" href="$Core_2Source_8h.xhtml" title="Declare a base class for sources processed by SubPixTools." alt="" coords="2869,356,3006,385"/>
+<area shape="rect" id="node29" href="$CommandLineConfig_8h.xhtml" title="Declare a class for managing the configuration with which tools are run." alt="" coords="2018,441,2204,470"/>
+<area shape="rect" id="node36" href="$TranslateToAny_8h.xhtml" title="Defines a class that allows placing inhomogeneous types data in property trees." alt="" coords="3101,672,3246,701"/>
+<area shape="rect" id="node38" href="$Annulus_8h.xhtml" title="Declare a class defining an annulus around each source to measure the background in." alt="" coords="3780,518,3975,547"/>
+<area shape="rect" id="node41" title=" " alt="" coords="1966,347,2125,393"/>
+<area shape="rect" id="node30" href="$IO_2CommandLineUtil_8h.xhtml" title="Declarations of utilities for command line parsing of IO related options." alt="" coords="2062,595,2226,624"/>
+<area shape="rect" id="node31" title=" " alt="" coords="1904,672,2120,701"/>
+<area shape="rect" id="node33" href="$EllipticalGaussian_8h.xhtml" title="Class defining ellptical Gaussian point spread functions (PSF)." alt="" coords="1862,518,2074,547"/>
+<area shape="rect" id="node32" title=" " alt="" coords="2246,672,2319,701"/>
+<area shape="rect" id="node35" title=" " alt="" coords="4100,672,4159,701"/>
+<area shape="rect" id="node37" title=" " alt="" coords="3113,758,3234,787"/>
+<area shape="rect" id="node40" title=" " alt="" coords="2664,672,2723,701"/>
+<area shape="rect" id="node43" href="$SourceLocation_8h.xhtml" title="Declares a class defining the minimum requirements for specifying the locations of sources." alt="" coords="3406,518,3552,547"/>
+<area shape="rect" id="node46" href="$Flux_8h.xhtml" title="Declare a class for flux measurements." alt="" coords="1773,518,1838,547"/>
+<area shape="rect" id="node47" href="$Background_2Source_8h.xhtml" title="Declares the base class for background extract(ion/ed) from an astronomical image." alt="" coords="3008,441,3195,470"/>
+<area shape="rect" id="node49" title=" " alt="" coords="3270,441,3343,470"/>
+<area shape="rect" id="node44" href="$SourceID_8h.xhtml" title="The declaration of the SourceID class." alt="" coords="3671,595,3772,624"/>
+<area shape="rect" id="node48" href="$Core_2Image_8h.xhtml" title="Declares a base class for images to be processed." alt="" coords="3099,518,3229,547"/>
+</map>

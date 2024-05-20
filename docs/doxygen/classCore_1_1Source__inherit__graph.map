@@ -1,0 +1,9 @@
+<map id="Core::Source" name="Core::Source">
+<area shape="rect" id="node1" title="A base class for all sources in SuperPhot." alt="" coords="97,674,278,980"/>
+<area shape="rect" id="node5" href="$classCore_1_1SDKSource.xhtml" title="Represents a source with a PSF described by an elliptical gaussian." alt="" coords="15,1028,173,1333"/>
+<area shape="rect" id="node7" href="$classPSF_1_1MapSource.xhtml" title="Class for evaluating a collection of smooth dependencies for a collection of sources." alt="" coords="197,1113,367,1248"/>
+<area shape="rect" id="node2" href="$classCore_1_1SourceLocation.xhtml" title="The minimum requirements for objects specifying where a source is." alt="" coords="99,474,276,626"/>
+<area shape="rect" id="node3" href="$classCore_1_1Point.xhtml" title=" " alt="" coords="99,257,276,426"/>
+<area shape="rect" id="node4" href="$classCore_1_1Point.xhtml" title="Representing a 2D point with real valued cartesian coordinates." alt="" coords="100,5,275,192"/>
+<area shape="rect" id="node6" href="$classIO_1_1OutputSDKSource.xhtml" title=" " alt="" coords="5,1381,183,1635"/>
+</map>

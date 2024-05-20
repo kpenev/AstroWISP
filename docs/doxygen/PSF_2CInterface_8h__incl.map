@@ -1,0 +1,11 @@
+<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/PSF/CInterface.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/PSF/CInterface.h">
+<area shape="rect" id="node1" title="Declare C&#45;style functions for accessing the functionality of the PSF library." alt="" coords="195,5,378,68"/>
+<area shape="rect" id="node2" href="$PSF_2Typedefs_8h.xhtml" title="Some useful typedef statements." alt="" coords="134,116,233,145"/>
+<area shape="rect" id="node5" title=" " alt="" coords="276,193,337,222"/>
+<area shape="rect" id="node8" href="$IO_2CInterface_8h.xhtml" title="Declare C&#45;style functions for accessing the functionality of the IO library." alt="" coords="323,116,463,145"/>
+<area shape="rect" id="node3" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="265,270,484,316"/>
+<area shape="rect" id="node4" title=" " alt="" coords="27,193,85,222"/>
+<area shape="rect" id="node6" title=" " alt="" coords="109,193,187,222"/>
+<area shape="rect" id="node7" title=" " alt="" coords="211,193,252,222"/>
+<area shape="rect" id="node9" href="$parse__hat__mask_8h.xhtml" title="Declares a function for parsing HAT&#45;style maskes from image header." alt="" coords="412,193,564,222"/>
+</map>

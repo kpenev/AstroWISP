@@ -1,0 +1,8 @@
+<map id="Core::SDKSource" name="Core::SDKSource">
+<area shape="rect" id="node1" title="Represents a source with a PSF described by an elliptical gaussian." alt="" coords="17,1028,175,1333"/>
+<area shape="rect" id="node6" href="$classIO_1_1OutputSDKSource.xhtml" title=" " alt="" coords="7,1381,185,1635"/>
+<area shape="rect" id="node2" href="$classCore_1_1Source.xhtml" title="A base class for all sources in SuperPhot." alt="" coords="5,674,187,980"/>
+<area shape="rect" id="node3" href="$classCore_1_1SourceLocation.xhtml" title="The minimum requirements for objects specifying where a source is." alt="" coords="8,474,184,626"/>
+<area shape="rect" id="node4" href="$classCore_1_1Point.xhtml" title=" " alt="" coords="8,257,184,426"/>
+<area shape="rect" id="node5" href="$classCore_1_1Point.xhtml" title="Representing a 2D point with real valued cartesian coordinates." alt="" coords="9,5,183,192"/>
+</map>

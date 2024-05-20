@@ -1,0 +1,12 @@
+<map id="Error::Runtime" name="Error::Runtime">
+<area shape="rect" id="node1" title="The parent of all run&#45;time errors." alt="" coords="515,338,639,439"/>
+<area shape="rect" id="node4" href="$classError_1_1CommandLine.xhtml" title="Error while parsing the command line." alt="" coords="5,496,175,597"/>
+<area shape="rect" id="node5" href="$classError_1_1Fitting.xhtml" title=" " alt="" coords="199,496,307,597"/>
+<area shape="rect" id="node6" href="$classError_1_1GSLError.xhtml" title="Error in a GNU Scientific Library function." alt="" coords="331,496,462,597"/>
+<area shape="rect" id="node7" href="$classError_1_1InvalidArgument.xhtml" title="A function (or method) received an argument with an invalid value." alt="" coords="487,487,667,606"/>
+<area shape="rect" id="node8" href="$classError_1_1IO.xhtml" title="Input/Output error." alt="" coords="691,496,772,597"/>
+<area shape="rect" id="node9" href="$classError_1_1ParsingError.xhtml" title="Error while parsing the configuration." alt="" coords="796,496,950,597"/>
+<area shape="rect" id="node10" href="$classError_1_1Type.xhtml" title="The type of something was not what was expected." alt="" coords="974,496,1073,597"/>
+<area shape="rect" id="node2" href="$classError_1_1General.xhtml" title="The parent of all errors raised anywhere in the code." alt="" coords="507,138,647,290"/>
+<area shape="rect" id="node3" title=" " alt="" coords="517,5,636,90"/>
+</map>

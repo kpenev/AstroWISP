@@ -1,0 +1,6 @@
+<map id="Background::MeasureExcludingSources" name="Background::MeasureExcludingSources">
+<area shape="rect" id="node1" title="Avoid pixels close to sources when extracting a background." alt="" coords="5,882,254,1204"/>
+<area shape="rect" id="node2" href="$classBackground_1_1Measure.xhtml" title="The minimum requirements for a Background extractor class." alt="" coords="19,537,211,724"/>
+<area shape="rect" id="node3" href="$classCore_1_1Image.xhtml" title=" " alt="" coords="235,444,419,817"/>
+<area shape="rect" id="node4" href="$classCore_1_1Image.xhtml" title="Declare the minimum functionality expected from input images." alt="" coords="213,5,441,379"/>
+</map>

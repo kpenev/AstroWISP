@@ -1,0 +1,4 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classPSF_1_1PiecewiseCell.xhtml" title="An abstract base class for all cell of a Piecesiwe." alt="" coords="5,5,170,34"/>
+<area shape="rect" id="node2" href="$classPSF_1_1PiecewiseBicubicCell.xhtml" title="A class for Piecewise cells over which the intensity is given by a bi&#45;cubic polynomial." alt="" coords="218,5,435,34"/>
+</map>

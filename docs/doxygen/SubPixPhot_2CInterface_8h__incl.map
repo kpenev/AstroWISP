@@ -1,0 +1,7 @@
+<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/SubPixPhot/CInterface.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/SubPixPhot/CInterface.h">
+<area shape="rect" id="node1" title="Declare C&#45;style functions for accessing the functionality of SubPixPhot." alt="" coords="68,5,269,68"/>
+<area shape="rect" id="node2" href="$IO_2CInterface_8h.xhtml" title="Declare C&#45;style functions for accessing the functionality of the IO library." alt="" coords="45,116,185,145"/>
+<area shape="rect" id="node5" href="$Core_2CInterface_8h.xhtml" title="Declare some opaque structures to be used when creating C&#45;interfaces to libraries." alt="" coords="216,193,374,222"/>
+<area shape="rect" id="node3" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="5,270,225,316"/>
+<area shape="rect" id="node4" href="$parse__hat__mask_8h.xhtml" title="Declares a function for parsing HAT&#45;style maskes from image header." alt="" coords="39,193,191,222"/>
+</map>

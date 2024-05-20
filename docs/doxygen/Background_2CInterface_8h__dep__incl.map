@@ -1,0 +1,6 @@
+<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/Background/CInterface.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/Background/CInterface.h">
+<area shape="rect" id="node1" title="Declare C&#45;style functions for accessing the functionality of the Background library." alt="" coords="126,5,327,68"/>
+<area shape="rect" id="node2" href="$Background_2CInterface_8cpp.xhtml" title="The definitions of the functions declared in CInterface.h." alt="" coords="5,116,224,179"/>
+<area shape="rect" id="node3" href="$FitPSF_2CInterface_8h.xhtml" title="Declare C&#45;style functions for accessing the functionality of FitPSF." alt="" coords="248,116,432,179"/>
+<area shape="rect" id="node4" href="$FitPSF_2CInterface_8cpp.xhtml" title="Define the C&#45;interface functions for the FitPSF library." alt="" coords="248,227,432,290"/>
+</map>

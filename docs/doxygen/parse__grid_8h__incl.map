@@ -1,0 +1,17 @@
+<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/IO/parse_grid.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/IO/parse_grid.h">
+<area shape="rect" id="node1" title="Define functions for converting between string and PSF::Grid." alt="" coords="919,5,1102,68"/>
+<area shape="rect" id="node2" href="$Grid_8h.xhtml" title="Some useful typedef statements." alt="" coords="853,116,966,145"/>
+<area shape="rect" id="node8" title=" " alt="" coords="981,433,1041,462"/>
+<area shape="rect" id="node3" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="180,424,399,470"/>
+<area shape="rect" id="node4" href="$ParseCSV_8h.xhtml" title="Declarations of functions for parsing strings of comma separated values to lists." alt="" coords="548,193,708,222"/>
+<area shape="rect" id="node7" title=" " alt="" coords="520,433,584,462"/>
+<area shape="rect" id="node10" title=" " alt="" coords="881,347,922,376"/>
+<area shape="rect" id="node14" title=" " alt="" coords="24,347,101,376"/>
+<area shape="rect" id="node5" href="$PhotColumns_8h.xhtml" title="Defines constants to denote the various columns that can be input or output by the various tools and ..." alt="" coords="384,347,515,376"/>
+<area shape="rect" id="node9" href="$Core_2Typedefs_8h.xhtml" title="Some useful typedef statements." alt="" coords="578,270,678,299"/>
+<area shape="rect" id="node13" href="$Error_8h.xhtml" title="The hierarchy of exceptions for this project." alt="" coords="163,270,232,299"/>
+<area shape="rect" id="node6" title=" " alt="" coords="423,433,487,462"/>
+<area shape="rect" id="node11" title=" " alt="" coords="589,347,667,376"/>
+<area shape="rect" id="node12" title=" " alt="" coords="691,347,805,376"/>
+<area shape="rect" id="node15" title=" " alt="" coords="176,347,259,376"/>
+</map>

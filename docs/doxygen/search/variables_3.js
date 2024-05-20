@@ -1,0 +1,16 @@
+var searchData=
+[
+  ['mask_5fall_1723',['MASK_ALL',['../IO_2CInterface_8cpp.xhtml#a899ec8ae1bd8ba7e54893d298af2b393',1,'MASK_ALL():&#160;CInterface.cpp'],['../IO_2CInterface_8h.xhtml#a899ec8ae1bd8ba7e54893d298af2b393',1,'MASK_ALL():&#160;CInterface.cpp']]],
+  ['mask_5fbad_1724',['MASK_BAD',['../IO_2CInterface_8cpp.xhtml#a246b9d10513e441bd7554292da690ef6',1,'MASK_BAD():&#160;CInterface.cpp'],['../IO_2CInterface_8h.xhtml#a246b9d10513e441bd7554292da690ef6',1,'MASK_BAD():&#160;CInterface.cpp']]],
+  ['mask_5fclear_1725',['MASK_CLEAR',['../IO_2CInterface_8cpp.xhtml#ad66cd75dfe1e7e142ebe1b25dfc03de5',1,'MASK_CLEAR():&#160;CInterface.cpp'],['../IO_2CInterface_8h.xhtml#ad66cd75dfe1e7e142ebe1b25dfc03de5',1,'MASK_CLEAR():&#160;CInterface.cpp']]],
+  ['mask_5fcosmic_1726',['MASK_COSMIC',['../IO_2CInterface_8cpp.xhtml#a21bfdf0e2dfbaf3b54d55b6d7753ff3b',1,'MASK_COSMIC():&#160;CInterface.cpp'],['../IO_2CInterface_8h.xhtml#a21bfdf0e2dfbaf3b54d55b6d7753ff3b',1,'MASK_COSMIC():&#160;CInterface.cpp']]],
+  ['mask_5ffault_1727',['MASK_FAULT',['../IO_2CInterface_8cpp.xhtml#a723d3acde94006c66690f1ad61b15300',1,'MASK_FAULT():&#160;CInterface.cpp'],['../IO_2CInterface_8h.xhtml#a723d3acde94006c66690f1ad61b15300',1,'MASK_FAULT():&#160;CInterface.cpp']]],
+  ['mask_5fhot_1728',['MASK_HOT',['../IO_2CInterface_8cpp.xhtml#a26f3f469a9dfdce0e98eeb78cfa8ad3c',1,'MASK_HOT():&#160;CInterface.cpp'],['../IO_2CInterface_8h.xhtml#a26f3f469a9dfdce0e98eeb78cfa8ad3c',1,'MASK_HOT():&#160;CInterface.cpp']]],
+  ['mask_5finterpolated_1729',['MASK_INTERPOLATED',['../IO_2CInterface_8cpp.xhtml#aa7b364671556215dcc64113fc028b016',1,'MASK_INTERPOLATED():&#160;CInterface.cpp'],['../IO_2CInterface_8h.xhtml#aa7b364671556215dcc64113fc028b016',1,'MASK_INTERPOLATED():&#160;CInterface.cpp']]],
+  ['mask_5fleaked_1730',['MASK_LEAKED',['../IO_2CInterface_8cpp.xhtml#a433b9ead55a8db78ae2b94248cbf2b51',1,'MASK_LEAKED():&#160;CInterface.cpp'],['../IO_2CInterface_8h.xhtml#a433b9ead55a8db78ae2b94248cbf2b51',1,'MASK_LEAKED():&#160;CInterface.cpp']]],
+  ['mask_5fnan_1731',['MASK_NAN',['../IO_2CInterface_8cpp.xhtml#a784ae5ef522f037793b8562b2edaeb7a',1,'MASK_NAN():&#160;CInterface.cpp'],['../IO_2CInterface_8h.xhtml#a784ae5ef522f037793b8562b2edaeb7a',1,'MASK_NAN():&#160;CInterface.cpp']]],
+  ['mask_5fok_1732',['MASK_OK',['../IO_2CInterface_8cpp.xhtml#a14c0f248e71bbb781656070d2bba98ad',1,'MASK_OK():&#160;CInterface.cpp'],['../IO_2CInterface_8h.xhtml#a14c0f248e71bbb781656070d2bba98ad',1,'MASK_OK():&#160;CInterface.cpp']]],
+  ['mask_5fouter_1733',['MASK_OUTER',['../IO_2CInterface_8cpp.xhtml#a0e30822c37ab168dea7232a6811bafea',1,'MASK_OUTER():&#160;CInterface.cpp'],['../IO_2CInterface_8h.xhtml#a0e30822c37ab168dea7232a6811bafea',1,'MASK_OUTER():&#160;CInterface.cpp']]],
+  ['mask_5foversaturated_1734',['MASK_OVERSATURATED',['../IO_2CInterface_8cpp.xhtml#a93cb32ad0325e55f03e0aa0c4c7a2697',1,'MASK_OVERSATURATED():&#160;CInterface.cpp'],['../IO_2CInterface_8h.xhtml#a93cb32ad0325e55f03e0aa0c4c7a2697',1,'MASK_OVERSATURATED():&#160;CInterface.cpp']]],
+  ['mask_5fsaturated_1735',['MASK_SATURATED',['../IO_2CInterface_8cpp.xhtml#a055e978026b98debf9f84b6ed8f5abcc',1,'MASK_SATURATED():&#160;CInterface.cpp'],['../IO_2CInterface_8h.xhtml#a055e978026b98debf9f84b6ed8f5abcc',1,'MASK_SATURATED():&#160;CInterface.cpp']]]
+];

@@ -1,0 +1,4 @@
+<map id="Core::StringList" name="Core::StringList">
+<area shape="rect" id="node1" title="Synonym for list of strings (needed for boost command line parsing)." alt="" coords="22,138,153,222"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,5,170,90"/>
+</map>
