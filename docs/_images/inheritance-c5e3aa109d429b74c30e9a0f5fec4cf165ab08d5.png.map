@@ -1,5 +1,0 @@
-<map id="inheritance8809a3d541" name="inheritance8809a3d541">
-<area shape="rect" id="node1" href="#tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless" target="_top" title="Test piecewise bicubic PSF fitting on noiseless images." alt="" coords="5,152,464,177"/>
-<area shape="rect" id="node2" href="tests.utilities.html#tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="134,79,335,104"/>
-<area shape="rect" id="node3" title="A class whose instances are single test cases." alt="" coords="151,5,319,31"/>
-</map>

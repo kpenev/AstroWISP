@@ -1,0 +1,10 @@
+<map id="inheritance43dc39c194" name="inheritance43dc39c194">
+<area shape="rect" id="node1" title="Helper class that provides a standard way to create an ABC using" alt="" coords="141,5,216,32"/>
+<area shape="rect" id="node5" href="superphot.psf_base.html#superphot.psf_base.PSFBase" target="_top" title="The base class for all supported PSFs." alt="" coords="81,80,276,107"/>
+<area shape="rect" id="node2" href="superphot.background.html#superphot.background.BackgroundExtractor" target="_top" title="Measure the background level for each source in an image." alt="" coords="240,5,515,32"/>
+<area shape="rect" id="node3" href="superphot.fit_star_shape.html#superphot.fit_star_shape.FitStarShape" target="_top" title="Fit for the PSF/PRF of stars and their flux." alt="" coords="539,5,783,32"/>
+<area shape="rect" id="node4" href="superphot.piecewise_bicubic_psf.html#superphot.piecewise_bicubic_psf.PiecewiseBicubicPSF" target="_top" title="Implement the PSFBase methods for libary PSFs." alt="" coords="5,155,352,181"/>
+<area shape="rect" id="node6" href="superphot.piecewise_bicubic_psf_map.html#superphot.piecewise_bicubic_psf_map.PiecewiseBicubicPSFMap" target="_top" title="Provide convenient python interface to shape fitting results." alt="" coords="808,5,1211,32"/>
+<area shape="rect" id="node7" href="superphot.subpixphot.html#superphot.subpixphot.SubPixPhot" target="_top" title="Use sub&#45;pixel aware aperture photomotre to measure fluxes of sources." alt="" coords="1235,5,1453,32"/>
+<area shape="rect" id="node8" href="superphot.superphot_io_tree.html#superphot.superphot_io_tree.SuperPhotIOTree" target="_top" title="Interface for extracting entries from an IO::H5IODataTree." alt="" coords="1477,5,1768,32"/>
+</map>

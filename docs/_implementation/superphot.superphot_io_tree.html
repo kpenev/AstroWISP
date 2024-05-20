@@ -1,87 +1,57 @@
-
-
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en">
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>superphot.superphot_io_tree module &mdash; SuperPhot Python Interface  documentation</title>
-  
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/unlimited_width.css" />
 
   
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
-  
-  
-
-  
-
-  
-  
-    
-
-  
-
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/unlimited_width.css" type="text/css" />
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="C++ API" href="../cpp_api.html" />
     <link rel="prev" title="superphot.subpixphot module" href="superphot.subpixphot.html" /> 
-
-  
-  <script src="../_static/js/modernizr.min.js"></script>
-
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
-          
+        <div class="wy-side-nav-search" >
 
           
-            <a href="../index.html" class="icon icon-home"> SuperPhot Python Interface
           
-
-          
+          <a href="../index.html" class="icon icon-home">
+            SuperPhot Python Interface
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Unix Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html#windows-installation">Windows Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit_tests.html">Unit Tests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../python_interface/index.html">Python Interface Documentation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">Python Package Implementation</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="superphot.html">superphot package</a><ul class="current">
@@ -90,7 +60,10 @@
 <li class="toctree-l3 current"><a class="reference internal" href="superphot.html#submodules">Submodules</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="superphot.background.html">superphot.background module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="superphot.fit_star_shape.html">superphot.fit_star_shape module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="superphot.smooth_dependence.html">superphot.smooth_dependence module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="superphot.hat_masks.html">superphot.hat_masks module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="superphot.piecewise_bicubic_psf.html">superphot.piecewise_bicubic_psf module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="superphot.piecewise_bicubic_psf_map.html">superphot.piecewise_bicubic_psf_map module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="superphot.psf_base.html">superphot.psf_base module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="superphot.subpixphot.html">superphot.subpixphot module</a></li>
 <li class="toctree-l4 current"><a class="current reference internal" href="#">superphot.superphot_io_tree module</a></li>
 </ul>
@@ -104,256 +77,230 @@
 <li class="toctree-l1"><a class="reference internal" href="../_unit_tests/modules.html">Unit Testing Code</a></li>
 </ul>
 
-            
-          
         </div>
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">SuperPhot Python Interface</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../index.html">Docs</a> &raquo;</li>
-        
-          <li><a href="modules.html">superphot</a> &raquo;</li>
-        
-          <li><a href="superphot.html">superphot package</a> &raquo;</li>
-        
-      <li>superphot.superphot_io_tree module</li>
-    
-    
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">superphot</a></li>
+          <li class="breadcrumb-item"><a href="superphot.html">superphot package</a></li>
+      <li class="breadcrumb-item active">superphot.superphot_io_tree module</li>
       <li class="wy-breadcrumbs-aside">
-        
-            
             <a href="../_sources/_implementation/superphot.superphot_io_tree.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  
-<style>
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast,
-.nboutput.nblast {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast + .nbinput {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-</style>
-<div class="section" id="module-superphot.superphot_io_tree">
-<span id="superphot-superphot-io-tree-module"></span><h1>superphot.superphot_io_tree module<a class="headerlink" href="#module-superphot.superphot_io_tree" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="class-inheritance-diagram">
-<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this headline">¶</a></h2>
-<div class="graphviz"><img src="../_images/inheritance-70ab847404dc9d95b2bb0316e14bd4f0f48ad37d.png" alt="Inheritance diagram of SuperPhotIOTree, c_bool, c_byte, c_char_p, c_double, c_int, c_long, c_short, c_ubyte, c_uint, c_ulong, c_ushort, c_void_p" usemap="#inheritance280f9353bf" class="inheritance graphviz" /></div>
-<map id="inheritance280f9353bf" name="inheritance280f9353bf">
-<area shape="rect" id="node13" href="#superphot.superphot_io_tree.SuperPhotIOTree" target="_top" title="Interface for extracting entries from an IO::H5IODataTree." alt="" coords="1696,5,2015,31"/>
+             
+  <section id="module-superphot.superphot_io_tree">
+<span id="superphot-superphot-io-tree-module"></span><h1>superphot.superphot_io_tree module<a class="headerlink" href="#module-superphot.superphot_io_tree" title="Permalink to this heading"></a></h1>
+<section id="class-inheritance-diagram">
+<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this heading"></a></h2>
+<div class="graphviz"><img src="../_images/inheritance-cde9cf581603565ca590c2a246c232c9546461ec.png" alt="Inheritance diagram of SuperPhotIOTree, c_bool, c_byte, c_char, c_char_p, c_double, c_int, c_long, c_short, c_ubyte, c_uint, c_ulong, c_ushort, c_void_p" usemap="#inheritance5c01d84971" class="inheritance graphviz" /></div>
+<map id="inheritance5c01d84971" name="inheritance5c01d84971">
+<area shape="rect" id="node14" href="#superphot.superphot_io_tree.SuperPhotIOTree" target="_top" title="Interface for extracting entries from an IO::H5IODataTree." alt="" coords="1715,5,2006,32"/>
 </map><p>Define a function for intefracing with the superphotio library.</p>
-<dl class="class">
-<dt id="superphot.superphot_io_tree.SuperPhotIOTree">
-<em class="property">class </em><code class="descclassname">superphot.superphot_io_tree.</code><code class="descname">SuperPhotIOTree</code><span class="sig-paren">(</span><em>library_configuration</em>, <em>version_info=''</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/superphot_io_tree.html#SuperPhotIOTree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.superphot_io_tree.SuperPhotIOTree" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<div class="graphviz"><img src="../_images/inheritance-288fb8bf8d258f9ca48cf81d90d08528a8472f23.png" alt="Inheritance diagram of superphot.superphot_io_tree.SuperPhotIOTree" usemap="#inheritance8ab43aea48" class="inheritance graphviz" /></div>
+<dl class="py class">
+<dt class="sig sig-object py" id="superphot.superphot_io_tree.SuperPhotIOTree">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">superphot.superphot_io_tree.</span></span><span class="sig-name descname"><span class="pre">SuperPhotIOTree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tool_or_configuration</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version_info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/superphot_io_tree.html#SuperPhotIOTree"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#superphot.superphot_io_tree.SuperPhotIOTree" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<div class="graphviz"><img src="../_images/inheritance-57d6ada5d8bc34df6ab8238a61150cc36185dbfc.png" alt="Inheritance diagram of superphot.superphot_io_tree.SuperPhotIOTree" usemap="#inheritance8ab43aea48" class="inheritance graphviz" /></div>
 <map id="inheritance8ab43aea48" name="inheritance8ab43aea48">
-<area shape="rect" id="node1" href="#superphot.superphot_io_tree.SuperPhotIOTree" target="_top" title="Interface for extracting entries from an IO::H5IODataTree." alt="" coords="5,5,324,31"/>
+<area shape="rect" id="node1" href="#superphot.superphot_io_tree.SuperPhotIOTree" target="_top" title="Interface for extracting entries from an IO::H5IODataTree." alt="" coords="5,5,296,32"/>
 </map><p>Interface for extracting entries from an IO::H5IODataTree.</p>
-<dl class="method">
-<dt id="superphot.superphot_io_tree.SuperPhotIOTree.__del__">
-<code class="descname">__del__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/superphot_io_tree.html#SuperPhotIOTree.__del__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.superphot_io_tree.SuperPhotIOTree.__del__" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="superphot.superphot_io_tree.SuperPhotIOTree.__del__">
+<span class="sig-name descname"><span class="pre">__del__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/superphot_io_tree.html#SuperPhotIOTree.__del__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#superphot.superphot_io_tree.SuperPhotIOTree.__del__" title="Permalink to this definition"></a></dt>
 <dd><p>Destroy the tree allocated by __init__.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="superphot.superphot_io_tree.SuperPhotIOTree.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>library_configuration</em>, <em>version_info=''</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/superphot_io_tree.html#SuperPhotIOTree.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.superphot_io_tree.SuperPhotIOTree.__init__" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="superphot.superphot_io_tree.SuperPhotIOTree.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tool_or_configuration</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version_info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/superphot_io_tree.html#SuperPhotIOTree.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#superphot.superphot_io_tree.SuperPhotIOTree.__init__" title="Permalink to this definition"></a></dt>
 <dd><p>Create a tree with just the given configuration.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>library_configuration</strong> – The configuration object created by the
-library for the tool which will be using the configuration tree.</li>
-<li><strong>version_info</strong> – Information about the version of the
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tool_or_configuration</strong> – The configuration object created by the
+library for the tool which will be using the configuration tree
+or the tool itself.</p></li>
+<li><p><strong>version_info</strong> – Information about the version of the
 tool/scripts/… using this tree. It is safe to leave this
-empty, if it is not required as an entry in the tree.</li>
+empty, if it is not required as an entry in the tree.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">None</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="method">
-<dt id="superphot.superphot_io_tree.SuperPhotIOTree.get">
-<code class="descname">get</code><span class="sig-paren">(</span><em>quantity</em>, <em>dtype=&lt;class 'ctypes.c_double'&gt;</em>, <em>shape=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/superphot_io_tree.html#SuperPhotIOTree.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.superphot_io_tree.SuperPhotIOTree.get" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="superphot.superphot_io_tree.SuperPhotIOTree.defined_quantity_names">
+<span class="sig-name descname"><span class="pre">defined_quantity_names</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/superphot_io_tree.html#SuperPhotIOTree.defined_quantity_names"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#superphot.superphot_io_tree.SuperPhotIOTree.defined_quantity_names" title="Permalink to this definition"></a></dt>
+<dd><p>Return a list of the quantities with non-empty values in the tree.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>None</strong> – </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The full names of the quantities with available data using dot
+as a separator between leves in the tree.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="superphot.superphot_io_tree.SuperPhotIOTree.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quantity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype=&lt;class</span> <span class="pre">'ctypes.c_double'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape=None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/superphot_io_tree.html#SuperPhotIOTree.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#superphot.superphot_io_tree.SuperPhotIOTree.get" title="Permalink to this definition"></a></dt>
 <dd><p>Return the given quantity as a proper python object.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>quantity</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – The quantity to extract from the tree.</li>
-<li><strong>dtype</strong> – The data type of individual values of the quantity.</li>
-<li><strong>shape</strong> (<em>tulpe of ints</em>) – The shape of the array of values
-to expect. Use None for scalar quantities.</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>quantity</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The quantity to extract from the tree.</p></li>
+<li><p><strong>dtype</strong> – The data type of individual values of the quantity.</p></li>
+<li><p><strong>shape</strong> (<em>tuple of ints</em>) – The shape of the array of values
+to expect. Use None for scalar quantities.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The values of the quantity. The return type is always an array,
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The values of the quantity. The return type is always an array,
 even for sintgle valued quantities. In the latter case, the
 shape is (1,).</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numpy.ndarray(shape=shape, dtype=dtype)</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray(shape=shape, dtype=dtype)</p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="method">
-<dt id="superphot.superphot_io_tree.SuperPhotIOTree.get_psfmap_variables">
-<code class="descname">get_psfmap_variables</code><span class="sig-paren">(</span><em>image_index</em>, <em>num_variables</em>, <em>num_sources</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/superphot_io_tree.html#SuperPhotIOTree.get_psfmap_variables"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#superphot.superphot_io_tree.SuperPhotIOTree.get_psfmap_variables" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="superphot.superphot_io_tree.SuperPhotIOTree.get_psfmap_variables">
+<span class="sig-name descname"><span class="pre">get_psfmap_variables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_variables</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_sources</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/superphot_io_tree.html#SuperPhotIOTree.get_psfmap_variables"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#superphot.superphot_io_tree.SuperPhotIOTree.get_psfmap_variables" title="Permalink to this definition"></a></dt>
 <dd><p>Return the values of the PSF map variables for all sources in an image.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>image_index</strong> – The index of the image for which to return the
-values of the variables as supplied to PSF fitting.</li>
-<li><strong>num_variables</strong> – The number of variables used for PSF fitting.</li>
-<li><strong>num_sources</strong> – The number of sources in the selected image.</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image_index</strong> – The index of the image for which to return the
+values of the variables as supplied to PSF fitting.</p></li>
+<li><p><strong>num_variables</strong> – The number of variables used for PSF fitting.</p></li>
+<li><p><strong>num_sources</strong> – The number of sources in the selected image.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Array with records named as the PSF map variables and entries
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array with records named as the PSF map variables and entries
 containing the values of the variables for all sources in the
 image identified by image_index.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numpy.ndarray(dtype=float, shape=(num_variables, num_sources)</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray(dtype=float, shape=(num_variables, num_sources)</p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="superphot.superphot_io_tree.SuperPhotIOTree.type_string">
-<code class="descname">type_string</code><em class="property"> = {&lt;class 'ctypes.c_bool'&gt;: 'bool', &lt;class 'ctypes.c_double'&gt;: 'double', &lt;class 'ctypes.c_int'&gt;: 'int', &lt;class 'ctypes.c_short'&gt;: 'short', &lt;class 'ctypes.c_long'&gt;: 'long', &lt;class 'ctypes.c_byte'&gt;: 'char', &lt;class 'ctypes.c_uint'&gt;: 'uint', &lt;class 'ctypes.c_ulong'&gt;: 'ulong', &lt;class 'ctypes.c_ushort'&gt;: 'ushort', &lt;class 'ctypes.c_ubyte'&gt;: 'uchar'}</em><a class="headerlink" href="#superphot.superphot_io_tree.SuperPhotIOTree.type_string" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="superphot.superphot_io_tree.SuperPhotIOTree.set_aperture_photometry_inputs">
+<span class="sig-name descname"><span class="pre">set_aperture_photometry_inputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">star_shape_grid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">star_shape_map_terms</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">star_shape_map_coefficients</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">magnitude_1adu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/superphot_io_tree.html#SuperPhotIOTree.set_aperture_photometry_inputs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#superphot.superphot_io_tree.SuperPhotIOTree.set_aperture_photometry_inputs" title="Permalink to this definition"></a></dt>
+<dd><p>Add to the tree all the information required for aperture photometry.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source_data</strong> (<em>structured numpy.array</em>) – Should contain informaiton
+about all sources to do apreture photometry on as fields. At
+least the following floating point fields must be present: <cite>x</cite>,
+<cite>y</cite>, <cite>bg</cite>, <cite>bg_err</cite>, any variables used by the PSF map, and
+either <cite>flux</cite> and <cite>flux_err</cite> or <cite>mag</cite> and <cite>mag_err</cite>. It must
+also contain a string field <cite>id</cite> of source IDs and an unsigned
+integer field <cite>bg_npix</cite>.</p></li>
+<li><p><strong>star_shape_grid</strong> (<em>2-D iterable</em>) – The grid boundaries on which the
+star shape is being modeled.</p></li>
+<li><p><strong>star_shape_map_terms</strong> (<em>2-D numpy array</em>) – The values of the terms
+required to evaluate the PSF/PRF map for each source. First
+dimension should iterate over sources and second over
+expansion terms.</p></li>
+<li><p><strong>magnitude_1adu</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – The magnitude that corresponds to a flux
+of 1ADU. Only required if relying on magnitudes to get star
+shape amplitudes.</p></li>
+<li><p><strong>star_shape_map_coefficients</strong> (<em>4-D numpy.array</em>) – The coefficients
+in front of all terms. See bicubic PSf model for details.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="superphot.superphot_io_tree.SuperPhotIOTree.set_star_shape_map">
+<span class="sig-name descname"><span class="pre">set_star_shape_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coefficients</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/superphot_io_tree.html#SuperPhotIOTree.set_star_shape_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#superphot.superphot_io_tree.SuperPhotIOTree.set_star_shape_map" title="Permalink to this definition"></a></dt>
+<dd><p>Add to tree all entries that define the star shape map.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>grid</strong> (<em>2-D iterable</em>) – The grid on which the star shape is
+represented.</p></li>
+<li><p><strong>map_terms</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The expression defining the terms the star shape
+parameters depend on.</p></li>
+<li><p><strong>coefficients</strong> (<em>4-D numpy.array</em>) – The coefficients of the map. See
+:class:fit_star_shape for details.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="superphot.superphot_io_tree.SuperPhotIOTree.type_string">
+<span class="sig-name descname"><span class="pre">type_string</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{&lt;class</span> <span class="pre">'ctypes.c_bool'&gt;:</span> <span class="pre">'bool',</span> <span class="pre">&lt;class</span> <span class="pre">'ctypes.c_double'&gt;:</span> <span class="pre">'double',</span> <span class="pre">&lt;class</span> <span class="pre">'ctypes.c_int'&gt;:</span> <span class="pre">'int',</span> <span class="pre">&lt;class</span> <span class="pre">'ctypes.c_short'&gt;:</span> <span class="pre">'short',</span> <span class="pre">&lt;class</span> <span class="pre">'ctypes.c_long'&gt;:</span> <span class="pre">'long',</span> <span class="pre">&lt;class</span> <span class="pre">'ctypes.c_byte'&gt;:</span> <span class="pre">'char',</span> <span class="pre">&lt;class</span> <span class="pre">'ctypes.c_ubyte'&gt;:</span> <span class="pre">'uchar',</span> <span class="pre">&lt;class</span> <span class="pre">'ctypes.c_char'&gt;:</span> <span class="pre">'char',</span> <span class="pre">&lt;class</span> <span class="pre">'ctypes.c_uint'&gt;:</span> <span class="pre">'uint',</span> <span class="pre">&lt;class</span> <span class="pre">'ctypes.c_ulong'&gt;:</span> <span class="pre">'ulong',</span> <span class="pre">&lt;class</span> <span class="pre">'ctypes.c_ushort'&gt;:</span> <span class="pre">'ushort'}</span></em><a class="headerlink" href="#superphot.superphot_io_tree.SuperPhotIOTree.type_string" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="../cpp_api.html" class="btn btn-neutral float-right" title="C++ API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="superphot.subpixphot.html" class="btn btn-neutral" title="superphot.subpixphot module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="superphot.subpixphot.html" class="btn btn-neutral float-left" title="superphot.subpixphot module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../cpp_api.html" class="btn btn-neutral float-right" title="C++ API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &copy; Copyright 2018, Kaloyan Penev
-
-    </p>
+    <p>&#169; Copyright 2018, Kaloyan Penev.</p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
-
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-
-  
-
-  <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });

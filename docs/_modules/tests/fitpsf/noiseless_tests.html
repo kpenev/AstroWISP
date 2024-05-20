@@ -1,85 +1,54 @@
-
-
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en">
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>tests.fitpsf.noiseless_tests &mdash; SuperPhot Python Interface  documentation</title>
-  
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/unlimited_width.css" />
 
   
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
-  
-  
-
-  
-
-  
-  
-    
-
-  
-
-  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/unlimited_width.css" type="text/css" />
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
-
-  
-  <script src="../../../_static/js/modernizr.min.js"></script>
-
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
-          
+        <div class="wy-side-nav-search" >
 
           
-            <a href="../../../index.html" class="icon icon-home"> SuperPhot Python Interface
           
-
-          
+          <a href="../../../index.html" class="icon icon-home">
+            SuperPhot Python Interface
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Unix Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#windows-installation">Windows Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../unit_tests.html">Unit Tests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../python_interface/index.html">Python Interface Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../_implementation/modules.html">Python Package Implementation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../cpp_api.html">C++ API</a></li>
@@ -87,72 +56,36 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../_unit_tests/modules.html">Unit Testing Code</a></li>
 </ul>
 
-            
-          
         </div>
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../../index.html">SuperPhot Python Interface</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../../../index.html">Docs</a> &raquo;</li>
-        
-          <li><a href="../../index.html">Module code</a> &raquo;</li>
-        
-      <li>tests.fitpsf.noiseless_tests</li>
-    
-    
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">tests.fitpsf.noiseless_tests</li>
       <li class="wy-breadcrumbs-aside">
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <h1>Source code for tests.fitpsf.noiseless_tests</h1><div class="highlight"><pre>
 <span></span><span class="ch">#!/usr/bin/env python3</span>
 
 <span class="sd">&quot;&quot;&quot;Create noiseless FITS files to test various tools on.&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">subprocess</span> <span class="k">import</span> <span class="n">call</span>
+<span class="kn">from</span> <span class="nn">subprocess</span> <span class="kn">import</span> <span class="n">call</span>
 <span class="kn">import</span> <span class="nn">unittest</span>
 
 <span class="kn">import</span> <span class="nn">os</span>
@@ -160,7 +93,7 @@
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">numpy</span>
 <span class="kn">import</span> <span class="nn">h5py</span>
-<span class="kn">from</span> <span class="nn">astropy.io</span> <span class="k">import</span> <span class="n">fits</span> <span class="k">as</span> <span class="n">pyfits</span>
+<span class="kn">from</span> <span class="nn">astropy.io</span> <span class="kn">import</span> <span class="n">fits</span> <span class="k">as</span> <span class="n">pyfits</span>
 
 <span class="n">module_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
 
@@ -178,13 +111,13 @@
 <span class="c1">#Needs to be after os.path and sys to allow adding the seach path.</span>
 <span class="c1">#pylint: disable=wrong-import-position</span>
 
-<span class="kn">from</span> <span class="nn">superphot.fake_image.piecewise_bicubic_psf</span> <span class="k">import</span> <span class="n">PiecewiseBicubicPSF</span>
-<span class="kn">from</span> <span class="nn">tests.fitpsf.utils</span> <span class="k">import</span> <span class="n">make_image_and_source_list</span>
+<span class="kn">from</span> <span class="nn">superphot.fake_image.piecewise_bicubic_psf</span> <span class="kn">import</span> <span class="n">PiecewiseBicubicPSF</span>
+<span class="kn">from</span> <span class="nn">tests.fitpsf.utils</span> <span class="kn">import</span> <span class="n">make_image_and_source_list</span>
 <span class="c1">#pylint: enable=wrong-import-position</span>
 
 
 <div class="viewcode-block" id="TestPiecewiseBicubicNoiseless"><a class="viewcode-back" href="../../../_unit_tests/tests.fitpsf.noiseless_tests.html#tests.fitpsf.noiseless_tests.TestPiecewiseBicubicNoiseless">[docs]</a><span class="k">class</span> <span class="nc">TestPiecewiseBicubicNoiseless</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Test piecewise bicubic PSF fitting on noiseless images.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test piecewise bicubic PSF fitting on noiseless images.&quot;&quot;&quot;</span>
 
     <span class="n">fitpsf_executable</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span>
         <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
@@ -207,7 +140,7 @@
     <span class="c1">#TODO: consider splitting into several functions</span>
     <span class="c1">#pylint: disable=too-many-locals</span>
 <div class="viewcode-block" id="TestPiecewiseBicubicNoiseless.check_results"><a class="viewcode-back" href="../../../_unit_tests/tests.fitpsf.noiseless_tests.html#tests.fitpsf.noiseless_tests.TestPiecewiseBicubicNoiseless.check_results">[docs]</a>    <span class="k">def</span> <span class="nf">check_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">psf_fit_fname</span><span class="p">,</span> <span class="n">sources</span><span class="p">,</span> <span class="n">extra_variables</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Assert that fitted PSF map evaluates to expected PSFs for sources.</span>
 
 <span class="sd">        Args:</span>
@@ -310,7 +243,7 @@
                  <span class="n">sources</span><span class="p">,</span>
                  <span class="n">psffit_terms</span><span class="p">,</span>
                  <span class="n">extra_variables</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Assert that a fit of a series of images works exactly.</span>
 
 <span class="sd">        Args:</span>
@@ -338,7 +271,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">def</span> <span class="nf">grid_boundary_str</span><span class="p">(</span><span class="n">boundaries</span><span class="p">):</span>
-            <span class="sd">&quot;&quot;&quot;Return a comma separated list of the given grid boundaries.&quot;&quot;&quot;</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Return a comma separated list of the given grid boundaries.&quot;&quot;&quot;</span>
 
             <span class="k">return</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">boundaries</span><span class="p">)</span>
 
@@ -397,7 +330,7 @@
                 <span class="p">[</span><span class="n">pyfits</span><span class="o">.</span><span class="n">PrimaryHDU</span><span class="p">(</span><span class="n">subpix_map</span><span class="p">)]</span>
             <span class="p">)</span><span class="o">.</span><span class="n">writeto</span><span class="p">(</span>
                 <span class="n">subpix_fname</span><span class="p">,</span>
-                <span class="n">clobber</span><span class="o">=</span><span class="kc">True</span>
+                <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span>
             <span class="p">)</span>
             <span class="n">files_to_cleanup</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">subpix_fname</span><span class="p">)</span>
 
@@ -446,7 +379,7 @@
             <span class="nb">map</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">,</span> <span class="n">files_to_cleanup</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TestPiecewiseBicubicNoiseless.test_single_source"><a class="viewcode-back" href="../../../_unit_tests/tests.fitpsf.noiseless_tests.html#tests.fitpsf.noiseless_tests.TestPiecewiseBicubicNoiseless.test_single_source">[docs]</a>    <span class="k">def</span> <span class="nf">test_single_source</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Test fitting a single source in the center of the image.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test fitting a single source in the center of the image.&quot;&quot;&quot;</span>
 
         <span class="n">values</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
         <span class="n">d_dx</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
@@ -475,7 +408,7 @@
         <span class="p">)</span></div>
 
 <div class="viewcode-block" id="TestPiecewiseBicubicNoiseless.test_isolated_sources"><a class="viewcode-back" href="../../../_unit_tests/tests.fitpsf.noiseless_tests.html#tests.fitpsf.noiseless_tests.TestPiecewiseBicubicNoiseless.test_isolated_sources">[docs]</a>    <span class="k">def</span> <span class="nf">test_isolated_sources</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Test fitting an image containing 8 well isolated sources.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test fitting an image containing 8 well isolated sources.&quot;&quot;&quot;</span>
 
         <span class="n">psf_parameters</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">values</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)),</span>
                               <span class="n">d_dx</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)),</span>
@@ -558,7 +491,7 @@
                       <span class="n">psffit_terms</span><span class="o">=</span><span class="s1">&#39;{1, x, y}&#39;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TestPiecewiseBicubicNoiseless.test_two_overlapping_sources"><a class="viewcode-back" href="../../../_unit_tests/tests.fitpsf.noiseless_tests.html#tests.fitpsf.noiseless_tests.TestPiecewiseBicubicNoiseless.test_two_overlapping_sources">[docs]</a>    <span class="k">def</span> <span class="nf">test_two_overlapping_sources</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Test fitting an image containing 2 sources all overlapping.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test fitting an image containing 2 sources all overlapping.&quot;&quot;&quot;</span>
 
         <span class="n">psf_args</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">psf_parameters</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">values</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)),</span>
                                             <span class="n">d_dx</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)),</span>
@@ -578,7 +511,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">run_test</span><span class="p">(</span><span class="n">sources</span><span class="o">=</span><span class="p">[</span><span class="n">sources</span><span class="p">],</span> <span class="n">psffit_terms</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{1}</span><span class="s1">&#39;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TestPiecewiseBicubicNoiseless.test_four_overlapping_sources"><a class="viewcode-back" href="../../../_unit_tests/tests.fitpsf.noiseless_tests.html#tests.fitpsf.noiseless_tests.TestPiecewiseBicubicNoiseless.test_four_overlapping_sources">[docs]</a>    <span class="k">def</span> <span class="nf">test_four_overlapping_sources</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Test fitting an image containing 4 overlapping sources.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test fitting an image containing 4 overlapping sources.&quot;&quot;&quot;</span>
 
         <span class="n">psf_parameters</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
             <span class="n">values</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)),</span>
@@ -650,7 +583,7 @@
                       <span class="n">extra_variables</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;enabled&#39;</span><span class="p">])</span></div>
 
 <div class="viewcode-block" id="TestPiecewiseBicubicNoiseless.test_multi_image_with_extra_var"><a class="viewcode-back" href="../../../_unit_tests/tests.fitpsf.noiseless_tests.html#tests.fitpsf.noiseless_tests.TestPiecewiseBicubicNoiseless.test_multi_image_with_extra_var">[docs]</a>    <span class="k">def</span> <span class="nf">test_multi_image_with_extra_var</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Test fitting a series of 5 images and non-position variables.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test fitting a series of 5 images and non-position variables.&quot;&quot;&quot;</span>
 
         <span class="n">boundaries</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">3.02</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">3.02</span><span class="p">]),</span>
                           <span class="n">y</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">2.04</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">2.04</span><span class="p">]))</span>
@@ -658,7 +591,7 @@
         <span class="c1">#t &amp; z are arbitrary and dx and dy seem reasonable</span>
         <span class="c1">#pylint: disable=invalid-name</span>
         <span class="k">def</span> <span class="nf">image_sources</span><span class="p">(</span><span class="n">dx_dy_z_fluxbkp</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-            <span class="sd">&quot;&quot;&quot;Return 3 overlapping sources with slightly different PSFs.&quot;&quot;&quot;</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Return 3 overlapping sources with slightly different PSFs.&quot;&quot;&quot;</span>
 
 
             <span class="n">values</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
@@ -788,48 +721,26 @@
 </pre></div>
 
            </div>
-           
           </div>
           <footer>
-  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &copy; Copyright 2018, Kaloyan Penev
-
-    </p>
+    <p>&#169; Copyright 2018, Kaloyan Penev.</p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
-
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-
-  
-
-  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });

@@ -1,87 +1,57 @@
-
-
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en">
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>tests.test_fit_star_shape.utils module &mdash; SuperPhot Python Interface  documentation</title>
-  
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/unlimited_width.css" />
 
   
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
-  
-  
-
-  
-
-  
-  
-    
-
-  
-
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/unlimited_width.css" type="text/css" />
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="tests.test_background module" href="tests.test_background.html" />
     <link rel="prev" title="tests.test_fit_star_shape.noiseless_tests module" href="tests.test_fit_star_shape.noiseless_tests.html" /> 
-
-  
-  <script src="../_static/js/modernizr.min.js"></script>
-
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
-          
+        <div class="wy-side-nav-search" >
 
           
-            <a href="../index.html" class="icon icon-home"> SuperPhot Python Interface
           
-
-          
+          <a href="../index.html" class="icon icon-home">
+            SuperPhot Python Interface
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Unix Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html#windows-installation">Windows Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit_tests.html">Unit Tests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../python_interface/index.html">Python Interface Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../_implementation/modules.html">Python Package Implementation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cpp_api.html">C++ API</a></li>
@@ -100,199 +70,127 @@
 </li>
 </ul>
 
-            
-          
         </div>
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">SuperPhot Python Interface</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../index.html">Docs</a> &raquo;</li>
-        
-          <li><a href="modules.html">tests</a> &raquo;</li>
-        
-          <li><a href="tests.html">tests package</a> &raquo;</li>
-        
-          <li><a href="tests.test_fit_star_shape.html">tests.test_fit_star_shape package</a> &raquo;</li>
-        
-      <li>tests.test_fit_star_shape.utils module</li>
-    
-    
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">tests</a></li>
+          <li class="breadcrumb-item"><a href="tests.html">tests package</a></li>
+          <li class="breadcrumb-item"><a href="tests.test_fit_star_shape.html">tests.test_fit_star_shape package</a></li>
+      <li class="breadcrumb-item active">tests.test_fit_star_shape.utils module</li>
       <li class="wy-breadcrumbs-aside">
-        
-            
             <a href="../_sources/_unit_tests/tests.test_fit_star_shape.utils.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  
-<style>
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast,
-.nboutput.nblast {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast + .nbinput {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-</style>
-<div class="section" id="module-tests.test_fit_star_shape.utils">
-<span id="tests-test-fit-star-shape-utils-module"></span><h1>tests.test_fit_star_shape.utils module<a class="headerlink" href="#module-tests.test_fit_star_shape.utils" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="class-inheritance-diagram">
-<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this headline">¶</a></h2>
-<div class="graphviz"><img src="../_images/inheritance-79001489d7d9c059de27b21bd0c5f8d4bf999e0f.png" alt="Inheritance diagram of Image, c_double" usemap="#inheritance60336ee2d5" class="inheritance graphviz" /></div>
-<map id="inheritance60336ee2d5" name="inheritance60336ee2d5">
-<area shape="rect" id="node3" href="../_implementation/superphot.fake_image.image.html#superphot.fake_image.image.Image" target="_top" title="A base class for fake images." alt="" coords="86,79,345,104"/>
+             
+  <section id="module-tests.test_fit_star_shape.utils">
+<span id="tests-test-fit-star-shape-utils-module"></span><h1>tests.test_fit_star_shape.utils module<a class="headerlink" href="#module-tests.test_fit_star_shape.utils" title="Permalink to this heading"></a></h1>
+<section id="class-inheritance-diagram">
+<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this heading"></a></h2>
+<div class="graphviz"><img src="../_images/inheritance-1e90bffa7eb401b929fdc6886eaaf5a56ad18164.png" alt="Inheritance diagram of Image, Interpreter, c_bool, c_double" usemap="#inheritance9ce56584e3" class="inheritance graphviz" /></div>
+<map id="inheritance9ce56584e3" name="inheritance9ce56584e3">
+<area shape="rect" id="node5" href="../_implementation/superphot.fake_image.image.html#superphot.fake_image.image.Image" target="_top" title="A base class for fake images." alt="" coords="408,80,636,107"/>
 </map><p>A collection of functions used by the fit_star_shape unit tests.</p>
-<dl class="function">
-<dt id="tests.test_fit_star_shape.utils.make_image_and_source_list">
-<code class="descclassname">tests.test_fit_star_shape.utils.</code><code class="descname">make_image_and_source_list</code><span class="sig-paren">(</span><em>sources</em>, <em>extra_variables</em>, <em>subpix_map</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_fit_star_shape/utils.html#make_image_and_source_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_fit_star_shape.utils.make_image_and_source_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create an image and a list of the sources in it ready for psf fitting.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>sources</strong> – <p>A list of dictionaries with at least the following keywords:</p>
-<blockquote>
-<div><ul>
-<li>x:    The x coordinate of the source center.</li>
-<li>y:    The y coordinate of the source center.</li>
-<li>psf:    An instance of some sub-class of PSFBase giving the
-sources’s PSF. It should already be scaled to the desired
-flux.</li>
+<dl class="py function">
+<dt class="sig sig-object py" id="tests.test_fit_star_shape.utils.evaluate_psffit_terms">
+<span class="sig-prename descclassname"><span class="pre">tests.test_fit_star_shape.utils.</span></span><span class="sig-name descname"><span class="pre">evaluate_psffit_terms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sources</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">terms_str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_fit_star_shape/utils.html#evaluate_psffit_terms"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tests.test_fit_star_shape.utils.evaluate_psffit_terms" title="Permalink to this definition"></a></dt>
+<dd><p>Evaluate the specified terms to properly formatted array for PSF fitting.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sources</strong> – See <cite>sources</cite> argument to <cite>make_image_and_source_list()</cite>.</p></li>
+<li><p><strong>terms_str</strong> (<em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – List of strings to evaluate using entries in
+sources.</p></li>
 </ul>
-</div></blockquote>
-<p>Additional keywords may be added to the source list and hence
-available as variables for PSF fitting by listing the names in the
-extra_variables argument.</p>
-</li>
-<li><strong>extra_variables</strong> – A list of additional keywords from sources to add to
-the source list and the order in which those should be added. The
-corresponding entries in sources must be floating point values.</li>
-<li><strong>subpix_map</strong> – The sub-pixel map to impose on the image. For more
-details see same name argument of Image.add_source.</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The sources added to the image. The fields give the variables
-defined for the sources.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numpy record array</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The terms the PSF map is allowed to depend on evaluated for each
+source, organized suitably to pass as the fifth argument to
+<cite>FitStarShape.fit()</cite>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2-D numpy array</p>
+</dd>
+</dl>
 </dd></dl>
 
-</div>
-</div>
+<dl class="py function">
+<dt class="sig sig-object py" id="tests.test_fit_star_shape.utils.make_image_and_source_list">
+<span class="sig-prename descclassname"><span class="pre">tests.test_fit_star_shape.utils.</span></span><span class="sig-name descname"><span class="pre">make_image_and_source_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sources</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subpix_map</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_fit_star_shape/utils.html#make_image_and_source_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tests.test_fit_star_shape.utils.make_image_and_source_list" title="Permalink to this definition"></a></dt>
+<dd><p>Create an image and a list of the sources in it ready for psf fitting.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sources</strong> – <p>A list of dictionaries with at least the following keywords:</p>
+<ul>
+<li><p>x:    The x coordinate of the source center.</p></li>
+<li><p>y:    The y coordinate of the source center.</p></li>
+<li><p>psf:    An instance of some sub-class of PSFBase giving the
+sources’s PSF. It should already be scaled to the desired
+flux.</p></li>
+<li><dl class="simple">
+<dt>enabled(optional):    True/False flag of whether to include</dt><dd><p>this source in shape fitting.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</p></li>
+<li><p><strong>subpix_map</strong> – The sub-pixel map to impose on the image. For more
+details see same name argument of Image.add_source.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The sources added to the image. The fields give the variables
+defined for the sources.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy record array</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="tests.test_background.html" class="btn btn-neutral float-right" title="tests.test_background module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="tests.test_fit_star_shape.noiseless_tests.html" class="btn btn-neutral" title="tests.test_fit_star_shape.noiseless_tests module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="tests.test_fit_star_shape.noiseless_tests.html" class="btn btn-neutral float-left" title="tests.test_fit_star_shape.noiseless_tests module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tests.test_background.html" class="btn btn-neutral float-right" title="tests.test_background module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &copy; Copyright 2018, Kaloyan Penev
-
-    </p>
+    <p>&#169; Copyright 2018, Kaloyan Penev.</p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
-
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-
-  
-
-  <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });

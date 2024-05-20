@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>superphot.piecewise_bicubic_psf module &mdash; SuperPhot Python Interface  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/unlimited_width.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="superphot.piecewise_bicubic_psf_map module" href="superphot.piecewise_bicubic_psf_map.html" />
+    <link rel="prev" title="superphot.hat_masks module" href="superphot.hat_masks.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            SuperPhot Python Interface
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Unix Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html#windows-installation">Windows Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit_tests.html">Unit Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python_interface/index.html">Python Interface Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Python Package Implementation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="superphot.html">superphot package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="superphot.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="superphot.html#subpackages">Subpackages</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="superphot.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="superphot.background.html">superphot.background module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="superphot.fit_star_shape.html">superphot.fit_star_shape module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="superphot.hat_masks.html">superphot.hat_masks module</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">superphot.piecewise_bicubic_psf module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="superphot.piecewise_bicubic_psf_map.html">superphot.piecewise_bicubic_psf_map module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="superphot.psf_base.html">superphot.psf_base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="superphot.subpixphot.html">superphot.subpixphot module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="superphot.superphot_io_tree.html">superphot.superphot_io_tree module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cpp_api.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../c_api.html">C API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_unit_tests/modules.html">Unit Testing Code</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SuperPhot Python Interface</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">superphot</a></li>
+          <li class="breadcrumb-item"><a href="superphot.html">superphot package</a></li>
+      <li class="breadcrumb-item active">superphot.piecewise_bicubic_psf module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_implementation/superphot.piecewise_bicubic_psf.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-superphot.piecewise_bicubic_psf">
+<span id="superphot-piecewise-bicubic-psf-module"></span><h1>superphot.piecewise_bicubic_psf module<a class="headerlink" href="#module-superphot.piecewise_bicubic_psf" title="Permalink to this heading"></a></h1>
+<section id="class-inheritance-diagram">
+<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this heading"></a></h2>
+<div class="graphviz"><img src="../_images/inheritance-7b02eb2646b601d482a0f686233c283676cdd8fa.png" alt="Inheritance diagram of PSFBase, PiecewiseBicubicPSF, c_double" usemap="#inheritancedbf6d61619" class="inheritance graphviz" /></div>
+<map id="inheritancedbf6d61619" name="inheritancedbf6d61619">
+<area shape="rect" id="node4" href="superphot.psf_base.html#superphot.psf_base.PSFBase" target="_top" title="The base class for all supported PSFs." alt="" coords="81,80,276,107"/>
+<area shape="rect" id="node3" href="#superphot.piecewise_bicubic_psf.PiecewiseBicubicPSF" target="_top" title="Implement the PSFBase methods for libary PSFs." alt="" coords="5,155,352,181"/>
+</map><p>A wrapper class for working with PSFs/PRFs from the C/C++ library.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="superphot.piecewise_bicubic_psf.PiecewiseBicubicPSF">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">superphot.piecewise_bicubic_psf.</span></span><span class="sig-name descname"><span class="pre">PiecewiseBicubicPSF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">library_psf</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/piecewise_bicubic_psf.html#PiecewiseBicubicPSF"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#superphot.piecewise_bicubic_psf.PiecewiseBicubicPSF" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="superphot.psf_base.html#superphot.psf_base.PSFBase" title="superphot.psf_base.PSFBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PSFBase</span></code></a></p>
+<div class="graphviz"><img src="../_images/inheritance-0b8d1b28a24928bcf5baff585728c3ec0c135616.png" alt="Inheritance diagram of superphot.piecewise_bicubic_psf.PiecewiseBicubicPSF" usemap="#inheritancef87b5605c1" class="inheritance graphviz" /></div>
+<map id="inheritancef87b5605c1" name="inheritancef87b5605c1">
+<area shape="rect" id="node3" href="superphot.psf_base.html#superphot.psf_base.PSFBase" target="_top" title="The base class for all supported PSFs." alt="" coords="81,80,276,107"/>
+<area shape="rect" id="node2" href="#superphot.piecewise_bicubic_psf.PiecewiseBicubicPSF" target="_top" title="Implement the PSFBase methods for libary PSFs." alt="" coords="5,155,352,181"/>
+</map><p>Implement the PSFBase methods for libary PSFs.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="superphot.piecewise_bicubic_psf.PiecewiseBicubicPSF.__call__">
+<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/piecewise_bicubic_psf.html#PiecewiseBicubicPSF.__call__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#superphot.piecewise_bicubic_psf.PiecewiseBicubicPSF.__call__" title="Permalink to this definition"></a></dt>
+<dd><p>Return the value(s) of the PSF at the given point(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em> or </em><em>numpy array</em>) – The horizontal offset(s) from center of
+the point at which to return the PSF value.</p></li>
+<li><p><strong>y</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em> or </em><em>numpy array</em>) – The vertical offset(s) from center of
+the point at which to return the PSF value.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The value(s) of the PSF at (x, y) relative to the source center.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="superphot.piecewise_bicubic_psf.PiecewiseBicubicPSF.__del__">
+<span class="sig-name descname"><span class="pre">__del__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/piecewise_bicubic_psf.html#PiecewiseBicubicPSF.__del__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#superphot.piecewise_bicubic_psf.PiecewiseBicubicPSF.__del__" title="Permalink to this definition"></a></dt>
+<dd><p>Delete the underlying library PSF.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="superphot.piecewise_bicubic_psf.PiecewiseBicubicPSF.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">library_psf</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/piecewise_bicubic_psf.html#PiecewiseBicubicPSF.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#superphot.piecewise_bicubic_psf.PiecewiseBicubicPSF.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>Wrap the given library PSF in a convenient python interface.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="superphot.piecewise_bicubic_psf.PiecewiseBicubicPSF.get_down_range">
+<span class="sig-name descname"><span class="pre">get_down_range</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/piecewise_bicubic_psf.html#PiecewiseBicubicPSF.get_down_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#superphot.piecewise_bicubic_psf.PiecewiseBicubicPSF.get_down_range" title="Permalink to this definition"></a></dt>
+<dd><p>Return how far the PSF extends downward of center.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="superphot.piecewise_bicubic_psf.PiecewiseBicubicPSF.get_left_range">
+<span class="sig-name descname"><span class="pre">get_left_range</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/piecewise_bicubic_psf.html#PiecewiseBicubicPSF.get_left_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#superphot.piecewise_bicubic_psf.PiecewiseBicubicPSF.get_left_range" title="Permalink to this definition"></a></dt>
+<dd><p>Return how far the PSF extends to the left of center.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="superphot.piecewise_bicubic_psf.PiecewiseBicubicPSF.get_right_range">
+<span class="sig-name descname"><span class="pre">get_right_range</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/piecewise_bicubic_psf.html#PiecewiseBicubicPSF.get_right_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#superphot.piecewise_bicubic_psf.PiecewiseBicubicPSF.get_right_range" title="Permalink to this definition"></a></dt>
+<dd><p>Return how far the PSF extends to the right of center.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="superphot.piecewise_bicubic_psf.PiecewiseBicubicPSF.get_up_range">
+<span class="sig-name descname"><span class="pre">get_up_range</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/piecewise_bicubic_psf.html#PiecewiseBicubicPSF.get_up_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#superphot.piecewise_bicubic_psf.PiecewiseBicubicPSF.get_up_range" title="Permalink to this definition"></a></dt>
+<dd><p>Return how far the PSF extends upward of center.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="superphot.piecewise_bicubic_psf.PiecewiseBicubicPSF.integrate">
+<span class="sig-name descname"><span class="pre">integrate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">circle_radius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/superphot/piecewise_bicubic_psf.html#PiecewiseBicubicPSF.integrate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#superphot.piecewise_bicubic_psf.PiecewiseBicubicPSF.integrate" title="Permalink to this definition"></a></dt>
+<dd><p>Return integrals of the PSF over circle-rectangle overlaps.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>center_x</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em> or </em><em>array</em>) – The x coordinate(s) of the center(s) of
+the rectangle(s) to integrate over.</p></li>
+<li><p><strong>center_y</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em> or </em><em>array</em>) – The y coordinate(s) of the center(s) of
+the rectangle(s) to integrate over.</p></li>
+<li><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em> or </em><em>array</em>) – The width(s) of the rectangle(s).</p></li>
+<li><p><strong>height</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em> or </em><em>array</em>) – The height(s) of the rectangle(s).</p></li>
+<li><p><strong>circle_radius</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em> or </em><em>array</em>) – The rad(ii/us) of the circle(s).
+For zero entries or None, the integral is over the full
+rectangle(s).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The integral of the PSF over the specified area(s).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a> or array</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="superphot.hat_masks.html" class="btn btn-neutral float-left" title="superphot.hat_masks module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="superphot.piecewise_bicubic_psf_map.html" class="btn btn-neutral float-right" title="superphot.piecewise_bicubic_psf_map module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2018, Kaloyan Penev.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

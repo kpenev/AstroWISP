@@ -1,87 +1,57 @@
-
-
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en">
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>tests.test_fake_image module &mdash; SuperPhot Python Interface  documentation</title>
-  
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/unlimited_width.css" />
 
   
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
-  
-  
-
-  
-
-  
-  
-    
-
-  
-
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/unlimited_width.css" type="text/css" />
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="tests.test_piecewise_bicubic_psf module" href="tests.test_piecewise_bicubic_psf.html" />
     <link rel="prev" title="tests.test_background module" href="tests.test_background.html" /> 
-
-  
-  <script src="../_static/js/modernizr.min.js"></script>
-
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
-          
+        <div class="wy-side-nav-search" >
 
           
-            <a href="../index.html" class="icon icon-home"> SuperPhot Python Interface
           
-
-          
+          <a href="../index.html" class="icon icon-home">
+            SuperPhot Python Interface
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Unix Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html#windows-installation">Windows Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit_tests.html">Unit Tests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../python_interface/index.html">Python Interface Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../_implementation/modules.html">Python Package Implementation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cpp_api.html">C++ API</a></li>
@@ -102,201 +72,114 @@
 </li>
 </ul>
 
-            
-          
         </div>
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">SuperPhot Python Interface</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../index.html">Docs</a> &raquo;</li>
-        
-          <li><a href="modules.html">tests</a> &raquo;</li>
-        
-          <li><a href="tests.html">tests package</a> &raquo;</li>
-        
-      <li>tests.test_fake_image module</li>
-    
-    
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">tests</a></li>
+          <li class="breadcrumb-item"><a href="tests.html">tests package</a></li>
+      <li class="breadcrumb-item active">tests.test_fake_image module</li>
       <li class="wy-breadcrumbs-aside">
-        
-            
             <a href="../_sources/_unit_tests/tests.test_fake_image.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  
-<style>
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast,
-.nboutput.nblast {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast + .nbinput {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-</style>
-<div class="section" id="module-tests.test_fake_image">
-<span id="tests-test-fake-image-module"></span><h1>tests.test_fake_image module<a class="headerlink" href="#module-tests.test_fake_image" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="class-inheritance-diagram">
-<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this headline">¶</a></h2>
-<div class="graphviz"><img src="../_images/inheritance-857d7817f0bb86bea56796a02cd80aa44b5f9833.png" alt="Inheritance diagram of FloatTestCase, Image, PiecewiseBicubicPSF, TestImage" usemap="#inheritance5be4968c28" class="inheritance graphviz" /></div>
+             
+  <section id="module-tests.test_fake_image">
+<span id="tests-test-fake-image-module"></span><h1>tests.test_fake_image module<a class="headerlink" href="#module-tests.test_fake_image" title="Permalink to this heading"></a></h1>
+<section id="class-inheritance-diagram">
+<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this heading"></a></h2>
+<div class="graphviz"><img src="../_images/inheritance-6eb58e4cd91eb664a6809f8d18a8730e2aef3451.png" alt="Inheritance diagram of FloatTestCase, Image, PiecewiseBicubicPSF, TestImage" usemap="#inheritance5be4968c28" class="inheritance graphviz" /></div>
 <map id="inheritance5be4968c28" name="inheritance5be4968c28">
-<area shape="rect" id="node6" href="../_implementation/superphot.fake_image.psf_base.html#superphot.fake_image.psf_base.PSFBase" target="_top" title="The base class for all supported PSFs." alt="" coords="88,79,377,104"/>
-<area shape="rect" id="node3" href="../_implementation/superphot.fake_image.image.html#superphot.fake_image.image.Image" target="_top" title="A base class for fake images." alt="" coords="402,79,661,104"/>
-<area shape="rect" id="node4" href="../_implementation/superphot.fake_image.piecewise_bicubic_psf.html#superphot.fake_image.piecewise_bicubic_psf.PiecewiseBicubicPSF" target="_top" title="A piecewise PSF class where the PSF over each piece is a bi&#45;cubic function." alt="" coords="5,225,460,251"/>
-<area shape="rect" id="node5" href="../_implementation/superphot.fake_image.piecewise_psf.html#superphot.fake_image.piecewise_psf.PiecewisePSF" target="_top" title="Base clas for PSFs defined on a grid of pieces." alt="" coords="55,152,410,177"/>
-<area shape="rect" id="node7" href="#tests.test_fake_image.TestImage" target="_top" title="Make sure the Image class functions as expected." alt="" coords="667,152,905,177"/>
-<area shape="rect" id="node8" href="tests.utilities.html#tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="685,79,887,104"/>
+<area shape="rect" id="node6" href="../_implementation/superphot.psf_base.html#superphot.psf_base.PSFBase" target="_top" title="The base class for all supported PSFs." alt="" coords="116,80,312,107"/>
+<area shape="rect" id="node3" href="../_implementation/superphot.fake_image.image.html#superphot.fake_image.image.Image" target="_top" title="A base class for fake images." alt="" coords="336,80,564,107"/>
+<area shape="rect" id="node4" href="../_implementation/superphot.fake_image.piecewise_bicubic_psf.html#superphot.fake_image.piecewise_bicubic_psf.PiecewiseBicubicPSF" target="_top" title="A piecewise PSF class where the PSF over each piece is a bi&#45;cubic function." alt="" coords="5,229,423,256"/>
+<area shape="rect" id="node5" href="../_implementation/superphot.fake_image.piecewise_psf.html#superphot.fake_image.piecewise_psf.PiecewisePSF" target="_top" title="Base clas for PSFs defined on a grid of pieces." alt="" coords="51,155,377,181"/>
+<area shape="rect" id="node7" href="#tests.test_fake_image.TestImage" target="_top" title="Make sure the Image class functions as expected." alt="" coords="573,155,788,181"/>
+<area shape="rect" id="node8" href="tests.utilities.html#tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="589,80,773,107"/>
 </map><p>Unittest test case for the superphot.fake_image.image.Image class.</p>
-<dl class="class">
-<dt id="tests.test_fake_image.TestImage">
-<em class="property">class </em><code class="descclassname">tests.test_fake_image.</code><code class="descname">TestImage</code><span class="sig-paren">(</span><em>methodName='runTest'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_fake_image.html#TestImage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_fake_image.TestImage" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="tests.utilities.html#tests.utilities.FloatTestCase" title="tests.utilities.FloatTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">tests.utilities.FloatTestCase</span></code></a></p>
-<div class="graphviz"><img src="../_images/inheritance-d5a056c0dedde948e3e1d4fe08eb3aa13a6d766d.png" alt="Inheritance diagram of tests.test_fake_image.TestImage" usemap="#inheritancedeed27bb82" class="inheritance graphviz" /></div>
+<dl class="py class">
+<dt class="sig sig-object py" id="tests.test_fake_image.TestImage">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tests.test_fake_image.</span></span><span class="sig-name descname"><span class="pre">TestImage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_fake_image.html#TestImage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tests.test_fake_image.TestImage" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="tests.utilities.html#tests.utilities.FloatTestCase" title="tests.utilities.FloatTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">FloatTestCase</span></code></a></p>
+<div class="graphviz"><img src="../_images/inheritance-1a53d8f5ee04ea603447938bf944248614d56821.png" alt="Inheritance diagram of tests.test_fake_image.TestImage" usemap="#inheritancedeed27bb82" class="inheritance graphviz" /></div>
 <map id="inheritancedeed27bb82" name="inheritancedeed27bb82">
-<area shape="rect" id="node1" href="#tests.test_fake_image.TestImage" target="_top" title="Make sure the Image class functions as expected." alt="" coords="5,152,244,177"/>
-<area shape="rect" id="node2" href="tests.utilities.html#tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="24,79,225,104"/>
+<area shape="rect" id="node1" href="#tests.test_fake_image.TestImage" target="_top" title="Make sure the Image class functions as expected." alt="" coords="5,155,221,181"/>
+<area shape="rect" id="node2" href="tests.utilities.html#tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="21,80,205,107"/>
 </map><p>Make sure the Image class functions as expected.</p>
-<dl class="method">
-<dt id="tests.test_fake_image.TestImage.assertExpectedImage">
-<code class="descname">assertExpectedImage</code><span class="sig-paren">(</span><em>got</em>, <em>expected</em>, <em>message</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_fake_image.html#TestImage.assertExpectedImage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_fake_image.TestImage.assertExpectedImage" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="tests.test_fake_image.TestImage.assertExpectedImage">
+<span class="sig-name descname"><span class="pre">assertExpectedImage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">got</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expected</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_fake_image.html#TestImage.assertExpectedImage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tests.test_fake_image.TestImage.assertExpectedImage" title="Permalink to this definition"></a></dt>
 <dd><p>Check if an image is the same as expected.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="tests.test_fake_image.TestImage.setUp">
-<code class="descname">setUp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_fake_image.html#TestImage.setUp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_fake_image.TestImage.setUp" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="tests.test_fake_image.TestImage.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_fake_image.html#TestImage.setUp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tests.test_fake_image.TestImage.setUp" title="Permalink to this definition"></a></dt>
 <dd><p>Set tolerance to 100 x epsilon.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="tests.test_fake_image.TestImage.test_misaligned_source">
-<code class="descname">test_misaligned_source</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_fake_image.html#TestImage.test_misaligned_source"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_fake_image.TestImage.test_misaligned_source" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="tests.test_fake_image.TestImage.test_misaligned_source">
+<span class="sig-name descname"><span class="pre">test_misaligned_source</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_fake_image.html#TestImage.test_misaligned_source"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tests.test_fake_image.TestImage.test_misaligned_source" title="Permalink to this definition"></a></dt>
 <dd><p>Test behavior with a single source not alinged with pixels.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="tests.test_fake_image.TestImage.test_no_source">
-<code class="descname">test_no_source</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_fake_image.html#TestImage.test_no_source"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_fake_image.TestImage.test_no_source" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="tests.test_fake_image.TestImage.test_no_source">
+<span class="sig-name descname"><span class="pre">test_no_source</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_fake_image.html#TestImage.test_no_source"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tests.test_fake_image.TestImage.test_no_source" title="Permalink to this definition"></a></dt>
 <dd><p>Test behavior of images with no sources.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="tests.test_fake_image.TestImage.test_pix_aligned_source">
-<code class="descname">test_pix_aligned_source</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_fake_image.html#TestImage.test_pix_aligned_source"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.test_fake_image.TestImage.test_pix_aligned_source" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="tests.test_fake_image.TestImage.test_pix_aligned_source">
+<span class="sig-name descname"><span class="pre">test_pix_aligned_source</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_fake_image.html#TestImage.test_pix_aligned_source"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tests.test_fake_image.TestImage.test_pix_aligned_source" title="Permalink to this definition"></a></dt>
 <dd><p>Test behavior with a single source covering exact pixels.</p>
 </dd></dl>
 
 </dd></dl>
 
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="tests.test_piecewise_bicubic_psf.html" class="btn btn-neutral float-right" title="tests.test_piecewise_bicubic_psf module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="tests.test_background.html" class="btn btn-neutral" title="tests.test_background module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="tests.test_background.html" class="btn btn-neutral float-left" title="tests.test_background module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tests.test_piecewise_bicubic_psf.html" class="btn btn-neutral float-right" title="tests.test_piecewise_bicubic_psf module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &copy; Copyright 2018, Kaloyan Penev
-
-    </p>
+    <p>&#169; Copyright 2018, Kaloyan Penev.</p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
-
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-
-  
-
-  <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });

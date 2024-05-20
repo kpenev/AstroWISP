@@ -1,5 +1,0 @@
-<map id="inheritance25d02e3b0b" name="inheritance25d02e3b0b">
-<area shape="rect" id="node1" href="#tests.test_background.TestAnnulusBackground" target="_top" title="Test background extraction based on annuli around sources." alt="" coords="5,152,331,177"/>
-<area shape="rect" id="node2" href="tests.utilities.html#tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="67,79,269,104"/>
-<area shape="rect" id="node3" title="A class whose instances are single test cases." alt="" coords="84,5,252,31"/>
-</map>

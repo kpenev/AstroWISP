@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unix Installation &mdash; SuperPhot Python Interface  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+      <link rel="stylesheet" type="text/css" href="_static/unlimited_width.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Unit Tests" href="unit_tests.html" />
+    <link rel="prev" title="Welcome to SuperPhot’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            SuperPhot Python Interface
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Unix Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installing-java-jdk-8">Installing Java JDK 8+</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-gradle">Installing Gradle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-libraries-dependencies">Installing Libraries Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-superphot">Installing SuperPhot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#windows-installation">Windows Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">Installing Java JDK 8+</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="unit_tests.html">Unit Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_interface/index.html">Python Interface Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_implementation/modules.html">Python Package Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cpp_api.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c_api.html">C API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_unit_tests/modules.html">Unit Testing Code</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">SuperPhot Python Interface</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Unix Installation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/installation.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="unix-installation">
+<h1>Unix Installation<a class="headerlink" href="#unix-installation" title="Permalink to this heading"></a></h1>
+<section id="installing-java-jdk-8">
+<h2>Installing Java JDK 8+<a class="headerlink" href="#installing-java-jdk-8" title="Permalink to this heading"></a></h2>
+<ol class="arabic">
+<li><p>Check if Java is installed, and if so the version, using:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ java -version
+</pre></div>
+</div>
+</li>
+<li><p>If it is not installed, install the latest version of java using the following in a console:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apt install default-jre
+</pre></div>
+</div>
+</li>
+<li><p>After installing the latest version, or if it was already installed, check to insure the version is JDK8+.</p>
+<p>It should output something similar:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">openjdk</span> <span class="n">version</span> <span class="s2">&quot;11.0.11&quot;</span> <span class="mi">2021</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">20</span>
+<span class="n">OpenJDK</span> <span class="n">Runtime</span> <span class="n">Environment</span> <span class="p">(</span><span class="n">build</span> <span class="mf">11.0.11</span><span class="o">+</span><span class="mi">9</span><span class="o">-</span><span class="n">Ubuntu</span><span class="o">-</span><span class="mi">0</span><span class="n">ubuntu2</span><span class="p">)</span>
+<span class="n">OpenJDK</span> <span class="mi">64</span><span class="o">-</span><span class="n">Bit</span> <span class="n">Server</span> <span class="n">VM</span> <span class="p">(</span><span class="n">build</span> <span class="mf">11.0.11</span><span class="o">+</span><span class="mi">9</span><span class="o">-</span><span class="n">Ubuntu</span><span class="o">-</span><span class="mi">0</span><span class="n">ubuntu2</span><span class="p">,</span> <span class="n">mixed</span> <span class="n">mode</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="installing-gradle">
+<h2>Installing Gradle<a class="headerlink" href="#installing-gradle" title="Permalink to this heading"></a></h2>
+<ol class="arabic">
+<li><p><a class="reference external" href="https://gradle.org/releases/">Download</a> the latest gradle distribution
+which comes in two flavors:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Binary-only (bin)</p></li>
+<li><p>Complete (all), with documents and sources</p></li>
+</ul>
+</div></blockquote>
+<p>Our recommendation is to download the binary-only version as the documents
+and sources can be viewed online.</p>
+</li>
+<li><p>Unpack the distribution; unzip the distribution zip file in the directory of
+your choosing, e.g.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mkdir /opt/gradle
+$ unzip -d /opt/gradle gradle-7.1-bin.zip
+$ ls /opt/gradle/gradle-7.1
+bin  init.d  lib  LICENSE  NOTICE  README
+</pre></div>
+</div>
+</li>
+<li><p>Configure the system environment; configure your <code class="docutils literal notranslate"><span class="pre">PATH</span></code> environment
+variable to include the <code class="docutils literal notranslate"><span class="pre">bin</span></code> directory of the unzipped distribution by
+editing your bashrc or bash_profile file, e.g.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ gedit ~/.bashrc
+</pre></div>
+</div>
+</li>
+</ol>
+<blockquote>
+<div><p>and at the bottom line of this bashrc (or bash_profile) file insert the following: <code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">PATH=$PATH:/opt/gradle/gradle-7.1/bin</span></code></p>
+</div></blockquote>
+<ol class="arabic">
+<li><p>Verify your installation; open a console and run <code class="docutils literal notranslate"><span class="pre">gradle</span> <span class="pre">-v</span></code> to run gradle and display the version, e.g.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ gradle -v
+------------------------------------------------------------
+Gradle 7.1
+------------------------------------------------------------
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="installing-libraries-dependencies">
+<h2>Installing Libraries Dependencies<a class="headerlink" href="#installing-libraries-dependencies" title="Permalink to this heading"></a></h2>
+<ol class="arabic">
+<li><p>Installing CFITSIO:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ tar xf cfitsio_latest.tar.gz
+$ cd cfitsio-X.XX                   # Replace X.XX with version
+$ ./configure --prefix=/usr/local --enable-sse2 --enable-reentrant
+$ make
+$ make utils
+$ sudo make install
+$ ./testprog &gt; testprog.lis
+$ diff testprog.lis testprog.out    # Should have no output
+$ cmp testprog.fit testprog.std     # Should have no output
+$ rm cookbook fitscopy imcopy smem speed testprog
+</pre></div>
+</div>
+</li>
+</ol>
+<p>The CFITSIO library should be tested by building and running
+the testprog.c program that is included with the release.
+On Unix systems, type:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span> <span class="n">make</span> <span class="n">testprog</span>
+<span class="o">%</span> <span class="n">testprog</span> <span class="o">&gt;</span> <span class="n">testprog</span><span class="o">.</span><span class="n">lis</span>
+<span class="o">%</span> <span class="n">diff</span> <span class="n">testprog</span><span class="o">.</span><span class="n">lis</span> <span class="n">testprog</span><span class="o">.</span><span class="n">out</span>
+<span class="o">%</span> <span class="n">cmp</span> <span class="n">testprog</span><span class="o">.</span><span class="n">fit</span> <span class="n">testprog</span><span class="o">.</span><span class="n">std</span>
+</pre></div>
+</div>
+<p>On VMS systems, (assuming cc is the name of the C compiler command), type:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cc testprog.c
+$ link testprog, cfitsio/lib
+$ run testprog
+</pre></div>
+</div>
+<p>The testprog program should produce a FITS file called <cite>testprog.fit</cite>
+that is identical to the testprog.std FITS file included in this
+release.  The diagnostic messages (which were piped to the file
+testprog.lis in the Unix example) should be identical to the listing
+contained in the file testprog.out.  The <cite>diff</cite> and <cite>cmp</cite> commands
+shown above should not report any differences in the files.</p>
+<p>Try typing <cite>echo $LD_LIBRARY_PATH</cite></p>
+<ul class="simple">
+<li><p>If it returns nothing, then type</p></li>
+</ul>
+<p><cite>export LD_LIBRARY_PATH=/usr/local/lib</cite></p>
+<ul class="simple">
+<li><p>If it returns something, then type</p></li>
+</ul>
+<p><cite>export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/lib</cite></p>
+<p>ldconfig</p>
+</section>
+<section id="installing-superphot">
+<h2>Installing SuperPhot<a class="headerlink" href="#installing-superphot" title="Permalink to this heading"></a></h2>
+<dl class="simple">
+<dt>Make sure the following libraries are installed:</dt><dd><ul class="simple">
+<li><p>cfitsio</p></li>
+</ul>
+</dd>
+</dl>
+<p>Navigate to the path where the SuperPhot repository was downloaded and run the
+following commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./gradlew clean
+$ ./gradlew build
+</pre></div>
+</div>
+</section>
+</section>
+<section id="windows-installation">
+<h1>Windows Installation<a class="headerlink" href="#windows-installation" title="Permalink to this heading"></a></h1>
+<section id="id1">
+<h2>Installing Java JDK 8+<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
+<p>#use MSVC 2017
+#TODO test gradle wrapper installation
+#TODO edit build.gradle,
+#TODO libz still found?
+#TODO look up windows ldd equivalent (dependency walker may work check, try cygwin newest), if not try to see what works with the current dll’s on Ashkans and hope to god it works :)
+#TODO
+#TODO See if cfitsio is removable at all, look where its included and if feasible to remove (might be good to do surgery and get rid of it at some point)
+#boost requires program options, which arent a header only option
+#TODO figure out dll shared library with Ashkan</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to SuperPhot’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="unit_tests.html" class="btn btn-neutral float-right" title="Unit Tests" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2018, Kaloyan Penev.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

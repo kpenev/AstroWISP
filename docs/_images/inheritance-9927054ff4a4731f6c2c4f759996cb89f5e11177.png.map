@@ -1,6 +1,0 @@
-<map id="inheritance0c0bad10a6" name="inheritance0c0bad10a6">
-<area shape="rect" id="node1" href="../_implementation/superphot.background.html#superphot.background.BackgroundExtractor" target="_top" title="Measure the background level for each source in an image." alt="" coords="5,5,312,31"/>
-<area shape="rect" id="node2" href="#tests.test_background.TestAnnulusBackground" target="_top" title="Test background extraction based on annuli around sources." alt="" coords="257,152,583,177"/>
-<area shape="rect" id="node3" href="tests.utilities.html#tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="319,79,521,104"/>
-<area shape="rect" id="node4" title="A class whose instances are single test cases." alt="" coords="336,5,504,31"/>
-</map>
