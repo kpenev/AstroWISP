@@ -7,19 +7,9 @@ import os.path
 import unittest
 import numpy
 
-sys.path.insert(
-    0,
-    os.path.abspath(
-        os.path.join(
-            os.path.abspath(os.path.dirname(__file__)),
-            '..'
-        )
-    )
-)
-
 #Needs to be after os.path and sys to allow adding the seach path.
 #pylint: disable=wrong-import-position
-from tests.utilities import FloatTestCase
+from superphot.tests.utilities import FloatTestCase
 from superphot import BackgroundExtractor
 #pylint: enable=wrong-import-position
 

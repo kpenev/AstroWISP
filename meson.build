@@ -115,3 +115,4 @@ shared_library(
 )
 
 subdir('PythonPackage/superphot')
+subdir('PythonPackage/tests')

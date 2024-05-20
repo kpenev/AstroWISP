@@ -2,7 +2,6 @@
 
 """Test SuperPhot's fit_star_shape module."""
 
-import sys
 import os.path
 import unittest
 from ctypes import c_ubyte
@@ -11,27 +10,12 @@ import numpy
 
 from superphot import FitStarShape, BackgroundExtractor
 
-_module_path = os.path.abspath(os.path.dirname(__file__))
-sys.path.insert(
-    0,
-    os.path.abspath(
-        os.path.join(
-            _module_path,
-            '..',
-            '..'
-        )
-    )
-)
-
-#Needs to be after os.path and sys to allow adding the seach path.
-#pylint: disable=wrong-import-position
-from tests.utilities import FloatTestCase
-from tests.test_fit_star_shape.utils import\
+from superphot.tests.utilities import FloatTestCase
+from superphot.tests.test_fit_star_shape.utils import\
     make_image_and_source_list,\
     evaluate_psffit_terms
 
 from superphot.fake_image.piecewise_bicubic_psf import PiecewiseBicubicPSF
-#pylint: enable=wrong-import-position
 
 class TestFitStarShapeNoiseless(FloatTestCase):
     """Test piecewise bicubic PSF fitting on noiseless images."""

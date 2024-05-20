@@ -7,10 +7,7 @@ import sys
 import unittest
 import numpy
 
-from tests.utilities import FloatTestCase
-
-sys.path.insert(0,
-                os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from superphot.tests.utilities import FloatTestCase
 
 #Needs to be after os.path and sys to allow adding the seach path.
 #pylint: disable=wrong-import-position
