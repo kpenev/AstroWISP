@@ -1,12 +1,21 @@
+#Control file for cibuildwheel (generate PIP wheels using github actions)
+
 [build-system]
 build-backend = 'mesonpy'
 requires = ['meson-python']
 
-[tool.cibuildwheel]
-build = ['cp37-macosx_x86_64', 'cp37-win_amd64']
+[tool.cibuildwheel.macos]
+build = ['cp37-macosx_x86_64']
+
+[tool.cibuildwheel.windows]
+build = ['cp37-win_amd64']
+
+[tool.cibuildwheel.linux]
+build = ['cp38-manylinux_x86_64']
 
 [tool.meson-python.args]
 compile = ['-vvv']
 
-[tool.cibuildwheel.windows]
-repair-wheel-command = ""
+#Nothing to install from Eigen so avoid triggering unnecessary wheel repair,
+#which is not implemented for windows).
+install = ['--skip-subprojects=eigen']

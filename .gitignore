@@ -11,3 +11,4 @@ doc_src
 .ipynb_checkpoints
 -
 .AppleDouble
+*.whl
