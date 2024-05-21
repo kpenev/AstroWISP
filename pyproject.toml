@@ -21,10 +21,6 @@ authors = [
     {
         name = 'Istvan Domsa',
         email = 'istvan.domsa@gmail.com'
-    },
-    {
-        name = 'Zoltan Csubry',
-        email = 'zcsubry@astro.princeton.edu'
     }
 ]
 
