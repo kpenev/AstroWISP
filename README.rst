@@ -1,5 +1,5 @@
-SuperPhot
-=========
+AstroWISP: **Astro**nomical **W**idefield **I**mages **S**tellar **P**hotometry
+===============================================================================
 
 A tool for obsessive photometry from night sky images.
 
