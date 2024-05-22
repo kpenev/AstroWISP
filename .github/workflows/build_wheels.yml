@@ -11,7 +11,7 @@ jobs:
         # macos-13 is an intel runner, macos-14 is apple silicon
         # So far has succeeded on: macos-13
         #os: [ubuntu-latest, windows-2019, macos-13, macos-14]
-        os: [ubuntu-latest, windows-2019]
+        os: [ubuntu-latest]
 
     steps:
       - uses: actions/checkout@v4
