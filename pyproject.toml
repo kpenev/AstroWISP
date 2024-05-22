@@ -78,8 +78,8 @@ visualize = [
 [tool.cibuildwheel]
 test-requires = ['asteval']
 
-#Asteval requires python >= 3.8
-test-skip = 'cp37-* pp37-*'
+#Asteval requires python >= 3.8 and scipy only available for 64 bit
+test-skip = 'cp37-* pp37-* *-win32'
 
 test-command = [
     'python3 -m astrowisp.tests.test_fake_image',
