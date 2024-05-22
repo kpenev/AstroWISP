@@ -78,6 +78,7 @@ visualize = [
 #[tool.cibuildwheel.linux]
 #build = ['cp38-manylinux_x86_64']
 
+[tool.cibuildwhee.linux]
 skip = ['*-musllinux-*']
 
 [tool.meson-python.args]
