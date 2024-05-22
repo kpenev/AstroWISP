@@ -22,7 +22,6 @@ toolchain = {
 }[compiler_id]
 
 add_project_arguments('-D' + toolchain,
-                      '-DTRACK_PROGRESS',
                       language : 'cpp')
 if get_option('buildtype') == 'debug'
     add_project_arguments('-DVERBOSE_DEBUG', '-DDEBUG', language: 'cpp')
