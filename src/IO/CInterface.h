@@ -62,7 +62,7 @@ extern "C" {
                                    long y_resolution,
                                    char *mask);
 
-    ///Create a tree to hold the results of SuperPhot processing.
+    ///Create a tree to hold the results of AstroWISP processing.
     LIB_PUBLIC H5IODataTree *create_result_tree(
         ///The configuration of the tool being used. Should point to an instance
         ///of some sub-class of IO::CommandLineConfig

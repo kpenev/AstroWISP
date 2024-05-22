@@ -107,13 +107,13 @@ Try typing `echo $LD_LIBRARY_PATH`
 
 ldconfig
 
-Installing SuperPhot
+Installing AstroWISP
 ====================
 
 Make sure the following libraries are installed:
     * cfitsio
 
-Navigate to the path where the SuperPhot repository was downloaded and run the
+Navigate to the path where the AstroWISP repository was downloaded and run the
 following commands::
 
     $ ./gradlew clean

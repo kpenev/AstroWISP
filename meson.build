@@ -1,7 +1,7 @@
 #Control file for meson/meson-python (compiling and PIP packaging)
 
 project(
-    'superphot',
+    'astrowisp',
     'cpp',
     version: '0.0.0',
     meson_version: '>= 1.4.0',
@@ -106,12 +106,11 @@ cpp_src = [
 ]
 
 shared_library(
-    'superphot',
+    'astrowisp',
     cpp_src,
     dependencies: dependencies,
     install: true,
-    install_dir: py.get_install_dir() / 'superphot'
+    install_dir: py.get_install_dir() / 'astrowisp'
 )
 
-subdir('PythonPackage/superphot')
-subdir('PythonPackage/tests')
+subdir('PythonPackage/astrowisp')

@@ -1,9 +1,9 @@
-.. SuperPhot documentation master file, created by
+.. AstroWISP documentation master file, created by
    sphinx-quickstart on Thu May  3 17:42:32 2018.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to SuperPhot's documentation!
+Welcome to AstroWISP's documentation!
 ======================================================
 
 .. toctree::

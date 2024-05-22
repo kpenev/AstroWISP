@@ -19,7 +19,7 @@
 
 namespace Core {
 
-    ///A base class for all sources in SuperPhot.
+    ///A base class for all sources in AstroWISP.
     class LIB_PUBLIC Source : public SourceLocation {
     private:
         ///Is the source enabled (should it be processed?).

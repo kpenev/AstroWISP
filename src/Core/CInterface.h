@@ -36,7 +36,7 @@ extern "C" {
     ///Opaque struct to cast to/from Core::SubPixelMap.
     struct CoreSubPixelMap;
 
-    ///Create and fill image for processing by SuperPhot's tools.
+    ///Create and fill image for processing by AstroWISP's tools.
     LIB_PUBLIC CoreImage *create_core_image(
         ///See same name argument to Core::Image::Image().
         unsigned long x_resolution,

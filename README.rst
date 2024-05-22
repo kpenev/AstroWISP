@@ -4,7 +4,7 @@ AstroWISP: ``Astro``nomical ``W``idefield ``I``mages ``S``tellar ``P``hotometry
 A tool for extracting stellar photometry from widefild color or monochrome 
 images of the night sky
 
-[Full documentation](https://kpenev.github.io/SuperPhot/)
+[Full documentation](https://kpenev.github.io/AstroWISP/)
 
 Currently the following photometry methods are supported, and in the future we
 plan to add Image Subtraction:
@@ -26,7 +26,7 @@ Pixel Response Function, or PRF, incorporates the effect of the detector. The
 value of the PRF at a given offset from the source center gives the value a
 pixel centered at that location should have. 
 
-Superphot allows for both PSF and PRF fitting, imposing a requirement that
+AstroWISP allows for both PSF and PRF fitting, imposing a requirement that
 either function depends smoothly on the properties of the star being fit. The
 dependence is parametrized as an arbitrary polynomial of fnuctions of the
 relevant paramaters. Which properties it is allowed to depend on is entirely up
@@ -39,6 +39,6 @@ images.
 Aperture photometry
 -------------------
 
-Sum-up the flux in a circular aperture centered around each source. Superphot
+Sum-up the flux in a circular aperture centered around each source. AstroWISP
 handles pixels that span the aperture boundary by properly integrating the
 product of th PSF and the sub-pixel sensitivity.

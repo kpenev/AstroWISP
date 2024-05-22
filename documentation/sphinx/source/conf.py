@@ -32,7 +32,7 @@ sys.path.insert(
 
 # -- Project information -----------------------------------------------------
 
-project = 'SuperPhot Python Interface'
+project = 'AstroWISP Python Interface'
 #pylint: disable=redefined-builtin
 copyright = '2018, Kaloyan Penev'
 #pylint: enable=redefined-builtin
@@ -127,7 +127,7 @@ html_static_path = ['_static']
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'SuperPhotdoc'
+htmlhelp_basename = 'AstroWISPdoc'
 
 
 # -- Options for LaTeX output ------------------------------------------------
@@ -156,8 +156,8 @@ latex_elements = {
 latex_documents = [
     (
         master_doc,
-        'SuperPhot.tex',
-        'SuperPhot Documentation',
+        'AstroWISP.tex',
+        'AstroWISP Documentation',
         'Kaloyan Penev',
         'manual'
     ),
@@ -171,8 +171,8 @@ latex_documents = [
 man_pages = [
     (
         master_doc,
-        'superphot',
-        'SuperPhot Documentation',
+        'astrowisp',
+        'AstroWISP Documentation',
         [author],
         1
     )
@@ -187,10 +187,10 @@ man_pages = [
 texinfo_documents = [
     (
         master_doc,
-        'SuperPhot',
-        'SuperPhot Documentation',
+        'AstroWISP',
+        'AstroWISP Documentation',
         author,
-        'SuperPhot',
+        'AstroWISP',
         'One line description of project.',
         'Miscellaneous'
     ),

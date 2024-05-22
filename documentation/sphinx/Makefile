@@ -5,9 +5,9 @@
 SPHINXOPTS  	=
 SPHINXBUILD 	= sphinx-build
 SPHINXAPIDOC	= sphinx-apidoc
-SPHINXPROJ    	= SuperPhot
+SPHINXPROJ    	= AstroWISP
 SOURCEDIR     	= source
-MODULEDIR     	= ../../PythonPackage/superphot
+MODULEDIR     	= ../../PythonPackage/astrowisp
 TESTDIR     	= ../../PythonPackage/tests
 BUILDDIR    	= build
 APIDOCOPTS  	= --force -M --separate

@@ -3,7 +3,7 @@ Measuring Background
 ********************
 
 Photometry starts by determining the background level and its uncertainty for
-each source. At present SuperPhot uses the median average and the scatter around
+each source. At present AstroWISP uses the median average and the scatter around
 it (after outlier rejection) of pixels in an annulus around each source,
 excluding pixels too close to other sources. The user specifies two radii:
 
@@ -18,13 +18,13 @@ excluding pixels too close to other sources. The user specifies two radii:
       of this source or any other source.
 
 Background measurement is performed using the
-:class:`superphot.BackgroundExtractor` class and requires specifying the image,
+:class:`astrowisp.BackgroundExtractor` class and requires specifying the image,
 list of source locations, the inner/outer background radii  and returns
 estimates of the background for each source, its error (standard deviation), and
 the number of pixels that participated in the determination of the background
 value and error::
 
-    from superphot import BackgroundExtractor
+    from astrowisp import BackgroundExtractor
     import numpy.random
 
     image = numpy.random.rand(100, 100)
