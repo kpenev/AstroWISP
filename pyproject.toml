@@ -78,8 +78,18 @@ visualize = [
 #[tool.cibuildwheel.linux]
 #build = ['cp38-manylinux_x86_64']
 
-[tool.cibuildwhee.linux]
+[tool.cibuildwheel]
+test-command = [
+    'python3 -m astrowisp.tests.test_fake_image',
+    'python3 -m astrowisp.tests.test_piecewise_bicubic_psf',
+    'python3 -m astrowisp.tests.test_background',
+    'python3 -m astrowisp.tests.test_fit_star_shape.noiseless_tests',
+]
+
+[tool.cibuildwheel.linux]
 skip = ['*-musllinux-*']
+
+
 
 [tool.meson-python.args]
 compile = ['-vvv']
