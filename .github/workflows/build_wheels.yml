@@ -9,8 +9,9 @@ jobs:
     strategy:
       matrix:
         # macos-13 is an intel runner, macos-14 is apple silicon
-        # TODO: Add macos-14
-        os: [ubuntu-latest, windows-2019, macos-13]
+        # So far has succeeded on: macos-13
+        #os: [ubuntu-latest, windows-2019, macos-13, macos-14]
+        os: [ubuntu-latest, windows-2019]
 
     steps:
       - uses: actions/checkout@v4
