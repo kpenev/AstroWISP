@@ -79,6 +79,8 @@ visualize = [
 #build = ['cp38-manylinux_x86_64']
 
 [tool.cibuildwheel]
+test-requires = ['asteval', 'unittest']
+
 test-command = [
     'python3 -m astrowisp.tests.test_fake_image',
     'python3 -m astrowisp.tests.test_piecewise_bicubic_psf',
