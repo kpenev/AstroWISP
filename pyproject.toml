@@ -76,9 +76,11 @@ visualize = [
 #build = ['cp38-manylinux_x86_64']
 
 [tool.cibuildwheel]
+skip = ['*-musllinux_*']
+
 test-requires = ['asteval']
 
-#Asteval requires python >= 3.8 and scipy only available for 64 bit and cpython
+#Asteval requires python >= 3.8 and scipy wheels only available on some archs
 test-skip = 'cp37-* pp* *-win32 *_i686 *_ppc64le *_s390x'
 
 test-command = [
@@ -87,11 +89,6 @@ test-command = [
     'python3 -m astrowisp.tests.test_background',
     'python3 -m astrowisp.tests.test_fit_star_shape.noiseless_tests',
 ]
-
-[tool.cibuildwheel.linux]
-skip = ['*-musllinux-*']
-
-
 
 [tool.meson-python.args]
 compile = ['-vvv']
