@@ -227,7 +227,7 @@ class TestFitStarShapeNoiseless(FloatTestCase):
                 numpy.array([[0.0, 0.0], [0.0, 4.0]])
         ]:
 
-            print('Fitting for the PSF.')
+            #print('Fitting for the PSF.')
             fit_star_shape = FitStarShape(
                 mode='PSF',
                 grid=[sources[0][0]['psf_args']['boundaries']['x'],
@@ -247,9 +247,9 @@ class TestFitStarShapeNoiseless(FloatTestCase):
             fit_images_and_sources = []
             measure_backgrounds = []
             for sub_image, image_sources in enumerate(sources):
-                print(f'Sub-image #{sub_image:d} sources:\n')
-                for src in image_sources:
-                    print('\t' + repr(src) + '\n')
+                #print(f'Sub-image #{sub_image:d} sources:\n')
+                #for src in image_sources:
+                #    print('\t' + repr(src) + '\n')
                 psf_sources = [
                     {
                         'x': src['x'],
@@ -288,9 +288,9 @@ class TestFitStarShapeNoiseless(FloatTestCase):
 #                                        fit_star_shape.configuration,
 #                                        sub_image)
 
-            print(80*'=')
-            print('Fitting for star shape')
-            print(80*'=')
+            #print(80*'=')
+            #print('Fitting for star shape')
+            #print(80*'=')
             result_tree = fit_star_shape.fit(
                 fit_images_and_sources,
                 measure_backgrounds
@@ -303,7 +303,9 @@ class TestFitStarShapeNoiseless(FloatTestCase):
                     image_sources,
                     len(psffit_terms)
                 )
-                print('Finished checking results for image ' + str(image_index))
+                #print('Finished checking results for image '
+                #      +
+                #      str(image_index))
 
     def test_single_source(self):
         """Test fitting a single source in the center of the image."""
