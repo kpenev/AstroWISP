@@ -84,6 +84,9 @@ test-requires = ['asteval']
 test-skip = 'cp37-* pp* *-win32 *_i686 *_ppc64le *_s390x'
 
 test-command = [
+    'cd d/',
+    'echo {package}',
+    'ls {package}',
     'python3 -m astrowisp.tests.test_fake_image',
     'python3 -m astrowisp.tests.test_piecewise_bicubic_psf',
     'python3 -m astrowisp.tests.test_background',
