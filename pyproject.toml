@@ -57,10 +57,7 @@ source = 'https://github.com/kpenev/AstroWISP'
 documentation = 'https://kpenev.github.io/AstroWISP/'
 
 [project.optional-dependencies]
-test = [
-    'asteval',
-    'unittest'
-]
+test = ['asteval']
 
 visualize = [
     'configargparse',
@@ -79,7 +76,7 @@ visualize = [
 #build = ['cp38-manylinux_x86_64']
 
 [tool.cibuildwheel]
-test-requires = ['asteval', 'unittest']
+test-requires = ['asteval']
 
 #Asteval requires python >= 3.8
 test-skip = 'cp37-* pp37-*'
