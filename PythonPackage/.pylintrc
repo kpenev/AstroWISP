@@ -13,6 +13,12 @@ ignore=CVS
 # regex matches against base names, not paths.
 ignore-patterns=
 
+# Add files or directories matching the regular expressions patterns to the
+# ignore-list. The regex matches against paths and can be in Posix or Windows
+# format. Because '\\' represents the directory delimiter on Windows systems, it
+# can't be used as an escape character. (default: []) 
+ignore-paths=.*astrowisp/tests/fitpsf
+
 # Python code to execute, usually for sys.path manipulation such as
 # pygtk.require().
 #init-hook=
@@ -226,6 +232,8 @@ function-naming-style=snake_case
 good-names=i,
            j,
            k,
+           x,
+           y,
            ex,
            Run,
            _
@@ -290,7 +298,7 @@ indent-after-paren=4
 indent-string='    '
 
 # Maximum number of characters on a single line.
-max-line-length=100
+max-line-length=80
 
 # Maximum number of lines in a module
 max-module-lines=1000
@@ -531,4 +539,4 @@ known-third-party=enchant
 
 # Exceptions that will emit a warning when being caught. Defaults to
 # "Exception"
-overgeneral-exceptions=Exception
+overgeneral-exceptions=builtins.Exception

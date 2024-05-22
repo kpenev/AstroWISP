@@ -9,14 +9,15 @@ import subprocess
 from ctypes import c_double, c_char
 
 from matplotlib import pyplot
-from mpl_toolkits import mplot3d
 import scipy
 import scipy.spatial
 import scipy.stats
-import numpy
+#import numpy
 from scipy.interpolate import SmoothBivariateSpline
 try:
+    #pylint: disable=import-error
     import xalglib
+    #pylint: enable=import-error
 finally:
     pass
 from astropy.io import fits
@@ -34,6 +35,7 @@ from astrowisp.utils.file_utilities import\
     prepare_file_output
 from astrowisp.utils import flux_from_magnitude
 
+#pylint: disable=too-many-statements
 def parse_command_line(parser=None,
                        assume_sources=False,
                        add_config_file=True,
@@ -61,7 +63,7 @@ def parse_command_line(parser=None,
 
             setattr(namespace,
                     self.dest,
-                    dict(statistic=values[0], bins=int(values[1])))
+                    {'statistic': values[0], 'bins': int(values[1])})
     #pylint: enable=too-few-public-methods
 
     def parse_image_split(split_str):
@@ -166,7 +168,7 @@ def parse_command_line(parser=None,
     parser.add_argument(
         '--add-binned',
         nargs=2,
-        default=dict(),
+        default={},
         action=ValidateBinning,
         metavar=('STATISTIC', 'NBINS'),
         help='If supplied, in addition to pixel values, a binned curve is also '
@@ -372,6 +374,7 @@ def parse_command_line(parser=None,
         cmdline_args.slice = [parse_slice('x = 0 +- 0.2'),
                               parse_slice('y = 0 +- 0.2')]
     return cmdline_args
+#pylint: enable=too-many-statements
 
 
 def get_trans_fname(frame_fname, trans_pattern):
@@ -396,9 +399,7 @@ def get_trans_fname(frame_fname, trans_pattern):
     )
 
     if not os.path.exists(trans_fname):
-        raise IOError('Transformation file %s does not exist!'
-                      %
-                      trans_fname)
+        raise IOError(f'Transformation file {trans_fname!r} does not exist!')
 
     return trans_fname
 
@@ -435,7 +436,7 @@ def get_source_positions(catalogue_fname, trans_fname, image_resolution):
         )
         #pylint: enable=invalid-name
 
-    with open(trans_fname) as trans:
+    with open(trans_fname, encoding='utf-8') as trans:
         for line in trans:
             if line.startswith('# 2MASS:'):
                 field_center = tuple(line.split()[2:4])
@@ -444,7 +445,7 @@ def get_source_positions(catalogue_fname, trans_fname, image_resolution):
         [
             'grtrans',
             '--input', catalogue_fname,
-            '--wcs', 'tan,degrees,ra=%s,dec=%s' % field_center,
+            '--wcs', f'tan,degrees,ra={field_center[0]},dec={field_center[1]}',
             '--col-radec', '2,3',
             '--col-out', '2,3',
             '--output', '-'
@@ -573,7 +574,7 @@ def get_source_info(*,
     src_x = scipy.fromiter((pos[0] for pos in source_positions), dtype=c_double)
     src_y = scipy.fromiter((pos[1] for pos in source_positions), dtype=c_double)
     for int_id in range(result.size):
-        result['ID'][int_id] = '%5.5d' % int_id
+        result['ID'][int_id] = f'{int_id:05d}'
     result['x'] = src_x
     result['y'] = src_y
 
@@ -762,6 +763,8 @@ def get_prf_data(pixel_values,
     ))
 
 
+#TODO: see if can be fixed
+#pylint: disable=too-many-locals
 def plot_prf_slice(prf_data,
                    spline,
                    *,
@@ -866,6 +869,7 @@ def plot_prf_slice(prf_data,
             zorder=30,
             alpha=0.7
         )
+#pylint: enable=too-many-locals
 
 
 def plot_entire_prf(cmdline_args,
@@ -1038,11 +1042,15 @@ def plot_3d_prf(cmdline_args, meshgrid_x, meshgrid_y, prf_slice_splines):
 
     def plot_3d_slice(spline, meshgrid_x, meshgrid_y, stride, linewidths):
         """Plot the 3D PRF of one slice of the image."""
-        ax = pyplot.axes(projection='3d')
-        ax.contour3D(meshgrid_x,
-                     meshgrid_y,
-                     spline.reshape(meshgrid_x.shape),
-                     stride)
+        pyplot.axes(
+            projection='3d'
+        ).contour3D(
+            meshgrid_x,
+            meshgrid_y,
+            spline.reshape(meshgrid_x.shape),
+            stride,
+            linewidths=linewidths
+        )
 
     def get_3d_plot_tasks(cmdline_args):
         """
@@ -1117,12 +1125,10 @@ def plot_3d_prf(cmdline_args, meshgrid_x, meshgrid_y, prf_slice_splines):
 
         for (
                 spline,
-                individual_fname,
-                color
+                individual_fname
         ) in zip(
             prf_slice_splines,
-            slice_fnames,
-            kelly_colors[2:]
+            slice_fnames
         ):
             if (
                     individual_fname is not None
@@ -1180,7 +1186,7 @@ def get_image_slices(splits, inner_only):
             splitting specified on the command line.
     """
 
-    split_slices = dict(x=[slice(0, None)], y=[slice(0, None)])
+    split_slices = {'x': [slice(0, None)], 'y': [slice(0, None)]}
 
     for direction, value in sorted(splits):
         split_slices[direction][-1] = slice(split_slices[direction][-1].start,
@@ -1500,6 +1506,8 @@ def list_plot_filenames(cmdline_args):
 
     return result
 
+#TODO: see if it can be simplified
+#pylint: disable=too-many-branches
 def show_plots(slice_prf_data, slice_splines, cmdline_args, append=False):
     """
     Generate the plots and display them to the user.
@@ -1609,6 +1617,7 @@ def show_plots(slice_prf_data, slice_splines, cmdline_args, append=False):
             pyplot.savefig(combined_fname,
                            dpi=cmdline_args.figure_dpi)
             pyplot.cla()
+#pylint: enable=too-many-branches
 
 
 def extract_pixel_data(cmdline_args, image_slices, sources=None):
@@ -1677,6 +1686,8 @@ def extract_pixel_data(cmdline_args, image_slices, sources=None):
                     cmdline_args
                 ),
                 (
+                    #This is more readable
+                    #pylint: disable=consider-using-f-string
                     '(%f, %f)'
                     %
                     (
@@ -1691,6 +1702,7 @@ def extract_pixel_data(cmdline_args, image_slices, sources=None):
                             (y_image_slice.stop or image_resolution[0])
                         ) / 2.0
                     )
+                    #pylint: enable=consider-using-f-string
                 )
             )
             for x_image_slice, y_image_slice, x_index, y_index in image_slices

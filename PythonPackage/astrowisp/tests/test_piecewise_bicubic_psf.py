@@ -189,9 +189,9 @@ class TestPiecewiseBicubicPSF(FloatTestCase):
                 grid:    The grid on which the PSF was constructed (see
                     boundaries argument of PicewiseBicubicPSF.__init__
 
-                test_points:    A collection of points at which to try to evaluate
-                    the PSF. It is perfectly valid for the points to be outside
-                    the range of the PSF.
+                test_points:    A collection of points at which to try to
+                    evaluate the PSF. It is perfectly valid for the points to be
+                    outside the range of the PSF.
 
             Returns:
                 None
@@ -271,10 +271,12 @@ class TestPiecewiseBicubicPSF(FloatTestCase):
                     grid_x, grid_y = numpy.meshgrid(grid['x'],
                                                     grid['y'])
                     psf = PiecewiseBicubicPSF(
-                        psf_parameters={'values': grid_x * x_slope + grid_y * y_slope,
-                                        'd_dx': numpy.full(shape, x_slope),
-                                        'd_dy': numpy.full(shape, y_slope),
-                                        'd2_dxdy': numpy.zeros(shape)},
+                        psf_parameters={
+                            'values': grid_x * x_slope + grid_y * y_slope,
+                            'd_dx': numpy.full(shape, x_slope),
+                            'd_dy': numpy.full(shape, y_slope),
+                            'd2_dxdy': numpy.zeros(shape)
+                        },
                         boundaries=grid
                     )
                     psf_slope = {'x': x_slope, 'y': y_slope}
@@ -301,9 +303,9 @@ class TestPiecewiseBicubicPSF(FloatTestCase):
                 grid:    The grid on which the PSF was constructed (see
                     boundaries argument of PicewiseBicubicPSF.__init__
 
-                test_points:    A collection of points at which to try to evaluate
-                    the PSF. It is perfectly valid for the points to be outside
-                    the range of the PSF.
+                test_points:    A collection of points at which to try to
+                    evaluate the PSF. It is perfectly valid for the points to be
+                    outside the range of the PSF.
 
             Returns:
                 None

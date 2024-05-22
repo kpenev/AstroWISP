@@ -58,11 +58,11 @@ class SubPixPhot:
                     pixels.
     """
 
-    _default_configuration = dict(subpixmap=numpy.ones((1, 1), dtype=c_double),
-                                  apertures=numpy.arange(1.0, 5.5),
-                                  gain=1.0,
-                                  magnitude_1adu=10.0,
-                                  const_error=0.0)
+    _default_configuration = {'subpixmap': numpy.ones((1, 1), dtype=c_double),
+                              'apertures': numpy.arange(1.0, 5.5),
+                              'gain': 1.0,
+                              'magnitude_1adu': 10.0,
+                              'const_error': 0.0}
 
     @staticmethod
     def _format_config(param_value):
@@ -86,8 +86,10 @@ class SubPixPhot:
             return ()
 
         if param_value[0] == 'apertures':
-            return (b'ap.aperture',
-                    b','.join([repr(ap).encode('ascii') for ap in param_value[1]]))
+            return (
+                b'ap.aperture',
+                b','.join([repr(ap).encode('ascii') for ap in param_value[1]])
+            )
 
         if param_value[0] == 'const_error':
             param_name = b'ap.const-error'
@@ -131,7 +133,7 @@ class SubPixPhot:
             None
         """
 
-        for k in configuration:
+        for k, value in configuration:
             if k not in self.configuration:
                 raise KeyError('Unrecognized configuration parameter: '
                                +
@@ -143,8 +145,8 @@ class SubPixPhot:
                     )
                 self._library_subpix_map = (
                     self._astrowisp_library.create_core_subpixel_map(
-                        *configuration[k].shape,
-                        configuration[k]
+                        *value.shape,
+                        value
                     )
                 )
 

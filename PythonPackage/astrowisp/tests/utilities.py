@@ -54,6 +54,6 @@ class FloatTestCase(unittest.TestCase):
 
         self.assertTrue(
             self.approx_equal(value_1, value_2),
-            '%f !~ %f: %s' % (value_1, value_2, message)
+            f'{value_1:f} !~ {value_2:f}: {message}'
         )
     #pylint: enable=invalid-name

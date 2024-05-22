@@ -131,8 +131,13 @@ class TestImage(FloatTestCase):
                                    psf=psf,
                                    subpix_map=subpix_map)
                     expected_piece = expected[
-                        expected_off - y_off : expected_off - y_off + img.shape[0],
-                        expected_off - x_off : expected_off - x_off + img.shape[1]
+                        expected_off - y_off
+                        :
+                        expected_off - y_off + img.shape[0]
+                        ,
+                        expected_off - x_off
+                        :
+                        expected_off - x_off + img.shape[1]
                     ]
                     self.assertExpectedImage(
                         img,

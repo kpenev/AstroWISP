@@ -8,7 +8,7 @@ SPHINXAPIDOC	= sphinx-apidoc
 SPHINXPROJ    	= AstroWISP
 SOURCEDIR     	= source
 MODULEDIR     	= ../../PythonPackage/astrowisp
-TESTDIR     	= ../../PythonPackage/tests
+TESTDIR     	= ../../PythonPackage/astrowisp/tests
 BUILDDIR    	= build
 APIDOCOPTS  	= --force -M --separate
 DOXYGENDIR		= ../doxygen
@@ -30,6 +30,7 @@ install: html
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
 %: Makefile
 	./make_doc_src.sh
+	mkdir -p $(DOXYGENDIR)/build/html
 	cd $(DOXYGENDIR) && rm -rf build/xml && doxygen Doxyfile && cp images/* build/xml/
 	rm -rf $(BUILDDIR)
 	mkdir -p $(BUILDDIR)/html

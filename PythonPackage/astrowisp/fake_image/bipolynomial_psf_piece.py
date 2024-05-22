@@ -30,10 +30,10 @@ class BipolynomialPSFPiece(PSFPiece):
 
         result = 0.0
         y_factor = 1.0
-        for y_pow in range(len(self.__coefficients)):
+        for ypow_coef_slice in self.__coefficients:
             x_factor = 1.0
-            for x_pow in range(len(self.__coefficients[y_pow])):
-                result += (self.__coefficients[y_pow][x_pow]
+            for coef in ypow_coef_slice:
+                result += (coef
                            *
                            x_factor
                            *
@@ -44,6 +44,8 @@ class BipolynomialPSFPiece(PSFPiece):
         return result
     #pylint: enable=invalid-name
 
+    #It's either that or not using enumarete
+    #pylint: disable=too-many-locals
     def integrate(self, left, bottom, width, height):
         """See documentation of PSFPiece.integrate."""
 
@@ -52,12 +54,12 @@ class BipolynomialPSFPiece(PSFPiece):
         right = left + width
         bottom_factor = bottom
         top_factor = top
-        for y_pow in range(len(self.__coefficients)):
+        for y_pow, ypow_coef_slice in enumerate(self.__coefficients):
             left_factor = left
             right_factor = right
-            for x_pow in range(len(self.__coefficients[y_pow])):
+            for x_pow, coef in enumerate(ypow_coef_slice):
                 result += (
-                    self.__coefficients[y_pow][x_pow]
+                    coef
                     *
                     (right_factor - left_factor) / (x_pow + 1)
                     *
@@ -69,4 +71,5 @@ class BipolynomialPSFPiece(PSFPiece):
             top_factor *= top
 
         return result
+    #pylint: enable=too-many-locals
 #pylint: enable=too-few-public-methods

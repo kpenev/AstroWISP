@@ -32,18 +32,14 @@ def parse_hat_mask(header):
         >>>     matched = numpy.bitwise_and(image_mask,
         >>>                                 mask_flags[flag_name]).astype(bool)
         >>>
-        >>>     #Print number of pixels for which the OVERSATURATED flag is raised
+        >>>     #Print number of pixels for which the OVERSATURATED flag is
+        >>>     #raised
         >>>     print(flag_name + ': ' + repr(matched.sum()))
         >>>
         >>>     #Output x, y, flux for the pixels flagged as OVERSATURATED
         >>>     for y, x in zip(*numpy.nonzero(matched)):
         >>>         print('%4d %4d %15d' % (x, y, f[1].data[y, x]))
     """
-
-    #The intent is to export this for use by other modules/scripts
-    #pylint: disable=global-statement
-    global mask_flags
-    #pylint: enable=global-statement
 
     mask_string = ''.join((c[1] + ' ') if c[0] == 'MASKINFO' else ''
                           for c in header.items()).encode('ascii')

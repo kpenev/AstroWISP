@@ -7,6 +7,7 @@ from astrowisp._initialize_library import get_astrowisp_library
 
 #The __init__, __del__ and __call__ methods justify making this a class.
 #pylint: disable=too-few-public-methods
+#pylint: disable=too-many-instance-attributes
 class BackgroundExtractor:
     """
     Measure the background level for each source in an image.
@@ -114,6 +115,8 @@ class BackgroundExtractor:
         r"""Destroy the image and extractor created in :meth:`__init__`\ ."""
 
         self._astrowisp_library.destroy_core_image(self._library_image)
-        self._astrowisp_library.destroy_background_extractor(self.library_extractor)
-
+        self._astrowisp_library.destroy_background_extractor(
+            self.library_extractor
+        )
 #pylint: enable=too-few-public-methods
+#pylint: enable=too-many-instance-attributes

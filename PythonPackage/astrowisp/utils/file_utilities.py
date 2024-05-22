@@ -7,9 +7,9 @@ from tempfile import NamedTemporaryFile
 from subprocess import call
 import logging
 
-_logger = logging.getLogger(__name__)
-
 from astropy.io import fits
+
+_logger = logging.getLogger(__name__)
 
 def prepare_file_output(fname,
                         allow_existing,
@@ -21,10 +21,8 @@ def prepare_file_output(fname,
     if os.path.exists(fname):
         if not allow_existing:
             raise OSError(
-                'Destination file %s already exists and overwritting not '
-                'allowed!'
-                %
-                repr(fname)
+                f'Destination file {fname!r} already exists and overwritting '
+                'not allowed!'
             )
         if delete_existing:
             _logger.info('Overwriting %s', fname)
@@ -75,7 +73,10 @@ def get_fname_pattern_substitutions(fits_fname, fits_header=None):
     if fits_header is None:
         with fits.open(fits_fname, 'readonly') as fits_file:
             fits_header = fits_file[
+                #False positive
+                #pylint: disable=no-member
                 0 if fits_file[0].header['NAXIS'] else 1
+                #pylint: enable=no-member
             ].header
 
     return dict(
@@ -83,5 +84,3 @@ def get_fname_pattern_substitutions(fits_fname, fits_header=None):
         FITS_ROOT=get_fits_fname_root(fits_fname),
         FITS_DIR=os.path.dirname(fits_fname)
     )
-
-

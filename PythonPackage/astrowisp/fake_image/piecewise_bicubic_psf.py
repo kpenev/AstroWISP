@@ -111,28 +111,32 @@ class PiecewiseBicubicPSF(PiecewisePSF):
             for cell_x_index in range(len(boundaries['x']) - 1):
                 pieces[-1].append(
                     self._create_piece(
-                        boundaries=dict(
-                            x=boundaries['x'][cell_x_index : cell_x_index + 2],
-                            y=boundaries['y'][cell_y_index : cell_y_index + 2]
-                        ),
-                        psf_parameters=dict(
-                            values=psf_parameters['values'][
+                        boundaries={
+                            'x': boundaries['x'][cell_x_index
+                                                 :
+                                                 cell_x_index + 2],
+                            'y': boundaries['y'][cell_y_index
+                                                 :
+                                                 cell_y_index + 2]
+                        },
+                        psf_parameters={
+                            'values': psf_parameters['values'][
                                 cell_y_index : cell_y_index + 2,
                                 cell_x_index : cell_x_index + 2
                             ],
-                            d_dx=psf_parameters['d_dx'][
+                            'd_dx': psf_parameters['d_dx'][
                                 cell_y_index : cell_y_index + 2,
                                 cell_x_index : cell_x_index + 2
                             ],
-                            d_dy=psf_parameters['d_dy'][
+                            'd_dy': psf_parameters['d_dy'][
                                 cell_y_index : cell_y_index + 2,
                                 cell_x_index : cell_x_index + 2
                             ],
-                            d2_dxdy=psf_parameters['d2_dxdy'][
+                            'd2_dxdy': psf_parameters['d2_dxdy'][
                                 cell_y_index : cell_y_index + 2,
                                 cell_x_index : cell_x_index + 2
                             ]
-                        )
+                        }
                     )
                 )
         super().__init__(boundaries, pieces)
