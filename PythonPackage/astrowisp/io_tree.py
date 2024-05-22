@@ -357,9 +357,6 @@ class IOTree:
             1,
             self.library_tree
         )
-        print('star_shape_map_terms.shape: ' + repr(star_shape_map_terms.shape))
-        print('# coef: ' + repr(star_shape_map_coefficients.shape[-1]))
-        print('# sources: ' + repr(source_data.size))
         assert star_shape_map_terms.shape == (
             source_data.size,
             star_shape_map_coefficients.shape[-1]

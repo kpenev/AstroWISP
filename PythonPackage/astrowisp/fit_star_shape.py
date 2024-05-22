@@ -331,7 +331,6 @@ class FitStarShape:
                 b'bicubic'
             )
         ) + (b'',)
-        print('Configuration arguments: ' + repr(config_arguments))
         self._astrowisp_library.update_psffit_configuration(*config_arguments)
 
 
