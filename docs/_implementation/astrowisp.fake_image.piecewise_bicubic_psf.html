@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>astrowisp.fake_image.piecewise_bicubic_psf module &mdash; AstroWISP Python Interface  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/unlimited_width.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="astrowisp.fake_image.piecewise_psf module" href="astrowisp.fake_image.piecewise_psf.html" />
+    <link rel="prev" title="astrowisp.fake_image.image module" href="astrowisp.fake_image.image.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            AstroWISP Python Interface
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Unix Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html#windows-installation">Windows Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit_tests.html">Unit Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python_interface/index.html">Python Interface Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Python Package Implementation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="astrowisp.html">astrowisp package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="astrowisp.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="astrowisp.fake_image.html">astrowisp.fake_image package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="astrowisp.tests.html">astrowisp.tests package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="astrowisp.utils.html">astrowisp.utils package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#submodules">Submodules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="doxygen/index.xhtml#http://">C/C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_unit_tests/modules.html">Unit Testing Code</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">AstroWISP Python Interface</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">astrowisp</a></li>
+          <li class="breadcrumb-item"><a href="astrowisp.html">astrowisp package</a></li>
+          <li class="breadcrumb-item"><a href="astrowisp.fake_image.html">astrowisp.fake_image package</a></li>
+      <li class="breadcrumb-item active">astrowisp.fake_image.piecewise_bicubic_psf module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_implementation/astrowisp.fake_image.piecewise_bicubic_psf.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-astrowisp.fake_image.piecewise_bicubic_psf">
+<span id="astrowisp-fake-image-piecewise-bicubic-psf-module"></span><h1>astrowisp.fake_image.piecewise_bicubic_psf module<a class="headerlink" href="#module-astrowisp.fake_image.piecewise_bicubic_psf" title="Permalink to this heading"></a></h1>
+<section id="class-inheritance-diagram">
+<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this heading"></a></h2>
+<div class="graphviz"><img src="../_images/inheritance-6aaf51bdbcef671d6953e3d684c8ceb2c2c862a7.png" alt="Inheritance diagram of BipolynomialPSFPiece, PiecewiseBicubicPSF, PiecewisePSF" usemap="#inheritance9dee50cc34" class="inheritance graphviz" /></div>
+<map id="inheritance9dee50cc34" name="inheritance9dee50cc34">
+<area shape="rect" id="node3" href="astrowisp.fake_image.psf_piece.html#astrowisp.fake_image.psf_piece.PSFPiece" target="_top" title="Declare a minimum interface for pieces of PiecewisePSF." alt="" coords="153,80,424,107"/>
+<area shape="rect" id="node6" href="astrowisp.psf_base.html#astrowisp.psf_base.PSFBase" target="_top" title="The base class for all supported PSFs." alt="" coords="483,80,677,107"/>
+<area shape="rect" id="node2" href="astrowisp.fake_image.bipolynomial_psf_piece.html#astrowisp.fake_image.bipolynomial_psf_piece.BipolynomialPSFPiece" target="_top" title="Class for PSF pieces over which the PSF is a bi&#45;polynomial function." alt="" coords="5,155,430,181"/>
+<area shape="rect" id="node4" href="#astrowisp.fake_image.piecewise_bicubic_psf.PiecewiseBicubicPSF" target="_top" title="A piecewise PSF class where the PSF over each piece is a bi&#45;cubic function." alt="" coords="408,229,824,256"/>
+<area shape="rect" id="node5" href="astrowisp.fake_image.piecewise_psf.html#astrowisp.fake_image.piecewise_psf.PiecewisePSF" target="_top" title="Base clas for PSFs defined on a grid of pieces." alt="" coords="454,155,779,181"/>
+</map><p>Defines the PiecewiseBicubicPSF class.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="astrowisp.fake_image.piecewise_bicubic_psf.PiecewiseBicubicPSF">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">astrowisp.fake_image.piecewise_bicubic_psf.</span></span><span class="sig-name descname"><span class="pre">PiecewiseBicubicPSF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">boundaries</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">psf_parameters</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/fake_image/piecewise_bicubic_psf.html#PiecewiseBicubicPSF"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.fake_image.piecewise_bicubic_psf.PiecewiseBicubicPSF" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="astrowisp.fake_image.piecewise_psf.html#astrowisp.fake_image.piecewise_psf.PiecewisePSF" title="astrowisp.fake_image.piecewise_psf.PiecewisePSF"><code class="xref py py-class docutils literal notranslate"><span class="pre">PiecewisePSF</span></code></a></p>
+<div class="graphviz"><img src="../_images/inheritance-23463bdb8f2ad751de7458e2c8d6d50573740139.png" alt="Inheritance diagram of astrowisp.fake_image.piecewise_bicubic_psf.PiecewiseBicubicPSF" usemap="#inheritance83dd303a31" class="inheritance graphviz" /></div>
+<map id="inheritance83dd303a31" name="inheritance83dd303a31">
+<area shape="rect" id="node4" href="astrowisp.psf_base.html#astrowisp.psf_base.PSFBase" target="_top" title="The base class for all supported PSFs." alt="" coords="116,80,311,107"/>
+<area shape="rect" id="node2" href="#astrowisp.fake_image.piecewise_bicubic_psf.PiecewiseBicubicPSF" target="_top" title="A piecewise PSF class where the PSF over each piece is a bi&#45;cubic function." alt="" coords="5,229,422,256"/>
+<area shape="rect" id="node3" href="astrowisp.fake_image.piecewise_psf.html#astrowisp.fake_image.piecewise_psf.PiecewisePSF" target="_top" title="Base clas for PSFs defined on a grid of pieces." alt="" coords="51,155,376,181"/>
+</map><p>A piecewise PSF class where the PSF over each piece is a bi-cubic function.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="astrowisp.fake_image.piecewise_bicubic_psf.PiecewiseBicubicPSF.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">boundaries</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">psf_parameters</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/fake_image/piecewise_bicubic_psf.html#PiecewiseBicubicPSF.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.fake_image.piecewise_bicubic_psf.PiecewiseBicubicPSF.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>Initialize a PiecewiseBicubicPSF with the given shape.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>boundaries</strong> – Dictionary (keys <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>) listing the cell
+horizontal/vertical boundaries.</p></li>
+<li><p><strong>psf_parameters</strong> – <p>A dictionary of 2x2 structures with keys:</p>
+<ul>
+<li><dl class="simple">
+<dt>values:    The values of the piece bi-cubic polynomial af the</dt><dd><p>intersections of the horizontal &amp; vertical <code class="docutils literal notranslate"><span class="pre">boundaries</span></code>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>d_dx:    The x derivatives of the piece bi-cubic polynomial af</dt><dd><p>the intersections of the horizontal &amp; vertical
+<code class="docutils literal notranslate"><span class="pre">boundaries</span></code>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>d_dy:    The y derivatives of the piece bi-cubic polynomial af</dt><dd><p>the intersections of the horizontal &amp; vertical
+<code class="docutils literal notranslate"><span class="pre">boundaries</span></code>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>d2_dxdy:    The x,y cross-derivatives of the piece bi-cubic</dt><dd><p>polynomial af the intersections of the horizontal &amp;
+vertical <code class="docutils literal notranslate"><span class="pre">boundaries</span></code>.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="astrowisp.fake_image.piecewise_bicubic_psf.PiecewiseBicubicPSF._create_piece">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_create_piece</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">boundaries</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">psf_parameters</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/fake_image/piecewise_bicubic_psf.html#PiecewiseBicubicPSF._create_piece"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.fake_image.piecewise_bicubic_psf.PiecewiseBicubicPSF._create_piece" title="Permalink to this definition"></a></dt>
+<dd><p>Return a BicubicPSFPiece satisfying the given constraints.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>__init__</strong> (<em>The same as the arguments of</em>) – </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A BicubicPSFPiece instance with parameters as specified by
+<cite>psf_parameters</cite>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>psf_piece</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="astrowisp.fake_image.image.html" class="btn btn-neutral float-left" title="astrowisp.fake_image.image module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="astrowisp.fake_image.piecewise_psf.html" class="btn btn-neutral float-right" title="astrowisp.fake_image.piecewise_psf module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2018, Kaloyan Penev.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,4 +1,4 @@
-<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/PSF/Piecewise.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/PSF/Piecewise.h">
+<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/Piecewise.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/Piecewise.h">
 <area shape="rect" id="node1" title="Defines the PSF::Piecewise PSF model." alt="" coords="576,5,760,68"/>
 <area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="213,270,432,316"/>
 <area shape="rect" id="node3" href="$PiecewiseCell_8h.xhtml" title="Defines a base class for the cells comprising a Piecewise." alt="" coords="431,116,569,145"/>

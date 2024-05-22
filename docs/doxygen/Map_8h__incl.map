@@ -1,4 +1,4 @@
-<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/PSF/Map.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/PSF/Map.h">
+<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/Map.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/Map.h">
 <area shape="rect" id="node1" title="Declarations of the Map class and some related functions." alt="" coords="2935,5,3119,68"/>
 <area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="2579,689,2798,735"/>
 <area shape="rect" id="node3" href="$PSF_8h.xhtml" title="Defines the base class of all PSF models." alt="" coords="2898,527,2964,556"/>

@@ -1,4 +1,4 @@
-<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/IO/CommandLineConfig.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/IO/CommandLineConfig.h">
+<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/IO/CommandLineConfig.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/IO/CommandLineConfig.h">
 <area shape="rect" id="node1" title="Declare a class for managing the configuration with which tools are run." alt="" coords="1301,5,1511,68"/>
 <area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="298,689,517,735"/>
 <area shape="rect" id="node3" href="$IO_2CommandLineUtil_8h.xhtml" title="Declarations of utilities for command line parsing of IO related options." alt="" coords="1446,535,1609,564"/>

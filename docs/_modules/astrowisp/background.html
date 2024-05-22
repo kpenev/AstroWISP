@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>astrowisp.background &mdash; AstroWISP Python Interface  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/unlimited_width.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            AstroWISP Python Interface
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Unix Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html#windows-installation">Windows Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../unit_tests.html">Unit Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_interface/index.html">Python Interface Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_implementation/modules.html">Python Package Implementation</a></li>
+<li class="toctree-l1"><a class="reference external" href="doxygen/index.xhtml#http://">C/C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_unit_tests/modules.html">Unit Testing Code</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AstroWISP Python Interface</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">astrowisp.background</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for astrowisp.background</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Interface to the AstroWISP background library.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">ctypes</span> <span class="kn">import</span> <span class="n">c_double</span><span class="p">,</span> <span class="n">c_uint</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+
+<span class="kn">from</span> <span class="nn">astrowisp._initialize_library</span> <span class="kn">import</span> <span class="n">get_astrowisp_library</span>
+
+<span class="c1">#The __init__, __del__ and __call__ methods justify making this a class.</span>
+<span class="c1">#pylint: disable=too-few-public-methods</span>
+<span class="c1">#pylint: disable=too-many-instance-attributes</span>
+<div class="viewcode-block" id="BackgroundExtractor"><a class="viewcode-back" href="../../_implementation/astrowisp.background.html#astrowisp.BackgroundExtractor">[docs]</a><span class="k">class</span> <span class="nc">BackgroundExtractor</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Measure the background level for each source in an image.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        image:    The image being processed.</span>
+
+<span class="sd">        inner_radius:    The size of the aperture aronud each source within</span>
+<span class="sd">            which pixels are excluded from background measurement.</span>
+
+<span class="sd">        outer_radius:    The outer rim of the aperture around each source within</span>
+<span class="sd">            which unrejected pixels are included in the background measurement.</span>
+
+<span class="sd">        error_confidence:    The confidence level to use for estimating the</span>
+<span class="sd">            background error.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="BackgroundExtractor.__init__"><a class="viewcode-back" href="../../_implementation/astrowisp.background.html#astrowisp.BackgroundExtractor.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">image</span><span class="p">,</span>
+                 <span class="n">inner_radius</span><span class="p">,</span>
+                 <span class="n">outer_radius</span><span class="p">,</span>
+                 <span class="n">error_confidence</span><span class="o">=</span><span class="mf">0.68</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a background extractor with the given parameters.</span>
+
+<span class="sd">        Args: see class attributes.</span>
+
+<span class="sd">        Returns: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_astrowisp_library</span> <span class="o">=</span> <span class="n">get_astrowisp_library</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">image</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inner_radius</span> <span class="o">=</span> <span class="n">inner_radius</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outer_radius</span> <span class="o">=</span> <span class="n">outer_radius</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_confidence</span> <span class="o">=</span> <span class="n">error_confidence</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_library_image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_astrowisp_library</span><span class="o">.</span><span class="n">create_core_image</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">image</span><span class="p">,</span>
+            <span class="kc">None</span><span class="p">,</span>
+            <span class="kc">None</span><span class="p">,</span>
+            <span class="kc">True</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">library_extractor</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_astrowisp_library</span><span class="o">.</span><span class="n">create_background_extractor</span><span class="p">(</span>
+                <span class="n">inner_radius</span><span class="p">,</span>
+                <span class="n">outer_radius</span><span class="p">,</span>
+                <span class="n">inner_radius</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_library_image</span><span class="p">,</span>
+                <span class="n">error_confidence</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_sources</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="BackgroundExtractor.__call__"><a class="viewcode-back" href="../../_implementation/astrowisp.background.html#astrowisp.BackgroundExtractor.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_x</span><span class="p">,</span> <span class="n">source_y</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Measure the background under the sources with the given coordinates.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            source_x:    The `x` coordinates of the sources within the image.</span>
+
+<span class="sd">            source_y:    The `y` coordinates of the sources within the image.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            tuple:</span>
+<span class="sd">                numpy.array:</span>
+<span class="sd">                    The estimate of the background under each source in the same</span>
+<span class="sd">                    order as the input sources.</span>
+
+<span class="sd">                numpy.array:</span>
+<span class="sd">                    The estimate of the uncertainty in the background under each</span>
+<span class="sd">                    source in the same order as the input sources.</span>
+
+<span class="sd">                numpy.array:</span>
+<span class="sd">                    The number of pixels which were used to derive the</span>
+<span class="sd">                    background and its uncertainty.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">assert</span> <span class="n">source_x</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="n">source_y</span><span class="o">.</span><span class="n">size</span>
+
+        <span class="k">assert</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_set_sources</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_sources</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_astrowisp_library</span><span class="o">.</span><span class="n">add_source_list_to_background_extractor</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">library_extractor</span><span class="p">,</span>
+            <span class="n">source_x</span><span class="p">,</span>
+            <span class="n">source_y</span><span class="p">,</span>
+            <span class="n">source_x</span><span class="o">.</span><span class="n">size</span>
+        <span class="p">)</span>
+
+        <span class="n">bg_value</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">source_x</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">c_double</span><span class="p">)</span>
+        <span class="n">bg_error</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">source_x</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">c_double</span><span class="p">)</span>
+        <span class="n">bg_numpix</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">source_x</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">c_uint</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_astrowisp_library</span><span class="o">.</span><span class="n">get_all_backgrounds</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">library_extractor</span><span class="p">,</span>
+            <span class="n">bg_value</span><span class="p">,</span>
+            <span class="n">bg_error</span><span class="p">,</span>
+            <span class="n">bg_numpix</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">bg_value</span><span class="p">,</span> <span class="n">bg_error</span><span class="p">,</span> <span class="n">bg_numpix</span></div>
+
+<div class="viewcode-block" id="BackgroundExtractor.__del__"><a class="viewcode-back" href="../../_implementation/astrowisp.background.html#astrowisp.BackgroundExtractor.__del__">[docs]</a>    <span class="k">def</span> <span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Destroy the image and extractor created in :meth:`__init__`\ .&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_astrowisp_library</span><span class="o">.</span><span class="n">destroy_core_image</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_library_image</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_astrowisp_library</span><span class="o">.</span><span class="n">destroy_background_extractor</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">library_extractor</span>
+        <span class="p">)</span></div></div>
+<span class="c1">#pylint: enable=too-few-public-methods</span>
+<span class="c1">#pylint: enable=too-many-instance-attributes</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2018, Kaloyan Penev.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

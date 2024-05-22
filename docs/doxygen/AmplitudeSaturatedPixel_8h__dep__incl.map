@@ -1,13 +1,13 @@
-<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/FitPSF/AmplitudeSaturatedPixel.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/FitPSF/AmplitudeSaturatedPixel.h">
+<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/FitPSF/AmplitudeSaturatedPixel.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/FitPSF/AmplitudeSaturatedPixel.h">
 <area shape="rect" id="node1" title="Define a class used when fitting for PSF amplitude with saturated pixels." alt="" coords="210,5,480,68"/>
 <area shape="rect" id="node2" href="$SDKSourceBase_8h.xhtml" title="Declares a base class for sources participating in SDK fitting." alt="" coords="102,227,316,290"/>
 <area shape="rect" id="node8" href="$FitPSF_2Source_8h.xhtml" title="Defines the base class for sources participating in PSF fitting." alt="" coords="325,116,509,179"/>
 <area shape="rect" id="node3" href="$FitPSF_2SDKSource_8h_source.xhtml" title=" " alt="" coords="261,338,445,401"/>
 <area shape="rect" id="node7" href="$SDKSourceBase_8cpp.xhtml" title="Defines some of the methods of the SDKSourceBase class." alt="" coords="5,338,237,401"/>
 <area shape="rect" id="node4" href="$SDKUtil_8h.xhtml" title="Declare functions used during elliptical Gaussian PSF fitting." alt="" coords="261,449,445,512"/>
-<area shape="rect" id="node5" href="$PolynomialSDK_8h.xhtml" title="Declares a class for fitting elliptical gaussian PSFs as a smooth function of image position." alt="" coords="31,560,238,623"/>
+<area shape="rect" id="node5" href="$PolynomialSDK_8h.xhtml" title="Declares a class for fitting elliptical gaussian PSFs as a smooth function of image position." alt="" coords="30,560,236,623"/>
 <area shape="rect" id="node6" href="$SDKUtil_8cpp.xhtml" title="Define the functions from SDKUtil.h." alt="" coords="261,560,445,623"/>
-<area shape="rect" id="node9" href="$FitPSF_2Image_8h.xhtml" title="Defines a class describing an image of Pixel pixels." alt="" coords="391,227,574,290"/>
+<area shape="rect" id="node9" href="$FitPSF_2Image_8h.xhtml" title="Defines a class describing an image of Pixel pixels." alt="" coords="390,227,575,290"/>
 <area shape="rect" id="node11" href="$OverlapSource_8h.xhtml" title="Defines the overlap&#45;related features of PSF fitting sources." alt="" coords="536,338,735,401"/>
 <area shape="rect" id="node16" href="$Pixel_8cpp.xhtml" title="Define the backrgound excess functions and some methods of Pixel.h." alt="" coords="673,227,857,290"/>
 <area shape="rect" id="node10" href="$FitPSF_2CInterface_8cpp.xhtml" title="Define the C&#45;interface functions for the FitPSF library." alt="" coords="441,782,625,845"/>

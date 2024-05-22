@@ -1,8 +1,0 @@
-<map id="inheritance087745dfdd" name="inheritance087745dfdd">
-<area shape="rect" id="node1" title="Helper class that provides a standard way to create an ABC using" alt="" coords="177,5,251,32"/>
-<area shape="rect" id="node4" href="../_implementation/superphot.psf_base.html#superphot.psf_base.PSFBase" target="_top" title="The base class for all supported PSFs." alt="" coords="116,80,312,107"/>
-<area shape="rect" id="node2" href="../_implementation/superphot.fake_image.piecewise_bicubic_psf.html#superphot.fake_image.piecewise_bicubic_psf.PiecewiseBicubicPSF" target="_top" title="A piecewise PSF class where the PSF over each piece is a bi&#45;cubic function." alt="" coords="5,229,423,256"/>
-<area shape="rect" id="node3" href="../_implementation/superphot.fake_image.piecewise_psf.html#superphot.fake_image.piecewise_psf.PiecewisePSF" target="_top" title="Base clas for PSFs defined on a grid of pieces." alt="" coords="51,155,377,181"/>
-<area shape="rect" id="node5" href="#tests.fitpsf.noiseless_tests.TestPiecewiseBicubicNoiseless" target="_top" title="Test piecewise bicubic PSF fitting on noiseless images." alt="" coords="335,80,704,107"/>
-<area shape="rect" id="node6" title="A class whose instances are single test cases." alt="" coords="441,5,598,32"/>
-</map>

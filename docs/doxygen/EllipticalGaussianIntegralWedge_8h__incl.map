@@ -1,4 +1,4 @@
-<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/PSF/EllipticalGaussianIntegralWedge.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/PSF/EllipticalGaussianIntegralWedge.h">
+<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/EllipticalGaussianIntegralWedge.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/EllipticalGaussianIntegralWedge.h">
 <area shape="rect" id="node1" title="Declare a class for integrating elliptical Guassians over wedge areas." alt="" coords="5,5,249,85"/>
 <area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="84,535,303,581"/>
 <area shape="rect" id="node3" href="$EllipticalGaussianIntegralByOrder_8h.xhtml" title="Class approximating integrals of ellptical Gaussians by incremental expansion order." alt="" coords="149,133,353,179"/>

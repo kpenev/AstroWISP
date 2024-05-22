@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>superphot &mdash; SuperPhot Python Interface  documentation</title>
+  <title>astrowisp &mdash; AstroWISP Python Interface  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
@@ -24,7 +24,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="superphot package" href="superphot.html" />
+    <link rel="next" title="astrowisp package" href="astrowisp.html" />
     <link rel="prev" title="Example of PSF Fitting and Aperture Photometry Using Mock Data" href="../python_interface/example_mock_data.html" /> 
 </head>
 
@@ -37,7 +37,7 @@
           
           
           <a href="../index.html" class="icon icon-home">
-            SuperPhot Python Interface
+            AstroWISP Python Interface
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -54,7 +54,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../unit_tests.html">Unit Tests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../python_interface/index.html">Python Interface Documentation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Python Package Implementation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="superphot.html">superphot package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="astrowisp.html">astrowisp package</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference external" href="doxygen/index.xhtml#http://">C/C++ API</a></li>
@@ -67,7 +67,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">SuperPhot Python Interface</a>
+          <a href="../index.html">AstroWISP Python Interface</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -75,7 +75,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">superphot</li>
+      <li class="breadcrumb-item active">astrowisp</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/_implementation/modules.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -85,51 +85,56 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="superphot">
-<h1>superphot<a class="headerlink" href="#superphot" title="Permalink to this heading"></a></h1>
+  <section id="astrowisp">
+<h1>astrowisp<a class="headerlink" href="#astrowisp" title="Permalink to this heading"></a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="superphot.html">superphot package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="superphot.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
-<li class="toctree-l2"><a class="reference internal" href="superphot.html#subpackages">Subpackages</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="superphot.fake_image.html">superphot.fake_image package</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="superphot.fake_image.html#submodules">Submodules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="astrowisp.html">astrowisp package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="astrowisp.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="astrowisp.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.fake_image.html">astrowisp.fake_image package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="astrowisp.fake_image.html#submodules">Submodules</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="superphot.utils.html">superphot.utils package</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="superphot.utils.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.tests.html">astrowisp.tests package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="astrowisp.tests.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="astrowisp.tests.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.utils.html">astrowisp.utils package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="astrowisp.utils.html#submodules">Submodules</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="superphot.html#submodules">Submodules</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="superphot.background.html">superphot.background module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="superphot.background.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="astrowisp.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.background.html">astrowisp.background module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="astrowisp.background.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="superphot.fit_star_shape.html">superphot.fit_star_shape module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="superphot.fit_star_shape.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.fit_star_shape.html">astrowisp.fit_star_shape module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="astrowisp.fit_star_shape.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="superphot.hat_masks.html">superphot.hat_masks module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="superphot.piecewise_bicubic_psf.html">superphot.piecewise_bicubic_psf module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="superphot.piecewise_bicubic_psf.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.hat_masks.html">astrowisp.hat_masks module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.io_tree.html">astrowisp.io_tree module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="astrowisp.io_tree.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="superphot.piecewise_bicubic_psf_map.html">superphot.piecewise_bicubic_psf_map module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="superphot.piecewise_bicubic_psf_map.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.piecewise_bicubic_psf.html">astrowisp.piecewise_bicubic_psf module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="astrowisp.piecewise_bicubic_psf.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="superphot.psf_base.html">superphot.psf_base module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="superphot.psf_base.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.piecewise_bicubic_psf_map.html">astrowisp.piecewise_bicubic_psf_map module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="astrowisp.piecewise_bicubic_psf_map.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="superphot.subpixphot.html">superphot.subpixphot module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="superphot.subpixphot.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.psf_base.html">astrowisp.psf_base module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="astrowisp.psf_base.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="superphot.superphot_io_tree.html">superphot.superphot_io_tree module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="superphot.superphot_io_tree.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.subpixphot.html">astrowisp.subpixphot module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="astrowisp.subpixphot.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
 </ul>
 </li>
 </ul>
@@ -145,7 +150,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../python_interface/example_mock_data.html" class="btn btn-neutral float-left" title="Example of PSF Fitting and Aperture Photometry Using Mock Data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="superphot.html" class="btn btn-neutral float-right" title="superphot package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="astrowisp.html" class="btn btn-neutral float-right" title="astrowisp package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

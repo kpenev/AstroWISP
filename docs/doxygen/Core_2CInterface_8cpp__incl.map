@@ -1,5 +1,5 @@
-<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/Core/CInterface.cpp" name="/Users/kpenev/projects/git/SuperPhot/doc_src/Core/CInterface.cpp">
-<area shape="rect" id="node1" title="The definitions of the functions declared in CInterface.h." alt="" coords="137,5,320,68"/>
+<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/Core/CInterface.cpp" name="/Users/kpenev/projects/git/AstroWISP/doc_src/Core/CInterface.cpp">
+<area shape="rect" id="node1" title="The definitions of the functions declared in CInterface.h." alt="" coords="136,5,321,68"/>
 <area shape="rect" id="node2" href="$Core_2CInterface_8h.xhtml" title="Declare some opaque structures to be used when creating C&#45;interfaces to libraries." alt="" coords="5,116,113,145"/>
 <area shape="rect" id="node4" href="$Core_2Image_8h.xhtml" title="Declares a base class for images to be processed." alt="" coords="471,116,549,145"/>
 <area shape="rect" id="node19" href="$SubPixelMap_8h.xhtml" title="Declares the base class for all sub&#45;pixel maps." alt="" coords="163,116,294,145"/>

@@ -1,4 +1,4 @@
-<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/FitPSF/PolynomialSDK.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/FitPSF/PolynomialSDK.h">
+<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/FitPSF/PolynomialSDK.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/FitPSF/PolynomialSDK.h">
 <area shape="rect" id="node1" title="Declares a class for fitting elliptical gaussian PSFs as a smooth function of image position." alt="" coords="2835,5,3041,68"/>
 <area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="1451,937,1670,983"/>
 <area shape="rect" id="node3" href="$SDKUtil_8h.xhtml" title="Declare functions used during elliptical Gaussian PSF fitting." alt="" coords="2840,116,2932,145"/>

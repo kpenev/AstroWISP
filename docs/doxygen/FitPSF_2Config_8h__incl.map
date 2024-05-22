@@ -1,5 +1,5 @@
-<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/FitPSF/Config.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/FitPSF/Config.h">
-<area shape="rect" id="node1" title="Declares the command line parser for the FitPSF tool." alt="" coords="1053,5,1236,68"/>
+<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/FitPSF/Config.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/FitPSF/Config.h">
+<area shape="rect" id="node1" title="Declares the command line parser for the FitPSF tool." alt="" coords="1052,5,1237,68"/>
 <area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="1532,783,1752,829"/>
 <area shape="rect" id="node3" href="$Grid_8h.xhtml" title="Some useful typedef statements." alt="" coords="2587,467,2699,496"/>
 <area shape="rect" id="node9" href="$Core_2Typedefs_8h.xhtml" title="Some useful typedef statements." alt="" coords="2519,629,2618,658"/>

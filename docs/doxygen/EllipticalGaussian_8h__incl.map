@@ -1,4 +1,4 @@
-<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/PSF/EllipticalGaussian.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/PSF/EllipticalGaussian.h">
+<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/EllipticalGaussian.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/EllipticalGaussian.h">
 <area shape="rect" id="node1" title="Class defining ellptical Gaussian point spread functions (PSF)." alt="" coords="985,5,1188,68"/>
 <area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="889,612,1108,658"/>
 <area shape="rect" id="node3" href="$EllipticalGaussianIntegralRectangle_8h.xhtml" title="Declare a class for calculating ellptical Gaussian integrals over rectangles." alt="" coords="916,116,1119,162"/>

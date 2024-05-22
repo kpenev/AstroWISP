@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>tests.test_fake_image module &mdash; SuperPhot Python Interface  documentation</title>
+  <title>tests.test_fake_image module &mdash; AstroWISP Python Interface  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
@@ -37,7 +37,7 @@
           
           
           <a href="../index.html" class="icon icon-home">
-            SuperPhot Python Interface
+            AstroWISP Python Interface
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -77,7 +77,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">SuperPhot Python Interface</a>
+          <a href="../index.html">AstroWISP Python Interface</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -101,23 +101,23 @@
 <span id="tests-test-fake-image-module"></span><h1>tests.test_fake_image module<a class="headerlink" href="#module-tests.test_fake_image" title="Permalink to this heading"></a></h1>
 <section id="class-inheritance-diagram">
 <h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this heading"></a></h2>
-<div class="graphviz"><img src="../_images/inheritance-6eb58e4cd91eb664a6809f8d18a8730e2aef3451.png" alt="Inheritance diagram of FloatTestCase, Image, PiecewiseBicubicPSF, TestImage" usemap="#inheritance5be4968c28" class="inheritance graphviz" /></div>
+<div class="graphviz"><img src="../_images/inheritance-81f6808699153e83412c1733419f90989c41348a.png" alt="Inheritance diagram of FloatTestCase, Image, PiecewiseBicubicPSF, TestImage" usemap="#inheritance5be4968c28" class="inheritance graphviz" /></div>
 <map id="inheritance5be4968c28" name="inheritance5be4968c28">
-<area shape="rect" id="node6" href="../_implementation/superphot.psf_base.html#superphot.psf_base.PSFBase" target="_top" title="The base class for all supported PSFs." alt="" coords="116,80,312,107"/>
-<area shape="rect" id="node3" href="../_implementation/superphot.fake_image.image.html#superphot.fake_image.image.Image" target="_top" title="A base class for fake images." alt="" coords="336,80,564,107"/>
-<area shape="rect" id="node4" href="../_implementation/superphot.fake_image.piecewise_bicubic_psf.html#superphot.fake_image.piecewise_bicubic_psf.PiecewiseBicubicPSF" target="_top" title="A piecewise PSF class where the PSF over each piece is a bi&#45;cubic function." alt="" coords="5,229,423,256"/>
-<area shape="rect" id="node5" href="../_implementation/superphot.fake_image.piecewise_psf.html#superphot.fake_image.piecewise_psf.PiecewisePSF" target="_top" title="Base clas for PSFs defined on a grid of pieces." alt="" coords="51,155,377,181"/>
-<area shape="rect" id="node7" href="#tests.test_fake_image.TestImage" target="_top" title="Make sure the Image class functions as expected." alt="" coords="573,155,788,181"/>
-<area shape="rect" id="node8" href="tests.utilities.html#tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="589,80,773,107"/>
-</map><p>Unittest test case for the superphot.fake_image.image.Image class.</p>
+<area shape="rect" id="node6" href="../_implementation/astrowisp.psf_base.html#astrowisp.psf_base.PSFBase" target="_top" title="The base class for all supported PSFs." alt="" coords="116,80,311,107"/>
+<area shape="rect" id="node2" href="../_implementation/astrowisp.fake_image.image.html#astrowisp.fake_image.image.Image" target="_top" title="A base class for fake images." alt="" coords="335,80,562,107"/>
+<area shape="rect" id="node4" href="../_implementation/astrowisp.fake_image.piecewise_bicubic_psf.html#astrowisp.fake_image.piecewise_bicubic_psf.PiecewiseBicubicPSF" target="_top" title="A piecewise PSF class where the PSF over each piece is a bi&#45;cubic function." alt="" coords="5,229,422,256"/>
+<area shape="rect" id="node5" href="../_implementation/astrowisp.fake_image.piecewise_psf.html#astrowisp.fake_image.piecewise_psf.PiecewisePSF" target="_top" title="Base clas for PSFs defined on a grid of pieces." alt="" coords="51,155,376,181"/>
+<area shape="rect" id="node7" href="../_implementation/astrowisp.tests.utilities.html#astrowisp.tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="586,80,830,107"/>
+<area shape="rect" id="node9" href="#tests.test_fake_image.TestImage" target="_top" title="Make sure the Image class functions as expected." alt="" coords="601,155,816,181"/>
+</map><p>Unittest test case for the astrowisp.fake_image.image.Image class.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="tests.test_fake_image.TestImage">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tests.test_fake_image.</span></span><span class="sig-name descname"><span class="pre">TestImage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_fake_image.html#TestImage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tests.test_fake_image.TestImage" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="tests.utilities.html#tests.utilities.FloatTestCase" title="tests.utilities.FloatTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">FloatTestCase</span></code></a></p>
-<div class="graphviz"><img src="../_images/inheritance-1a53d8f5ee04ea603447938bf944248614d56821.png" alt="Inheritance diagram of tests.test_fake_image.TestImage" usemap="#inheritancedeed27bb82" class="inheritance graphviz" /></div>
+<dd><p>Bases: <a class="reference internal" href="../_implementation/astrowisp.tests.utilities.html#astrowisp.tests.utilities.FloatTestCase" title="astrowisp.tests.utilities.FloatTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">FloatTestCase</span></code></a></p>
+<div class="graphviz"><img src="../_images/inheritance-33ba04431ff0d31ca1dea82e3e149afd3e3d2e03.png" alt="Inheritance diagram of tests.test_fake_image.TestImage" usemap="#inheritancedeed27bb82" class="inheritance graphviz" /></div>
 <map id="inheritancedeed27bb82" name="inheritancedeed27bb82">
-<area shape="rect" id="node1" href="#tests.test_fake_image.TestImage" target="_top" title="Make sure the Image class functions as expected." alt="" coords="5,155,221,181"/>
-<area shape="rect" id="node2" href="tests.utilities.html#tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="21,80,205,107"/>
+<area shape="rect" id="node1" href="../_implementation/astrowisp.tests.utilities.html#astrowisp.tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="5,80,250,107"/>
+<area shape="rect" id="node3" href="#tests.test_fake_image.TestImage" target="_top" title="Make sure the Image class functions as expected." alt="" coords="20,155,235,181"/>
 </map><p>Make sure the Image class functions as expected.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="tests.test_fake_image.TestImage.assertExpectedImage">

@@ -1,5 +1,5 @@
-<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/SubPixPhot/Config.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/SubPixPhot/Config.h">
-<area shape="rect" id="node1" title="Defines a class containing the configuration with which to run subpixphot." alt="" coords="1807,5,1990,68"/>
+<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/SubPixPhot/Config.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/SubPixPhot/Config.h">
+<area shape="rect" id="node1" title="Defines a class containing the configuration with which to run subpixphot." alt="" coords="1807,5,1991,68"/>
 <area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="721,783,940,829"/>
 <area shape="rect" id="node3" href="$CommandLineConfig_8h.xhtml" title="Declare a class for managing the configuration with which tools are run." alt="" coords="742,116,960,145"/>
 <area shape="rect" id="node5" href="$Error_8h.xhtml" title="The hierarchy of exceptions for this project." alt="" coords="1071,629,1191,658"/>

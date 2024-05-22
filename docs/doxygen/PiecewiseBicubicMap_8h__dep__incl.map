@@ -1,7 +1,7 @@
-<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/PSF/PiecewiseBicubicMap.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/PSF/PiecewiseBicubicMap.h">
+<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/PiecewiseBicubicMap.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/PiecewiseBicubicMap.h">
 <area shape="rect" id="node1" title="Declares a smoothly varying over an image piecewise bicubic PSF map class." alt="" coords="224,5,457,68"/>
 <area shape="rect" id="node2" href="$FitPSF_2PiecewiseBicubic_8h.xhtml" title="The declarations of the functions related to fitting piecewise bicubic PSFs." alt="" coords="5,116,225,179"/>
-<area shape="rect" id="node4" href="$PSF_2CInterface_8cpp.xhtml" title="The definitions of the functions declared in CInterface.h." alt="" coords="249,116,432,179"/>
-<area shape="rect" id="node5" href="$PiecewiseBicubicMap_8cpp.xhtml" title="Definitions of some methods of the PiecewiseBicubicMap class." alt="" coords="456,116,705,179"/>
+<area shape="rect" id="node4" href="$PSF_2CInterface_8cpp.xhtml" title="The definitions of the functions declared in CInterface.h." alt="" coords="248,116,433,179"/>
+<area shape="rect" id="node5" href="$PiecewiseBicubicMap_8cpp.xhtml" title="Definitions of some methods of the PiecewiseBicubicMap class." alt="" coords="457,116,706,179"/>
 <area shape="rect" id="node3" href="$FitPSF_2CInterface_8cpp.xhtml" title="Define the C&#45;interface functions for the FitPSF library." alt="" coords="23,227,207,290"/>
 </map>

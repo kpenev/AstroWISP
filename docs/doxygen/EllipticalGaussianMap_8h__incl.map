@@ -1,4 +1,4 @@
-<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/PSF/EllipticalGaussianMap.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/PSF/EllipticalGaussianMap.h">
+<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/EllipticalGaussianMap.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/EllipticalGaussianMap.h">
 <area shape="rect" id="node1" title="Declares a smoothly varying over an image elliptical Gaussian PSF map class." alt="" coords="723,5,957,68"/>
 <area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="1285,1014,1504,1060"/>
 <area shape="rect" id="node3" href="$EllipticalGaussian_8h.xhtml" title="Class defining ellptical Gaussian point spread functions (PSF)." alt="" coords="1117,441,1280,470"/>

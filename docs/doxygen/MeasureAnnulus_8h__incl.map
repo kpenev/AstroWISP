@@ -1,4 +1,4 @@
-<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/Background/MeasureAnnulus.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/Background/MeasureAnnulus.h">
+<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/Background/MeasureAnnulus.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/Background/MeasureAnnulus.h">
 <area shape="rect" id="node1" title="Declare a class for extracting source background from an annulus around each source excluding areas a..." alt="" coords="799,5,1049,68"/>
 <area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="240,578,459,624"/>
 <area shape="rect" id="node3" href="$MeasureExcludingSources_8h.xhtml" title="Declares a class for extracting the background around sources attempting to exclude nearby sources." alt="" coords="484,116,711,145"/>

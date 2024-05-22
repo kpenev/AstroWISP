@@ -1,4 +1,4 @@
-<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/Core/SDKSource.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/Core/SDKSource.h">
+<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/Core/SDKSource.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/Core/SDKSource.h">
 <area shape="rect" id="node1" title="Declare a class for sources with ellptical gaussian PSF." alt="" coords="1192,5,1376,68"/>
 <area shape="rect" id="node2" href="$Core_2Source_8h.xhtml" title="Declare a base class for sources processed by SubPixTools." alt="" coords="1608,296,1693,325"/>
 <area shape="rect" id="node31" href="$EllipticalGaussian_8h.xhtml" title="Class defining ellptical Gaussian point spread functions (PSF)." alt="" coords="1057,116,1268,145"/>

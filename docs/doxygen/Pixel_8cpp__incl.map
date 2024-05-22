@@ -1,5 +1,5 @@
-<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/FitPSF/Pixel.cpp" name="/Users/kpenev/projects/git/SuperPhot/doc_src/FitPSF/Pixel.cpp">
-<area shape="rect" id="node1" title="Define the backrgound excess functions and some methods of Pixel.h." alt="" coords="767,5,950,68"/>
+<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/FitPSF/Pixel.cpp" name="/Users/kpenev/projects/git/AstroWISP/doc_src/FitPSF/Pixel.cpp">
+<area shape="rect" id="node1" title="Define the backrgound excess functions and some methods of Pixel.h." alt="" coords="767,5,951,68"/>
 <area shape="rect" id="node2" href="$Pixel_8h.xhtml" title="Defines a class describing a single pixel participating in PSF/PRF fitting." alt="" coords="1254,270,1325,299"/>
 <area shape="rect" id="node21" href="$FitPSF_2Source_8h.xhtml" title="Defines the base class for sources participating in PSF fitting." alt="" coords="1572,116,1657,145"/>
 <area shape="rect" id="node3" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="1782,766,2002,812"/>

@@ -1,4 +1,4 @@
-<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/Background/CInterface.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/Background/CInterface.h">
+<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/Background/CInterface.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/Background/CInterface.h">
 <area shape="rect" id="node1" title="Declare C&#45;style functions for accessing the functionality of the Background library." alt="" coords="845,5,1046,68"/>
 <area shape="rect" id="node2" href="$MeasureAnnulus_8h.xhtml" title="Declare a class for extracting source background from an annulus around each source excluding areas a..." alt="" coords="554,116,710,145"/>
 <area shape="rect" id="node7" href="$Core_2Image_8h.xhtml" title="Declares a base class for images to be processed." alt="" coords="874,424,1003,453"/>

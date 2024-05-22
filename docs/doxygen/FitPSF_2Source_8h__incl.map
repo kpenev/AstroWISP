@@ -1,4 +1,4 @@
-<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/FitPSF/Source.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/FitPSF/Source.h">
+<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/FitPSF/Source.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/FitPSF/Source.h">
 <area shape="rect" id="node1" title="Defines the base class for sources participating in PSF fitting." alt="" coords="2644,5,2828,68"/>
 <area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="1954,689,2174,735"/>
 <area shape="rect" id="node3" href="$AmplitudeSaturatedPixel_8h.xhtml" title="Define a class used when fitting for PSF amplitude with saturated pixels." alt="" coords="2608,510,2819,539"/>

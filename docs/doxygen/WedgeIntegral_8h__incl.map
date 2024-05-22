@@ -1,4 +1,4 @@
-<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/PSF/WedgeIntegral.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/PSF/WedgeIntegral.h">
+<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/WedgeIntegral.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/WedgeIntegral.h">
 <area shape="rect" id="node1" title="Declares a class that calculates integrals of x^my^n over circle wedges." alt="" coords="283,5,467,68"/>
 <area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="103,347,322,393"/>
 <area shape="rect" id="node3" href="$IntegralUtil_8h.xhtml" title="Useful functions for calculating PSF integrals." alt="" coords="119,116,231,145"/>

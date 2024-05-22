@@ -1,4 +1,4 @@
-<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/PSF/EllipticalGaussianMap.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/PSF/EllipticalGaussianMap.h">
+<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/EllipticalGaussianMap.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/EllipticalGaussianMap.h">
 <area shape="rect" id="node1" title="Declares a smoothly varying over an image elliptical Gaussian PSF map class." alt="" coords="143,5,378,68"/>
 <area shape="rect" id="node2" href="$DataTreeCalculations_8h.xhtml" title="Declare functions that calculate some entries of I/O data trees from others." alt="" coords="14,116,243,179"/>
 <area shape="rect" id="node4" href="$EllipticalGaussianMap_8cpp.xhtml" title="Definitions of some methods of the EllipticalGaussianMap class." alt="" coords="267,116,518,179"/>

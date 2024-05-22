@@ -1,5 +1,5 @@
-<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/FitPSF/Pixel.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/FitPSF/Pixel.h">
-<area shape="rect" id="node1" title="Defines a class describing a single pixel participating in PSF/PRF fitting." alt="" coords="904,5,1087,68"/>
+<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/FitPSF/Pixel.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/FitPSF/Pixel.h">
+<area shape="rect" id="node1" title="Defines a class describing a single pixel participating in PSF/PRF fitting." alt="" coords="903,5,1088,68"/>
 <area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="579,424,798,470"/>
 <area shape="rect" id="node3" href="$Background_2Source_8h.xhtml" title="Declares the base class for background extract(ion/ed) from an astronomical image." alt="" coords="755,116,942,145"/>
 <area shape="rect" id="node5" href="$Core_2Typedefs_8h.xhtml" title="Some useful typedef statements." alt="" coords="280,270,380,299"/>

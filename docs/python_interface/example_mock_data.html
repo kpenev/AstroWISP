@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Example of PSF Fitting and Aperture Photometry Using Mock Data &mdash; SuperPhot Python Interface  documentation</title>
+  <title>Example of PSF Fitting and Aperture Photometry Using Mock Data &mdash; AstroWISP Python Interface  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
@@ -27,7 +27,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="superphot" href="../_implementation/modules.html" />
+    <link rel="next" title="astrowisp" href="../_implementation/modules.html" />
     <link rel="prev" title="Aperture Photometry" href="aperture_photometry.html" /> 
 </head>
 
@@ -40,7 +40,7 @@
           
           
           <a href="../index.html" class="icon icon-home">
-            SuperPhot Python Interface
+            AstroWISP Python Interface
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -85,7 +85,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">SuperPhot Python Interface</a>
+          <a href="../index.html">AstroWISP Python Interface</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -121,10 +121,10 @@
 <span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">expanduser</span>
 
 <span class="kn">import</span> <span class="nn">sys</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">expanduser</span><span class="p">(</span><span class="s1">&#39;~/projects/git/SuperPhot/PythonPackage&#39;</span><span class="p">))</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">expanduser</span><span class="p">(</span><span class="s1">&#39;~/projects/git/SuperPhot/PythonPackage/tests&#39;</span><span class="p">))</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">expanduser</span><span class="p">(</span><span class="s1">&#39;~/projects/git/AstroWISP/PythonPackage&#39;</span><span class="p">))</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">expanduser</span><span class="p">(</span><span class="s1">&#39;~/projects/git/AstroWISP/PythonPackage/tests&#39;</span><span class="p">))</span>
 
-<span class="kn">from</span> <span class="nn">superphot.fake_image.piecewise_bicubic_psf</span> <span class="kn">import</span> <span class="n">PiecewiseBicubicPSF</span>
+<span class="kn">from</span> <span class="nn">astrowisp.fake_image.piecewise_bicubic_psf</span> <span class="kn">import</span> <span class="n">PiecewiseBicubicPSF</span>
 <span class="kn">from</span> <span class="nn">test_fit_star_shape.utils</span> <span class="kn">import</span> <span class="n">make_image_and_source_list</span>
 </pre></div>
 </div>
@@ -219,7 +219,7 @@ Source list:array([(b&#39;000000&#39;, 5., 5.)],
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">superphot</span> <span class="kn">import</span> <span class="n">FitStarShape</span><span class="p">,</span> <span class="n">BackgroundExtractor</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astrowisp</span> <span class="kn">import</span> <span class="n">FitStarShape</span><span class="p">,</span> <span class="n">BackgroundExtractor</span>
 </pre></div>
 </div>
 </div>
@@ -329,7 +329,7 @@ PSF fit flux: array([2.])
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">superphot</span> <span class="kn">import</span> <span class="n">SubPixPhot</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astrowisp</span> <span class="kn">import</span> <span class="n">SubPixPhot</span>
 </pre></div>
 </div>
 </div>
@@ -411,7 +411,7 @@ Aperture    Magnitude +- Error      Flux
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="aperture_photometry.html" class="btn btn-neutral float-left" title="Aperture Photometry" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../_implementation/modules.html" class="btn btn-neutral float-right" title="superphot" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../_implementation/modules.html" class="btn btn-neutral float-right" title="astrowisp" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

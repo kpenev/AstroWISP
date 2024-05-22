@@ -1,4 +1,4 @@
-<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/PSF/LocalPolynomial.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/PSF/LocalPolynomial.h">
+<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/LocalPolynomial.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/LocalPolynomial.h">
 <area shape="rect" id="node1" title="Defines a basic PSF based on local second order expansion." alt="" coords="92,5,285,68"/>
 <area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="5,270,225,316"/>
 <area shape="rect" id="node3" href="$PSF_8h.xhtml" title="Defines the base class of all PSF models." alt="" coords="230,116,296,145"/>

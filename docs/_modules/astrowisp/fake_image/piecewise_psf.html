@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>astrowisp.fake_image.piecewise_psf &mdash; AstroWISP Python Interface  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/unlimited_width.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            AstroWISP Python Interface
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Unix Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#windows-installation">Windows Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../unit_tests.html">Unit Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../python_interface/index.html">Python Interface Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_implementation/modules.html">Python Package Implementation</a></li>
+<li class="toctree-l1"><a class="reference external" href="doxygen/index.xhtml#http://">C/C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_unit_tests/modules.html">Unit Testing Code</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">AstroWISP Python Interface</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">astrowisp.fake_image.piecewise_psf</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for astrowisp.fake_image.piecewise_psf</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Declares the PiecewisePSF base class for piecewise PSF functions.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">bisect</span> <span class="kn">import</span> <span class="n">bisect</span>
+
+<span class="kn">from</span> <span class="nn">astrowisp.psf_base</span> <span class="kn">import</span> <span class="n">PSFBase</span>
+
+<div class="viewcode-block" id="get_piece_index"><a class="viewcode-back" href="../../../_implementation/astrowisp.fake_image.piecewise_psf.html#astrowisp.fake_image.piecewise_psf.get_piece_index">[docs]</a><span class="k">def</span> <span class="nf">get_piece_index</span><span class="p">(</span><span class="n">boundaries</span><span class="p">,</span> <span class="n">coordinate</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the index of the piece along one axis containing the given coord.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        boundaries:    The offsets relative to the PSF center where different</span>
+<span class="sd">            PSF pieces meet along the direction in which we are trying to locate</span>
+<span class="sd">            the piece index.</span>
+<span class="sd">        coordinate:    The coordinate we are trying to find the piece index of.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        ind:    The index along the selected coordinate of the piece</span>
+<span class="sd">            containing x.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">coordinate</span> <span class="o">==</span> <span class="n">boundaries</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">boundaries</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span>
+    <span class="k">return</span> <span class="n">bisect</span><span class="p">(</span><span class="n">boundaries</span><span class="p">,</span> <span class="n">coordinate</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span></div>
+
+<div class="viewcode-block" id="PiecewisePSF"><a class="viewcode-back" href="../../../_implementation/astrowisp.fake_image.piecewise_psf.html#astrowisp.fake_image.piecewise_psf.PiecewisePSF">[docs]</a><span class="k">class</span> <span class="nc">PiecewisePSF</span><span class="p">(</span><span class="n">PSFBase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base clas for PSFs defined on a grid of pieces.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="PiecewisePSF.__init__"><a class="viewcode-back" href="../../../_implementation/astrowisp.fake_image.piecewise_psf.html#astrowisp.fake_image.piecewise_psf.PiecewisePSF.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boundaries</span><span class="p">,</span> <span class="n">pieces</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Define a PSF with the given boundaries.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            boundaries:    Dictionary with keys `x` and `y` giving the offsets</span>
+<span class="sd">                relative to the center of the horizontal piece boundaries. The</span>
+<span class="sd">                PSF is zero left of the first or right of the last x boundary</span>
+<span class="sd">                as wall as below the first and above the last y boundary.</span>
+
+<span class="sd">            pieces:    The pieces making up the PSF should be a class inherited</span>
+<span class="sd">                from PSFPiece.</span>
+
+<span class="sd">        Returns: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_boundaries</span> <span class="o">=</span> <span class="n">boundaries</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pieces</span> <span class="o">=</span> <span class="n">pieces</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="PiecewisePSF.get_left_range"><a class="viewcode-back" href="../../../_implementation/astrowisp.fake_image.piecewise_psf.html#astrowisp.fake_image.piecewise_psf.PiecewisePSF.get_left_range">[docs]</a>    <span class="k">def</span> <span class="nf">get_left_range</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return how far the PSF extends to the left of center.&quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">_boundaries</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="PiecewisePSF.get_right_range"><a class="viewcode-back" href="../../../_implementation/astrowisp.fake_image.piecewise_psf.html#astrowisp.fake_image.piecewise_psf.PiecewisePSF.get_right_range">[docs]</a>    <span class="k">def</span> <span class="nf">get_right_range</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return how far the PSF extends to the right of center.&quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_boundaries</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="PiecewisePSF.get_down_range"><a class="viewcode-back" href="../../../_implementation/astrowisp.fake_image.piecewise_psf.html#astrowisp.fake_image.piecewise_psf.PiecewisePSF.get_down_range">[docs]</a>    <span class="k">def</span> <span class="nf">get_down_range</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return how far the PSF extends downward of center.&quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">_boundaries</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="PiecewisePSF.get_up_range"><a class="viewcode-back" href="../../../_implementation/astrowisp.fake_image.piecewise_psf.html#astrowisp.fake_image.piecewise_psf.PiecewisePSF.get_up_range">[docs]</a>    <span class="k">def</span> <span class="nf">get_up_range</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return how far the PSF extends upward of center.&quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_boundaries</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></div>
+
+    <span class="c1">#(x, y) is a reasonable way to specify the coordinates of an offset vector.</span>
+    <span class="c1">#pylint: disable=invalid-name</span>
+<div class="viewcode-block" id="PiecewisePSF.__call__"><a class="viewcode-back" href="../../../_implementation/astrowisp.fake_image.piecewise_psf.html#astrowisp.fake_image.piecewise_psf.PiecewisePSF.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;See the documentation of PSFBase.__call__.&quot;&quot;&quot;</span>
+
+        <span class="k">if</span><span class="p">(</span>
+                <span class="n">x</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_boundaries</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                <span class="ow">or</span>
+                <span class="n">x</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_boundaries</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="ow">or</span>
+                <span class="n">y</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_boundaries</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                <span class="ow">or</span>
+                <span class="n">y</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_boundaries</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="p">):</span>
+            <span class="k">return</span> <span class="mf">0.0</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pieces</span><span class="p">[</span>
+            <span class="n">get_piece_index</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_boundaries</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">],</span> <span class="n">y</span><span class="p">)</span>
+        <span class="p">][</span>
+            <span class="n">get_piece_index</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_boundaries</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">x</span><span class="p">)</span>
+        <span class="p">](</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span></div>
+    <span class="c1">#pylint: enable=invalid-name</span>
+
+<div class="viewcode-block" id="PiecewisePSF.integrate"><a class="viewcode-back" href="../../../_implementation/astrowisp.fake_image.piecewise_psf.html#astrowisp.fake_image.piecewise_psf.PiecewisePSF.integrate">[docs]</a>    <span class="k">def</span> <span class="nf">integrate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">bottom</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;See documentation of PSFBase.integrate.&quot;&quot;&quot;</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+        <span class="k">if</span> <span class="n">width</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">sign</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+            <span class="n">left</span> <span class="o">=</span> <span class="n">left</span> <span class="o">+</span> <span class="n">width</span>
+            <span class="n">width</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">width</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sign</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">height</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">sign</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
+            <span class="n">bottom</span> <span class="o">=</span> <span class="n">bottom</span> <span class="o">+</span> <span class="n">height</span>
+            <span class="n">height</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">height</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">y_piece</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span>
+                <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">get_piece_index</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_boundaries</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">],</span> <span class="n">bottom</span><span class="p">)),</span>
+                <span class="nb">min</span><span class="p">(</span><span class="n">get_piece_index</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_boundaries</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">],</span>
+                                    <span class="n">bottom</span> <span class="o">+</span> <span class="n">height</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                    <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_boundaries</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="p">):</span>
+
+            <span class="n">y_min</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_boundaries</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">][</span><span class="n">y_piece</span><span class="p">],</span> <span class="n">bottom</span><span class="p">)</span>
+            <span class="n">y_max</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">height</span> <span class="o">+</span> <span class="n">bottom</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_boundaries</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">][</span><span class="n">y_piece</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+
+            <span class="k">for</span> <span class="n">x_piece</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span>
+                    <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">get_piece_index</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_boundaries</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">left</span><span class="p">)),</span>
+                    <span class="nb">min</span><span class="p">(</span><span class="n">get_piece_index</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_boundaries</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span>
+                                        <span class="n">left</span> <span class="o">+</span> <span class="n">width</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                        <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_boundaries</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="p">):</span>
+                <span class="n">piece</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pieces</span><span class="p">[</span><span class="n">y_piece</span><span class="p">][</span><span class="n">x_piece</span><span class="p">]</span>
+                <span class="n">x_min</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_boundaries</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">][</span><span class="n">x_piece</span><span class="p">],</span> <span class="n">left</span><span class="p">)</span>
+                <span class="n">x_max</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">width</span> <span class="o">+</span> <span class="n">left</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_boundaries</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">][</span><span class="n">x_piece</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+
+                <span class="n">result</span> <span class="o">+=</span> <span class="n">piece</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">x_min</span><span class="p">,</span>
+                                          <span class="n">y_min</span><span class="p">,</span>
+                                          <span class="n">x_max</span> <span class="o">-</span> <span class="n">x_min</span><span class="p">,</span>
+                                          <span class="n">y_max</span> <span class="o">-</span> <span class="n">y_min</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">sign</span> <span class="o">*</span> <span class="n">result</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2018, Kaloyan Penev.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

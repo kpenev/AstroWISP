@@ -1,4 +1,4 @@
-<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/IO/OutputArray.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/IO/OutputArray.h">
+<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/IO/OutputArray.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/IO/OutputArray.h">
 <area shape="rect" id="node1" title="Declares a class for writing array of values held in boost::any." alt="" coords="691,5,875,68"/>
 <area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="149,287,369,333"/>
 <area shape="rect" id="node3" href="$TranslateToAny_8h.xhtml" title="Defines a class that allows placing inhomogeneous types data in property trees." alt="" coords="77,210,222,239"/>

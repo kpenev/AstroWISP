@@ -1,4 +1,4 @@
-<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/Background/MeasureExcludingSources.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/Background/MeasureExcludingSources.h">
+<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/Background/MeasureExcludingSources.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/Background/MeasureExcludingSources.h">
 <area shape="rect" id="node1" title="Declares a class for extracting the background around sources attempting to exclude nearby sources." alt="" coords="933,5,1254,68"/>
 <area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="792,501,1011,547"/>
 <area shape="rect" id="node3" href="$Measure_8h.xhtml" title="Declares the minimum requirements for a background extractor class." alt="" coords="932,116,1028,145"/>

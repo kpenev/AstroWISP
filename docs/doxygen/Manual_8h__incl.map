@@ -1,5 +1,5 @@
-<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/Background/Manual.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/Background/Manual.h">
-<area shape="rect" id="node1" title="Declare a background class for sources with known backgrounds." alt="" coords="74,5,257,68"/>
+<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/Background/Manual.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/Background/Manual.h">
+<area shape="rect" id="node1" title="Declare a background class for sources with known backgrounds." alt="" coords="73,5,257,68"/>
 <area shape="rect" id="node2" href="$Measure_8h.xhtml" title="Declares the minimum requirements for a background extractor class." alt="" coords="117,116,213,145"/>
 <area shape="rect" id="node3" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="157,501,376,547"/>
 <area shape="rect" id="node4" href="$Background_2Source_8h.xhtml" title="Declares the base class for background extract(ion/ed) from an astronomical image." alt="" coords="269,193,355,222"/>

@@ -1,5 +1,5 @@
-<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/PSF/MapSource.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/PSF/MapSource.h">
-<area shape="rect" id="node1" title="Defines a source class which can be passed directly to a PSF map." alt="" coords="2890,5,3073,68"/>
+<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/MapSource.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/MapSource.h">
+<area shape="rect" id="node1" title="Defines a source class which can be passed directly to a PSF map." alt="" coords="2889,5,3074,68"/>
 <area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="2554,783,2774,829"/>
 <area shape="rect" id="node3" href="$H5IODataTree_8h.xhtml" title="A structure to hold any output data produced by subpixtools." alt="" coords="1379,116,1549,145"/>
 <area shape="rect" id="node11" title=" " alt="" coords="125,792,190,821"/>

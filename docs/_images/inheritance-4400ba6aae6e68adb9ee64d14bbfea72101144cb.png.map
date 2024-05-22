@@ -1,5 +1,0 @@
-<map id="inheritance0d53412eca" name="inheritance0d53412eca">
-<area shape="rect" id="node7" title="All numbers inherit from this class." alt="" coords="792,5,913,32"/>
-<area shape="rect" id="node8" href="#superphot.fit_star_shape.FitStarShape" target="_top" title="Fit for the PSF/PRF of stars and their flux." alt="" coords="937,5,1181,32"/>
-<area shape="rect" id="node9" href="superphot.superphot_io_tree.html#superphot.superphot_io_tree.SuperPhotIOTree" target="_top" title="Interface for extracting entries from an IO::H5IODataTree." alt="" coords="1206,5,1496,32"/>
-</map>

@@ -1,4 +1,4 @@
-<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/FitPSF/LinearSource.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/FitPSF/LinearSource.h">
+<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/FitPSF/LinearSource.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/FitPSF/LinearSource.h">
 <area shape="rect" id="node1" title="Declares a class used for PSF fitting where pixel responses are linear functions of the shape paramet..." alt="" coords="2846,5,3034,68"/>
 <area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="2200,903,2419,949"/>
 <area shape="rect" id="node3" href="$OverlapSource_8h.xhtml" title="Defines the overlap&#45;related features of PSF fitting sources." alt="" coords="2595,116,2736,145"/>

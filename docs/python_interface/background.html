@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Measuring Background &mdash; SuperPhot Python Interface  documentation</title>
+  <title>Measuring Background &mdash; AstroWISP Python Interface  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
@@ -37,7 +37,7 @@
           
           
           <a href="../index.html" class="icon icon-home">
-            SuperPhot Python Interface
+            AstroWISP Python Interface
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -70,7 +70,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">SuperPhot Python Interface</a>
+          <a href="../index.html">AstroWISP Python Interface</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -92,7 +92,7 @@
   <section id="measuring-background">
 <h1>Measuring Background<a class="headerlink" href="#measuring-background" title="Permalink to this heading"></a></h1>
 <p>Photometry starts by determining the background level and its uncertainty for
-each source. At present SuperPhot uses the median average and the scatter around
+each source. At present AstroWISP uses the median average and the scatter around
 it (after outlier rejection) of pixels in an annulus around each source,
 excluding pixels too close to other sources. The user specifies two radii:</p>
 <blockquote>
@@ -108,12 +108,12 @@ of this source or any other source.</p></li>
 </ul>
 </div></blockquote>
 <p>Background measurement is performed using the
-<a class="reference internal" href="../_implementation/superphot.html#superphot.BackgroundExtractor" title="superphot.BackgroundExtractor"><code class="xref py py-class docutils literal notranslate"><span class="pre">superphot.BackgroundExtractor</span></code></a> class and requires specifying the image,
+<a class="reference internal" href="../_implementation/astrowisp.html#astrowisp.BackgroundExtractor" title="astrowisp.BackgroundExtractor"><code class="xref py py-class docutils literal notranslate"><span class="pre">astrowisp.BackgroundExtractor</span></code></a> class and requires specifying the image,
 list of source locations, the inner/outer background radii  and returns
 estimates of the background for each source, its error (standard deviation), and
 the number of pixels that participated in the determination of the background
 value and error:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">superphot</span> <span class="kn">import</span> <span class="n">BackgroundExtractor</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astrowisp</span> <span class="kn">import</span> <span class="n">BackgroundExtractor</span>
 <span class="kn">import</span> <span class="nn">numpy.random</span>
 
 <span class="n">image</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>

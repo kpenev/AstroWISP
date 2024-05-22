@@ -1,8 +1,8 @@
-<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/Core/CInterface.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/Core/CInterface.h">
+<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/Core/CInterface.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/Core/CInterface.h">
 <area shape="rect" id="node1" title="Declare some opaque structures to be used when creating C&#45;interfaces to libraries." alt="" coords="312,5,496,68"/>
 <area shape="rect" id="node2" href="$Background_2CInterface_8h.xhtml" title="Declare C&#45;style functions for accessing the functionality of the Background library." alt="" coords="101,116,302,179"/>
 <area shape="rect" id="node4" href="$FitPSF_2CInterface_8h.xhtml" title="Declare C&#45;style functions for accessing the functionality of FitPSF." alt="" coords="248,227,432,290"/>
-<area shape="rect" id="node6" href="$Core_2CInterface_8cpp.xhtml" title="The definitions of the functions declared in CInterface.h." alt="" coords="378,116,561,179"/>
+<area shape="rect" id="node6" href="$Core_2CInterface_8cpp.xhtml" title="The definitions of the functions declared in CInterface.h." alt="" coords="377,116,561,179"/>
 <area shape="rect" id="node7" href="$SubPixPhot_2CInterface_8h.xhtml" title="Declare C&#45;style functions for accessing the functionality of SubPixPhot." alt="" coords="585,116,785,179"/>
 <area shape="rect" id="node3" href="$Background_2CInterface_8cpp.xhtml" title="The definitions of the functions declared in CInterface.h." alt="" coords="5,227,224,290"/>
 <area shape="rect" id="node5" href="$FitPSF_2CInterface_8cpp.xhtml" title="Define the C&#45;interface functions for the FitPSF library." alt="" coords="248,338,432,401"/>

@@ -1,4 +1,4 @@
-<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/FitPSF/CInterface.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/FitPSF/CInterface.h">
+<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/FitPSF/CInterface.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/FitPSF/CInterface.h">
 <area shape="rect" id="node1" title="Declare C&#45;style functions for accessing the functionality of FitPSF." alt="" coords="383,5,567,68"/>
 <area shape="rect" id="node2" href="$Core_2CInterface_8h.xhtml" title="Declare some opaque structures to be used when creating C&#45;interfaces to libraries." alt="" coords="396,193,554,222"/>
 <area shape="rect" id="node4" href="$IO_2CInterface_8h.xhtml" title="Declare C&#45;style functions for accessing the functionality of the IO library." alt="" coords="69,578,209,607"/>

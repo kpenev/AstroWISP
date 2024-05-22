@@ -1,6 +1,6 @@
 <map id="Core::SourceLocation" name="Core::SourceLocation">
 <area shape="rect" id="node1" title="The minimum requirements for objects specifying where a source is." alt="" coords="99,474,276,626"/>
-<area shape="rect" id="node4" href="$classCore_1_1Source.xhtml" title="A base class for all sources in SuperPhot." alt="" coords="97,674,278,980"/>
+<area shape="rect" id="node4" href="$classCore_1_1Source.xhtml" title="A base class for all sources in AstroWISP." alt="" coords="97,674,278,980"/>
 <area shape="rect" id="node2" href="$classCore_1_1Point.xhtml" title=" " alt="" coords="99,257,276,426"/>
 <area shape="rect" id="node3" href="$classCore_1_1Point.xhtml" title="Representing a 2D point with real valued cartesian coordinates." alt="" coords="100,5,275,192"/>
 <area shape="rect" id="node5" href="$classCore_1_1SDKSource.xhtml" title="Represents a source with a PSF described by an elliptical gaussian." alt="" coords="15,1028,173,1333"/>

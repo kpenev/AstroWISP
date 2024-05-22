@@ -1,4 +1,4 @@
-<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/PSF/DataTreeCalculations.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/PSF/DataTreeCalculations.h">
+<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/DataTreeCalculations.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/DataTreeCalculations.h">
 <area shape="rect" id="node1" title="Declare functions that calculate some entries of I/O data trees from others." alt="" coords="2271,5,2500,68"/>
 <area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="2920,1031,3139,1077"/>
 <area shape="rect" id="node3" href="$H5IODataTree_8h.xhtml" title="A structure to hold any output data produced by subpixtools." alt="" coords="2083,364,2253,393"/>

@@ -1,5 +1,5 @@
-<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/PSF/CInterface.cpp" name="/Users/kpenev/projects/git/SuperPhot/doc_src/PSF/CInterface.cpp">
-<area shape="rect" id="node1" title="The definitions of the functions declared in CInterface.h." alt="" coords="2199,5,2382,68"/>
+<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/CInterface.cpp" name="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/CInterface.cpp">
+<area shape="rect" id="node1" title="The definitions of the functions declared in CInterface.h." alt="" coords="2199,5,2383,68"/>
 <area shape="rect" id="node2" href="$PSF_2CInterface_8h.xhtml" title="Declare C&#45;style functions for accessing the functionality of the PSF library." alt="" coords="3936,595,4043,624"/>
 <area shape="rect" id="node11" href="$PiecewiseBicubicMap_8h.xhtml" title="Declares a smoothly varying over an image piecewise bicubic PSF map class." alt="" coords="2195,116,2387,145"/>
 <area shape="rect" id="node23" href="$PSF_2PiecewiseBicubic_8h.xhtml" title="Defines a continuously differentiable PSF where each cell is a bicubic function." alt="" coords="599,347,761,376"/>

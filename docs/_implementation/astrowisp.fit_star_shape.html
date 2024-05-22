@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>astrowisp.fit_star_shape module &mdash; AstroWISP Python Interface  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/unlimited_width.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="astrowisp.hat_masks module" href="astrowisp.hat_masks.html" />
+    <link rel="prev" title="astrowisp.background module" href="astrowisp.background.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            AstroWISP Python Interface
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Unix Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html#windows-installation">Windows Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit_tests.html">Unit Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python_interface/index.html">Python Interface Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Python Package Implementation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="astrowisp.html">astrowisp package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#subpackages">Subpackages</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="astrowisp.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="astrowisp.background.html">astrowisp.background module</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">astrowisp.fit_star_shape module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="astrowisp.hat_masks.html">astrowisp.hat_masks module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="astrowisp.io_tree.html">astrowisp.io_tree module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="astrowisp.piecewise_bicubic_psf.html">astrowisp.piecewise_bicubic_psf module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="astrowisp.piecewise_bicubic_psf_map.html">astrowisp.piecewise_bicubic_psf_map module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="astrowisp.psf_base.html">astrowisp.psf_base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="astrowisp.subpixphot.html">astrowisp.subpixphot module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="doxygen/index.xhtml#http://">C/C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_unit_tests/modules.html">Unit Testing Code</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">AstroWISP Python Interface</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">astrowisp</a></li>
+          <li class="breadcrumb-item"><a href="astrowisp.html">astrowisp package</a></li>
+      <li class="breadcrumb-item active">astrowisp.fit_star_shape module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_implementation/astrowisp.fit_star_shape.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-astrowisp.fit_star_shape">
+<span id="astrowisp-fit-star-shape-module"></span><h1>astrowisp.fit_star_shape module<a class="headerlink" href="#module-astrowisp.fit_star_shape" title="Permalink to this heading"></a></h1>
+<section id="class-inheritance-diagram">
+<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this heading"></a></h2>
+<div class="graphviz"><img src="../_images/inheritance-fa311bc1cf2a45153cf1bf3a7d45a3b9113dfef4.png" alt="Inheritance diagram of FitStarShape, IOTree, Number, c_bool, c_char, c_char_p, c_double, c_int, c_ulong" usemap="#inheritancee2739705f6" class="inheritance graphviz" /></div>
+<map id="inheritancee2739705f6" name="inheritancee2739705f6">
+<area shape="rect" id="node1" href="#astrowisp.fit_star_shape.FitStarShape" target="_top" title="Fit for the PSF/PRF of stars and their flux." alt="" coords="5,5,249,32"/>
+<area shape="rect" id="node2" href="astrowisp.io_tree.html#astrowisp.io_tree.IOTree" target="_top" title="Interface for extracting entries from an IO::H5IODataTree." alt="" coords="273,5,437,32"/>
+</map><p>Define the <a class="reference internal" href="#astrowisp.fit_star_shape.FitStarShape" title="astrowisp.fit_star_shape.FitStarShape"><code class="xref py py-class docutils literal notranslate"><span class="pre">FitStarShape</span></code></a>, which performs PSF/PRF fitting.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="astrowisp.fit_star_shape.FitStarShape">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">astrowisp.fit_star_shape.</span></span><span class="sig-name descname"><span class="pre">FitStarShape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_aperture</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">other_configuration</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/fit_star_shape.html#FitStarShape"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.fit_star_shape.FitStarShape" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<div class="graphviz"><img src="../_images/inheritance-6640fdef511fb5cf7661c3659360f80dfe256fb4.png" alt="Inheritance diagram of astrowisp.fit_star_shape.FitStarShape" usemap="#inheritance747f920e34" class="inheritance graphviz" /></div>
+<map id="inheritance747f920e34" name="inheritance747f920e34">
+<area shape="rect" id="node1" href="#astrowisp.fit_star_shape.FitStarShape" target="_top" title="Fit for the PSF/PRF of stars and their flux." alt="" coords="5,5,249,32"/>
+</map><p>Fit for the PSF/PRF of stars and their flux.</p>
+<p>The PSF and PRF describe the distribution of light from a point source at
+infinity on the imaging device pixels.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>PSF is the distribution of light produced by the optical system in the
+plane of the detector for a point source at infinity.</p></li>
+<li><p>PRF is the response of a detector pixel at some offset from the
+center of the source. That is, the PRF is the PSF convolved with
+the sensitivity of detector pixels.</p></li>
+</ul>
+</div></blockquote>
+<p>Both representations use a general piece-wise polynomial model in which the
+area around the source location is split into a rectangular, but in general
+irregular, grid of cells. Over each cell the PSF/PRF is modeled as a
+bi-cubic polynomial. The resulting function is constraned to have continuous
+values, first order derivatives and x-y cross-derivative across cell
+boundaries. Further, it’s value, first derivative and the x-y cross
+derivative are contsrainted to go to zero on the outside boundaries of the
+grid.</p>
+<span class="target" id="attributes"></span><dl class="py attribute">
+<dt class="sig sig-object py" id="astrowisp.fit_star_shape.FitStarShape._library_psf_fitter">
+<span class="sig-name descname"><span class="pre">_library_psf_fitter</span></span><a class="headerlink" href="#astrowisp.fit_star_shape.FitStarShape._library_psf_fitter" title="Permalink to this definition"></a></dt>
+<dd><p>The library object for carrying out PSF/PRF
+fitting.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="astrowisp.fit_star_shape.FitStarShape._library_configuration">
+<span class="sig-name descname"><span class="pre">_library_configuration</span></span><a class="headerlink" href="#astrowisp.fit_star_shape.FitStarShape._library_configuration" title="Permalink to this definition"></a></dt>
+<dd><p>Library configuration object set per the
+current <a class="reference internal" href="#astrowisp.fit_star_shape.FitStarShape.configuration" title="astrowisp.fit_star_shape.FitStarShape.configuration"><code class="xref py py-attr docutils literal notranslate"><span class="pre">configuration</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="astrowisp.fit_star_shape.FitStarShape._result_tree">
+<span class="sig-name descname"><span class="pre">_result_tree</span></span><a class="headerlink" href="#astrowisp.fit_star_shape.FitStarShape._result_tree" title="Permalink to this definition"></a></dt>
+<dd><p>The IOTree instance containing the last
+fittintg results, on None, if no fitting has been performed yet.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="astrowisp.fit_star_shape.FitStarShape.mode">
+<span class="sig-name descname"><span class="pre">mode</span></span><a class="headerlink" href="#astrowisp.fit_star_shape.FitStarShape.mode" title="Permalink to this definition"></a></dt>
+<dd><p>Are we doing ‘PSF’ or ‘PRF’ fitting (case
+insensitive).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="astrowisp.fit_star_shape.FitStarShape.configuration">
+<span class="sig-name descname"><span class="pre">configuration</span></span><a class="headerlink" href="#astrowisp.fit_star_shape.FitStarShape.configuration" title="Permalink to this definition"></a></dt>
+<dd><p>The configuraiton for how to carry out PSF/PRF
+fitting. The following keys are used (others are ignored by this
+class):</p>
+<dl class="simple">
+<dt>mode (str):</dt><dd><p>What kind of fitting to do ‘PSF’ or ‘PRF’ (case insensitive).</p>
+</dd>
+<dt>grid (list of floats):</dt><dd><p>A comma separated list of grid boundaries.  Can either be a
+single list, in which case it is used for both the horizontal
+and vertical boundaries. If different splitting is desired in
+the two directions, two lists should be supplied separated by
+<code class="docutils literal notranslate"><span class="pre">;</span></code>. The first list should contain the vertical (x) boundaries
+and the second list gives the horizontal (y) ones. Sometimes it
+is desirable to treat the PSF as a uniform distribution of light
+over pixels. This is accomplished by setting a grid with just
+outer boundaries (e.g. <code class="docutils literal notranslate"><span class="pre">-5,5</span></code>) which automatically makes the
+PSF equal to zero everywhere, leaving only the background (i.e.
+flat light distribution). If such a grid is set, this also
+changes how stars excluded from shape fitting are treated.
+Normally, the fluxes of these stars are fit after the shape is
+determined using the “good” stars, but if zero PSF model is
+used, any sources excluded from the shape fit through the other
+configurations have their flux set to NaN to exclude them from
+further processing. If you want to keep all sources with zero
+PSF model, then make sure none are excluded from shape fitting.</p>
+</dd>
+<dt>initial_aperture (float):</dt><dd><p>This aperture is used to derive an initial guess for the
+amplitudes of sources when fitting for a piecewise bicubic PSF
+model by doing aperture photometry assuming a perfectly flat
+PSF.</p>
+</dd>
+<dt>subpixmap (2D numpy array):</dt><dd><p>The sub-pixel map, for PSF fitting only.</p>
+</dd>
+<dt>smoothing (float):</dt><dd><p>How much smoothing penalty to impose when fitting the PSF.
+<code class="docutils literal notranslate"><span class="pre">None</span></code> for no smoothing. Value can be both positive and
+negative and will always result in smoothing (less for negative
+values).</p>
+</dd>
+<dt>max_chi2 (float):</dt><dd><p>The value of the reduced chi squared above which sources are
+excluded from the fit. This can indicate non-point sources or
+sources for which the location is wrong among ohter things.</p>
+</dd>
+<dt>pixel_rejection_threshold (float):</dt><dd><p>A number defining individual pixels to exclude from the PSF fit.
+Pixels with fitting residuals (normalized by the standard
+deviation) bigger than this value are excluded. If zero, no
+pixels are rejected.</p>
+</dd>
+<dt>max_abs_amplitude_change (float):</dt><dd><p>The absolute root of sum squares tolerance of the source
+amplitude changes in order to declare the piecewise bicubic PSF
+fitting converged.</p>
+</dd>
+<dt>max_rel_amplitude_change (float):</dt><dd><p>The relative root of sum squares tolerance of the source
+amplitude changes in order to declare the piecewise bicubic PSF
+fitting converged.</p>
+</dd>
+<dt>min_convergence_rate (float):</dt><dd><p>If the rate of convergence falls below this threshold,
+iterations are stopped. The rate is calculated as the fractional
+decrease in the difference between the amplitude change and the
+value when it would stop, as determined by the
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">max_abs_amplitude_change</span></code> and
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">max_rel_amplitude_change</span></code> attributes.</p>
+</dd>
+<dt>max_iterations (int):</dt><dd><p>No more than this number if iterations will be performed. If
+convergence is not achieved before then, the latest estimates
+are output and an exception is thrown. A negative value allows
+infinite iterations. A value of zero, along with an initial
+guess for the PSF causes only the amplitudes to be fit for PSF
+fitting photometry with a known PSF. It is an error to pass a
+value of zero for this option and not specify and initial guess
+for the PSF.</p>
+</dd>
+<dt>gain (float):</dt><dd><p>The gain in electrons per ADU to assume for the input images.</p>
+</dd>
+<dt>cover_grid (bool):</dt><dd><p>If this option is true, all pixels that at least partially
+overlap with the grid are assigned to the corresponding source.
+This option is ignored for sdk PSF models.</p>
+</dd>
+<dt>src_min_signal_to_noise (float):</dt><dd><p>How far above the background (in units of RMS) should pixels be
+to still be considered part of a source. Ignored if the
+piecewise bibucic PSF grid is used to select source pixels
+(cover-bicubic-grid option).</p>
+</dd>
+<dt>src_max_aperture (float):</dt><dd><p>If this option has a positive value, pixels are assigned to
+sources in circular apertures (the smallest such that all pixels
+that pass the signal to noise cut are still assigned to the
+source). If an aperture larger than this value is required, an
+exception is thrown.</p>
+</dd>
+<dt>src_max_sat_frac (float):</dt><dd><p>If more than this fraction of the pixels assigned to a source
+are saturated, the source is excluded from the fit.</p>
+</dd>
+<dt>src_min_pix (int):</dt><dd><p>The minimum number of pixels that must be assigned to a source
+in order to include the source is the PSF fit.</p>
+</dd>
+<dt>src_max_pix (int):</dt><dd><p>The maximum number of pixels that car be assigned to a source
+before excluding the source from the PSF fit.</p>
+</dd>
+<dt>src_max_count (int):</dt><dd><p>The maximum number of sources to include in the fit for the PSF
+shape. The rest of the sources get their amplitudes fit and are
+used to determine the overlaps. Sources are ranked according to
+the sum of (background excess)^2/(pixel variance+background
+variance) of their individual non-saturated pixels.</p>
+</dd>
+<dt>bg_min_pix (int):</dt><dd><p>The minimum number of pixels a background estimate must be based
+on in order to include the source in shape fitting.</p>
+</dd>
+<dt>magnitude_1adu (float):</dt><dd><p>The magnitude that corresponds to a flux of 1ADU.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Example</p>
+<p>Create and configure a PRF fitting object, allowing up to third order
+dependence on image position, on a grid which splits the area around the
+source in 16 squares of 2pix by 2pix size each and using an aperture
+with 5 pixel radius for the initial estimate of source amplitudes:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">astrowisp</span> <span class="kn">import</span> <span class="n">FitStarShape</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fitprf</span> <span class="o">=</span> <span class="n">FitStarShape</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;prf&#39;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                      <span class="n">grid</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">4.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>                      <span class="n">initial_aperture</span><span class="o">=</span><span class="mf">5.0</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="astrowisp.fit_star_shape.FitStarShape.__del__">
+<span class="sig-name descname"><span class="pre">__del__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/fit_star_shape.html#FitStarShape.__del__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.fit_star_shape.FitStarShape.__del__" title="Permalink to this definition"></a></dt>
+<dd><p>Destroy the configuration object created in <a class="reference internal" href="#astrowisp.fit_star_shape.FitStarShape.__init__" title="astrowisp.fit_star_shape.FitStarShape.__init__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="astrowisp.fit_star_shape.FitStarShape.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_aperture</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">other_configuration</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/fit_star_shape.html#FitStarShape.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.fit_star_shape.FitStarShape.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>Set-up an object ready to perform PSF/PRF fitting.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>by</strong> (<em>All the configuration attributes of the class can be configured</em>) – </p></li>
+<li><p><strong>arguments.</strong> (<em>passing them as keyword</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="astrowisp.fit_star_shape.FitStarShape._format_config">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_format_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">param_value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/fit_star_shape.html#FitStarShape._format_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.fit_star_shape.FitStarShape._format_config" title="Permalink to this definition"></a></dt>
+<dd><p>Format config param for passing to AstroWISP PSF fitting lib.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="astrowisp.fit_star_shape.FitStarShape.configure">
+<span class="sig-name descname"><span class="pre">configure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">configuration</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/fit_star_shape.html#FitStarShape.configure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.fit_star_shape.FitStarShape.configure" title="Permalink to this definition"></a></dt>
+<dd><p>Modify the currently defined configuration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>**configuration</strong> – See <a class="reference internal" href="#astrowisp.fit_star_shape.FitStarShape.configuration" title="astrowisp.fit_star_shape.FitStarShape.configuration"><code class="xref py py-attr docutils literal notranslate"><span class="pre">configuration</span></code></a>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="astrowisp.fit_star_shape.FitStarShape.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_sources</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backgrounds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">require_convergence</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/fit_star_shape.html#FitStarShape.fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.fit_star_shape.FitStarShape.fit" title="Permalink to this definition"></a></dt>
+<dd><p>Fit for the shape of the sources in a collection of imeges.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image_sources</strong> (<em>[</em><em>5-tuples</em><em>]</em>) – <p>Each entry consists of:</p>
+<ol class="arabic" start="0">
+<li><p>The pixel values of the calibratred image</p></li>
+<li><p>The error estimates of the pixel values</p></li>
+<li><p>Mask flags of the pixel values.</p></li>
+<li><p>Sources to process, defining at least the following
+quantities in a dictionary:</p>
+<blockquote>
+<div><ul>
+<li><p><strong>ID</strong> (string): some unique identifier for the source</p></li>
+<li><p><strong>x</strong> (float): The x coordinate of the source
+center in pixels</p></li>
+<li><p><strong>y</strong> (float): See <code class="docutils literal notranslate"><span class="pre">x</span></code></p></li>
+</ul>
+</div></blockquote>
+<p>May also define <strong>enabled</strong> to flag only some sources for
+inclusion in the shape fit.</p>
+<p>The source list can be either a numyy record array with field
+names as keys or a dictionary with field names as keys and
+1-D numpy arrays of identical lengths as values.</p>
+</li>
+<li><p>List of the terms on which PSF parameters are allowed to
+depend on.</p></li>
+</ol>
+</p></li>
+<li><p><strong>backgrounds</strong> (<em>[</em><a class="reference internal" href="astrowisp.html#astrowisp.BackgroundExtractor" title="astrowisp.BackgroundExtractor"><em>BackgroundExtractor</em></a><em>]</em>) – The measured backgrounds
+under the sources.</p></li>
+<li><p><strong>require_convergence</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – If set to <cite>False</cite>, even non-converged
+fits are saved. If <cite>True</cite>, an exception is raised.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A SubPixPhot IO tree containing all the newly derived results.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="astrowisp.io_tree.html#astrowisp.io_tree.IOTree" title="astrowisp.io_tree.IOTree">IOTree</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="astrowisp.background.html" class="btn btn-neutral float-left" title="astrowisp.background module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="astrowisp.hat_masks.html" class="btn btn-neutral float-right" title="astrowisp.hat_masks module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2018, Kaloyan Penev.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

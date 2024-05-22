@@ -1,4 +1,4 @@
-<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/PSF/CirclePieceIntegral.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/PSF/CirclePieceIntegral.h">
+<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/CirclePieceIntegral.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/CirclePieceIntegral.h">
 <area shape="rect" id="node1" title="Declares a class that calculates x^my^n integrals over circle pieces." alt="" coords="522,5,732,68"/>
 <area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="619,347,838,393"/>
 <area shape="rect" id="node3" href="$IntegralUtil_8h.xhtml" title="Useful functions for calculating PSF integrals." alt="" coords="473,116,584,145"/>

@@ -1,5 +1,5 @@
-<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/Background/Zero.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/Background/Zero.h">
-<area shape="rect" id="node1" title="Declare a background class for images from which the background has already been subtracted." alt="" coords="1069,5,1252,68"/>
+<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/Background/Zero.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/Background/Zero.h">
+<area shape="rect" id="node1" title="Declare a background class for images from which the background has already been subtracted." alt="" coords="1068,5,1252,68"/>
 <area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="837,501,1057,547"/>
 <area shape="rect" id="node3" href="$Point_8h.xhtml" title="Defines a point class in two dimensions." alt="" coords="1035,270,1157,299"/>
 <area shape="rect" id="node4" href="$Measure_8h.xhtml" title="Declares the minimum requirements for a background extractor class." alt="" coords="1112,116,1208,145"/>

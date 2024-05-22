@@ -1,5 +1,5 @@
-<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/IO/H5IODataTree.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/IO/H5IODataTree.h">
-<area shape="rect" id="node1" title="A structure to hold any output data produced by subpixtools." alt="" coords="1987,5,2170,68"/>
+<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/IO/H5IODataTree.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/IO/H5IODataTree.h">
+<area shape="rect" id="node1" title="A structure to hold any output data produced by subpixtools." alt="" coords="1987,5,2171,68"/>
 <area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="1016,783,1235,829"/>
 <area shape="rect" id="node3" href="$CommandLineConfig_8h.xhtml" title="Declare a class for managing the configuration with which tools are run." alt="" coords="376,125,563,154"/>
 <area shape="rect" id="node5" href="$Error_8h.xhtml" title="The hierarchy of exceptions for this project." alt="" coords="789,706,910,735"/>

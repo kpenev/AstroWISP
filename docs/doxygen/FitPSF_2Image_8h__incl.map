@@ -1,4 +1,4 @@
-<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/FitPSF/Image.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/FitPSF/Image.h">
+<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/FitPSF/Image.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/FitPSF/Image.h">
 <area shape="rect" id="node1" title="Defines a class describing an image of Pixel pixels." alt="" coords="168,5,352,68"/>
 <area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="1660,766,1879,812"/>
 <area shape="rect" id="node3" href="$Pixel_8h.xhtml" title="Defines a class describing a single pixel participating in PSF/PRF fitting." alt="" coords="280,270,350,299"/>

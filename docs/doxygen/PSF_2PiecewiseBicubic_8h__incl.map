@@ -1,4 +1,4 @@
-<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/PSF/PiecewiseBicubic.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/PSF/PiecewiseBicubic.h">
+<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/PiecewiseBicubic.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/PiecewiseBicubic.h">
 <area shape="rect" id="node1" title="Defines a continuously differentiable PSF where each cell is a bicubic function." alt="" coords="253,5,454,68"/>
 <area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="357,501,576,547"/>
 <area shape="rect" id="node3" href="$Piecewise_8h.xhtml" title="Defines the PSF::Piecewise PSF model." alt="" coords="624,270,733,299"/>

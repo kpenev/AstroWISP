@@ -1,4 +1,4 @@
-<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/SubPixPhot/Common.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/SubPixPhot/Common.h">
+<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/SubPixPhot/Common.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/SubPixPhot/Common.h">
 <area shape="rect" id="node1" title="Declare functions used by both the C&#45;interface and the command line interface." alt="" coords="2507,5,2699,68"/>
 <area shape="rect" id="node2" href="$OutputArray_8h.xhtml" title="Declares a class for writing array of values held in boost::any." alt="" coords="725,689,875,718"/>
 <area shape="rect" id="node4" href="$TranslateToAny_8h.xhtml" title="Defines a class that allows placing inhomogeneous types data in property trees." alt="" coords="579,775,723,804"/>

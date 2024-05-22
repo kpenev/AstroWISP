@@ -1,0 +1,10 @@
+<map id="inheritancec8a3039f09" name="inheritancec8a3039f09">
+<area shape="rect" id="node1" title="Helper class that provides a standard way to create an ABC using" alt="" coords="141,5,215,32"/>
+<area shape="rect" id="node6" href="astrowisp.psf_base.html#astrowisp.psf_base.PSFBase" target="_top" title="The base class for all supported PSFs." alt="" coords="81,80,275,107"/>
+<area shape="rect" id="node2" href="astrowisp.background.html#astrowisp.background.BackgroundExtractor" target="_top" title="Measure the background level for each source in an image." alt="" coords="240,5,514,32"/>
+<area shape="rect" id="node3" href="astrowisp.fit_star_shape.html#astrowisp.fit_star_shape.FitStarShape" target="_top" title="Fit for the PSF/PRF of stars and their flux." alt="" coords="538,5,781,32"/>
+<area shape="rect" id="node4" href="astrowisp.io_tree.html#astrowisp.io_tree.IOTree" target="_top" title="Interface for extracting entries from an IO::H5IODataTree." alt="" coords="805,5,970,32"/>
+<area shape="rect" id="node5" href="astrowisp.piecewise_bicubic_psf.html#astrowisp.piecewise_bicubic_psf.PiecewiseBicubicPSF" target="_top" title="Implement the PSFBase methods for libary PSFs." alt="" coords="5,155,351,181"/>
+<area shape="rect" id="node7" href="astrowisp.piecewise_bicubic_psf_map.html#astrowisp.piecewise_bicubic_psf_map.PiecewiseBicubicPSFMap" target="_top" title="Provide convenient python interface to shape fitting results." alt="" coords="994,5,1397,32"/>
+<area shape="rect" id="node8" href="astrowisp.subpixphot.html#astrowisp.subpixphot.SubPixPhot" target="_top" title="Use sub&#45;pixel aware aperture photomotre to measure fluxes of sources." alt="" coords="1420,5,1637,32"/>
+</map>

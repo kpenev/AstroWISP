@@ -1,4 +1,4 @@
-<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/Core/CommandLineUtil.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/Core/CommandLineUtil.h">
+<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/Core/CommandLineUtil.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/Core/CommandLineUtil.h">
 <area shape="rect" id="node1" title="Declarations of utilities for command line parsing common to all tools." alt="" coords="771,5,977,68"/>
 <area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="502,347,721,393"/>
 <area shape="rect" id="node3" href="$ParseCSV_8h.xhtml" title="Declarations of functions for parsing strings of comma separated values to lists." alt="" coords="506,116,615,145"/>

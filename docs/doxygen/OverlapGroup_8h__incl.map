@@ -1,4 +1,4 @@
-<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/FitPSF/OverlapGroup.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/FitPSF/OverlapGroup.h">
+<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/FitPSF/OverlapGroup.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/FitPSF/OverlapGroup.h">
 <area shape="rect" id="node1" title="Defines a class for working with groups of overlapping sources." alt="" coords="1003,5,1196,68"/>
 <area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="917,501,1136,547"/>
 <area shape="rect" id="node3" href="$Pixel_8h.xhtml" title="Defines a class describing a single pixel participating in PSF/PRF fitting." alt="" coords="926,116,996,145"/>

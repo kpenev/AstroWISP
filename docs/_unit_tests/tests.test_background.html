@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>tests.test_background module &mdash; SuperPhot Python Interface  documentation</title>
+  <title>tests.test_background module &mdash; AstroWISP Python Interface  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
@@ -37,7 +37,7 @@
           
           
           <a href="../index.html" class="icon icon-home">
-            SuperPhot Python Interface
+            AstroWISP Python Interface
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -77,7 +77,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">SuperPhot Python Interface</a>
+          <a href="../index.html">AstroWISP Python Interface</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -97,8 +97,78 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="tests-test-background-module">
-<h1>tests.test_background module<a class="headerlink" href="#tests-test-background-module" title="Permalink to this heading"></a></h1>
+  <section id="module-tests.test_background">
+<span id="tests-test-background-module"></span><h1>tests.test_background module<a class="headerlink" href="#module-tests.test_background" title="Permalink to this heading"></a></h1>
+<section id="class-inheritance-diagram">
+<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this heading"></a></h2>
+<div class="graphviz"><img src="../_images/inheritance-760f127afd52022fbaada9e416dc0fd993bc114d.png" alt="Inheritance diagram of BackgroundExtractor, FloatTestCase, TestAnnulusBackground" usemap="#inheritance0c0bad10a6" class="inheritance graphviz" /></div>
+<map id="inheritance0c0bad10a6" name="inheritance0c0bad10a6">
+<area shape="rect" id="node1" href="../_implementation/astrowisp.background.html#astrowisp.background.BackgroundExtractor" target="_top" title="Measure the background level for each source in an image." alt="" coords="5,5,280,32"/>
+<area shape="rect" id="node2" href="../_implementation/astrowisp.tests.utilities.html#astrowisp.tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="260,80,505,107"/>
+<area shape="rect" id="node4" href="#tests.test_background.TestAnnulusBackground" target="_top" title="Test background extraction based on annuli around sources." alt="" coords="235,155,530,181"/>
+</map><p>Test AstroWISP’s background extraction.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="tests.test_background.TestAnnulusBackground">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tests.test_background.</span></span><span class="sig-name descname"><span class="pre">TestAnnulusBackground</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_background.html#TestAnnulusBackground"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tests.test_background.TestAnnulusBackground" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../_implementation/astrowisp.tests.utilities.html#astrowisp.tests.utilities.FloatTestCase" title="astrowisp.tests.utilities.FloatTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">FloatTestCase</span></code></a></p>
+<div class="graphviz"><img src="../_images/inheritance-cdf8a3b0448b05f5d20827b68671ea556252fe7d.png" alt="Inheritance diagram of tests.test_background.TestAnnulusBackground" usemap="#inheritance25d02e3b0b" class="inheritance graphviz" /></div>
+<map id="inheritance25d02e3b0b" name="inheritance25d02e3b0b">
+<area shape="rect" id="node1" href="../_implementation/astrowisp.tests.utilities.html#astrowisp.tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="31,80,275,107"/>
+<area shape="rect" id="node3" href="#tests.test_background.TestAnnulusBackground" target="_top" title="Test background extraction based on annuli around sources." alt="" coords="5,155,301,181"/>
+</map><p>Test background extraction based on annuli around sources.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="tests.test_background.TestAnnulusBackground.add_flux_around_sources">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">add_flux_around_sources</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra_flux</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_background.html#TestAnnulusBackground.add_flux_around_sources"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tests.test_background.TestAnnulusBackground.add_flux_around_sources" title="Permalink to this definition"></a></dt>
+<dd><p>Add extra flux to image pixels within a radius around sources.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source_x</strong> – The x coordinates of the sources to add flux around.</p></li>
+<li><p><strong>source_x</strong> – The y coordinates of the sources to add flux around.</p></li>
+<li><p><strong>radius</strong> – Pixes with centers within this radius get extra flux.</p></li>
+<li><p><strong>extra_flux</strong> – The amount of extra flux per pixel to add.</p></li>
+<li><p><strong>image</strong> – The image to add flux to.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tests.test_background.TestAnnulusBackground.test_background_error">
+<span class="sig-name descname"><span class="pre">test_background_error</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_background.html#TestAnnulusBackground.test_background_error"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tests.test_background.TestAnnulusBackground.test_background_error" title="Permalink to this definition"></a></dt>
+<dd><p>Test constant gradient background but with known error.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tests.test_background.TestAnnulusBackground.test_background_gradient">
+<span class="sig-name descname"><span class="pre">test_background_gradient</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_background.html#TestAnnulusBackground.test_background_gradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tests.test_background.TestAnnulusBackground.test_background_gradient" title="Permalink to this definition"></a></dt>
+<dd><p>Tests where the background has a constant non-zero gradient.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tests.test_background.TestAnnulusBackground.test_constant_image">
+<span class="sig-name descname"><span class="pre">test_constant_image</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_background.html#TestAnnulusBackground.test_constant_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tests.test_background.TestAnnulusBackground.test_constant_image" title="Permalink to this definition"></a></dt>
+<dd><p>Test background extraction on an image with all pixels the same.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tests.test_background.TestAnnulusBackground.test_crowded_image">
+<span class="sig-name descname"><span class="pre">test_crowded_image</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_background.html#TestAnnulusBackground.test_crowded_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tests.test_background.TestAnnulusBackground.test_crowded_image" title="Permalink to this definition"></a></dt>
+<dd><p>Tests involving sources for which no BG can be determined.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tests.test_background.TestAnnulusBackground.test_partially_crowded_image">
+<span class="sig-name descname"><span class="pre">test_partially_crowded_image</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_background.html#TestAnnulusBackground.test_partially_crowded_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tests.test_background.TestAnnulusBackground.test_partially_crowded_image" title="Permalink to this definition"></a></dt>
+<dd><p>A test where one source is crowded and 4 are not.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
 </section>
 
 

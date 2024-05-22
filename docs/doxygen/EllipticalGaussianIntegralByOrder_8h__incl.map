@@ -1,4 +1,4 @@
-<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/PSF/EllipticalGaussianIntegralByOrder.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/PSF/EllipticalGaussianIntegralByOrder.h">
+<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/EllipticalGaussianIntegralByOrder.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/EllipticalGaussianIntegralByOrder.h">
 <area shape="rect" id="node1" title="Class approximating integrals of ellptical Gaussians by incremental expansion order." alt="" coords="240,5,483,85"/>
 <area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="5,441,225,487"/>
 <area shape="rect" id="node3" href="$WedgeIntegral_8h.xhtml" title="Declares a class that calculates integrals of x^my^n over circle wedges." alt="" coords="293,133,431,162"/>

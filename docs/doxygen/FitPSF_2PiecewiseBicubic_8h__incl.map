@@ -1,4 +1,4 @@
-<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/FitPSF/PiecewiseBicubic.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/FitPSF/PiecewiseBicubic.h">
+<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/FitPSF/PiecewiseBicubic.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/FitPSF/PiecewiseBicubic.h">
 <area shape="rect" id="node1" title="The declarations of the functions related to fitting piecewise bicubic PSFs." alt="" coords="3662,5,3882,68"/>
 <area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="1720,595,1939,641"/>
 <area shape="rect" id="node3" href="$FitPSF_2Common_8h.xhtml" title="Defines some of the functions needed exclusively by the FitPSF tool." alt="" coords="2145,193,2244,222"/>

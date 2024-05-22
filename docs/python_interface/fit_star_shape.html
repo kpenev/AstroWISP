@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PSF/PRF Fitting &mdash; SuperPhot Python Interface  documentation</title>
+  <title>PSF/PRF Fitting &mdash; AstroWISP Python Interface  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
@@ -37,7 +37,7 @@
           
           
           <a href="../index.html" class="icon icon-home">
-            SuperPhot Python Interface
+            AstroWISP Python Interface
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -74,7 +74,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">SuperPhot Python Interface</a>
+          <a href="../index.html">AstroWISP Python Interface</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -99,25 +99,25 @@
 <h2>Fitting for Source Shapes<a class="headerlink" href="#fitting-for-source-shapes" title="Permalink to this heading"></a></h2>
 <p>Fitting for the shapes of point sources (either their PSF or PRF) and an overall
 scaling constant is one of the methods of extracting photometry supported by
-SuperPhot. This is accomplished using the <a class="reference internal" href="../_implementation/superphot.fit_star_shape.html#module-superphot.fit_star_shape" title="superphot.fit_star_shape"><code class="xref py py-mod docutils literal notranslate"><span class="pre">superphot.fit_star_shape</span></code></a>
+AstroWISP. This is accomplished using the <a class="reference internal" href="../_implementation/astrowisp.fit_star_shape.html#module-astrowisp.fit_star_shape" title="astrowisp.fit_star_shape"><code class="xref py py-mod docutils literal notranslate"><span class="pre">astrowisp.fit_star_shape</span></code></a>
 module.  Currently only piecewise bi-cubic PSF/PRF models are supported, with
 the shape constrained to depend smoothly on image position and any other
 user-defined parameters, possibly accross multiple images simultaneously and the
 amplitudes (fluxes) of sources being independent of each other. Fitting is done
-by constructing an instance of <a class="reference internal" href="../_implementation/superphot.html#superphot.FitStarShape" title="superphot.FitStarShape"><code class="xref py py-class docutils literal notranslate"><span class="pre">superphot.FitStarShape</span></code></a> and calling it on
+by constructing an instance of <a class="reference internal" href="../_implementation/astrowisp.html#astrowisp.FitStarShape" title="astrowisp.FitStarShape"><code class="xref py py-class docutils literal notranslate"><span class="pre">astrowisp.FitStarShape</span></code></a> and calling it on
 a collection of frames to be fit simultaneously and a list of all the sources in
 each frame.  For details on how to specify fitting parameters and source and
-frame listts, see the documentation of <a class="reference internal" href="../_implementation/superphot.html#superphot.FitStarShape" title="superphot.FitStarShape"><code class="xref py py-class docutils literal notranslate"><span class="pre">superphot.FitStarShape</span></code></a>.</p>
+frame listts, see the documentation of <a class="reference internal" href="../_implementation/astrowisp.html#astrowisp.FitStarShape" title="astrowisp.FitStarShape"><code class="xref py py-class docutils literal notranslate"><span class="pre">astrowisp.FitStarShape</span></code></a>.</p>
 <p>An example of fitting for the PSF in an image can be found
 <a class="reference internal" href="example_mock_data.html#PSF-fitting"><span class="std std-ref">here</span></a></p>
 </section>
 <section id="psf-map-utilities">
 <h2>PSF Map utilities<a class="headerlink" href="#psf-map-utilities" title="Permalink to this heading"></a></h2>
 <p>Smooth dependence of PSF/PRF on parameters is enforced by modeling the PSF/PRF
-parameters as low order polynomials of user specified quantities. SuperPhot
+parameters as low order polynomials of user specified quantities. AstroWISP
 defines a language for specifying the dependence (see
-<code class="xref py py-attr docutils literal notranslate"><span class="pre">superphot.FitStarShape.shape_terms</span></code> for the definition of the language).
-The <code class="xref py py-class docutils literal notranslate"><span class="pre">superphot.SmoothDependence</span></code> class offers tools for parsing the
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">astrowisp.FitStarShape.shape_terms</span></code> for the definition of the language).
+The <code class="xref py py-class docutils literal notranslate"><span class="pre">astrowisp.SmoothDependence</span></code> class offers tools for parsing the
 language, and generating the various terms involved in the dependence.</p>
 </section>
 </section>

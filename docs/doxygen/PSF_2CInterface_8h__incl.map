@@ -1,5 +1,5 @@
-<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/PSF/CInterface.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/PSF/CInterface.h">
-<area shape="rect" id="node1" title="Declare C&#45;style functions for accessing the functionality of the PSF library." alt="" coords="195,5,378,68"/>
+<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/CInterface.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/CInterface.h">
+<area shape="rect" id="node1" title="Declare C&#45;style functions for accessing the functionality of the PSF library." alt="" coords="194,5,379,68"/>
 <area shape="rect" id="node2" href="$PSF_2Typedefs_8h.xhtml" title="Some useful typedef statements." alt="" coords="134,116,233,145"/>
 <area shape="rect" id="node5" title=" " alt="" coords="276,193,337,222"/>
 <area shape="rect" id="node8" href="$IO_2CInterface_8h.xhtml" title="Declare C&#45;style functions for accessing the functionality of the IO library." alt="" coords="323,116,463,145"/>

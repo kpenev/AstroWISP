@@ -1,5 +1,5 @@
-<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/FitPSF/PixelOrder.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/FitPSF/PixelOrder.h">
-<area shape="rect" id="node1" title="Define a class that orders pixels inside a source." alt="" coords="1160,5,1343,68"/>
+<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/FitPSF/PixelOrder.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/FitPSF/PixelOrder.h">
+<area shape="rect" id="node1" title="Define a class that orders pixels inside a source." alt="" coords="1159,5,1344,68"/>
 <area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="835,501,1054,547"/>
 <area shape="rect" id="node3" href="$Pixel_8h.xhtml" title="Defines a class describing a single pixel participating in PSF/PRF fitting." alt="" coords="1158,116,1228,145"/>
 <area shape="rect" id="node4" href="$Background_2Source_8h.xhtml" title="Declares the base class for background extract(ion/ed) from an astronomical image." alt="" coords="851,193,1038,222"/>

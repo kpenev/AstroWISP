@@ -1,4 +1,4 @@
-<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/PSF/PiecewiseBicubicMap.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/PSF/PiecewiseBicubicMap.h">
+<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/PiecewiseBicubicMap.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/PiecewiseBicubicMap.h">
 <area shape="rect" id="node1" title="Declares a smoothly varying over an image piecewise bicubic PSF map class." alt="" coords="2195,5,2427,68"/>
 <area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="2098,749,2318,795"/>
 <area shape="rect" id="node3" href="$parse__grid_8h.xhtml" title="Define functions for converting between string and PSF::Grid." alt="" coords="3688,356,3830,385"/>

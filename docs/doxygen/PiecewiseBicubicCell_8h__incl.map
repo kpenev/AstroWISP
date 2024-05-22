@@ -1,4 +1,4 @@
-<map id="/Users/kpenev/projects/git/SuperPhot/doc_src/PSF/PiecewiseBicubicCell.h" name="/Users/kpenev/projects/git/SuperPhot/doc_src/PSF/PiecewiseBicubicCell.h">
+<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/PiecewiseBicubicCell.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/PiecewiseBicubicCell.h">
 <area shape="rect" id="node1" title="Defines a PSF cell with intensity given by a bi&#45;cubic polynomial." alt="" coords="284,5,514,68"/>
 <area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="198,424,418,470"/>
 <area shape="rect" id="node3" href="$PiecewiseCell_8h.xhtml" title="Defines a base class for the cells comprising a Piecewise." alt="" coords="94,270,231,299"/>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aperture Photometry &mdash; SuperPhot Python Interface  documentation</title>
+  <title>Aperture Photometry &mdash; AstroWISP Python Interface  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
@@ -37,7 +37,7 @@
           
           
           <a href="../index.html" class="icon icon-home">
-            SuperPhot Python Interface
+            AstroWISP Python Interface
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -70,7 +70,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">SuperPhot Python Interface</a>
+          <a href="../index.html">AstroWISP Python Interface</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -102,13 +102,13 @@ another producing a different response.  Second, some pixels inevitably cross
 the aperture boundary. In addition to the former effect, the fraction of the
 flux that should be counted as inside the aperture for those pixels is in
 general <em>not equal to</em> the fraction of the pixel that is inside the aperture.
-The <a class="reference internal" href="../_implementation/superphot.html#superphot.SubPixPhot" title="superphot.SubPixPhot"><code class="xref py py-class docutils literal notranslate"><span class="pre">superphot.SubPixPhot</span></code></a> tool handles both of these effects exactly.
+The <a class="reference internal" href="../_implementation/astrowisp.html#astrowisp.SubPixPhot" title="astrowisp.SubPixPhot"><code class="xref py py-class docutils literal notranslate"><span class="pre">astrowisp.SubPixPhot</span></code></a> tool handles both of these effects exactly.
 For each pixel, the pixel response is multiplied by the integral of the PSF over
 the part of the pixel inside the aperture and divided by the integral of the
 product of the PSF and the pixel sensitivity function over the entire pixel
 before being added to the total flux. Both integrals of this procedure are
 calculated analytically and without any approximations.</p>
-<p>Aperture photometry with <a class="reference internal" href="../_implementation/superphot.html#superphot.SubPixPhot" title="superphot.SubPixPhot"><code class="xref py py-class docutils literal notranslate"><span class="pre">superphot.SubPixPhot</span></code></a> is demonstrated <a class="reference internal" href="example_mock_data.html#Aperture-Photometry"><span class="std std-ref">here</span></a></p>
+<p>Aperture photometry with <a class="reference internal" href="../_implementation/astrowisp.html#astrowisp.SubPixPhot" title="astrowisp.SubPixPhot"><code class="xref py py-class docutils literal notranslate"><span class="pre">astrowisp.SubPixPhot</span></code></a> is demonstrated <a class="reference internal" href="example_mock_data.html#Aperture-Photometry"><span class="std std-ref">here</span></a></p>
 </section>
 
 

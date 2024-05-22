@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>astrowisp.psf_base module &mdash; AstroWISP Python Interface  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/unlimited_width.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="astrowisp.subpixphot module" href="astrowisp.subpixphot.html" />
+    <link rel="prev" title="astrowisp.piecewise_bicubic_psf_map module" href="astrowisp.piecewise_bicubic_psf_map.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            AstroWISP Python Interface
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Unix Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html#windows-installation">Windows Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit_tests.html">Unit Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python_interface/index.html">Python Interface Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Python Package Implementation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="astrowisp.html">astrowisp package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#subpackages">Subpackages</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="astrowisp.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="astrowisp.background.html">astrowisp.background module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="astrowisp.fit_star_shape.html">astrowisp.fit_star_shape module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="astrowisp.hat_masks.html">astrowisp.hat_masks module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="astrowisp.io_tree.html">astrowisp.io_tree module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="astrowisp.piecewise_bicubic_psf.html">astrowisp.piecewise_bicubic_psf module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="astrowisp.piecewise_bicubic_psf_map.html">astrowisp.piecewise_bicubic_psf_map module</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">astrowisp.psf_base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="astrowisp.subpixphot.html">astrowisp.subpixphot module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="doxygen/index.xhtml#http://">C/C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_unit_tests/modules.html">Unit Testing Code</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">AstroWISP Python Interface</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">astrowisp</a></li>
+          <li class="breadcrumb-item"><a href="astrowisp.html">astrowisp package</a></li>
+      <li class="breadcrumb-item active">astrowisp.psf_base module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_implementation/astrowisp.psf_base.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-astrowisp.psf_base">
+<span id="astrowisp-psf-base-module"></span><h1>astrowisp.psf_base module<a class="headerlink" href="#module-astrowisp.psf_base" title="Permalink to this heading"></a></h1>
+<section id="class-inheritance-diagram">
+<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this heading"></a></h2>
+<div class="graphviz"><img src="../_images/inheritance-da1fc7af7e287be763ec7ae9bc4784cd8cd65a59.png" alt="Inheritance diagram of ABC, PSFBase" usemap="#inheritance35d7c8c5af" class="inheritance graphviz" /></div>
+<map id="inheritance35d7c8c5af" name="inheritance35d7c8c5af">
+<area shape="rect" id="node2" href="#astrowisp.psf_base.PSFBase" target="_top" title="The base class for all supported PSFs." alt="" coords="5,80,200,107"/>
+</map><p>Defines a base class for all PSF models: PSFBase.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="astrowisp.psf_base.PSFBase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">astrowisp.psf_base.</span></span><span class="sig-name descname"><span class="pre">PSFBase</span></span><a class="reference internal" href="../_modules/astrowisp/psf_base.html#PSFBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.psf_base.PSFBase" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a></p>
+<div class="graphviz"><img src="../_images/inheritance-1803f9390277e49c61ab69a3eefffb1d1d805257.png" alt="Inheritance diagram of astrowisp.psf_base.PSFBase" usemap="#inheritanceb8f9f27df2" class="inheritance graphviz" /></div>
+<map id="inheritanceb8f9f27df2" name="inheritanceb8f9f27df2">
+<area shape="rect" id="node2" href="#astrowisp.psf_base.PSFBase" target="_top" title="The base class for all supported PSFs." alt="" coords="5,80,200,107"/>
+</map><p>The base class for all supported PSFs.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="astrowisp.psf_base.PSFBase.__call__">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/psf_base.html#PSFBase.__call__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.psf_base.PSFBase.__call__" title="Permalink to this definition"></a></dt>
+<dd><p>Return the value of the PSF at the given point.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> – The horizontal offset from center of the point at which to
+return the PSF value.</p></li>
+<li><p><strong>y</strong> – The vertical offset from center of the point at which to
+return the PSF value.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The value of the PSF at (x, y) relative to the source center.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="astrowisp.psf_base.PSFBase.get_down_range">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_down_range</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/psf_base.html#PSFBase.get_down_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.psf_base.PSFBase.get_down_range" title="Permalink to this definition"></a></dt>
+<dd><p>Return how far the PSF extends downward of center.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="astrowisp.psf_base.PSFBase.get_left_range">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_left_range</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/psf_base.html#PSFBase.get_left_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.psf_base.PSFBase.get_left_range" title="Permalink to this definition"></a></dt>
+<dd><p>Return how far the PSF extends to the left of center.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="astrowisp.psf_base.PSFBase.get_right_range">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_right_range</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/psf_base.html#PSFBase.get_right_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.psf_base.PSFBase.get_right_range" title="Permalink to this definition"></a></dt>
+<dd><p>Return how far the PSF extends to the right of center.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="astrowisp.psf_base.PSFBase.get_up_range">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_up_range</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/psf_base.html#PSFBase.get_up_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.psf_base.PSFBase.get_up_range" title="Permalink to this definition"></a></dt>
+<dd><p>Return how far the PSF extends upward of center.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="astrowisp.psf_base.PSFBase.integrate">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">integrate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">left</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bottom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/psf_base.html#PSFBase.integrate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.psf_base.PSFBase.integrate" title="Permalink to this definition"></a></dt>
+<dd><p>Return integrals of the PSF over circle-rectangle overlaps.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>left</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em> or </em><em>array</em>) – The x coordinate(s) of left boundary of the
+the rectangle(s) to integrate over.</p></li>
+<li><p><strong>bottom</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em> or </em><em>array</em>) – The y coordinate(s) of the bottom
+boundary of the rectangle(s) to integrate over.</p></li>
+<li><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em> or </em><em>array</em>) – The width(s) of the rectangle(s).</p></li>
+<li><p><strong>height</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em> or </em><em>array</em>) – The height(s) of the rectangle(s).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The integral of the PSF over the specified area(s).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a> or array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="astrowisp.psf_base.PSFBase.predict_pixel">
+<span class="sig-name descname"><span class="pre">predict_pixel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">center_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subpix_map</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">array([[1.]])</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/psf_base.html#PSFBase.predict_pixel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.psf_base.PSFBase.predict_pixel" title="Permalink to this definition"></a></dt>
+<dd><p>Predict the value(s) of pixel(s) assuming a pixel sensitivity map.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>center_x</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em> or </em><em>array</em>) – The offset(s) of the center(s) of the
+pixels from the source position in the x direction.</p></li>
+<li><p><strong>center_y</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em> or </em><em>array</em>) – The offset(s) of the center(s) of the
+pixels from the source position in the y direction.</p></li>
+<li><p><strong>subpix_map</strong> (<em>2-D array</em>) – The pixel sensitivity map to assume.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The integral(s) of product of the PSF and the sub-pixel
+sensitivity map over pixel(s) located as specified relative to
+the source center.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a> or array</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="astrowisp.piecewise_bicubic_psf_map.html" class="btn btn-neutral float-left" title="astrowisp.piecewise_bicubic_psf_map module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="astrowisp.subpixphot.html" class="btn btn-neutral float-right" title="astrowisp.subpixphot module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2018, Kaloyan Penev.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
