@@ -79,7 +79,7 @@ visualize = [
 test-requires = ['asteval']
 
 #Asteval requires python >= 3.8 and scipy only available for 64 bit and cpython
-test-skip = 'cp37-* pp* *-win32 '
+test-skip = 'cp37-* pp* *-win32 *_i686 *_ppc64le *_s390x'
 
 test-command = [
     'python3 -m astrowisp.tests.test_fake_image',
