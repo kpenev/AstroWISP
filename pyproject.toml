@@ -93,10 +93,6 @@ test-command = [
 
 [tool.cibuildwheel.windows]
 
-    {wheel} for the absolute path to the built wheel
-    {dest_dir} for the absolute path of the directory where to create the repaired wheel
-    {delocate_archs} (macOS only) comma-separated list of architectures in the wheel.
-
 repair-wheel-command = [
     'mkdir -p {dest_dir}/unpacked_wheel',
     'cd {dest_dir}/unpacked_wheel',
