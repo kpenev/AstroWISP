@@ -85,7 +85,6 @@ test-requires = ['asteval']
 test-skip = 'cp37-* pp* *-win32 *_i686 *_ppc64le *_s390x'
 
 test-command = [
-    "python -c 'import astrowisp; from os.path import dirname, join; print(join(dirname(astrowisp.__file__), \"libastrowisp.\"))'",
     'python -m astrowisp.tests.test_fake_image',
     'python -m astrowisp.tests.test_piecewise_bicubic_psf',
     'python -m astrowisp.tests.test_background',
