@@ -49,7 +49,7 @@ jobs:
             CIBW_TEST_COMMAND: >
               python -m astrowisp &&
               ldd "$(python -m astrowisp)"
-            #CIBW_REPAIR_WHEEL_COMMAND_WINDOWS: >
+            CIBW_REPAIR_WHEEL_COMMAND_WINDOWS: 
             #  ls ${{ steps.install-boost.outputs.BOOST_ROOT }}/lib &&
             #  delvewheel show --add-path=$BOOST_ROOT/lib {wheel} &&
             #  delvewheel repair 

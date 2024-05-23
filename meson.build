@@ -40,6 +40,7 @@ if host_machine.system() == 'windows'
       '-DBOOST_RESULT_OF_USE_TR1',
       '-D_USE_MATH_DEFINES',
       '-DNO_VISIBILITY',
+      '-static',
       language: 'cpp'
     )
 else
