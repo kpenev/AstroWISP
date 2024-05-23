@@ -4,6 +4,7 @@ py_src = [
     'hat_masks.py',
     '_initialize_library.py',
     '__init__.py', 
+    '__main__.py', 
     'piecewise_bicubic_psf_map.py',
     'piecewise_bicubic_psf.py',
     'psf_base.py',
