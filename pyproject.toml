@@ -91,6 +91,27 @@ test-command = [
     'python -m astrowisp.tests.test_fit_star_shape.noiseless_tests',
 ]
 
+[tool.cibuildwheel.windows]
+
+    {wheel} for the absolute path to the built wheel
+    {dest_dir} for the absolute path of the directory where to create the repaired wheel
+    {delocate_archs} (macOS only) comma-separated list of architectures in the wheel.
+
+repair-wheel-command = [
+    'mkdir -p {dest_dir}/unpacked_wheel',
+    'cd {dest_dir}/unpacked_wheel',
+    'wheel unpack {wheel}',
+    'cd astrowisp*',
+    'cp astrowisp/libastrowisp.dll astrowisp/libastrowisp.pyd',
+    'wheel pack .',
+    'mv -fv *.whl {wheel}',
+    'cd {dest_dir}',
+    'rm -rf unpacked_wheel',
+    'delvewheel show {wheel}',
+    'delvewheel repair -w {dest_dir} {wheel}'
+]
+
+
 [tool.meson-python.args]
 compile = ['-vvv']
 
