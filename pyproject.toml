@@ -77,12 +77,12 @@ visualize = [
 
 [tool.cibuildwheel]
 skip = ['*-musllinux_*']
-build = ['cp39-win_amd64']
+build = ['cp312-win_amd64']
 
 test-requires = ['asteval']
 
 #Asteval requires python >= 3.8 and scipy wheels only available on some archs
-test-skip = 'cp37-* pp* *-win32 *_i686 *_ppc64le *_s390x'
+test-skip = 'cp37-* pp* *-win32 *_i686 *_ppc64le *_s390x *-win_amd64'
 
 test-command = [
     'python -m astrowisp.tests.test_fake_image',
