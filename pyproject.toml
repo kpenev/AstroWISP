@@ -94,11 +94,14 @@ test-command = [
 [tool.cibuildwheel.windows]
 
 repair-wheel-command = [
-    'mkdir -p {dest_dir}/unpacked_wheel',
-    'cd {dest_dir}/unpacked_wheel',
+    'mkdir -p {dest_dir}\unpacked_wheel',
+    'cd {dest_dir}\unpacked_wheel',
     'wheel unpack {wheel}',
     'cd astrowisp*',
-    'cp astrowisp/libastrowisp.dll astrowisp/libastrowisp.pyd',
+    'ls',
+    'ls astrowisp',
+    'cp astrowisp\libastrowisp.dll astrowisp\libastrowisp.pyd',
+    'ls astrowisp',
     'wheel pack .',
     'mv -fv *.whl {wheel}',
     'cd {dest_dir}',
