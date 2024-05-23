@@ -108,21 +108,6 @@ repair-wheel-command = [
     'rm -rf {dest_dir}\unpacked_wheel',
     'delvewheel show {wheel}',
     'delvewheel repair -w {dest_dir} {wheel}',
-    'cd {dest_dir}',
-    'echo WHEELS:',
-    'ls',
-    'echo OVERWRITING',
-    'mv -fv *.whl {wheel}',
-    'echo DEST DIR',
-    'ls {dest_dir}',
-    'mkdir -p {dest_dir}\unpacked_wheel',
-    'cd {dest_dir}',
-    'wheel unpack {wheel}',
-    'ls',
-    'cd astrowisp*',
-    'rm astrowisp\libastrowisp.pyd',
-    'wheel pack .',
-    'mv -fv *.whl {dest_dir}'
 ]
 
 
