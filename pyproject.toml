@@ -93,7 +93,7 @@ test-command = [
 
 [tool.cibuildwheel.windows]
 repair-wheel-command = [
-    'pip install delvewheel'
+    'pip install delvewheel',
     'delvewheel repair -v --wheel-dir {dest_dir} {wheel}'
 ]
 
