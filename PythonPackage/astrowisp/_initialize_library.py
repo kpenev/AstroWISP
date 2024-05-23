@@ -462,3 +462,6 @@ def get_astrowisp_library():
         get_astrowisp_library.result = _initialize_library()
 
     return get_astrowisp_library.result
+
+if __name__ == '__main__':
+    print(path.join(path.dirname(__file__), 'libastrowisp.dll'))
