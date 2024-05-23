@@ -41,6 +41,8 @@ if host_machine.system() == 'windows'
       '-D_USE_MATH_DEFINES',
       '-DNO_VISIBILITY',
       '-static',
+      '-static-libgcc',
+      '-static-libstdc++',
       language: 'cpp'
     )
 else
