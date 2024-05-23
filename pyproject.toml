@@ -107,7 +107,7 @@ repair-wheel-command = [
     'cd {dest_dir}',
     'rm -rf unpacked_wheel',
     'delvewheel show {wheel}',
-    'delvewheel repair -w {dest_dir} {wheel}'
+    'delvewheel repair -w {dest_dir} {wheel}',
     'mkdir -p {dest_dir}\unpacked_wheel',
     'cd {dest_dir}\unpacked_wheel',
     'wheel unpack {dest_dir}\*.whl',
