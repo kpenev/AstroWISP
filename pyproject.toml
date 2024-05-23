@@ -109,7 +109,7 @@ repair-wheel-command = [
     'delvewheel repair -w {dest_dir} {wheel}',
     'cd {dest_dir}',
     'echo WHEELS:',
-    'ls *.whl',
+    'ls',
     'echo OVERWRITING',
     'mv -fv *.whl {wheel}',
     'echo DEST DIR',
