@@ -91,12 +91,6 @@ test-command = [
     'python -m astrowisp.tests.test_fit_star_shape.noiseless_tests',
 ]
 
-[tool.cibuildwheel.windows]
-repair-wheel-command = [
-    'pip install delvewheel',
-    'delvewheel repair -v --wheel-dir {dest_dir} {wheel}'
-]
-
 [tool.meson-python.args]
 compile = ['-vvv']
 
