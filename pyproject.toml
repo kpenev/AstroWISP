@@ -85,13 +85,10 @@ test-requires = ['asteval']
 test-skip = 'cp37-* pp* *-win32 *_i686 *_ppc64le *_s390x'
 
 test-command = [
-    'D:',
-    'cd {package}',
-    'dir',
-    'python3 -m astrowisp.tests.test_fake_image',
-    'python3 -m astrowisp.tests.test_piecewise_bicubic_psf',
-    'python3 -m astrowisp.tests.test_background',
-    'python3 -m astrowisp.tests.test_fit_star_shape.noiseless_tests',
+    'python -m astrowisp.tests.test_fake_image',
+    'python -m astrowisp.tests.test_piecewise_bicubic_psf',
+    'python -m astrowisp.tests.test_background',
+    'python -m astrowisp.tests.test_fit_star_shape.noiseless_tests',
 ]
 
 [tool.meson-python.args]
