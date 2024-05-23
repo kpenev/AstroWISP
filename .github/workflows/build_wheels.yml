@@ -47,11 +47,11 @@ jobs:
               DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:$BOOST_ROOT/lib delocate-listdeps {wheel} &&
               DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:$BOOST_ROOT/lib delocate-wheel --require-archs {delocate_archs} -w {dest_dir} {wheel}
             CIBW_REPAIR_WHEEL_COMMAND_WINDOWS: >
-              ls $BOOST_ROOT/lib &&
+              ls ${{ steps.install-boost.outputs.BOOST_ROOT }}/lib &&
               delvewheel show --add-path=$BOOST_ROOT/lib {wheel} &&
               delvewheel repair 
               -v 
-              --add-path=$BOOST_ROOT/lib 
+              --add-path=${{ steps.install-boost.outputs.BOOST_ROOT }}/lib 
               --wheel-dir={dest_dir} 
               {wheel}
         #   CIBW_SOME_OPTION: value
