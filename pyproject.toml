@@ -98,7 +98,9 @@ repair-wheel-command = [
     'cd {dest_dir}\unpacked_wheel',
     'wheel unpack {wheel}',
     'cd astrowisp*',
+    'echo "WHEEL CONTENT:"',
     'ls',
+    'echo "astrowisp inside WHEEL CONTENT:"',
     'ls astrowisp',
     'strip astrowisp\libastrowisp.dll',
     'cp astrowisp\libastrowisp.dll astrowisp\libastrowisp.pyd',
@@ -109,7 +111,21 @@ repair-wheel-command = [
     'delvewheel show {wheel}',
     'delvewheel repair -w {dest_dir} {wheel}',
     'echo "DESTINATION DIRECTORY({dest_dir}) contains:"',
-    'ls {dest_dir}'
+    'ls {dest_dir}',
+    'mv -fv {dest_dir}\*.whl {wheel}',
+    'mkdir -p {dest_dir}\unpacked_wheel',
+    'cd {dest_dir}\unpacked_wheel',
+    'wheel unpack {wheel}',
+    'cd astrowisp*',
+    'echo "astrowisp inside repaired WHEEL CONTENT:"',
+    'ls astrowisp',
+    'echo "libastrowisp.dll DEPENDENCIES:"',
+    'ldd astrowisp\libastrowisp.dll',
+    'mv -fv astrowisp\libastrowisp.pyd astrowisp\libastrowisp.dll',
+    'echo "patched libastrowisp DEPENDENCIES:"',
+    'ldd astrowisp\libastrowisp.dll',
+    'wheel pack .',
+    'mv -fv *.whl {dest_dir}'
 ]
 
 
