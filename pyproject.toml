@@ -137,6 +137,3 @@ compile = ['-vvv']
 #Nothing to install from Eigen so avoid triggering unnecessary wheel repair,
 #which is not implemented for windows).
 install = ['--skip-subprojects=eigen']
-
-[tool.setuptools.packages.find]
-prune = "docs"
