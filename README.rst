@@ -1,5 +1,5 @@
-AstroWISP: ``Astro``nomical ``W``idefield ``I``mages ``S``tellar ``P``hotometry
-===============================================================================
+AstroWISP: ``A`` stronomical ``W`` idefield ``I`` mages ``S`` tellar ``P`` hotometry
+====================================================================================
 
 A tool for extracting stellar photometry from widefild color or monochrome 
 images of the night sky
