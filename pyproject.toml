@@ -108,6 +108,8 @@ repair-wheel-command = [
     'rm -rf {dest_dir}\unpacked_wheel',
     'delvewheel show {wheel}',
     'delvewheel repair -w {dest_dir} {wheel}',
+    'echo "DESTINATION DIRECTORY({dest_dir}) contains:"',
+    'ls {dest_dir}'
 ]
 
 
