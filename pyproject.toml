@@ -77,7 +77,6 @@ visualize = [
 
 [tool.cibuildwheel]
 skip = ['*-musllinux_*']
-build = ['cp312-win_amd64']
 
 test-requires = ['asteval']
 
