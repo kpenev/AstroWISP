@@ -125,7 +125,9 @@ repair-wheel-command = [
     'echo "patched libastrowisp DEPENDENCIES:"',
     'ldd astrowisp\libastrowisp.dll',
     'wheel pack .',
-    'mv -fv *.whl {dest_dir}'
+    'mv -fv *.whl {dest_dir}',
+    'pushd {dest_dir}',
+    'rm -rf {dest_dir}\unpacked_wheel'
 ]
 
 
