@@ -139,4 +139,4 @@ compile = ['-vvv']
 install = ['--skip-subprojects=eigen']
 
 [tool.setuptools.packages.find]
-prune = "docs*"
+prune = "docs"
