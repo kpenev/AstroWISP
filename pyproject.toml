@@ -93,7 +93,7 @@ test-command = [
 [tool.cibuildwheel.windows]
 
 repair-wheel-command = [
-    'mkdir -p {dest_dir}\unpacked_wheel',
+    'mkdir {dest_dir}\unpacked_wheel',
     'pushd {dest_dir}\unpacked_wheel',
     'wheel unpack {wheel}',
     'pushd astrowisp*',
@@ -113,7 +113,7 @@ repair-wheel-command = [
     'echo "DESTINATION DIRECTORY({dest_dir}) contains:"',
     'ls',
     'mv -fv *.whl {wheel}',
-    'mkdir -p {dest_dir}\unpacked_wheel',
+    'mkdir {dest_dir}\unpacked_wheel',
     'pushd {dest_dir}\unpacked_wheel',
     'wheel unpack {wheel}',
     'pushd astrowisp*',
