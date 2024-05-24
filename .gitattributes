@@ -1,2 +1,3 @@
 *.py ident
 *.h ident
+docs/* export-ignore
