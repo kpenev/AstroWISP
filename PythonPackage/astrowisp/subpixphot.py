@@ -133,7 +133,7 @@ class SubPixPhot:
             None
         """
 
-        for k, value in configuration:
+        for k, value in configuration.items():
             if k not in self.configuration:
                 raise KeyError('Unrecognized configuration parameter: '
                                +
