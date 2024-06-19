@@ -41,7 +41,7 @@ jobs:
             # https://github.com/MarkusJx/prebuilt-boost/blob/main/versions-manifest.json
             boost_version: ${{ matrix.os == 'macos-14' && '1.81.0' || '1.79.0' }}
             # OPTIONAL: Specify a platform version
-            platform_version: 2019
+            platform_version: $BOOST_PLATFORM
             toolset: ${{ startsWith(matrix.os, 'mac') && 'clang' || 'mingw' }}
             arch: ${{ matrix.os == 'macos-14' && 'aarch64' || 'x86' }}
             boost_install_dir: ${{github.workspace}}/external
