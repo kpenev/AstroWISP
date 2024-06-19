@@ -14,13 +14,13 @@ jobs:
         #   * macos-13,
         #   * windows-2019
         #os: [ubuntu-latest, windows-2019, macos-13, macos-14]
-        os: [ubuntu-latest, macos-13, windows-2019]
+        os: [macos-14]
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Boost Mac/Windows
-        if: ${{ startsWith(matrix.os, 'mac') || startsWith(matrix.os, 'windows') }}
+      - name: Install Boost Windows
+        if: ${{ startsWith(matrix.os, 'windows') }}
         id: install-boost
         uses: MarkusJx/install-boost@v2.4.5
         with:
@@ -29,11 +29,28 @@ jobs:
             # https://github.com/MarkusJx/prebuilt-boost/blob/main/versions-manifest.json
             boost_version: 1.79.0
             # OPTIONAL: Specify a platform version
-            platform_version: ${{ startsWith(matrix.os, 'mac') && '10.15' || '2019' }}
-            toolset: ${{ startsWith(matrix.os, 'mac') && 'clang' || 'mingw' }}
+            platform_version: '2019'
+            toolset: 'mingw'
             boost_install_dir: ${{github.workspace}}/external
             # NOTE: If a boost version matching all requirements cannot be found,
             # this build step will fail
+
+      - name: Install Boost Mac
+        if: ${{ startsWith(matrix.os, 'mac') }}
+        id: install-boost
+        uses: MarkusJx/install-boost@v2.4.5
+        with:
+            # REQUIRED: Specify the required boost version
+            # A list of supported versions can be found here:
+            # https://github.com/MarkusJx/prebuilt-boost/blob/main/versions-manifest.json
+            boost_version: 1.79.0
+            # OPTIONAL: Specify a platform version
+            platform_version: ${{ matrix.os == 'macos-14' && '14' || '10.15' }}
+            toolset: 'clang'
+            boost_install_dir: ${{github.workspace}}/external
+            # NOTE: If a boost version matching all requirements cannot be found,
+            # this build step will fail
+
     
       - name: Build wheels
         uses: pypa/cibuildwheel@v2.18.0
