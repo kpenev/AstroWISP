@@ -21,19 +21,15 @@ jobs:
 
       - name: Detect Boost Platform
         if: ${{ startsWith(matrix.os, 'windows')}}
-        run:
-          echo "BOOST_PLATFORM=2019" >> "$GITHUB_ENV"
+        run: echo "BOOST_PLATFORM=2019" >> "$GITHUB_ENV"
 
       - name: Detect Boost Platform
         if: ${{ matrix.os == 'macos-13' }}
-        run:
-          echo "BOOST_PLATFORM=10.15" >> "$GITHUB_ENV"
+        run: echo "BOOST_PLATFORM=10.15" >> "$GITHUB_ENV"
 
       - name: Detect Boost Platform
         if: ${{ matrix.os == 'macos-14' }}
-        run:
-          echo "BOOST_PLATFORM=14" >> "$GITHUB_ENV"
-
+        run: echo "BOOST_PLATFORM=14" >> "$GITHUB_ENV"
 
       - name: Install Boost Mac/Windows
         if: ${{ startsWith(matrix.os, 'mac') || startsWith(matrix.os, 'windows') }}
@@ -45,7 +41,7 @@ jobs:
             # https://github.com/MarkusJx/prebuilt-boost/blob/main/versions-manifest.json
             boost_version: ${{ matrix.os == 'macos-14' && '1.81.0' || '1.79.0' }}
             # OPTIONAL: Specify a platform version
-            platform_version: $BOOST_PLATFORM
+            platform_version: 2019
             toolset: ${{ startsWith(matrix.os, 'mac') && 'clang' || 'mingw' }}
             boost_install_dir: ${{github.workspace}}/external
             # NOTE: If a boost version matching all requirements cannot be found,
