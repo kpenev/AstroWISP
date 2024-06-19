@@ -43,7 +43,7 @@ jobs:
             # REQUIRED: Specify the required boost version
             # A list of supported versions can be found here:
             # https://github.com/MarkusJx/prebuilt-boost/blob/main/versions-manifest.json
-            boost_version: ${{ matrix.os == 'macos-14' && '1.78.0' || '1.79.0'}}
+            boost_version: ${{ matrix.os == 'macos-14' && '1.81.0' || '1.79.0'}}
             # OPTIONAL: Specify a platform version
             platform_version: $BOOST_PLATFORM
             toolset: ${{ startsWith(matrix.os, 'mac') && 'clang' || 'mingw' }}
