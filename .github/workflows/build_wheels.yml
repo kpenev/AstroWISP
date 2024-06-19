@@ -25,12 +25,12 @@ jobs:
           echo "BOOST_PLATFORM=2019" >> "$GITHUB_ENV"
 
       - name: Detect Boost Platform
-        if: ${{ matrix.os == "macos-13" }}
+        if: ${{ matrix.os == 'macos-13' }}
         run:
           echo "BOOST_PLATFORM=10.15" >> "$GITHUB_ENV"
 
       - name: Detect Boost Platform
-        if: ${{ matrix.os == "macos-14" }}
+        if: ${{ matrix.os == 'macos-14' }}
         run:
           echo "BOOST_PLATFORM=14" >> "$GITHUB_ENV"
 
