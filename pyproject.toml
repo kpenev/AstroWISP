@@ -73,10 +73,10 @@ visualize = [
 #build = ['cp37-win_amd64']
 #
 [tool.cibuildwheel.linux]
-build = ['cp39-manylinux_x86_64']
+build = ['cp310-manylinux_x86_64']
 
 [tool.cibuildwheel]
-skip = ['*-musllinux_* *-win32 *']
+skip = ['*-musllinux_* *-win32']
 
 test-requires = ['asteval']
 
