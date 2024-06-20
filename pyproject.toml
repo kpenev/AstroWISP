@@ -76,7 +76,7 @@ visualize = [
 build = ['cp39-manylinux_x86_64']
 
 [tool.cibuildwheel]
-skip = ['*-musllinux_* *-win32']
+skip = ['*-musllinux_* *-win32 *']
 
 test-requires = ['asteval']
 
