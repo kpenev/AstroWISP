@@ -72,7 +72,7 @@ visualize = [
 #[tool.cibuildwheel.windows]
 #build = ['cp37-win_amd64']
 #
-#[tool.cibuildwheel.linux]
+[tool.cibuildwheel.linux]
 build = ['cp39-manylinux_x86_64']
 
 [tool.cibuildwheel]
