@@ -13,7 +13,8 @@ jobs:
         #   * ubuntu-latest, 
         #   * macos-13,
         #   * windows-2019
-        os: [ubuntu-latest, windows-2019, macos-13, macos-14]
+        #os: [ubuntu-latest, windows-2019, macos-13, macos-14]
+        os: [macos-14]
 
     steps:
       - uses: actions/checkout@v4
@@ -42,6 +43,7 @@ jobs:
             # OPTIONAL: Specify a platform version
             platform_version: ${{ env.BOOST_PLATFORM }}
             toolset: ${{ startsWith(matrix.os, 'mac') && 'clang' || 'mingw' }}
+            arch±: ${{ matrix.os == 'macos-14' && 'aarch64' || 'x86' }}
             boost_install_dir: ${{github.workspace}}/external
             # NOTE: If a boost version matching all requirements cannot be found,
             # this build step will fail
