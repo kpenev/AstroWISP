@@ -42,7 +42,7 @@ jobs:
             # OPTIONAL: Specify a platform version
             platform_version: ${{ env.BOOST_PLATFORM }}
             toolset: ${{ startsWith(matrix.os, 'mac') && 'clang' || 'mingw' }}
-            arch±: ${{ matrix.os == 'macos-14' && 'aarch64' || 'x86' }}
+            arch: ${{ matrix.os == 'macos-14' && 'aarch64' || 'x86' }}
             boost_install_dir: ${{github.workspace}}/external
             # NOTE: If a boost version matching all requirements cannot be found,
             # this build step will fail
