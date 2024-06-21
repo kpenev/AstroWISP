@@ -67,7 +67,7 @@ visualize = [
 
 #Remove these to build full set of wheels.
 #[tool.cibuildwheel.macos]
-#build = ['cp37-macosx_x86_64']
+build = ['cp312-macosx_arm64']
 #
 #[tool.cibuildwheel.windows]
 #build = ['cp37-win_amd64']
