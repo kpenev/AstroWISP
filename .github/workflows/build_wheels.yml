@@ -21,7 +21,7 @@ jobs:
 
       - name: Detect Boost Platform
         if: ${{ startsWith(matrix.os, 'windows')}}
-        run: echo "BOOST_PLATFORM='2019'" >> "$GITHUB_ENV"
+        run: echo "$Env:BOOST_PLATFORM=2019" >> "$GITHUB_ENV"
 
       - name: Detect Boost Platform
         if: ${{ matrix.os == 'macos-13' }}
@@ -30,9 +30,6 @@ jobs:
       - name: Detect Boost Platform
         if: ${{ matrix.os == 'macos-14' }}
         run: echo "BOOST_PLATFORM=14" >> "$GITHUB_ENV"
-
-      - name: Test Boost Platform
-        run: echo "$BOOST_PLATFORM"
 
       - name: Install Boost Mac/Windows
         if: ${{ startsWith(matrix.os, 'mac') || startsWith(matrix.os, 'windows') }}
