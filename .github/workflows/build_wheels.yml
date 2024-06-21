@@ -32,7 +32,7 @@ jobs:
         run: echo "BOOST_PLATFORM=14" >> "$GITHUB_ENV"
 
       - name: Test Boost Platform
-        run: echo "BOOST_PLATFORM: $BOOST_PLATFORM"
+        run: echo "$BOOST_PLATFORM"
 
       - name: Install Boost Mac/Windows
         if: ${{ startsWith(matrix.os, 'mac') || startsWith(matrix.os, 'windows') }}
