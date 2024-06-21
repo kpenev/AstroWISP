@@ -13,14 +13,15 @@ jobs:
         #   * ubuntu-latest, 
         #   * macos-13,
         #   * windows-2019
-        os: [ubuntu-latest, windows-2019, macos-13, macos-14]
+        #os: [ubuntu-latest, windows-2019, macos-13, macos-14]
+        os: [windows-2019]
 
     steps:
       - uses: actions/checkout@v4
 
       - name: Detect Boost Platform
         if: ${{ startsWith(matrix.os, 'windows')}}
-        run: echo "BOOST_PLATFORM=2019" >> "$GITHUB_ENV"
+        run: echo "BOOST_PLATFORM='2019'" >> "$GITHUB_ENV"
 
       - name: Detect Boost Platform
         if: ${{ matrix.os == 'macos-13' }}
