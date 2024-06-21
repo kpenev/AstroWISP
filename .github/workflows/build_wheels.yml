@@ -20,10 +20,6 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Detect Boost Platform
-        if: ${{ startsWith(matrix.os, 'windows')}}
-        run: echo "$Env:BOOST_PLATFORM=2019" >> "$GITHUB_ENV"
-
-      - name: Detect Boost Platform
         if: ${{ matrix.os == 'macos-13' }}
         run: echo "BOOST_PLATFORM=10.15" >> "$GITHUB_ENV"
 
@@ -41,7 +37,7 @@ jobs:
             # https://github.com/MarkusJx/prebuilt-boost/blob/main/versions-manifest.json
             boost_version: ${{ matrix.os == 'macos-14' && '1.81.0' || '1.79.0' }}
             # OPTIONAL: Specify a platform version
-            platform_version: ${{ env.BOOST_PLATFORM }}
+            platform_version: ${{ startsWith(matrix.os, 'windows') && '2019' || env.BOOST_PLATFORM }}
             toolset: ${{ startsWith(matrix.os, 'mac') && 'clang' || 'mingw' }}
             arch: ${{ matrix.os == 'macos-14' && 'aarch64' || 'x86' }}
             boost_install_dir: ${{github.workspace}}/external
