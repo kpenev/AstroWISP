@@ -14,10 +14,18 @@ jobs:
         #   * macos-13,
         #   * windows-2019
         #os: [ubuntu-latest, windows-2019, macos-13, macos-14]
-        os: [ubuntu-latest, macos-13, windows-2019]
+        os: [macos-14]
 
     steps:
       - uses: actions/checkout@v4
+
+      - name: Detect Boost Platform
+        if: ${{ matrix.os == 'macos-13' }}
+        run: echo "BOOST_PLATFORM=10.15" >> "$GITHUB_ENV"
+
+      - name: Detect Boost Platform
+        if: ${{ matrix.os == 'macos-14' }}
+        run: echo "BOOST_PLATFORM=14" >> "$GITHUB_ENV"
 
       - name: Install Boost Mac/Windows
         if: ${{ startsWith(matrix.os, 'mac') || startsWith(matrix.os, 'windows') }}
@@ -27,10 +35,11 @@ jobs:
             # REQUIRED: Specify the required boost version
             # A list of supported versions can be found here:
             # https://github.com/MarkusJx/prebuilt-boost/blob/main/versions-manifest.json
-            boost_version: 1.79.0
+            boost_version: ${{ matrix.os == 'macos-14' && '1.81.0' || '1.79.0' }}
             # OPTIONAL: Specify a platform version
-            platform_version: ${{ startsWith(matrix.os, 'mac') && '10.15' || '2019' }}
+            platform_version: ${{ startsWith(matrix.os, 'windows') && '2019' || env.BOOST_PLATFORM }}
             toolset: ${{ startsWith(matrix.os, 'mac') && 'clang' || 'mingw' }}
+            arch: ${{ matrix.os == 'macos-14' && 'aarch64' || 'x86' }}
             boost_install_dir: ${{github.workspace}}/external
             # NOTE: If a boost version matching all requirements cannot be found,
             # this build step will fail
@@ -38,7 +47,7 @@ jobs:
       - name: Build wheels
         uses: pypa/cibuildwheel@v2.18.0
         env:
-            MACOSX_DEPLOYMENT_TARGET: 10.15
+            MACOSX_DEPLOYMENT_TARGET: ${{ matrix.os == 'macos-14' && '14.0' || '10.15' }}
             BOOST_ROOT: ${{ steps.install-boost.outputs.BOOST_ROOT }}
             CIBW_DEBUG_KEEP_CONTAINER: True
             #Work around MacOS idiocy per https://github.com/pypa/cibuildwheel/issues/816
