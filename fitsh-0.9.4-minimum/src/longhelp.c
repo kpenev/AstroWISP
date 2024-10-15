@@ -51,7 +51,7 @@
 		 } \
 	 } while(0)
 #else
-#define	realloc_check(ptr,size) 
+#define	realloc_check(ptr,size)
 #endif
 #define	malloc_check(ptr)	realloc_check(ptr,1)
 
@@ -65,7 +65,7 @@ static void remove_quotes(char *buff)
 	if ( k )	memmove(buff,buff+k,strlen(buff)+1-k);
 	else		buff++;
   }
-	
+
 }
 
 static int char_is_space(int c)
@@ -169,7 +169,7 @@ int longhelp_fprint_entry(FILE *fw,longhelp_entry *entry,int flags,int width)
  pad=(w+4+7)&(~7);
  fpad=16;
 
- if ( width>0 ) 
+ if ( width>0 )
  	longhelp_fprint_description(fw,width,w,fpad,pad,entry->description);
  else
   {	for ( ; w<pad ; w++ )
@@ -185,7 +185,7 @@ int longhelp_fprint(FILE *fw,longhelp_entry *entry,int flags,int width)
  int	lcnt;
 
  if ( width<0 && isatty(fileno(fw)) )
-  {     
+  {
 #ifdef TIOCGWINSZ
 	struct  winsize ws;
         if ( ! ioctl(fileno(fw),TIOCGWINSZ,&ws) )
@@ -193,7 +193,7 @@ int longhelp_fprint(FILE *fw,longhelp_entry *entry,int flags,int width)
         else
 #endif
                 width=0;
-  }     
+  }
 
  lcnt=0;
  while ( entry != NULL && entry->options != NULL )
@@ -280,5 +280,5 @@ int longhelp_fprint_mediawiki(FILE *fw,longhelp_entry *entry)
 }
 
 /*****************************************************************************/
-                                                                
-                
+
+

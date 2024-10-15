@@ -1,3 +1,8 @@
+0.9.4-astrowisp: changes from FITSH version 0.9.4
+=================================================
+ * Deleted all parts of FITSH not necessary to compile fistar and grcollect
+ * Switch build system from automake to meson + ninja
+
 0.9.4: new features, changes and fixes since FITSH version 0.9.3
 ================================================================
  * new: `fitrans` support truncated mean based averaging during shrink 
