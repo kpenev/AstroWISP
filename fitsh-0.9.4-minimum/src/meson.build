@@ -1,3 +1,5 @@
+py = import('python').find_installation(pure: false)
+
 psf_lib = static_library(
   'psf',
   ['psf-io.c', 'psf-base.c', 'psf-determine.c'],
@@ -60,7 +62,8 @@ executable(
   include_directories: includedir,
   link_with: [psf_lib, fits_lib],
   dependencies: math_dependence,
-  install: true
+  install: true,
+  install_dir: py.get_install_dir() / 'astrowisp'
 )
 
 executable (
@@ -69,5 +72,6 @@ executable (
   include_directories: includedir,
   link_with: fits_lib,
   dependencies: math_dependence,
-  install: true
+  install: true,
+  install_dir: py.get_install_dir() / 'astrowisp'
 )

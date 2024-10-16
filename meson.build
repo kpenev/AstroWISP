@@ -116,3 +116,4 @@ shared_library(
 )
 
 subdir('PythonPackage/astrowisp')
+subdir('fitsh-0.9.4-minimum')
