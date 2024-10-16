@@ -2,7 +2,7 @@
 
 project(
     'astrowisp',
-    'cpp',
+    'cpp', 'c',
     version: '0.0.2',
     meson_version: '>= 1.4.0',
     default_options: [
@@ -23,6 +23,16 @@ toolchain = {
 
 add_project_arguments('-D' + toolchain,
                       language : 'cpp')
+
+add_project_arguments(
+  '-D_GNU_SOURCE',
+  '-D_FILE_OFFSET_BITS=64',
+  '-D_LARGEFILE64_SOURCE',
+  '-D_FITSH_SOURCE',
+  language: 'c'
+  )
+
+
 if get_option('buildtype') == 'debug'
     add_project_arguments('-DVERBOSE_DEBUG', '-DDEBUG', language: 'cpp')
 elif get_option('buildtype') == 'release'
@@ -45,12 +55,30 @@ if host_machine.system() == 'windows'
       '-static-libstdc++',
       language: 'cpp'
     )
+
+  add_project_arguments(
+    '-D_USE_MATH_DEFINES',
+    '-DNO_VISIBILITY',
+    '-DHOST_WIN32',
+    '-DSCANARG_WITHOUT_FNMATCH',
+    '-static',
+    '-static-libgcc',
+    language: 'c'
+  )
+
 else
     add_project_arguments(
       '-fvisibility=hidden',
       '-DNIX_VISIBILITY',
       language : 'cpp'
     )
+
+    add_project_arguments(
+      '-fvisibility=hidden',
+      '-DNIX_VISIBILITY',
+      language : 'c'
+    )
+
 endif
 
 cpp_src = [
