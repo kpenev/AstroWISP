@@ -65,6 +65,12 @@ visualize = [
     'xalglib'
 ]
 
+[tool.setuptools.packages.find]
+where = ["build/fitsh-0.9.4-minimum/src"]
+
+[tool.setuptools.package-data]
+mypkg = ["fistar", "grcollect"]
+
 #Remove these to build full set of wheels.
 #[tool.cibuildwheel.macos]
 #build = ['cp312-macosx_arm64']
