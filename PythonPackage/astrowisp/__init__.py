@@ -12,7 +12,15 @@ from astrowisp.piecewise_bicubic_psf import PiecewiseBicubicPSF
 _module_path = path.dirname(path.abspath(__file__))
 
 fistar_path = path.join(_module_path, 'fistar')
+if not path.exists(fistar_path):
+    fistar_path += '.exe'
+assert path.exists(fistar_path)
+
 grcollect_path = path.join(_module_path, 'grcollect')
+if not path.exists(grcollect_path):
+    grcollect_path += '.exe'
+assert path.exists(grcollect_path)
+
 
 __all__ = ['BackgroundExtractor',
            'FitStarShape',
