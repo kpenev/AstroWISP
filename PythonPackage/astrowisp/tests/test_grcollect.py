@@ -40,16 +40,19 @@ class TestGRCollect(FloatTestCase):
                 '--col-base', '1',
                 '--col-stat', '2,3,4,5,6,7,8,9,10,11,12,13,14',
                 '--output', str(path.join(_test_data_dir, 'test_stat_grcollect.txt')),
-                '--stat', 'count,rcount,mean,rmean,median,rmedian,mediandev,medianmeddev',
+                '--stat', 'count,rcount,mean,rmean,median,rmedian,mediandev,rmediandev',
                 '--rejection', 'column=4,iterations=10,mean,stddev=4.0',
                 # '--rejection', 'column=4,,iterations=10,median,stddev=4.0',
                 '--rejection', 'column=7,iterations=10,mean,stddev=4.0',
                 # '--rejection', 'column=7,,iterations=10,median,stddev=4.0',
-                '--rejection', 'column=10,iterations=10,mean,stddev=4.0',
+                '--rejection', 'column=10,iterations=10,mean,meddev=15.0',
                 # '--rejection', 'column=10,,iterations=10,median,stddev=4.0',
-                '--rejection', 'column=13,iterations=10,mean,stddev=4.1',
+                '--rejection', 'column=13,iterations=10,mean,meddev=15.0',
                 # '--rejection', 'column=13,,iterations=10,median,stddev=4.0',
-                '--max-memory', '4g'
+                '--max-memory', '4g',
+                #TODO add tmpdir and remove after usage to get rid of all the grcollect temp files
+                #temp file module python
+                #'--tmpdir', ''
                 ],
                 stdin=PIPE,
                 stdout=PIPE
@@ -59,7 +62,9 @@ class TestGRCollect(FloatTestCase):
         mu = 100
         sigma = 50
         #TODO maybe do 1000000, although it takes like an hour
-        for i in range(200000):  
+        niter=200000
+        #TODO add gaussian to inner iteration
+        for i in range(niter):  
             temp = random.gauss(mu, sigma)  
             col_gaussian.append(temp)
 
@@ -82,13 +87,13 @@ class TestGRCollect(FloatTestCase):
                   0]
 
         #TODO maybe do 1000000, although it takes like an hour
-        for i in range(200000):
+        for i in range(niter):
             values[0] = random.randint(0, 10)
 
             #TODO need to find how to exclude the outliers so we can match rmedian and rmean to 
             # the regular mean and median excluded columns
             if i%20==0:
-                # values[2] = 100
+                values[2] = 0 #100
                 values[3] = 100
                 one_outliers += 1
             else:
@@ -96,7 +101,7 @@ class TestGRCollect(FloatTestCase):
                 values[3] = 1
             
             if i%20==0:
-                # values[5] = 100.0
+                values[5] = 0 #100.0
                 values[6] = 100.0
                 onefloat_outliers += 1
             else:
@@ -106,11 +111,11 @@ class TestGRCollect(FloatTestCase):
             values[7] += 1
 
             if i%20==0:
-                # values[8] = values[7] + 100000000
+                values[8] = 0 #values[7] + 100000000
                 values[9] = values[7] + 100000000
                 mil_outliers += 1
             elif i%50==0:
-                # values[8] = values[7] - 100000000
+                values[8] = 0 #values[7] - 100000000
                 values[9] = values[7] - 100000000
                 mil_outliers += 1
             else:
@@ -120,11 +125,11 @@ class TestGRCollect(FloatTestCase):
             values[10] = col_gaussian[i]  
 
             if i%20==0:
-                # values[11] = values[10] + 3*100000000*stdev_gaus
+                values[11] = 0 #values[10] + 3*100000000*stdev_gaus
                 values[12] = values[10] + 3*100000000*stdev_gaus
                 gaus_outliers += 1
             elif i%50==0:
-                # values[11] = values[10] - 3*100000000*stdev_gaus
+                values[11] = 0 #values[10] - 3*100000000*stdev_gaus
                 values[12] = values[10] - 3*100000000*stdev_gaus
                 gaus_outliers += 1
             else:
@@ -164,23 +169,26 @@ class TestGRCollect(FloatTestCase):
         print((df[17+24+24]-df[18+24+24]).sum())
         print((df[17+24+24+24]-df[18+24+24+24]).sum())
 
+
+
+        print((df[17]-df[18]).sum())
         #self assert true if every rejection outlier column from grcollect matches the number of outliers we produced
         #TODO cleanup this +24 junk to something nicer maybe do something with range(24,3,24) and iterate over those
         self.assertTrue((df[17]-df[18]).sum()==one_outliers,
-                        f'The one outliers mismatch: {(df[17+24+24]-df[18+24+24]).sum()!r} not equal to'
+                        f'The one outliers mismatch: {(df[17+24+24]-df[18+24+24]).sum()!r} not equal to '
                         f'{one_outliers!r}')
         self.assertTrue((df[17+24]-df[18+24]).sum()==onefloat_outliers,
-                        f'The floating point one outliers mismatch: {(df[17+24+24]-df[18+24+24]).sum()!r} not equal to'
+                        f'The floating point one outliers mismatch: {(df[17+24+24]-df[18+24+24]).sum()!r} not equal to '
                         f'{onefloat_outliers!r}')
         self.assertTrue((df[17+24+24]-df[18+24+24]).sum()==mil_outliers,
-                        f'The counted outliers mismatch: {(df[17+24+24]-df[18+24+24]).sum()!r} not equal to'
+                        f'The counted outliers mismatch: {(df[17+24+24]-df[18+24+24]).sum()!r} not equal to '
                         f'{mil_outliers!r}')
 
-        #gaussian outlier rejection should be within 5 percent of its total outliers
-        self.assertTrue(gaus_outliers-0.05*gaus_outliers<=
+        #gaussian outlier rejection should be within 2 percent of its total outliers
+        self.assertTrue(gaus_outliers-0.02*gaus_outliers<=
                         (df[17+24+24+24]-df[18+24+24+24]).sum()
-                        <=gaus_outliers+0.05*gaus_outliers,
-                        f'Gaussian outliers mismatch: {(df[17+24+24+24]-df[18+24+24+24]).sum()!r} not within 5% of'
+                        <=gaus_outliers+0.02*gaus_outliers,
+                        f'Gaussian outliers mismatch: {(df[17+24+24+24]-df[18+24+24+24]).sum()!r} not within 2% of '
                         f'{gaus_outliers!r}')
         
         #now check if the rmeans and rmedians should be what they should if the outliers werent present
@@ -188,6 +196,20 @@ class TestGRCollect(FloatTestCase):
 
         #TODO need to find how to exclude the outliers so we can match rmedian and rmean to 
         # the regular mean and median excluded columns
+        #maybe doing a antimean then applying a new mean with the outlier number but having 0s for the 
+        #outliers for the dataset that dont get rejected
+        # print(df[18-8+2].sum()*(niter)/(niter-one_outliers))
+        # print(df[18+2].sum())
+        print('means with excluded')
+        print(df[18-8+2].sum()*(niter)/(niter-one_outliers))
+        print(df[18+2].sum())
+        print(df[18-8+2+24].sum()*(niter)/(niter-onefloat_outliers))
+        print(df[18+2+24].sum())
+        print(df[18-8+2+24+24].sum()*(niter)/(niter-mil_outliers))
+        print(df[18+2+24+24].sum())
+        print(df[18-8+2+24+24+24].sum()*(niter)/(niter-gaus_outliers))
+        print(df[18+2+24+24+24].sum())
+
         print('means')
         print(df[18-8+2].sum())
         print(df[18+2].sum())
