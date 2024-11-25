@@ -102,8 +102,6 @@ test-command = [
 
 [tool.cibuildwheel.windows]
 
-build = ['cp310-win_amd64']
-
 repair-wheel-command = [
     'mkdir {dest_dir}\unpacked_wheel',
     'pushd {dest_dir}\unpacked_wheel',
