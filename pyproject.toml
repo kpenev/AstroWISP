@@ -67,10 +67,13 @@ visualize = [
 ]
 
 [tool.setuptools.packages.find]
-where = ["build/fitsh-0.9.4-minimum/src"]
+where = [
+    "build/fitsh-0.9.4-minimum/src",
+    "PythonPackage/astrowisp/tests/test_data"
+]
 
 [tool.setuptools.package-data]
-mypkg = ["fistar", "grcollect"]
+mypkg = ["fistar", "XO1_test_img.*"]
 
 #Remove these to build full set of wheels.
 #[tool.cibuildwheel.macos]
