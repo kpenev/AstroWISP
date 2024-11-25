@@ -81,8 +81,8 @@ mypkg = ["fistar", "XO1_test_img*"]
 #[tool.cibuildwheel.windows]
 #build = ['cp37-win_amd64']
 #
-[tool.cibuildwheel.linux]
-build = ['cp310-manylinux_x86_64']
+#[tool.cibuildwheel.linux]
+#build = ['cp310-manylinux_x86_64']
 
 [tool.cibuildwheel]
 skip = ['*-musllinux_* *-win32']
