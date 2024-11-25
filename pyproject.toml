@@ -41,7 +41,8 @@ classifiers = [
 
 dependencies = [
     'numpy < 2',
-    'scipy'
+    'scipy',
+    'astropy'
 ]
 
 description = 'Tools for extracting photometry from wide-field night sky images'
@@ -57,7 +58,7 @@ source = 'https://github.com/kpenev/AstroWISP'
 documentation = 'https://kpenev.github.io/AstroWISP/'
 
 [project.optional-dependencies]
-test = ['asteval']
+test = ['asteval', 'pandas']
 
 visualize = [
     'configargparse',
