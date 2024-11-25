@@ -13,3 +13,5 @@ py.install_sources(
 )
 
 subdir('test_fit_star_shape')
+
+subdir('test_data')
