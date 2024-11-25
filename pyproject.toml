@@ -76,7 +76,7 @@ mypkg = ["fistar", "XO1_test_img*"]
 
 #Remove these to build full set of wheels.
 #[tool.cibuildwheel.macos]
-#build = ['cp312-macosx_arm64']
+build = ['cp310-macosx_x86_64']
 #
 #[tool.cibuildwheel.windows]
 #build = ['cp310-win_amd64']
