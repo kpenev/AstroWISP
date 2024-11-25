@@ -29,7 +29,7 @@ class TestFistar(FloatTestCase):
         )
         print(f'Expected:\n{expected!r}')
         with get_unpacked_fits(
-            path.join(_test_data_dir, 'XO1_test_img.fits.fz')
+            path.join(_test_data_dir, 'XO1_test_img.fits')
         ) as unpacked_fname:
             with Popen(
                 [
