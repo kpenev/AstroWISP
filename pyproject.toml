@@ -78,8 +78,8 @@ mypkg = ["fistar", "XO1_test_img*"]
 #[tool.cibuildwheel.macos]
 #build = ['cp312-macosx_arm64']
 #
-[tool.cibuildwheel.windows]
-build = ['cp310-win_amd64']
+#[tool.cibuildwheel.windows]
+#build = ['cp310-win_amd64']
 #
 #[tool.cibuildwheel.linux]
 #build = ['cp310-manylinux_x86_64']
@@ -101,6 +101,8 @@ test-command = [
 ]
 
 [tool.cibuildwheel.windows]
+
+build = ['cp310-win_amd64']
 
 repair-wheel-command = [
     'mkdir {dest_dir}\unpacked_wheel',
