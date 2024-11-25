@@ -71,11 +71,7 @@ where = ["build/fitsh-0.9.4-minimum/src",
          "astrowisp",
          "astrowisp/tests/test_data",
          "PythonPackage",
-         "build/astrowisp",
-         "build/PythonPackage",
          "PythonPackage/astrowisp/tests/test_data",
-         "build/astrowisp/tests/test_data",
-         "build/PythonPackage/astrowisp/tests/test_data"
 ]
 
 [tool.setuptools.package-data]
