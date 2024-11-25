@@ -3,7 +3,7 @@
 project(
     'astrowisp',
     'cpp', 'c',
-    version: '0.0.2',
+    version: '1.0.0',
     meson_version: '>= 1.4.0',
     default_options: [
         'optimization=3',
