@@ -1,7 +1,7 @@
 AstroWISP: ``Astro``\ nomical ``W``\ idefield ``I``\ mages ``S``\ tellar ``P``\ hotometry
 =========================================================================================
 
-A tool for extracting stellar photometry from widefild color or monochrome 
+A tool for extracting stellar photometry from widefield color or monochrome
 images of the night sky
 
 [Full documentation](https://kpenev.github.io/AstroWISP/)
@@ -16,7 +16,7 @@ Fit for the distribution of light from a star on the detector (usually
 constrained to vary smoothly across stars) and an individual amplitude for each
 star giving a measure of the flux.
 
-Point Sread Function, or PSF, refers to the distribution of light hitting the
+Point Spread Function, or PSF, refers to the distribution of light hitting the
 detector as a function of the offset from the source center. In order to predict
 the value that a particular pixel should have given the PSF one needs to
 integrate over the pixel the product of the PSF and the sensitivity of the pixel
@@ -28,8 +28,8 @@ pixel centered at that location should have.
 
 AstroWISP allows for both PSF and PRF fitting, imposing a requirement that
 either function depends smoothly on the properties of the star being fit. The
-dependence is parametrized as an arbitrary polynomial of fnuctions of the
-relevant paramaters. Which properties it is allowed to depend on is entirely up
+dependence is parametrized as an arbitrary polynomial of functions of the
+relevant parameters. Which properties it is allowed to depend on is entirely up
 to the user. Typically at least the position of the source center on the
 detector is included, but other properties can be included as well (e.g. the
 color of the source, temperature of the telescope tube, etc.). Multiple images
