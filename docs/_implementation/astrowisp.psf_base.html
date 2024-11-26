@@ -49,8 +49,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../installation.html">Unix Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../installation.html#windows-installation">Windows Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../unit_tests.html">Unit Tests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../python_interface/index.html">Python Interface Documentation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">Python Package Implementation</a><ul class="current">
@@ -113,7 +112,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="astrowisp.psf_base.PSFBase">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">astrowisp.psf_base.</span></span><span class="sig-name descname"><span class="pre">PSFBase</span></span><a class="reference internal" href="../_modules/astrowisp/psf_base.html#PSFBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.psf_base.PSFBase" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a></p>
 <div class="graphviz"><img src="../_images/inheritance-1803f9390277e49c61ab69a3eefffb1d1d805257.png" alt="Inheritance diagram of astrowisp.psf_base.PSFBase" usemap="#inheritanceb8f9f27df2" class="inheritance graphviz" /></div>
 <map id="inheritanceb8f9f27df2" name="inheritanceb8f9f27df2">
 <area shape="rect" id="node2" href="#astrowisp.psf_base.PSFBase" target="_top" title="The base class for all supported PSFs." alt="" coords="5,80,200,107"/>
@@ -163,24 +162,27 @@ return the PSF value.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="astrowisp.psf_base.PSFBase.integrate">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">integrate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">left</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bottom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/psf_base.html#PSFBase.integrate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.psf_base.PSFBase.integrate" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">integrate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">circle_radius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/psf_base.html#PSFBase.integrate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.psf_base.PSFBase.integrate" title="Permalink to this definition"></a></dt>
 <dd><p>Return integrals of the PSF over circle-rectangle overlaps.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>left</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em> or </em><em>array</em>) – The x coordinate(s) of left boundary of the
+<li><p><strong>center_x</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em> or </em><em>array</em>) – The x coordinate(s) of the center(s) of
 the rectangle(s) to integrate over.</p></li>
-<li><p><strong>bottom</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em> or </em><em>array</em>) – The y coordinate(s) of the bottom
-boundary of the rectangle(s) to integrate over.</p></li>
-<li><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em> or </em><em>array</em>) – The width(s) of the rectangle(s).</p></li>
-<li><p><strong>height</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em> or </em><em>array</em>) – The height(s) of the rectangle(s).</p></li>
+<li><p><strong>center_y</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em> or </em><em>array</em>) – The y coordinate(s) of the center(s) of
+the rectangle(s) to integrate over.</p></li>
+<li><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em> or </em><em>array</em>) – The width(s) of the rectangle(s).</p></li>
+<li><p><strong>height</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em> or </em><em>array</em>) – The height(s) of the rectangle(s).</p></li>
+<li><p><strong>circle_radius</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em> or </em><em>array</em>) – The rad(ii/us) of the circle(s).
+For zero entries or None, the integral is over the full
+rectangle(s).</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The integral of the PSF over the specified area(s).</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a> or array</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a> or array</p>
 </dd>
 </dl>
 </dd></dl>
@@ -192,9 +194,9 @@ boundary of the rectangle(s) to integrate over.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>center_x</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em> or </em><em>array</em>) – The offset(s) of the center(s) of the
+<li><p><strong>center_x</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em> or </em><em>array</em>) – The offset(s) of the center(s) of the
 pixels from the source position in the x direction.</p></li>
-<li><p><strong>center_y</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em> or </em><em>array</em>) – The offset(s) of the center(s) of the
+<li><p><strong>center_y</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em> or </em><em>array</em>) – The offset(s) of the center(s) of the
 pixels from the source position in the y direction.</p></li>
 <li><p><strong>subpix_map</strong> (<em>2-D array</em>) – The pixel sensitivity map to assume.</p></li>
 </ul>
@@ -205,7 +207,7 @@ sensitivity map over pixel(s) located as specified relative to
 the source center.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a> or array</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a> or array</p>
 </dd>
 </dl>
 </dd></dl>

@@ -7,12 +7,12 @@
 <area shape="rect" id="node4" href="$SDKUtil_8h.xhtml" title="Declare functions used during elliptical Gaussian PSF fitting." alt="" coords="261,449,445,512"/>
 <area shape="rect" id="node5" href="$PolynomialSDK_8h.xhtml" title="Declares a class for fitting elliptical gaussian PSFs as a smooth function of image position." alt="" coords="30,560,236,623"/>
 <area shape="rect" id="node6" href="$SDKUtil_8cpp.xhtml" title="Define the functions from SDKUtil.h." alt="" coords="261,560,445,623"/>
-<area shape="rect" id="node9" href="$FitPSF_2Image_8h.xhtml" title="Defines a class describing an image of Pixel pixels." alt="" coords="390,227,575,290"/>
+<area shape="rect" id="node9" href="$FitPSF_2Image_8h.xhtml" title="Defines a class describing an image of Pixel pixels." alt="" coords="390,227,574,290"/>
 <area shape="rect" id="node11" href="$OverlapSource_8h.xhtml" title="Defines the overlap&#45;related features of PSF fitting sources." alt="" coords="536,338,735,401"/>
 <area shape="rect" id="node16" href="$Pixel_8cpp.xhtml" title="Define the backrgound excess functions and some methods of Pixel.h." alt="" coords="673,227,857,290"/>
 <area shape="rect" id="node10" href="$FitPSF_2CInterface_8cpp.xhtml" title="Define the C&#45;interface functions for the FitPSF library." alt="" coords="441,782,625,845"/>
 <area shape="rect" id="node12" href="$LinearSource_8h.xhtml" title="Declares a class used for PSF fitting where pixel responses are linear functions of the shape paramet..." alt="" coords="579,449,767,512"/>
 <area shape="rect" id="node13" href="$LinearSource_8cpp.xhtml" title="Define some of the methods of LinearSource class." alt="" coords="570,560,776,623"/>
 <area shape="rect" id="node14" href="$FitPSF_2PiecewiseBicubic_8h.xhtml" title="The declarations of the functions related to fitting piecewise bicubic PSFs." alt="" coords="703,671,923,734"/>
-<area shape="rect" id="node15" href="$PiecewiseBicubicPSFSmoothing_8h_source.xhtml" title=" " alt="" coords="850,560,1179,623"/>
+<area shape="rect" id="node15" href="$PiecewiseBicubicPSFSmoothing_8h_source.xhtml" title=" " alt="" coords="850,560,1178,623"/>
 </map>

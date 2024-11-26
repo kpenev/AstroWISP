@@ -2,7 +2,7 @@
 <area shape="rect" id="node1" title="The implementation of the methods of the MeasureExcludingSources class." alt="" coords="408,5,745,68"/>
 <area shape="rect" id="node2" href="$MeasureExcludingSources_8h.xhtml" title="Declares a class for extracting the background around sources attempting to exclude nearby sources." alt="" coords="631,116,857,145"/>
 <area shape="rect" id="node17" title=" " alt="" coords="688,501,771,530"/>
-<area shape="rect" id="node3" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="923,578,1142,624"/>
+<area shape="rect" id="node3" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="922,578,1142,624"/>
 <area shape="rect" id="node4" href="$Measure_8h.xhtml" title="Declares the minimum requirements for a background extractor class." alt="" coords="1055,193,1151,222"/>
 <area shape="rect" id="node6" href="$Core_2Image_8h.xhtml" title="Declares a base class for images to be processed." alt="" coords="577,347,706,376"/>
 <area shape="rect" id="node9" title=" " alt="" coords="605,501,646,530"/>
@@ -11,7 +11,7 @@
 <area shape="rect" id="node22" href="$NaN_8h.xhtml" title="Defines not&#45;a&#45;number and infinity." alt="" coords="953,347,1071,376"/>
 <area shape="rect" id="node23" title=" " alt="" coords="911,424,969,453"/>
 <area shape="rect" id="node5" href="$Background_2Source_8h.xhtml" title="Declares the base class for background extract(ion/ed) from an astronomical image." alt="" coords="874,270,959,299"/>
-<area shape="rect" id="node7" href="$Core_2Typedefs_8h.xhtml" title="Some useful typedef statements." alt="" coords="207,424,306,453"/>
+<area shape="rect" id="node7" href="$Core_2Typedefs_8h.xhtml" title="Some useful typedef statements." alt="" coords="206,424,306,453"/>
 <area shape="rect" id="node15" href="$Error_8h.xhtml" title="The hierarchy of exceptions for this project." alt="" coords="818,424,887,453"/>
 <area shape="rect" id="node18" title=" " alt="" coords="431,424,503,453"/>
 <area shape="rect" id="node19" title=" " alt="" coords="527,424,596,453"/>

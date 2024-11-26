@@ -4,9 +4,9 @@
 <area shape="rect" id="node4" href="$MeasureExcludingSources_8h.xhtml" title="Declares a class for extracting the background around sources attempting to exclude nearby sources." alt="" coords="428,116,748,179"/>
 <area shape="rect" id="node27" href="$Zero_8h.xhtml" title="Declare a background class for images from which the background has already been subtracted." alt="" coords="800,116,984,179"/>
 <area shape="rect" id="node3" href="$Manual_8cpp.xhtml" title="Implementation for some methods of Manual." alt="" coords="49,227,247,290"/>
-<area shape="rect" id="node5" href="$MeasureAnnulus_8h.xhtml" title="Declare a class for extracting source background from an annulus around each source excluding areas a..." alt="" coords="271,227,521,290"/>
-<area shape="rect" id="node26" href="$MeasureExcludingSources_8cpp.xhtml" title="The implementation of the methods of the MeasureExcludingSources class." alt="" coords="545,227,882,290"/>
-<area shape="rect" id="node6" href="$Background_2CInterface_8h.xhtml" title="Declare C&#45;style functions for accessing the functionality of the Background library." alt="" coords="295,338,497,401"/>
+<area shape="rect" id="node5" href="$MeasureAnnulus_8h.xhtml" title="Declare a class for extracting source background from an annulus around each source excluding areas a..." alt="" coords="271,227,520,290"/>
+<area shape="rect" id="node26" href="$MeasureExcludingSources_8cpp.xhtml" title="The implementation of the methods of the MeasureExcludingSources class." alt="" coords="544,227,882,290"/>
+<area shape="rect" id="node6" href="$Background_2CInterface_8h.xhtml" title="Declare C&#45;style functions for accessing the functionality of the Background library." alt="" coords="295,338,496,401"/>
 <area shape="rect" id="node10" href="$MeasureAnnulus_8cpp.xhtml" title="The implementation of the methods of the MeasureAnnulus class." alt="" coords="5,338,272,401"/>
 <area shape="rect" id="node11" href="$FitPSF_2Common_8h.xhtml" title="Defines some of the functions needed exclusively by the FitPSF tool." alt="" coords="828,338,1012,401"/>
 <area shape="rect" id="node7" href="$Background_2CInterface_8cpp.xhtml" title="The definitions of the functions declared in CInterface.h." alt="" coords="287,449,505,512"/>
@@ -23,7 +23,7 @@
 <area shape="rect" id="node23" href="$Pixel_8cpp.xhtml" title="Define the backrgound excess functions and some methods of Pixel.h." alt="" coords="812,560,996,623"/>
 <area shape="rect" id="node24" href="$SDKSourceBase_8h.xhtml" title="Declares a base class for sources participating in SDK fitting." alt="" coords="1070,560,1284,623"/>
 <area shape="rect" id="node20" href="$LinearSource_8h.xhtml" title="Declares a class used for PSF fitting where pixel responses are linear functions of the shape paramet..." alt="" coords="792,782,981,845"/>
-<area shape="rect" id="node21" href="$LinearSource_8cpp.xhtml" title="Define some of the methods of LinearSource class." alt="" coords="631,893,836,956"/>
+<area shape="rect" id="node21" href="$LinearSource_8cpp.xhtml" title="Define some of the methods of LinearSource class." alt="" coords="630,893,836,956"/>
 <area shape="rect" id="node22" href="$PiecewiseBicubicPSFSmoothing_8h_source.xhtml" title=" " alt="" coords="910,893,1239,956"/>
 <area shape="rect" id="node25" href="$SDKSourceBase_8cpp.xhtml" title="Defines some of the methods of the SDKSourceBase class." alt="" coords="1024,671,1256,734"/>
 </map>

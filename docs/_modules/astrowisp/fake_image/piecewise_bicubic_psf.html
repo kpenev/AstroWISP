@@ -46,8 +46,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Unix Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#windows-installation">Windows Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../unit_tests.html">Unit Tests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../python_interface/index.html">Python Interface Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../_implementation/modules.html">Python Package Implementation</a></li>
@@ -193,28 +192,32 @@
             <span class="k">for</span> <span class="n">cell_x_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">boundaries</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
                 <span class="n">pieces</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_create_piece</span><span class="p">(</span>
-                        <span class="n">boundaries</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
-                            <span class="n">x</span><span class="o">=</span><span class="n">boundaries</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">][</span><span class="n">cell_x_index</span> <span class="p">:</span> <span class="n">cell_x_index</span> <span class="o">+</span> <span class="mi">2</span><span class="p">],</span>
-                            <span class="n">y</span><span class="o">=</span><span class="n">boundaries</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">][</span><span class="n">cell_y_index</span> <span class="p">:</span> <span class="n">cell_y_index</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span>
-                        <span class="p">),</span>
-                        <span class="n">psf_parameters</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
-                            <span class="n">values</span><span class="o">=</span><span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;values&#39;</span><span class="p">][</span>
+                        <span class="n">boundaries</span><span class="o">=</span><span class="p">{</span>
+                            <span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">boundaries</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">][</span><span class="n">cell_x_index</span>
+                                                 <span class="p">:</span>
+                                                 <span class="n">cell_x_index</span> <span class="o">+</span> <span class="mi">2</span><span class="p">],</span>
+                            <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">boundaries</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">][</span><span class="n">cell_y_index</span>
+                                                 <span class="p">:</span>
+                                                 <span class="n">cell_y_index</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span>
+                        <span class="p">},</span>
+                        <span class="n">psf_parameters</span><span class="o">=</span><span class="p">{</span>
+                            <span class="s1">&#39;values&#39;</span><span class="p">:</span> <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;values&#39;</span><span class="p">][</span>
                                 <span class="n">cell_y_index</span> <span class="p">:</span> <span class="n">cell_y_index</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span>
                                 <span class="n">cell_x_index</span> <span class="p">:</span> <span class="n">cell_x_index</span> <span class="o">+</span> <span class="mi">2</span>
                             <span class="p">],</span>
-                            <span class="n">d_dx</span><span class="o">=</span><span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d_dx&#39;</span><span class="p">][</span>
+                            <span class="s1">&#39;d_dx&#39;</span><span class="p">:</span> <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d_dx&#39;</span><span class="p">][</span>
                                 <span class="n">cell_y_index</span> <span class="p">:</span> <span class="n">cell_y_index</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span>
                                 <span class="n">cell_x_index</span> <span class="p">:</span> <span class="n">cell_x_index</span> <span class="o">+</span> <span class="mi">2</span>
                             <span class="p">],</span>
-                            <span class="n">d_dy</span><span class="o">=</span><span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d_dy&#39;</span><span class="p">][</span>
+                            <span class="s1">&#39;d_dy&#39;</span><span class="p">:</span> <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d_dy&#39;</span><span class="p">][</span>
                                 <span class="n">cell_y_index</span> <span class="p">:</span> <span class="n">cell_y_index</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span>
                                 <span class="n">cell_x_index</span> <span class="p">:</span> <span class="n">cell_x_index</span> <span class="o">+</span> <span class="mi">2</span>
                             <span class="p">],</span>
-                            <span class="n">d2_dxdy</span><span class="o">=</span><span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d2_dxdy&#39;</span><span class="p">][</span>
+                            <span class="s1">&#39;d2_dxdy&#39;</span><span class="p">:</span> <span class="n">psf_parameters</span><span class="p">[</span><span class="s1">&#39;d2_dxdy&#39;</span><span class="p">][</span>
                                 <span class="n">cell_y_index</span> <span class="p">:</span> <span class="n">cell_y_index</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span>
                                 <span class="n">cell_x_index</span> <span class="p">:</span> <span class="n">cell_x_index</span> <span class="o">+</span> <span class="mi">2</span>
                             <span class="p">]</span>
-                        <span class="p">)</span>
+                        <span class="p">}</span>
                     <span class="p">)</span>
                 <span class="p">)</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">boundaries</span><span class="p">,</span> <span class="n">pieces</span><span class="p">)</span></div></div>

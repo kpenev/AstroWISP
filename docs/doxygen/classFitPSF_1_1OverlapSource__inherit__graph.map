@@ -1,6 +1,6 @@
 <map id="FitPSF::OverlapSource&lt; FIT_SOURCE_TYPE, PSF_TYPE &gt;" name="FitPSF::OverlapSource&lt; FIT_SOURCE_TYPE, PSF_TYPE &gt;">
-<area shape="rect" id="node1" title="PSF fitting source which handles overlaps with other sources." alt="" coords="7,648,236,1259"/>
-<area shape="rect" id="node3" href="$classFitPSF_1_1OverlapSource.xhtml" title=" " alt="" coords="11,1341,232,1952"/>
+<area shape="rect" id="node1" title="PSF fitting source which handles overlaps with other sources." alt="" coords="7,649,236,1260"/>
+<area shape="rect" id="node3" href="$classFitPSF_1_1OverlapSource.xhtml" title=" " alt="" coords="11,1342,232,1954"/>
 <area shape="rect" id="node2" href="$classFitPSF_1_1Source.xhtml" title="An abstract base class for sources which participate in PSF fitting." alt="" coords="5,5,238,600"/>
-<area shape="rect" id="node4" href="$classFitPSF_1_1LinearSource.xhtml" title="A class for PSF fitting sources whose flux distribution depends linearly on the PSF paramaters (for a..." alt="" coords="11,2000,232,2493"/>
+<area shape="rect" id="node4" href="$classFitPSF_1_1LinearSource.xhtml" title="A class for PSF fitting sources whose flux distribution depends linearly on the PSF paramaters (for a..." alt="" coords="11,2003,232,2495"/>
 </map>

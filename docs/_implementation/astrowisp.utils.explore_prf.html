@@ -49,8 +49,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../installation.html">Unix Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../installation.html#windows-installation">Windows Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../unit_tests.html">Unit Tests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../python_interface/index.html">Python Interface Documentation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">Python Package Implementation</a><ul class="current">
@@ -98,8 +97,419 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="astrowisp-utils-explore-prf-module">
-<h1>astrowisp.utils.explore_prf module<a class="headerlink" href="#astrowisp-utils-explore-prf-module" title="Permalink to this heading"></a></h1>
+  <section id="module-astrowisp.utils.explore_prf">
+<span id="astrowisp-utils-explore-prf-module"></span><h1>astrowisp.utils.explore_prf module<a class="headerlink" href="#module-astrowisp.utils.explore_prf" title="Permalink to this heading"></a></h1>
+<section id="class-inheritance-diagram">
+<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this heading"></a></h2>
+<div class="graphviz"><img src="../_images/inheritance-4cc24930c252a2324f4f49ae2f1b8b5fee6f98f4.png" alt="Inheritance diagram of AlglibSpline, ArgparseAction, ArgumentParser, BackgroundExtractor, DefaultsFormatter, FitStarShape, SmoothBivariateSpline, SubPixPhot, c_char, c_double" usemap="#inheritancead13e8eefa" class="inheritance graphviz" /></div>
+<map id="inheritancead13e8eefa" name="inheritancead13e8eefa">
+<area shape="rect" id="node5" href="astrowisp.background.html#astrowisp.background.BackgroundExtractor" target="_top" title="Measure the background level for each source in an image." alt="" coords="587,5,861,32"/>
+<area shape="rect" id="node6" href="astrowisp.fit_star_shape.html#astrowisp.fit_star_shape.FitStarShape" target="_top" title="Fit for the PSF/PRF of stars and their flux." alt="" coords="885,5,1128,32"/>
+<area shape="rect" id="node7" href="astrowisp.subpixphot.html#astrowisp.subpixphot.SubPixPhot" target="_top" title="Use sub&#45;pixel aware aperture photomotre to measure fluxes of sources." alt="" coords="1153,5,1370,32"/>
+<area shape="rect" id="node8" href="#astrowisp.utils.explore_prf.AlglibSpline" target="_top" title="Wrap alglib based splines so they can be evaluated on scipy arrays." alt="" coords="1395,5,1640,32"/>
+</map><p>Create some plots helpful for picking PSF grid.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="astrowisp.utils.explore_prf.AlglibSpline">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">astrowisp.utils.explore_prf.</span></span><span class="sig-name descname"><span class="pre">AlglibSpline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prf_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">penalty</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/utils/explore_prf.html#AlglibSpline"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.utils.explore_prf.AlglibSpline" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<div class="graphviz"><img src="../_images/inheritance-af17274607ba43a1b89e38a0d3154eb3013a510b.png" alt="Inheritance diagram of astrowisp.utils.explore_prf.AlglibSpline" usemap="#inheritance1a7c9e59d9" class="inheritance graphviz" /></div>
+<map id="inheritance1a7c9e59d9" name="inheritance1a7c9e59d9">
+<area shape="rect" id="node1" href="#astrowisp.utils.explore_prf.AlglibSpline" target="_top" title="Wrap alglib based splines so they can be evaluated on scipy arrays." alt="" coords="5,5,251,32"/>
+</map><p>Wrap alglib based splines so they can be evaluated on scipy arrays.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="astrowisp.utils.explore_prf.AlglibSpline.__call__">
+<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/utils/explore_prf.html#AlglibSpline.__call__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.utils.explore_prf.AlglibSpline.__call__" title="Permalink to this definition"></a></dt>
+<dd><p>Evaluate the spline.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="astrowisp.utils.explore_prf.AlglibSpline.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prf_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">penalty</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/utils/explore_prf.html#AlglibSpline.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.utils.explore_prf.AlglibSpline.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>Fit the spline on the given data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>prf_data</strong> – The return value of get_prf_data().</p></li>
+<li><p><strong>resolution</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – The grid resolution to use when building
+the spline.</p></li>
+<li><p><strong>penalty</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – The nonlinearity penalty when fitting the spline.</p></li>
+<li><p><strong>domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – The area (xmin, xmax, ymin,
+ymax) over which the spline will be derived.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="astrowisp.utils.explore_prf.AlglibSpline.plot_grid_boundaries">
+<span class="sig-name descname"><span class="pre">plot_grid_boundaries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">direction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/utils/explore_prf.html#AlglibSpline.plot_grid_boundaries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.utils.explore_prf.AlglibSpline.plot_grid_boundaries" title="Permalink to this definition"></a></dt>
+<dd><p>Add vertical lines to the current axis showing the grid along direction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>direction</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Either <cite>‘x’</cite>, or <cite>‘y’</cite>, selecting which direction
+to show the grid lines along.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="astrowisp.utils.explore_prf.extract_pixel_data">
+<span class="sig-prename descclassname"><span class="pre">astrowisp.utils.explore_prf.</span></span><span class="sig-name descname"><span class="pre">extract_pixel_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmdline_args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_slices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sources</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/utils/explore_prf.html#extract_pixel_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.utils.explore_prf.extract_pixel_data" title="Permalink to this definition"></a></dt>
+<dd><p>Get the pixel level data from the input image required for the plot.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cmdline_args</strong> – The parsed command line arguments.</p></li>
+<li><p><strong>image_slices</strong> – How to split the image when plotting (the return value
+of get_image_slices()).</p></li>
+<li><p><strong>sources</strong> (<em>scipy.array</em><em> or </em><em>None</em>) – If not None, it should be an array with
+equivalent structure to get_source_info(). If None,
+get_source_info() is used to initialize it.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of the PRF data (see return of get_prf_data()) for each
+image slice each entry contains the data and a plot label.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="astrowisp.utils.explore_prf.find_pixel_offsets">
+<span class="sig-prename descclassname"><span class="pre">astrowisp.utils.explore_prf.</span></span><span class="sig-name descname"><span class="pre">find_pixel_offsets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sources</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prf_range</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_resolution</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crowding_distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/utils/explore_prf.html#find_pixel_offsets"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.utils.explore_prf.find_pixel_offsets" title="Permalink to this definition"></a></dt>
+<dd><p>Return the positions of pixels within prf range relative to source centers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sources</strong> – The return value of get_source_info().</p></li>
+<li><p><strong>prf_range</strong> – See <cite>–prf-range</cite> command line argument.</p></li>
+<li><p><strong>image_resolution</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – The x and y resolution of the image under
+investigation.</p></li>
+<li><p><strong>crowding_distance</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – The minimum distance between a source and
+its closest neighbor to still consider the source isolated.</p></li>
+<li><p><strong>plot</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a>) – If True, show plots of the offsets and norm images.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><cite>x_off</cite>: The field giving the offset of the pixel center from
+the source position in the x direction</p></li>
+<li><p><cite>y_off</cite>: The field giving the offset of the pixel center from
+the source position in the y direction</p></li>
+<li><p><cite>norm</cite>: The normalization to use for the pixel response.</p></li>
+</ul>
+<p>Pixels that are not within range of any PSF or that are within more
+than one PSF’s range have <cite>nan</cite> entries.</p>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2-D field array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="astrowisp.utils.explore_prf.fit_spline">
+<span class="sig-prename descclassname"><span class="pre">astrowisp.utils.explore_prf.</span></span><span class="sig-name descname"><span class="pre">fit_spline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prf_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmdline_args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/utils/explore_prf.html#fit_spline"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.utils.explore_prf.fit_spline" title="Permalink to this definition"></a></dt>
+<dd><p>Return the best-fit spline to the PRF per the command line config.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="astrowisp.utils.explore_prf.get_image_slices">
+<span class="sig-prename descclassname"><span class="pre">astrowisp.utils.explore_prf.</span></span><span class="sig-name descname"><span class="pre">get_image_slices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">splits</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inner_only</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/utils/explore_prf.html#get_image_slices"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.utils.explore_prf.get_image_slices" title="Permalink to this definition"></a></dt>
+<dd><p>Return [(x-slice, y-slice, x_index, y_index), …] per <cite>–split-image</cite> arg.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>splits</strong> – The parsed image splits directly from the command line.</p></li>
+<li><p><strong>inner_only</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a>) – If True, slices in contact with the outer border
+of the image are discarded.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array slices directly useable to index the image implementing the
+splitting specified on the command line.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>[(x-slice, y-slice, x_index, y_index), …]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="astrowisp.utils.explore_prf.get_plot_tasks">
+<span class="sig-prename descclassname"><span class="pre">astrowisp.utils.explore_prf.</span></span><span class="sig-name descname"><span class="pre">get_plot_tasks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmdline_args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/utils/explore_prf.html#get_plot_tasks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.utils.explore_prf.get_plot_tasks" title="Permalink to this definition"></a></dt>
+<dd><p>Generator for all the plots that must be created.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmdline_args</strong> – The parse command line configuration.</p>
+</dd>
+<dt class="field-even">Yields<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>dict</em> – The parsed PRF slice directly taken from the command line to plot</p>
+<dl class="simple">
+<dt>[(str on None), …]: List of the filenames to save the plot if each</dt><dd><p>slice is saved separately. Appropriate length of Nones otherwise.</p>
+</dd>
+<dt>str or None: The filanem to save a combined plot of all pieces of the</dt><dd><p>image together or None if individual images are saved separately.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="astrowisp.utils.explore_prf.get_prf_data">
+<span class="sig-prename descclassname"><span class="pre">astrowisp.utils.explore_prf.</span></span><span class="sig-name descname"><span class="pre">get_prf_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pixel_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pixel_stddev</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pixel_offsets</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/utils/explore_prf.html#get_prf_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.utils.explore_prf.get_prf_data" title="Permalink to this definition"></a></dt>
+<dd><p>Return the PRF measurements for (a subset of) the image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pixel_values</strong> (<em>2-D float array</em>) – The calibrated pixel responses from
+the image to include in the plot.</p></li>
+<li><p><strong>pixel_stddev</strong> (<em>2-D float array</em>) – The estimated standard deviation of
+<cite>pixel_values</cite>.</p></li>
+<li><p><strong>pixel_offsets</strong> – The slice of the return value of find_pixel_offsets()
+corresponding to <cite>pixel_values</cite>.</p></li>
+<li><p><strong>error_threshold</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – See <cite>–error-threshold</cite> command line
+argument</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>The x-offsets of the points at which PRF measurements are
+available.</p></li>
+<li><p>The y-offsets of the points at which PRF measurements are
+available.</p></li>
+<li><p>The measured normalized PRF at the available offsets</p></li>
+<li><p>estimated errors of the PRF measurements.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(2-D float array, 2-D float array, 2-D float array, 2-D float array)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="astrowisp.utils.explore_prf.get_source_info">
+<span class="sig-prename descclassname"><span class="pre">astrowisp.utils.explore_prf.</span></span><span class="sig-name descname"><span class="pre">get_source_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pixel_array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stddev_array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask_array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_positions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aperture</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bg_radii</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/utils/explore_prf.html#get_source_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.utils.explore_prf.get_source_info" title="Permalink to this definition"></a></dt>
+<dd><p>Return field array containing source positions, fluxes and backgrounds.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pixel_array</strong> (<em>2-D array like</em>) – The measured values of the image
+pixels.</p></li>
+<li><p><strong>stddev_array</strong> (<em>2-D array like</em>) – The estimated variance of the image
+pixels.</p></li>
+<li><p><strong>mask_array</strong> (<em>2-D array like</em>) – Quality flags for the image pixels.</p></li>
+<li><p><strong>source_positions</strong> – The return value from get_source_positions().</p></li>
+<li><p><strong>aperture</strong> – The size of the aperture to use for measuring the flux.</p></li>
+<li><p><strong>bg_radii</strong> (<em>(</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>)</em>) – The inner and outer radius to use for the
+background annulus.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><p>All relevant source information in the following fields:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>x: The x coordinates of the sources.</p></li>
+<li><p>y: The y coordinates of the sources.</p></li>
+<li><p>flux: The measured fluxes of the sources.</p></li>
+<li><p>flux_err: Estimated error of the flux.</p></li>
+<li><p>bg: The measured backgrounds of the sources.</p></li>
+<li><p>bg_err: Estimated error of the background.</p></li>
+<li><p>bg_npix: The number of pixels used in determining the
+background.</p></li>
+</ul>
+</div></blockquote>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(scipy field array)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="astrowisp.utils.explore_prf.get_source_positions">
+<span class="sig-prename descclassname"><span class="pre">astrowisp.utils.explore_prf.</span></span><span class="sig-name descname"><span class="pre">get_source_positions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">catalogue_fname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trans_fname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_resolution</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/utils/explore_prf.html#get_source_positions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.utils.explore_prf.get_source_positions" title="Permalink to this definition"></a></dt>
+<dd><p>Return [(x, y), …] positions of the sources in the image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>catalogue_fname</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – The filename of a catalogue query containing
+all sources in the image (could contain more).</p></li>
+<li><p><strong>trans_fname</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – The filename of the grtrans file for transforming
+tan-projected (xi, eta) to image positions.</p></li>
+<li><p><strong>image_resolution</strong> (<em>(</em><em>x_res</em><em>, </em><em>y_res</em><em>)</em>) – The resolution of the input image.
+Used to determine which sources project outside the image.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of the (x, y) positions of the sources in the image.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>[(<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a>), …]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="astrowisp.utils.explore_prf.get_trans_fname">
+<span class="sig-prename descclassname"><span class="pre">astrowisp.utils.explore_prf.</span></span><span class="sig-name descname"><span class="pre">get_trans_fname</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame_fname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trans_pattern</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/utils/explore_prf.html#get_trans_fname"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.utils.explore_prf.get_trans_fname" title="Permalink to this definition"></a></dt>
+<dd><p>Return the filename of the trans file corresponding to a given frame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>frame_fname</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – The filename of the FITS frame used for plotting.</p></li>
+<li><p><strong>trans_pattern</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – The pattern for the filename of the
+transformation file specified on the command line.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The filename of the transformation file.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="astrowisp.utils.explore_prf.list_plot_filenames">
+<span class="sig-prename descclassname"><span class="pre">astrowisp.utils.explore_prf.</span></span><span class="sig-name descname"><span class="pre">list_plot_filenames</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmdline_args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/utils/explore_prf.html#list_plot_filenames"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.utils.explore_prf.list_plot_filenames" title="Permalink to this definition"></a></dt>
+<dd><p>List the filenames of all the plots that will be generated.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="astrowisp.utils.explore_prf.main">
+<span class="sig-prename descclassname"><span class="pre">astrowisp.utils.explore_prf.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmdline_args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/utils/explore_prf.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.utils.explore_prf.main" title="Permalink to this definition"></a></dt>
+<dd><p>Avoid polluting global namespace.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="astrowisp.utils.explore_prf.pad_prf_data">
+<span class="sig-prename descclassname"><span class="pre">astrowisp.utils.explore_prf.</span></span><span class="sig-name descname"><span class="pre">pad_prf_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prf_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmdline_args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/utils/explore_prf.html#pad_prf_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.utils.explore_prf.pad_prf_data" title="Permalink to this definition"></a></dt>
+<dd><p>Return PRF data zero-padded for fitting and the spline fit domain.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="astrowisp.utils.explore_prf.parse_command_line">
+<span class="sig-prename descclassname"><span class="pre">astrowisp.utils.explore_prf.</span></span><span class="sig-name descname"><span class="pre">parse_command_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parser</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assume_sources</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_config_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_frame_arg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/utils/explore_prf.html#parse_command_line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.utils.explore_prf.parse_command_line" title="Permalink to this definition"></a></dt>
+<dd><p>Return the command line arguments as attributes of an object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>parser</strong> (<em>ArgumentParser</em>) – If not None, should be a valid command line
+parser to which further arguments are addded by this method.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>See ArgumentParser.parse_args().</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="astrowisp.utils.explore_prf.plot_3d_prf">
+<span class="sig-prename descclassname"><span class="pre">astrowisp.utils.explore_prf.</span></span><span class="sig-name descname"><span class="pre">plot_3d_prf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmdline_args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meshgrid_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meshgrid_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prf_slice_splines</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/utils/explore_prf.html#plot_3d_prf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.utils.explore_prf.plot_3d_prf" title="Permalink to this definition"></a></dt>
+<dd><p>Plot a 3D slice of the PRF.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cmdline_args</strong> – The parse command line configuration.</p></li>
+<li><p><strong>meshgrid_x</strong> – The meshgrid generated for evaluating the PRF
+made from the grid points of the star_shape_grid</p></li>
+<li><p><strong>meshgrid_y</strong> – The meshgrid generated for evaluating the PRF
+made from the grid points of the star_shape_grid</p></li>
+<li><p><strong>prf_slice_splines</strong> – The evaluated PRF at the meshgrid points extracted
+from slice_splines</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="astrowisp.utils.explore_prf.plot_entire_prf">
+<span class="sig-prename descclassname"><span class="pre">astrowisp.utils.explore_prf.</span></span><span class="sig-name descname"><span class="pre">plot_entire_prf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmdline_args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_slices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sources</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/utils/explore_prf.html#plot_entire_prf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.utils.explore_prf.plot_entire_prf" title="Permalink to this definition"></a></dt>
+<dd><p>Plots the entire PRF on a 3d axes and displays it to the user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cmdline_args</strong> – The parsed command line arguments.</p></li>
+<li><p><strong>image_slices</strong> – How to split the image when plotting (the return
+value of get_image_slices())</p></li>
+<li><p><strong>grid_x</strong> – The PSF x-grid, pulled from star_shape_grid</p></li>
+<li><p><strong>grid_y</strong> – The PSF y-grid, pulled from star_shape_grid</p></li>
+<li><p><strong>sources</strong> (<em>scipy.array</em><em> or </em><em>None</em>) – If not None, it should be an array with
+equivalent structure to get_source_info(). If None,
+get_source_info() is used to initialize it.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="astrowisp.utils.explore_prf.plot_prf_slice">
+<span class="sig-prename descclassname"><span class="pre">astrowisp.utils.explore_prf.</span></span><span class="sig-name descname"><span class="pre">plot_prf_slice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prf_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spline</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_offset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_offset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thickness</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'k'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">marker_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">binning</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/utils/explore_prf.html#plot_prf_slice"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.utils.explore_prf.plot_prf_slice" title="Permalink to this definition"></a></dt>
+<dd><p>Plot a slice of the PRF.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>prf_data</strong> – The return value of get_prf_data().</p></li>
+<li><p><strong>x_offset/y_offset</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – Plot a slice of constant x or y (determined
+by the argument name) offset from the source center.</p></li>
+<li><p><strong>thickness</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – Points with x or y within <cite>thickness</cite> of the
+specified offset are included in the plot.</p></li>
+<li><p><strong>error_scale</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – See <cite>–error-scale</cite> command line argument.</p></li>
+<li><p><strong>error_threshold</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – See <cite>–error-threshold</cite> command line
+argument.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="astrowisp.utils.explore_prf.show_plots">
+<span class="sig-prename descclassname"><span class="pre">astrowisp.utils.explore_prf.</span></span><span class="sig-name descname"><span class="pre">show_plots</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">slice_prf_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slice_splines</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmdline_args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">append</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/utils/explore_prf.html#show_plots"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.utils.explore_prf.show_plots" title="Permalink to this definition"></a></dt>
+<dd><p>Generate the plots and display them to the user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>slice_prf_data</strong> (<em>iterable</em>) – List of the result of either get_prf_data()
+or pad_prf_data() for each image slice.</p></li>
+<li><p><strong>slice_splines</strong> (<em>iterable</em>) – List of best-fit splines to the data for
+each image slice. Must support evaluation using arrays of x &amp; y
+positions.</p></li>
+<li><p><strong>cmdline_args</strong> – The parsed command line arguments.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Returns</dt><dd><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
 </section>
 
 

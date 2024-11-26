@@ -46,8 +46,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Unix Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../installation.html#windows-installation">Windows Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../unit_tests.html">Unit Tests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../python_interface/index.html">Python Interface Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_implementation/modules.html">Python Package Implementation</a></li>
@@ -136,7 +135,7 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">approx_equal</span><span class="p">(</span><span class="n">value_1</span><span class="p">,</span> <span class="n">value_2</span><span class="p">),</span>
-            <span class="s1">&#39;</span><span class="si">%f</span><span class="s1"> !~ </span><span class="si">%f</span><span class="s1">: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">value_1</span><span class="p">,</span> <span class="n">value_2</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
+            <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">value_1</span><span class="si">:</span><span class="s1">f</span><span class="si">}</span><span class="s1"> !~ </span><span class="si">{</span><span class="n">value_2</span><span class="si">:</span><span class="s1">f</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s1">&#39;</span>
         <span class="p">)</span></div></div>
     <span class="c1">#pylint: enable=invalid-name</span>
 </pre></div>

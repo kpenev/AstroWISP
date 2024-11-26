@@ -1,6 +1,6 @@
 <map id="FitPSF::SDKSourceBase" name="FitPSF::SDKSourceBase">
-<area shape="rect" id="node1" title="An abstract class that defines the minimum requirements of a source to participate in the fitting for..." alt="" coords="15,1307,228,1663"/>
-<area shape="rect" id="node4" href="$classFitPSF_1_1SDKSource.xhtml" title="A PSF fitting source class based on a LocalPolynomialPSF." alt="" coords="23,1711,220,1915"/>
+<area shape="rect" id="node1" title="An abstract class that defines the minimum requirements of a source to participate in the fitting for..." alt="" coords="15,1308,228,1665"/>
+<area shape="rect" id="node4" href="$classFitPSF_1_1SDKSource.xhtml" title="A PSF fitting source class based on a LocalPolynomialPSF." alt="" coords="23,1714,220,1917"/>
 <area shape="rect" id="node2" href="$classFitPSF_1_1Source.xhtml" title=" " alt="" coords="5,665,238,1259"/>
 <area shape="rect" id="node3" href="$classFitPSF_1_1Source.xhtml" title="An abstract base class for sources which participate in PSF fitting." alt="" coords="5,5,238,600"/>
 </map>

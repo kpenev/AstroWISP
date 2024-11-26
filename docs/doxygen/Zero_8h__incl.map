@@ -1,6 +1,6 @@
 <map id="/Users/kpenev/projects/git/AstroWISP/doc_src/Background/Zero.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/Background/Zero.h">
 <area shape="rect" id="node1" title="Declare a background class for images from which the background has already been subtracted." alt="" coords="1068,5,1252,68"/>
-<area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="837,501,1057,547"/>
+<area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="837,501,1056,547"/>
 <area shape="rect" id="node3" href="$Point_8h.xhtml" title="Defines a point class in two dimensions." alt="" coords="1035,270,1157,299"/>
 <area shape="rect" id="node4" href="$Measure_8h.xhtml" title="Declares the minimum requirements for a background extractor class." alt="" coords="1112,116,1208,145"/>
 <area shape="rect" id="node5" href="$Background_2Source_8h.xhtml" title="Declares the base class for background extract(ion/ed) from an astronomical image." alt="" coords="904,193,990,222"/>
@@ -8,7 +8,7 @@
 <area shape="rect" id="node9" title=" " alt="" coords="552,424,593,453"/>
 <area shape="rect" id="node21" href="$NaN_8h.xhtml" title="Defines not&#45;a&#45;number and infinity." alt="" coords="792,270,910,299"/>
 <area shape="rect" id="node22" title=" " alt="" coords="910,347,968,376"/>
-<area shape="rect" id="node7" href="$Core_2Typedefs_8h.xhtml" title="Some useful typedef statements." alt="" coords="245,347,345,376"/>
+<area shape="rect" id="node7" href="$Core_2Typedefs_8h.xhtml" title="Some useful typedef statements." alt="" coords="245,347,344,376"/>
 <area shape="rect" id="node15" href="$Error_8h.xhtml" title="The hierarchy of exceptions for this project." alt="" coords="766,347,835,376"/>
 <area shape="rect" id="node17" title=" " alt="" coords="616,424,699,453"/>
 <area shape="rect" id="node18" title=" " alt="" coords="576,347,648,376"/>
@@ -17,7 +17,7 @@
 <area shape="rect" id="node8" title=" " alt="" coords="5,510,70,539"/>
 <area shape="rect" id="node10" title=" " alt="" coords="135,510,196,539"/>
 <area shape="rect" id="node11" title=" " alt="" coords="104,424,182,453"/>
-<area shape="rect" id="node12" href="$PhotColumns_8h.xhtml" title="Defines constants to denote the various columns that can be input or output by the various tools and ..." alt="" coords="207,424,338,453"/>
+<area shape="rect" id="node12" href="$PhotColumns_8h.xhtml" title="Defines constants to denote the various columns that can be input or output by the various tools and ..." alt="" coords="206,424,338,453"/>
 <area shape="rect" id="node14" title=" " alt="" coords="362,424,476,453"/>
 <area shape="rect" id="node13" title=" " alt="" coords="240,510,304,539"/>
 <area shape="rect" id="node16" title=" " alt="" coords="774,424,851,453"/>

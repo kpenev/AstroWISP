@@ -21,9 +21,9 @@
 <area shape="rect" id="node22" href="$Map_8cpp.xhtml" title="The declarations of Map methods and related functions." alt="" coords="1828,227,2013,290"/>
 <area shape="rect" id="node23" href="$PiecewiseBicubicMap_8h.xhtml" title="Declares a smoothly varying over an image piecewise bicubic PSF map class." alt="" coords="1314,227,1546,290"/>
 <area shape="rect" id="node26" href="$SubPixPhot_2Common_8h.xhtml" title="Declare functions used by both the C&#45;interface and the command line interface." alt="" coords="2036,227,2229,290"/>
-<area shape="rect" id="node19" href="$DataTreeCalculations_8h.xhtml" title="Declare functions that calculate some entries of I/O data trees from others." alt="" coords="2151,338,2381,401"/>
+<area shape="rect" id="node19" href="$DataTreeCalculations_8h.xhtml" title="Declare functions that calculate some entries of I/O data trees from others." alt="" coords="2151,338,2380,401"/>
 <area shape="rect" id="node21" href="$EllipticalGaussianMap_8cpp.xhtml" title="Definitions of some methods of the EllipticalGaussianMap class." alt="" coords="1876,338,2128,401"/>
 <area shape="rect" id="node20" href="$DataTreeCalculations_8cpp.xhtml" title="The definitions of the functions declared in DataTreeCalculations.h." alt="" coords="2143,449,2389,512"/>
 <area shape="rect" id="node24" href="$PSF_2CInterface_8cpp.xhtml" title="The definitions of the functions declared in CInterface.h." alt="" coords="1394,338,1578,401"/>
-<area shape="rect" id="node25" href="$PiecewiseBicubicMap_8cpp.xhtml" title="Definitions of some methods of the PiecewiseBicubicMap class." alt="" coords="1603,338,1852,401"/>
+<area shape="rect" id="node25" href="$PiecewiseBicubicMap_8cpp.xhtml" title="Definitions of some methods of the PiecewiseBicubicMap class." alt="" coords="1602,338,1852,401"/>
 </map>

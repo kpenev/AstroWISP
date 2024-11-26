@@ -46,8 +46,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Unix Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../installation.html#windows-installation">Windows Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../unit_tests.html">Unit Tests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../python_interface/index.html">Python Interface Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_implementation/modules.html">Python Package Implementation</a></li>
@@ -439,9 +438,6 @@
             <span class="mi">1</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">library_tree</span>
         <span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;star_shape_map_terms.shape: &#39;</span> <span class="o">+</span> <span class="nb">repr</span><span class="p">(</span><span class="n">star_shape_map_terms</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;# coef: &#39;</span> <span class="o">+</span> <span class="nb">repr</span><span class="p">(</span><span class="n">star_shape_map_coefficients</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;# sources: &#39;</span> <span class="o">+</span> <span class="nb">repr</span><span class="p">(</span><span class="n">source_data</span><span class="o">.</span><span class="n">size</span><span class="p">))</span>
         <span class="k">assert</span> <span class="n">star_shape_map_terms</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span>
             <span class="n">source_data</span><span class="o">.</span><span class="n">size</span><span class="p">,</span>
             <span class="n">star_shape_map_coefficients</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>

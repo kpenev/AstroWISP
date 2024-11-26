@@ -46,8 +46,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Unix Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#windows-installation">Windows Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../unit_tests.html">Unit Tests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../python_interface/index.html">Python Interface Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../_implementation/modules.html">Python Package Implementation</a></li>
@@ -271,9 +270,9 @@
 <span class="sd">                grid:    The grid on which the PSF was constructed (see</span>
 <span class="sd">                    boundaries argument of PicewiseBicubicPSF.__init__</span>
 
-<span class="sd">                test_points:    A collection of points at which to try to evaluate</span>
-<span class="sd">                    the PSF. It is perfectly valid for the points to be outside</span>
-<span class="sd">                    the range of the PSF.</span>
+<span class="sd">                test_points:    A collection of points at which to try to</span>
+<span class="sd">                    evaluate the PSF. It is perfectly valid for the points to be</span>
+<span class="sd">                    outside the range of the PSF.</span>
 
 <span class="sd">            Returns:</span>
 <span class="sd">                None</span>
@@ -353,10 +352,12 @@
                     <span class="n">grid_x</span><span class="p">,</span> <span class="n">grid_y</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span>
                                                     <span class="n">grid</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span>
                     <span class="n">psf</span> <span class="o">=</span> <span class="n">PiecewiseBicubicPSF</span><span class="p">(</span>
-                        <span class="n">psf_parameters</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;values&#39;</span><span class="p">:</span> <span class="n">grid_x</span> <span class="o">*</span> <span class="n">x_slope</span> <span class="o">+</span> <span class="n">grid_y</span> <span class="o">*</span> <span class="n">y_slope</span><span class="p">,</span>
-                                        <span class="s1">&#39;d_dx&#39;</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">x_slope</span><span class="p">),</span>
-                                        <span class="s1">&#39;d_dy&#39;</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">y_slope</span><span class="p">),</span>
-                                        <span class="s1">&#39;d2_dxdy&#39;</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="p">)},</span>
+                        <span class="n">psf_parameters</span><span class="o">=</span><span class="p">{</span>
+                            <span class="s1">&#39;values&#39;</span><span class="p">:</span> <span class="n">grid_x</span> <span class="o">*</span> <span class="n">x_slope</span> <span class="o">+</span> <span class="n">grid_y</span> <span class="o">*</span> <span class="n">y_slope</span><span class="p">,</span>
+                            <span class="s1">&#39;d_dx&#39;</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">x_slope</span><span class="p">),</span>
+                            <span class="s1">&#39;d_dy&#39;</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">y_slope</span><span class="p">),</span>
+                            <span class="s1">&#39;d2_dxdy&#39;</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span>
+                        <span class="p">},</span>
                         <span class="n">boundaries</span><span class="o">=</span><span class="n">grid</span>
                     <span class="p">)</span>
                     <span class="n">psf_slope</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">x_slope</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">y_slope</span><span class="p">}</span>
@@ -383,9 +384,9 @@
 <span class="sd">                grid:    The grid on which the PSF was constructed (see</span>
 <span class="sd">                    boundaries argument of PicewiseBicubicPSF.__init__</span>
 
-<span class="sd">                test_points:    A collection of points at which to try to evaluate</span>
-<span class="sd">                    the PSF. It is perfectly valid for the points to be outside</span>
-<span class="sd">                    the range of the PSF.</span>
+<span class="sd">                test_points:    A collection of points at which to try to</span>
+<span class="sd">                    evaluate the PSF. It is perfectly valid for the points to be</span>
+<span class="sd">                    outside the range of the PSF.</span>
 
 <span class="sd">            Returns:</span>
 <span class="sd">                None</span>

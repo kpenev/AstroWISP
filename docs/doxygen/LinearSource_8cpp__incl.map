@@ -24,10 +24,10 @@
 <area shape="rect" id="node38" title=" " alt="" coords="2687,578,2729,607"/>
 <area shape="rect" id="node39" href="$EllipticalGaussian_8h.xhtml" title="Class defining ellptical Gaussian point spread functions (PSF)." alt="" coords="3376,655,3587,684"/>
 <area shape="rect" id="node40" href="$Map_8h.xhtml" title="Declarations of the Map class and some related functions." alt="" coords="2482,424,2595,453"/>
-<area shape="rect" id="node41" href="$MapSource_8h.xhtml" title="Defines a source class which can be passed directly to a PSF map." alt="" coords="2881,501,2997,530"/>
+<area shape="rect" id="node41" href="$MapSource_8h.xhtml" title="Defines a source class which can be passed directly to a PSF map." alt="" coords="2880,501,2997,530"/>
 <area shape="rect" id="node42" href="$Core_2Source_8h.xhtml" title="Declare a base class for sources processed by SubPixTools." alt="" coords="3072,578,3208,607"/>
-<area shape="rect" id="node46" title=" " alt="" coords="430,818,509,847"/>
-<area shape="rect" id="node7" href="$EllipticalGaussianIntegralByOrder_8h.xhtml" title="Class approximating integrals of ellptical Gaussians by incremental expansion order." alt="" coords="2290,809,2489,855"/>
+<area shape="rect" id="node46" title=" " alt="" coords="430,818,508,847"/>
+<area shape="rect" id="node7" href="$EllipticalGaussianIntegralByOrder_8h.xhtml" title="Class approximating integrals of ellptical Gaussians by incremental expansion order." alt="" coords="2290,809,2488,855"/>
 <area shape="rect" id="node10" href="$FitPSF_2Config_8h.xhtml" title="Declares the command line parser for the FitPSF tool." alt="" coords="1857,732,1938,761"/>
 <area shape="rect" id="node20" href="$IOSources_8h.xhtml" title="Declares Input/Output interface for the FitPSF tool." alt="" coords="2541,732,2651,761"/>
 <area shape="rect" id="node24" href="$Core_2Image_8h.xhtml" title="Declares a base class for images to be processed." alt="" coords="1703,732,1833,761"/>
@@ -40,8 +40,8 @@
 <area shape="rect" id="node25" title=" " alt="" coords="1645,818,1718,847"/>
 <area shape="rect" id="node26" title=" " alt="" coords="887,818,956,847"/>
 <area shape="rect" id="node27" title=" " alt="" coords="1396,818,1468,847"/>
-<area shape="rect" id="node31" href="$Piecewise_8h.xhtml" title="Defines the PSF::Piecewise PSF model." alt="" coords="1269,655,1377,684"/>
-<area shape="rect" id="node35" href="$PiecewiseBicubicCell_8h.xhtml" title="Defines a PSF cell with intensity given by a bi&#45;cubic polynomial." alt="" coords="906,655,1097,684"/>
+<area shape="rect" id="node31" href="$Piecewise_8h.xhtml" title="Defines the PSF::Piecewise PSF model." alt="" coords="1268,655,1377,684"/>
+<area shape="rect" id="node35" href="$PiecewiseBicubicCell_8h.xhtml" title="Defines a PSF cell with intensity given by a bi&#45;cubic polynomial." alt="" coords="906,655,1096,684"/>
 <area shape="rect" id="node32" href="$PiecewiseCell_8h.xhtml" title="Defines a base class for the cells comprising a Piecewise." alt="" coords="1031,818,1169,847"/>
 <area shape="rect" id="node33" href="$PSF_8h.xhtml" title="Defines the base class of all PSF models." alt="" coords="2065,732,2130,761"/>
 <area shape="rect" id="node34" title=" " alt="" coords="1540,732,1628,761"/>

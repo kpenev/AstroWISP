@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Unix Installation &mdash; AstroWISP Python Interface  documentation</title>
+  <title>Installation &mdash; AstroWISP Python Interface  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
       <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
@@ -49,17 +49,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Unix Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#installing-java-jdk-8">Installing Java JDK 8+</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#installing-gradle">Installing Gradle</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#installing-libraries-dependencies">Installing Libraries Dependencies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#installing-astrowisp">Installing AstroWISP</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="#windows-installation">Windows Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id1">Installing Java JDK 8+</a></li>
-</ul>
-</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="unit_tests.html">Unit Tests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="python_interface/index.html">Python Interface Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_implementation/modules.html">Python Package Implementation</a></li>
@@ -81,7 +71,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Unix Installation</li>
+      <li class="breadcrumb-item active">Installation</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/installation.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -91,156 +81,20 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="unix-installation">
-<h1>Unix Installation<a class="headerlink" href="#unix-installation" title="Permalink to this heading"></a></h1>
-<section id="installing-java-jdk-8">
-<h2>Installing Java JDK 8+<a class="headerlink" href="#installing-java-jdk-8" title="Permalink to this heading"></a></h2>
-<ol class="arabic">
-<li><p>Check if Java is installed, and if so the version, using:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ java -version
+  <section id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h1>
+<p>We provide wheels for many operating systems, python versions, and
+architectures. In most cases:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">astrowisp</span>
 </pre></div>
 </div>
-</li>
-<li><p>If it is not installed, install the latest version of java using the following in a console:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apt install default-jre
+<p>or:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">astrowisp</span> <span class="o">--</span><span class="n">user</span>
 </pre></div>
 </div>
-</li>
-<li><p>After installing the latest version, or if it was already installed, check to insure the version is JDK8+.</p>
-<p>It should output something similar:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">openjdk</span> <span class="n">version</span> <span class="s2">&quot;11.0.11&quot;</span> <span class="mi">2021</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">20</span>
-<span class="n">OpenJDK</span> <span class="n">Runtime</span> <span class="n">Environment</span> <span class="p">(</span><span class="n">build</span> <span class="mf">11.0.11</span><span class="o">+</span><span class="mi">9</span><span class="o">-</span><span class="n">Ubuntu</span><span class="o">-</span><span class="mi">0</span><span class="n">ubuntu2</span><span class="p">)</span>
-<span class="n">OpenJDK</span> <span class="mi">64</span><span class="o">-</span><span class="n">Bit</span> <span class="n">Server</span> <span class="n">VM</span> <span class="p">(</span><span class="n">build</span> <span class="mf">11.0.11</span><span class="o">+</span><span class="mi">9</span><span class="o">-</span><span class="n">Ubuntu</span><span class="o">-</span><span class="mi">0</span><span class="n">ubuntu2</span><span class="p">,</span> <span class="n">mixed</span> <span class="n">mode</span><span class="p">)</span>
-</pre></div>
-</div>
-</li>
-</ol>
-</section>
-<section id="installing-gradle">
-<h2>Installing Gradle<a class="headerlink" href="#installing-gradle" title="Permalink to this heading"></a></h2>
-<ol class="arabic">
-<li><p><a class="reference external" href="https://gradle.org/releases/">Download</a> the latest gradle distribution
-which comes in two flavors:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>Binary-only (bin)</p></li>
-<li><p>Complete (all), with documents and sources</p></li>
-</ul>
-</div></blockquote>
-<p>Our recommendation is to download the binary-only version as the documents
-and sources can be viewed online.</p>
-</li>
-<li><p>Unpack the distribution; unzip the distribution zip file in the directory of
-your choosing, e.g.:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mkdir /opt/gradle
-$ unzip -d /opt/gradle gradle-7.1-bin.zip
-$ ls /opt/gradle/gradle-7.1
-bin  init.d  lib  LICENSE  NOTICE  README
-</pre></div>
-</div>
-</li>
-<li><p>Configure the system environment; configure your <code class="docutils literal notranslate"><span class="pre">PATH</span></code> environment
-variable to include the <code class="docutils literal notranslate"><span class="pre">bin</span></code> directory of the unzipped distribution by
-editing your bashrc or bash_profile file, e.g.:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ gedit ~/.bashrc
-</pre></div>
-</div>
-</li>
-</ol>
-<blockquote>
-<div><p>and at the bottom line of this bashrc (or bash_profile) file insert the following: <code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">PATH=$PATH:/opt/gradle/gradle-7.1/bin</span></code></p>
-</div></blockquote>
-<ol class="arabic">
-<li><p>Verify your installation; open a console and run <code class="docutils literal notranslate"><span class="pre">gradle</span> <span class="pre">-v</span></code> to run gradle and display the version, e.g.:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ gradle -v
-------------------------------------------------------------
-Gradle 7.1
-------------------------------------------------------------
-</pre></div>
-</div>
-</li>
-</ol>
-</section>
-<section id="installing-libraries-dependencies">
-<h2>Installing Libraries Dependencies<a class="headerlink" href="#installing-libraries-dependencies" title="Permalink to this heading"></a></h2>
-<ol class="arabic">
-<li><p>Installing CFITSIO:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ tar xf cfitsio_latest.tar.gz
-$ cd cfitsio-X.XX                   # Replace X.XX with version
-$ ./configure --prefix=/usr/local --enable-sse2 --enable-reentrant
-$ make
-$ make utils
-$ sudo make install
-$ ./testprog &gt; testprog.lis
-$ diff testprog.lis testprog.out    # Should have no output
-$ cmp testprog.fit testprog.std     # Should have no output
-$ rm cookbook fitscopy imcopy smem speed testprog
-</pre></div>
-</div>
-</li>
-</ol>
-<p>The CFITSIO library should be tested by building and running
-the testprog.c program that is included with the release.
-On Unix systems, type:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span> <span class="n">make</span> <span class="n">testprog</span>
-<span class="o">%</span> <span class="n">testprog</span> <span class="o">&gt;</span> <span class="n">testprog</span><span class="o">.</span><span class="n">lis</span>
-<span class="o">%</span> <span class="n">diff</span> <span class="n">testprog</span><span class="o">.</span><span class="n">lis</span> <span class="n">testprog</span><span class="o">.</span><span class="n">out</span>
-<span class="o">%</span> <span class="n">cmp</span> <span class="n">testprog</span><span class="o">.</span><span class="n">fit</span> <span class="n">testprog</span><span class="o">.</span><span class="n">std</span>
-</pre></div>
-</div>
-<p>On VMS systems, (assuming cc is the name of the C compiler command), type:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cc testprog.c
-$ link testprog, cfitsio/lib
-$ run testprog
-</pre></div>
-</div>
-<p>The testprog program should produce a FITS file called <cite>testprog.fit</cite>
-that is identical to the testprog.std FITS file included in this
-release.  The diagnostic messages (which were piped to the file
-testprog.lis in the Unix example) should be identical to the listing
-contained in the file testprog.out.  The <cite>diff</cite> and <cite>cmp</cite> commands
-shown above should not report any differences in the files.</p>
-<p>Try typing <cite>echo $LD_LIBRARY_PATH</cite></p>
-<ul class="simple">
-<li><p>If it returns nothing, then type</p></li>
-</ul>
-<p><cite>export LD_LIBRARY_PATH=/usr/local/lib</cite></p>
-<ul class="simple">
-<li><p>If it returns something, then type</p></li>
-</ul>
-<p><cite>export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/lib</cite></p>
-<p>ldconfig</p>
-</section>
-<section id="installing-astrowisp">
-<h2>Installing AstroWISP<a class="headerlink" href="#installing-astrowisp" title="Permalink to this heading"></a></h2>
-<dl class="simple">
-<dt>Make sure the following libraries are installed:</dt><dd><ul class="simple">
-<li><p>cfitsio</p></li>
-</ul>
-</dd>
-</dl>
-<p>Navigate to the path where the AstroWISP repository was downloaded and run the
-following commands:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./gradlew clean
-$ ./gradlew build
-</pre></div>
-</div>
-</section>
-</section>
-<section id="windows-installation">
-<h1>Windows Installation<a class="headerlink" href="#windows-installation" title="Permalink to this heading"></a></h1>
-<section id="id1">
-<h2>Installing Java JDK 8+<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
-<p>#use MSVC 2017
-#TODO test gradle wrapper installation
-#TODO edit build.gradle,
-#TODO libz still found?
-#TODO look up windows ldd equivalent (dependency walker may work check, try cygwin newest), if not try to see what works with the current dll’s on Ashkans and hope to god it works :)
-#TODO
-#TODO See if cfitsio is removable at all, look where its included and if feasible to remove (might be good to do surgery and get rid of it at some point)
-#boost requires program options, which arent a header only option
-#TODO figure out dll shared library with Ashkan</p>
-</section>
+<p>should work for Linux, Windows, and MacOS (13 or earlier). Installation on MacOS
+Apple chip MacOS computers is not currently supported, but we plan to add it in
+the future. At the time of writing, the latest supported python version is 3.12.</p>
 </section>
 
 

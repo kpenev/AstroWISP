@@ -46,8 +46,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Unix Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../installation.html#windows-installation">Windows Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../unit_tests.html">Unit Tests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../python_interface/index.html">Python Interface Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_implementation/modules.html">Python Package Implementation</a></li>
@@ -127,23 +126,28 @@
 <div class="viewcode-block" id="PSFBase.integrate"><a class="viewcode-back" href="../../_implementation/astrowisp.psf_base.html#astrowisp.psf_base.PSFBase.integrate">[docs]</a>    <span class="nd">@abstractmethod</span>
     <span class="k">def</span> <span class="nf">integrate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                   <span class="o">*</span><span class="p">,</span>
-                  <span class="n">left</span><span class="p">,</span>
-                  <span class="n">bottom</span><span class="p">,</span>
+                  <span class="n">center_x</span><span class="p">,</span>
+                  <span class="n">center_y</span><span class="p">,</span>
                   <span class="n">width</span><span class="p">,</span>
-                  <span class="n">height</span><span class="p">):</span>
+                  <span class="n">height</span><span class="p">,</span>
+                  <span class="n">circle_radius</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return integrals of the PSF over circle-rectangle overlaps.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            left(float or array):    The x coordinate(s) of left boundary of the</span>
+<span class="sd">            center_x(float or array):    The x coordinate(s) of the center(s) of</span>
 <span class="sd">                the rectangle(s) to integrate over.</span>
 
-<span class="sd">            bottom(float or array):    The y coordinate(s) of the bottom</span>
-<span class="sd">                boundary of the rectangle(s) to integrate over.</span>
+<span class="sd">            center_y(float or array):    The y coordinate(s) of the center(s) of</span>
+<span class="sd">                the rectangle(s) to integrate over.</span>
 
 <span class="sd">            width(float or array):    The width(s) of the rectangle(s).</span>
 
 <span class="sd">            height(float or array):    The height(s) of the rectangle(s).</span>
+
+<span class="sd">            circle_radius(float or array):    The rad(ii/us) of the circle(s).</span>
+<span class="sd">                For zero entries or None, the integral is over the full</span>
+<span class="sd">                rectangle(s).</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            float or array:</span>

@@ -12,11 +12,11 @@
 <area shape="rect" id="node7" href="$PolynomialSDK_8h.xhtml" title="Declares a class for fitting elliptical gaussian PSFs as a smooth function of image position." alt="" coords="214,671,421,734"/>
 <area shape="rect" id="node8" href="$SDKUtil_8cpp.xhtml" title="Define the functions from SDKUtil.h." alt="" coords="5,671,190,734"/>
 <area shape="rect" id="node10" href="$FitPSF_2Image_8h.xhtml" title="Defines a class describing an image of Pixel pixels." alt="" coords="692,338,876,401"/>
-<area shape="rect" id="node11" href="$OverlapSource_8h.xhtml" title="Defines the overlap&#45;related features of PSF fitting sources." alt="" coords="835,449,1035,512"/>
+<area shape="rect" id="node11" href="$OverlapSource_8h.xhtml" title="Defines the overlap&#45;related features of PSF fitting sources." alt="" coords="835,449,1034,512"/>
 <area shape="rect" id="node15" href="$Pixel_8cpp.xhtml" title="Define the backrgound excess functions and some methods of Pixel.h." alt="" coords="244,338,428,401"/>
 <area shape="rect" id="node16" href="$SDKSourceBase_8h.xhtml" title="Declares a base class for sources participating in SDK fitting." alt="" coords="453,338,667,401"/>
 <area shape="rect" id="node13" href="$LinearSource_8cpp.xhtml" title="Define some of the methods of LinearSource class." alt="" coords="1034,671,1239,734"/>
 <area shape="rect" id="node14" href="$PiecewiseBicubicPSFSmoothing_8h_source.xhtml" title=" " alt="" coords="681,671,1010,734"/>
-<area shape="rect" id="node17" href="$SDKSourceBase_8cpp.xhtml" title="Defines some of the methods of the SDKSourceBase class." alt="" coords="325,449,556,512"/>
+<area shape="rect" id="node17" href="$SDKSourceBase_8cpp.xhtml" title="Defines some of the methods of the SDKSourceBase class." alt="" coords="324,449,556,512"/>
 <area shape="rect" id="node20" href="$PiecewiseBicubicMap_8cpp.xhtml" title="Definitions of some methods of the PiecewiseBicubicMap class." alt="" coords="1420,227,1669,290"/>
 </map>

@@ -49,8 +49,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../installation.html">Unix Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../installation.html#windows-installation">Windows Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../unit_tests.html">Unit Tests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../python_interface/index.html">Python Interface Documentation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">Python Package Implementation</a><ul class="current">
@@ -117,13 +116,13 @@
 <area shape="rect" id="node3" href="astrowisp.fit_star_shape.html#astrowisp.fit_star_shape.FitStarShape" target="_top" title="Fit for the PSF/PRF of stars and their flux." alt="" coords="538,5,781,32"/>
 <area shape="rect" id="node4" href="astrowisp.io_tree.html#astrowisp.io_tree.IOTree" target="_top" title="Interface for extracting entries from an IO::H5IODataTree." alt="" coords="805,5,970,32"/>
 <area shape="rect" id="node5" href="astrowisp.piecewise_bicubic_psf.html#astrowisp.piecewise_bicubic_psf.PiecewiseBicubicPSF" target="_top" title="Implement the PSFBase methods for libary PSFs." alt="" coords="5,155,351,181"/>
-<area shape="rect" id="node7" href="astrowisp.piecewise_bicubic_psf_map.html#astrowisp.piecewise_bicubic_psf_map.PiecewiseBicubicPSFMap" target="_top" title="Provide convenient python interface to shape fitting results." alt="" coords="994,5,1397,32"/>
+<area shape="rect" id="node7" href="astrowisp.piecewise_bicubic_psf_map.html#astrowisp.piecewise_bicubic_psf_map.PiecewiseBicubicPSFMap" target="_top" title="Provide convenient python interface to shape fitting results." alt="" coords="994,5,1396,32"/>
 <area shape="rect" id="node8" href="astrowisp.subpixphot.html#astrowisp.subpixphot.SubPixPhot" target="_top" title="Use sub&#45;pixel aware aperture photomotre to measure fluxes of sources." alt="" coords="1420,5,1637,32"/>
 </map><p>AstroWISP python interface.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="astrowisp.BackgroundExtractor">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">astrowisp.</span></span><span class="sig-name descname"><span class="pre">BackgroundExtractor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inner_radius</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outer_radius</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_confidence</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.68</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/background.html#BackgroundExtractor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.BackgroundExtractor" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <div class="graphviz"><img src="../_images/inheritance-93dfbf4315efd2ea991983913376dd1f34c8cf2c.png" alt="Inheritance diagram of astrowisp.BackgroundExtractor" usemap="#inheritancec4679d0196" class="inheritance graphviz" /></div>
 <map id="inheritancec4679d0196" name="inheritancec4679d0196">
 <area shape="rect" id="node1" href="astrowisp.background.html#astrowisp.background.BackgroundExtractor" target="_top" title="Measure the background level for each source in an image." alt="" coords="5,5,280,32"/>
@@ -181,7 +180,7 @@ background and its uncertainty.</p>
 </p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)">tuple</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)">tuple</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -205,7 +204,7 @@ background and its uncertainty.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="astrowisp.FitStarShape">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">astrowisp.</span></span><span class="sig-name descname"><span class="pre">FitStarShape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_aperture</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">other_configuration</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/fit_star_shape.html#FitStarShape"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.FitStarShape" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <div class="graphviz"><img src="../_images/inheritance-24320499b64d12af876bdfb63b097a21fa75b8dc.png" alt="Inheritance diagram of astrowisp.FitStarShape" usemap="#inheritanceea963b5e10" class="inheritance graphviz" /></div>
 <map id="inheritanceea963b5e10" name="inheritanceea963b5e10">
 <area shape="rect" id="node1" href="astrowisp.fit_star_shape.html#astrowisp.fit_star_shape.FitStarShape" target="_top" title="Fit for the PSF/PRF of stars and their flux." alt="" coords="5,5,249,32"/>
@@ -257,7 +256,7 @@ fittintg results, on None, if no fitting has been performed yet.</p>
 insensitive).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -375,7 +374,7 @@ on in order to include the source in shape fitting.</p>
 </dl>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)">dict</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)">dict</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -468,7 +467,7 @@ depend on.</p></li>
 </p></li>
 <li><p><strong>backgrounds</strong> (<em>[</em><a class="reference internal" href="#astrowisp.BackgroundExtractor" title="astrowisp.BackgroundExtractor"><em>BackgroundExtractor</em></a><em>]</em>) – The measured backgrounds
 under the sources.</p></li>
-<li><p><strong>require_convergence</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – If set to <cite>False</cite>, even non-converged
+<li><p><strong>require_convergence</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a>) – If set to <cite>False</cite>, even non-converged
 fits are saved. If <cite>True</cite>, an exception is raised.</p></li>
 </ul>
 </dd>
@@ -499,9 +498,9 @@ fits are saved. If <cite>True</cite>, an exception is raised.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em> or </em><em>numpy array</em>) – The horizontal offset(s) from center of
+<li><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em> or </em><em>numpy array</em>) – The horizontal offset(s) from center of
 the point at which to return the PSF value.</p></li>
-<li><p><strong>y</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em> or </em><em>numpy array</em>) – The vertical offset(s) from center of
+<li><p><strong>y</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em> or </em><em>numpy array</em>) – The vertical offset(s) from center of
 the point at which to return the PSF value.</p></li>
 </ul>
 </dd>
@@ -557,13 +556,13 @@ the point at which to return the PSF value.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>center_x</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em> or </em><em>array</em>) – The x coordinate(s) of the center(s) of
+<li><p><strong>center_x</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em> or </em><em>array</em>) – The x coordinate(s) of the center(s) of
 the rectangle(s) to integrate over.</p></li>
-<li><p><strong>center_y</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em> or </em><em>array</em>) – The y coordinate(s) of the center(s) of
+<li><p><strong>center_y</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em> or </em><em>array</em>) – The y coordinate(s) of the center(s) of
 the rectangle(s) to integrate over.</p></li>
-<li><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em> or </em><em>array</em>) – The width(s) of the rectangle(s).</p></li>
-<li><p><strong>height</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em> or </em><em>array</em>) – The height(s) of the rectangle(s).</p></li>
-<li><p><strong>circle_radius</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em> or </em><em>array</em>) – The rad(ii/us) of the circle(s).
+<li><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em> or </em><em>array</em>) – The width(s) of the rectangle(s).</p></li>
+<li><p><strong>height</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em> or </em><em>array</em>) – The height(s) of the rectangle(s).</p></li>
+<li><p><strong>circle_radius</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em> or </em><em>array</em>) – The rad(ii/us) of the circle(s).
 For zero entries or None, the integral is over the full
 rectangle(s).</p></li>
 </ul>
@@ -572,7 +571,7 @@ rectangle(s).</p></li>
 <dd class="field-even"><p>The integral of the PSF over the specified area(s).</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a> or array</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a> or array</p>
 </dd>
 </dl>
 </dd></dl>
@@ -582,7 +581,7 @@ rectangle(s).</p></li>
 <dl class="py class">
 <dt class="sig sig-object py" id="astrowisp.PiecewiseBicubicPSFMap">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">astrowisp.</span></span><span class="sig-name descname"><span class="pre">PiecewiseBicubicPSFMap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">star_shape_map_tree</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/piecewise_bicubic_psf_map.html#PiecewiseBicubicPSFMap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.PiecewiseBicubicPSFMap" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <div class="graphviz"><img src="../_images/inheritance-e56f6833640e5d28adc47b6953cbf78825f613e6.png" alt="Inheritance diagram of astrowisp.PiecewiseBicubicPSFMap" usemap="#inheritance75a5fd0db0" class="inheritance graphviz" /></div>
 <map id="inheritance75a5fd0db0" name="inheritance75a5fd0db0">
 <area shape="rect" id="node1" href="astrowisp.piecewise_bicubic_psf_map.html#astrowisp.piecewise_bicubic_psf_map.PiecewiseBicubicPSFMap" target="_top" title="Provide convenient python interface to shape fitting results." alt="" coords="5,5,408,32"/>
@@ -631,7 +630,7 @@ calling FitStarShape.fit().</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="astrowisp.SubPixPhot">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">astrowisp.</span></span><span class="sig-name descname"><span class="pre">SubPixPhot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">configuration</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/subpixphot.html#SubPixPhot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.SubPixPhot" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <div class="graphviz"><img src="../_images/inheritance-fbd275b7b742fe049d7f2397a757302f127b83ca.png" alt="Inheritance diagram of astrowisp.SubPixPhot" usemap="#inheritance558df5a58a" class="inheritance graphviz" /></div>
 <map id="inheritance558df5a58a" name="inheritance558df5a58a">
 <area shape="rect" id="node1" href="astrowisp.subpixphot.html#astrowisp.subpixphot.SubPixPhot" target="_top" title="Use sub&#45;pixel aware aperture photomotre to measure fluxes of sources." alt="" coords="5,5,223,32"/>
@@ -695,7 +694,7 @@ ignored by this class).</p>
 </dl>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)">dict</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)">dict</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -718,7 +717,7 @@ pixels.</p>
 </div></blockquote>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)">dict</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)">dict</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -741,7 +740,7 @@ saturation, hot pixels, etc.).</p></li>
 <li><p><strong>fitsf_io_tree</strong> (<a class="reference internal" href="astrowisp.io_tree.html#astrowisp.io_tree.IOTree" title="astrowisp.io_tree.IOTree"><em>IOTree</em></a>) – The result tree returned by
 fit_star_shape.fit(). On output, this variable also contains the
 newly derived aperture photometry measurements.</p></li>
-<li><p><strong>image_index</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – The image index within the result tree
+<li><p><strong>image_index</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – The image index within the result tree
 corresponding to the input image. This is the index of the image
 within the list of images passed to <a class="reference internal" href="astrowisp.fit_star_shape.html#module-astrowisp.fit_star_shape" title="astrowisp.fit_star_shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">fit_star_shape</span></code></a>.</p></li>
 </ul>
@@ -793,7 +792,7 @@ subpixphot tool.</p></li>
 </p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.12)">bytes</a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.12)">bytes</a>)</p>
+<dd class="field-odd"><p>(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.13)">bytes</a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.13)">bytes</a>)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -866,6 +865,14 @@ subpixphot tool.</p></li>
 <li class="toctree-l4"><a class="reference internal" href="astrowisp.tests.test_fake_image.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.tests.test_fistar.html">astrowisp.tests.test_fistar module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="astrowisp.tests.test_fistar.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.tests.test_grcollect.html">astrowisp.tests.test_grcollect module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="astrowisp.tests.test_grcollect.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="astrowisp.tests.test_piecewise_bicubic_psf.html">astrowisp.tests.test_piecewise_bicubic_psf module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="astrowisp.tests.test_piecewise_bicubic_psf.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
 </ul>
@@ -880,7 +887,10 @@ subpixphot tool.</p></li>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="astrowisp.utils.html">astrowisp.utils package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="astrowisp.utils.html#submodules">Submodules</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="astrowisp.utils.explore_prf.html">astrowisp.utils.explore_prf module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.utils.explore_prf.html">astrowisp.utils.explore_prf module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="astrowisp.utils.explore_prf.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="astrowisp.utils.file_utilities.html">astrowisp.utils.file_utilities module</a></li>
 </ul>
 </li>

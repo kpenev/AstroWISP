@@ -1,15 +1,15 @@
 <map id="/Users/kpenev/projects/git/AstroWISP/doc_src/Background/CommandLineUtil.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/Background/CommandLineUtil.h">
-<area shape="rect" id="node1" title="Declarations of utilities for command line parsing backgrund information." alt="" coords="603,5,860,68"/>
+<area shape="rect" id="node1" title="Declarations of utilities for command line parsing backgrund information." alt="" coords="602,5,860,68"/>
 <area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="411,347,630,393"/>
-<area shape="rect" id="node3" href="$Annulus_8h.xhtml" title="Declare a class defining an annulus around each source to measure the background in." alt="" coords="165,193,258,222"/>
+<area shape="rect" id="node3" href="$Annulus_8h.xhtml" title="Declare a class defining an annulus around each source to measure the background in." alt="" coords="164,193,258,222"/>
 <area shape="rect" id="node6" title=" " alt="" coords="693,356,753,385"/>
-<area shape="rect" id="node7" title=" " alt="" coords="249,270,326,299"/>
+<area shape="rect" id="node7" title=" " alt="" coords="248,270,326,299"/>
 <area shape="rect" id="node8" href="$ParseCSV_8h.xhtml" title="Declarations of functions for parsing strings of comma separated values to lists." alt="" coords="710,116,870,145"/>
 <area shape="rect" id="node10" title=" " alt="" coords="1219,356,1283,385"/>
-<area shape="rect" id="node13" title=" " alt="" coords="1257,270,1299,299"/>
-<area shape="rect" id="node16" href="$Error_8h.xhtml" title="The hierarchy of exceptions for this project." alt="" coords="407,193,477,222"/>
+<area shape="rect" id="node13" title=" " alt="" coords="1257,270,1298,299"/>
+<area shape="rect" id="node16" href="$Error_8h.xhtml" title="The hierarchy of exceptions for this project." alt="" coords="407,193,476,222"/>
 <area shape="rect" id="node18" title=" " alt="" coords="1374,116,1590,145"/>
-<area shape="rect" id="node19" title=" " alt="" coords="1613,116,1687,145"/>
+<area shape="rect" id="node19" title=" " alt="" coords="1613,116,1686,145"/>
 <area shape="rect" id="node4" href="$NaN_8h.xhtml" title="Defines not&#45;a&#45;number and infinity." alt="" coords="5,270,124,299"/>
 <area shape="rect" id="node5" title=" " alt="" coords="35,356,94,385"/>
 <area shape="rect" id="node9" href="$PhotColumns_8h.xhtml" title="Defines constants to denote the various columns that can be input or output by the various tools and ..." alt="" coords="1102,270,1233,299"/>

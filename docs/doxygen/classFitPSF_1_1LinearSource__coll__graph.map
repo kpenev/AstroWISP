@@ -1,12 +1,12 @@
 <map id="FitPSF::LinearSource" name="FitPSF::LinearSource">
-<area shape="rect" id="node1" title="A class for PSF fitting sources whose flux distribution depends linearly on the PSF paramaters (for a..." alt="" coords="521,2388,741,2863"/>
-<area shape="rect" id="node2" href="$classFitPSF_1_1OverlapSource.xhtml" title=" " alt="" coords="408,1711,628,2323"/>
-<area shape="rect" id="node3" href="$classFitPSF_1_1Source.xhtml" title=" " alt="" coords="402,1044,634,1604"/>
+<area shape="rect" id="node1" title="A class for PSF fitting sources whose flux distribution depends linearly on the PSF paramaters (for a..." alt="" coords="514,2388,735,2863"/>
+<area shape="rect" id="node2" href="$classFitPSF_1_1OverlapSource.xhtml" title=" " alt="" coords="401,1711,621,2323"/>
+<area shape="rect" id="node3" href="$classFitPSF_1_1Source.xhtml" title=" " alt="" coords="395,1044,627,1604"/>
 <area shape="rect" id="node4" href="$classCore_1_1Flux.xhtml" title="A class representing the flux measurement for a source, including an error estimate and a flag." alt="" coords="330,56,425,277"/>
 <area shape="rect" id="node6" href="$classFitPSF_1_1Source.xhtml" title="An abstract base class for sources which participate in PSF fitting." alt="" coords="211,393,443,953"/>
 <area shape="rect" id="node5" href="$classCore_1_1SubPixelMap.xhtml" title="The base class for all sub&#45;pixel maps." alt="" coords="95,5,255,328"/>
-<area shape="rect" id="node7" href="$classFitPSF_1_1OverlapSource.xhtml" title="PSF fitting source which handles overlaps with other sources." alt="" coords="148,1018,378,1629"/>
-<area shape="rect" id="node8" href="$classPSF_1_1PiecewiseBicubic.xhtml" title="A Piecewise defined as a bicubic interpolation over a grid, where at each grid point the value,..." alt="" coords="662,1941,851,2093"/>
-<area shape="rect" id="node9" href="$classPSF_1_1Piecewise.xhtml" title="A PSF model consisting of a grid of rectangles each with a separate intensity function." alt="" coords="662,1018,867,1629"/>
+<area shape="rect" id="node7" href="$classFitPSF_1_1OverlapSource.xhtml" title="PSF fitting source which handles overlaps with other sources." alt="" coords="142,1018,371,1629"/>
+<area shape="rect" id="node8" href="$classPSF_1_1PiecewiseBicubic.xhtml" title="A Piecewise defined as a bicubic interpolation over a grid, where at each grid point the value,..." alt="" coords="658,1941,847,2093"/>
+<area shape="rect" id="node9" href="$classPSF_1_1Piecewise.xhtml" title="A PSF model consisting of a grid of rectangles each with a separate intensity function." alt="" coords="658,1018,863,1629"/>
 <area shape="rect" id="node10" href="$classPSF_1_1PSF.xhtml" title="An abstract parent class for all PSF models." alt="" coords="641,554,893,792"/>
 </map>

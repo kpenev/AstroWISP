@@ -3,5 +3,5 @@
 <area shape="rect" id="node2" href="$classPSF_1_1EllipticalGaussian.xhtml" title="An ellptical Gaussian PSF with peak flux above the background normalized to 1." alt="" coords="5,291,241,936"/>
 <area shape="rect" id="node3" href="$classPSF_1_1LocalPolynomial.xhtml" title=" " alt="" coords="264,529,446,698"/>
 <area shape="rect" id="node4" href="$classPSF_1_1Piecewise.xhtml" title="A PSF model consisting of a grid of rectangles each with a separate intensity function." alt="" coords="470,308,675,919"/>
-<area shape="rect" id="node5" href="$classPSF_1_1PiecewiseBicubic.xhtml" title="A Piecewise defined as a bicubic interpolation over a grid, where at each grid point the value,..." alt="" coords="478,984,667,1136"/>
+<area shape="rect" id="node5" href="$classPSF_1_1PiecewiseBicubic.xhtml" title="A Piecewise defined as a bicubic interpolation over a grid, where at each grid point the value,..." alt="" coords="478,984,666,1136"/>
 </map>

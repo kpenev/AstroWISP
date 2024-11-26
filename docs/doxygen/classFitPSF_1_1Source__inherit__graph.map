@@ -3,8 +3,8 @@
 <area shape="rect" id="node2" href="$classFitPSF_1_1OverlapSource.xhtml" title="PSF fitting source which handles overlaps with other sources." alt="" coords="5,665,226,1259"/>
 <area shape="rect" id="node5" href="$classFitPSF_1_1Source.xhtml" title=" " alt="" coords="506,665,738,1259"/>
 <area shape="rect" id="node8" href="$classFitPSF_1_1Source.xhtml" title=" " alt="" coords="250,665,482,1259"/>
-<area shape="rect" id="node3" href="$classFitPSF_1_1OverlapSource.xhtml" title=" " alt="" coords="123,1341,343,1952"/>
-<area shape="rect" id="node4" href="$classFitPSF_1_1LinearSource.xhtml" title="A class for PSF fitting sources whose flux distribution depends linearly on the PSF paramaters (for a..." alt="" coords="123,2000,343,2493"/>
-<area shape="rect" id="node6" href="$classFitPSF_1_1SDKSourceBase.xhtml" title="An abstract class that defines the minimum requirements of a source to participate in the fitting for..." alt="" coords="516,1469,729,1825"/>
-<area shape="rect" id="node7" href="$classFitPSF_1_1SDKSource.xhtml" title="A PSF fitting source class based on a LocalPolynomialPSF." alt="" coords="524,2145,721,2348"/>
+<area shape="rect" id="node3" href="$classFitPSF_1_1OverlapSource.xhtml" title=" " alt="" coords="121,1341,342,1952"/>
+<area shape="rect" id="node4" href="$classFitPSF_1_1LinearSource.xhtml" title="A class for PSF fitting sources whose flux distribution depends linearly on the PSF paramaters (for a..." alt="" coords="121,2002,342,2494"/>
+<area shape="rect" id="node6" href="$classFitPSF_1_1SDKSourceBase.xhtml" title="An abstract class that defines the minimum requirements of a source to participate in the fitting for..." alt="" coords="516,1468,729,1825"/>
+<area shape="rect" id="node7" href="$classFitPSF_1_1SDKSource.xhtml" title="A PSF fitting source class based on a LocalPolynomialPSF." alt="" coords="524,2146,721,2350"/>
 </map>

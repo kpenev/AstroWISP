@@ -49,8 +49,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../installation.html">Unix Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../installation.html#windows-installation">Windows Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../unit_tests.html">Unit Tests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../python_interface/index.html">Python Interface Documentation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">Python Package Implementation</a><ul class="current">
@@ -113,7 +112,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="astrowisp.io_tree.IOTree">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">astrowisp.io_tree.</span></span><span class="sig-name descname"><span class="pre">IOTree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tool_or_configuration</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version_info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/io_tree.html#IOTree"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.io_tree.IOTree" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <div class="graphviz"><img src="../_images/inheritance-f6e8fc1e4cf6e445298c8974ea6cb4318c74a45e.png" alt="Inheritance diagram of astrowisp.io_tree.IOTree" usemap="#inheritance2bbe9a83d6" class="inheritance graphviz" /></div>
 <map id="inheritance2bbe9a83d6" name="inheritance2bbe9a83d6">
 <area shape="rect" id="node1" href="#astrowisp.io_tree.IOTree" target="_top" title="Interface for extracting entries from an IO::H5IODataTree." alt="" coords="5,5,170,32"/>
@@ -158,7 +157,7 @@ empty, if it is not required as an entry in the tree.</p></li>
 as a separator between leves in the tree.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a>]</p>
+<dd class="field-odd"><p>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -170,7 +169,7 @@ as a separator between leves in the tree.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>quantity</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The quantity to extract from the tree.</p></li>
+<li><p><strong>quantity</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – The quantity to extract from the tree.</p></li>
 <li><p><strong>dtype</strong> – The data type of individual values of the quantity.</p></li>
 <li><p><strong>shape</strong> (<em>tuple of ints</em>) – The shape of the array of values
 to expect. Use None for scalar quantities.</p></li>
@@ -231,7 +230,7 @@ star shape is being modeled.</p></li>
 required to evaluate the PSF/PRF map for each source. First
 dimension should iterate over sources and second over
 expansion terms.</p></li>
-<li><p><strong>magnitude_1adu</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – The magnitude that corresponds to a flux
+<li><p><strong>magnitude_1adu</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – The magnitude that corresponds to a flux
 of 1ADU. Only required if relying on magnitudes to get star
 shape amplitudes.</p></li>
 <li><p><strong>star_shape_map_coefficients</strong> (<em>4-D numpy.array</em>) – The coefficients
@@ -253,7 +252,7 @@ in front of all terms. See bicubic PSf model for details.</p></li>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>grid</strong> (<em>2-D iterable</em>) – The grid on which the star shape is
 represented.</p></li>
-<li><p><strong>map_terms</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The expression defining the terms the star shape
+<li><p><strong>map_terms</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – The expression defining the terms the star shape
 parameters depend on.</p></li>
 <li><p><strong>coefficients</strong> (<em>4-D numpy.array</em>) – The coefficients of the map. See
 :class:fit_star_shape for details.</p></li>

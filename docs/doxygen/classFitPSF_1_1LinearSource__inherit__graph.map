@@ -1,5 +1,5 @@
 <map id="FitPSF::LinearSource" name="FitPSF::LinearSource">
-<area shape="rect" id="node1" title="A class for PSF fitting sources whose flux distribution depends linearly on the PSF paramaters (for a..." alt="" coords="138,2017,358,2510"/>
+<area shape="rect" id="node1" title="A class for PSF fitting sources whose flux distribution depends linearly on the PSF paramaters (for a..." alt="" coords="138,2019,358,2511"/>
 <area shape="rect" id="node2" href="$classFitPSF_1_1OverlapSource.xhtml" title=" " alt="" coords="138,1358,358,1969"/>
 <area shape="rect" id="node3" href="$classFitPSF_1_1Source.xhtml" title=" " alt="" coords="5,673,238,1268"/>
 <area shape="rect" id="node4" href="$classFitPSF_1_1Source.xhtml" title="An abstract base class for sources which participate in PSF fitting." alt="" coords="132,5,364,600"/>

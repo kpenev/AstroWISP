@@ -4,8 +4,8 @@
 <area shape="rect" id="node2" href="../_implementation/astrowisp.background.html#astrowisp.background.BackgroundExtractor" target="_top" title="Measure the background level for each source in an image." alt="" coords="275,5,549,32"/>
 <area shape="rect" id="node3" href="../_implementation/astrowisp.fake_image.piecewise_bicubic_psf.html#astrowisp.fake_image.piecewise_bicubic_psf.PiecewiseBicubicPSF" target="_top" title="A piecewise PSF class where the PSF over each piece is a bi&#45;cubic function." alt="" coords="5,229,422,256"/>
 <area shape="rect" id="node4" href="../_implementation/astrowisp.fake_image.piecewise_psf.html#astrowisp.fake_image.piecewise_psf.PiecewisePSF" target="_top" title="Base clas for PSFs defined on a grid of pieces." alt="" coords="51,155,376,181"/>
-<area shape="rect" id="node6" href="../_implementation/astrowisp.fit_star_shape.html#astrowisp.fit_star_shape.FitStarShape" target="_top" title="Fit for the PSF/PRF of stars and their flux." alt="" coords="573,5,817,32"/>
+<area shape="rect" id="node6" href="../_implementation/astrowisp.fit_star_shape.html#astrowisp.fit_star_shape.FitStarShape" target="_top" title="Fit for the PSF/PRF of stars and their flux." alt="" coords="573,5,816,32"/>
 <area shape="rect" id="node7" href="../_implementation/astrowisp.tests.utilities.html#astrowisp.tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="797,80,1041,107"/>
-<area shape="rect" id="node10" href="#tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless" target="_top" title="Test piecewise bicubic PSF fitting on noiseless images." alt="" coords="707,155,1131,181"/>
+<area shape="rect" id="node10" href="#tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless" target="_top" title="Test piecewise bicubic PSF fitting on noiseless images." alt="" coords="707,155,1130,181"/>
 <area shape="rect" id="node8" title="A class whose instances are single test cases." alt="" coords="841,5,997,32"/>
 </map>

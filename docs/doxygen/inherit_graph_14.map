@@ -1,7 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
 <area shape="rect" id="node1" href="$classError_1_1ParsingError.xhtml" title="Error while parsing the configuration." alt="" coords="5,140,160,169"/>
 <area shape="rect" id="node2" href="$classError_1_1General.xhtml" title="The parent of all errors raised anywhere in the code." alt="" coords="208,113,329,142"/>
-<area shape="rect" id="node3" href="$classError_1_1Fits.xhtml" title="The parent of all fits library related errors." alt="" coords="423,32,513,61"/>
+<area shape="rect" id="node3" href="$classError_1_1Fits.xhtml" title="The parent of all fits library related errors." alt="" coords="422,32,513,61"/>
 <area shape="rect" id="node6" href="$classError_1_1NotImplemented.xhtml" title="An error indicating a feature has not been implemented yet." alt="" coords="377,112,558,141"/>
 <area shape="rect" id="node7" href="$classError_1_1Runtime.xhtml" title="The parent of all run&#45;time errors." alt="" coords="406,165,530,194"/>
 <area shape="rect" id="node4" href="$classError_1_1FitsImage.xhtml" title="Errors related an the actual fits image." alt="" coords="629,5,764,34"/>

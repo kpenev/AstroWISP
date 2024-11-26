@@ -1,7 +1,7 @@
 <map id="/Users/kpenev/projects/git/AstroWISP/doc_src/Core/Error.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/Core/Error.h">
-<area shape="rect" id="node1" title="The hierarchy of exceptions for this project." alt="" coords="1111,5,1295,68"/>
+<area shape="rect" id="node1" title="The hierarchy of exceptions for this project." alt="" coords="1110,5,1295,68"/>
 <area shape="rect" id="node2" href="$Background_2CommandLineUtil_8h.xhtml" title="Declarations of utilities for command line parsing backgrund information." alt="" coords="791,338,1049,401"/>
-<area shape="rect" id="node3" href="$FitPSF_2Config_8h.xhtml" title="Declares the command line parser for the FitPSF tool." alt="" coords="943,449,1127,512"/>
+<area shape="rect" id="node3" href="$FitPSF_2Config_8h.xhtml" title="Declares the command line parser for the FitPSF tool." alt="" coords="942,449,1127,512"/>
 <area shape="rect" id="node12" href="$SubPixPhot_2Config_8h.xhtml" title="Defines a class containing the configuration with which to run subpixphot." alt="" coords="680,449,864,512"/>
 <area shape="rect" id="node14" href="$Core_2CommandLineUtil_8h.xhtml" title="Declarations of utilities for command line parsing common to all tools." alt="" coords="561,338,767,401"/>
 <area shape="rect" id="node15" href="$Core_2Image_8h.xhtml" title="Declares a base class for images to be processed." alt="" coords="2433,227,2618,290"/>
@@ -12,38 +12,38 @@
 <area shape="rect" id="node39" href="$IOSources_8h.xhtml" title="Declares Input/Output interface for the FitPSF tool." alt="" coords="3316,449,3500,512"/>
 <area shape="rect" id="node40" href="$SubPixelMap_8h.xhtml" title="Declares the base class for all sub&#45;pixel maps." alt="" coords="2116,227,2300,290"/>
 <area shape="rect" id="node41" href="$IO_2CommandLineUtil_8h.xhtml" title="Declarations of utilities for command line parsing of IO related options." alt="" coords="1109,116,1296,179"/>
-<area shape="rect" id="node44" href="$CirclePieceIntegral_8h.xhtml" title="Declares a class that calculates x^my^n integrals over circle pieces." alt="" coords="3628,116,3839,179"/>
+<area shape="rect" id="node44" href="$CirclePieceIntegral_8h.xhtml" title="Declares a class that calculates x^my^n integrals over circle pieces." alt="" coords="3628,116,3838,179"/>
 <area shape="rect" id="node46" href="$PSF_8h.xhtml" title="Defines the base class of all PSF models." alt="" coords="1476,116,1660,179"/>
 <area shape="rect" id="node50" href="$VisualizePSFMap_8h.xhtml" title="Declares the command line parser for the VisualizePSFMap tool." alt="" coords="3863,116,4161,179"/>
-<area shape="rect" id="node4" href="$FitPSF_2CInterface_8cpp.xhtml" title="Define the C&#45;interface functions for the FitPSF library." alt="" coords="1891,1004,2075,1067"/>
+<area shape="rect" id="node4" href="$FitPSF_2CInterface_8cpp.xhtml" title="Define the C&#45;interface functions for the FitPSF library." alt="" coords="1890,1004,2075,1067"/>
 <area shape="rect" id="node5" href="$FitPSF_2Common_8h.xhtml" title="Defines some of the functions needed exclusively by the FitPSF tool." alt="" coords="2344,560,2528,623"/>
 <area shape="rect" id="node11" href="$FitPSF_2Config_8cpp.xhtml" title="The implementation of the FitPSF::Config methods." alt="" coords="892,560,1076,623"/>
 <area shape="rect" id="node6" href="$FitPSF_2PiecewiseBicubic_8h.xhtml" title="The declarations of the functions related to fitting piecewise bicubic PSFs." alt="" coords="1873,893,2092,956"/>
 <area shape="rect" id="node7" href="$FitPSF_2SDKSource_8h_source.xhtml" title=" " alt="" coords="2889,1004,3074,1067"/>
 <area shape="rect" id="node8" href="$FitPSF_2Source_8h.xhtml" title="Defines the base class for sources participating in PSF fitting." alt="" coords="2189,782,2374,845"/>
-<area shape="rect" id="node9" href="$FitPSF_2Image_8h.xhtml" title="Defines a class describing an image of Pixel pixels." alt="" coords="2415,893,2599,956"/>
-<area shape="rect" id="node10" href="$SDKSourceBase_8h.xhtml" title="Declares a base class for sources participating in SDK fitting." alt="" coords="3018,893,3233,956"/>
+<area shape="rect" id="node9" href="$FitPSF_2Image_8h.xhtml" title="Defines a class describing an image of Pixel pixels." alt="" coords="2414,893,2599,956"/>
+<area shape="rect" id="node10" href="$SDKSourceBase_8h.xhtml" title="Declares a base class for sources participating in SDK fitting." alt="" coords="3018,893,3232,956"/>
 <area shape="rect" id="node13" href="$SubPixPhot_2Config_8cpp.xhtml" title="Implement the methods of the Config class." alt="" coords="676,560,868,623"/>
 <area shape="rect" id="node16" href="$Background_2CInterface_8h.xhtml" title="Declare C&#45;style functions for accessing the functionality of the Background library." alt="" coords="3037,338,3238,401"/>
 <area shape="rect" id="node17" href="$MeasureExcludingSources_8h.xhtml" title="Declares a class for extracting the background around sources attempting to exclude nearby sources." alt="" coords="2692,338,3012,401"/>
 <area shape="rect" id="node18" href="$Background_2Source_8h.xhtml" title="Declares the base class for background extract(ion/ed) from an astronomical image." alt="" coords="2484,338,2668,401"/>
 <area shape="rect" id="node29" href="$Core_2CInterface_8cpp.xhtml" title="The definitions of the functions declared in CInterface.h." alt="" coords="2124,338,2308,401"/>
 <area shape="rect" id="node30" href="$SubPixelCorrectedFlux_8h.xhtml" title="Defile a class that corrects for non&#45;uniform subpixel sensitivity and partial pixels in the aperture." alt="" coords="1604,338,1847,401"/>
-<area shape="rect" id="node31" href="$IO_2CInterface_8cpp.xhtml" title="The definitions of the functinos from CInterface.h." alt="" coords="1151,560,1335,623"/>
-<area shape="rect" id="node19" href="$Core_2Source_8h.xhtml" title="Declare a base class for sources processed by SubPixTools." alt="" coords="2175,449,2359,512"/>
+<area shape="rect" id="node31" href="$IO_2CInterface_8cpp.xhtml" title="The definitions of the functinos from CInterface.h." alt="" coords="1150,560,1335,623"/>
+<area shape="rect" id="node19" href="$Core_2Source_8h.xhtml" title="Declare a base class for sources processed by SubPixTools." alt="" coords="2174,449,2359,512"/>
 <area shape="rect" id="node28" href="$LinearSource_8h.xhtml" title="Declares a class used for PSF fitting where pixel responses are linear functions of the shape paramet..." alt="" coords="2755,671,2944,734"/>
-<area shape="rect" id="node20" href="$MapSource_8h.xhtml" title="Defines a source class which can be passed directly to a PSF map." alt="" coords="1511,560,1695,623"/>
-<area shape="rect" id="node27" href="$MapSourceContainer_8h.xhtml" title="Declares a container for holding MapSource objects." alt="" coords="1468,671,1695,734"/>
+<area shape="rect" id="node20" href="$MapSource_8h.xhtml" title="Defines a source class which can be passed directly to a PSF map." alt="" coords="1510,560,1695,623"/>
+<area shape="rect" id="node27" href="$MapSourceContainer_8h.xhtml" title="Declares a container for holding MapSource objects." alt="" coords="1468,671,1694,734"/>
 <area shape="rect" id="node22" href="$EllipticalGaussianMap_8h.xhtml" title="Declares a smoothly varying over an image elliptical Gaussian PSF map class." alt="" coords="594,782,828,845"/>
 <area shape="rect" id="node24" href="$Map_8cpp.xhtml" title="The declarations of Map methods and related functions." alt="" coords="852,782,1036,845"/>
 <area shape="rect" id="node25" href="$PiecewiseBicubicMap_8h.xhtml" title="Declares a smoothly varying over an image piecewise bicubic PSF map class." alt="" coords="1060,782,1292,845"/>
-<area shape="rect" id="node26" href="$SubPixPhot_2Common_8h.xhtml" title="Declare functions used by both the C&#45;interface and the command line interface." alt="" coords="1367,782,1559,845"/>
+<area shape="rect" id="node26" href="$SubPixPhot_2Common_8h.xhtml" title="Declare functions used by both the C&#45;interface and the command line interface." alt="" coords="1366,782,1559,845"/>
 <area shape="rect" id="node23" href="$DataTreeCalculations_8h.xhtml" title="Declare functions that calculate some entries of I/O data trees from others." alt="" coords="596,893,825,956"/>
 <area shape="rect" id="node33" href="$ParseCSV_8cpp.xhtml" title="The definitions of the function in ParseCSV.h." alt="" coords="144,338,328,401"/>
 <area shape="rect" id="node34" href="$Grid_8h.xhtml" title="Some useful typedef statements." alt="" coords="352,338,536,401"/>
-<area shape="rect" id="node36" href="$H5IODataTree_8cpp.xhtml" title="The definitions of some of the methods of the H5IODataTree class." alt="" coords="215,560,399,623"/>
+<area shape="rect" id="node36" href="$H5IODataTree_8cpp.xhtml" title="The definitions of some of the methods of the H5IODataTree class." alt="" coords="214,560,399,623"/>
 <area shape="rect" id="node38" href="$SourceLocation_8h.xhtml" title="Declares a class defining the minimum requirements for specifying the locations of sources." alt="" coords="3313,338,3503,401"/>
-<area shape="rect" id="node42" href="$CommandLineConfig_8h.xhtml" title="Declare a class for managing the configuration with which tools are run." alt="" coords="1124,338,1335,401"/>
+<area shape="rect" id="node42" href="$CommandLineConfig_8h.xhtml" title="Declare a class for managing the configuration with which tools are run." alt="" coords="1124,338,1334,401"/>
 <area shape="rect" id="node43" href="$IO_2CommandLineUtil_8cpp.xhtml" title="Implementation of tilities for command line parsing common to all tools." alt="" coords="1031,227,1236,290"/>
 <area shape="rect" id="node45" href="$PiecewiseBicubicCell_8h.xhtml" title="Defines a PSF cell with intensity given by a bi&#45;cubic polynomial." alt="" coords="3809,227,4039,290"/>
 <area shape="rect" id="node47" href="$EllipticalGaussian_8h.xhtml" title="Class defining ellptical Gaussian point spread functions (PSF)." alt="" coords="1889,227,2092,290"/>

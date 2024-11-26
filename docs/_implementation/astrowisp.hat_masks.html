@@ -49,8 +49,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../installation.html">Unix Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../installation.html#windows-installation">Windows Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../unit_tests.html">Unit Tests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../python_interface/index.html">Python Interface Documentation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">Python Package Implementation</a><ul class="current">
@@ -102,49 +101,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-astrowisp.hat_masks">
-<span id="astrowisp-hat-masks-module"></span><h1>astrowisp.hat_masks module<a class="headerlink" href="#module-astrowisp.hat_masks" title="Permalink to this heading"></a></h1>
-<p>Utilities for working with HAT-style masks in FITS headers.</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="astrowisp.hat_masks.parse_hat_mask">
-<span class="sig-prename descclassname"><span class="pre">astrowisp.hat_masks.</span></span><span class="sig-name descname"><span class="pre">parse_hat_mask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">header</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/hat_masks.html#parse_hat_mask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.hat_masks.parse_hat_mask" title="Permalink to this definition"></a></dt>
-<dd><p>Extract the HAT-style mask contained in header.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>header</strong> – The header of the image whose mask to parse.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>array with exactly the same resolution as the input image containing
-a bit-field for each pixel indicating any bad-pixel flags raised per
-the header.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>numpy.array(dtype=uint8)</p>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">astropy.io</span> <span class="kn">import</span> <span class="n">fits</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;/Users/kpenev/tmp/1-447491_4.fits.fz&#39;</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>               <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;readonly&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">image_mask</span> <span class="o">=</span> <span class="n">parse_hat_mask</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">flag_name</span> <span class="o">=</span> <span class="s1">&#39;OVERSATURATED&#39;</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">matched</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">bitwise_and</span><span class="p">(</span><span class="n">image_mask</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>                                <span class="n">mask_flags</span><span class="p">[</span><span class="n">flag_name</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">bool</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="c1">#Print number of pixels for which the OVERSATURATED flag is</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="c1">#raised</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="n">flag_name</span> <span class="o">+</span> <span class="s1">&#39;: &#39;</span> <span class="o">+</span> <span class="nb">repr</span><span class="p">(</span><span class="n">matched</span><span class="o">.</span><span class="n">sum</span><span class="p">()))</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="c1">#Output x, y, flux for the pixels flagged as OVERSATURATED</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="k">for</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">numpy</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">matched</span><span class="p">)):</span>
-<span class="gp">&gt;&gt;&gt; </span>        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%4d</span><span class="s1"> </span><span class="si">%4d</span><span class="s1"> </span><span class="si">%15d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">]))</span>
-</pre></div>
-</div>
-</dd></dl>
-
+  <section id="astrowisp-hat-masks-module">
+<h1>astrowisp.hat_masks module<a class="headerlink" href="#astrowisp-hat-masks-module" title="Permalink to this heading"></a></h1>
 </section>
 
 

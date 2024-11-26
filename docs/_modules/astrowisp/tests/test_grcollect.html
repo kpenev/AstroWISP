@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>astrowisp.tests.test_grcollect &mdash; AstroWISP Python Interface  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/unlimited_width.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            AstroWISP Python Interface
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../unit_tests.html">Unit Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../python_interface/index.html">Python Interface Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_implementation/modules.html">Python Package Implementation</a></li>
+<li class="toctree-l1"><a class="reference external" href="doxygen/index.xhtml#http://">C/C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_unit_tests/modules.html">Unit Testing Code</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">AstroWISP Python Interface</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">astrowisp.tests.test_grcollect</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for astrowisp.tests.test_grcollect</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Test rejection outlier using built-in grcollect executable.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">path</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">from</span> <span class="nn">subprocess</span> <span class="kn">import</span> <span class="n">Popen</span><span class="p">,</span> <span class="n">PIPE</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+
+<span class="kn">import</span> <span class="nn">unittest</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">statistics</span>
+<span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">read_csv</span>
+<span class="kn">import</span> <span class="nn">pandas</span>
+
+<span class="c1">#TODO need for fix import grcollect path for windows; points to c:/local</span>
+<span class="c1">#from astrowisp import grcollect_path</span>
+<span class="kn">from</span> <span class="nn">astrowisp.tests.utilities</span> <span class="kn">import</span> <span class="n">FloatTestCase</span>
+
+<span class="c1">#_test_data_dir = path.join(path.dirname(path.abspath(__file__)),</span>
+<span class="c1">#                           &#39;test_data&#39;)</span>
+
+<span class="c1">#TODO remove manual overwrite of directory paths here</span>
+<span class="n">_test_data_dir</span><span class="o">=</span><span class="s1">&#39;B:/Github/AstroWISP/PythonPackage/astrowisp/tests/test_data/&#39;</span>
+<span class="n">grcollect_path</span><span class="o">=</span><span class="s1">&#39;B:/fitsh-0.9.4-minimum/builddir/src/grcollect.exe&#39;</span>
+
+<div class="viewcode-block" id="TestGRCollect"><a class="viewcode-back" href="../../../_implementation/astrowisp.tests.test_grcollect.html#astrowisp.tests.test_grcollect.TestGRCollect">[docs]</a><span class="k">class</span> <span class="nc">TestGRCollect</span><span class="p">(</span><span class="n">FloatTestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test cases for the grcollect executable.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="TestGRCollect.test_dataset"><a class="viewcode-back" href="../../../_implementation/astrowisp.tests.test_grcollect.html#astrowisp.tests.test_grcollect.TestGRCollect.test_dataset">[docs]</a>    <span class="k">def</span> <span class="nf">test_dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create dataset to test rejection outlier&quot;&quot;&quot;</span>
+        <span class="c1"># parse_result = partial(read_csv, sep=r&#39;\s+&#39;, comment=&#39;#&#39;, header=None)</span>
+
+        <span class="c1">#setup subprocess for grcollect</span>
+        <span class="c1">#TODO do we need to use median or mean rejection for grcollect</span>
+        <span class="n">grcollect</span> <span class="o">=</span> <span class="n">Popen</span><span class="p">(</span>
+                <span class="p">[</span>
+                <span class="n">grcollect_path</span><span class="p">,</span>
+                <span class="s1">&#39;-&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;-V&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;--col-base&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;--col-stat&#39;</span><span class="p">,</span> <span class="s1">&#39;2,3,4,5,6,7,8,9,10,11,12,13,14&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;--output&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_test_data_dir</span><span class="p">,</span> <span class="s1">&#39;test_stat_grcollect.txt&#39;</span><span class="p">)),</span>
+                <span class="s1">&#39;--stat&#39;</span><span class="p">,</span> <span class="s1">&#39;count,rcount,mean,rmean,median,rmedian,mediandev,rmediandev&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;--rejection&#39;</span><span class="p">,</span> <span class="s1">&#39;column=4,iterations=10,mean,stddev=4.0&#39;</span><span class="p">,</span>
+                <span class="c1"># &#39;--rejection&#39;, &#39;column=4,,iterations=10,median,stddev=4.0&#39;,</span>
+                <span class="s1">&#39;--rejection&#39;</span><span class="p">,</span> <span class="s1">&#39;column=7,iterations=10,mean,stddev=4.0&#39;</span><span class="p">,</span>
+                <span class="c1"># &#39;--rejection&#39;, &#39;column=7,,iterations=10,median,stddev=4.0&#39;,</span>
+                <span class="s1">&#39;--rejection&#39;</span><span class="p">,</span> <span class="s1">&#39;column=10,iterations=10,mean,meddev=15.0&#39;</span><span class="p">,</span>
+                <span class="c1"># &#39;--rejection&#39;, &#39;column=10,,iterations=10,median,stddev=4.0&#39;,</span>
+                <span class="s1">&#39;--rejection&#39;</span><span class="p">,</span> <span class="s1">&#39;column=13,iterations=10,mean,meddev=15.0&#39;</span><span class="p">,</span>
+                <span class="c1"># &#39;--rejection&#39;, &#39;column=13,,iterations=10,median,stddev=4.0&#39;,</span>
+                <span class="s1">&#39;--max-memory&#39;</span><span class="p">,</span> <span class="s1">&#39;4g&#39;</span><span class="p">,</span>
+                <span class="c1">#TODO add tmpdir and remove after usage to get rid of all the grcollect temp files</span>
+                <span class="c1">#temp file module python</span>
+                <span class="c1">#&#39;--tmpdir&#39;, &#39;&#39;</span>
+                <span class="p">],</span>
+                <span class="n">stdin</span><span class="o">=</span><span class="n">PIPE</span><span class="p">,</span>
+                <span class="n">stdout</span><span class="o">=</span><span class="n">PIPE</span>
+                <span class="p">)</span>
+        
+        <span class="n">col_gaussian</span><span class="o">=</span><span class="p">[]</span>
+        <span class="n">mu</span> <span class="o">=</span> <span class="mi">100</span>
+        <span class="n">sigma</span> <span class="o">=</span> <span class="mi">50</span>
+        <span class="c1">#TODO maybe do 1000000, although it takes like an hour</span>
+        <span class="n">niter</span><span class="o">=</span><span class="mi">200000</span>
+        <span class="c1">#TODO add gaussian to inner iteration</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">niter</span><span class="p">):</span>  
+            <span class="n">temp</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">gauss</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>  
+            <span class="n">col_gaussian</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+
+        <span class="n">stdev_gaus</span> <span class="o">=</span> <span class="n">statistics</span><span class="o">.</span><span class="n">stdev</span><span class="p">(</span><span class="n">col_gaussian</span><span class="p">)</span>
+        <span class="n">mean_gaus</span> <span class="o">=</span> <span class="n">statistics</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">col_gaussian</span><span class="p">)</span>
+
+        <span class="c1">#setup outlier counters</span>
+        <span class="n">one_outliers</span><span class="o">=</span><span class="mi">0</span>
+        <span class="n">onefloat_outliers</span><span class="o">=</span><span class="mi">0</span>
+        <span class="n">mil_outliers</span><span class="o">=</span><span class="mi">0</span>
+        <span class="n">gaus_outliers</span><span class="o">=</span><span class="mi">0</span>
+
+        <span class="c1">#array values to add random statistics to</span>
+        <span class="c1">#every 3rd version of values is being altered i.e. values[3n]</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> 
+                  <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> 
+                  <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> 
+                  <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> 
+                  <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> 
+                  <span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1">#TODO maybe do 1000000, although it takes like an hour</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">niter</span><span class="p">):</span>
+            <span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+
+            <span class="c1">#TODO need to find how to exclude the outliers so we can match rmedian and rmean to </span>
+            <span class="c1"># the regular mean and median excluded columns</span>
+            <span class="k">if</span> <span class="n">i</span><span class="o">%</span><span class="mi">20</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                <span class="n">values</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1">#100</span>
+                <span class="n">values</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+                <span class="n">one_outliers</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">values</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="n">values</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+            
+            <span class="k">if</span> <span class="n">i</span><span class="o">%</span><span class="mi">20</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                <span class="n">values</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1">#100.0</span>
+                <span class="n">values</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="mf">100.0</span>
+                <span class="n">onefloat_outliers</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">values</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+                <span class="n">values</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+            <span class="n">values</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+            <span class="k">if</span> <span class="n">i</span><span class="o">%</span><span class="mi">20</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                <span class="n">values</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1">#values[7] + 100000000</span>
+                <span class="n">values</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="o">=</span> <span class="n">values</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">+</span> <span class="mi">100000000</span>
+                <span class="n">mil_outliers</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">i</span><span class="o">%</span><span class="mi">50</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                <span class="n">values</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1">#values[7] - 100000000</span>
+                <span class="n">values</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="o">=</span> <span class="n">values</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">-</span> <span class="mi">100000000</span>
+                <span class="n">mil_outliers</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">values</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="o">=</span> <span class="n">values</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span>
+                <span class="n">values</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="o">=</span> <span class="n">values</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span>
+
+            <span class="n">values</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">=</span> <span class="n">col_gaussian</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>  
+
+            <span class="k">if</span> <span class="n">i</span><span class="o">%</span><span class="mi">20</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                <span class="n">values</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1">#values[10] + 3*100000000*stdev_gaus</span>
+                <span class="n">values</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span> <span class="o">=</span> <span class="n">values</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="mi">100000000</span><span class="o">*</span><span class="n">stdev_gaus</span>
+                <span class="n">gaus_outliers</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">i</span><span class="o">%</span><span class="mi">50</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                <span class="n">values</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1">#values[10] - 3*100000000*stdev_gaus</span>
+                <span class="n">values</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span> <span class="o">=</span> <span class="n">values</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="mi">100000000</span><span class="o">*</span><span class="n">stdev_gaus</span>
+                <span class="n">gaus_outliers</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">values</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span> <span class="o">=</span> <span class="n">values</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span>
+                <span class="n">values</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span> <span class="o">=</span> <span class="n">values</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span>
+            
+            <span class="c1">#writes each value list as a line in subprocess POPEN for grcollect</span>
+            <span class="n">grcollect</span><span class="o">.</span><span class="n">stdin</span><span class="o">.</span><span class="n">write</span><span class="p">(((</span><span class="nb">str</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">values</span><span class="p">))</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">))</span>
+
+        <span class="c1">#makes subprocess wait for grcollect to finish</span>
+        <span class="n">grcollect</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
+        <span class="c1">#closes subprocess</span>
+        <span class="n">grcollect</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="c1">#TODO remove print statements for everything from here forward</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;outliers:&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;one_outliers=&#39;</span><span class="o">+</span><span class="nb">repr</span><span class="p">(</span><span class="n">one_outliers</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;onefloat_outliers=&#39;</span><span class="o">+</span><span class="nb">repr</span><span class="p">(</span><span class="n">onefloat_outliers</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;mil_outliers=&#39;</span><span class="o">+</span><span class="nb">repr</span><span class="p">(</span><span class="n">mil_outliers</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;gaus_outliers=&#39;</span><span class="o">+</span><span class="nb">repr</span><span class="p">(</span><span class="n">gaus_outliers</span><span class="p">))</span>
+
+        <span class="c1">#write grcollect stat file to pandas dataframe</span>
+        <span class="n">df</span><span class="o">=</span><span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_test_data_dir</span><span class="p">,</span> <span class="s1">&#39;test_stat_grcollect.txt&#39;</span><span class="p">),</span> 
+                           <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+                           <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\s+&#39;</span><span class="p">,</span> 
+                           <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="c1">#TODO disable to csv after grcollect is tested</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_test_data_dir</span><span class="p">,</span> <span class="s1">&#39;test_stat_grcollect.csv&#39;</span><span class="p">))</span>
+
+        <span class="c1">#every 24 columns is the columns we perform rejection to in this case</span>
+        <span class="c1">#columns are &#39;count,rcount,mean,rmean,median,rmedian,mediandev,medianmeddev&#39; </span>
+        <span class="c1">#for every column that has statistics added to grcollect</span>
+        <span class="c1">#i.e columns &#39;2,3,4,5,6,7,8,9,10,11,12,13,14&#39;</span>
+
+        <span class="nb">print</span><span class="p">((</span><span class="n">df</span><span class="p">[</span><span class="mi">17</span><span class="p">]</span><span class="o">-</span><span class="n">df</span><span class="p">[</span><span class="mi">18</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">((</span><span class="n">df</span><span class="p">[</span><span class="mi">17</span><span class="o">+</span><span class="mi">24</span><span class="p">]</span><span class="o">-</span><span class="n">df</span><span class="p">[</span><span class="mi">18</span><span class="o">+</span><span class="mi">24</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">((</span><span class="n">df</span><span class="p">[</span><span class="mi">17</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="p">]</span><span class="o">-</span><span class="n">df</span><span class="p">[</span><span class="mi">18</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">((</span><span class="n">df</span><span class="p">[</span><span class="mi">17</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="p">]</span><span class="o">-</span><span class="n">df</span><span class="p">[</span><span class="mi">18</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+
+
+
+        <span class="nb">print</span><span class="p">((</span><span class="n">df</span><span class="p">[</span><span class="mi">17</span><span class="p">]</span><span class="o">-</span><span class="n">df</span><span class="p">[</span><span class="mi">18</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+        <span class="c1">#self assert true if every rejection outlier column from grcollect matches the number of outliers we produced</span>
+        <span class="c1">#TODO cleanup this +24 junk to something nicer maybe do something with range(24,3,24) and iterate over those</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">((</span><span class="n">df</span><span class="p">[</span><span class="mi">17</span><span class="p">]</span><span class="o">-</span><span class="n">df</span><span class="p">[</span><span class="mi">18</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">==</span><span class="n">one_outliers</span><span class="p">,</span>
+                        <span class="sa">f</span><span class="s1">&#39;The one outliers mismatch: </span><span class="si">{</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="mi">17</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="p">]</span><span class="o">-</span><span class="n">df</span><span class="p">[</span><span class="mi">18</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">!r}</span><span class="s1"> not equal to &#39;</span>
+                        <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">one_outliers</span><span class="si">!r}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">((</span><span class="n">df</span><span class="p">[</span><span class="mi">17</span><span class="o">+</span><span class="mi">24</span><span class="p">]</span><span class="o">-</span><span class="n">df</span><span class="p">[</span><span class="mi">18</span><span class="o">+</span><span class="mi">24</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">==</span><span class="n">onefloat_outliers</span><span class="p">,</span>
+                        <span class="sa">f</span><span class="s1">&#39;The floating point one outliers mismatch: </span><span class="si">{</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="mi">17</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="p">]</span><span class="o">-</span><span class="n">df</span><span class="p">[</span><span class="mi">18</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">!r}</span><span class="s1"> not equal to &#39;</span>
+                        <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">onefloat_outliers</span><span class="si">!r}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">((</span><span class="n">df</span><span class="p">[</span><span class="mi">17</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="p">]</span><span class="o">-</span><span class="n">df</span><span class="p">[</span><span class="mi">18</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">==</span><span class="n">mil_outliers</span><span class="p">,</span>
+                        <span class="sa">f</span><span class="s1">&#39;The counted outliers mismatch: </span><span class="si">{</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="mi">17</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="p">]</span><span class="o">-</span><span class="n">df</span><span class="p">[</span><span class="mi">18</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">!r}</span><span class="s1"> not equal to &#39;</span>
+                        <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">mil_outliers</span><span class="si">!r}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="c1">#gaussian outlier rejection should be within 2 percent of its total outliers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">gaus_outliers</span><span class="o">-</span><span class="mf">0.02</span><span class="o">*</span><span class="n">gaus_outliers</span><span class="o">&lt;=</span>
+                        <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="mi">17</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="p">]</span><span class="o">-</span><span class="n">df</span><span class="p">[</span><span class="mi">18</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+                        <span class="o">&lt;=</span><span class="n">gaus_outliers</span><span class="o">+</span><span class="mf">0.02</span><span class="o">*</span><span class="n">gaus_outliers</span><span class="p">,</span>
+                        <span class="sa">f</span><span class="s1">&#39;Gaussian outliers mismatch: </span><span class="si">{</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="mi">17</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="p">]</span><span class="o">-</span><span class="n">df</span><span class="p">[</span><span class="mi">18</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">!r}</span><span class="s1"> not within 2% of &#39;</span>
+                        <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">gaus_outliers</span><span class="si">!r}</span><span class="s1">&#39;</span><span class="p">)</span>
+        
+        <span class="c1">#now check if the rmeans and rmedians should be what they should if the outliers werent present</span>
+        <span class="c1">#columns are &#39;count,rcount,mean,rmean,median,rmedian,mediandev,medianmeddev&#39; </span>
+
+        <span class="c1">#TODO need to find how to exclude the outliers so we can match rmedian and rmean to </span>
+        <span class="c1"># the regular mean and median excluded columns</span>
+        <span class="c1">#maybe doing a antimean then applying a new mean with the outlier number but having 0s for the </span>
+        <span class="c1">#outliers for the dataset that dont get rejected</span>
+        <span class="c1"># print(df[18-8+2].sum()*(niter)/(niter-one_outliers))</span>
+        <span class="c1"># print(df[18+2].sum())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;means with excluded&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="mi">18</span><span class="o">-</span><span class="mi">8</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="p">(</span><span class="n">niter</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">niter</span><span class="o">-</span><span class="n">one_outliers</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="mi">18</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="mi">18</span><span class="o">-</span><span class="mi">8</span><span class="o">+</span><span class="mi">2</span><span class="o">+</span><span class="mi">24</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="p">(</span><span class="n">niter</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">niter</span><span class="o">-</span><span class="n">onefloat_outliers</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="mi">18</span><span class="o">+</span><span class="mi">2</span><span class="o">+</span><span class="mi">24</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="mi">18</span><span class="o">-</span><span class="mi">8</span><span class="o">+</span><span class="mi">2</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="p">(</span><span class="n">niter</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">niter</span><span class="o">-</span><span class="n">mil_outliers</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="mi">18</span><span class="o">+</span><span class="mi">2</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="mi">18</span><span class="o">-</span><span class="mi">8</span><span class="o">+</span><span class="mi">2</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="p">(</span><span class="n">niter</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">niter</span><span class="o">-</span><span class="n">gaus_outliers</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="mi">18</span><span class="o">+</span><span class="mi">2</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;means&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="mi">18</span><span class="o">-</span><span class="mi">8</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="mi">18</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="mi">18</span><span class="o">-</span><span class="mi">8</span><span class="o">+</span><span class="mi">2</span><span class="o">+</span><span class="mi">24</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="mi">18</span><span class="o">+</span><span class="mi">2</span><span class="o">+</span><span class="mi">24</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="mi">18</span><span class="o">-</span><span class="mi">8</span><span class="o">+</span><span class="mi">2</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="mi">18</span><span class="o">+</span><span class="mi">2</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="mi">18</span><span class="o">-</span><span class="mi">8</span><span class="o">+</span><span class="mi">2</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="mi">18</span><span class="o">+</span><span class="mi">2</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+
+        <span class="c1"># print(&#39;means&#39;)</span>
+        <span class="c1"># print(df[18-8+2])</span>
+        <span class="c1"># print(df[18+2])</span>
+        <span class="c1"># print(df[18-8+2+24])</span>
+        <span class="c1"># print(df[18+2+24])</span>
+        <span class="c1"># print(df[18-8+2+24+24])</span>
+        <span class="c1"># print(df[18+2+24+24])</span>
+        <span class="c1"># print(df[18-8+2+24+24+24])</span>
+        <span class="c1"># print(df[18+2+24+24+24])</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;medians&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="mi">18</span><span class="o">-</span><span class="mi">8</span><span class="o">+</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="mi">18</span><span class="o">+</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="mi">18</span><span class="o">-</span><span class="mi">8</span><span class="o">+</span><span class="mi">4</span><span class="o">+</span><span class="mi">24</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="mi">18</span><span class="o">+</span><span class="mi">4</span><span class="o">+</span><span class="mi">24</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="mi">18</span><span class="o">-</span><span class="mi">8</span><span class="o">+</span><span class="mi">4</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="mi">18</span><span class="o">+</span><span class="mi">4</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="mi">18</span><span class="o">-</span><span class="mi">8</span><span class="o">+</span><span class="mi">4</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="mi">18</span><span class="o">+</span><span class="mi">4</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span></div></div>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2018, Kaloyan Penev.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

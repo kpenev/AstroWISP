@@ -16,12 +16,12 @@
 <area shape="rect" id="node10" href="$PolynomialSDK_8h.xhtml" title="Declares a class for fitting elliptical gaussian PSFs as a smooth function of image position." alt="" coords="214,893,421,956"/>
 <area shape="rect" id="node11" href="$SDKUtil_8cpp.xhtml" title="Define the functions from SDKUtil.h." alt="" coords="5,893,190,956"/>
 <area shape="rect" id="node13" href="$FitPSF_2Image_8h.xhtml" title="Defines a class describing an image of Pixel pixels." alt="" coords="692,560,876,623"/>
-<area shape="rect" id="node14" href="$OverlapSource_8h.xhtml" title="Defines the overlap&#45;related features of PSF fitting sources." alt="" coords="835,671,1035,734"/>
+<area shape="rect" id="node14" href="$OverlapSource_8h.xhtml" title="Defines the overlap&#45;related features of PSF fitting sources." alt="" coords="835,671,1034,734"/>
 <area shape="rect" id="node18" href="$Pixel_8cpp.xhtml" title="Define the backrgound excess functions and some methods of Pixel.h." alt="" coords="244,560,428,623"/>
 <area shape="rect" id="node19" href="$SDKSourceBase_8h.xhtml" title="Declares a base class for sources participating in SDK fitting." alt="" coords="453,560,667,623"/>
 <area shape="rect" id="node16" href="$LinearSource_8cpp.xhtml" title="Define some of the methods of LinearSource class." alt="" coords="1034,893,1239,956"/>
 <area shape="rect" id="node17" href="$PiecewiseBicubicPSFSmoothing_8h_source.xhtml" title=" " alt="" coords="681,893,1010,956"/>
-<area shape="rect" id="node20" href="$SDKSourceBase_8cpp.xhtml" title="Defines some of the methods of the SDKSourceBase class." alt="" coords="325,671,556,734"/>
+<area shape="rect" id="node20" href="$SDKSourceBase_8cpp.xhtml" title="Defines some of the methods of the SDKSourceBase class." alt="" coords="324,671,556,734"/>
 <area shape="rect" id="node23" href="$PiecewiseBicubicMap_8cpp.xhtml" title="Definitions of some methods of the PiecewiseBicubicMap class." alt="" coords="1420,449,1669,512"/>
-<area shape="rect" id="node25" href="$PiecewiseBicubicCell_8cpp.xhtml" title="The implementation details of PiecewiseBicubicCell." alt="" coords="1353,227,1600,290"/>
+<area shape="rect" id="node25" href="$PiecewiseBicubicCell_8cpp.xhtml" title="The implementation details of PiecewiseBicubicCell." alt="" coords="1352,227,1600,290"/>
 </map>

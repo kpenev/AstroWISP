@@ -6,7 +6,7 @@
 <area shape="rect" id="node22" href="$PiecewiseBicubicMap_8h.xhtml" title="Declares a smoothly varying over an image piecewise bicubic PSF map class." alt="" coords="1293,116,1526,179"/>
 <area shape="rect" id="node25" href="$SubPixPhot_2Common_8h.xhtml" title="Declare functions used by both the C&#45;interface and the command line interface." alt="" coords="1549,116,1742,179"/>
 <area shape="rect" id="node3" href="$FitPSF_2Image_8h.xhtml" title="Defines a class describing an image of Pixel pixels." alt="" coords="5,227,190,290"/>
-<area shape="rect" id="node5" href="$OverlapSource_8h.xhtml" title="Defines the overlap&#45;related features of PSF fitting sources." alt="" coords="151,338,351,401"/>
+<area shape="rect" id="node5" href="$OverlapSource_8h.xhtml" title="Defines the overlap&#45;related features of PSF fitting sources." alt="" coords="151,338,350,401"/>
 <area shape="rect" id="node10" href="$Pixel_8cpp.xhtml" title="Define the backrgound excess functions and some methods of Pixel.h." alt="" coords="288,227,472,290"/>
 <area shape="rect" id="node11" href="$FitPSF_2SDKSource_8h_source.xhtml" title=" " alt="" coords="417,338,602,401"/>
 <area shape="rect" id="node15" href="$SDKSourceBase_8h.xhtml" title="Declares a base class for sources participating in SDK fitting." alt="" coords="546,227,761,290"/>
@@ -20,7 +20,7 @@
 <area shape="rect" id="node14" href="$SDKUtil_8cpp.xhtml" title="Define the functions from SDKUtil.h." alt="" coords="1031,560,1215,623"/>
 <area shape="rect" id="node16" href="$SDKSourceBase_8cpp.xhtml" title="Defines some of the methods of the SDKSourceBase class." alt="" coords="626,338,857,401"/>
 <area shape="rect" id="node18" href="$DataTreeCalculations_8h.xhtml" title="Declare functions that calculate some entries of I/O data trees from others." alt="" coords="784,227,1014,290"/>
-<area shape="rect" id="node20" href="$EllipticalGaussianMap_8cpp.xhtml" title="Definitions of some methods of the EllipticalGaussianMap class." alt="" coords="1037,227,1289,290"/>
+<area shape="rect" id="node20" href="$EllipticalGaussianMap_8cpp.xhtml" title="Definitions of some methods of the EllipticalGaussianMap class." alt="" coords="1037,227,1288,290"/>
 <area shape="rect" id="node19" href="$DataTreeCalculations_8cpp.xhtml" title="The definitions of the functions declared in DataTreeCalculations.h." alt="" coords="881,338,1127,401"/>
 <area shape="rect" id="node23" href="$PSF_2CInterface_8cpp.xhtml" title="The definitions of the functions declared in CInterface.h." alt="" coords="1363,227,1547,290"/>
 <area shape="rect" id="node24" href="$PiecewiseBicubicMap_8cpp.xhtml" title="Definitions of some methods of the PiecewiseBicubicMap class." alt="" coords="1572,227,1821,290"/>

@@ -16,12 +16,6 @@ if not path.exists(fistar_path):
     fistar_path += '.exe'
 assert path.exists(fistar_path)
 
-grcollect_path = path.join(_module_path, 'grcollect')
-if not path.exists(grcollect_path):
-    grcollect_path += '.exe'
-assert path.exists(grcollect_path)
-
-
 __all__ = ['BackgroundExtractor',
            'FitStarShape',
            'SubPixPhot',

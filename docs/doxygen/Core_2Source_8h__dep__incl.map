@@ -9,7 +9,7 @@
 <area shape="rect" id="node4" href="$PolynomialSDK_8h.xhtml" title="Declares a class for fitting elliptical gaussian PSFs as a smooth function of image position." alt="" coords="447,782,653,845"/>
 <area shape="rect" id="node6" href="$SourceInput_8cpp.xhtml" title="Define some of the methods of the SourceInput class." alt="" coords="258,449,488,512"/>
 <area shape="rect" id="node9" href="$FitPSF_2Image_8h.xhtml" title="Defines a class describing an image of Pixel pixels." alt="" coords="990,449,1174,512"/>
-<area shape="rect" id="node11" href="$OverlapSource_8h.xhtml" title="Defines the overlap&#45;related features of PSF fitting sources." alt="" coords="1263,560,1462,623"/>
+<area shape="rect" id="node11" href="$OverlapSource_8h.xhtml" title="Defines the overlap&#45;related features of PSF fitting sources." alt="" coords="1262,560,1462,623"/>
 <area shape="rect" id="node16" href="$Pixel_8cpp.xhtml" title="Define the backrgound excess functions and some methods of Pixel.h." alt="" coords="1222,449,1406,512"/>
 <area shape="rect" id="node17" href="$FitPSF_2SDKSource_8h_source.xhtml" title=" " alt="" coords="613,560,797,623"/>
 <area shape="rect" id="node20" href="$SDKSourceBase_8h.xhtml" title="Declares a base class for sources participating in SDK fitting." alt="" coords="751,449,965,512"/>
@@ -20,7 +20,7 @@
 <area shape="rect" id="node15" href="$PiecewiseBicubicPSFSmoothing_8h_source.xhtml" title=" " alt="" coords="1407,782,1736,845"/>
 <area shape="rect" id="node18" href="$SDKUtil_8h.xhtml" title="Declare functions used during elliptical Gaussian PSF fitting." alt="" coords="613,671,797,734"/>
 <area shape="rect" id="node19" href="$SDKUtil_8cpp.xhtml" title="Define the functions from SDKUtil.h." alt="" coords="678,782,862,845"/>
-<area shape="rect" id="node21" href="$SDKSourceBase_8cpp.xhtml" title="Defines some of the methods of the SDKSourceBase class." alt="" coords="821,560,1053,623"/>
+<area shape="rect" id="node21" href="$SDKSourceBase_8cpp.xhtml" title="Defines some of the methods of the SDKSourceBase class." alt="" coords="821,560,1052,623"/>
 <area shape="rect" id="node23" href="$Map_8h.xhtml" title="Declarations of the Map class and some related functions." alt="" coords="1778,227,1962,290"/>
 <area shape="rect" id="node33" href="$MapSourceContainer_8h.xhtml" title="Declares a container for holding MapSource objects." alt="" coords="2426,227,2653,290"/>
 <area shape="rect" id="node24" href="$EllipticalGaussianMap_8h.xhtml" title="Declares a smoothly varying over an image elliptical Gaussian PSF map class." alt="" coords="2185,338,2419,401"/>
@@ -28,7 +28,7 @@
 <area shape="rect" id="node29" href="$PiecewiseBicubicMap_8h.xhtml" title="Declares a smoothly varying over an image piecewise bicubic PSF map class." alt="" coords="1870,338,2102,401"/>
 <area shape="rect" id="node32" href="$SubPixPhot_2Common_8h.xhtml" title="Declare functions used by both the C&#45;interface and the command line interface." alt="" coords="2443,338,2636,401"/>
 <area shape="rect" id="node25" href="$DataTreeCalculations_8h.xhtml" title="Declare functions that calculate some entries of I/O data trees from others." alt="" coords="2618,449,2848,512"/>
-<area shape="rect" id="node27" href="$EllipticalGaussianMap_8cpp.xhtml" title="Definitions of some methods of the EllipticalGaussianMap class." alt="" coords="2343,449,2595,512"/>
+<area shape="rect" id="node27" href="$EllipticalGaussianMap_8cpp.xhtml" title="Definitions of some methods of the EllipticalGaussianMap class." alt="" coords="2343,449,2594,512"/>
 <area shape="rect" id="node26" href="$DataTreeCalculations_8cpp.xhtml" title="The definitions of the functions declared in DataTreeCalculations.h." alt="" coords="2610,560,2856,623"/>
 <area shape="rect" id="node30" href="$PSF_2CInterface_8cpp.xhtml" title="The definitions of the functions declared in CInterface.h." alt="" coords="2135,449,2320,512"/>
 <area shape="rect" id="node31" href="$PiecewiseBicubicMap_8cpp.xhtml" title="Definitions of some methods of the PiecewiseBicubicMap class." alt="" coords="1862,449,2111,512"/>

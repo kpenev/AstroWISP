@@ -10,7 +10,7 @@
 <area shape="rect" id="node24" href="$SourceID_8h.xhtml" title="The declaration of the SourceID class." alt="" coords="3972,612,4073,641"/>
 <area shape="rect" id="node33" href="$Background_2Source_8h.xhtml" title="Declares the base class for background extract(ion/ed) from an astronomical image." alt="" coords="490,527,678,556"/>
 <area shape="rect" id="node34" href="$Core_2Image_8h.xhtml" title="Declares a base class for images to be processed." alt="" coords="3011,612,3141,641"/>
-<area shape="rect" id="node11" title=" " alt="" coords="1718,766,1797,795"/>
+<area shape="rect" id="node11" title=" " alt="" coords="1718,766,1796,795"/>
 <area shape="rect" id="node6" href="$WedgeIntegral_8h.xhtml" title="Declares a class that calculates integrals of x^my^n over circle wedges." alt="" coords="2499,612,2637,641"/>
 <area shape="rect" id="node7" href="$Core_2Typedefs_8h.xhtml" title="Some useful typedef statements." alt="" coords="2000,689,2150,718"/>
 <area shape="rect" id="node8" title=" " alt="" coords="3341,852,3406,881"/>
@@ -23,10 +23,10 @@
 <area shape="rect" id="node29" href="$Point_8h.xhtml" title="Defines a point class in two dimensions." alt="" coords="254,612,325,641"/>
 <area shape="rect" id="node38" href="$SubPixelMap_8h.xhtml" title="Declares the base class for all sub&#45;pixel maps." alt="" coords="3267,612,3448,641"/>
 <area shape="rect" id="node40" href="$H5IODataTree_8h.xhtml" title="A structure to hold any output data produced by subpixtools." alt="" coords="1945,612,2114,641"/>
-<area shape="rect" id="node41" title=" " alt="" coords="2392,433,2435,462"/>
+<area shape="rect" id="node41" title=" " alt="" coords="2392,433,2434,462"/>
 <area shape="rect" id="node42" href="$EllipticalGaussian_8h.xhtml" title="Class defining ellptical Gaussian point spread functions (PSF)." alt="" coords="3418,347,3630,376"/>
 <area shape="rect" id="node47" href="$Map_8h.xhtml" title="Declarations of the Map class and some related functions." alt="" coords="2291,270,2405,299"/>
-<area shape="rect" id="node48" href="$MapSource_8h.xhtml" title="Defines a source class which can be passed directly to a PSF map." alt="" coords="1777,347,1893,376"/>
+<area shape="rect" id="node48" href="$MapSource_8h.xhtml" title="Defines a source class which can be passed directly to a PSF map." alt="" coords="1776,347,1893,376"/>
 <area shape="rect" id="node49" href="$Core_2Source_8h.xhtml" title="Declare a base class for sources processed by SubPixTools." alt="" coords="853,433,990,462"/>
 <area shape="rect" id="node50" href="$Flux_8h.xhtml" title="Declare a class for flux measurements." alt="" coords="1075,527,1141,556"/>
 <area shape="rect" id="node17" href="$FitPSF_2Config_8h.xhtml" title="Declares the command line parser for the FitPSF tool." alt="" coords="1737,612,1818,641"/>
@@ -43,8 +43,8 @@
 <area shape="rect" id="node25" title=" " alt="" coords="4200,689,4264,718"/>
 <area shape="rect" id="node26" title=" " alt="" coords="3555,689,3624,718"/>
 <area shape="rect" id="node28" title=" " alt="" coords="4104,689,4176,718"/>
-<area shape="rect" id="node31" title=" " alt="" coords="552,689,611,718"/>
-<area shape="rect" id="node35" title=" " alt="" coords="3011,689,3083,718"/>
+<area shape="rect" id="node31" title=" " alt="" coords="552,689,610,718"/>
+<area shape="rect" id="node35" title=" " alt="" coords="3010,689,3083,718"/>
 <area shape="rect" id="node43" href="$EllipticalGaussianIntegralRectangle_8h.xhtml" title="Declare a class for calculating ellptical Gaussian integrals over rectangles." alt="" coords="2661,424,2864,470"/>
 <area shape="rect" id="node44" href="$EllipticalGaussianIntegralWedge_8h.xhtml" title="Declare a class for integrating elliptical Guassians over wedge areas." alt="" coords="2989,424,3192,470"/>
 <area shape="rect" id="node45" href="$PSF_8h.xhtml" title="Defines the base class of all PSF models." alt="" coords="2355,527,2421,556"/>

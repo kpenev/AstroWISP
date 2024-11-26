@@ -46,8 +46,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Unix Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation.html#windows-installation">Windows Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="unit_tests.html">Unit Tests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="python_interface/index.html">Python Interface Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_implementation/modules.html">Python Package Implementation</a></li>
@@ -91,6 +90,7 @@
  | <a href="#F"><strong>F</strong></a>
  | <a href="#G"><strong>G</strong></a>
  | <a href="#I"><strong>I</strong></a>
+ | <a href="#L"><strong>L</strong></a>
  | <a href="#M"><strong>M</strong></a>
  | <a href="#O"><strong>O</strong></a>
  | <a href="#P"><strong>P</strong></a>
@@ -126,6 +126,8 @@
         <li><a href="_implementation/astrowisp.html#astrowisp.SubPixPhot.__call__">(astrowisp.SubPixPhot method)</a>
 </li>
         <li><a href="_implementation/astrowisp.subpixphot.html#astrowisp.subpixphot.SubPixPhot.__call__">(astrowisp.subpixphot.SubPixPhot method)</a>
+</li>
+        <li><a href="_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.AlglibSpline.__call__">(astrowisp.utils.explore_prf.AlglibSpline method)</a>
 </li>
       </ul></li>
       <li><a href="_implementation/astrowisp.background.html#astrowisp.background.BackgroundExtractor.__del__">__del__() (astrowisp.background.BackgroundExtractor method)</a>
@@ -180,6 +182,8 @@
         <li><a href="_implementation/astrowisp.html#astrowisp.SubPixPhot.__init__">(astrowisp.SubPixPhot method)</a>
 </li>
         <li><a href="_implementation/astrowisp.subpixphot.html#astrowisp.subpixphot.SubPixPhot.__init__">(astrowisp.subpixphot.SubPixPhot method)</a>
+</li>
+        <li><a href="_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.AlglibSpline.__init__">(astrowisp.utils.explore_prf.AlglibSpline method)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -243,6 +247,8 @@
 </li>
       </ul></li>
       <li><a href="_implementation/astrowisp.fake_image.image.html#astrowisp.fake_image.image.Image.add_source">add_source() (astrowisp.fake_image.image.Image method)</a>
+</li>
+      <li><a href="_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.AlglibSpline">AlglibSpline (class in astrowisp.utils.explore_prf)</a>
 </li>
       <li><a href="_implementation/astrowisp.tests.utilities.html#astrowisp.tests.utilities.FloatTestCase.approx_equal">approx_equal() (astrowisp.tests.utilities.FloatTestCase method)</a>
 
@@ -326,13 +332,6 @@
 </li>
       </ul></li>
       <li>
-    astrowisp.hat_masks
-
-      <ul>
-        <li><a href="_implementation/astrowisp.hat_masks.html#module-astrowisp.hat_masks">module</a>
-</li>
-      </ul></li>
-      <li>
     astrowisp.io_tree
 
       <ul>
@@ -346,8 +345,6 @@
         <li><a href="_implementation/astrowisp.piecewise_bicubic_psf.html#module-astrowisp.piecewise_bicubic_psf">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     astrowisp.piecewise_bicubic_psf_map
 
@@ -362,6 +359,8 @@
         <li><a href="_implementation/astrowisp.psf_base.html#module-astrowisp.psf_base">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     astrowisp.subpixphot
 
@@ -412,6 +411,13 @@
 </li>
       </ul></li>
       <li>
+    astrowisp.tests.test_fistar
+
+      <ul>
+        <li><a href="_implementation/astrowisp.tests.test_fistar.html#module-astrowisp.tests.test_fistar">module</a>
+</li>
+      </ul></li>
+      <li>
     astrowisp.tests.test_fit_star_shape
 
       <ul>
@@ -433,6 +439,13 @@
 </li>
       </ul></li>
       <li>
+    astrowisp.tests.test_grcollect
+
+      <ul>
+        <li><a href="_implementation/astrowisp.tests.test_grcollect.html#module-astrowisp.tests.test_grcollect">module</a>
+</li>
+      </ul></li>
+      <li>
     astrowisp.tests.test_piecewise_bicubic_psf
 
       <ul>
@@ -451,6 +464,13 @@
 
       <ul>
         <li><a href="_implementation/astrowisp.utils.html#module-astrowisp.utils">module</a>
+</li>
+      </ul></li>
+      <li>
+    astrowisp.utils.explore_prf
+
+      <ul>
+        <li><a href="_implementation/astrowisp.utils.explore_prf.html#module-astrowisp.utils.explore_prf">module</a>
 </li>
       </ul></li>
       <li>
@@ -548,18 +568,24 @@
         <li><a href="_unit_tests/tests.test_fit_star_shape.utils.html#tests.test_fit_star_shape.utils.evaluate_psffit_terms">(in module tests.test_fit_star_shape.utils)</a>
 </li>
       </ul></li>
+      <li><a href="_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.extract_pixel_data">extract_pixel_data() (in module astrowisp.utils.explore_prf)</a>
+</li>
   </ul></td>
 </tr></table>
 
 <h2 id="F">F</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.find_pixel_offsets">find_pixel_offsets() (in module astrowisp.utils.explore_prf)</a>
+</li>
       <li><a href="_implementation/astrowisp.fit_star_shape.html#astrowisp.fit_star_shape.FitStarShape.fit">fit() (astrowisp.fit_star_shape.FitStarShape method)</a>
 
       <ul>
         <li><a href="_implementation/astrowisp.html#astrowisp.FitStarShape.fit">(astrowisp.FitStarShape method)</a>
 </li>
       </ul></li>
+      <li><a href="_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.fit_spline">fit_spline() (in module astrowisp.utils.explore_prf)</a>
+</li>
       <li><a href="_implementation/astrowisp.tests.fitpsf.noiseless_tests.html#astrowisp.tests.fitpsf.noiseless_tests.TestPiecewiseBicubicNoiseless.fitpsf_executable">fitpsf_executable (astrowisp.tests.fitpsf.noiseless_tests.TestPiecewiseBicubicNoiseless attribute)</a>
 
       <ul>
@@ -604,6 +630,8 @@
 </li>
       <li><a href="_implementation/astrowisp.utils.file_utilities.html#astrowisp.utils.file_utilities.get_fname_pattern_substitutions">get_fname_pattern_substitutions() (in module astrowisp.utils.file_utilities)</a>
 </li>
+      <li><a href="_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.get_image_slices">get_image_slices() (in module astrowisp.utils.explore_prf)</a>
+</li>
       <li><a href="_implementation/astrowisp.fake_image.piecewise_psf.html#astrowisp.fake_image.piecewise_psf.PiecewisePSF.get_left_range">get_left_range() (astrowisp.fake_image.piecewise_psf.PiecewisePSF method)</a>
 
       <ul>
@@ -614,9 +642,13 @@
         <li><a href="_implementation/astrowisp.psf_base.html#astrowisp.psf_base.PSFBase.get_left_range">(astrowisp.psf_base.PSFBase method)</a>
 </li>
       </ul></li>
+      <li><a href="_implementation/astrowisp.fake_image.piecewise_psf.html#astrowisp.fake_image.piecewise_psf.get_piece_index">get_piece_index() (in module astrowisp.fake_image.piecewise_psf)</a>
+</li>
+      <li><a href="_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.get_plot_tasks">get_plot_tasks() (in module astrowisp.utils.explore_prf)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="_implementation/astrowisp.fake_image.piecewise_psf.html#astrowisp.fake_image.piecewise_psf.get_piece_index">get_piece_index() (in module astrowisp.fake_image.piecewise_psf)</a>
+      <li><a href="_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.get_prf_data">get_prf_data() (in module astrowisp.utils.explore_prf)</a>
 </li>
       <li><a href="_implementation/astrowisp.io_tree.html#astrowisp.io_tree.IOTree.get_psfmap_variables">get_psfmap_variables() (astrowisp.io_tree.IOTree method)</a>
 </li>
@@ -630,6 +662,12 @@
         <li><a href="_implementation/astrowisp.psf_base.html#astrowisp.psf_base.PSFBase.get_right_range">(astrowisp.psf_base.PSFBase method)</a>
 </li>
       </ul></li>
+      <li><a href="_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.get_source_info">get_source_info() (in module astrowisp.utils.explore_prf)</a>
+</li>
+      <li><a href="_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.get_source_positions">get_source_positions() (in module astrowisp.utils.explore_prf)</a>
+</li>
+      <li><a href="_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.get_trans_fname">get_trans_fname() (in module astrowisp.utils.explore_prf)</a>
+</li>
       <li><a href="_implementation/astrowisp.utils.file_utilities.html#astrowisp.utils.file_utilities.get_unpacked_fits">get_unpacked_fits() (in module astrowisp.utils.file_utilities)</a>
 </li>
       <li><a href="_implementation/astrowisp.fake_image.piecewise_psf.html#astrowisp.fake_image.piecewise_psf.PiecewisePSF.get_up_range">get_up_range() (astrowisp.fake_image.piecewise_psf.PiecewisePSF method)</a>
@@ -687,9 +725,19 @@
   </ul></td>
 </tr></table>
 
+<h2 id="L">L</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.list_plot_filenames">list_plot_filenames() (in module astrowisp.utils.explore_prf)</a>
+</li>
+  </ul></td>
+</tr></table>
+
 <h2 id="M">M</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.main">main() (in module astrowisp.utils.explore_prf)</a>
+</li>
       <li><a href="_implementation/astrowisp.tests.fitpsf.utils.html#astrowisp.tests.fitpsf.utils.make_image_and_source_list">make_image_and_source_list() (in module astrowisp.tests.fitpsf.utils)</a>
 
       <ul>
@@ -728,8 +776,6 @@
 </li>
         <li><a href="_implementation/astrowisp.fit_star_shape.html#module-astrowisp.fit_star_shape">astrowisp.fit_star_shape</a>
 </li>
-        <li><a href="_implementation/astrowisp.hat_masks.html#module-astrowisp.hat_masks">astrowisp.hat_masks</a>
-</li>
         <li><a href="_implementation/astrowisp.io_tree.html#module-astrowisp.io_tree">astrowisp.io_tree</a>
 </li>
         <li><a href="_implementation/astrowisp.piecewise_bicubic_psf.html#module-astrowisp.piecewise_bicubic_psf">astrowisp.piecewise_bicubic_psf</a>
@@ -752,17 +798,23 @@
 </li>
         <li><a href="_implementation/astrowisp.tests.test_fake_image.html#module-astrowisp.tests.test_fake_image">astrowisp.tests.test_fake_image</a>
 </li>
+        <li><a href="_implementation/astrowisp.tests.test_fistar.html#module-astrowisp.tests.test_fistar">astrowisp.tests.test_fistar</a>
+</li>
         <li><a href="_implementation/astrowisp.tests.test_fit_star_shape.html#module-astrowisp.tests.test_fit_star_shape">astrowisp.tests.test_fit_star_shape</a>
 </li>
         <li><a href="_implementation/astrowisp.tests.test_fit_star_shape.noiseless_tests.html#module-astrowisp.tests.test_fit_star_shape.noiseless_tests">astrowisp.tests.test_fit_star_shape.noiseless_tests</a>
 </li>
         <li><a href="_implementation/astrowisp.tests.test_fit_star_shape.utils.html#module-astrowisp.tests.test_fit_star_shape.utils">astrowisp.tests.test_fit_star_shape.utils</a>
 </li>
+        <li><a href="_implementation/astrowisp.tests.test_grcollect.html#module-astrowisp.tests.test_grcollect">astrowisp.tests.test_grcollect</a>
+</li>
         <li><a href="_implementation/astrowisp.tests.test_piecewise_bicubic_psf.html#module-astrowisp.tests.test_piecewise_bicubic_psf">astrowisp.tests.test_piecewise_bicubic_psf</a>
 </li>
         <li><a href="_implementation/astrowisp.tests.utilities.html#module-astrowisp.tests.utilities">astrowisp.tests.utilities</a>
 </li>
         <li><a href="_implementation/astrowisp.utils.html#module-astrowisp.utils">astrowisp.utils</a>
+</li>
+        <li><a href="_implementation/astrowisp.utils.explore_prf.html#module-astrowisp.utils.explore_prf">astrowisp.utils.explore_prf</a>
 </li>
         <li><a href="_implementation/astrowisp.utils.file_utilities.html#module-astrowisp.utils.file_utilities">astrowisp.utils.file_utilities</a>
 </li>
@@ -778,11 +830,15 @@
 </li>
         <li><a href="_unit_tests/tests.test_fake_image.html#module-tests.test_fake_image">tests.test_fake_image</a>
 </li>
+        <li><a href="_unit_tests/tests.test_fistar.html#module-tests.test_fistar">tests.test_fistar</a>
+</li>
         <li><a href="_unit_tests/tests.test_fit_star_shape.html#module-tests.test_fit_star_shape">tests.test_fit_star_shape</a>
 </li>
         <li><a href="_unit_tests/tests.test_fit_star_shape.noiseless_tests.html#module-tests.test_fit_star_shape.noiseless_tests">tests.test_fit_star_shape.noiseless_tests</a>
 </li>
         <li><a href="_unit_tests/tests.test_fit_star_shape.utils.html#module-tests.test_fit_star_shape.utils">tests.test_fit_star_shape.utils</a>
+</li>
+        <li><a href="_unit_tests/tests.test_grcollect.html#module-tests.test_grcollect">tests.test_grcollect</a>
 </li>
         <li><a href="_unit_tests/tests.test_piecewise_bicubic_psf.html#module-tests.test_piecewise_bicubic_psf">tests.test_piecewise_bicubic_psf</a>
 </li>
@@ -807,7 +863,9 @@
 <h2 id="P">P</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="_implementation/astrowisp.hat_masks.html#astrowisp.hat_masks.parse_hat_mask">parse_hat_mask() (in module astrowisp.hat_masks)</a>
+      <li><a href="_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.pad_prf_data">pad_prf_data() (in module astrowisp.utils.explore_prf)</a>
+</li>
+      <li><a href="_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.parse_command_line">parse_command_line() (in module astrowisp.utils.explore_prf)</a>
 </li>
       <li><a href="_implementation/astrowisp.html#astrowisp.PiecewiseBicubicPSF">PiecewiseBicubicPSF (class in astrowisp)</a>
 
@@ -823,9 +881,17 @@
         <li><a href="_implementation/astrowisp.piecewise_bicubic_psf_map.html#astrowisp.piecewise_bicubic_psf_map.PiecewiseBicubicPSFMap">(class in astrowisp.piecewise_bicubic_psf_map)</a>
 </li>
       </ul></li>
+      <li><a href="_implementation/astrowisp.fake_image.piecewise_psf.html#astrowisp.fake_image.piecewise_psf.PiecewisePSF">PiecewisePSF (class in astrowisp.fake_image.piecewise_psf)</a>
+</li>
+      <li><a href="_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.plot_3d_prf">plot_3d_prf() (in module astrowisp.utils.explore_prf)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="_implementation/astrowisp.fake_image.piecewise_psf.html#astrowisp.fake_image.piecewise_psf.PiecewisePSF">PiecewisePSF (class in astrowisp.fake_image.piecewise_psf)</a>
+      <li><a href="_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.plot_entire_prf">plot_entire_prf() (in module astrowisp.utils.explore_prf)</a>
+</li>
+      <li><a href="_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.AlglibSpline.plot_grid_boundaries">plot_grid_boundaries() (astrowisp.utils.explore_prf.AlglibSpline method)</a>
+</li>
+      <li><a href="_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.plot_prf_slice">plot_prf_slice() (in module astrowisp.utils.explore_prf)</a>
 </li>
       <li><a href="_implementation/astrowisp.tests.test_piecewise_bicubic_psf.html#astrowisp.tests.test_piecewise_bicubic_psf.point_in_grid">point_in_grid() (in module astrowisp.tests.test_piecewise_bicubic_psf)</a>
 
@@ -885,6 +951,8 @@
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.show_plots">show_plots() (in module astrowisp.utils.explore_prf)</a>
+</li>
       <li><a href="_implementation/astrowisp.html#astrowisp.SubPixPhot">SubPixPhot (class in astrowisp)</a>
 
       <ul>
@@ -919,6 +987,12 @@
 
       <ul>
         <li><a href="_unit_tests/tests.test_background.html#tests.test_background.TestAnnulusBackground.test_crowded_image">(tests.test_background.TestAnnulusBackground method)</a>
+</li>
+      </ul></li>
+      <li><a href="_implementation/astrowisp.tests.test_grcollect.html#astrowisp.tests.test_grcollect.TestGRCollect.test_dataset">test_dataset() (astrowisp.tests.test_grcollect.TestGRCollect method)</a>
+
+      <ul>
+        <li><a href="_unit_tests/tests.test_grcollect.html#tests.test_grcollect.TestGRCollect.test_dataset">(tests.test_grcollect.TestGRCollect method)</a>
 </li>
       </ul></li>
       <li><a href="_implementation/astrowisp.tests.fitpsf.noiseless_tests.html#astrowisp.tests.fitpsf.noiseless_tests.TestPiecewiseBicubicNoiseless.test_four_overlapping_sources">test_four_overlapping_sources() (astrowisp.tests.fitpsf.noiseless_tests.TestPiecewiseBicubicNoiseless method)</a>
@@ -1009,8 +1083,6 @@
         <li><a href="_unit_tests/tests.test_fit_star_shape.noiseless_tests.html#tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.test_single_source">(tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless method)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_implementation/astrowisp.tests.fitpsf.noiseless_tests.html#astrowisp.tests.fitpsf.noiseless_tests.TestPiecewiseBicubicNoiseless.test_two_overlapping_sources">test_two_overlapping_sources() (astrowisp.tests.fitpsf.noiseless_tests.TestPiecewiseBicubicNoiseless method)</a>
 
       <ul>
@@ -1019,6 +1091,14 @@
         <li><a href="_unit_tests/tests.fitpsf.noiseless_tests.html#tests.fitpsf.noiseless_tests.TestPiecewiseBicubicNoiseless.test_two_overlapping_sources">(tests.fitpsf.noiseless_tests.TestPiecewiseBicubicNoiseless method)</a>
 </li>
         <li><a href="_unit_tests/tests.test_fit_star_shape.noiseless_tests.html#tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.test_two_overlapping_sources">(tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_implementation/astrowisp.tests.test_fistar.html#astrowisp.tests.test_fistar.TestFistar.test_xo1">test_xo1() (astrowisp.tests.test_fistar.TestFistar method)</a>
+
+      <ul>
+        <li><a href="_unit_tests/tests.test_fistar.html#tests.test_fistar.TestFistar.test_xo1">(tests.test_fistar.TestFistar method)</a>
 </li>
       </ul></li>
       <li><a href="_implementation/astrowisp.tests.test_piecewise_bicubic_psf.html#astrowisp.tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_zero">test_zero() (astrowisp.tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF method)</a>
@@ -1033,10 +1113,22 @@
         <li><a href="_unit_tests/tests.test_background.html#tests.test_background.TestAnnulusBackground">(class in tests.test_background)</a>
 </li>
       </ul></li>
+      <li><a href="_implementation/astrowisp.tests.test_fistar.html#astrowisp.tests.test_fistar.TestFistar">TestFistar (class in astrowisp.tests.test_fistar)</a>
+
+      <ul>
+        <li><a href="_unit_tests/tests.test_fistar.html#tests.test_fistar.TestFistar">(class in tests.test_fistar)</a>
+</li>
+      </ul></li>
       <li><a href="_implementation/astrowisp.tests.test_fit_star_shape.noiseless_tests.html#astrowisp.tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless">TestFitStarShapeNoiseless (class in astrowisp.tests.test_fit_star_shape.noiseless_tests)</a>
 
       <ul>
         <li><a href="_unit_tests/tests.test_fit_star_shape.noiseless_tests.html#tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless">(class in tests.test_fit_star_shape.noiseless_tests)</a>
+</li>
+      </ul></li>
+      <li><a href="_implementation/astrowisp.tests.test_grcollect.html#astrowisp.tests.test_grcollect.TestGRCollect">TestGRCollect (class in astrowisp.tests.test_grcollect)</a>
+
+      <ul>
+        <li><a href="_unit_tests/tests.test_grcollect.html#tests.test_grcollect.TestGRCollect">(class in tests.test_grcollect)</a>
 </li>
       </ul></li>
       <li><a href="_implementation/astrowisp.tests.test_fake_image.html#astrowisp.tests.test_fake_image.TestImage">TestImage (class in astrowisp.tests.test_fake_image)</a>
@@ -1100,6 +1192,13 @@
 </li>
       </ul></li>
       <li>
+    tests.test_fistar
+
+      <ul>
+        <li><a href="_unit_tests/tests.test_fistar.html#module-tests.test_fistar">module</a>
+</li>
+      </ul></li>
+      <li>
     tests.test_fit_star_shape
 
       <ul>
@@ -1118,6 +1217,13 @@
 
       <ul>
         <li><a href="_unit_tests/tests.test_fit_star_shape.utils.html#module-tests.test_fit_star_shape.utils">module</a>
+</li>
+      </ul></li>
+      <li>
+    tests.test_grcollect
+
+      <ul>
+        <li><a href="_unit_tests/tests.test_grcollect.html#module-tests.test_grcollect">module</a>
 </li>
       </ul></li>
       <li>
