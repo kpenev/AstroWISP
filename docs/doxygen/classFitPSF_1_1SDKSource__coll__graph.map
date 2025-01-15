@@ -1,16 +1,16 @@
 <map id="FitPSF::SDKSource&lt; SUBPIX_TYPE &gt;" name="FitPSF::SDKSource&lt; SUBPIX_TYPE &gt;">
 <area shape="rect" id="node1" title="A PSF fitting source class based on a LocalPolynomialPSF." alt="" coords="315,6415,673,7037"/>
-<area shape="rect" id="node2" href="$classFitPSF_1_1SDKSourceBase.html" title="An abstract class that defines the minimum requirements of a source to participate in the fitting for..." alt="" coords="318,5413,670,6365"/>
-<area shape="rect" id="node3" href="$classFitPSF_1_1Source.html" title=" " alt="" coords="354,4239,634,5364"/>
-<area shape="rect" id="node4" href="$classPSF_1_1MapSource.html" title="Class for evaluating a collection of smooth dependencies for a collection of sources." alt="" coords="495,2611,738,2870"/>
-<area shape="rect" id="node12" href="$classFitPSF_1_1Source.html" title="An abstract base class for sources which participate in PSF fitting." alt="" coords="234,3100,514,4173"/>
-<area shape="rect" id="node5" href="$classCore_1_1Source.html" title="A base class for all sources in AstroWISP." alt="" coords="487,1844,746,2397"/>
-<area shape="rect" id="node6" href="$classCore_1_1SourceLocation.html" title="The minimum requirements for objects specifying where a source is." alt="" coords="261,1243,463,1501"/>
-<area shape="rect" id="node7" href="$classCore_1_1Point.html" title=" " alt="" coords="155,494,332,683"/>
-<area shape="rect" id="node8" href="$classCore_1_1Point.html" title="Representing a 2D point with real valued cartesian coordinates." alt="" coords="138,5,349,212"/>
-<area shape="rect" id="node9" href="$classCore_1_1SourceID.html" title="The two components of the HAT i.d. (primary filed and source number)" alt="" coords="357,277,607,900"/>
-<area shape="rect" id="node10" href="$classPSF_1_1PSF.html" title="An abstract parent class for all PSF models." alt="" coords="487,965,747,1779"/>
-<area shape="rect" id="node11" href="$classBackground_1_1Source.html" title="The base class for the backgnound under a source." alt="" coords="771,1191,1022,1553"/>
-<area shape="rect" id="node13" href="$classCore_1_1Flux.html" title="A class representing the flux measurement for a source, including an error estimate and a flag." alt="" coords="5,2577,209,2905"/>
-<area shape="rect" id="node14" href="$classCore_1_1SubPixelMap.html" title="The base class for all sub&#45;pixel maps." alt="" coords="234,2447,471,3035"/>
+<area shape="rect" id="node2" href="$classFitPSF_1_1SDKSourceBase.xhtml" title="An abstract class that defines the minimum requirements of a source to participate in the fitting for..." alt="" coords="318,5413,670,6365"/>
+<area shape="rect" id="node3" href="$classFitPSF_1_1Source.xhtml" title=" " alt="" coords="354,4239,634,5364"/>
+<area shape="rect" id="node4" href="$classPSF_1_1MapSource.xhtml" title="Class for evaluating a collection of smooth dependencies for a collection of sources." alt="" coords="495,2611,738,2870"/>
+<area shape="rect" id="node12" href="$classFitPSF_1_1Source.xhtml" title="An abstract base class for sources which participate in PSF fitting." alt="" coords="234,3100,514,4173"/>
+<area shape="rect" id="node5" href="$classCore_1_1Source.xhtml" title="A base class for all sources in AstroWISP." alt="" coords="487,1844,746,2397"/>
+<area shape="rect" id="node6" href="$classCore_1_1SourceLocation.xhtml" title="The minimum requirements for objects specifying where a source is." alt="" coords="261,1243,463,1501"/>
+<area shape="rect" id="node7" href="$classCore_1_1Point.xhtml" title=" " alt="" coords="155,494,332,683"/>
+<area shape="rect" id="node8" href="$classCore_1_1Point.xhtml" title="Representing a 2D point with real valued cartesian coordinates." alt="" coords="138,5,349,212"/>
+<area shape="rect" id="node9" href="$classCore_1_1SourceID.xhtml" title="The two components of the HAT i.d. (primary filed and source number)" alt="" coords="357,277,607,900"/>
+<area shape="rect" id="node10" href="$classPSF_1_1PSF.xhtml" title="An abstract parent class for all PSF models." alt="" coords="487,965,747,1779"/>
+<area shape="rect" id="node11" href="$classBackground_1_1Source.xhtml" title="The base class for the backgnound under a source." alt="" coords="771,1191,1022,1553"/>
+<area shape="rect" id="node13" href="$classCore_1_1Flux.xhtml" title="A class representing the flux measurement for a source, including an error estimate and a flag." alt="" coords="5,2577,209,2905"/>
+<area shape="rect" id="node14" href="$classCore_1_1SubPixelMap.xhtml" title="The base class for all sub&#45;pixel maps." alt="" coords="234,2447,471,3035"/>
 </map>

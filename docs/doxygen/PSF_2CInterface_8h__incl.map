@@ -1,11 +1,11 @@
 <map id="/home/kpenev/projects/git/AstroWISP/doc_src/PSF/CInterface.h" name="/home/kpenev/projects/git/AstroWISP/doc_src/PSF/CInterface.h">
 <area shape="rect" id="node1" title="Declare C&#45;style functions for accessing the functionality of the PSF library." alt="" coords="198,5,383,69"/>
-<area shape="rect" id="node2" href="$PSF_2Typedefs_8h.html" title="Some useful typedef statements." alt="" coords="136,117,236,147"/>
+<area shape="rect" id="node2" href="$PSF_2Typedefs_8h.xhtml" title="Some useful typedef statements." alt="" coords="136,117,236,147"/>
 <area shape="rect" id="node5" title=" " alt="" coords="280,195,341,224"/>
-<area shape="rect" id="node8" href="$IO_2CInterface_8h.html" title="Declare C&#45;style functions for accessing the functionality of the IO library." alt="" coords="328,117,468,147"/>
-<area shape="rect" id="node3" href="$SharedLibraryExportMacros_8h_source.html" title=" " alt="" coords="268,272,488,319"/>
+<area shape="rect" id="node8" href="$IO_2CInterface_8h.xhtml" title="Declare C&#45;style functions for accessing the functionality of the IO library." alt="" coords="328,117,468,147"/>
+<area shape="rect" id="node3" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="268,272,488,319"/>
 <area shape="rect" id="node4" title=" " alt="" coords="26,195,85,224"/>
 <area shape="rect" id="node6" title=" " alt="" coords="110,195,188,224"/>
 <area shape="rect" id="node7" title=" " alt="" coords="213,195,256,224"/>
-<area shape="rect" id="node9" href="$parse__hat__mask_8h.html" title="Declares a function for parsing HAT&#45;style maskes from image header." alt="" coords="416,195,570,224"/>
+<area shape="rect" id="node9" href="$parse__hat__mask_8h.xhtml" title="Declares a function for parsing HAT&#45;style maskes from image header." alt="" coords="416,195,570,224"/>
 </map>

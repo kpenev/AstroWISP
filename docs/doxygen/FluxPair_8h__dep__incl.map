@@ -1,6 +1,6 @@
 <map id="/home/kpenev/projects/git/AstroWISP/doc_src/Core/FluxPair.h" name="/home/kpenev/projects/git/AstroWISP/doc_src/Core/FluxPair.h">
 <area shape="rect" id="node1" title="Define a class for holding subpixel sensitivity weighted and non&#45;weighted fluxes." alt="" coords="35,5,220,69"/>
-<area shape="rect" id="node2" href="$SubPixelCorrectedFlux_8h.html" title="Defile a class that corrects for non&#45;uniform subpixel sensitivity and partial pixels in the aperture." alt="" coords="5,117,249,181"/>
-<area shape="rect" id="node3" href="$FitPSF_2PiecewiseBicubic_8h.html" title="The declarations of the functions related to fitting piecewise bicubic PSFs." alt="" coords="17,229,237,293"/>
-<area shape="rect" id="node4" href="$FitPSF_2CInterface_8cpp.html" title="Define the C&#45;interface functions for the FitPSF library." alt="" coords="35,341,220,405"/>
+<area shape="rect" id="node2" href="$SubPixelCorrectedFlux_8h.xhtml" title="Defile a class that corrects for non&#45;uniform subpixel sensitivity and partial pixels in the aperture." alt="" coords="5,117,249,181"/>
+<area shape="rect" id="node3" href="$FitPSF_2PiecewiseBicubic_8h.xhtml" title="The declarations of the functions related to fitting piecewise bicubic PSFs." alt="" coords="17,229,237,293"/>
+<area shape="rect" id="node4" href="$FitPSF_2CInterface_8cpp.xhtml" title="Define the C&#45;interface functions for the FitPSF library." alt="" coords="35,341,220,405"/>
 </map>

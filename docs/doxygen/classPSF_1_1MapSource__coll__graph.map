@@ -1,10 +1,10 @@
 <map id="PSF::MapSource" name="PSF::MapSource">
 <area shape="rect" id="node1" title="Class for evaluating a collection of smooth dependencies for a collection of sources." alt="" coords="363,2447,605,2705"/>
-<area shape="rect" id="node2" href="$classCore_1_1Source.html" title="A base class for all sources in AstroWISP." alt="" coords="355,1844,613,2397"/>
-<area shape="rect" id="node3" href="$classCore_1_1SourceLocation.html" title="The minimum requirements for objects specifying where a source is." alt="" coords="129,1243,330,1501"/>
-<area shape="rect" id="node4" href="$classCore_1_1Point.html" title=" " alt="" coords="22,494,199,683"/>
-<area shape="rect" id="node5" href="$classCore_1_1Point.html" title="Representing a 2D point with real valued cartesian coordinates." alt="" coords="5,5,216,212"/>
-<area shape="rect" id="node6" href="$classCore_1_1SourceID.html" title="The two components of the HAT i.d. (primary filed and source number)" alt="" coords="224,277,475,900"/>
-<area shape="rect" id="node7" href="$classPSF_1_1PSF.html" title="An abstract parent class for all PSF models." alt="" coords="354,965,614,1779"/>
-<area shape="rect" id="node8" href="$classBackground_1_1Source.html" title="The base class for the backgnound under a source." alt="" coords="639,1191,889,1553"/>
+<area shape="rect" id="node2" href="$classCore_1_1Source.xhtml" title="A base class for all sources in AstroWISP." alt="" coords="355,1844,613,2397"/>
+<area shape="rect" id="node3" href="$classCore_1_1SourceLocation.xhtml" title="The minimum requirements for objects specifying where a source is." alt="" coords="129,1243,330,1501"/>
+<area shape="rect" id="node4" href="$classCore_1_1Point.xhtml" title=" " alt="" coords="22,494,199,683"/>
+<area shape="rect" id="node5" href="$classCore_1_1Point.xhtml" title="Representing a 2D point with real valued cartesian coordinates." alt="" coords="5,5,216,212"/>
+<area shape="rect" id="node6" href="$classCore_1_1SourceID.xhtml" title="The two components of the HAT i.d. (primary filed and source number)" alt="" coords="224,277,475,900"/>
+<area shape="rect" id="node7" href="$classPSF_1_1PSF.xhtml" title="An abstract parent class for all PSF models." alt="" coords="354,965,614,1779"/>
+<area shape="rect" id="node8" href="$classBackground_1_1Source.xhtml" title="The base class for the backgnound under a source." alt="" coords="639,1191,889,1553"/>
 </map>

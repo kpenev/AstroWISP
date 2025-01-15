@@ -1,8 +1,8 @@
 <map id="/home/kpenev/projects/git/AstroWISP/doc_src/FitPSF/SDKSourceBase.h" name="/home/kpenev/projects/git/AstroWISP/doc_src/FitPSF/SDKSourceBase.h">
 <area shape="rect" id="node1" title="Declares a base class for sources participating in SDK fitting." alt="" coords="227,5,441,69"/>
-<area shape="rect" id="node2" href="$FitPSF_2SDKSource_8h_source.html" title=" " alt="" coords="125,117,311,181"/>
-<area shape="rect" id="node6" href="$SDKSourceBase_8cpp.html" title="Defines some of the methods of the SDKSourceBase class." alt="" coords="335,117,567,181"/>
-<area shape="rect" id="node3" href="$SDKUtil_8h.html" title="Declare functions used during elliptical Gaussian PSF fitting." alt="" coords="125,229,311,293"/>
-<area shape="rect" id="node4" href="$PolynomialSDK_8h.html" title="Declares a class for fitting elliptical gaussian PSFs as a smooth function of image position." alt="" coords="5,341,212,405"/>
-<area shape="rect" id="node5" href="$SDKUtil_8cpp.html" title="Define the functions from SDKUtil.h." alt="" coords="236,341,421,405"/>
+<area shape="rect" id="node2" href="$FitPSF_2SDKSource_8h_source.xhtml" title=" " alt="" coords="125,117,311,181"/>
+<area shape="rect" id="node6" href="$SDKSourceBase_8cpp.xhtml" title="Defines some of the methods of the SDKSourceBase class." alt="" coords="335,117,567,181"/>
+<area shape="rect" id="node3" href="$SDKUtil_8h.xhtml" title="Declare functions used during elliptical Gaussian PSF fitting." alt="" coords="125,229,311,293"/>
+<area shape="rect" id="node4" href="$PolynomialSDK_8h.xhtml" title="Declares a class for fitting elliptical gaussian PSFs as a smooth function of image position." alt="" coords="5,341,212,405"/>
+<area shape="rect" id="node5" href="$SDKUtil_8cpp.xhtml" title="Define the functions from SDKUtil.h." alt="" coords="236,341,421,405"/>
 </map>

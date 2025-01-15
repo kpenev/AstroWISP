@@ -1,5 +1,5 @@
 <map id="PSF::EllipticalGaussianIntegralWedge" name="PSF::EllipticalGaussianIntegralWedge">
 <area shape="rect" id="node1" title="Calculates integrals of an elliptical gaussion over a wedge of a circle." alt="" coords="130,1040,374,1403"/>
-<area shape="rect" id="node2" href="$classPSF_1_1EllipticalGaussianIntegralByOrder.html" title="Elliptical gaussian integrals refined by incrementing the expansion order." alt="" coords="5,5,251,975"/>
-<area shape="rect" id="node3" href="$classPSF_1_1WedgeIntegral.html" title="A class that implements the integral of x^my^n over a circle wedge." alt="" coords="275,335,477,645"/>
+<area shape="rect" id="node2" href="$classPSF_1_1EllipticalGaussianIntegralByOrder.xhtml" title="Elliptical gaussian integrals refined by incrementing the expansion order." alt="" coords="5,5,251,975"/>
+<area shape="rect" id="node3" href="$classPSF_1_1WedgeIntegral.xhtml" title="A class that implements the integral of x^my^n over a circle wedge." alt="" coords="275,335,477,645"/>
 </map>

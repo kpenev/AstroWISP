@@ -1,11 +1,11 @@
 <map id="/home/kpenev/projects/git/AstroWISP/doc_src/Core/ParseCSV.h" name="/home/kpenev/projects/git/AstroWISP/doc_src/Core/ParseCSV.h">
 <area shape="rect" id="node1" title="Declarations of functions for parsing strings of comma separated values to lists." alt="" coords="405,5,590,69"/>
-<area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.html" title=" " alt="" coords="295,272,515,319"/>
-<area shape="rect" id="node3" href="$PhotColumns_8h.html" title="Defines constants to denote the various columns that can be input or output by the various tools and ..." alt="" coords="74,195,206,224"/>
+<area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="295,272,515,319"/>
+<area shape="rect" id="node3" href="$PhotColumns_8h.xhtml" title="Defines constants to denote the various columns that can be input or output by the various tools and ..." alt="" coords="74,195,206,224"/>
 <area shape="rect" id="node6" title=" " alt="" coords="5,281,67,310"/>
-<area shape="rect" id="node7" href="$Core_2Typedefs_8h.html" title="Some useful typedef statements." alt="" coords="310,117,410,147"/>
+<area shape="rect" id="node7" href="$Core_2Typedefs_8h.xhtml" title="Some useful typedef statements." alt="" coords="310,117,410,147"/>
 <area shape="rect" id="node8" title=" " alt="" coords="575,195,617,224"/>
-<area shape="rect" id="node11" href="$Error_8h.html" title="The hierarchy of exceptions for this project." alt="" coords="719,117,790,147"/>
+<area shape="rect" id="node11" href="$Error_8h.xhtml" title="The hierarchy of exceptions for this project." alt="" coords="719,117,790,147"/>
 <area shape="rect" id="node4" title=" " alt="" coords="107,281,173,310"/>
 <area shape="rect" id="node5" title=" " alt="" coords="205,281,270,310"/>
 <area shape="rect" id="node9" title=" " alt="" coords="282,195,361,224"/>

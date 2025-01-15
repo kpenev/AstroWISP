@@ -1,6 +1,6 @@
 <map id="Error::FitsImage" name="Error::FitsImage">
 <area shape="rect" id="node1" title="Errors related an the actual fits image." alt="" coords="5,613,223,751"/>
-<area shape="rect" id="node2" href="$classError_1_1Fits.html" title="The parent of all fits library related errors." alt="" coords="26,428,202,565"/>
-<area shape="rect" id="node3" href="$classError_1_1General.html" title="The parent of all errors raised anywhere in the code." alt="" coords="5,139,223,380"/>
+<area shape="rect" id="node2" href="$classError_1_1Fits.xhtml" title="The parent of all fits library related errors." alt="" coords="26,428,202,565"/>
+<area shape="rect" id="node3" href="$classError_1_1General.xhtml" title="The parent of all errors raised anywhere in the code." alt="" coords="5,139,223,380"/>
 <area shape="rect" id="node4" title=" " alt="" coords="54,5,174,91"/>
 </map>

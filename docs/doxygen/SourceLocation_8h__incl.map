@@ -1,10 +1,10 @@
 <map id="/home/kpenev/projects/git/AstroWISP/doc_src/Core/SourceLocation.h" name="/home/kpenev/projects/git/AstroWISP/doc_src/Core/SourceLocation.h">
 <area shape="rect" id="node1" title="Declares a class defining the minimum requirements for specifying the locations of sources." alt="" coords="625,5,816,69"/>
-<area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.html" title=" " alt="" coords="575,272,795,319"/>
-<area shape="rect" id="node3" href="$SourceID_8h.html" title="The declaration of the SourceID class." alt="" coords="297,117,400,147"/>
-<area shape="rect" id="node12" href="$Point_8h.html" title="Defines a point class in two dimensions." alt="" coords="722,117,794,147"/>
-<area shape="rect" id="node13" href="$NaN_8h.html" title="Defines not&#45;a&#45;number and infinity." alt="" coords="819,117,887,147"/>
-<area shape="rect" id="node4" href="$Error_8h.html" title="The hierarchy of exceptions for this project." alt="" coords="240,195,311,224"/>
+<area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="575,272,795,319"/>
+<area shape="rect" id="node3" href="$SourceID_8h.xhtml" title="The declaration of the SourceID class." alt="" coords="297,117,400,147"/>
+<area shape="rect" id="node12" href="$Point_8h.xhtml" title="Defines a point class in two dimensions." alt="" coords="722,117,794,147"/>
+<area shape="rect" id="node13" href="$NaN_8h.xhtml" title="Defines not&#45;a&#45;number and infinity." alt="" coords="819,117,887,147"/>
+<area shape="rect" id="node4" href="$Error_8h.xhtml" title="The hierarchy of exceptions for this project." alt="" coords="240,195,311,224"/>
 <area shape="rect" id="node5" title=" " alt="" coords="163,281,241,310"/>
 <area shape="rect" id="node7" title=" " alt="" coords="103,195,165,224"/>
 <area shape="rect" id="node8" title=" " alt="" coords="386,195,450,224"/>

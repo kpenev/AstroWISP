@@ -1,4 +1,4 @@
 <map id="PSF::PiecewiseCell" name="PSF::PiecewiseCell">
 <area shape="rect" id="node1" title="An abstract base class for all cell of a Piecesiwe." alt="" coords="5,5,289,905"/>
-<area shape="rect" id="node2" href="$classPSF_1_1PiecewiseBicubicCell.html" title="A class for Piecewise cells over which the intensity is given by a bi&#45;cubic polynomial." alt="" coords="30,953,265,1767"/>
+<area shape="rect" id="node2" href="$classPSF_1_1PiecewiseBicubicCell.xhtml" title="A class for Piecewise cells over which the intensity is given by a bi&#45;cubic polynomial." alt="" coords="30,953,265,1767"/>
 </map>

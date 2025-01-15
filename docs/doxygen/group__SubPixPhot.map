@@ -1,5 +1,5 @@
 <map id="SubPixPhot" name="SubPixPhot">
-<area shape="rect" id="node1" href="$group__FitPSF.html" title=" " alt="" coords="385,221,457,249"/>
-<area shape="rect" id="node2" href="$group__FitSubpix.html" title=" " alt="" coords="376,542,467,570"/>
+<area shape="rect" id="node1" href="$group__FitPSF.xhtml" title=" " alt="" coords="385,221,457,249"/>
+<area shape="rect" id="node2" href="$group__FitSubpix.xhtml" title=" " alt="" coords="376,542,467,570"/>
 <area shape="rect" id="node3" title="Does aperture photometry correcting for non&#45;uniform pixel sensitivity." alt="" coords="5,373,112,401"/>
 </map>

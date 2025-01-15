@@ -1,6 +1,6 @@
 <map id="Error::GSLError" name="Error::GSLError">
 <area shape="rect" id="node1" title="Error in a GNU Scientific Library function." alt="" coords="5,613,223,751"/>
-<area shape="rect" id="node2" href="$classError_1_1Runtime.html" title="The parent of all run&#45;time errors." alt="" coords="5,428,223,565"/>
-<area shape="rect" id="node3" href="$classError_1_1General.html" title="The parent of all errors raised anywhere in the code." alt="" coords="5,139,223,380"/>
+<area shape="rect" id="node2" href="$classError_1_1Runtime.xhtml" title="The parent of all run&#45;time errors." alt="" coords="5,428,223,565"/>
+<area shape="rect" id="node3" href="$classError_1_1General.xhtml" title="The parent of all errors raised anywhere in the code." alt="" coords="5,139,223,380"/>
 <area shape="rect" id="node4" title=" " alt="" coords="54,5,174,91"/>
 </map>

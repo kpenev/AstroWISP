@@ -1,5 +1,5 @@
 <map id="PSF::EllipticalGaussianIntegralByOrder" name="PSF::EllipticalGaussianIntegralByOrder">
 <area shape="rect" id="node1" title="Elliptical gaussian integrals refined by incrementing the expansion order." alt="" coords="164,5,409,975"/>
-<area shape="rect" id="node2" href="$classPSF_1_1EllipticalGaussianIntegralRectangle.html" title="Calculates integrals of an elliptical gaussion over a rectangle." alt="" coords="5,1092,283,1333"/>
-<area shape="rect" id="node3" href="$classPSF_1_1EllipticalGaussianIntegralWedge.html" title="Calculates integrals of an elliptical gaussion over a wedge of a circle." alt="" coords="307,1023,551,1403"/>
+<area shape="rect" id="node2" href="$classPSF_1_1EllipticalGaussianIntegralRectangle.xhtml" title="Calculates integrals of an elliptical gaussion over a rectangle." alt="" coords="5,1092,283,1333"/>
+<area shape="rect" id="node3" href="$classPSF_1_1EllipticalGaussianIntegralWedge.xhtml" title="Calculates integrals of an elliptical gaussion over a wedge of a circle." alt="" coords="307,1023,551,1403"/>
 </map>

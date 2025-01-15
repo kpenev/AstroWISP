@@ -1,16 +1,16 @@
 <map id="/home/kpenev/projects/git/AstroWISP/doc_src/FitPSF/AmplitudeSaturatedPixel.h" name="/home/kpenev/projects/git/AstroWISP/doc_src/FitPSF/AmplitudeSaturatedPixel.h">
 <area shape="rect" id="node1" title="Define a class used when fitting for PSF amplitude with saturated pixels." alt="" coords="5,5,276,69"/>
-<area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.html" title=" " alt="" coords="211,521,431,568"/>
-<area shape="rect" id="node3" href="$EllipticalGaussianIntegralByOrder_8h.html" title="Class approximating integrals of ellptical Gaussians by incremental expansion order." alt="" coords="177,117,376,164"/>
+<area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="211,521,431,568"/>
+<area shape="rect" id="node3" href="$EllipticalGaussianIntegralByOrder_8h.xhtml" title="Class approximating integrals of ellptical Gaussians by incremental expansion order." alt="" coords="177,117,376,164"/>
 <area shape="rect" id="node10" title=" " alt="" coords="128,444,207,473"/>
-<area shape="rect" id="node4" href="$WedgeIntegral_8h.html" title="Declares a class that calculates integrals of x^my^n over circle wedges." alt="" coords="654,212,793,241"/>
-<area shape="rect" id="node5" href="$IntegralUtil_8h.html" title="Useful functions for calculating PSF integrals." alt="" coords="549,289,661,319"/>
-<area shape="rect" id="node6" href="$Core_2Typedefs_8h.html" title="Some useful typedef statements." alt="" coords="529,367,680,396"/>
+<area shape="rect" id="node4" href="$WedgeIntegral_8h.xhtml" title="Declares a class that calculates integrals of x^my^n over circle wedges." alt="" coords="654,212,793,241"/>
+<area shape="rect" id="node5" href="$IntegralUtil_8h.xhtml" title="Useful functions for calculating PSF integrals." alt="" coords="549,289,661,319"/>
+<area shape="rect" id="node6" href="$Core_2Typedefs_8h.xhtml" title="Some useful typedef statements." alt="" coords="529,367,680,396"/>
 <area shape="rect" id="node7" title=" " alt="" coords="793,530,859,559"/>
 <area shape="rect" id="node8" title=" " alt="" coords="831,444,874,473"/>
 <area shape="rect" id="node12" title=" " alt="" coords="947,530,1012,559"/>
 <area shape="rect" id="node14" title=" " alt="" coords="787,289,860,319"/>
 <area shape="rect" id="node9" title=" " alt="" coords="558,530,619,559"/>
-<area shape="rect" id="node11" href="$PhotColumns_8h.html" title="Defines constants to denote the various columns that can be input or output by the various tools and ..." alt="" coords="624,444,756,473"/>
+<area shape="rect" id="node11" href="$PhotColumns_8h.xhtml" title="Defines constants to denote the various columns that can be input or output by the various tools and ..." alt="" coords="624,444,756,473"/>
 <area shape="rect" id="node13" title=" " alt="" coords="485,444,599,473"/>
 </map>

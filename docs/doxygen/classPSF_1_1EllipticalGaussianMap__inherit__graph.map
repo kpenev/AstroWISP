@@ -1,4 +1,4 @@
 <map id="PSF::EllipticalGaussianMap" name="PSF::EllipticalGaussianMap">
 <area shape="rect" id="node1" title="Smoothly varying over the image elliptical Gaussian PSF." alt="" coords="13,399,241,709"/>
-<area shape="rect" id="node2" href="$classPSF_1_1Map.html" title="Interface for working with smooth dependenc of PSF/PRF on source parameters." alt="" coords="5,5,248,351"/>
+<area shape="rect" id="node2" href="$classPSF_1_1Map.xhtml" title="Interface for working with smooth dependenc of PSF/PRF on source parameters." alt="" coords="5,5,248,351"/>
 </map>

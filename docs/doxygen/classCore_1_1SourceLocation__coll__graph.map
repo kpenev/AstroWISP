@@ -1,6 +1,6 @@
 <map id="Core::SourceLocation" name="Core::SourceLocation">
 <area shape="rect" id="node1" title="The minimum requirements for objects specifying where a source is." alt="" coords="129,965,330,1224"/>
-<area shape="rect" id="node2" href="$classCore_1_1Point.html" title=" " alt="" coords="22,494,199,683"/>
-<area shape="rect" id="node3" href="$classCore_1_1Point.html" title="Representing a 2D point with real valued cartesian coordinates." alt="" coords="5,5,216,212"/>
-<area shape="rect" id="node4" href="$classCore_1_1SourceID.html" title="The two components of the HAT i.d. (primary filed and source number)" alt="" coords="224,277,475,900"/>
+<area shape="rect" id="node2" href="$classCore_1_1Point.xhtml" title=" " alt="" coords="22,494,199,683"/>
+<area shape="rect" id="node3" href="$classCore_1_1Point.xhtml" title="Representing a 2D point with real valued cartesian coordinates." alt="" coords="5,5,216,212"/>
+<area shape="rect" id="node4" href="$classCore_1_1SourceID.xhtml" title="The two components of the HAT i.d. (primary filed and source number)" alt="" coords="224,277,475,900"/>
 </map>

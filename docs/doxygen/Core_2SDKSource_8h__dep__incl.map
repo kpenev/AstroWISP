@@ -1,8 +1,8 @@
 <map id="/home/kpenev/projects/git/AstroWISP/doc_src/Core/SDKSource.h" name="/home/kpenev/projects/git/AstroWISP/doc_src/Core/SDKSource.h">
 <area shape="rect" id="node1" title="Declare a class for sources with ellptical gaussian PSF." alt="" coords="184,5,369,69"/>
-<area shape="rect" id="node2" href="$OutputSDKSource_8h.html" title="The class of sources with Ellptical gaussian PSFs used for output." alt="" coords="115,117,305,181"/>
-<area shape="rect" id="node4" href="$SourceInput_8h.html" title="Declare an input stream for sources class." alt="" coords="236,229,451,293"/>
-<area shape="rect" id="node3" href="$PolynomialSDK_8h.html" title="Declares a class for fitting elliptical gaussian PSFs as a smooth function of image position." alt="" coords="5,229,212,293"/>
-<area shape="rect" id="node5" href="$SourceInput_8cpp.html" title="Define some of the methods of the SourceInput class." alt="" coords="101,341,332,405"/>
-<area shape="rect" id="node6" href="$SubPixPhotIO_8h.html" title="Defines I/O utilities for the subpixphot executable." alt="" coords="357,341,586,405"/>
+<area shape="rect" id="node2" href="$OutputSDKSource_8h.xhtml" title="The class of sources with Ellptical gaussian PSFs used for output." alt="" coords="115,117,305,181"/>
+<area shape="rect" id="node4" href="$SourceInput_8h.xhtml" title="Declare an input stream for sources class." alt="" coords="236,229,451,293"/>
+<area shape="rect" id="node3" href="$PolynomialSDK_8h.xhtml" title="Declares a class for fitting elliptical gaussian PSFs as a smooth function of image position." alt="" coords="5,229,212,293"/>
+<area shape="rect" id="node5" href="$SourceInput_8cpp.xhtml" title="Define some of the methods of the SourceInput class." alt="" coords="101,341,332,405"/>
+<area shape="rect" id="node6" href="$SubPixPhotIO_8h.xhtml" title="Defines I/O utilities for the subpixphot executable." alt="" coords="357,341,586,405"/>
 </map>

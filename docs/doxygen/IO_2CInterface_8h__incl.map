@@ -1,5 +1,5 @@
 <map id="/home/kpenev/projects/git/AstroWISP/doc_src/IO/CInterface.h" name="/home/kpenev/projects/git/AstroWISP/doc_src/IO/CInterface.h">
 <area shape="rect" id="node1" title="Declare C&#45;style functions for accessing the functionality of the IO library." alt="" coords="23,5,208,69"/>
-<area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.html" title=" " alt="" coords="5,195,225,241"/>
-<area shape="rect" id="node3" href="$parse__hat__mask_8h.html" title="Declares a function for parsing HAT&#45;style maskes from image header." alt="" coords="96,117,249,147"/>
+<area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="5,195,225,241"/>
+<area shape="rect" id="node3" href="$parse__hat__mask_8h.xhtml" title="Declares a function for parsing HAT&#45;style maskes from image header." alt="" coords="96,117,249,147"/>
 </map>

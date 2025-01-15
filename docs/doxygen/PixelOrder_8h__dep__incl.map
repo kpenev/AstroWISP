@@ -1,9 +1,9 @@
 <map id="/home/kpenev/projects/git/AstroWISP/doc_src/FitPSF/PixelOrder.h" name="/home/kpenev/projects/git/AstroWISP/doc_src/FitPSF/PixelOrder.h">
 <area shape="rect" id="node1" title="Define a class that orders pixels inside a source." alt="" coords="115,5,300,69"/>
-<area shape="rect" id="node2" href="$OverlapSource_8h.html" title="Defines the overlap&#45;related features of PSF fitting sources." alt="" coords="108,117,308,181"/>
-<area shape="rect" id="node3" href="$LinearSource_8h.html" title="Declares a class used for PSF fitting where pixel responses are linear functions of the shape paramet..." alt="" coords="113,229,302,293"/>
-<area shape="rect" id="node4" href="$FitPSF_2CInterface_8cpp.html" title="Define the C&#45;interface functions for the FitPSF library." alt="" coords="44,565,230,629"/>
-<area shape="rect" id="node5" href="$LinearSource_8cpp.html" title="Define some of the methods of LinearSource class." alt="" coords="34,341,240,405"/>
-<area shape="rect" id="node6" href="$FitPSF_2PiecewiseBicubic_8h.html" title="The declarations of the functions related to fitting piecewise bicubic PSFs." alt="" coords="168,453,388,517"/>
-<area shape="rect" id="node7" href="$PiecewiseBicubicPSFSmoothing_8h_source.html" title=" " alt="" coords="316,341,646,405"/>
+<area shape="rect" id="node2" href="$OverlapSource_8h.xhtml" title="Defines the overlap&#45;related features of PSF fitting sources." alt="" coords="108,117,308,181"/>
+<area shape="rect" id="node3" href="$LinearSource_8h.xhtml" title="Declares a class used for PSF fitting where pixel responses are linear functions of the shape paramet..." alt="" coords="113,229,302,293"/>
+<area shape="rect" id="node4" href="$FitPSF_2CInterface_8cpp.xhtml" title="Define the C&#45;interface functions for the FitPSF library." alt="" coords="44,565,230,629"/>
+<area shape="rect" id="node5" href="$LinearSource_8cpp.xhtml" title="Define some of the methods of LinearSource class." alt="" coords="34,341,240,405"/>
+<area shape="rect" id="node6" href="$FitPSF_2PiecewiseBicubic_8h.xhtml" title="The declarations of the functions related to fitting piecewise bicubic PSFs." alt="" coords="168,453,388,517"/>
+<area shape="rect" id="node7" href="$PiecewiseBicubicPSFSmoothing_8h_source.xhtml" title=" " alt="" coords="316,341,646,405"/>
 </map>

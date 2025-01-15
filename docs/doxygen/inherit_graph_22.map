@@ -1,6 +1,6 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
 <area shape="rect" id="node1" title=" " alt="" coords="5,23,195,70"/>
-<area shape="rect" id="node2" href="$classIO_1_1CommandLineConfig.html" title="A base class for configuration of tools using the command line." alt="" coords="243,32,441,61"/>
-<area shape="rect" id="node3" href="$classFitPSF_1_1Config.html" title="Default configuration from file but overwritten by command line options." alt="" coords="507,5,634,35"/>
-<area shape="rect" id="node4" href="$classSubPixPhot_1_1Config.html" title="Default configuration from file but overwritten by command line options." alt="" coords="489,59,652,88"/>
+<area shape="rect" id="node2" href="$classIO_1_1CommandLineConfig.xhtml" title="A base class for configuration of tools using the command line." alt="" coords="243,32,441,61"/>
+<area shape="rect" id="node3" href="$classFitPSF_1_1Config.xhtml" title="Default configuration from file but overwritten by command line options." alt="" coords="507,5,634,35"/>
+<area shape="rect" id="node4" href="$classSubPixPhot_1_1Config.xhtml" title="Default configuration from file but overwritten by command line options." alt="" coords="489,59,652,88"/>
 </map>

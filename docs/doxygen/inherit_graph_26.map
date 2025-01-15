@@ -1,5 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classPSF_1_1EllipticalGaussianIntegralByOrder.html" title="Elliptical gaussian integrals refined by incrementing the expansion order." alt="" coords="5,41,249,88"/>
-<area shape="rect" id="node2" href="$classPSF_1_1EllipticalGaussianIntegralRectangle.html" title="Calculates integrals of an elliptical gaussion over a rectangle." alt="" coords="297,5,541,52"/>
-<area shape="rect" id="node3" href="$classPSF_1_1EllipticalGaussianIntegralWedge.html" title="Calculates integrals of an elliptical gaussion over a wedge of a circle." alt="" coords="297,76,541,123"/>
+<area shape="rect" id="node1" href="$classPSF_1_1EllipticalGaussianIntegralByOrder.xhtml" title="Elliptical gaussian integrals refined by incrementing the expansion order." alt="" coords="5,41,249,88"/>
+<area shape="rect" id="node2" href="$classPSF_1_1EllipticalGaussianIntegralRectangle.xhtml" title="Calculates integrals of an elliptical gaussion over a rectangle." alt="" coords="297,5,541,52"/>
+<area shape="rect" id="node3" href="$classPSF_1_1EllipticalGaussianIntegralWedge.xhtml" title="Calculates integrals of an elliptical gaussion over a wedge of a circle." alt="" coords="297,76,541,123"/>
 </map>

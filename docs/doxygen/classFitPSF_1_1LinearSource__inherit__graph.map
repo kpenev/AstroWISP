@@ -1,11 +1,11 @@
 <map id="FitPSF::LinearSource" name="FitPSF::LinearSource">
 <area shape="rect" id="node1" title="A class for PSF fitting sources whose flux distribution depends linearly on the PSF paramaters (for a..." alt="" coords="5,6436,333,8151"/>
-<area shape="rect" id="node2" href="$classFitPSF_1_1OverlapSource.html" title=" " alt="" coords="10,4741,329,6387"/>
-<area shape="rect" id="node3" href="$classFitPSF_1_1Source.html" title="An abstract base class for sources which participate in PSF fitting." alt="" coords="24,1787,304,2912"/>
-<area shape="rect" id="node9" href="$classFitPSF_1_1OverlapSource.html" title="PSF fitting source which handles overlaps with other sources." alt="" coords="185,2961,495,4659"/>
-<area shape="rect" id="node4" href="$classPSF_1_1MapSource.html" title="Class for evaluating a collection of smooth dependencies for a collection of sources." alt="" coords="43,1479,285,1737"/>
-<area shape="rect" id="node5" href="$classCore_1_1Source.html" title="A base class for all sources in AstroWISP." alt="" coords="35,824,293,1429"/>
-<area shape="rect" id="node6" href="$classCore_1_1SourceLocation.html" title="The minimum requirements for objects specifying where a source is." alt="" coords="63,516,265,775"/>
-<area shape="rect" id="node7" href="$classCore_1_1Point.html" title=" " alt="" coords="75,277,253,467"/>
-<area shape="rect" id="node8" href="$classCore_1_1Point.html" title="Representing a 2D point with real valued cartesian coordinates." alt="" coords="59,5,269,212"/>
+<area shape="rect" id="node2" href="$classFitPSF_1_1OverlapSource.xhtml" title=" " alt="" coords="10,4741,329,6387"/>
+<area shape="rect" id="node3" href="$classFitPSF_1_1Source.xhtml" title="An abstract base class for sources which participate in PSF fitting." alt="" coords="24,1787,304,2912"/>
+<area shape="rect" id="node9" href="$classFitPSF_1_1OverlapSource.xhtml" title="PSF fitting source which handles overlaps with other sources." alt="" coords="185,2961,495,4659"/>
+<area shape="rect" id="node4" href="$classPSF_1_1MapSource.xhtml" title="Class for evaluating a collection of smooth dependencies for a collection of sources." alt="" coords="43,1479,285,1737"/>
+<area shape="rect" id="node5" href="$classCore_1_1Source.xhtml" title="A base class for all sources in AstroWISP." alt="" coords="35,824,293,1429"/>
+<area shape="rect" id="node6" href="$classCore_1_1SourceLocation.xhtml" title="The minimum requirements for objects specifying where a source is." alt="" coords="63,516,265,775"/>
+<area shape="rect" id="node7" href="$classCore_1_1Point.xhtml" title=" " alt="" coords="75,277,253,467"/>
+<area shape="rect" id="node8" href="$classCore_1_1Point.xhtml" title="Representing a 2D point with real valued cartesian coordinates." alt="" coords="59,5,269,212"/>
 </map>

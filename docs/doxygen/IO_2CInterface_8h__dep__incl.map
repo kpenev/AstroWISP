@@ -1,9 +1,9 @@
 <map id="/home/kpenev/projects/git/AstroWISP/doc_src/IO/CInterface.h" name="/home/kpenev/projects/git/AstroWISP/doc_src/IO/CInterface.h">
 <area shape="rect" id="node1" title="Declare C&#45;style functions for accessing the functionality of the IO library." alt="" coords="319,5,504,69"/>
-<area shape="rect" id="node2" href="$FitPSF_2CInterface_8h.html" title="Declare C&#45;style functions for accessing the functionality of FitPSF." alt="" coords="5,117,191,181"/>
-<area shape="rect" id="node4" href="$IO_2CInterface_8cpp.html" title="The definitions of the functinos from CInterface.h." alt="" coords="215,117,400,181"/>
-<area shape="rect" id="node5" href="$PSF_2CInterface_8h.html" title="Declare C&#45;style functions for accessing the functionality of the PSF library." alt="" coords="424,117,609,181"/>
-<area shape="rect" id="node7" href="$SubPixPhot_2CInterface_8h.html" title="Declare C&#45;style functions for accessing the functionality of SubPixPhot." alt="" coords="633,117,835,181"/>
-<area shape="rect" id="node3" href="$FitPSF_2CInterface_8cpp.html" title="Define the C&#45;interface functions for the FitPSF library." alt="" coords="5,229,191,293"/>
-<area shape="rect" id="node6" href="$PSF_2CInterface_8cpp.html" title="The definitions of the functions declared in CInterface.h." alt="" coords="424,229,609,293"/>
+<area shape="rect" id="node2" href="$FitPSF_2CInterface_8h.xhtml" title="Declare C&#45;style functions for accessing the functionality of FitPSF." alt="" coords="5,117,191,181"/>
+<area shape="rect" id="node4" href="$IO_2CInterface_8cpp.xhtml" title="The definitions of the functinos from CInterface.h." alt="" coords="215,117,400,181"/>
+<area shape="rect" id="node5" href="$PSF_2CInterface_8h.xhtml" title="Declare C&#45;style functions for accessing the functionality of the PSF library." alt="" coords="424,117,609,181"/>
+<area shape="rect" id="node7" href="$SubPixPhot_2CInterface_8h.xhtml" title="Declare C&#45;style functions for accessing the functionality of SubPixPhot." alt="" coords="633,117,835,181"/>
+<area shape="rect" id="node3" href="$FitPSF_2CInterface_8cpp.xhtml" title="Define the C&#45;interface functions for the FitPSF library." alt="" coords="5,229,191,293"/>
+<area shape="rect" id="node6" href="$PSF_2CInterface_8cpp.xhtml" title="The definitions of the functions declared in CInterface.h." alt="" coords="424,229,609,293"/>
 </map>

@@ -1,9 +1,9 @@
 <map id="/home/kpenev/projects/git/AstroWISP/doc_src/Core/CInterface.h" name="/home/kpenev/projects/git/AstroWISP/doc_src/Core/CInterface.h">
 <area shape="rect" id="node1" title="Declare some opaque structures to be used when creating C&#45;interfaces to libraries." alt="" coords="314,5,499,69"/>
-<area shape="rect" id="node2" href="$Background_2CInterface_8h.html" title="Declare C&#45;style functions for accessing the functionality of the Background library." alt="" coords="101,117,304,181"/>
-<area shape="rect" id="node4" href="$FitPSF_2CInterface_8h.html" title="Declare C&#45;style functions for accessing the functionality of FitPSF." alt="" coords="249,229,434,293"/>
-<area shape="rect" id="node6" href="$Core_2CInterface_8cpp.html" title="The definitions of the functions declared in CInterface.h." alt="" coords="379,117,565,181"/>
-<area shape="rect" id="node7" href="$SubPixPhot_2CInterface_8h.html" title="Declare C&#45;style functions for accessing the functionality of SubPixPhot." alt="" coords="589,117,790,181"/>
-<area shape="rect" id="node3" href="$Background_2CInterface_8cpp.html" title="The definitions of the functions declared in CInterface.h." alt="" coords="5,229,224,293"/>
-<area shape="rect" id="node5" href="$FitPSF_2CInterface_8cpp.html" title="Define the C&#45;interface functions for the FitPSF library." alt="" coords="249,341,434,405"/>
+<area shape="rect" id="node2" href="$Background_2CInterface_8h.xhtml" title="Declare C&#45;style functions for accessing the functionality of the Background library." alt="" coords="101,117,304,181"/>
+<area shape="rect" id="node4" href="$FitPSF_2CInterface_8h.xhtml" title="Declare C&#45;style functions for accessing the functionality of FitPSF." alt="" coords="249,229,434,293"/>
+<area shape="rect" id="node6" href="$Core_2CInterface_8cpp.xhtml" title="The definitions of the functions declared in CInterface.h." alt="" coords="379,117,565,181"/>
+<area shape="rect" id="node7" href="$SubPixPhot_2CInterface_8h.xhtml" title="Declare C&#45;style functions for accessing the functionality of SubPixPhot." alt="" coords="589,117,790,181"/>
+<area shape="rect" id="node3" href="$Background_2CInterface_8cpp.xhtml" title="The definitions of the functions declared in CInterface.h." alt="" coords="5,229,224,293"/>
+<area shape="rect" id="node5" href="$FitPSF_2CInterface_8cpp.xhtml" title="Define the C&#45;interface functions for the FitPSF library." alt="" coords="249,341,434,405"/>
 </map>

@@ -1,13 +1,13 @@
 <map id="/home/kpenev/projects/git/AstroWISP/doc_src/FitPSF/Pixel.h" name="/home/kpenev/projects/git/AstroWISP/doc_src/FitPSF/Pixel.h">
 <area shape="rect" id="node1" title="Defines a class describing a single pixel participating in PSF/PRF fitting." alt="" coords="404,5,589,69"/>
-<area shape="rect" id="node2" href="$FitPSF_2Image_8h.html" title="Defines a class describing an image of Pixel pixels." alt="" coords="105,117,291,181"/>
-<area shape="rect" id="node9" href="$OverlapGroup_8h.html" title="Defines a class for working with groups of overlapping sources." alt="" coords="576,229,769,293"/>
-<area shape="rect" id="node10" href="$Pixel_8cpp.html" title="Define the backrgound excess functions and some methods of Pixel.h." alt="" coords="600,117,785,181"/>
-<area shape="rect" id="node11" href="$PixelOrder_8h.html" title="Define a class that orders pixels inside a source." alt="" coords="339,117,524,181"/>
-<area shape="rect" id="node3" href="$FitPSF_2CInterface_8cpp.html" title="Define the C&#45;interface functions for the FitPSF library." alt="" coords="5,677,191,741"/>
-<area shape="rect" id="node4" href="$OverlapSource_8h.html" title="Defines the overlap&#45;related features of PSF fitting sources." alt="" coords="169,229,369,293"/>
-<area shape="rect" id="node5" href="$LinearSource_8h.html" title="Declares a class used for PSF fitting where pixel responses are linear functions of the shape paramet..." alt="" coords="174,341,363,405"/>
-<area shape="rect" id="node6" href="$LinearSource_8cpp.html" title="Define some of the methods of LinearSource class." alt="" coords="540,453,747,517"/>
-<area shape="rect" id="node7" href="$FitPSF_2PiecewiseBicubic_8h.html" title="The declarations of the functions related to fitting piecewise bicubic PSFs." alt="" coords="188,565,408,629"/>
-<area shape="rect" id="node8" href="$PiecewiseBicubicPSFSmoothing_8h_source.html" title=" " alt="" coords="187,453,516,517"/>
+<area shape="rect" id="node2" href="$FitPSF_2Image_8h.xhtml" title="Defines a class describing an image of Pixel pixels." alt="" coords="105,117,291,181"/>
+<area shape="rect" id="node9" href="$OverlapGroup_8h.xhtml" title="Defines a class for working with groups of overlapping sources." alt="" coords="576,229,769,293"/>
+<area shape="rect" id="node10" href="$Pixel_8cpp.xhtml" title="Define the backrgound excess functions and some methods of Pixel.h." alt="" coords="600,117,785,181"/>
+<area shape="rect" id="node11" href="$PixelOrder_8h.xhtml" title="Define a class that orders pixels inside a source." alt="" coords="339,117,524,181"/>
+<area shape="rect" id="node3" href="$FitPSF_2CInterface_8cpp.xhtml" title="Define the C&#45;interface functions for the FitPSF library." alt="" coords="5,677,191,741"/>
+<area shape="rect" id="node4" href="$OverlapSource_8h.xhtml" title="Defines the overlap&#45;related features of PSF fitting sources." alt="" coords="169,229,369,293"/>
+<area shape="rect" id="node5" href="$LinearSource_8h.xhtml" title="Declares a class used for PSF fitting where pixel responses are linear functions of the shape paramet..." alt="" coords="174,341,363,405"/>
+<area shape="rect" id="node6" href="$LinearSource_8cpp.xhtml" title="Define some of the methods of LinearSource class." alt="" coords="540,453,747,517"/>
+<area shape="rect" id="node7" href="$FitPSF_2PiecewiseBicubic_8h.xhtml" title="The declarations of the functions related to fitting piecewise bicubic PSFs." alt="" coords="188,565,408,629"/>
+<area shape="rect" id="node8" href="$PiecewiseBicubicPSFSmoothing_8h_source.xhtml" title=" " alt="" coords="187,453,516,517"/>
 </map>

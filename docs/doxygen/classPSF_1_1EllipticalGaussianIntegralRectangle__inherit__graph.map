@@ -1,4 +1,4 @@
 <map id="PSF::EllipticalGaussianIntegralRectangle" name="PSF::EllipticalGaussianIntegralRectangle">
 <area shape="rect" id="node1" title="Calculates integrals of an elliptical gaussion over a rectangle." alt="" coords="5,1023,283,1264"/>
-<area shape="rect" id="node2" href="$classPSF_1_1EllipticalGaussianIntegralByOrder.html" title="Elliptical gaussian integrals refined by incrementing the expansion order." alt="" coords="21,5,267,975"/>
+<area shape="rect" id="node2" href="$classPSF_1_1EllipticalGaussianIntegralByOrder.xhtml" title="Elliptical gaussian integrals refined by incrementing the expansion order." alt="" coords="21,5,267,975"/>
 </map>

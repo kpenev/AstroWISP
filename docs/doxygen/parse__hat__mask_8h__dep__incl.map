@@ -1,11 +1,11 @@
 <map id="/home/kpenev/projects/git/AstroWISP/doc_src/IO/parse_hat_mask.h" name="/home/kpenev/projects/git/AstroWISP/doc_src/IO/parse_hat_mask.h">
 <area shape="rect" id="node1" title="Declares a function for parsing HAT&#45;style maskes from image header." alt="" coords="425,5,611,69"/>
-<area shape="rect" id="node2" href="$IO_2CInterface_8h.html" title="Declare C&#45;style functions for accessing the functionality of the IO library." alt="" coords="319,117,504,181"/>
-<area shape="rect" id="node9" href="$parse__hat__mask_8cpp.html" title="Define the parse_hat_mask function." alt="" coords="529,117,723,181"/>
-<area shape="rect" id="node3" href="$FitPSF_2CInterface_8h.html" title="Declare C&#45;style functions for accessing the functionality of FitPSF." alt="" coords="5,229,191,293"/>
-<area shape="rect" id="node5" href="$IO_2CInterface_8cpp.html" title="The definitions of the functinos from CInterface.h." alt="" coords="215,229,400,293"/>
-<area shape="rect" id="node6" href="$PSF_2CInterface_8h.html" title="Declare C&#45;style functions for accessing the functionality of the PSF library." alt="" coords="424,229,609,293"/>
-<area shape="rect" id="node8" href="$SubPixPhot_2CInterface_8h.html" title="Declare C&#45;style functions for accessing the functionality of SubPixPhot." alt="" coords="633,229,835,293"/>
-<area shape="rect" id="node4" href="$FitPSF_2CInterface_8cpp.html" title="Define the C&#45;interface functions for the FitPSF library." alt="" coords="5,341,191,405"/>
-<area shape="rect" id="node7" href="$PSF_2CInterface_8cpp.html" title="The definitions of the functions declared in CInterface.h." alt="" coords="424,341,609,405"/>
+<area shape="rect" id="node2" href="$IO_2CInterface_8h.xhtml" title="Declare C&#45;style functions for accessing the functionality of the IO library." alt="" coords="319,117,504,181"/>
+<area shape="rect" id="node9" href="$parse__hat__mask_8cpp.xhtml" title="Define the parse_hat_mask function." alt="" coords="529,117,723,181"/>
+<area shape="rect" id="node3" href="$FitPSF_2CInterface_8h.xhtml" title="Declare C&#45;style functions for accessing the functionality of FitPSF." alt="" coords="5,229,191,293"/>
+<area shape="rect" id="node5" href="$IO_2CInterface_8cpp.xhtml" title="The definitions of the functinos from CInterface.h." alt="" coords="215,229,400,293"/>
+<area shape="rect" id="node6" href="$PSF_2CInterface_8h.xhtml" title="Declare C&#45;style functions for accessing the functionality of the PSF library." alt="" coords="424,229,609,293"/>
+<area shape="rect" id="node8" href="$SubPixPhot_2CInterface_8h.xhtml" title="Declare C&#45;style functions for accessing the functionality of SubPixPhot." alt="" coords="633,229,835,293"/>
+<area shape="rect" id="node4" href="$FitPSF_2CInterface_8cpp.xhtml" title="Define the C&#45;interface functions for the FitPSF library." alt="" coords="5,341,191,405"/>
+<area shape="rect" id="node7" href="$PSF_2CInterface_8cpp.xhtml" title="The definitions of the functions declared in CInterface.h." alt="" coords="424,341,609,405"/>
 </map>
