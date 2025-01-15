@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>astrowisp.hat_masks module &mdash; AstroWISP Python Interface  documentation</title>
+  <title>astrowisp.libastrowisp module &mdash; AstroWISP Python Interface  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
@@ -22,8 +22,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="astrowisp.io_tree module" href="astrowisp.io_tree.html" />
-    <link rel="prev" title="astrowisp.fit_star_shape module" href="astrowisp.fit_star_shape.html" /> 
+    <link rel="next" title="astrowisp.piecewise_bicubic_psf module" href="astrowisp.piecewise_bicubic_psf.html" />
+    <link rel="prev" title="astrowisp.io_tree module" href="astrowisp.io_tree.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -62,9 +62,9 @@
 <li class="toctree-l3 current"><a class="reference internal" href="astrowisp.html#submodules">Submodules</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="astrowisp.background.html">astrowisp.background module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="astrowisp.fit_star_shape.html">astrowisp.fit_star_shape module</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">astrowisp.hat_masks module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="astrowisp.hat_masks.html">astrowisp.hat_masks module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="astrowisp.io_tree.html">astrowisp.io_tree module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="astrowisp.libastrowisp.html">astrowisp.libastrowisp module</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">astrowisp.libastrowisp module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="astrowisp.piecewise_bicubic_psf.html">astrowisp.piecewise_bicubic_psf module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="astrowisp.piecewise_bicubic_psf_map.html">astrowisp.piecewise_bicubic_psf_map module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="astrowisp.psf_base.html">astrowisp.psf_base module</a></li>
@@ -95,9 +95,9 @@
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="modules.html">astrowisp</a></li>
           <li class="breadcrumb-item"><a href="astrowisp.html">astrowisp package</a></li>
-      <li class="breadcrumb-item active">astrowisp.hat_masks module</li>
+      <li class="breadcrumb-item active">astrowisp.libastrowisp module</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/_implementation/astrowisp.hat_masks.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/_implementation/astrowisp.libastrowisp.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -105,57 +105,16 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-astrowisp.hat_masks">
-<span id="astrowisp-hat-masks-module"></span><h1>astrowisp.hat_masks module<a class="headerlink" href="#module-astrowisp.hat_masks" title="Link to this heading"></a></h1>
-<p>Utilities for working with HAT-style masks in FITS headers.</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="astrowisp.hat_masks.parse_hat_mask">
-<span class="sig-prename descclassname"><span class="pre">astrowisp.hat_masks.</span></span><span class="sig-name descname"><span class="pre">parse_hat_mask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">header</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/hat_masks.html#parse_hat_mask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.hat_masks.parse_hat_mask" title="Link to this definition"></a></dt>
-<dd><p>Extract the HAT-style mask contained in header.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>header</strong> – The header of the image whose mask to parse.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>array with exactly the same resolution as the input image containing
-a bit-field for each pixel indicating any bad-pixel flags raised per
-the header.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>numpy.array(dtype=uint8)</p>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">astropy.io</span> <span class="kn">import</span> <span class="n">fits</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;/Users/kpenev/tmp/1-447491_4.fits.fz&#39;</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>               <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;readonly&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">image_mask</span> <span class="o">=</span> <span class="n">parse_hat_mask</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">flag_name</span> <span class="o">=</span> <span class="s1">&#39;OVERSATURATED&#39;</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">matched</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">bitwise_and</span><span class="p">(</span><span class="n">image_mask</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>                                <span class="n">mask_flags</span><span class="p">[</span><span class="n">flag_name</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">bool</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="c1">#Print number of pixels for which the OVERSATURATED flag is</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="c1">#raised</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="n">flag_name</span> <span class="o">+</span> <span class="s1">&#39;: &#39;</span> <span class="o">+</span> <span class="nb">repr</span><span class="p">(</span><span class="n">matched</span><span class="o">.</span><span class="n">sum</span><span class="p">()))</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="c1">#Output x, y, flux for the pixels flagged as OVERSATURATED</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="k">for</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">numpy</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">matched</span><span class="p">)):</span>
-<span class="gp">&gt;&gt;&gt; </span>        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%4d</span><span class="s1"> </span><span class="si">%4d</span><span class="s1"> </span><span class="si">%15d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">]))</span>
-</pre></div>
-</div>
-</dd></dl>
-
+  <section id="astrowisp-libastrowisp-module">
+<h1>astrowisp.libastrowisp module<a class="headerlink" href="#astrowisp-libastrowisp-module" title="Link to this heading"></a></h1>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="astrowisp.fit_star_shape.html" class="btn btn-neutral float-left" title="astrowisp.fit_star_shape module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="astrowisp.io_tree.html" class="btn btn-neutral float-right" title="astrowisp.io_tree module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="astrowisp.io_tree.html" class="btn btn-neutral float-left" title="astrowisp.io_tree module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="astrowisp.piecewise_bicubic_psf.html" class="btn btn-neutral float-right" title="astrowisp.piecewise_bicubic_psf module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
