@@ -14,8 +14,6 @@ var group__SubPixPhot =
     [ "SourceInput.cpp", "SourceInput_8cpp.xhtml", null ],
     [ "SourceInput.h", "SourceInput_8h.xhtml", null ],
     [ "SubPixPhotIO.h", "SubPixPhotIO_8h.xhtml", null ],
-    [ "Error", "namespaceError.xhtml", null ],
-    [ "Phot", "namespacePhot.xhtml", null ],
     [ "MeasureAnnulus", "classBackground_1_1MeasureAnnulus.xhtml", [
       [ "MeasureAnnulus", "classBackground_1_1MeasureAnnulus.xhtml#ad87d8214f96e2cf928e2e6bcb91b6bc7", null ],
       [ "MeasureAnnulus", "classBackground_1_1MeasureAnnulus.xhtml#a7aefaa75f2be4e63f3fcf12fb69b1537", null ],

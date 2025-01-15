@@ -1,26 +1,24 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>astrowisp.psf_base module &mdash; AstroWISP Python Interface  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/unlimited_width.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/unlimited_width.css?v=eea1f72d" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -55,6 +53,11 @@
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">Python Package Implementation</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="astrowisp.html">astrowisp package</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="astrowisp.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.BackgroundExtractor"><code class="docutils literal notranslate"><span class="pre">BackgroundExtractor</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.FitStarShape"><code class="docutils literal notranslate"><span class="pre">FitStarShape</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.PiecewiseBicubicPSF"><code class="docutils literal notranslate"><span class="pre">PiecewiseBicubicPSF</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.PiecewiseBicubicPSFMap"><code class="docutils literal notranslate"><span class="pre">PiecewiseBicubicPSFMap</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.SubPixPhot"><code class="docutils literal notranslate"><span class="pre">SubPixPhot</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="astrowisp.html#subpackages">Subpackages</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="astrowisp.html#submodules">Submodules</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="astrowisp.background.html">astrowisp.background module</a></li>
@@ -102,24 +105,27 @@
            <div itemprop="articleBody">
              
   <section id="module-astrowisp.psf_base">
-<span id="astrowisp-psf-base-module"></span><h1>astrowisp.psf_base module<a class="headerlink" href="#module-astrowisp.psf_base" title="Permalink to this heading"></a></h1>
+<span id="astrowisp-psf-base-module"></span><h1>astrowisp.psf_base module<a class="headerlink" href="#module-astrowisp.psf_base" title="Link to this heading"></a></h1>
 <section id="class-inheritance-diagram">
-<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this heading"></a></h2>
-<div class="graphviz"><img src="../_images/inheritance-da1fc7af7e287be763ec7ae9bc4784cd8cd65a59.png" alt="Inheritance diagram of ABC, PSFBase" usemap="#inheritance35d7c8c5af" class="inheritance graphviz" /></div>
+<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Link to this heading"></a></h2>
+<div class="graphviz"><img src="../_images/inheritance-a34f1e5400c86051138f9f3d610d390d47c0662d.png" alt="Inheritance diagram of ABC, PSFBase" usemap="#inheritance35d7c8c5af" class="inheritance graphviz" /></div>
 <map id="inheritance35d7c8c5af" name="inheritance35d7c8c5af">
-<area shape="rect" id="node2" href="#astrowisp.psf_base.PSFBase" target="_top" title="The base class for all supported PSFs." alt="" coords="5,80,200,107"/>
+<area shape="rect" id="node1" href="https://docs.python.org/3/library/abc.html#abc.ABC" target="_top" title="Helper class that provides a standard way to create an ABC using" alt="" coords="71,5,147,31"/>
+<area shape="rect" id="node2" href="#astrowisp.psf_base.PSFBase" target="_top" title="The base class for all supported PSFs." alt="" coords="5,79,212,104"/>
 </map><p>Defines a base class for all PSF models: PSFBase.</p>
+</section>
 <dl class="py class">
 <dt class="sig sig-object py" id="astrowisp.psf_base.PSFBase">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">astrowisp.psf_base.</span></span><span class="sig-name descname"><span class="pre">PSFBase</span></span><a class="reference internal" href="../_modules/astrowisp/psf_base.html#PSFBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.psf_base.PSFBase" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">astrowisp.psf_base.</span></span><span class="sig-name descname"><span class="pre">PSFBase</span></span><a class="reference internal" href="../_modules/astrowisp/psf_base.html#PSFBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.psf_base.PSFBase" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a></p>
-<div class="graphviz"><img src="../_images/inheritance-1803f9390277e49c61ab69a3eefffb1d1d805257.png" alt="Inheritance diagram of astrowisp.psf_base.PSFBase" usemap="#inheritanceb8f9f27df2" class="inheritance graphviz" /></div>
+<div class="graphviz"><img src="../_images/inheritance-972eaa3e84e57a97468ccf6974373aac7078dca7.png" alt="Inheritance diagram of astrowisp.psf_base.PSFBase" usemap="#inheritanceb8f9f27df2" class="inheritance graphviz" /></div>
 <map id="inheritanceb8f9f27df2" name="inheritanceb8f9f27df2">
-<area shape="rect" id="node2" href="#astrowisp.psf_base.PSFBase" target="_top" title="The base class for all supported PSFs." alt="" coords="5,80,200,107"/>
+<area shape="rect" id="node1" href="https://docs.python.org/3/library/abc.html#abc.ABC" target="_top" title="Helper class that provides a standard way to create an ABC using" alt="" coords="71,5,147,31"/>
+<area shape="rect" id="node2" href="#astrowisp.psf_base.PSFBase" target="_top" title="The base class for all supported PSFs." alt="" coords="5,79,212,104"/>
 </map><p>The base class for all supported PSFs.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="astrowisp.psf_base.PSFBase.__call__">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/psf_base.html#PSFBase.__call__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.psf_base.PSFBase.__call__" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/psf_base.html#PSFBase.__call__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.psf_base.PSFBase.__call__" title="Link to this definition"></a></dt>
 <dd><p>Return the value of the PSF at the given point.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -138,31 +144,31 @@ return the PSF value.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="astrowisp.psf_base.PSFBase.get_down_range">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_down_range</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/psf_base.html#PSFBase.get_down_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.psf_base.PSFBase.get_down_range" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_down_range</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/psf_base.html#PSFBase.get_down_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.psf_base.PSFBase.get_down_range" title="Link to this definition"></a></dt>
 <dd><p>Return how far the PSF extends downward of center.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="astrowisp.psf_base.PSFBase.get_left_range">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_left_range</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/psf_base.html#PSFBase.get_left_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.psf_base.PSFBase.get_left_range" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_left_range</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/psf_base.html#PSFBase.get_left_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.psf_base.PSFBase.get_left_range" title="Link to this definition"></a></dt>
 <dd><p>Return how far the PSF extends to the left of center.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="astrowisp.psf_base.PSFBase.get_right_range">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_right_range</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/psf_base.html#PSFBase.get_right_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.psf_base.PSFBase.get_right_range" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_right_range</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/psf_base.html#PSFBase.get_right_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.psf_base.PSFBase.get_right_range" title="Link to this definition"></a></dt>
 <dd><p>Return how far the PSF extends to the right of center.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="astrowisp.psf_base.PSFBase.get_up_range">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_up_range</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/psf_base.html#PSFBase.get_up_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.psf_base.PSFBase.get_up_range" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_up_range</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/psf_base.html#PSFBase.get_up_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.psf_base.PSFBase.get_up_range" title="Link to this definition"></a></dt>
 <dd><p>Return how far the PSF extends upward of center.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="astrowisp.psf_base.PSFBase.integrate">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">integrate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">circle_radius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/psf_base.html#PSFBase.integrate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.psf_base.PSFBase.integrate" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">integrate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">circle_radius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/psf_base.html#PSFBase.integrate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.psf_base.PSFBase.integrate" title="Link to this definition"></a></dt>
 <dd><p>Return integrals of the PSF over circle-rectangle overlaps.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -189,7 +195,7 @@ rectangle(s).</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="astrowisp.psf_base.PSFBase.predict_pixel">
-<span class="sig-name descname"><span class="pre">predict_pixel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">center_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subpix_map</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">array([[1.]])</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/psf_base.html#PSFBase.predict_pixel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.psf_base.PSFBase.predict_pixel" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">predict_pixel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">center_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subpix_map</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">array([[1.]])</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/psf_base.html#PSFBase.predict_pixel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.psf_base.PSFBase.predict_pixel" title="Link to this definition"></a></dt>
 <dd><p>Predict the value(s) of pixel(s) assuming a pixel sensitivity map.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -214,7 +220,6 @@ the source center.</p>
 
 </dd></dl>
 
-</section>
 </section>
 
 

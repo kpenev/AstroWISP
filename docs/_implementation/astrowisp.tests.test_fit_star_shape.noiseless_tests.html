@@ -1,26 +1,24 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>astrowisp.tests.test_fit_star_shape.noiseless_tests module &mdash; AstroWISP Python Interface  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/unlimited_width.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/unlimited_width.css?v=eea1f72d" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -55,6 +53,11 @@
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">Python Package Implementation</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="astrowisp.html">astrowisp package</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="astrowisp.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.BackgroundExtractor"><code class="docutils literal notranslate"><span class="pre">BackgroundExtractor</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.FitStarShape"><code class="docutils literal notranslate"><span class="pre">FitStarShape</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.PiecewiseBicubicPSF"><code class="docutils literal notranslate"><span class="pre">PiecewiseBicubicPSF</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.PiecewiseBicubicPSFMap"><code class="docutils literal notranslate"><span class="pre">PiecewiseBicubicPSFMap</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.SubPixPhot"><code class="docutils literal notranslate"><span class="pre">SubPixPhot</span></code></a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="astrowisp.html#subpackages">Subpackages</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="astrowisp.fake_image.html">astrowisp.fake_image package</a></li>
 <li class="toctree-l4 current"><a class="reference internal" href="astrowisp.tests.html">astrowisp.tests package</a></li>
@@ -99,31 +102,34 @@
            <div itemprop="articleBody">
              
   <section id="module-astrowisp.tests.test_fit_star_shape.noiseless_tests">
-<span id="astrowisp-tests-test-fit-star-shape-noiseless-tests-module"></span><h1>astrowisp.tests.test_fit_star_shape.noiseless_tests module<a class="headerlink" href="#module-astrowisp.tests.test_fit_star_shape.noiseless_tests" title="Permalink to this heading"></a></h1>
+<span id="astrowisp-tests-test-fit-star-shape-noiseless-tests-module"></span><h1>astrowisp.tests.test_fit_star_shape.noiseless_tests module<a class="headerlink" href="#module-astrowisp.tests.test_fit_star_shape.noiseless_tests" title="Link to this heading"></a></h1>
 <section id="class-inheritance-diagram">
-<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this heading"></a></h2>
-<div class="graphviz"><img src="../_images/inheritance-4c93a041d330ea8fce53b59d51e58ecff15f4242.png" alt="Inheritance diagram of BackgroundExtractor, FitStarShape, FloatTestCase, PiecewiseBicubicPSF, TestFitStarShapeNoiseless, c_ubyte" usemap="#inheritanceb67e7fc920" class="inheritance graphviz" /></div>
+<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Link to this heading"></a></h2>
+<div class="graphviz"><img src="../_images/inheritance-e2e1dbeb789b7bb5b67976b1d2d6b706fd996462.png" alt="Inheritance diagram of BackgroundExtractor, FitStarShape, FloatTestCase, PiecewiseBicubicPSF, TestFitStarShapeNoiseless, c_ubyte" usemap="#inheritanceb67e7fc920" class="inheritance graphviz" /></div>
 <map id="inheritanceb67e7fc920" name="inheritanceb67e7fc920">
-<area shape="rect" id="node5" href="astrowisp.psf_base.html#astrowisp.psf_base.PSFBase" target="_top" title="The base class for all supported PSFs." alt="" coords="116,80,311,107"/>
-<area shape="rect" id="node2" href="astrowisp.background.html#astrowisp.background.BackgroundExtractor" target="_top" title="Measure the background level for each source in an image." alt="" coords="275,5,549,32"/>
-<area shape="rect" id="node3" href="astrowisp.fake_image.piecewise_bicubic_psf.html#astrowisp.fake_image.piecewise_bicubic_psf.PiecewiseBicubicPSF" target="_top" title="A piecewise PSF class where the PSF over each piece is a bi&#45;cubic function." alt="" coords="5,229,422,256"/>
-<area shape="rect" id="node4" href="astrowisp.fake_image.piecewise_psf.html#astrowisp.fake_image.piecewise_psf.PiecewisePSF" target="_top" title="Base clas for PSFs defined on a grid of pieces." alt="" coords="51,155,376,181"/>
-<area shape="rect" id="node6" href="astrowisp.fit_star_shape.html#astrowisp.fit_star_shape.FitStarShape" target="_top" title="Fit for the PSF/PRF of stars and their flux." alt="" coords="573,5,816,32"/>
-<area shape="rect" id="node7" href="#astrowisp.tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless" target="_top" title="Test piecewise bicubic PSF fitting on noiseless images." alt="" coords="677,155,1160,181"/>
-<area shape="rect" id="node8" href="astrowisp.tests.utilities.html#astrowisp.tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="797,80,1041,107"/>
+<area shape="rect" id="node1" href="https://docs.python.org/3/library/abc.html#abc.ABC" target="_top" title="Helper class that provides a standard way to create an ABC using" alt="" coords="194,5,270,31"/>
+<area shape="rect" id="node5" href="astrowisp.psf_base.html#astrowisp.psf_base.PSFBase" target="_top" title="The base class for all supported PSFs." alt="" coords="129,79,335,104"/>
+<area shape="rect" id="node2" href="astrowisp.background.html#astrowisp.background.BackgroundExtractor" target="_top" title="Measure the background level for each source in an image." alt="" coords="294,5,599,31"/>
+<area shape="rect" id="node3" href="astrowisp.fake_image.piecewise_bicubic_psf.html#astrowisp.fake_image.piecewise_bicubic_psf.PiecewiseBicubicPSF" target="_top" title="A piecewise PSF class where the PSF over each piece is a bi&#45;cubic function." alt="" coords="5,225,459,251"/>
+<area shape="rect" id="node4" href="astrowisp.fake_image.piecewise_psf.html#astrowisp.fake_image.piecewise_psf.PiecewisePSF" target="_top" title="Base clas for PSFs defined on a grid of pieces." alt="" coords="55,152,409,177"/>
+<area shape="rect" id="node6" href="astrowisp.fit_star_shape.html#astrowisp.fit_star_shape.FitStarShape" target="_top" title="Fit for the PSF/PRF of stars and their flux." alt="" coords="624,5,891,31"/>
+<area shape="rect" id="node7" href="#astrowisp.tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless" target="_top" title="Test piecewise bicubic PSF fitting on noiseless images." alt="" coords="735,152,1262,177"/>
+<area shape="rect" id="node8" href="astrowisp.tests.utilities.html#astrowisp.tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="864,79,1133,104"/>
+<area shape="rect" id="node10" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_ubyte" target="_top" title="ctypes.c_ubyte" alt="" coords="1107,5,1227,31"/>
 </map><p>Test AstroWISP’s fit_star_shape module.</p>
+</section>
 <dl class="py class">
 <dt class="sig sig-object py" id="astrowisp.tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">astrowisp.tests.test_fit_star_shape.noiseless_tests.</span></span><span class="sig-name descname"><span class="pre">TestFitStarShapeNoiseless</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/tests/test_fit_star_shape/noiseless_tests.html#TestFitStarShapeNoiseless"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">astrowisp.tests.test_fit_star_shape.noiseless_tests.</span></span><span class="sig-name descname"><span class="pre">TestFitStarShapeNoiseless</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/tests/test_fit_star_shape/noiseless_tests.html#TestFitStarShapeNoiseless"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="astrowisp.tests.utilities.html#astrowisp.tests.utilities.FloatTestCase" title="astrowisp.tests.utilities.FloatTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">FloatTestCase</span></code></a></p>
 <div class="graphviz"><img src="../_images/inheritance-9a18ff9b3c9426ad09094b928c0dc000622be17d.png" alt="Inheritance diagram of astrowisp.tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless" usemap="#inheritance1030d2edc6" class="inheritance graphviz" /></div>
 <map id="inheritance1030d2edc6" name="inheritance1030d2edc6">
-<area shape="rect" id="node1" href="#astrowisp.tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless" target="_top" title="Test piecewise bicubic PSF fitting on noiseless images." alt="" coords="5,155,489,181"/>
-<area shape="rect" id="node2" href="astrowisp.tests.utilities.html#astrowisp.tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="125,80,369,107"/>
+<area shape="rect" id="node1" href="#astrowisp.tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless" target="_top" title="Test piecewise bicubic PSF fitting on noiseless images." alt="" coords="5,152,532,177"/>
+<area shape="rect" id="node2" href="astrowisp.tests.utilities.html#astrowisp.tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="134,79,403,104"/>
 </map><p>Test piecewise bicubic PSF fitting on noiseless images.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="astrowisp.tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.check_results">
-<span class="sig-name descname"><span class="pre">check_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result_tree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sources</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_terms</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/tests/test_fit_star_shape/noiseless_tests.html#TestFitStarShapeNoiseless.check_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.check_results" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">check_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result_tree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sources</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_terms</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/tests/test_fit_star_shape/noiseless_tests.html#TestFitStarShapeNoiseless.check_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.check_results" title="Link to this definition"></a></dt>
 <dd><p>Assert that fitted PSF map and source fluxes match expectations.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -146,7 +152,7 @@ fit. See same name argument of run_test.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="astrowisp.tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.create_debug_files">
-<span class="sig-name descname"><span class="pre">create_debug_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sub_image</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/tests/test_fit_star_shape/noiseless_tests.html#TestFitStarShapeNoiseless.create_debug_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.create_debug_files" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">create_debug_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sub_image</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/tests/test_fit_star_shape/noiseless_tests.html#TestFitStarShapeNoiseless.create_debug_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.create_debug_files" title="Link to this definition"></a></dt>
 <dd><p>Create the pair of files used by the C test of PSF fitting.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -164,7 +170,7 @@ fit simultaneously.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="astrowisp.tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.run_test">
-<span class="sig-name descname"><span class="pre">run_test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sources</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">psffit_terms</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/tests/test_fit_star_shape/noiseless_tests.html#TestFitStarShapeNoiseless.run_test"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.run_test" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">run_test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sources</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">psffit_terms</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/tests/test_fit_star_shape/noiseless_tests.html#TestFitStarShapeNoiseless.run_test"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.run_test" title="Link to this definition"></a></dt>
 <dd><p>Assert that a fit of a series of images works exactly.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -198,37 +204,36 @@ functions.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="astrowisp.tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.test_four_overlapping_sources">
-<span class="sig-name descname"><span class="pre">test_four_overlapping_sources</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/tests/test_fit_star_shape/noiseless_tests.html#TestFitStarShapeNoiseless.test_four_overlapping_sources"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.test_four_overlapping_sources" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">test_four_overlapping_sources</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/tests/test_fit_star_shape/noiseless_tests.html#TestFitStarShapeNoiseless.test_four_overlapping_sources"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.test_four_overlapping_sources" title="Link to this definition"></a></dt>
 <dd><p>Test fitting an image containing 4 overlapping sources.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="astrowisp.tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.test_isolated_sources">
-<span class="sig-name descname"><span class="pre">test_isolated_sources</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/tests/test_fit_star_shape/noiseless_tests.html#TestFitStarShapeNoiseless.test_isolated_sources"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.test_isolated_sources" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">test_isolated_sources</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/tests/test_fit_star_shape/noiseless_tests.html#TestFitStarShapeNoiseless.test_isolated_sources"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.test_isolated_sources" title="Link to this definition"></a></dt>
 <dd><p>Test fitting an image containing 8 well isolated sources.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="astrowisp.tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.test_multi_image_with_extra_var">
-<span class="sig-name descname"><span class="pre">test_multi_image_with_extra_var</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/tests/test_fit_star_shape/noiseless_tests.html#TestFitStarShapeNoiseless.test_multi_image_with_extra_var"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.test_multi_image_with_extra_var" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">test_multi_image_with_extra_var</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/tests/test_fit_star_shape/noiseless_tests.html#TestFitStarShapeNoiseless.test_multi_image_with_extra_var"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.test_multi_image_with_extra_var" title="Link to this definition"></a></dt>
 <dd><p>Test fitting a series of 5 images and non-position variables.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="astrowisp.tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.test_single_source">
-<span class="sig-name descname"><span class="pre">test_single_source</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/tests/test_fit_star_shape/noiseless_tests.html#TestFitStarShapeNoiseless.test_single_source"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.test_single_source" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">test_single_source</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/tests/test_fit_star_shape/noiseless_tests.html#TestFitStarShapeNoiseless.test_single_source"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.test_single_source" title="Link to this definition"></a></dt>
 <dd><p>Test fitting a single source in the center of the image.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="astrowisp.tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.test_two_overlapping_sources">
-<span class="sig-name descname"><span class="pre">test_two_overlapping_sources</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/tests/test_fit_star_shape/noiseless_tests.html#TestFitStarShapeNoiseless.test_two_overlapping_sources"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.test_two_overlapping_sources" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">test_two_overlapping_sources</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/tests/test_fit_star_shape/noiseless_tests.html#TestFitStarShapeNoiseless.test_two_overlapping_sources"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless.test_two_overlapping_sources" title="Link to this definition"></a></dt>
 <dd><p>Test fitting an image containing 2 sources all overlapping.</p>
 </dd></dl>
 
 </dd></dl>
 
-</section>
 </section>
 
 

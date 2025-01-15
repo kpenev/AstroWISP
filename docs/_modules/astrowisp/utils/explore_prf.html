@@ -1,25 +1,23 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>astrowisp.utils.explore_prf &mdash; AstroWISP Python Interface  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/unlimited_width.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/unlimited_width.css?v=eea1f72d" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../../_static/doctools.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -118,7 +116,9 @@
 <span class="kn">from</span> <span class="nn">astrowisp.utils</span> <span class="kn">import</span> <span class="n">flux_from_magnitude</span>
 
 <span class="c1">#pylint: disable=too-many-statements</span>
-<div class="viewcode-block" id="parse_command_line"><a class="viewcode-back" href="../../../_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.parse_command_line">[docs]</a><span class="k">def</span> <span class="nf">parse_command_line</span><span class="p">(</span><span class="n">parser</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="parse_command_line">
+<a class="viewcode-back" href="../../../_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.parse_command_line">[docs]</a>
+<span class="k">def</span> <span class="nf">parse_command_line</span><span class="p">(</span><span class="n">parser</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                        <span class="n">assume_sources</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                        <span class="n">add_config_file</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                        <span class="n">add_frame_arg</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -456,10 +456,13 @@
         <span class="n">cmdline_args</span><span class="o">.</span><span class="n">slice</span> <span class="o">=</span> <span class="p">[</span><span class="n">parse_slice</span><span class="p">(</span><span class="s1">&#39;x = 0 +- 0.2&#39;</span><span class="p">),</span>
                               <span class="n">parse_slice</span><span class="p">(</span><span class="s1">&#39;y = 0 +- 0.2&#39;</span><span class="p">)]</span>
     <span class="k">return</span> <span class="n">cmdline_args</span></div>
+
 <span class="c1">#pylint: enable=too-many-statements</span>
 
 
-<div class="viewcode-block" id="get_trans_fname"><a class="viewcode-back" href="../../../_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.get_trans_fname">[docs]</a><span class="k">def</span> <span class="nf">get_trans_fname</span><span class="p">(</span><span class="n">frame_fname</span><span class="p">,</span> <span class="n">trans_pattern</span><span class="p">):</span>
+<div class="viewcode-block" id="get_trans_fname">
+<a class="viewcode-back" href="../../../_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.get_trans_fname">[docs]</a>
+<span class="k">def</span> <span class="nf">get_trans_fname</span><span class="p">(</span><span class="n">frame_fname</span><span class="p">,</span> <span class="n">trans_pattern</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return the filename of the trans file corresponding to a given frame.</span>
 
@@ -486,7 +489,10 @@
     <span class="k">return</span> <span class="n">trans_fname</span></div>
 
 
-<div class="viewcode-block" id="get_source_positions"><a class="viewcode-back" href="../../../_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.get_source_positions">[docs]</a><span class="k">def</span> <span class="nf">get_source_positions</span><span class="p">(</span><span class="n">catalogue_fname</span><span class="p">,</span> <span class="n">trans_fname</span><span class="p">,</span> <span class="n">image_resolution</span><span class="p">):</span>
+
+<div class="viewcode-block" id="get_source_positions">
+<a class="viewcode-back" href="../../../_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.get_source_positions">[docs]</a>
+<span class="k">def</span> <span class="nf">get_source_positions</span><span class="p">(</span><span class="n">catalogue_fname</span><span class="p">,</span> <span class="n">trans_fname</span><span class="p">,</span> <span class="n">image_resolution</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return [(x, y), ...] positions of the sources in the image.</span>
 
@@ -561,7 +567,10 @@
     <span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="get_source_info"><a class="viewcode-back" href="../../../_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.get_source_info">[docs]</a><span class="k">def</span> <span class="nf">get_source_info</span><span class="p">(</span><span class="o">*</span><span class="p">,</span>
+
+<div class="viewcode-block" id="get_source_info">
+<a class="viewcode-back" href="../../../_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.get_source_info">[docs]</a>
+<span class="k">def</span> <span class="nf">get_source_info</span><span class="p">(</span><span class="o">*</span><span class="p">,</span>
                     <span class="n">pixel_array</span><span class="p">,</span>
                     <span class="n">stddev_array</span><span class="p">,</span>
                     <span class="n">mask_array</span><span class="p">,</span>
@@ -671,9 +680,12 @@
     <span class="k">return</span> <span class="n">result</span></div>
 
 
+
 <span class="c1">#No clean way to simplify found.</span>
 <span class="c1">#pylint: disable=too-many-locals</span>
-<div class="viewcode-block" id="find_pixel_offsets"><a class="viewcode-back" href="../../../_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.find_pixel_offsets">[docs]</a><span class="k">def</span> <span class="nf">find_pixel_offsets</span><span class="p">(</span><span class="n">sources</span><span class="p">,</span>
+<div class="viewcode-block" id="find_pixel_offsets">
+<a class="viewcode-back" href="../../../_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.find_pixel_offsets">[docs]</a>
+<span class="k">def</span> <span class="nf">find_pixel_offsets</span><span class="p">(</span><span class="n">sources</span><span class="p">,</span>
                        <span class="n">prf_range</span><span class="p">,</span>
                        <span class="n">image_resolution</span><span class="p">,</span>
                        <span class="n">crowding_distance</span><span class="p">,</span>
@@ -779,10 +791,13 @@
         <span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
     <span class="k">return</span> <span class="n">result</span></div>
+
 <span class="c1">#pylint: enable=too-many-locals</span>
 
 
-<div class="viewcode-block" id="get_prf_data"><a class="viewcode-back" href="../../../_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.get_prf_data">[docs]</a><span class="k">def</span> <span class="nf">get_prf_data</span><span class="p">(</span><span class="n">pixel_values</span><span class="p">,</span>
+<div class="viewcode-block" id="get_prf_data">
+<a class="viewcode-back" href="../../../_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.get_prf_data">[docs]</a>
+<span class="k">def</span> <span class="nf">get_prf_data</span><span class="p">(</span><span class="n">pixel_values</span><span class="p">,</span>
                  <span class="n">pixel_stddev</span><span class="p">,</span>
                  <span class="n">pixel_offsets</span><span class="p">,</span>
                  <span class="n">error_threshold</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
@@ -845,9 +860,12 @@
     <span class="p">))</span></div>
 
 
+
 <span class="c1">#TODO: see if can be fixed</span>
 <span class="c1">#pylint: disable=too-many-locals</span>
-<div class="viewcode-block" id="plot_prf_slice"><a class="viewcode-back" href="../../../_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.plot_prf_slice">[docs]</a><span class="k">def</span> <span class="nf">plot_prf_slice</span><span class="p">(</span><span class="n">prf_data</span><span class="p">,</span>
+<div class="viewcode-block" id="plot_prf_slice">
+<a class="viewcode-back" href="../../../_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.plot_prf_slice">[docs]</a>
+<span class="k">def</span> <span class="nf">plot_prf_slice</span><span class="p">(</span><span class="n">prf_data</span><span class="p">,</span>
                    <span class="n">spline</span><span class="p">,</span>
                    <span class="o">*</span><span class="p">,</span>
                    <span class="n">label</span><span class="p">,</span>
@@ -951,10 +969,13 @@
             <span class="n">zorder</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
             <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span>
         <span class="p">)</span></div>
+
 <span class="c1">#pylint: enable=too-many-locals</span>
 
 
-<div class="viewcode-block" id="plot_entire_prf"><a class="viewcode-back" href="../../../_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.plot_entire_prf">[docs]</a><span class="k">def</span> <span class="nf">plot_entire_prf</span><span class="p">(</span><span class="n">cmdline_args</span><span class="p">,</span>
+<div class="viewcode-block" id="plot_entire_prf">
+<a class="viewcode-back" href="../../../_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.plot_entire_prf">[docs]</a>
+<span class="k">def</span> <span class="nf">plot_entire_prf</span><span class="p">(</span><span class="n">cmdline_args</span><span class="p">,</span>
                     <span class="n">image_slices</span><span class="p">,</span>
                     <span class="n">grid_x</span><span class="p">,</span>
                     <span class="n">grid_y</span><span class="p">,</span>
@@ -1101,11 +1122,14 @@
                         <span class="n">x_index</span><span class="p">,</span>
                         <span class="n">y_index</span><span class="p">)</span></div>
 
+
             <span class="c1">#TODO need to manually set vmin and vmax make color have a</span>
             <span class="c1">#wider range try to find color limit, should make them quantiles</span>
             <span class="c1">#functions</span>
 
-<div class="viewcode-block" id="plot_3d_prf"><a class="viewcode-back" href="../../../_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.plot_3d_prf">[docs]</a><span class="k">def</span> <span class="nf">plot_3d_prf</span><span class="p">(</span><span class="n">cmdline_args</span><span class="p">,</span> <span class="n">meshgrid_x</span><span class="p">,</span> <span class="n">meshgrid_y</span><span class="p">,</span> <span class="n">prf_slice_splines</span><span class="p">):</span>
+<div class="viewcode-block" id="plot_3d_prf">
+<a class="viewcode-back" href="../../../_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.plot_3d_prf">[docs]</a>
+<span class="k">def</span> <span class="nf">plot_3d_prf</span><span class="p">(</span><span class="n">cmdline_args</span><span class="p">,</span> <span class="n">meshgrid_x</span><span class="p">,</span> <span class="n">meshgrid_y</span><span class="p">,</span> <span class="n">prf_slice_splines</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Plot a 3D slice of the PRF.</span>
 
@@ -1252,7 +1276,10 @@
             <span class="n">pyplot</span><span class="o">.</span><span class="n">cla</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="get_image_slices"><a class="viewcode-back" href="../../../_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.get_image_slices">[docs]</a><span class="k">def</span> <span class="nf">get_image_slices</span><span class="p">(</span><span class="n">splits</span><span class="p">,</span> <span class="n">inner_only</span><span class="p">):</span>
+
+<div class="viewcode-block" id="get_image_slices">
+<a class="viewcode-back" href="../../../_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.get_image_slices">[docs]</a>
+<span class="k">def</span> <span class="nf">get_image_slices</span><span class="p">(</span><span class="n">splits</span><span class="p">,</span> <span class="n">inner_only</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return [(x-slice, y-slice, x_index, y_index), ...] per `--split-image` arg.</span>
 
@@ -1288,10 +1315,15 @@
     <span class="p">]</span></div>
 
 
-<div class="viewcode-block" id="AlglibSpline"><a class="viewcode-back" href="../../../_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.AlglibSpline">[docs]</a><span class="k">class</span> <span class="nc">AlglibSpline</span><span class="p">:</span>
+
+<div class="viewcode-block" id="AlglibSpline">
+<a class="viewcode-back" href="../../../_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.AlglibSpline">[docs]</a>
+<span class="k">class</span> <span class="nc">AlglibSpline</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Wrap alglib based splines so they can be evaluated on scipy arrays.&quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="AlglibSpline.__init__"><a class="viewcode-back" href="../../../_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.AlglibSpline.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prf_data</span><span class="p">,</span> <span class="n">resolution</span><span class="p">,</span> <span class="n">penalty</span><span class="p">,</span> <span class="n">domain</span><span class="p">):</span>
+<div class="viewcode-block" id="AlglibSpline.__init__">
+<a class="viewcode-back" href="../../../_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.AlglibSpline.__init__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prf_data</span><span class="p">,</span> <span class="n">resolution</span><span class="p">,</span> <span class="n">penalty</span><span class="p">,</span> <span class="n">domain</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Fit the spline on the given data.</span>
 
@@ -1339,12 +1371,18 @@
             <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">xalglib</span><span class="o">.</span><span class="n">spline2dcalc</span><span class="p">(</span><span class="n">spline</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="AlglibSpline.__call__"><a class="viewcode-back" href="../../../_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.AlglibSpline.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+
+<div class="viewcode-block" id="AlglibSpline.__call__">
+<a class="viewcode-back" href="../../../_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.AlglibSpline.__call__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate the spline.&quot;&quot;&quot;</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">spline_eval</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="AlglibSpline.plot_grid_boundaries"><a class="viewcode-back" href="../../../_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.AlglibSpline.plot_grid_boundaries">[docs]</a>    <span class="k">def</span> <span class="nf">plot_grid_boundaries</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+
+<div class="viewcode-block" id="AlglibSpline.plot_grid_boundaries">
+<a class="viewcode-back" href="../../../_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.AlglibSpline.plot_grid_boundaries">[docs]</a>
+    <span class="k">def</span> <span class="nf">plot_grid_boundaries</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Add vertical lines to the current axis showing the grid along direction.</span>
 
@@ -1357,12 +1395,16 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span> <span class="o">+</span> <span class="s1">&#39;_nodes&#39;</span><span class="p">):</span>
-            <span class="n">pyplot</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">node</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span></div></div>
+            <span class="n">pyplot</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">node</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span></div>
+</div>
+
 
 
 <span class="c1">#TODO: simplify later</span>
 <span class="c1">#pylint: disable=too-many-locals</span>
-<div class="viewcode-block" id="pad_prf_data"><a class="viewcode-back" href="../../../_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.pad_prf_data">[docs]</a><span class="k">def</span> <span class="nf">pad_prf_data</span><span class="p">(</span><span class="n">prf_data</span><span class="p">,</span> <span class="n">cmdline_args</span><span class="p">):</span>
+<div class="viewcode-block" id="pad_prf_data">
+<a class="viewcode-back" href="../../../_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.pad_prf_data">[docs]</a>
+<span class="k">def</span> <span class="nf">pad_prf_data</span><span class="p">(</span><span class="n">prf_data</span><span class="p">,</span> <span class="n">cmdline_args</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return PRF data zero-padded for fitting and the spline fit domain.&quot;&quot;&quot;</span>
 
     <span class="c1">#False positive</span>
@@ -1490,10 +1532,13 @@
         <span class="n">add_mid_x</span> <span class="o">=</span> <span class="kc">False</span>
 
     <span class="k">return</span> <span class="n">padded_prf_data</span><span class="p">,</span> <span class="n">domain</span></div>
+
 <span class="c1">#pylint: enable=too-many-locals</span>
 
 
-<div class="viewcode-block" id="fit_spline"><a class="viewcode-back" href="../../../_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.fit_spline">[docs]</a><span class="k">def</span> <span class="nf">fit_spline</span><span class="p">(</span><span class="n">prf_data</span><span class="p">,</span> <span class="n">domain</span><span class="p">,</span> <span class="n">cmdline_args</span><span class="p">):</span>
+<div class="viewcode-block" id="fit_spline">
+<a class="viewcode-back" href="../../../_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.fit_spline">[docs]</a>
+<span class="k">def</span> <span class="nf">fit_spline</span><span class="p">(</span><span class="n">prf_data</span><span class="p">,</span> <span class="n">domain</span><span class="p">,</span> <span class="n">cmdline_args</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the best-fit spline to the PRF per the command line config.&quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">cmdline_args</span><span class="o">.</span><span class="n">spline_method</span> <span class="o">==</span> <span class="s1">&#39;none&#39;</span><span class="p">:</span>
@@ -1516,7 +1561,10 @@
         <span class="n">domain</span><span class="o">=</span><span class="n">domain</span>
     <span class="p">)</span></div>
 
-<div class="viewcode-block" id="get_plot_tasks"><a class="viewcode-back" href="../../../_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.get_plot_tasks">[docs]</a><span class="k">def</span> <span class="nf">get_plot_tasks</span><span class="p">(</span><span class="n">cmdline_args</span><span class="p">):</span>
+
+<div class="viewcode-block" id="get_plot_tasks">
+<a class="viewcode-back" href="../../../_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.get_plot_tasks">[docs]</a>
+<span class="k">def</span> <span class="nf">get_plot_tasks</span><span class="p">(</span><span class="n">cmdline_args</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generator for all the plots that must be created.</span>
 
@@ -1574,7 +1622,10 @@
             <span class="p">)</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="list_plot_filenames"><a class="viewcode-back" href="../../../_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.list_plot_filenames">[docs]</a><span class="k">def</span> <span class="nf">list_plot_filenames</span><span class="p">(</span><span class="n">cmdline_args</span><span class="p">):</span>
+
+<div class="viewcode-block" id="list_plot_filenames">
+<a class="viewcode-back" href="../../../_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.list_plot_filenames">[docs]</a>
+<span class="k">def</span> <span class="nf">list_plot_filenames</span><span class="p">(</span><span class="n">cmdline_args</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;List the filenames of all the plots that will be generated.&quot;&quot;&quot;</span>
 
     <span class="k">assert</span> <span class="n">cmdline_args</span><span class="o">.</span><span class="n">save_plot_pattern</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
@@ -1588,9 +1639,12 @@
 
     <span class="k">return</span> <span class="n">result</span></div>
 
+
 <span class="c1">#TODO: see if it can be simplified</span>
 <span class="c1">#pylint: disable=too-many-branches</span>
-<div class="viewcode-block" id="show_plots"><a class="viewcode-back" href="../../../_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.show_plots">[docs]</a><span class="k">def</span> <span class="nf">show_plots</span><span class="p">(</span><span class="n">slice_prf_data</span><span class="p">,</span> <span class="n">slice_splines</span><span class="p">,</span> <span class="n">cmdline_args</span><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="show_plots">
+<a class="viewcode-back" href="../../../_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.show_plots">[docs]</a>
+<span class="k">def</span> <span class="nf">show_plots</span><span class="p">(</span><span class="n">slice_prf_data</span><span class="p">,</span> <span class="n">slice_splines</span><span class="p">,</span> <span class="n">cmdline_args</span><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generate the plots and display them to the user.</span>
 
@@ -1699,10 +1753,13 @@
             <span class="n">pyplot</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">combined_fname</span><span class="p">,</span>
                            <span class="n">dpi</span><span class="o">=</span><span class="n">cmdline_args</span><span class="o">.</span><span class="n">figure_dpi</span><span class="p">)</span>
             <span class="n">pyplot</span><span class="o">.</span><span class="n">cla</span><span class="p">()</span></div>
+
 <span class="c1">#pylint: enable=too-many-branches</span>
 
 
-<div class="viewcode-block" id="extract_pixel_data"><a class="viewcode-back" href="../../../_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.extract_pixel_data">[docs]</a><span class="k">def</span> <span class="nf">extract_pixel_data</span><span class="p">(</span><span class="n">cmdline_args</span><span class="p">,</span> <span class="n">image_slices</span><span class="p">,</span> <span class="n">sources</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="extract_pixel_data">
+<a class="viewcode-back" href="../../../_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.extract_pixel_data">[docs]</a>
+<span class="k">def</span> <span class="nf">extract_pixel_data</span><span class="p">(</span><span class="n">cmdline_args</span><span class="p">,</span> <span class="n">image_slices</span><span class="p">,</span> <span class="n">sources</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get the pixel level data from the input image required for the plot.</span>
 
@@ -1791,7 +1848,10 @@
         <span class="p">]</span></div>
 
 
-<div class="viewcode-block" id="main"><a class="viewcode-back" href="../../../_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">cmdline_args</span><span class="p">):</span>
+
+<div class="viewcode-block" id="main">
+<a class="viewcode-back" href="../../../_implementation/astrowisp.utils.explore_prf.html#astrowisp.utils.explore_prf.main">[docs]</a>
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">cmdline_args</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Avoid polluting global namespace.&quot;&quot;&quot;</span>
 
     <span class="n">image_slices</span> <span class="o">=</span> <span class="n">get_image_slices</span><span class="p">(</span><span class="n">cmdline_args</span><span class="o">.</span><span class="n">split_image</span><span class="p">,</span>
@@ -1805,6 +1865,7 @@
     <span class="n">show_plots</span><span class="p">(</span><span class="n">slice_prf_data</span><span class="p">,</span>
                <span class="n">slice_splines</span><span class="p">,</span>
                <span class="n">cmdline_args</span><span class="p">)</span></div>
+
 
     <span class="c1">#TODO fix this to, broken atm fix sources</span>
 

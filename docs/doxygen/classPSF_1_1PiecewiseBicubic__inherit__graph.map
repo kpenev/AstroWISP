@@ -1,5 +1,5 @@
 <map id="PSF::PiecewiseBicubic" name="PSF::PiecewiseBicubic">
-<area shape="rect" id="node1" title="A Piecewise defined as a bicubic interpolation over a grid, where at each grid point the value,..." alt="" coords="37,950,226,1102"/>
-<area shape="rect" id="node2" href="$classPSF_1_1Piecewise.xhtml" title="A PSF model consisting of a grid of rectangles each with a separate intensity function." alt="" coords="29,291,234,902"/>
-<area shape="rect" id="node3" href="$classPSF_1_1PSF.xhtml" title="An abstract parent class for all PSF models." alt="" coords="5,5,258,243"/>
+<area shape="rect" id="node1" title="A Piecewise defined as a bicubic interpolation over a grid, where at each grid point the value,..." alt="" coords="33,983,222,1137"/>
+<area shape="rect" id="node2" href="$classPSF_1_1Piecewise.xhtml" title="A PSF model consisting of a grid of rectangles each with a separate intensity function." alt="" coords="24,312,231,935"/>
+<area shape="rect" id="node3" href="$classPSF_1_1PSF.xhtml" title="An abstract parent class for all PSF models." alt="" coords="5,5,249,264"/>
 </map>

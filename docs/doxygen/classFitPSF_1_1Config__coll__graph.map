@@ -1,5 +1,5 @@
 <map id="FitPSF::Config" name="FitPSF::Config">
-<area shape="rect" id="node1" title="Default configuration from file but overwritten by command line options." alt="" coords="21,491,203,626"/>
-<area shape="rect" id="node2" href="$classIO_1_1CommandLineConfig.xhtml" title="A base class for configuration of tools using the command line." alt="" coords="5,138,219,443"/>
-<area shape="rect" id="node3" title=" " alt="" coords="34,5,190,90"/>
+<area shape="rect" id="node1" title="Default configuration from file but overwritten by command line options." alt="" coords="21,497,204,635"/>
+<area shape="rect" id="node2" href="$classIO_1_1CommandLineConfig.xhtml" title="A base class for configuration of tools using the command line." alt="" coords="5,139,220,449"/>
+<area shape="rect" id="node3" title=" " alt="" coords="34,5,191,91"/>
 </map>

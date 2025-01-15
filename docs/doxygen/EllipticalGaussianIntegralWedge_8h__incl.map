@@ -1,16 +1,16 @@
-<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/EllipticalGaussianIntegralWedge.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/EllipticalGaussianIntegralWedge.h">
-<area shape="rect" id="node1" title="Declare a class for integrating elliptical Guassians over wedge areas." alt="" coords="5,5,249,85"/>
-<area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="84,535,303,581"/>
-<area shape="rect" id="node3" href="$EllipticalGaussianIntegralByOrder_8h.xhtml" title="Class approximating integrals of ellptical Gaussians by incremental expansion order." alt="" coords="149,133,353,179"/>
-<area shape="rect" id="node4" href="$WedgeIntegral_8h.xhtml" title="Declares a class that calculates integrals of x^my^n over circle wedges." alt="" coords="283,227,422,256"/>
-<area shape="rect" id="node10" title=" " alt="" coords="869,458,948,487"/>
-<area shape="rect" id="node5" href="$IntegralUtil_8h.xhtml" title="Useful functions for calculating PSF integrals." alt="" coords="343,304,455,333"/>
-<area shape="rect" id="node6" href="$Core_2Typedefs_8h.xhtml" title="Some useful typedef statements." alt="" coords="406,381,557,410"/>
-<area shape="rect" id="node7" title=" " alt="" coords="724,544,788,573"/>
-<area shape="rect" id="node8" title=" " alt="" coords="257,458,298,487"/>
-<area shape="rect" id="node12" title=" " alt="" coords="895,544,959,573"/>
-<area shape="rect" id="node14" title=" " alt="" coords="146,304,218,333"/>
-<area shape="rect" id="node9" title=" " alt="" coords="477,544,537,573"/>
-<area shape="rect" id="node11" href="$PhotColumns_8h.xhtml" title="Defines constants to denote the various columns that can be input or output by the various tools and ..." alt="" coords="563,458,694,487"/>
-<area shape="rect" id="node13" title=" " alt="" coords="424,458,539,487"/>
+<map id="/home/kpenev/projects/git/AstroWISP/doc_src/PSF/EllipticalGaussianIntegralWedge.h" name="/home/kpenev/projects/git/AstroWISP/doc_src/PSF/EllipticalGaussianIntegralWedge.h">
+<area shape="rect" id="node1" title="Declare a class for integrating elliptical Guassians over wedge areas." alt="" coords="5,5,249,87"/>
+<area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="85,539,305,585"/>
+<area shape="rect" id="node3" href="$EllipticalGaussianIntegralByOrder_8h.xhtml" title="Class approximating integrals of ellptical Gaussians by incremental expansion order." alt="" coords="151,135,355,181"/>
+<area shape="rect" id="node4" href="$WedgeIntegral_8h.xhtml" title="Declares a class that calculates integrals of x^my^n over circle wedges." alt="" coords="286,229,425,259"/>
+<area shape="rect" id="node10" title=" " alt="" coords="875,461,953,491"/>
+<area shape="rect" id="node5" href="$IntegralUtil_8h.xhtml" title="Useful functions for calculating PSF integrals." alt="" coords="346,307,458,336"/>
+<area shape="rect" id="node6" href="$Core_2Typedefs_8h.xhtml" title="Some useful typedef statements." alt="" coords="408,384,559,413"/>
+<area shape="rect" id="node7" title=" " alt="" coords="728,547,793,577"/>
+<area shape="rect" id="node8" title=" " alt="" coords="258,461,301,491"/>
+<area shape="rect" id="node12" title=" " alt="" coords="900,547,965,577"/>
+<area shape="rect" id="node14" title=" " alt="" coords="147,307,220,336"/>
+<area shape="rect" id="node9" title=" " alt="" coords="479,547,541,577"/>
+<area shape="rect" id="node11" href="$PhotColumns_8h.xhtml" title="Defines constants to denote the various columns that can be input or output by the various tools and ..." alt="" coords="565,461,697,491"/>
+<area shape="rect" id="node13" title=" " alt="" coords="426,461,541,491"/>
 </map>

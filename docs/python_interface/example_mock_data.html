@@ -1,29 +1,27 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Example of PSF Fitting and Aperture Photometry Using Mock Data &mdash; AstroWISP Python Interface  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/unlimited_width.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/unlimited_width.css?v=eea1f72d" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -104,11 +102,11 @@
            <div itemprop="articleBody">
              
   <section id="Example-of-PSF-Fitting-and-Aperture-Photometry-Using-Mock-Data">
-<h1>Example of PSF Fitting and Aperture Photometry Using Mock Data<a class="headerlink" href="#Example-of-PSF-Fitting-and-Aperture-Photometry-Using-Mock-Data" title="Permalink to this heading"></a></h1>
+<h1>Example of PSF Fitting and Aperture Photometry Using Mock Data<a class="headerlink" href="#Example-of-PSF-Fitting-and-Aperture-Photometry-Using-Mock-Data" title="Link to this heading"></a></h1>
 <section id="PSF-fitting">
-<h2>PSF fitting<a class="headerlink" href="#PSF-fitting" title="Permalink to this heading"></a></h2>
+<h2>PSF fitting<a class="headerlink" href="#PSF-fitting" title="Link to this heading"></a></h2>
 <section id="Step-1:-Prepare-Mock-Input-Data-for-PSF-Fitting">
-<h3>Step 1: Prepare Mock Input Data for PSF Fitting<a class="headerlink" href="#Step-1:-Prepare-Mock-Input-Data-for-PSF-Fitting" title="Permalink to this heading"></a></h3>
+<h3>Step 1: Prepare Mock Input Data for PSF Fitting<a class="headerlink" href="#Step-1:-Prepare-Mock-Input-Data-for-PSF-Fitting" title="Link to this heading"></a></h3>
 <p>Import the required objects for creating mock input data to demonstrate PSF fitting.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -209,7 +207,7 @@ Source list:array([(b&#39;000000&#39;, 5., 5.)],
 </div>
 </section>
 <section id="Step-2:-Perform-the-PSF-Fitting">
-<h3>Step 2: Perform the PSF Fitting<a class="headerlink" href="#Step-2:-Perform-the-PSF-Fitting" title="Permalink to this heading"></a></h3>
+<h3>Step 2: Perform the PSF Fitting<a class="headerlink" href="#Step-2:-Perform-the-PSF-Fitting" title="Link to this heading"></a></h3>
 <p>Import the required objects for PSF fitting and Background extraction</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
@@ -285,7 +283,7 @@ Source list:array([(b&#39;000000&#39;, 5., 5.)],
 </div>
 </section>
 <section id="Results">
-<h3>Results<a class="headerlink" href="#Results" title="Permalink to this heading"></a></h3>
+<h3>Results<a class="headerlink" href="#Results" title="Link to this heading"></a></h3>
 <p>Let’s look at the coefficients of the polynomial expansion of the PSF parameters. In our case, the PSF has 4 free parameters <span class="math notranslate nohighlight">\(f\)</span>, <span class="math notranslate nohighlight">\(\frac{\partial f}{\partial x}\)</span>, <span class="math notranslate nohighlight">\(\frac{\partial f}{\partial y}\)</span>, and <span class="math notranslate nohighlight">\(\frac{\partial^2 f}{\partial x\partial y}\)</span> at the center of the grid (all other grid intersections lie on the boundary and hence are contsrained to be zero.</p>
 <p>The PSF we used to create the source had: <span class="math notranslate nohighlight">\(f = 1\)</span>, and <span class="math notranslate nohighlight">\(\frac{\partial f}{\partial x} = \frac{\partial f}{\partial y} = \frac{\partial^2 f}{\partial x\partial y} = 0\)</span>, which we expect to recover.</p>
 <div class="nbinput docutils container">
@@ -328,7 +326,7 @@ PSF fit flux: array([2.])
 </section>
 </section>
 <section id="Aperture-Photometry">
-<h2>Aperture Photometry<a class="headerlink" href="#Aperture-Photometry" title="Permalink to this heading"></a></h2>
+<h2>Aperture Photometry<a class="headerlink" href="#Aperture-Photometry" title="Link to this heading"></a></h2>
 <p>Import the aperture photometry object</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
@@ -385,7 +383,7 @@ Reading background
 </pre></div></div>
 </div>
 <section id="id1">
-<h3>Results<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<h3>Results<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
 <p>The first two apertures are not large enough to encompass the entire source, so we expect the flux to be underestimated, by a lot and then by a little, and the last aperture should recover the exact source flux.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:

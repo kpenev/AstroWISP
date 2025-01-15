@@ -1,26 +1,24 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>astrowisp.tests.utilities module &mdash; AstroWISP Python Interface  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/unlimited_width.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/unlimited_width.css?v=eea1f72d" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -55,6 +53,11 @@
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">Python Package Implementation</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="astrowisp.html">astrowisp package</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="astrowisp.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.BackgroundExtractor"><code class="docutils literal notranslate"><span class="pre">BackgroundExtractor</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.FitStarShape"><code class="docutils literal notranslate"><span class="pre">FitStarShape</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.PiecewiseBicubicPSF"><code class="docutils literal notranslate"><span class="pre">PiecewiseBicubicPSF</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.PiecewiseBicubicPSFMap"><code class="docutils literal notranslate"><span class="pre">PiecewiseBicubicPSFMap</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.SubPixPhot"><code class="docutils literal notranslate"><span class="pre">SubPixPhot</span></code></a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="astrowisp.html#subpackages">Subpackages</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="astrowisp.fake_image.html">astrowisp.fake_image package</a></li>
 <li class="toctree-l4 current"><a class="reference internal" href="astrowisp.tests.html">astrowisp.tests package</a></li>
@@ -98,30 +101,31 @@
            <div itemprop="articleBody">
              
   <section id="module-astrowisp.tests.utilities">
-<span id="astrowisp-tests-utilities-module"></span><h1>astrowisp.tests.utilities module<a class="headerlink" href="#module-astrowisp.tests.utilities" title="Permalink to this heading"></a></h1>
+<span id="astrowisp-tests-utilities-module"></span><h1>astrowisp.tests.utilities module<a class="headerlink" href="#module-astrowisp.tests.utilities" title="Link to this heading"></a></h1>
 <section id="class-inheritance-diagram">
-<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this heading"></a></h2>
+<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Link to this heading"></a></h2>
 <div class="graphviz"><img src="../_images/inheritance-5141614e42fff497c5bd4ee7cbf914f7c6e9faa5.png" alt="Inheritance diagram of FloatTestCase" usemap="#inheritance5fbd0abfe6" class="inheritance graphviz" /></div>
 <map id="inheritance5fbd0abfe6" name="inheritance5fbd0abfe6">
-<area shape="rect" id="node1" href="#astrowisp.tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="5,80,250,107"/>
+<area shape="rect" id="node1" href="#astrowisp.tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="5,79,275,104"/>
 </map><p>A collection of general use testing utilities.</p>
+</section>
 <dl class="py class">
 <dt class="sig sig-object py" id="astrowisp.tests.utilities.FloatTestCase">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">astrowisp.tests.utilities.</span></span><span class="sig-name descname"><span class="pre">FloatTestCase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/tests/utilities.html#FloatTestCase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.tests.utilities.FloatTestCase" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">astrowisp.tests.utilities.</span></span><span class="sig-name descname"><span class="pre">FloatTestCase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/tests/utilities.html#FloatTestCase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.tests.utilities.FloatTestCase" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
 <div class="graphviz"><img src="../_images/inheritance-2e070ee4d46e5aa3b1dc5f7cc3e01f2b590786dd.png" alt="Inheritance diagram of astrowisp.tests.utilities.FloatTestCase" usemap="#inheritance37e271f593" class="inheritance graphviz" /></div>
 <map id="inheritance37e271f593" name="inheritance37e271f593">
-<area shape="rect" id="node1" href="#astrowisp.tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="5,80,250,107"/>
+<area shape="rect" id="node1" href="#astrowisp.tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="5,79,275,104"/>
 </map><p>Test case involving floating point comparisons.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="astrowisp.tests.utilities.FloatTestCase.approx_equal">
-<span class="sig-name descname"><span class="pre">approx_equal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/tests/utilities.html#FloatTestCase.approx_equal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.tests.utilities.FloatTestCase.approx_equal" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">approx_equal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/tests/utilities.html#FloatTestCase.approx_equal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.tests.utilities.FloatTestCase.approx_equal" title="Link to this definition"></a></dt>
 <dd><p>Return True iff value_1 ~= value_2 to within tolerance.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="astrowisp.tests.utilities.FloatTestCase.assertApprox">
-<span class="sig-name descname"><span class="pre">assertApprox</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/tests/utilities.html#FloatTestCase.assertApprox"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.tests.utilities.FloatTestCase.assertApprox" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">assertApprox</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/tests/utilities.html#FloatTestCase.assertApprox"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.tests.utilities.FloatTestCase.assertApprox" title="Link to this definition"></a></dt>
 <dd><p>Assert that the two values are equal to wihin the current tolerance.</p>
 <p class="rubric">Notes</p>
 <p>The exact definition is:</p>
@@ -143,7 +147,7 @@ tolerange * |value_1 + value_2|  * float_info.epsilon</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="astrowisp.tests.utilities.FloatTestCase.set_tolerance">
-<span class="sig-name descname"><span class="pre">set_tolerance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tolerance</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/tests/utilities.html#FloatTestCase.set_tolerance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.tests.utilities.FloatTestCase.set_tolerance" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">set_tolerance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tolerance</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/tests/utilities.html#FloatTestCase.set_tolerance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.tests.utilities.FloatTestCase.set_tolerance" title="Link to this definition"></a></dt>
 <dd><p>Set the tolerance for floating point comparisons.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -159,12 +163,11 @@ numbers. See assertApprox for more details.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="astrowisp.tests.utilities.FloatTestCase.tolerance">
-<span class="sig-name descname"><span class="pre">tolerance</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">10.0</span></em><a class="headerlink" href="#astrowisp.tests.utilities.FloatTestCase.tolerance" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">tolerance</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">10.0</span></em><a class="headerlink" href="#astrowisp.tests.utilities.FloatTestCase.tolerance" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-</section>
 </section>
 
 

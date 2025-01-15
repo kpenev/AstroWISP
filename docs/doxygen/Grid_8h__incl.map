@@ -1,16 +1,16 @@
-<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/Grid.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/Grid.h">
-<area shape="rect" id="node1" title="Some useful typedef statements." alt="" coords="733,5,918,68"/>
-<area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="180,347,399,393"/>
-<area shape="rect" id="node3" href="$ParseCSV_8h.xhtml" title="Declarations of functions for parsing strings of comma separated values to lists." alt="" coords="611,116,771,145"/>
-<area shape="rect" id="node6" title=" " alt="" coords="659,356,723,385"/>
-<area shape="rect" id="node7" title=" " alt="" coords="871,356,932,385"/>
-<area shape="rect" id="node9" title=" " alt="" coords="881,270,922,299"/>
-<area shape="rect" id="node13" title=" " alt="" coords="24,270,101,299"/>
-<area shape="rect" id="node4" href="$PhotColumns_8h.xhtml" title="Defines constants to denote the various columns that can be input or output by the various tools and ..." alt="" coords="384,270,515,299"/>
-<area shape="rect" id="node8" href="$Core_2Typedefs_8h.xhtml" title="Some useful typedef statements." alt="" coords="641,193,740,222"/>
-<area shape="rect" id="node12" href="$Error_8h.xhtml" title="The hierarchy of exceptions for this project." alt="" coords="163,193,232,222"/>
-<area shape="rect" id="node5" title=" " alt="" coords="423,356,487,385"/>
-<area shape="rect" id="node10" title=" " alt="" coords="728,270,806,299"/>
-<area shape="rect" id="node11" title=" " alt="" coords="539,270,653,299"/>
-<area shape="rect" id="node14" title=" " alt="" coords="176,270,259,299"/>
+<map id="/home/kpenev/projects/git/AstroWISP/doc_src/PSF/Grid.h" name="/home/kpenev/projects/git/AstroWISP/doc_src/PSF/Grid.h">
+<area shape="rect" id="node1" title="Some useful typedef statements." alt="" coords="739,5,925,69"/>
+<area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="182,349,402,396"/>
+<area shape="rect" id="node3" href="$ParseCSV_8h.xhtml" title="Declarations of functions for parsing strings of comma separated values to lists." alt="" coords="615,117,777,147"/>
+<area shape="rect" id="node6" title=" " alt="" coords="663,358,729,387"/>
+<area shape="rect" id="node7" title=" " alt="" coords="879,358,940,387"/>
+<area shape="rect" id="node9" title=" " alt="" coords="888,272,931,301"/>
+<area shape="rect" id="node13" title=" " alt="" coords="25,272,103,301"/>
+<area shape="rect" id="node4" href="$PhotColumns_8h.xhtml" title="Defines constants to denote the various columns that can be input or output by the various tools and ..." alt="" coords="387,272,519,301"/>
+<area shape="rect" id="node8" href="$Core_2Typedefs_8h.xhtml" title="Some useful typedef statements." alt="" coords="646,195,746,224"/>
+<area shape="rect" id="node12" href="$Error_8h.xhtml" title="The hierarchy of exceptions for this project." alt="" coords="165,195,235,224"/>
+<area shape="rect" id="node5" title=" " alt="" coords="426,358,491,387"/>
+<area shape="rect" id="node10" title=" " alt="" coords="734,272,813,301"/>
+<area shape="rect" id="node11" title=" " alt="" coords="544,272,659,301"/>
+<area shape="rect" id="node14" title=" " alt="" coords="179,272,261,301"/>
 </map>

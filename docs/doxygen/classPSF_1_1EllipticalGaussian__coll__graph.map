@@ -1,4 +1,4 @@
 <map id="PSF::EllipticalGaussian" name="PSF::EllipticalGaussian">
-<area shape="rect" id="node1" title="An ellptical Gaussian PSF with peak flux above the background normalized to 1." alt="" coords="14,291,249,936"/>
-<area shape="rect" id="node2" href="$classPSF_1_1PSF.xhtml" title="An abstract parent class for all PSF models." alt="" coords="5,5,258,243"/>
+<area shape="rect" id="node1" title="An ellptical Gaussian PSF with peak flux above the background normalized to 1." alt="" coords="22,312,233,987"/>
+<area shape="rect" id="node2" href="$classPSF_1_1PSF.xhtml" title="An abstract parent class for all PSF models." alt="" coords="5,5,249,264"/>
 </map>

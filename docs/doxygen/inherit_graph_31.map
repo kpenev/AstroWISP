@@ -1,5 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classPSF_1_1EllipticalGaussianIntegralByOrder.xhtml" title="Elliptical gaussian integrals refined by incrementing the expansion order." alt="" coords="5,41,249,87"/>
-<area shape="rect" id="node2" href="$classPSF_1_1EllipticalGaussianIntegralRectangle.xhtml" title="Calculates integrals of an elliptical gaussion over a rectangle." alt="" coords="297,5,540,51"/>
-<area shape="rect" id="node3" href="$classPSF_1_1EllipticalGaussianIntegralWedge.xhtml" title="Calculates integrals of an elliptical gaussion over a wedge of a circle." alt="" coords="297,76,540,122"/>
+<area shape="rect" id="node1" href="$classPSF_1_1PSF.xhtml" title="An abstract parent class for all PSF models." alt="" coords="5,59,100,88"/>
+<area shape="rect" id="node2" href="$classPSF_1_1EllipticalGaussian.xhtml" title="An ellptical Gaussian PSF with peak flux above the background normalized to 1." alt="" coords="148,5,339,35"/>
+<area shape="rect" id="node3" href="$classPSF_1_1LocalPolynomial.xhtml" title=" " alt="" coords="153,59,334,88"/>
+<area shape="rect" id="node4" href="$classPSF_1_1Piecewise.xhtml" title="A PSF model consisting of a grid of rectangles each with a separate intensity function." alt="" coords="175,112,311,141"/>
+<area shape="rect" id="node5" href="$classPSF_1_1PiecewiseBicubic.xhtml" title="A Piecewise defined as a bicubic interpolation over a grid, where at each grid point the value,..." alt="" coords="387,112,576,141"/>
 </map>

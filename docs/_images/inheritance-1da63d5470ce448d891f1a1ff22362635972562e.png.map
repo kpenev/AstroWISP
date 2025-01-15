@@ -1,0 +1,7 @@
+<map id="inheritance9ce56584e3" name="inheritance9ce56584e3">
+<area shape="rect" id="node1" title="create an asteval Interpreter: a restricted, simplified interpreter" alt="" coords="5,5,200,31"/>
+<area shape="rect" id="node2" href="../_implementation/astrowisp.fake_image.image.html#astrowisp.fake_image.image.Image" target="_top" title="A base class for fake images." alt="" coords="157,79,411,104"/>
+<area shape="rect" id="node3" title="ndarray(shape, dtype=float, buffer=None, offset=0," alt="" coords="225,5,343,31"/>
+<area shape="rect" id="node4" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_bool" target="_top" title="ctypes.c_bool" alt="" coords="367,5,478,31"/>
+<area shape="rect" id="node5" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_double" target="_top" title="ctypes.c_double" alt="" coords="502,5,629,31"/>
+</map>

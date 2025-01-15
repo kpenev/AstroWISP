@@ -1,3 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classIO_1_1OutputArray.xhtml" title="Prepares to write an array of values from from boost::any." alt="" coords="5,5,187,51"/>
+<area shape="rect" id="node1" href="$classPSF_1_1Map.xhtml" title="Interface for working with smooth dependenc of PSF/PRF on source parameters." alt="" coords="5,32,99,61"/>
+<area shape="rect" id="node2" href="$classPSF_1_1EllipticalGaussianMap.xhtml" title="Smoothly varying over the image elliptical Gaussian PSF." alt="" coords="147,5,369,35"/>
+<area shape="rect" id="node3" href="$classPSF_1_1PiecewiseBicubicMap.xhtml" title="Smoothly varying over an image piecewise bicubic PSF." alt="" coords="148,59,368,88"/>
 </map>

@@ -1,0 +1,7 @@
+<map id="inheritance708c195730" name="inheritance708c195730">
+<area shape="rect" id="node1" href="#astrowisp.tests.test_fistar.TestFistar" target="_top" title="Test cases for the fistar executable." alt="" coords="13,152,267,177"/>
+<area shape="rect" id="node2" href="astrowisp.tests.utilities.html#astrowisp.tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="5,79,275,104"/>
+<area shape="rect" id="node3" title="A class whose instances are single test cases." alt="" coords="56,5,224,31"/>
+<area shape="rect" id="node4" title="partial(func, *args, **keywords) &#45; new function with partial application" alt="" coords="248,5,376,31"/>
+<area shape="rect" id="node5" href="https://docs.python.org/3/library/subprocess.html#subprocess.Popen" target="_top" title="Execute a child program in a new process." alt="" coords="400,5,539,31"/>
+</map>

@@ -1,5 +1,5 @@
 <map id="inheritance97895a5bf6" name="inheritance97895a5bf6">
-<area shape="rect" id="node1" href="#astrowisp.tests.test_fistar.TestFistar" target="_top" title="Test cases for the fistar executable." alt="" coords="10,155,245,181"/>
-<area shape="rect" id="node2" href="astrowisp.tests.utilities.html#astrowisp.tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="5,80,250,107"/>
-<area shape="rect" id="node3" title="A class whose instances are single test cases." alt="" coords="49,5,206,32"/>
+<area shape="rect" id="node1" href="#astrowisp.tests.test_fistar.TestFistar" target="_top" title="Test cases for the fistar executable." alt="" coords="13,152,267,177"/>
+<area shape="rect" id="node2" href="astrowisp.tests.utilities.html#astrowisp.tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="5,79,275,104"/>
+<area shape="rect" id="node3" title="A class whose instances are single test cases." alt="" coords="56,5,224,31"/>
 </map>

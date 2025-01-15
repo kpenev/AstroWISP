@@ -1,6 +1,6 @@
 <map id="Error::CommandLine" name="Error::CommandLine">
-<area shape="rect" id="node1" title="Error while parsing the command line." alt="" coords="5,487,175,589"/>
-<area shape="rect" id="node2" href="$classError_1_1Runtime.xhtml" title="The parent of all run&#45;time errors." alt="" coords="28,338,152,439"/>
-<area shape="rect" id="node3" href="$classError_1_1General.xhtml" title="The parent of all errors raised anywhere in the code." alt="" coords="20,138,160,290"/>
-<area shape="rect" id="node4" title=" " alt="" coords="30,5,150,90"/>
+<area shape="rect" id="node1" title="Error while parsing the command line." alt="" coords="5,492,176,595"/>
+<area shape="rect" id="node2" href="$classError_1_1Runtime.xhtml" title="The parent of all run&#45;time errors." alt="" coords="28,341,153,444"/>
+<area shape="rect" id="node3" href="$classError_1_1General.xhtml" title="The parent of all errors raised anywhere in the code." alt="" coords="20,139,161,293"/>
+<area shape="rect" id="node4" title=" " alt="" coords="31,5,151,91"/>
 </map>

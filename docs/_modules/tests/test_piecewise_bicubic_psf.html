@@ -1,25 +1,23 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>tests.test_piecewise_bicubic_psf &mdash; AstroWISP Python Interface  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/unlimited_width.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../_static/unlimited_width.css?v=eea1f72d" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -90,7 +88,9 @@
 <span class="kn">from</span> <span class="nn">astrowisp.fake_image.piecewise_bicubic_psf</span> <span class="kn">import</span> <span class="n">PiecewiseBicubicPSF</span>
 
 
-<div class="viewcode-block" id="point_in_grid"><a class="viewcode-back" href="../../_unit_tests/tests.test_piecewise_bicubic_psf.html#tests.test_piecewise_bicubic_psf.point_in_grid">[docs]</a><span class="k">def</span> <span class="nf">point_in_grid</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="n">grid</span><span class="p">):</span>
+<div class="viewcode-block" id="point_in_grid">
+<a class="viewcode-back" href="../../_unit_tests/tests.test_piecewise_bicubic_psf.html#tests.test_piecewise_bicubic_psf.point_in_grid">[docs]</a>
+<span class="k">def</span> <span class="nf">point_in_grid</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="n">grid</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return True iff the point is within grid.&quot;&quot;&quot;</span>
 
     <span class="k">return</span> <span class="p">(</span>
@@ -103,10 +103,15 @@
         <span class="n">point</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">grid</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
     <span class="p">)</span></div>
 
-<div class="viewcode-block" id="TestPiecewiseBicubicPSF"><a class="viewcode-back" href="../../_unit_tests/tests.test_piecewise_bicubic_psf.html#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF">[docs]</a><span class="k">class</span> <span class="nc">TestPiecewiseBicubicPSF</span><span class="p">(</span><span class="n">FloatTestCase</span><span class="p">):</span>
+
+<div class="viewcode-block" id="TestPiecewiseBicubicPSF">
+<a class="viewcode-back" href="../../_unit_tests/tests.test_piecewise_bicubic_psf.html#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF">[docs]</a>
+<span class="k">class</span> <span class="nc">TestPiecewiseBicubicPSF</span><span class="p">(</span><span class="n">FloatTestCase</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Make sure the PiecewiseBicubicPSF class functions as expected.&quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="TestPiecewiseBicubicPSF.setUp"><a class="viewcode-back" href="../../_unit_tests/tests.test_piecewise_bicubic_psf.html#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="TestPiecewiseBicubicPSF.setUp">
+<a class="viewcode-back" href="../../_unit_tests/tests.test_piecewise_bicubic_psf.html#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.setUp">[docs]</a>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Define a set of picewise PSF grids to use during tests.&quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_grids</span> <span class="o">=</span> <span class="p">[</span>
@@ -137,7 +142,10 @@
         <span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_tolerance</span><span class="p">(</span><span class="mf">10.0</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="TestPiecewiseBicubicPSF.test_zero"><a class="viewcode-back" href="../../_unit_tests/tests.test_piecewise_bicubic_psf.html#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_zero">[docs]</a>    <span class="k">def</span> <span class="nf">test_zero</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="TestPiecewiseBicubicPSF.test_zero">
+<a class="viewcode-back" href="../../_unit_tests/tests.test_piecewise_bicubic_psf.html#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_zero">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_zero</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Make sure that all-zero input produces an identically zero PSF.&quot;&quot;&quot;</span>
 
         <span class="k">for</span> <span class="n">grid</span><span class="p">,</span> <span class="n">test_points</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_grids</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_test_points</span><span class="p">):</span>
@@ -163,7 +171,10 @@
                         <span class="mf">0.0</span>
                     <span class="p">)</span></div>
 
-<div class="viewcode-block" id="TestPiecewiseBicubicPSF.test_one"><a class="viewcode-back" href="../../_unit_tests/tests.test_piecewise_bicubic_psf.html#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_one">[docs]</a>    <span class="k">def</span> <span class="nf">test_one</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="TestPiecewiseBicubicPSF.test_one">
+<a class="viewcode-back" href="../../_unit_tests/tests.test_piecewise_bicubic_psf.html#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_one">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_one</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Make sure that a PSF = 1 everywhere within the grid works.&quot;&quot;&quot;</span>
 
         <span class="k">for</span> <span class="n">grid</span><span class="p">,</span> <span class="n">test_points</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_grids</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_test_points</span><span class="p">):</span>
@@ -208,7 +219,10 @@
                     <span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="TestPiecewiseBicubicPSF.test_pi"><a class="viewcode-back" href="../../_unit_tests/tests.test_piecewise_bicubic_psf.html#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_pi">[docs]</a>    <span class="k">def</span> <span class="nf">test_pi</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="TestPiecewiseBicubicPSF.test_pi">
+<a class="viewcode-back" href="../../_unit_tests/tests.test_piecewise_bicubic_psf.html#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_pi">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_pi</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Make sure that a PSF = 1 everywhere within the grid works.&quot;&quot;&quot;</span>
 
         <span class="k">for</span> <span class="n">grid</span><span class="p">,</span> <span class="n">test_points</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_grids</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_test_points</span><span class="p">):</span>
@@ -254,7 +268,10 @@
                         <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">point1</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">f</span><span class="si">}</span><span class="s2"> &lt; y &lt; </span><span class="si">{</span><span class="n">point2</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">f</span><span class="si">}</span><span class="s2">&quot;</span>
                     <span class="p">)</span></div>
 
-<div class="viewcode-block" id="TestPiecewiseBicubicPSF.test_linear"><a class="viewcode-back" href="../../_unit_tests/tests.test_piecewise_bicubic_psf.html#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_linear">[docs]</a>    <span class="k">def</span> <span class="nf">test_linear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="TestPiecewiseBicubicPSF.test_linear">
+<a class="viewcode-back" href="../../_unit_tests/tests.test_piecewise_bicubic_psf.html#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_linear">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_linear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Test PSFs that is are linear functions of x and/or y work.&quot;&quot;&quot;</span>
 
         <span class="k">def</span> <span class="nf">test_evaluation</span><span class="p">(</span><span class="n">psf</span><span class="p">,</span> <span class="n">slope</span><span class="p">,</span> <span class="n">grid</span><span class="p">,</span> <span class="n">test_points</span><span class="p">):</span>
@@ -367,9 +384,12 @@
 
 
 
+
     <span class="c1">#Broke this up into as many pieces as was reasonable.</span>
     <span class="c1">#pylint: disable=too-many-locals</span>
-<div class="viewcode-block" id="TestPiecewiseBicubicPSF.test_random_single_patch"><a class="viewcode-back" href="../../_unit_tests/tests.test_piecewise_bicubic_psf.html#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_random_single_patch">[docs]</a>    <span class="k">def</span> <span class="nf">test_random_single_patch</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="TestPiecewiseBicubicPSF.test_random_single_patch">
+<a class="viewcode-back" href="../../_unit_tests/tests.test_piecewise_bicubic_psf.html#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_random_single_patch">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_random_single_patch</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Test PSFs equal to random bi-cubic polynomials.&quot;&quot;&quot;</span>
 
         <span class="k">def</span> <span class="nf">test_evaluation</span><span class="p">(</span><span class="n">psf</span><span class="p">,</span> <span class="n">coef</span><span class="p">,</span> <span class="n">grid</span><span class="p">,</span> <span class="n">test_points</span><span class="p">):</span>
@@ -512,7 +532,9 @@
             <span class="p">)</span>
 
             <span class="n">test_evaluation</span><span class="p">(</span><span class="n">psf</span><span class="p">,</span> <span class="n">coef</span><span class="p">,</span> <span class="n">grid</span><span class="p">,</span> <span class="n">test_points</span><span class="p">)</span>
-            <span class="n">test_integration</span><span class="p">(</span><span class="n">psf</span><span class="p">,</span> <span class="n">coef</span><span class="p">,</span> <span class="n">grid</span><span class="p">,</span> <span class="n">test_points</span><span class="p">)</span></div></div>
+            <span class="n">test_integration</span><span class="p">(</span><span class="n">psf</span><span class="p">,</span> <span class="n">coef</span><span class="p">,</span> <span class="n">grid</span><span class="p">,</span> <span class="n">test_points</span><span class="p">)</span></div>
+</div>
+
     <span class="c1">#pylint: enable=too-many-locals</span>
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>

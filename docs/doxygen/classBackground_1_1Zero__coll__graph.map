@@ -1,4 +1,4 @@
 <map id="Background::Zero" name="Background::Zero">
-<area shape="rect" id="node1" title="The background is assumed already subtracted from the input image." alt="" coords="5,240,198,460"/>
-<area shape="rect" id="node2" href="$classBackground_1_1Measure.xhtml" title="The minimum requirements for a Background extractor class." alt="" coords="5,5,198,192"/>
+<area shape="rect" id="node1" title="The background is assumed already subtracted from the input image." alt="" coords="5,243,199,467"/>
+<area shape="rect" id="node2" href="$classBackground_1_1Measure.xhtml" title="The minimum requirements for a Background extractor class." alt="" coords="5,5,199,195"/>
 </map>

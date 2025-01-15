@@ -1,7 +1,0 @@
-<map id="inheritance9f176bac36" name="inheritance9f176bac36">
-<area shape="rect" id="node1" href="#astrowisp.tests.test_grcollect.TestGRCollect" target="_top" title="Test cases for the grcollect executable." alt="" coords="5,155,288,181"/>
-<area shape="rect" id="node2" href="astrowisp.tests.utilities.html#astrowisp.tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="24,80,269,107"/>
-<area shape="rect" id="node3" title="A class whose instances are single test cases." alt="" coords="68,5,225,32"/>
-<area shape="rect" id="node4" title="partial(func, *args, **keywords) &#45; new function with partial application" alt="" coords="248,5,362,32"/>
-<area shape="rect" id="node5" title="Execute a child program in a new process." alt="" coords="386,5,515,32"/>
-</map>

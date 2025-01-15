@@ -1,5 +1,5 @@
-<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/FitPSF/SDKUtil.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/FitPSF/SDKUtil.h">
-<area shape="rect" id="node1" title="Declare functions used during elliptical Gaussian PSF fitting." alt="" coords="126,5,310,68"/>
-<area shape="rect" id="node2" href="$PolynomialSDK_8h.xhtml" title="Declares a class for fitting elliptical gaussian PSFs as a smooth function of image position." alt="" coords="5,116,212,179"/>
-<area shape="rect" id="node3" href="$SDKUtil_8cpp.xhtml" title="Define the functions from SDKUtil.h." alt="" coords="236,116,421,179"/>
+<map id="/home/kpenev/projects/git/AstroWISP/doc_src/FitPSF/SDKUtil.h" name="/home/kpenev/projects/git/AstroWISP/doc_src/FitPSF/SDKUtil.h">
+<area shape="rect" id="node1" title="Declare functions used during elliptical Gaussian PSF fitting." alt="" coords="125,5,311,69"/>
+<area shape="rect" id="node2" href="$PolynomialSDK_8h.xhtml" title="Declares a class for fitting elliptical gaussian PSFs as a smooth function of image position." alt="" coords="5,117,212,181"/>
+<area shape="rect" id="node3" href="$SDKUtil_8cpp.xhtml" title="Define the functions from SDKUtil.h." alt="" coords="236,117,421,181"/>
 </map>

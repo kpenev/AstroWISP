@@ -1,4 +1,4 @@
 <map id="inheritance6998726140" name="inheritance6998726140">
-<area shape="rect" id="node1" href="#astrowisp.tests.fitpsf.noiseless_tests.TestPiecewiseBicubicNoiseless" target="_top" title="Test piecewise bicubic PSF fitting on noiseless images." alt="" coords="5,80,434,107"/>
-<area shape="rect" id="node2" title="A class whose instances are single test cases." alt="" coords="141,5,298,32"/>
+<area shape="rect" id="node1" href="#astrowisp.tests.fitpsf.noiseless_tests.TestPiecewiseBicubicNoiseless" target="_top" title="Test piecewise bicubic PSF fitting on noiseless images." alt="" coords="5,79,472,104"/>
+<area shape="rect" id="node2" title="A class whose instances are single test cases." alt="" coords="155,5,323,31"/>
 </map>

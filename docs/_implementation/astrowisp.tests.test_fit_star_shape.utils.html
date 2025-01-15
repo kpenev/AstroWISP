@@ -1,26 +1,24 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>astrowisp.tests.test_fit_star_shape.utils module &mdash; AstroWISP Python Interface  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/unlimited_width.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/unlimited_width.css?v=eea1f72d" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -55,6 +53,11 @@
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">Python Package Implementation</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="astrowisp.html">astrowisp package</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="astrowisp.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.BackgroundExtractor"><code class="docutils literal notranslate"><span class="pre">BackgroundExtractor</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.FitStarShape"><code class="docutils literal notranslate"><span class="pre">FitStarShape</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.PiecewiseBicubicPSF"><code class="docutils literal notranslate"><span class="pre">PiecewiseBicubicPSF</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.PiecewiseBicubicPSFMap"><code class="docutils literal notranslate"><span class="pre">PiecewiseBicubicPSFMap</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.SubPixPhot"><code class="docutils literal notranslate"><span class="pre">SubPixPhot</span></code></a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="astrowisp.html#subpackages">Subpackages</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="astrowisp.fake_image.html">astrowisp.fake_image package</a></li>
 <li class="toctree-l4 current"><a class="reference internal" href="astrowisp.tests.html">astrowisp.tests package</a></li>
@@ -99,16 +102,19 @@
            <div itemprop="articleBody">
              
   <section id="module-astrowisp.tests.test_fit_star_shape.utils">
-<span id="astrowisp-tests-test-fit-star-shape-utils-module"></span><h1>astrowisp.tests.test_fit_star_shape.utils module<a class="headerlink" href="#module-astrowisp.tests.test_fit_star_shape.utils" title="Permalink to this heading"></a></h1>
+<span id="astrowisp-tests-test-fit-star-shape-utils-module"></span><h1>astrowisp.tests.test_fit_star_shape.utils module<a class="headerlink" href="#module-astrowisp.tests.test_fit_star_shape.utils" title="Link to this heading"></a></h1>
 <section id="class-inheritance-diagram">
-<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this heading"></a></h2>
-<div class="graphviz"><img src="../_images/inheritance-27bc50de81fa0443a9554717b4bb9c3cf367b53a.png" alt="Inheritance diagram of Image, Interpreter, c_bool, c_double" usemap="#inheritance9ce56584e3" class="inheritance graphviz" /></div>
+<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Link to this heading"></a></h2>
+<div class="graphviz"><img src="../_images/inheritance-0a61cb7ecef281760762e2a97c7a1b1873e4433c.png" alt="Inheritance diagram of Image, Interpreter, c_bool, c_double" usemap="#inheritance9ce56584e3" class="inheritance graphviz" /></div>
 <map id="inheritance9ce56584e3" name="inheritance9ce56584e3">
-<area shape="rect" id="node2" href="astrowisp.fake_image.image.html#astrowisp.fake_image.image.Image" target="_top" title="A base class for fake images." alt="" coords="142,80,369,107"/>
+<area shape="rect" id="node2" href="astrowisp.fake_image.image.html#astrowisp.fake_image.image.Image" target="_top" title="A base class for fake images." alt="" coords="157,79,411,104"/>
+<area shape="rect" id="node4" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_bool" target="_top" title="ctypes.c_bool" alt="" coords="367,5,478,31"/>
+<area shape="rect" id="node5" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_double" target="_top" title="ctypes.c_double" alt="" coords="502,5,629,31"/>
 </map><p>A collection of functions used by the fit_star_shape unit tests.</p>
+</section>
 <dl class="py function">
 <dt class="sig sig-object py" id="astrowisp.tests.test_fit_star_shape.utils.evaluate_psffit_terms">
-<span class="sig-prename descclassname"><span class="pre">astrowisp.tests.test_fit_star_shape.utils.</span></span><span class="sig-name descname"><span class="pre">evaluate_psffit_terms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sources</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">terms_str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/tests/test_fit_star_shape/utils.html#evaluate_psffit_terms"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.tests.test_fit_star_shape.utils.evaluate_psffit_terms" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">astrowisp.tests.test_fit_star_shape.utils.</span></span><span class="sig-name descname"><span class="pre">evaluate_psffit_terms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sources</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">terms_str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/tests/test_fit_star_shape/utils.html#evaluate_psffit_terms"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.tests.test_fit_star_shape.utils.evaluate_psffit_terms" title="Link to this definition"></a></dt>
 <dd><p>Evaluate the specified terms to properly formatted array for PSF fitting.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -131,7 +137,7 @@ source, organized suitably to pass as the fifth argument to
 
 <dl class="py function">
 <dt class="sig sig-object py" id="astrowisp.tests.test_fit_star_shape.utils.make_image_and_source_list">
-<span class="sig-prename descclassname"><span class="pre">astrowisp.tests.test_fit_star_shape.utils.</span></span><span class="sig-name descname"><span class="pre">make_image_and_source_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sources</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subpix_map</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/tests/test_fit_star_shape/utils.html#make_image_and_source_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.tests.test_fit_star_shape.utils.make_image_and_source_list" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">astrowisp.tests.test_fit_star_shape.utils.</span></span><span class="sig-name descname"><span class="pre">make_image_and_source_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sources</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subpix_map</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/tests/test_fit_star_shape/utils.html#make_image_and_source_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.tests.test_fit_star_shape.utils.make_image_and_source_list" title="Link to this definition"></a></dt>
 <dd><p>Create an image and a list of the sources in it ready for psf fitting.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -164,7 +170,6 @@ defined for the sources.</p>
 </dl>
 </dd></dl>
 
-</section>
 </section>
 
 

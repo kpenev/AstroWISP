@@ -1,5 +1,5 @@
 <map id="inheritancee39dc9db3e" name="inheritancee39dc9db3e">
-<area shape="rect" id="node1" href="#astrowisp.tests.test_background.TestAnnulusBackground" target="_top" title="Test background extraction based on annuli around sources." alt="" coords="5,155,361,181"/>
-<area shape="rect" id="node2" href="astrowisp.tests.utilities.html#astrowisp.tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="61,80,305,107"/>
-<area shape="rect" id="node3" title="A class whose instances are single test cases." alt="" coords="105,5,261,32"/>
+<area shape="rect" id="node1" href="#astrowisp.tests.test_background.TestAnnulusBackground" target="_top" title="Test background extraction based on annuli around sources." alt="" coords="5,152,397,177"/>
+<area shape="rect" id="node2" href="astrowisp.tests.utilities.html#astrowisp.tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="67,79,336,104"/>
+<area shape="rect" id="node3" title="A class whose instances are single test cases." alt="" coords="117,5,285,31"/>
 </map>

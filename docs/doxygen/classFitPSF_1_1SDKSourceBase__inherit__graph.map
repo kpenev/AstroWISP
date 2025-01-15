@@ -1,6 +1,11 @@
 <map id="FitPSF::SDKSourceBase" name="FitPSF::SDKSourceBase">
-<area shape="rect" id="node1" title="An abstract class that defines the minimum requirements of a source to participate in the fitting for..." alt="" coords="15,1308,228,1665"/>
-<area shape="rect" id="node4" href="$classFitPSF_1_1SDKSource.xhtml" title="A PSF fitting source class based on a LocalPolynomialPSF." alt="" coords="23,1714,220,1917"/>
-<area shape="rect" id="node2" href="$classFitPSF_1_1Source.xhtml" title=" " alt="" coords="5,665,238,1259"/>
-<area shape="rect" id="node3" href="$classFitPSF_1_1Source.xhtml" title="An abstract base class for sources which participate in PSF fitting." alt="" coords="5,5,238,600"/>
+<area shape="rect" id="node1" title="An abstract class that defines the minimum requirements of a source to participate in the fitting for..." alt="" coords="15,2557,229,2937"/>
+<area shape="rect" id="node9" href="$classFitPSF_1_1SDKSource.xhtml" title="A PSF fitting source class based on a LocalPolynomialPSF." alt="" coords="23,2987,221,3193"/>
+<area shape="rect" id="node2" href="$classFitPSF_1_1Source.xhtml" title=" " alt="" coords="5,1903,239,2508"/>
+<area shape="rect" id="node3" href="$classPSF_1_1MapSource.xhtml" title="Class for evaluating a collection of smooth dependencies for a collection of sources." alt="" coords="31,1045,202,1183"/>
+<area shape="rect" id="node8" href="$classFitPSF_1_1Source.xhtml" title="An abstract base class for sources which participate in PSF fitting." alt="" coords="139,1232,372,1837"/>
+<area shape="rect" id="node4" href="$classCore_1_1Source.xhtml" title="A base class for all sources in AstroWISP." alt="" coords="25,685,208,996"/>
+<area shape="rect" id="node5" href="$classCore_1_1SourceLocation.xhtml" title="The minimum requirements for objects specifying where a source is." alt="" coords="28,481,205,636"/>
+<area shape="rect" id="node6" href="$classCore_1_1Point.xhtml" title=" " alt="" coords="28,260,205,432"/>
+<area shape="rect" id="node7" href="$classCore_1_1Point.xhtml" title="Representing a 2D point with real valued cartesian coordinates." alt="" coords="29,5,204,195"/>
 </map>

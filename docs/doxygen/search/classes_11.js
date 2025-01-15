@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['wedgeintegral_953',['WedgeIntegral',['../classPSF_1_1WedgeIntegral.xhtml',1,'PSF']]]
+  ['wedgeintegral_960',['WedgeIntegral',['../classPSF_1_1WedgeIntegral.xhtml',1,'PSF']]]
 ];

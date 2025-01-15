@@ -1,26 +1,24 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>astrowisp &mdash; AstroWISP Python Interface  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/unlimited_width.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/unlimited_width.css?v=eea1f72d" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -85,11 +83,64 @@
            <div itemprop="articleBody">
              
   <section id="astrowisp">
-<h1>astrowisp<a class="headerlink" href="#astrowisp" title="Permalink to this heading"></a></h1>
+<h1>astrowisp<a class="headerlink" href="#astrowisp" title="Link to this heading"></a></h1>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="astrowisp.html">astrowisp package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="astrowisp.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="astrowisp.html#astrowisp.BackgroundExtractor"><code class="docutils literal notranslate"><span class="pre">BackgroundExtractor</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.BackgroundExtractor.image"><code class="docutils literal notranslate"><span class="pre">BackgroundExtractor.image</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.BackgroundExtractor.inner_radius"><code class="docutils literal notranslate"><span class="pre">BackgroundExtractor.inner_radius</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.BackgroundExtractor.outer_radius"><code class="docutils literal notranslate"><span class="pre">BackgroundExtractor.outer_radius</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.BackgroundExtractor.error_confidence"><code class="docutils literal notranslate"><span class="pre">BackgroundExtractor.error_confidence</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.BackgroundExtractor.__call__"><code class="docutils literal notranslate"><span class="pre">BackgroundExtractor.__call__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.BackgroundExtractor.__del__"><code class="docutils literal notranslate"><span class="pre">BackgroundExtractor.__del__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.BackgroundExtractor.__init__"><code class="docutils literal notranslate"><span class="pre">BackgroundExtractor.__init__()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="astrowisp.html#astrowisp.FitStarShape"><code class="docutils literal notranslate"><span class="pre">FitStarShape</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.FitStarShape._library_psf_fitter"><code class="docutils literal notranslate"><span class="pre">FitStarShape._library_psf_fitter</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.FitStarShape._library_configuration"><code class="docutils literal notranslate"><span class="pre">FitStarShape._library_configuration</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.FitStarShape._result_tree"><code class="docutils literal notranslate"><span class="pre">FitStarShape._result_tree</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.FitStarShape.mode"><code class="docutils literal notranslate"><span class="pre">FitStarShape.mode</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.FitStarShape.configuration"><code class="docutils literal notranslate"><span class="pre">FitStarShape.configuration</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.FitStarShape.__del__"><code class="docutils literal notranslate"><span class="pre">FitStarShape.__del__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.FitStarShape.__init__"><code class="docutils literal notranslate"><span class="pre">FitStarShape.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.FitStarShape._format_config"><code class="docutils literal notranslate"><span class="pre">FitStarShape._format_config()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.FitStarShape.configure"><code class="docutils literal notranslate"><span class="pre">FitStarShape.configure()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.FitStarShape.fit"><code class="docutils literal notranslate"><span class="pre">FitStarShape.fit()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="astrowisp.html#astrowisp.PiecewiseBicubicPSF"><code class="docutils literal notranslate"><span class="pre">PiecewiseBicubicPSF</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.PiecewiseBicubicPSF.__call__"><code class="docutils literal notranslate"><span class="pre">PiecewiseBicubicPSF.__call__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.PiecewiseBicubicPSF.__del__"><code class="docutils literal notranslate"><span class="pre">PiecewiseBicubicPSF.__del__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.PiecewiseBicubicPSF.__init__"><code class="docutils literal notranslate"><span class="pre">PiecewiseBicubicPSF.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.PiecewiseBicubicPSF.get_down_range"><code class="docutils literal notranslate"><span class="pre">PiecewiseBicubicPSF.get_down_range()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.PiecewiseBicubicPSF.get_left_range"><code class="docutils literal notranslate"><span class="pre">PiecewiseBicubicPSF.get_left_range()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.PiecewiseBicubicPSF.get_right_range"><code class="docutils literal notranslate"><span class="pre">PiecewiseBicubicPSF.get_right_range()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.PiecewiseBicubicPSF.get_up_range"><code class="docutils literal notranslate"><span class="pre">PiecewiseBicubicPSF.get_up_range()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.PiecewiseBicubicPSF.integrate"><code class="docutils literal notranslate"><span class="pre">PiecewiseBicubicPSF.integrate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="astrowisp.html#astrowisp.PiecewiseBicubicPSFMap"><code class="docutils literal notranslate"><span class="pre">PiecewiseBicubicPSFMap</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.PiecewiseBicubicPSFMap.__call__"><code class="docutils literal notranslate"><span class="pre">PiecewiseBicubicPSFMap.__call__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.PiecewiseBicubicPSFMap.__del__"><code class="docutils literal notranslate"><span class="pre">PiecewiseBicubicPSFMap.__del__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.PiecewiseBicubicPSFMap.__init__"><code class="docutils literal notranslate"><span class="pre">PiecewiseBicubicPSFMap.__init__()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="astrowisp.html#astrowisp.SubPixPhot"><code class="docutils literal notranslate"><span class="pre">SubPixPhot</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.SubPixPhot._library_configuration"><code class="docutils literal notranslate"><span class="pre">SubPixPhot._library_configuration</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.SubPixPhot._result_tree"><code class="docutils literal notranslate"><span class="pre">SubPixPhot._result_tree</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.SubPixPhot._library_subpix_map"><code class="docutils literal notranslate"><span class="pre">SubPixPhot._library_subpix_map</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.SubPixPhot.configuration"><code class="docutils literal notranslate"><span class="pre">SubPixPhot.configuration</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.SubPixPhot.image"><code class="docutils literal notranslate"><span class="pre">SubPixPhot.image</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.SubPixPhot.__call__"><code class="docutils literal notranslate"><span class="pre">SubPixPhot.__call__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.SubPixPhot.__del__"><code class="docutils literal notranslate"><span class="pre">SubPixPhot.__del__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.SubPixPhot.__init__"><code class="docutils literal notranslate"><span class="pre">SubPixPhot.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.SubPixPhot._format_config"><code class="docutils literal notranslate"><span class="pre">SubPixPhot._format_config()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.SubPixPhot.configure"><code class="docutils literal notranslate"><span class="pre">SubPixPhot.configure()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="astrowisp.html#subpackages">Subpackages</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="astrowisp.fake_image.html">astrowisp.fake_image package</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="astrowisp.fake_image.html#submodules">Submodules</a></li>
@@ -101,6 +152,7 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="astrowisp.utils.html">astrowisp.utils package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="astrowisp.utils.html#astrowisp.utils.flux_from_magnitude"><code class="docutils literal notranslate"><span class="pre">flux_from_magnitude()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="astrowisp.utils.html#submodules">Submodules</a></li>
 </ul>
 </li>
@@ -109,31 +161,38 @@
 <li class="toctree-l2"><a class="reference internal" href="astrowisp.html#submodules">Submodules</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="astrowisp.background.html">astrowisp.background module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="astrowisp.background.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="astrowisp.background.html#astrowisp.background.BackgroundExtractor"><code class="docutils literal notranslate"><span class="pre">BackgroundExtractor</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="astrowisp.fit_star_shape.html">astrowisp.fit_star_shape module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="astrowisp.fit_star_shape.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="astrowisp.fit_star_shape.html#astrowisp.fit_star_shape.FitStarShape"><code class="docutils literal notranslate"><span class="pre">FitStarShape</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="astrowisp.hat_masks.html">astrowisp.hat_masks module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="astrowisp.io_tree.html">astrowisp.io_tree module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="astrowisp.io_tree.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="astrowisp.io_tree.html#astrowisp.io_tree.IOTree"><code class="docutils literal notranslate"><span class="pre">IOTree</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="astrowisp.piecewise_bicubic_psf.html">astrowisp.piecewise_bicubic_psf module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="astrowisp.piecewise_bicubic_psf.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="astrowisp.piecewise_bicubic_psf.html#astrowisp.piecewise_bicubic_psf.PiecewiseBicubicPSF"><code class="docutils literal notranslate"><span class="pre">PiecewiseBicubicPSF</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="astrowisp.piecewise_bicubic_psf_map.html">astrowisp.piecewise_bicubic_psf_map module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="astrowisp.piecewise_bicubic_psf_map.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="astrowisp.piecewise_bicubic_psf_map.html#astrowisp.piecewise_bicubic_psf_map.PiecewiseBicubicPSFMap"><code class="docutils literal notranslate"><span class="pre">PiecewiseBicubicPSFMap</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="astrowisp.psf_base.html">astrowisp.psf_base module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="astrowisp.psf_base.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="astrowisp.psf_base.html#astrowisp.psf_base.PSFBase"><code class="docutils literal notranslate"><span class="pre">PSFBase</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="astrowisp.subpixphot.html">astrowisp.subpixphot module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="astrowisp.subpixphot.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="astrowisp.subpixphot.html#astrowisp.subpixphot.SubPixPhot"><code class="docutils literal notranslate"><span class="pre">SubPixPhot</span></code></a></li>
 </ul>
 </li>
 </ul>

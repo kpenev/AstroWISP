@@ -1,4 +1,4 @@
 <map id="inheritance629eb26084" name="inheritance629eb26084">
-<area shape="rect" id="node1" href="#tests.fitpsf.noiseless_tests.TestPiecewiseBicubicNoiseless" target="_top" title="Test piecewise bicubic PSF fitting on noiseless images." alt="" coords="5,80,374,107"/>
-<area shape="rect" id="node2" title="A class whose instances are single test cases." alt="" coords="111,5,268,32"/>
+<area shape="rect" id="node1" href="#tests.fitpsf.noiseless_tests.TestPiecewiseBicubicNoiseless" target="_top" title="Test piecewise bicubic PSF fitting on noiseless images." alt="" coords="5,79,404,104"/>
+<area shape="rect" id="node2" title="A class whose instances are single test cases." alt="" coords="121,5,289,31"/>
 </map>

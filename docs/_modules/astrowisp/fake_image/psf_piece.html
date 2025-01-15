@@ -1,25 +1,23 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>astrowisp.fake_image.psf_piece &mdash; AstroWISP Python Interface  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/unlimited_width.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/unlimited_width.css?v=eea1f72d" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../../_static/doctools.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -85,16 +83,23 @@
 
 <span class="c1">#This is only a base class, so eventual objects will have more public methods</span>
 <span class="c1">#pylint: disable=too-few-public-methods</span>
-<div class="viewcode-block" id="PSFPiece"><a class="viewcode-back" href="../../../_implementation/astrowisp.fake_image.psf_piece.html#astrowisp.fake_image.psf_piece.PSFPiece">[docs]</a><span class="k">class</span> <span class="nc">PSFPiece</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+<div class="viewcode-block" id="PSFPiece">
+<a class="viewcode-back" href="../../../_implementation/astrowisp.fake_image.psf_piece.html#astrowisp.fake_image.psf_piece.PSFPiece">[docs]</a>
+<span class="k">class</span> <span class="nc">PSFPiece</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Declare a minimum interface for pieces of PiecewisePSF.&quot;&quot;&quot;</span>
 
     <span class="c1">#(x,y) is a reasonable way to specify the components of an offset vector</span>
     <span class="c1">#pylint: disable=invalid-name</span>
-<div class="viewcode-block" id="PSFPiece.__call__"><a class="viewcode-back" href="../../../_implementation/astrowisp.fake_image.psf_piece.html#astrowisp.fake_image.psf_piece.PSFPiece.__call__">[docs]</a>    <span class="nd">@abstractmethod</span>
+<div class="viewcode-block" id="PSFPiece.__call__">
+<a class="viewcode-back" href="../../../_implementation/astrowisp.fake_image.psf_piece.html#astrowisp.fake_image.psf_piece.PSFPiece.__call__">[docs]</a>
+    <span class="nd">@abstractmethod</span>
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate the piece at the given position.&quot;&quot;&quot;</span></div>
 
-<div class="viewcode-block" id="PSFPiece.integrate"><a class="viewcode-back" href="../../../_implementation/astrowisp.fake_image.psf_piece.html#astrowisp.fake_image.psf_piece.PSFPiece.integrate">[docs]</a>    <span class="nd">@abstractmethod</span>
+
+<div class="viewcode-block" id="PSFPiece.integrate">
+<a class="viewcode-back" href="../../../_implementation/astrowisp.fake_image.psf_piece.html#astrowisp.fake_image.psf_piece.PSFPiece.integrate">[docs]</a>
+    <span class="nd">@abstractmethod</span>
     <span class="k">def</span> <span class="nf">integrate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">bottom</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Evaluate the integral of the cell function over a rectangle.</span>
@@ -115,7 +120,9 @@
 <span class="sd">                The integral of the bi-cubic polynomial function defining this</span>
 <span class="sd">                piece of the PSF over the specified rectangle, with no</span>
 <span class="sd">                consideration of whether the rectangle fits within the piece.</span>
-<span class="sd">        &quot;&quot;&quot;</span></div></div>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+</div>
+
     <span class="c1">#pylint: enable=invalid-name</span>
 
 <span class="c1">#pylint: enable=too-few-public-methods</span>

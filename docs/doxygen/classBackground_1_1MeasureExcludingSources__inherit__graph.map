@@ -1,5 +1,5 @@
 <map id="Background::MeasureExcludingSources" name="Background::MeasureExcludingSources">
-<area shape="rect" id="node1" title="Avoid pixels close to sources when extracting a background." alt="" coords="5,240,254,579"/>
-<area shape="rect" id="node3" href="$classBackground_1_1MeasureAnnulus.xhtml" title="Measure the background in an annulus around each source." alt="" coords="11,627,248,779"/>
-<area shape="rect" id="node2" href="$classBackground_1_1Measure.xhtml" title="The minimum requirements for a Background extractor class." alt="" coords="33,5,226,192"/>
+<area shape="rect" id="node1" title="Avoid pixels close to sources when extracting a background." alt="" coords="5,243,255,588"/>
+<area shape="rect" id="node3" href="$classBackground_1_1MeasureAnnulus.xhtml" title="Measure the background in an annulus around each source." alt="" coords="11,636,249,791"/>
+<area shape="rect" id="node2" href="$classBackground_1_1Measure.xhtml" title="The minimum requirements for a Background extractor class." alt="" coords="33,5,227,195"/>
 </map>

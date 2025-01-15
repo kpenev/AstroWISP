@@ -10,26 +10,41 @@ var annotated_dup =
       [ "Zero", "classBackground_1_1Zero.xhtml", "classBackground_1_1Zero" ]
     ] ],
     [ "Core", null, [
-      [ "ColumnList", "classCore_1_1ColumnList.xhtml", null ],
-      [ "DoubleValarray", "classCore_1_1DoubleValarray.xhtml", "classCore_1_1DoubleValarray" ],
       [ "Flux", "classCore_1_1Flux.xhtml", "classCore_1_1Flux" ],
       [ "FluxPair", "classCore_1_1FluxPair.xhtml", "classCore_1_1FluxPair" ],
       [ "Image", "classCore_1_1Image.xhtml", "classCore_1_1Image" ],
       [ "Point", "classCore_1_1Point.xhtml", "classCore_1_1Point" ],
-      [ "RealList", "classCore_1_1RealList.xhtml", null ],
       [ "SDKSource", "classCore_1_1SDKSource.xhtml", "classCore_1_1SDKSource" ],
       [ "Source", "classCore_1_1Source.xhtml", "classCore_1_1Source" ],
       [ "SourceID", "classCore_1_1SourceID.xhtml", "classCore_1_1SourceID" ],
       [ "SourceLocation", "classCore_1_1SourceLocation.xhtml", "classCore_1_1SourceLocation" ],
-      [ "StringList", "classCore_1_1StringList.xhtml", null ],
       [ "SubPixelCorrectedFlux", "classCore_1_1SubPixelCorrectedFlux.xhtml", "classCore_1_1SubPixelCorrectedFlux" ],
-      [ "SubPixelMap", "classCore_1_1SubPixelMap.xhtml", "classCore_1_1SubPixelMap" ]
+      [ "SubPixelMap", "classCore_1_1SubPixelMap.xhtml", "classCore_1_1SubPixelMap" ],
+      [ "RealList", "classCore_1_1RealList.xhtml", null ],
+      [ "ColumnList", "classCore_1_1ColumnList.xhtml", null ],
+      [ "StringList", "classCore_1_1StringList.xhtml", null ],
+      [ "DoubleValarray", "classCore_1_1DoubleValarray.xhtml", "classCore_1_1DoubleValarray" ]
     ] ],
-    [ "Error", "namespaceError.xhtml", "namespaceError" ],
+    [ "Error", "namespaceError.xhtml", [
+      [ "General", "classError_1_1General.xhtml", "classError_1_1General" ],
+      [ "NotImplemented", "classError_1_1NotImplemented.xhtml", "classError_1_1NotImplemented" ],
+      [ "Fits", "classError_1_1Fits.xhtml", "classError_1_1Fits" ],
+      [ "FitsImage", "classError_1_1FitsImage.xhtml", "classError_1_1FitsImage" ],
+      [ "ImageOutside", "classError_1_1ImageOutside.xhtml", "classError_1_1ImageOutside" ],
+      [ "Runtime", "classError_1_1Runtime.xhtml", "classError_1_1Runtime" ],
+      [ "Type", "classError_1_1Type.xhtml", "classError_1_1Type" ],
+      [ "InvalidArgument", "classError_1_1InvalidArgument.xhtml", "classError_1_1InvalidArgument" ],
+      [ "CommandLine", "classError_1_1CommandLine.xhtml", "classError_1_1CommandLine" ],
+      [ "ParsingError", "classError_1_1ParsingError.xhtml", "classError_1_1ParsingError" ],
+      [ "IO", "classError_1_1IO.xhtml", "classError_1_1IO" ],
+      [ "GSLError", "classError_1_1GSLError.xhtml", "classError_1_1GSLError" ],
+      [ "Fitting", "classError_1_1Fitting.xhtml", "classError_1_1Fitting" ]
+    ] ],
     [ "FitPSF", null, [
       [ "AmplitudeSaturatedPixel", "classFitPSF_1_1AmplitudeSaturatedPixel.xhtml", "classFitPSF_1_1AmplitudeSaturatedPixel" ],
-      [ "Config", "classFitPSF_1_1Config.xhtml", "classFitPSF_1_1Config" ],
       [ "Image", "classFitPSF_1_1Image.xhtml", "classFitPSF_1_1Image" ],
+      [ "Source", "classFitPSF_1_1Source.xhtml", "classFitPSF_1_1Source" ],
+      [ "Config", "classFitPSF_1_1Config.xhtml", "classFitPSF_1_1Config" ],
       [ "IOSources", "classFitPSF_1_1IOSources.xhtml", "classFitPSF_1_1IOSources" ],
       [ "LinearSource", "classFitPSF_1_1LinearSource.xhtml", "classFitPSF_1_1LinearSource" ],
       [ "OverlapGroup", "classFitPSF_1_1OverlapGroup.xhtml", "classFitPSF_1_1OverlapGroup" ],
@@ -39,8 +54,7 @@ var annotated_dup =
       [ "PixelOrder", "classFitPSF_1_1PixelOrder.xhtml", "classFitPSF_1_1PixelOrder" ],
       [ "PolynomialSDK", "classFitPSF_1_1PolynomialSDK.xhtml", "classFitPSF_1_1PolynomialSDK" ],
       [ "SDKSource", "classFitPSF_1_1SDKSource.xhtml", "classFitPSF_1_1SDKSource" ],
-      [ "SDKSourceBase", "classFitPSF_1_1SDKSourceBase.xhtml", "classFitPSF_1_1SDKSourceBase" ],
-      [ "Source", "classFitPSF_1_1Source.xhtml", "classFitPSF_1_1Source" ]
+      [ "SDKSourceBase", "classFitPSF_1_1SDKSourceBase.xhtml", "classFitPSF_1_1SDKSourceBase" ]
     ] ],
     [ "IO", null, [
       [ "CommandLineConfig", "classIO_1_1CommandLineConfig.xhtml", "classIO_1_1CommandLineConfig" ],
@@ -49,7 +63,9 @@ var annotated_dup =
       [ "OutputSDKSource", "classIO_1_1OutputSDKSource.xhtml", "classIO_1_1OutputSDKSource" ],
       [ "TranslateToAny", "classIO_1_1TranslateToAny.xhtml", "classIO_1_1TranslateToAny" ]
     ] ],
-    [ "Phot", "namespacePhot.xhtml", "namespacePhot" ],
+    [ "Phot", "namespacePhot.xhtml", [
+      [ "ColumnNamesVector", "classPhot_1_1ColumnNamesVector.xhtml", "classPhot_1_1ColumnNamesVector" ]
+    ] ],
     [ "PSF", null, [
       [ "EllipticalGaussian", "classPSF_1_1EllipticalGaussian.xhtml", "classPSF_1_1EllipticalGaussian" ],
       [ "EllipticalGaussianIntegralByOrder", "classPSF_1_1EllipticalGaussianIntegralByOrder.xhtml", "classPSF_1_1EllipticalGaussianIntegralByOrder" ],

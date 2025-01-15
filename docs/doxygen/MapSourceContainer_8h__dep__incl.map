@@ -1,6 +1,6 @@
-<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/MapSourceContainer.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/MapSourceContainer.h">
-<area shape="rect" id="node1" title="Declares a container for holding MapSource objects." alt="" coords="133,5,359,68"/>
-<area shape="rect" id="node2" href="$DataTreeCalculations_8h.xhtml" title="Declare functions that calculate some entries of I/O data trees from others." alt="" coords="14,116,243,179"/>
-<area shape="rect" id="node4" href="$SubPixPhot_2Common_8h.xhtml" title="Declare functions used by both the C&#45;interface and the command line interface." alt="" coords="267,116,459,179"/>
-<area shape="rect" id="node3" href="$DataTreeCalculations_8cpp.xhtml" title="The definitions of the functions declared in DataTreeCalculations.h." alt="" coords="5,227,252,290"/>
+<map id="/home/kpenev/projects/git/AstroWISP/doc_src/PSF/MapSourceContainer.h" name="/home/kpenev/projects/git/AstroWISP/doc_src/PSF/MapSourceContainer.h">
+<area shape="rect" id="node1" title="Declares a container for holding MapSource objects." alt="" coords="133,5,359,69"/>
+<area shape="rect" id="node2" href="$DataTreeCalculations_8h.xhtml" title="Declare functions that calculate some entries of I/O data trees from others." alt="" coords="13,117,244,181"/>
+<area shape="rect" id="node4" href="$SubPixPhot_2Common_8h.xhtml" title="Declare functions used by both the C&#45;interface and the command line interface." alt="" coords="268,117,461,181"/>
+<area shape="rect" id="node3" href="$DataTreeCalculations_8cpp.xhtml" title="The definitions of the functions declared in DataTreeCalculations.h." alt="" coords="5,229,252,293"/>
 </map>

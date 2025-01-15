@@ -9,7 +9,7 @@ var hierarchy =
       [ "Background::Zero", "classBackground_1_1Zero.xhtml", null ]
     ] ],
     [ "Background::Source", "classBackground_1_1Source.xhtml", null ],
-    [ "variables_map", null, [
+    [ "boost::program_options::variables_map", null, [
       [ "IO::CommandLineConfig", "classIO_1_1CommandLineConfig.xhtml", [
         [ "FitPSF::Config", "classFitPSF_1_1Config.xhtml", null ],
         [ "SubPixPhot::Config", "classSubPixPhot_1_1Config.xhtml", null ]
@@ -26,17 +26,15 @@ var hierarchy =
     [ "Core::SubPixelCorrectedFlux< SUBPIX_TYPE >", "classCore_1_1SubPixelCorrectedFlux.xhtml", null ],
     [ "Core::SubPixelMap", "classCore_1_1SubPixelMap.xhtml", null ],
     [ "FitPSF::AmplitudeSaturatedPixel", "classFitPSF_1_1AmplitudeSaturatedPixel.xhtml", null ],
-    [ "FitPSF::Image< SOURCE_TYPE >", "classFitPSF_1_1Image.xhtml", null ],
     [ "FitPSF::IOSources", "classFitPSF_1_1IOSources.xhtml", null ],
     [ "FitPSF::OverlapGroup< SOURCE_TYPE, PSF_TYPE >", "classFitPSF_1_1OverlapGroup.xhtml", null ],
     [ "FitPSF::PiecewiseBicubicPSFSmoothing", "classFitPSF_1_1PiecewiseBicubicPSFSmoothing.xhtml", null ],
     [ "FitPSF::Pixel< SOURCE_TYPE >", "classFitPSF_1_1Pixel.xhtml", null ],
     [ "FitPSF::PixelOrder", "classFitPSF_1_1PixelOrder.xhtml", null ],
     [ "FitPSF::PolynomialSDK< SUBPIX_TYPE >", "classFitPSF_1_1PolynomialSDK.xhtml", null ],
-    [ "FitPSF::Source< PSF_TYPE >", "classFitPSF_1_1Source.xhtml", [
-      [ "FitPSF::OverlapSource< FIT_SOURCE_TYPE, PSF_TYPE >", "classFitPSF_1_1OverlapSource.xhtml", null ]
+    [ "Core::Image< double >", "classCore_1_1Image.xhtml", [
+      [ "FitPSF::Image< SOURCE_TYPE >", "classFitPSF_1_1Image.xhtml", null ]
     ] ],
-    [ "Core::Image< double >", "classCore_1_1Image.xhtml", null ],
     [ "IO::OutputArray< UNIT_TYPE >", "classIO_1_1OutputArray.xhtml", null ],
     [ "IO::TranslateToAny< DATA_TYPE >", "classIO_1_1TranslateToAny.xhtml", null ],
     [ "IOTreeBase", null, [
@@ -48,7 +46,19 @@ var hierarchy =
           [ "Core::SDKSource", "classCore_1_1SDKSource.xhtml", [
             [ "IO::OutputSDKSource", "classIO_1_1OutputSDKSource.xhtml", null ]
           ] ],
-          [ "PSF::MapSource", "classPSF_1_1MapSource.xhtml", null ]
+          [ "PSF::MapSource", "classPSF_1_1MapSource.xhtml", [
+            [ "FitPSF::Source< PSF::EllipticalGaussian >", "classFitPSF_1_1Source.xhtml", [
+              [ "FitPSF::SDKSourceBase", "classFitPSF_1_1SDKSourceBase.xhtml", [
+                [ "FitPSF::SDKSource< SUBPIX_TYPE >", "classFitPSF_1_1SDKSource.xhtml", null ]
+              ] ]
+            ] ],
+            [ "FitPSF::Source< PSF_TYPE >", "classFitPSF_1_1Source.xhtml", [
+              [ "FitPSF::OverlapSource< LinearSource, PSF::PiecewiseBicubic >", "classFitPSF_1_1OverlapSource.xhtml", [
+                [ "FitPSF::LinearSource", "classFitPSF_1_1LinearSource.xhtml", null ]
+              ] ],
+              [ "FitPSF::OverlapSource< FIT_SOURCE_TYPE, PSF_TYPE >", "classFitPSF_1_1OverlapSource.xhtml", null ]
+            ] ]
+          ] ]
         ] ]
       ] ]
     ] ],
@@ -73,17 +83,7 @@ var hierarchy =
     ] ],
     [ "PSF::Split", "classPSF_1_1Split.xhtml", null ],
     [ "PSF::WedgeIntegral", "classPSF_1_1WedgeIntegral.xhtml", null ],
-    [ "FitPSF::Source< PSF::EllipticalGaussian >", "classFitPSF_1_1Source.xhtml", [
-      [ "FitPSF::SDKSourceBase", "classFitPSF_1_1SDKSourceBase.xhtml", [
-        [ "FitPSF::SDKSource< SUBPIX_TYPE >", "classFitPSF_1_1SDKSource.xhtml", null ]
-      ] ]
-    ] ],
-    [ "FitPSF::Source< PSF::PiecewiseBicubic >", "classFitPSF_1_1Source.xhtml", [
-      [ "FitPSF::OverlapSource< LinearSource, PSF::PiecewiseBicubic >", "classFitPSF_1_1OverlapSource.xhtml", [
-        [ "FitPSF::LinearSource", "classFitPSF_1_1LinearSource.xhtml", null ]
-      ] ]
-    ] ],
-    [ "exception", null, [
+    [ "std::exception", null, [
       [ "Error::General", "classError_1_1General.xhtml", [
         [ "Error::Fits", "classError_1_1Fits.xhtml", [
           [ "Error::FitsImage", "classError_1_1FitsImage.xhtml", [
@@ -95,24 +95,24 @@ var hierarchy =
           [ "Error::CommandLine", "classError_1_1CommandLine.xhtml", null ],
           [ "Error::Fitting", "classError_1_1Fitting.xhtml", null ],
           [ "Error::GSLError", "classError_1_1GSLError.xhtml", null ],
-          [ "Error::InvalidArgument", "classError_1_1InvalidArgument.xhtml", null ],
           [ "Error::IO", "classError_1_1IO.xhtml", null ],
+          [ "Error::InvalidArgument", "classError_1_1InvalidArgument.xhtml", null ],
           [ "Error::ParsingError", "classError_1_1ParsingError.xhtml", null ],
           [ "Error::Type", "classError_1_1Type.xhtml", null ]
         ] ]
       ] ]
     ] ],
-    [ "list", null, [
+    [ "std::list", null, [
       [ "Core::ColumnList", "classCore_1_1ColumnList.xhtml", null ],
       [ "Core::RealList", "classCore_1_1RealList.xhtml", null ],
       [ "Core::StringList", "classCore_1_1StringList.xhtml", null ]
     ] ],
-    [ "valarray", null, [
+    [ "std::valarray", null, [
       [ "Core::DoubleValarray", "classCore_1_1DoubleValarray.xhtml", null ]
     ] ],
-    [ "vector", null, [
-      [ "Phot::ColumnNamesVector", "classPhot_1_1ColumnNamesVector.xhtml", null ],
-      [ "PSF::MapSourceContainer", "classPSF_1_1MapSourceContainer.xhtml", null ]
+    [ "std::vector", null, [
+      [ "PSF::MapSourceContainer", "classPSF_1_1MapSourceContainer.xhtml", null ],
+      [ "Phot::ColumnNamesVector", "classPhot_1_1ColumnNamesVector.xhtml", null ]
     ] ],
     [ "SubPixPhot::SourceInput", "classSubPixPhot_1_1SourceInput.xhtml", null ]
 ];

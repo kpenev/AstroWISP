@@ -1,5 +1,5 @@
 <map id="inheritanceba1ccc1f04" name="inheritanceba1ccc1f04">
-<area shape="rect" id="node1" href="#astrowisp.tests.test_fake_image.TestImage" target="_top" title="Make sure the Image class functions as expected." alt="" coords="5,155,281,181"/>
-<area shape="rect" id="node2" href="astrowisp.tests.utilities.html#astrowisp.tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="21,80,265,107"/>
-<area shape="rect" id="node3" title="A class whose instances are single test cases." alt="" coords="65,5,221,32"/>
+<area shape="rect" id="node1" href="#astrowisp.tests.test_fake_image.TestImage" target="_top" title="Make sure the Image class functions as expected." alt="" coords="5,152,309,177"/>
+<area shape="rect" id="node2" href="astrowisp.tests.utilities.html#astrowisp.tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="23,79,292,104"/>
+<area shape="rect" id="node3" title="A class whose instances are single test cases." alt="" coords="73,5,241,31"/>
 </map>

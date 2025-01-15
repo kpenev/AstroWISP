@@ -1,25 +1,23 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>tests.utilities &mdash; AstroWISP Python Interface  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/unlimited_width.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../_static/unlimited_width.css?v=eea1f72d" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -84,19 +82,26 @@
 <span class="kn">import</span> <span class="nn">unittest</span>
 <span class="kn">from</span> <span class="nn">sys</span> <span class="kn">import</span> <span class="n">float_info</span>
 
-<div class="viewcode-block" id="FloatTestCase"><a class="viewcode-back" href="../../_unit_tests/tests.utilities.html#tests.utilities.FloatTestCase">[docs]</a><span class="k">class</span> <span class="nc">FloatTestCase</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+<div class="viewcode-block" id="FloatTestCase">
+<a class="viewcode-back" href="../../_unit_tests/tests.utilities.html#tests.utilities.FloatTestCase">[docs]</a>
+<span class="k">class</span> <span class="nc">FloatTestCase</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Test case involving floating point comparisons.&quot;&quot;&quot;</span>
 
     <span class="n">tolerance</span> <span class="o">=</span> <span class="mf">10.0</span>
 
-<div class="viewcode-block" id="FloatTestCase.approx_equal"><a class="viewcode-back" href="../../_unit_tests/tests.utilities.html#tests.utilities.FloatTestCase.approx_equal">[docs]</a>    <span class="k">def</span> <span class="nf">approx_equal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value_1</span><span class="p">,</span> <span class="n">value_2</span><span class="p">):</span>
+<div class="viewcode-block" id="FloatTestCase.approx_equal">
+<a class="viewcode-back" href="../../_unit_tests/tests.utilities.html#tests.utilities.FloatTestCase.approx_equal">[docs]</a>
+    <span class="k">def</span> <span class="nf">approx_equal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value_1</span><span class="p">,</span> <span class="n">value_2</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return True iff value_1 ~= value_2 to within tolerance.&quot;&quot;&quot;</span>
 
         <span class="k">return</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">value_1</span> <span class="o">-</span> <span class="n">value_2</span><span class="p">)</span>
                 <span class="o">&lt;=</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">tolerance</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">value_1</span> <span class="o">+</span> <span class="n">value_2</span><span class="p">)</span> <span class="o">*</span> <span class="n">float_info</span><span class="o">.</span><span class="n">epsilon</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="FloatTestCase.set_tolerance"><a class="viewcode-back" href="../../_unit_tests/tests.utilities.html#tests.utilities.FloatTestCase.set_tolerance">[docs]</a>    <span class="k">def</span> <span class="nf">set_tolerance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">):</span>
+
+<div class="viewcode-block" id="FloatTestCase.set_tolerance">
+<a class="viewcode-back" href="../../_unit_tests/tests.utilities.html#tests.utilities.FloatTestCase.set_tolerance">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_tolerance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the tolerance for floating point comparisons.</span>
 
@@ -111,9 +116,12 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">tolerance</span> <span class="o">=</span> <span class="n">tolerance</span></div>
 
+
     <span class="c1">#Following standard unittest assert naming convections</span>
     <span class="c1">#pylint: disable=invalid-name</span>
-<div class="viewcode-block" id="FloatTestCase.assertApprox"><a class="viewcode-back" href="../../_unit_tests/tests.utilities.html#tests.utilities.FloatTestCase.assertApprox">[docs]</a>    <span class="k">def</span> <span class="nf">assertApprox</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value_1</span><span class="p">,</span> <span class="n">value_2</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="FloatTestCase.assertApprox">
+<a class="viewcode-back" href="../../_unit_tests/tests.utilities.html#tests.utilities.FloatTestCase.assertApprox">[docs]</a>
+    <span class="k">def</span> <span class="nf">assertApprox</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value_1</span><span class="p">,</span> <span class="n">value_2</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Assert that the two values are equal to wihin the current tolerance.</span>
 
@@ -136,7 +144,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">approx_equal</span><span class="p">(</span><span class="n">value_1</span><span class="p">,</span> <span class="n">value_2</span><span class="p">),</span>
             <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">value_1</span><span class="si">:</span><span class="s1">f</span><span class="si">}</span><span class="s1"> !~ </span><span class="si">{</span><span class="n">value_2</span><span class="si">:</span><span class="s1">f</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s1">&#39;</span>
-        <span class="p">)</span></div></div>
+        <span class="p">)</span></div>
+</div>
+
     <span class="c1">#pylint: enable=invalid-name</span>
 </pre></div>
 

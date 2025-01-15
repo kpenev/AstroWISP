@@ -1,25 +1,23 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>astrowisp.io_tree &mdash; AstroWISP Python Interface  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/unlimited_width.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../_static/unlimited_width.css?v=eea1f72d" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -106,7 +104,9 @@
 
 <span class="c1">#Sufficient functionality to justify a class.</span>
 <span class="c1">#pylint: disable=too-few-public-methods</span>
-<div class="viewcode-block" id="IOTree"><a class="viewcode-back" href="../../_implementation/astrowisp.io_tree.html#astrowisp.io_tree.IOTree">[docs]</a><span class="k">class</span> <span class="nc">IOTree</span><span class="p">:</span>
+<div class="viewcode-block" id="IOTree">
+<a class="viewcode-back" href="../../_implementation/astrowisp.io_tree.html#astrowisp.io_tree.IOTree">[docs]</a>
+<span class="k">class</span> <span class="nc">IOTree</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Interface for extracting entries from an IO::H5IODataTree.&quot;&quot;&quot;</span>
 
     <span class="n">type_string</span> <span class="o">=</span> <span class="p">{</span><span class="n">c_bool</span><span class="p">:</span> <span class="s1">&#39;bool&#39;</span><span class="p">,</span>
@@ -122,7 +122,9 @@
                    <span class="n">c_ushort</span><span class="p">:</span> <span class="s1">&#39;ushort&#39;</span><span class="p">,</span>
                    <span class="n">c_ubyte</span><span class="p">:</span> <span class="s1">&#39;uchar&#39;</span><span class="p">}</span>
 
-<div class="viewcode-block" id="IOTree.__init__"><a class="viewcode-back" href="../../_implementation/astrowisp.io_tree.html#astrowisp.io_tree.IOTree.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tool_or_configuration</span><span class="p">,</span> <span class="n">version_info</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="IOTree.__init__">
+<a class="viewcode-back" href="../../_implementation/astrowisp.io_tree.html#astrowisp.io_tree.IOTree.__init__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tool_or_configuration</span><span class="p">,</span> <span class="n">version_info</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create a tree with just the given configuration.</span>
 
@@ -152,7 +154,10 @@
             <span class="p">)</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="IOTree.defined_quantity_names"><a class="viewcode-back" href="../../_implementation/astrowisp.io_tree.html#astrowisp.io_tree.IOTree.defined_quantity_names">[docs]</a>    <span class="k">def</span> <span class="nf">defined_quantity_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="IOTree.defined_quantity_names">
+<a class="viewcode-back" href="../../_implementation/astrowisp.io_tree.html#astrowisp.io_tree.IOTree.defined_quantity_names">[docs]</a>
+    <span class="k">def</span> <span class="nf">defined_quantity_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return a list of the quantities with non-empty values in the tree.</span>
 
@@ -174,7 +179,10 @@
         <span class="k">return</span> <span class="p">[</span><span class="n">library_result</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
                 <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_quantities</span><span class="p">)]</span></div>
 
-<div class="viewcode-block" id="IOTree.get"><a class="viewcode-back" href="../../_implementation/astrowisp.io_tree.html#astrowisp.io_tree.IOTree.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">quantity</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">c_double</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="IOTree.get">
+<a class="viewcode-back" href="../../_implementation/astrowisp.io_tree.html#astrowisp.io_tree.IOTree.get">[docs]</a>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">quantity</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">c_double</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the given quantity as a proper python object.</span>
 
@@ -234,7 +242,10 @@
             <span class="p">)</span>
         <span class="k">return</span> <span class="n">result</span></div>
 
-<div class="viewcode-block" id="IOTree.get_psfmap_variables"><a class="viewcode-back" href="../../_implementation/astrowisp.io_tree.html#astrowisp.io_tree.IOTree.get_psfmap_variables">[docs]</a>    <span class="k">def</span> <span class="nf">get_psfmap_variables</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image_index</span><span class="p">,</span> <span class="n">num_variables</span><span class="p">,</span> <span class="n">num_sources</span><span class="p">):</span>
+
+<div class="viewcode-block" id="IOTree.get_psfmap_variables">
+<a class="viewcode-back" href="../../_implementation/astrowisp.io_tree.html#astrowisp.io_tree.IOTree.get_psfmap_variables">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_psfmap_variables</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image_index</span><span class="p">,</span> <span class="n">num_variables</span><span class="p">,</span> <span class="n">num_sources</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the values of the PSF map variables for all sources in an image.</span>
 
@@ -259,7 +270,10 @@
                                                       <span class="n">result</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">result</span></div>
 
-<div class="viewcode-block" id="IOTree.set_star_shape_map"><a class="viewcode-back" href="../../_implementation/astrowisp.io_tree.html#astrowisp.io_tree.IOTree.set_star_shape_map">[docs]</a>    <span class="k">def</span> <span class="nf">set_star_shape_map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grid</span><span class="p">,</span> <span class="n">coefficients</span><span class="p">):</span>
+
+<div class="viewcode-block" id="IOTree.set_star_shape_map">
+<a class="viewcode-back" href="../../_implementation/astrowisp.io_tree.html#astrowisp.io_tree.IOTree.set_star_shape_map">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_star_shape_map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grid</span><span class="p">,</span> <span class="n">coefficients</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Add to tree all entries that define the star shape map.</span>
 
@@ -304,7 +318,10 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">library_tree</span>
             <span class="p">)</span></div>
 
-<div class="viewcode-block" id="IOTree.set_aperture_photometry_inputs"><a class="viewcode-back" href="../../_implementation/astrowisp.io_tree.html#astrowisp.io_tree.IOTree.set_aperture_photometry_inputs">[docs]</a>    <span class="k">def</span> <span class="nf">set_aperture_photometry_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+
+<div class="viewcode-block" id="IOTree.set_aperture_photometry_inputs">
+<a class="viewcode-back" href="../../_implementation/astrowisp.io_tree.html#astrowisp.io_tree.IOTree.set_aperture_photometry_inputs">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_aperture_photometry_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                                        <span class="o">*</span><span class="p">,</span>
                                        <span class="n">source_data</span><span class="p">,</span>
                                        <span class="n">star_shape_grid</span><span class="p">,</span>
@@ -453,10 +470,15 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">set_star_shape_map</span><span class="p">(</span><span class="n">star_shape_grid</span><span class="p">,</span> <span class="n">star_shape_map_coefficients</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="IOTree.__del__"><a class="viewcode-back" href="../../_implementation/astrowisp.io_tree.html#astrowisp.io_tree.IOTree.__del__">[docs]</a>    <span class="k">def</span> <span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="IOTree.__del__">
+<a class="viewcode-back" href="../../_implementation/astrowisp.io_tree.html#astrowisp.io_tree.IOTree.__del__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Destroy the tree allocated by __init__.&quot;&quot;&quot;</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_astrowisp_library</span><span class="o">.</span><span class="n">destroy_result_tree</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">library_tree</span><span class="p">)</span></div></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_astrowisp_library</span><span class="o">.</span><span class="n">destroy_result_tree</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">library_tree</span><span class="p">)</span></div>
+</div>
+
 <span class="c1">#pylint: enable=too-few-public-methods</span>
 </pre></div>
 

@@ -1,25 +1,23 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>tests.test_background &mdash; AstroWISP Python Interface  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/unlimited_width.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../_static/unlimited_width.css?v=eea1f72d" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -89,10 +87,14 @@
 <span class="kn">from</span> <span class="nn">astrowisp.tests.utilities</span> <span class="kn">import</span> <span class="n">FloatTestCase</span>
 <span class="kn">from</span> <span class="nn">astrowisp</span> <span class="kn">import</span> <span class="n">BackgroundExtractor</span>
 
-<div class="viewcode-block" id="TestAnnulusBackground"><a class="viewcode-back" href="../../_unit_tests/tests.test_background.html#tests.test_background.TestAnnulusBackground">[docs]</a><span class="k">class</span> <span class="nc">TestAnnulusBackground</span><span class="p">(</span><span class="n">FloatTestCase</span><span class="p">):</span>
+<div class="viewcode-block" id="TestAnnulusBackground">
+<a class="viewcode-back" href="../../_unit_tests/tests.test_background.html#tests.test_background.TestAnnulusBackground">[docs]</a>
+<span class="k">class</span> <span class="nc">TestAnnulusBackground</span><span class="p">(</span><span class="n">FloatTestCase</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Test background extraction based on annuli around sources.&quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="TestAnnulusBackground.add_flux_around_sources"><a class="viewcode-back" href="../../_unit_tests/tests.test_background.html#tests.test_background.TestAnnulusBackground.add_flux_around_sources">[docs]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="TestAnnulusBackground.add_flux_around_sources">
+<a class="viewcode-back" href="../../_unit_tests/tests.test_background.html#tests.test_background.TestAnnulusBackground.add_flux_around_sources">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">add_flux_around_sources</span><span class="p">(</span><span class="n">source_x</span><span class="p">,</span> <span class="n">source_y</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">extra_flux</span><span class="p">,</span> <span class="n">image</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Add extra flux to image pixels within a radius around sources.</span>
@@ -131,7 +133,10 @@
                         <span class="n">image</span><span class="p">[</span><span class="n">pixel_y</span><span class="p">,</span> <span class="n">pixel_x</span><span class="p">]</span> <span class="o">+=</span> <span class="n">extra_flux</span></div>
 
 
-<div class="viewcode-block" id="TestAnnulusBackground.test_constant_image"><a class="viewcode-back" href="../../_unit_tests/tests.test_background.html#tests.test_background.TestAnnulusBackground.test_constant_image">[docs]</a>    <span class="k">def</span> <span class="nf">test_constant_image</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="TestAnnulusBackground.test_constant_image">
+<a class="viewcode-back" href="../../_unit_tests/tests.test_background.html#tests.test_background.TestAnnulusBackground.test_constant_image">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_constant_image</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Test background extraction on an image with all pixels the same.&quot;&quot;&quot;</span>
 
         <span class="n">inner_radius</span><span class="p">,</span> <span class="n">outer_radius</span> <span class="o">=</span> <span class="mf">1.99</span><span class="p">,</span> <span class="mf">4.01</span>
@@ -185,7 +190,10 @@
                                               <span class="n">message</span><span class="p">)</span>
                             <span class="bp">self</span><span class="o">.</span><span class="n">assertApprox</span><span class="p">(</span><span class="n">extracted_error</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="TestAnnulusBackground.test_crowded_image"><a class="viewcode-back" href="../../_unit_tests/tests.test_background.html#tests.test_background.TestAnnulusBackground.test_crowded_image">[docs]</a>    <span class="k">def</span> <span class="nf">test_crowded_image</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="TestAnnulusBackground.test_crowded_image">
+<a class="viewcode-back" href="../../_unit_tests/tests.test_background.html#tests.test_background.TestAnnulusBackground.test_crowded_image">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_crowded_image</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Tests involving sources for which no BG can be determined.&quot;&quot;&quot;</span>
 
         <span class="n">image</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
@@ -209,7 +217,10 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">extracted_value</span><span class="p">),</span> <span class="n">message</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">extracted_error</span><span class="p">),</span> <span class="n">message</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="TestAnnulusBackground.test_partially_crowded_image"><a class="viewcode-back" href="../../_unit_tests/tests.test_background.html#tests.test_background.TestAnnulusBackground.test_partially_crowded_image">[docs]</a>    <span class="k">def</span> <span class="nf">test_partially_crowded_image</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="TestAnnulusBackground.test_partially_crowded_image">
+<a class="viewcode-back" href="../../_unit_tests/tests.test_background.html#tests.test_background.TestAnnulusBackground.test_partially_crowded_image">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_partially_crowded_image</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;A test where one source is crowded and 4 are not.&quot;&quot;&quot;</span>
 
         <span class="n">image</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
@@ -261,7 +272,10 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">extracted_errors</span><span class="p">[</span><span class="mi">4</span><span class="p">]),</span>
                             <span class="n">message</span> <span class="o">%</span> <span class="p">(</span><span class="n">src_x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">src_y</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">extra_flux</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="TestAnnulusBackground.test_background_gradient"><a class="viewcode-back" href="../../_unit_tests/tests.test_background.html#tests.test_background.TestAnnulusBackground.test_background_gradient">[docs]</a>    <span class="k">def</span> <span class="nf">test_background_gradient</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="TestAnnulusBackground.test_background_gradient">
+<a class="viewcode-back" href="../../_unit_tests/tests.test_background.html#tests.test_background.TestAnnulusBackground.test_background_gradient">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_background_gradient</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Tests where the background has a constant non-zero gradient.&quot;&quot;&quot;</span>
 
         <span class="n">x_gradient</span><span class="p">,</span> <span class="n">y_gradient</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.5</span>
@@ -309,7 +323,10 @@
                             <span class="sa">f</span><span class="s1">&#39;extra flux = </span><span class="si">{</span><span class="n">extra_flux</span><span class="si">:</span><span class="s1">f</span><span class="si">}</span><span class="s1">&#39;</span>
                         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="TestAnnulusBackground.test_background_error"><a class="viewcode-back" href="../../_unit_tests/tests.test_background.html#tests.test_background.TestAnnulusBackground.test_background_error">[docs]</a>    <span class="k">def</span> <span class="nf">test_background_error</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="TestAnnulusBackground.test_background_error">
+<a class="viewcode-back" href="../../_unit_tests/tests.test_background.html#tests.test_background.TestAnnulusBackground.test_background_error">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_background_error</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Test constant gradient background but with known error.&quot;&quot;&quot;</span>
 
         <span class="n">half_pix</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">9.5</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
@@ -375,7 +392,9 @@
                             <span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span>
                             <span class="n">numpy</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">error_confidence</span> <span class="o">*</span> <span class="n">pixels</span><span class="o">.</span><span class="n">size</span> <span class="o">+</span> <span class="mf">0.501</span><span class="p">),</span>
                             <span class="n">message</span>
-                        <span class="p">)</span></div></div>
+                        <span class="p">)</span></div>
+</div>
+
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="n">failfast</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>

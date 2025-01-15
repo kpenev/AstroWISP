@@ -1,0 +1,15 @@
+<map id="inheritancead13e8eefa" name="inheritancead13e8eefa">
+<area shape="rect" id="node1" href="https://docs.python.org/3/library/argparse.html#argparse.Action" target="_top" title="Information about how to convert command line strings to Python objects." alt="" coords="5,5,129,31"/>
+<area shape="rect" id="node2" href="https://docs.python.org/3/library/argparse.html#argparse.ArgumentDefaultsHelpFormatter" target="_top" title="Help message formatter which adds default values to argument help." alt="" coords="94,79,390,104"/>
+<area shape="rect" id="node3" title="Formatter for generating usage messages and argument help strings." alt="" coords="153,5,331,31"/>
+<area shape="rect" id="node4" href="https://docs.python.org/3/library/argparse.html#argparse.ArgumentParser" target="_top" title="Object for parsing command line strings into Python objects." alt="" coords="434,5,621,31"/>
+<area shape="rect" id="node9" title="Drop&#45;in replacement for `argparse.ArgumentParser` that adds support for" alt="" coords="414,79,641,104"/>
+<area shape="rect" id="node5" href="astrowisp.background.html#astrowisp.background.BackgroundExtractor" target="_top" title="Measure the background level for each source in an image." alt="" coords="645,5,951,31"/>
+<area shape="rect" id="node6" href="astrowisp.fit_star_shape.html#astrowisp.fit_star_shape.FitStarShape" target="_top" title="Fit for the PSF/PRF of stars and their flux." alt="" coords="975,5,1242,31"/>
+<area shape="rect" id="node7" href="astrowisp.subpixphot.html#astrowisp.subpixphot.SubPixPhot" target="_top" title="Use sub&#45;pixel aware aperture photomotre to measure fluxes of sources." alt="" coords="1267,5,1505,31"/>
+<area shape="rect" id="node8" href="#astrowisp.utils.explore_prf.AlglibSpline" target="_top" title="Wrap alglib based splines so they can be evaluated on scipy arrays." alt="" coords="1530,5,1805,31"/>
+<area shape="rect" id="node10" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_char" target="_top" title="ctypes.c_char" alt="" coords="1829,5,1940,31"/>
+<area shape="rect" id="node11" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_double" target="_top" title="ctypes.c_double" alt="" coords="1964,5,2091,31"/>
+<area shape="rect" id="node12" title="Base class for bivariate splines." alt="" coords="2115,5,2409,31"/>
+<area shape="rect" id="node13" title="Smooth bivariate spline approximation." alt="" coords="2089,79,2435,104"/>
+</map>

@@ -1,26 +1,24 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>astrowisp.io_tree module &mdash; AstroWISP Python Interface  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/unlimited_width.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/unlimited_width.css?v=eea1f72d" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -55,6 +53,11 @@
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">Python Package Implementation</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="astrowisp.html">astrowisp package</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="astrowisp.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.BackgroundExtractor"><code class="docutils literal notranslate"><span class="pre">BackgroundExtractor</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.FitStarShape"><code class="docutils literal notranslate"><span class="pre">FitStarShape</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.PiecewiseBicubicPSF"><code class="docutils literal notranslate"><span class="pre">PiecewiseBicubicPSF</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.PiecewiseBicubicPSFMap"><code class="docutils literal notranslate"><span class="pre">PiecewiseBicubicPSFMap</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.SubPixPhot"><code class="docutils literal notranslate"><span class="pre">SubPixPhot</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="astrowisp.html#subpackages">Subpackages</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="astrowisp.html#submodules">Submodules</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="astrowisp.background.html">astrowisp.background module</a></li>
@@ -102,30 +105,44 @@
            <div itemprop="articleBody">
              
   <section id="module-astrowisp.io_tree">
-<span id="astrowisp-io-tree-module"></span><h1>astrowisp.io_tree module<a class="headerlink" href="#module-astrowisp.io_tree" title="Permalink to this heading"></a></h1>
+<span id="astrowisp-io-tree-module"></span><h1>astrowisp.io_tree module<a class="headerlink" href="#module-astrowisp.io_tree" title="Link to this heading"></a></h1>
 <section id="class-inheritance-diagram">
-<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this heading"></a></h2>
-<div class="graphviz"><img src="../_images/inheritance-2f07ac7f8911e92673fb75579376181918081510.png" alt="Inheritance diagram of IOTree, c_bool, c_byte, c_char, c_char_p, c_double, c_int, c_long, c_short, c_ubyte, c_uint, c_ulong, c_ushort, c_void_p" usemap="#inheritance5d525332a9" class="inheritance graphviz" /></div>
+<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Link to this heading"></a></h2>
+<div class="graphviz"><img src="../_images/inheritance-e5b067054b5cca5046a5adc78529228a69670959.png" alt="Inheritance diagram of IOTree, c_bool, c_byte, c_char, c_char_p, c_double, c_int, c_long, c_short, c_ubyte, c_uint, c_ulong, c_ushort, c_void_p" usemap="#inheritance5d525332a9" class="inheritance graphviz" /></div>
 <map id="inheritance5d525332a9" name="inheritance5d525332a9">
-<area shape="rect" id="node1" href="#astrowisp.io_tree.IOTree" target="_top" title="Interface for extracting entries from an IO::H5IODataTree." alt="" coords="5,5,170,32"/>
+<area shape="rect" id="node1" href="#astrowisp.io_tree.IOTree" target="_top" title="Interface for extracting entries from an IO::H5IODataTree." alt="" coords="5,5,184,31"/>
+<area shape="rect" id="node2" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_bool" target="_top" title="ctypes.c_bool" alt="" coords="209,5,319,31"/>
+<area shape="rect" id="node3" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_byte" target="_top" title="ctypes.c_byte" alt="" coords="344,5,456,31"/>
+<area shape="rect" id="node4" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_char" target="_top" title="ctypes.c_char" alt="" coords="481,5,591,31"/>
+<area shape="rect" id="node5" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_char_p" target="_top" title="ctypes.c_char_p" alt="" coords="615,5,742,31"/>
+<area shape="rect" id="node6" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_double" target="_top" title="ctypes.c_double" alt="" coords="766,5,893,31"/>
+<area shape="rect" id="node7" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_int" target="_top" title="ctypes.c_int" alt="" coords="917,5,1017,31"/>
+<area shape="rect" id="node8" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_long" target="_top" title="ctypes.c_long" alt="" coords="1041,5,1151,31"/>
+<area shape="rect" id="node9" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_short" target="_top" title="ctypes.c_short" alt="" coords="1175,5,1291,31"/>
+<area shape="rect" id="node10" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_ubyte" target="_top" title="ctypes.c_ubyte" alt="" coords="1316,5,1436,31"/>
+<area shape="rect" id="node11" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_uint" target="_top" title="ctypes.c_uint" alt="" coords="1461,5,1569,31"/>
+<area shape="rect" id="node12" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_ulong" target="_top" title="ctypes.c_ulong" alt="" coords="1593,5,1711,31"/>
+<area shape="rect" id="node13" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_ushort" target="_top" title="ctypes.c_ushort" alt="" coords="1735,5,1859,31"/>
+<area shape="rect" id="node14" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_void_p" target="_top" title="ctypes.c_void_p" alt="" coords="1883,5,2010,31"/>
 </map><p>Define a function for intefracing with the astrowisp shared library.</p>
+</section>
 <dl class="py class">
 <dt class="sig sig-object py" id="astrowisp.io_tree.IOTree">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">astrowisp.io_tree.</span></span><span class="sig-name descname"><span class="pre">IOTree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tool_or_configuration</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version_info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/io_tree.html#IOTree"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.io_tree.IOTree" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">astrowisp.io_tree.</span></span><span class="sig-name descname"><span class="pre">IOTree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tool_or_configuration</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version_info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/io_tree.html#IOTree"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.io_tree.IOTree" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <div class="graphviz"><img src="../_images/inheritance-f6e8fc1e4cf6e445298c8974ea6cb4318c74a45e.png" alt="Inheritance diagram of astrowisp.io_tree.IOTree" usemap="#inheritance2bbe9a83d6" class="inheritance graphviz" /></div>
 <map id="inheritance2bbe9a83d6" name="inheritance2bbe9a83d6">
-<area shape="rect" id="node1" href="#astrowisp.io_tree.IOTree" target="_top" title="Interface for extracting entries from an IO::H5IODataTree." alt="" coords="5,5,170,32"/>
+<area shape="rect" id="node1" href="#astrowisp.io_tree.IOTree" target="_top" title="Interface for extracting entries from an IO::H5IODataTree." alt="" coords="5,5,184,31"/>
 </map><p>Interface for extracting entries from an IO::H5IODataTree.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="astrowisp.io_tree.IOTree.__del__">
-<span class="sig-name descname"><span class="pre">__del__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/io_tree.html#IOTree.__del__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.io_tree.IOTree.__del__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__del__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/io_tree.html#IOTree.__del__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.io_tree.IOTree.__del__" title="Link to this definition"></a></dt>
 <dd><p>Destroy the tree allocated by __init__.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="astrowisp.io_tree.IOTree.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tool_or_configuration</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version_info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/io_tree.html#IOTree.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.io_tree.IOTree.__init__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tool_or_configuration</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version_info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/io_tree.html#IOTree.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.io_tree.IOTree.__init__" title="Link to this definition"></a></dt>
 <dd><p>Create a tree with just the given configuration.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -146,11 +163,11 @@ empty, if it is not required as an entry in the tree.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="astrowisp.io_tree.IOTree.defined_quantity_names">
-<span class="sig-name descname"><span class="pre">defined_quantity_names</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/io_tree.html#IOTree.defined_quantity_names"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.io_tree.IOTree.defined_quantity_names" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">defined_quantity_names</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/io_tree.html#IOTree.defined_quantity_names"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.io_tree.IOTree.defined_quantity_names" title="Link to this definition"></a></dt>
 <dd><p>Return a list of the quantities with non-empty values in the tree.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>None</strong> – </p>
+<dd class="field-odd"><p><strong>None</strong></p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The full names of the quantities with available data using dot
@@ -164,14 +181,14 @@ as a separator between leves in the tree.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="astrowisp.io_tree.IOTree.get">
-<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quantity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype=&lt;class</span> <span class="pre">'ctypes.c_double'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape=None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/io_tree.html#IOTree.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.io_tree.IOTree.get" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quantity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype=&lt;class</span> <span class="pre">'ctypes.c_double'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape=None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/io_tree.html#IOTree.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.io_tree.IOTree.get" title="Link to this definition"></a></dt>
 <dd><p>Return the given quantity as a proper python object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>quantity</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – The quantity to extract from the tree.</p></li>
 <li><p><strong>dtype</strong> – The data type of individual values of the quantity.</p></li>
-<li><p><strong>shape</strong> (<em>tuple of ints</em>) – The shape of the array of values
+<li><p><strong>shape</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><em>tuple</em></a><em> of </em><em>ints</em>) – The shape of the array of values
 to expect. Use None for scalar quantities.</p></li>
 </ul>
 </dd>
@@ -188,7 +205,7 @@ shape is (1,).</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="astrowisp.io_tree.IOTree.get_psfmap_variables">
-<span class="sig-name descname"><span class="pre">get_psfmap_variables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_variables</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_sources</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/io_tree.html#IOTree.get_psfmap_variables"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.io_tree.IOTree.get_psfmap_variables" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_psfmap_variables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_variables</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_sources</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/io_tree.html#IOTree.get_psfmap_variables"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.io_tree.IOTree.get_psfmap_variables" title="Link to this definition"></a></dt>
 <dd><p>Return the values of the PSF map variables for all sources in an image.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -212,7 +229,7 @@ image identified by image_index.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="astrowisp.io_tree.IOTree.set_aperture_photometry_inputs">
-<span class="sig-name descname"><span class="pre">set_aperture_photometry_inputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">star_shape_grid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">star_shape_map_terms</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">star_shape_map_coefficients</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">magnitude_1adu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/io_tree.html#IOTree.set_aperture_photometry_inputs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.io_tree.IOTree.set_aperture_photometry_inputs" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">set_aperture_photometry_inputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">star_shape_grid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">star_shape_map_terms</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">star_shape_map_coefficients</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">magnitude_1adu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/io_tree.html#IOTree.set_aperture_photometry_inputs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.io_tree.IOTree.set_aperture_photometry_inputs" title="Link to this definition"></a></dt>
 <dd><p>Add to the tree all the information required for aperture photometry.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -245,7 +262,7 @@ in front of all terms. See bicubic PSf model for details.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="astrowisp.io_tree.IOTree.set_star_shape_map">
-<span class="sig-name descname"><span class="pre">set_star_shape_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coefficients</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/io_tree.html#IOTree.set_star_shape_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.io_tree.IOTree.set_star_shape_map" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">set_star_shape_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coefficients</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/io_tree.html#IOTree.set_star_shape_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.io_tree.IOTree.set_star_shape_map" title="Link to this definition"></a></dt>
 <dd><p>Add to tree all entries that define the star shape map.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -266,12 +283,11 @@ parameters depend on.</p></li>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="astrowisp.io_tree.IOTree.type_string">
-<span class="sig-name descname"><span class="pre">type_string</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{&lt;class</span> <span class="pre">'ctypes.c_bool'&gt;:</span> <span class="pre">'bool',</span> <span class="pre">&lt;class</span> <span class="pre">'ctypes.c_double'&gt;:</span> <span class="pre">'double',</span> <span class="pre">&lt;class</span> <span class="pre">'ctypes.c_int'&gt;:</span> <span class="pre">'int',</span> <span class="pre">&lt;class</span> <span class="pre">'ctypes.c_short'&gt;:</span> <span class="pre">'short',</span> <span class="pre">&lt;class</span> <span class="pre">'ctypes.c_long'&gt;:</span> <span class="pre">'long',</span> <span class="pre">&lt;class</span> <span class="pre">'ctypes.c_byte'&gt;:</span> <span class="pre">'char',</span> <span class="pre">&lt;class</span> <span class="pre">'ctypes.c_ubyte'&gt;:</span> <span class="pre">'uchar',</span> <span class="pre">&lt;class</span> <span class="pre">'ctypes.c_char'&gt;:</span> <span class="pre">'char',</span> <span class="pre">&lt;class</span> <span class="pre">'ctypes.c_uint'&gt;:</span> <span class="pre">'uint',</span> <span class="pre">&lt;class</span> <span class="pre">'ctypes.c_ulong'&gt;:</span> <span class="pre">'ulong',</span> <span class="pre">&lt;class</span> <span class="pre">'ctypes.c_ushort'&gt;:</span> <span class="pre">'ushort'}</span></em><a class="headerlink" href="#astrowisp.io_tree.IOTree.type_string" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">type_string</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{&lt;class</span> <span class="pre">'ctypes.c_bool'&gt;:</span> <span class="pre">'bool',</span> <span class="pre">&lt;class</span> <span class="pre">'ctypes.c_byte'&gt;:</span> <span class="pre">'char',</span> <span class="pre">&lt;class</span> <span class="pre">'ctypes.c_char'&gt;:</span> <span class="pre">'char',</span> <span class="pre">&lt;class</span> <span class="pre">'ctypes.c_double'&gt;:</span> <span class="pre">'double',</span> <span class="pre">&lt;class</span> <span class="pre">'ctypes.c_int'&gt;:</span> <span class="pre">'int',</span> <span class="pre">&lt;class</span> <span class="pre">'ctypes.c_long'&gt;:</span> <span class="pre">'long',</span> <span class="pre">&lt;class</span> <span class="pre">'ctypes.c_short'&gt;:</span> <span class="pre">'short',</span> <span class="pre">&lt;class</span> <span class="pre">'ctypes.c_ubyte'&gt;:</span> <span class="pre">'uchar',</span> <span class="pre">&lt;class</span> <span class="pre">'ctypes.c_uint'&gt;:</span> <span class="pre">'uint',</span> <span class="pre">&lt;class</span> <span class="pre">'ctypes.c_ulong'&gt;:</span> <span class="pre">'ulong',</span> <span class="pre">&lt;class</span> <span class="pre">'ctypes.c_ushort'&gt;:</span> <span class="pre">'ushort'}</span></em><a class="headerlink" href="#astrowisp.io_tree.IOTree.type_string" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-</section>
 </section>
 
 

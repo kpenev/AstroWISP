@@ -1,5 +1,5 @@
 <map id="inheritance262da7a9b8" name="inheritance262da7a9b8">
-<area shape="rect" id="node1" href="../_implementation/astrowisp.tests.utilities.html#astrowisp.tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="5,80,250,107"/>
-<area shape="rect" id="node3" href="#tests.test_grcollect.TestGRCollect" target="_top" title="Test cases for the grcollect executable." alt="" coords="16,155,239,181"/>
-<area shape="rect" id="node2" title="A class whose instances are single test cases." alt="" coords="49,5,206,32"/>
+<area shape="rect" id="node1" href="../_implementation/astrowisp.tests.utilities.html#astrowisp.tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="5,79,275,104"/>
+<area shape="rect" id="node3" href="#tests.test_grcollect.TestGRCollect" target="_top" title="Test cases for the grcollect executable." alt="" coords="20,152,260,177"/>
+<area shape="rect" id="node2" title="A class whose instances are single test cases." alt="" coords="56,5,224,31"/>
 </map>

@@ -1,26 +1,24 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>astrowisp.piecewise_bicubic_psf module &mdash; AstroWISP Python Interface  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/unlimited_width.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/unlimited_width.css?v=eea1f72d" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -55,6 +53,11 @@
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">Python Package Implementation</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="astrowisp.html">astrowisp package</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="astrowisp.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.BackgroundExtractor"><code class="docutils literal notranslate"><span class="pre">BackgroundExtractor</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.FitStarShape"><code class="docutils literal notranslate"><span class="pre">FitStarShape</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.PiecewiseBicubicPSF"><code class="docutils literal notranslate"><span class="pre">PiecewiseBicubicPSF</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.PiecewiseBicubicPSFMap"><code class="docutils literal notranslate"><span class="pre">PiecewiseBicubicPSFMap</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.SubPixPhot"><code class="docutils literal notranslate"><span class="pre">SubPixPhot</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="astrowisp.html#subpackages">Subpackages</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="astrowisp.html#submodules">Submodules</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="astrowisp.background.html">astrowisp.background module</a></li>
@@ -102,26 +105,30 @@
            <div itemprop="articleBody">
              
   <section id="module-astrowisp.piecewise_bicubic_psf">
-<span id="astrowisp-piecewise-bicubic-psf-module"></span><h1>astrowisp.piecewise_bicubic_psf module<a class="headerlink" href="#module-astrowisp.piecewise_bicubic_psf" title="Permalink to this heading"></a></h1>
+<span id="astrowisp-piecewise-bicubic-psf-module"></span><h1>astrowisp.piecewise_bicubic_psf module<a class="headerlink" href="#module-astrowisp.piecewise_bicubic_psf" title="Link to this heading"></a></h1>
 <section id="class-inheritance-diagram">
-<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this heading"></a></h2>
-<div class="graphviz"><img src="../_images/inheritance-5d0909af355020c73f318f5275b19f9b1ade01b5.png" alt="Inheritance diagram of PSFBase, PiecewiseBicubicPSF, c_double" usemap="#inheritancedbf6d61619" class="inheritance graphviz" /></div>
+<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Link to this heading"></a></h2>
+<div class="graphviz"><img src="../_images/inheritance-e2d4234ef7722bf454798dc33c89730a847e11b2.png" alt="Inheritance diagram of PSFBase, PiecewiseBicubicPSF, c_double" usemap="#inheritancedbf6d61619" class="inheritance graphviz" /></div>
 <map id="inheritancedbf6d61619" name="inheritancedbf6d61619">
-<area shape="rect" id="node3" href="astrowisp.psf_base.html#astrowisp.psf_base.PSFBase" target="_top" title="The base class for all supported PSFs." alt="" coords="81,80,275,107"/>
-<area shape="rect" id="node2" href="#astrowisp.piecewise_bicubic_psf.PiecewiseBicubicPSF" target="_top" title="Implement the PSFBase methods for libary PSFs." alt="" coords="5,155,351,181"/>
+<area shape="rect" id="node1" href="https://docs.python.org/3/library/abc.html#abc.ABC" target="_top" title="Helper class that provides a standard way to create an ABC using" alt="" coords="154,5,230,31"/>
+<area shape="rect" id="node3" href="astrowisp.psf_base.html#astrowisp.psf_base.PSFBase" target="_top" title="The base class for all supported PSFs." alt="" coords="89,79,295,104"/>
+<area shape="rect" id="node2" href="#astrowisp.piecewise_bicubic_psf.PiecewiseBicubicPSF" target="_top" title="Implement the PSFBase methods for libary PSFs." alt="" coords="5,152,379,177"/>
+<area shape="rect" id="node4" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_double" target="_top" title="ctypes.c_double" alt="" coords="254,5,381,31"/>
 </map><p>A wrapper class for working with PSFs/PRFs from the C/C++ library.</p>
+</section>
 <dl class="py class">
 <dt class="sig sig-object py" id="astrowisp.piecewise_bicubic_psf.PiecewiseBicubicPSF">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">astrowisp.piecewise_bicubic_psf.</span></span><span class="sig-name descname"><span class="pre">PiecewiseBicubicPSF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">library_psf</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/piecewise_bicubic_psf.html#PiecewiseBicubicPSF"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.piecewise_bicubic_psf.PiecewiseBicubicPSF" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">astrowisp.piecewise_bicubic_psf.</span></span><span class="sig-name descname"><span class="pre">PiecewiseBicubicPSF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">library_psf</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/piecewise_bicubic_psf.html#PiecewiseBicubicPSF"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.piecewise_bicubic_psf.PiecewiseBicubicPSF" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="astrowisp.psf_base.html#astrowisp.psf_base.PSFBase" title="astrowisp.psf_base.PSFBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PSFBase</span></code></a></p>
-<div class="graphviz"><img src="../_images/inheritance-0f4f4f4fb58460e65464971fd95afabbf330afef.png" alt="Inheritance diagram of astrowisp.piecewise_bicubic_psf.PiecewiseBicubicPSF" usemap="#inheritance0015cdee6e" class="inheritance graphviz" /></div>
+<div class="graphviz"><img src="../_images/inheritance-fec94522651b7c9156d60fec3fee9608bc884619.png" alt="Inheritance diagram of astrowisp.piecewise_bicubic_psf.PiecewiseBicubicPSF" usemap="#inheritance0015cdee6e" class="inheritance graphviz" /></div>
 <map id="inheritance0015cdee6e" name="inheritance0015cdee6e">
-<area shape="rect" id="node3" href="astrowisp.psf_base.html#astrowisp.psf_base.PSFBase" target="_top" title="The base class for all supported PSFs." alt="" coords="81,80,275,107"/>
-<area shape="rect" id="node2" href="#astrowisp.piecewise_bicubic_psf.PiecewiseBicubicPSF" target="_top" title="Implement the PSFBase methods for libary PSFs." alt="" coords="5,155,351,181"/>
+<area shape="rect" id="node1" href="https://docs.python.org/3/library/abc.html#abc.ABC" target="_top" title="Helper class that provides a standard way to create an ABC using" alt="" coords="154,5,230,31"/>
+<area shape="rect" id="node3" href="astrowisp.psf_base.html#astrowisp.psf_base.PSFBase" target="_top" title="The base class for all supported PSFs." alt="" coords="89,79,295,104"/>
+<area shape="rect" id="node2" href="#astrowisp.piecewise_bicubic_psf.PiecewiseBicubicPSF" target="_top" title="Implement the PSFBase methods for libary PSFs." alt="" coords="5,152,379,177"/>
 </map><p>Implement the PSFBase methods for libary PSFs.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="astrowisp.piecewise_bicubic_psf.PiecewiseBicubicPSF.__call__">
-<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/piecewise_bicubic_psf.html#PiecewiseBicubicPSF.__call__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.piecewise_bicubic_psf.PiecewiseBicubicPSF.__call__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/piecewise_bicubic_psf.html#PiecewiseBicubicPSF.__call__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.piecewise_bicubic_psf.PiecewiseBicubicPSF.__call__" title="Link to this definition"></a></dt>
 <dd><p>Return the value(s) of the PSF at the given point(s).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -143,43 +150,43 @@ the point at which to return the PSF value.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="astrowisp.piecewise_bicubic_psf.PiecewiseBicubicPSF.__del__">
-<span class="sig-name descname"><span class="pre">__del__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/piecewise_bicubic_psf.html#PiecewiseBicubicPSF.__del__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.piecewise_bicubic_psf.PiecewiseBicubicPSF.__del__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__del__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/piecewise_bicubic_psf.html#PiecewiseBicubicPSF.__del__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.piecewise_bicubic_psf.PiecewiseBicubicPSF.__del__" title="Link to this definition"></a></dt>
 <dd><p>Delete the underlying library PSF.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="astrowisp.piecewise_bicubic_psf.PiecewiseBicubicPSF.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">library_psf</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/piecewise_bicubic_psf.html#PiecewiseBicubicPSF.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.piecewise_bicubic_psf.PiecewiseBicubicPSF.__init__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">library_psf</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/piecewise_bicubic_psf.html#PiecewiseBicubicPSF.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.piecewise_bicubic_psf.PiecewiseBicubicPSF.__init__" title="Link to this definition"></a></dt>
 <dd><p>Wrap the given library PSF in a convenient python interface.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="astrowisp.piecewise_bicubic_psf.PiecewiseBicubicPSF.get_down_range">
-<span class="sig-name descname"><span class="pre">get_down_range</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/piecewise_bicubic_psf.html#PiecewiseBicubicPSF.get_down_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.piecewise_bicubic_psf.PiecewiseBicubicPSF.get_down_range" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_down_range</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/piecewise_bicubic_psf.html#PiecewiseBicubicPSF.get_down_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.piecewise_bicubic_psf.PiecewiseBicubicPSF.get_down_range" title="Link to this definition"></a></dt>
 <dd><p>Return how far the PSF extends downward of center.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="astrowisp.piecewise_bicubic_psf.PiecewiseBicubicPSF.get_left_range">
-<span class="sig-name descname"><span class="pre">get_left_range</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/piecewise_bicubic_psf.html#PiecewiseBicubicPSF.get_left_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.piecewise_bicubic_psf.PiecewiseBicubicPSF.get_left_range" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_left_range</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/piecewise_bicubic_psf.html#PiecewiseBicubicPSF.get_left_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.piecewise_bicubic_psf.PiecewiseBicubicPSF.get_left_range" title="Link to this definition"></a></dt>
 <dd><p>Return how far the PSF extends to the left of center.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="astrowisp.piecewise_bicubic_psf.PiecewiseBicubicPSF.get_right_range">
-<span class="sig-name descname"><span class="pre">get_right_range</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/piecewise_bicubic_psf.html#PiecewiseBicubicPSF.get_right_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.piecewise_bicubic_psf.PiecewiseBicubicPSF.get_right_range" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_right_range</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/piecewise_bicubic_psf.html#PiecewiseBicubicPSF.get_right_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.piecewise_bicubic_psf.PiecewiseBicubicPSF.get_right_range" title="Link to this definition"></a></dt>
 <dd><p>Return how far the PSF extends to the right of center.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="astrowisp.piecewise_bicubic_psf.PiecewiseBicubicPSF.get_up_range">
-<span class="sig-name descname"><span class="pre">get_up_range</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/piecewise_bicubic_psf.html#PiecewiseBicubicPSF.get_up_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.piecewise_bicubic_psf.PiecewiseBicubicPSF.get_up_range" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_up_range</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/piecewise_bicubic_psf.html#PiecewiseBicubicPSF.get_up_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.piecewise_bicubic_psf.PiecewiseBicubicPSF.get_up_range" title="Link to this definition"></a></dt>
 <dd><p>Return how far the PSF extends upward of center.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="astrowisp.piecewise_bicubic_psf.PiecewiseBicubicPSF.integrate">
-<span class="sig-name descname"><span class="pre">integrate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">circle_radius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/piecewise_bicubic_psf.html#PiecewiseBicubicPSF.integrate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.piecewise_bicubic_psf.PiecewiseBicubicPSF.integrate" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">integrate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">circle_radius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/piecewise_bicubic_psf.html#PiecewiseBicubicPSF.integrate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.piecewise_bicubic_psf.PiecewiseBicubicPSF.integrate" title="Link to this definition"></a></dt>
 <dd><p>Return integrals of the PSF over circle-rectangle overlaps.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -206,7 +213,6 @@ rectangle(s).</p></li>
 
 </dd></dl>
 
-</section>
 </section>
 
 

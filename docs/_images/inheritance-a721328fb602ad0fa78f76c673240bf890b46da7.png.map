@@ -1,0 +1,5 @@
+<map id="inheritanced3021d0d53" name="inheritanced3021d0d53">
+<area shape="rect" id="node1" href="https://docs.python.org/3/library/abc.html#abc.ABC" target="_top" title="Helper class that provides a standard way to create an ABC using" alt="" coords="203,5,279,31"/>
+<area shape="rect" id="node3" href="astrowisp.fake_image.psf_piece.html#astrowisp.fake_image.psf_piece.PSFPiece" target="_top" title="Declare a minimum interface for pieces of PiecewisePSF." alt="" coords="94,79,389,104"/>
+<area shape="rect" id="node2" href="#astrowisp.fake_image.bipolynomial_psf_piece.BipolynomialPSFPiece" target="_top" title="Class for PSF pieces over which the PSF is a bi&#45;polynomial function." alt="" coords="5,152,477,177"/>
+</map>

@@ -1,26 +1,24 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>astrowisp.tests.test_fistar module &mdash; AstroWISP Python Interface  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/unlimited_width.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/unlimited_width.css?v=eea1f72d" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -55,6 +53,11 @@
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">Python Package Implementation</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="astrowisp.html">astrowisp package</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="astrowisp.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.BackgroundExtractor"><code class="docutils literal notranslate"><span class="pre">BackgroundExtractor</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.FitStarShape"><code class="docutils literal notranslate"><span class="pre">FitStarShape</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.PiecewiseBicubicPSF"><code class="docutils literal notranslate"><span class="pre">PiecewiseBicubicPSF</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.PiecewiseBicubicPSFMap"><code class="docutils literal notranslate"><span class="pre">PiecewiseBicubicPSFMap</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.SubPixPhot"><code class="docutils literal notranslate"><span class="pre">SubPixPhot</span></code></a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="astrowisp.html#subpackages">Subpackages</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="astrowisp.fake_image.html">astrowisp.fake_image package</a></li>
 <li class="toctree-l4 current"><a class="reference internal" href="astrowisp.tests.html">astrowisp.tests package</a></li>
@@ -98,32 +101,33 @@
            <div itemprop="articleBody">
              
   <section id="module-astrowisp.tests.test_fistar">
-<span id="astrowisp-tests-test-fistar-module"></span><h1>astrowisp.tests.test_fistar module<a class="headerlink" href="#module-astrowisp.tests.test_fistar" title="Permalink to this heading"></a></h1>
+<span id="astrowisp-tests-test-fistar-module"></span><h1>astrowisp.tests.test_fistar module<a class="headerlink" href="#module-astrowisp.tests.test_fistar" title="Link to this heading"></a></h1>
 <section id="class-inheritance-diagram">
-<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this heading"></a></h2>
-<div class="graphviz"><img src="../_images/inheritance-9af7e699f4983174922e383435e3b09355459661.png" alt="Inheritance diagram of FloatTestCase, Popen, TestFistar, partial" usemap="#inheritance708c195730" class="inheritance graphviz" /></div>
+<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Link to this heading"></a></h2>
+<div class="graphviz"><img src="../_images/inheritance-938cfcb6d2e42670047a0104182a4387792d59d7.png" alt="Inheritance diagram of FloatTestCase, Popen, TestFistar, partial" usemap="#inheritance708c195730" class="inheritance graphviz" /></div>
 <map id="inheritance708c195730" name="inheritance708c195730">
-<area shape="rect" id="node1" href="#astrowisp.tests.test_fistar.TestFistar" target="_top" title="Test cases for the fistar executable." alt="" coords="10,155,245,181"/>
-<area shape="rect" id="node2" href="astrowisp.tests.utilities.html#astrowisp.tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="5,80,250,107"/>
+<area shape="rect" id="node1" href="#astrowisp.tests.test_fistar.TestFistar" target="_top" title="Test cases for the fistar executable." alt="" coords="13,152,267,177"/>
+<area shape="rect" id="node2" href="astrowisp.tests.utilities.html#astrowisp.tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="5,79,275,104"/>
+<area shape="rect" id="node5" href="https://docs.python.org/3/library/subprocess.html#subprocess.Popen" target="_top" title="Execute a child program in a new process." alt="" coords="400,5,539,31"/>
 </map><p>Test source extraction using built-in fistar executable.</p>
+</section>
 <dl class="py class">
 <dt class="sig sig-object py" id="astrowisp.tests.test_fistar.TestFistar">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">astrowisp.tests.test_fistar.</span></span><span class="sig-name descname"><span class="pre">TestFistar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/tests/test_fistar.html#TestFistar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.tests.test_fistar.TestFistar" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">astrowisp.tests.test_fistar.</span></span><span class="sig-name descname"><span class="pre">TestFistar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/tests/test_fistar.html#TestFistar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.tests.test_fistar.TestFistar" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="astrowisp.tests.utilities.html#astrowisp.tests.utilities.FloatTestCase" title="astrowisp.tests.utilities.FloatTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">FloatTestCase</span></code></a></p>
 <div class="graphviz"><img src="../_images/inheritance-e8bc17fd7ce35b11f6c31189db7fd8d909c710b5.png" alt="Inheritance diagram of astrowisp.tests.test_fistar.TestFistar" usemap="#inheritance97895a5bf6" class="inheritance graphviz" /></div>
 <map id="inheritance97895a5bf6" name="inheritance97895a5bf6">
-<area shape="rect" id="node1" href="#astrowisp.tests.test_fistar.TestFistar" target="_top" title="Test cases for the fistar executable." alt="" coords="10,155,245,181"/>
-<area shape="rect" id="node2" href="astrowisp.tests.utilities.html#astrowisp.tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="5,80,250,107"/>
+<area shape="rect" id="node1" href="#astrowisp.tests.test_fistar.TestFistar" target="_top" title="Test cases for the fistar executable." alt="" coords="13,152,267,177"/>
+<area shape="rect" id="node2" href="astrowisp.tests.utilities.html#astrowisp.tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="5,79,275,104"/>
 </map><p>Test cases for the fistar executable.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="astrowisp.tests.test_fistar.TestFistar.test_xo1">
-<span class="sig-name descname"><span class="pre">test_xo1</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/tests/test_fistar.html#TestFistar.test_xo1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.tests.test_fistar.TestFistar.test_xo1" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">test_xo1</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/tests/test_fistar.html#TestFistar.test_xo1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.tests.test_fistar.TestFistar.test_xo1" title="Link to this definition"></a></dt>
 <dd><p>Check if extracting sources from XO-1 image matches expected.</p>
 </dd></dl>
 
 </dd></dl>
 
-</section>
 </section>
 
 

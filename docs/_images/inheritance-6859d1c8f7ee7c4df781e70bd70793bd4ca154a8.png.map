@@ -1,0 +1,11 @@
+<map id="inheritancee2739705f6" name="inheritancee2739705f6">
+<area shape="rect" id="node1" href="#astrowisp.fit_star_shape.FitStarShape" target="_top" title="Fit for the PSF/PRF of stars and their flux." alt="" coords="5,5,272,31"/>
+<area shape="rect" id="node2" href="astrowisp.io_tree.html#astrowisp.io_tree.IOTree" target="_top" title="Interface for extracting entries from an IO::H5IODataTree." alt="" coords="296,5,475,31"/>
+<area shape="rect" id="node3" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_bool" target="_top" title="ctypes.c_bool" alt="" coords="499,5,610,31"/>
+<area shape="rect" id="node4" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_char" target="_top" title="ctypes.c_char" alt="" coords="634,5,745,31"/>
+<area shape="rect" id="node5" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_char_p" target="_top" title="ctypes.c_char_p" alt="" coords="769,5,895,31"/>
+<area shape="rect" id="node6" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_double" target="_top" title="ctypes.c_double" alt="" coords="919,5,1046,31"/>
+<area shape="rect" id="node7" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_int" target="_top" title="ctypes.c_int" alt="" coords="1070,5,1170,31"/>
+<area shape="rect" id="node8" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_ulong" target="_top" title="ctypes.c_ulong" alt="" coords="1194,5,1313,31"/>
+<area shape="rect" id="node9" href="https://docs.python.org/3/library/numbers.html#numbers.Number" target="_top" title="All numbers inherit from this class." alt="" coords="1337,5,1471,31"/>
+</map>

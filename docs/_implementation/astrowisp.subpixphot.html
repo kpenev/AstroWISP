@@ -1,26 +1,24 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>astrowisp.subpixphot module &mdash; AstroWISP Python Interface  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/unlimited_width.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/unlimited_width.css?v=eea1f72d" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -55,6 +53,11 @@
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">Python Package Implementation</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="astrowisp.html">astrowisp package</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="astrowisp.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.BackgroundExtractor"><code class="docutils literal notranslate"><span class="pre">BackgroundExtractor</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.FitStarShape"><code class="docutils literal notranslate"><span class="pre">FitStarShape</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.PiecewiseBicubicPSF"><code class="docutils literal notranslate"><span class="pre">PiecewiseBicubicPSF</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.PiecewiseBicubicPSFMap"><code class="docutils literal notranslate"><span class="pre">PiecewiseBicubicPSFMap</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astrowisp.html#astrowisp.SubPixPhot"><code class="docutils literal notranslate"><span class="pre">SubPixPhot</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="astrowisp.html#subpackages">Subpackages</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="astrowisp.html#submodules">Submodules</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="astrowisp.background.html">astrowisp.background module</a></li>
@@ -102,24 +105,27 @@
            <div itemprop="articleBody">
              
   <section id="module-astrowisp.subpixphot">
-<span id="astrowisp-subpixphot-module"></span><h1>astrowisp.subpixphot module<a class="headerlink" href="#module-astrowisp.subpixphot" title="Permalink to this heading"></a></h1>
+<span id="astrowisp-subpixphot-module"></span><h1>astrowisp.subpixphot module<a class="headerlink" href="#module-astrowisp.subpixphot" title="Link to this heading"></a></h1>
 <section id="class-inheritance-diagram">
-<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this heading"></a></h2>
-<div class="graphviz"><img src="../_images/inheritance-23ec0313d58e9702fbab3bfa50dee991d97a702f.png" alt="Inheritance diagram of SubPixPhot, c_double, c_uint" usemap="#inheritance52971f4961" class="inheritance graphviz" /></div>
+<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Link to this heading"></a></h2>
+<div class="graphviz"><img src="../_images/inheritance-26e2036fe93933a7f95e7da6ed06662d492cec1c.png" alt="Inheritance diagram of SubPixPhot, c_double, c_uint" usemap="#inheritance52971f4961" class="inheritance graphviz" /></div>
 <map id="inheritance52971f4961" name="inheritance52971f4961">
-<area shape="rect" id="node1" href="#astrowisp.subpixphot.SubPixPhot" target="_top" title="Use sub&#45;pixel aware aperture photomotre to measure fluxes of sources." alt="" coords="5,5,223,32"/>
+<area shape="rect" id="node1" href="#astrowisp.subpixphot.SubPixPhot" target="_top" title="Use sub&#45;pixel aware aperture photomotre to measure fluxes of sources." alt="" coords="5,5,244,31"/>
+<area shape="rect" id="node2" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_double" target="_top" title="ctypes.c_double" alt="" coords="268,5,395,31"/>
+<area shape="rect" id="node3" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_uint" target="_top" title="ctypes.c_uint" alt="" coords="419,5,527,31"/>
 </map><p>Define the <a class="reference internal" href="#astrowisp.subpixphot.SubPixPhot" title="astrowisp.subpixphot.SubPixPhot"><code class="xref py py-class docutils literal notranslate"><span class="pre">SubPixPhot</span></code></a>, which performs aperture photometry.</p>
+</section>
 <dl class="py class">
 <dt class="sig sig-object py" id="astrowisp.subpixphot.SubPixPhot">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">astrowisp.subpixphot.</span></span><span class="sig-name descname"><span class="pre">SubPixPhot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">configuration</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/subpixphot.html#SubPixPhot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.subpixphot.SubPixPhot" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">astrowisp.subpixphot.</span></span><span class="sig-name descname"><span class="pre">SubPixPhot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">configuration</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/subpixphot.html#SubPixPhot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.subpixphot.SubPixPhot" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <div class="graphviz"><img src="../_images/inheritance-37bc154ee2175e9a302aedec28bf1cc14027a68a.png" alt="Inheritance diagram of astrowisp.subpixphot.SubPixPhot" usemap="#inheritanced48ad2090c" class="inheritance graphviz" /></div>
 <map id="inheritanced48ad2090c" name="inheritanced48ad2090c">
-<area shape="rect" id="node1" href="#astrowisp.subpixphot.SubPixPhot" target="_top" title="Use sub&#45;pixel aware aperture photomotre to measure fluxes of sources." alt="" coords="5,5,223,32"/>
+<area shape="rect" id="node1" href="#astrowisp.subpixphot.SubPixPhot" target="_top" title="Use sub&#45;pixel aware aperture photomotre to measure fluxes of sources." alt="" coords="5,5,244,31"/>
 </map><p>Use sub-pixel aware aperture photomotre to measure fluxes of sources.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="astrowisp.subpixphot.SubPixPhot._library_configuration">
-<span class="sig-name descname"><span class="pre">_library_configuration</span></span><a class="headerlink" href="#astrowisp.subpixphot.SubPixPhot._library_configuration" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">_library_configuration</span></span><a class="headerlink" href="#astrowisp.subpixphot.SubPixPhot._library_configuration" title="Link to this definition"></a></dt>
 <dd><p>The library
 configuration object to use the next aperture photometry
 measurement.</p>
@@ -132,7 +138,7 @@ measurement.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="astrowisp.subpixphot.SubPixPhot._result_tree">
-<span class="sig-name descname"><span class="pre">_result_tree</span></span><a class="headerlink" href="#astrowisp.subpixphot.SubPixPhot._result_tree" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">_result_tree</span></span><a class="headerlink" href="#astrowisp.subpixphot.SubPixPhot._result_tree" title="Link to this definition"></a></dt>
 <dd><p>The IOTree instance
 containing PSF fitting and aperture photometry information from the
 last aperture photomtry measurement, or None if no photometry has
@@ -146,7 +152,7 @@ been done yet.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="astrowisp.subpixphot.SubPixPhot._library_subpix_map">
-<span class="sig-name descname"><span class="pre">_library_subpix_map</span></span><a class="headerlink" href="#astrowisp.subpixphot.SubPixPhot._library_subpix_map" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">_library_subpix_map</span></span><a class="headerlink" href="#astrowisp.subpixphot.SubPixPhot._library_subpix_map" title="Link to this definition"></a></dt>
 <dd><p>The library object
 representing the currently set sub-pixel map.</p>
 <dl class="field-list simple">
@@ -158,7 +164,7 @@ representing the currently set sub-pixel map.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="astrowisp.subpixphot.SubPixPhot.configuration">
-<span class="sig-name descname"><span class="pre">configuration</span></span><a class="headerlink" href="#astrowisp.subpixphot.SubPixPhot.configuration" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">configuration</span></span><a class="headerlink" href="#astrowisp.subpixphot.SubPixPhot.configuration" title="Link to this definition"></a></dt>
 <dd><p>The congfiguration for how to perform the
 next aperture photometry. The following keys are used (others are
 ignored by this class).</p>
@@ -183,7 +189,7 @@ ignored by this class).</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="astrowisp.subpixphot.SubPixPhot.image">
-<span class="sig-name descname"><span class="pre">image</span></span><a class="headerlink" href="#astrowisp.subpixphot.SubPixPhot.image" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">image</span></span><a class="headerlink" href="#astrowisp.subpixphot.SubPixPhot.image" title="Link to this definition"></a></dt>
 <dd><p>The last image for which aperture photometry was
 extracted. Contains the following entries:</p>
 <blockquote>
@@ -206,7 +212,7 @@ pixels.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="astrowisp.subpixphot.SubPixPhot.__call__">
-<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fitpsf_io_tree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/subpixphot.html#SubPixPhot.__call__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.subpixphot.SubPixPhot.__call__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fitpsf_io_tree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/subpixphot.html#SubPixPhot.__call__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.subpixphot.SubPixPhot.__call__" title="Link to this definition"></a></dt>
 <dd><p>Measure the fluxes of all sources in an image using aperture photometry.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -236,13 +242,13 @@ include the newly measured fluxes.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="astrowisp.subpixphot.SubPixPhot.__del__">
-<span class="sig-name descname"><span class="pre">__del__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/subpixphot.html#SubPixPhot.__del__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.subpixphot.SubPixPhot.__del__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__del__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/subpixphot.html#SubPixPhot.__del__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.subpixphot.SubPixPhot.__del__" title="Link to this definition"></a></dt>
 <dd><p>Destroy any library objects created by this object.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="astrowisp.subpixphot.SubPixPhot.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">configuration</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/subpixphot.html#SubPixPhot.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.subpixphot.SubPixPhot.__init__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">configuration</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/subpixphot.html#SubPixPhot.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.subpixphot.SubPixPhot.__init__" title="Link to this definition"></a></dt>
 <dd><p>Prepare an object for measuring fluxes using aperture photometry.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -256,11 +262,11 @@ include the newly measured fluxes.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="astrowisp.subpixphot.SubPixPhot._format_config">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_format_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">param_value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/subpixphot.html#SubPixPhot._format_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.subpixphot.SubPixPhot._format_config" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_format_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">param_value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/subpixphot.html#SubPixPhot._format_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.subpixphot.SubPixPhot._format_config" title="Link to this definition"></a></dt>
 <dd><p>Format config param for passing to AstroWISP aperture photometry func.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>param_value</strong> (<em>pair of values</em>) – One of the recognized keys from
+<dd class="field-odd"><p><strong>param_value</strong> (<em>pair</em><em> of </em><em>values</em>) – One of the recognized keys from
 <a class="reference internal" href="#astrowisp.subpixphot.SubPixPhot.configuration" title="astrowisp.subpixphot.SubPixPhot.configuration"><code class="xref py py-attr docutils literal notranslate"><span class="pre">configuration</span></code></a> and the value it should be set to.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -281,7 +287,7 @@ subpixphot tool.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="astrowisp.subpixphot.SubPixPhot.configure">
-<span class="sig-name descname"><span class="pre">configure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">configuration</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/subpixphot.html#SubPixPhot.configure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.subpixphot.SubPixPhot.configure" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">configure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">configuration</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astrowisp/subpixphot.html#SubPixPhot.configure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astrowisp.subpixphot.SubPixPhot.configure" title="Link to this definition"></a></dt>
 <dd><p>Modify the currently defined configuration.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -295,7 +301,6 @@ subpixphot tool.</p></li>
 
 </dd></dl>
 
-</section>
 </section>
 
 

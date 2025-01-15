@@ -1,26 +1,24 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>tests.test_piecewise_bicubic_psf module &mdash; AstroWISP Python Interface  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/unlimited_width.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/unlimited_width.css?v=eea1f72d" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -99,59 +97,61 @@
            <div itemprop="articleBody">
              
   <section id="module-tests.test_piecewise_bicubic_psf">
-<span id="tests-test-piecewise-bicubic-psf-module"></span><h1>tests.test_piecewise_bicubic_psf module<a class="headerlink" href="#module-tests.test_piecewise_bicubic_psf" title="Permalink to this heading"></a></h1>
+<span id="tests-test-piecewise-bicubic-psf-module"></span><h1>tests.test_piecewise_bicubic_psf module<a class="headerlink" href="#module-tests.test_piecewise_bicubic_psf" title="Link to this heading"></a></h1>
 <section id="class-inheritance-diagram">
-<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this heading"></a></h2>
-<div class="graphviz"><img src="../_images/inheritance-dd7180cba6f48fde17954e5ba4b0bd6daf448ac7.png" alt="Inheritance diagram of FloatTestCase, PiecewiseBicubicPSF, TestPiecewiseBicubicPSF" usemap="#inheritance0087abd281" class="inheritance graphviz" /></div>
+<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Link to this heading"></a></h2>
+<div class="graphviz"><img src="../_images/inheritance-f863e90a9e0825f71c47e8fb5f4680b292887dd6.png" alt="Inheritance diagram of FloatTestCase, PiecewiseBicubicPSF, TestPiecewiseBicubicPSF" usemap="#inheritance0087abd281" class="inheritance graphviz" /></div>
 <map id="inheritance0087abd281" name="inheritance0087abd281">
-<area shape="rect" id="node4" href="../_implementation/astrowisp.psf_base.html#astrowisp.psf_base.PSFBase" target="_top" title="The base class for all supported PSFs." alt="" coords="116,80,311,107"/>
-<area shape="rect" id="node2" href="../_implementation/astrowisp.fake_image.piecewise_bicubic_psf.html#astrowisp.fake_image.piecewise_bicubic_psf.PiecewiseBicubicPSF" target="_top" title="A piecewise PSF class where the PSF over each piece is a bi&#45;cubic function." alt="" coords="5,229,422,256"/>
-<area shape="rect" id="node3" href="../_implementation/astrowisp.fake_image.piecewise_psf.html#astrowisp.fake_image.piecewise_psf.PiecewisePSF" target="_top" title="Base clas for PSFs defined on a grid of pieces." alt="" coords="51,155,376,181"/>
-<area shape="rect" id="node5" href="../_implementation/astrowisp.tests.utilities.html#astrowisp.tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="465,80,709,107"/>
-<area shape="rect" id="node7" href="#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF" target="_top" title="Make sure the PiecewiseBicubicPSF class functions as expected." alt="" coords="401,155,773,181"/>
+<area shape="rect" id="node1" href="https://docs.python.org/3/library/abc.html#abc.ABC" target="_top" title="Helper class that provides a standard way to create an ABC using" alt="" coords="194,5,270,31"/>
+<area shape="rect" id="node4" href="../_implementation/astrowisp.psf_base.html#astrowisp.psf_base.PSFBase" target="_top" title="The base class for all supported PSFs." alt="" coords="129,79,335,104"/>
+<area shape="rect" id="node2" href="../_implementation/astrowisp.fake_image.piecewise_bicubic_psf.html#astrowisp.fake_image.piecewise_bicubic_psf.PiecewiseBicubicPSF" target="_top" title="A piecewise PSF class where the PSF over each piece is a bi&#45;cubic function." alt="" coords="5,225,459,251"/>
+<area shape="rect" id="node3" href="../_implementation/astrowisp.fake_image.piecewise_psf.html#astrowisp.fake_image.piecewise_psf.PiecewisePSF" target="_top" title="Base clas for PSFs defined on a grid of pieces." alt="" coords="55,152,409,177"/>
+<area shape="rect" id="node5" href="../_implementation/astrowisp.tests.utilities.html#astrowisp.tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="499,79,768,104"/>
+<area shape="rect" id="node7" href="#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF" target="_top" title="Make sure the PiecewiseBicubicPSF class functions as expected." alt="" coords="433,152,833,177"/>
 </map><p>Define unittest test case for the PiecewiseBicubicPSF class.</p>
+</section>
 <dl class="py class">
 <dt class="sig sig-object py" id="tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tests.test_piecewise_bicubic_psf.</span></span><span class="sig-name descname"><span class="pre">TestPiecewiseBicubicPSF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_piecewise_bicubic_psf.html#TestPiecewiseBicubicPSF"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tests.test_piecewise_bicubic_psf.</span></span><span class="sig-name descname"><span class="pre">TestPiecewiseBicubicPSF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_piecewise_bicubic_psf.html#TestPiecewiseBicubicPSF"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="../_implementation/astrowisp.tests.utilities.html#astrowisp.tests.utilities.FloatTestCase" title="astrowisp.tests.utilities.FloatTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">FloatTestCase</span></code></a></p>
 <div class="graphviz"><img src="../_images/inheritance-a60e2bd80e235ccafc1a10b90bbfc6c8350d9c10.png" alt="Inheritance diagram of tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF" usemap="#inheritance131314dfe9" class="inheritance graphviz" /></div>
 <map id="inheritance131314dfe9" name="inheritance131314dfe9">
-<area shape="rect" id="node1" href="../_implementation/astrowisp.tests.utilities.html#astrowisp.tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="69,80,314,107"/>
-<area shape="rect" id="node3" href="#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF" target="_top" title="Make sure the PiecewiseBicubicPSF class functions as expected." alt="" coords="5,155,378,181"/>
+<area shape="rect" id="node1" href="../_implementation/astrowisp.tests.utilities.html#astrowisp.tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="71,79,340,104"/>
+<area shape="rect" id="node3" href="#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF" target="_top" title="Make sure the PiecewiseBicubicPSF class functions as expected." alt="" coords="5,152,405,177"/>
 </map><p>Make sure the PiecewiseBicubicPSF class functions as expected.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.setUp">
-<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_piecewise_bicubic_psf.html#TestPiecewiseBicubicPSF.setUp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.setUp" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_piecewise_bicubic_psf.html#TestPiecewiseBicubicPSF.setUp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.setUp" title="Link to this definition"></a></dt>
 <dd><p>Define a set of picewise PSF grids to use during tests.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_linear">
-<span class="sig-name descname"><span class="pre">test_linear</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_piecewise_bicubic_psf.html#TestPiecewiseBicubicPSF.test_linear"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_linear" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">test_linear</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_piecewise_bicubic_psf.html#TestPiecewiseBicubicPSF.test_linear"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_linear" title="Link to this definition"></a></dt>
 <dd><p>Test PSFs that is are linear functions of x and/or y work.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_one">
-<span class="sig-name descname"><span class="pre">test_one</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_piecewise_bicubic_psf.html#TestPiecewiseBicubicPSF.test_one"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_one" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">test_one</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_piecewise_bicubic_psf.html#TestPiecewiseBicubicPSF.test_one"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_one" title="Link to this definition"></a></dt>
 <dd><p>Make sure that a PSF = 1 everywhere within the grid works.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_pi">
-<span class="sig-name descname"><span class="pre">test_pi</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_piecewise_bicubic_psf.html#TestPiecewiseBicubicPSF.test_pi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_pi" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">test_pi</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_piecewise_bicubic_psf.html#TestPiecewiseBicubicPSF.test_pi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_pi" title="Link to this definition"></a></dt>
 <dd><p>Make sure that a PSF = 1 everywhere within the grid works.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_random_single_patch">
-<span class="sig-name descname"><span class="pre">test_random_single_patch</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_piecewise_bicubic_psf.html#TestPiecewiseBicubicPSF.test_random_single_patch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_random_single_patch" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">test_random_single_patch</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_piecewise_bicubic_psf.html#TestPiecewiseBicubicPSF.test_random_single_patch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_random_single_patch" title="Link to this definition"></a></dt>
 <dd><p>Test PSFs equal to random bi-cubic polynomials.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_zero">
-<span class="sig-name descname"><span class="pre">test_zero</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_piecewise_bicubic_psf.html#TestPiecewiseBicubicPSF.test_zero"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_zero" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">test_zero</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_piecewise_bicubic_psf.html#TestPiecewiseBicubicPSF.test_zero"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tests.test_piecewise_bicubic_psf.TestPiecewiseBicubicPSF.test_zero" title="Link to this definition"></a></dt>
 <dd><p>Make sure that all-zero input produces an identically zero PSF.</p>
 </dd></dl>
 
@@ -159,11 +159,10 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="tests.test_piecewise_bicubic_psf.point_in_grid">
-<span class="sig-prename descclassname"><span class="pre">tests.test_piecewise_bicubic_psf.</span></span><span class="sig-name descname"><span class="pre">point_in_grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">point</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_piecewise_bicubic_psf.html#point_in_grid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tests.test_piecewise_bicubic_psf.point_in_grid" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">tests.test_piecewise_bicubic_psf.</span></span><span class="sig-name descname"><span class="pre">point_in_grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">point</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_piecewise_bicubic_psf.html#point_in_grid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tests.test_piecewise_bicubic_psf.point_in_grid" title="Link to this definition"></a></dt>
 <dd><p>Return True iff the point is within grid.</p>
 </dd></dl>
 
-</section>
 </section>
 
 

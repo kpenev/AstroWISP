@@ -1,6 +1,6 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" title=" " alt="" coords="5,59,47,88"/>
-<area shape="rect" id="node2" href="$classCore_1_1ColumnList.xhtml" title="Synonim for list of column names (needed for boost command line parsing)." alt="" coords="95,5,240,34"/>
-<area shape="rect" id="node3" href="$classCore_1_1RealList.xhtml" title="Synonim for list of doubles (needed for boost command line parsing)." alt="" coords="106,59,229,88"/>
-<area shape="rect" id="node4" href="$classCore_1_1StringList.xhtml" title="Synonym for list of strings (needed for boost command line parsing)." alt="" coords="102,112,233,141"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,59,76,88"/>
+<area shape="rect" id="node2" href="$classCore_1_1ColumnList.xhtml" title="Synonim for list of column names (needed for boost command line parsing)." alt="" coords="124,5,271,35"/>
+<area shape="rect" id="node3" href="$classCore_1_1RealList.xhtml" title="Synonim for list of doubles (needed for boost command line parsing)." alt="" coords="135,59,259,88"/>
+<area shape="rect" id="node4" href="$classCore_1_1StringList.xhtml" title="Synonym for list of strings (needed for boost command line parsing)." alt="" coords="131,112,263,141"/>
 </map>

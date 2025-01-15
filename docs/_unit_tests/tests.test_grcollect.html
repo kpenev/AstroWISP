@@ -1,26 +1,24 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>tests.test_grcollect module &mdash; AstroWISP Python Interface  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/unlimited_width.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/unlimited_width.css?v=eea1f72d" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -99,32 +97,33 @@
            <div itemprop="articleBody">
              
   <section id="module-tests.test_grcollect">
-<span id="tests-test-grcollect-module"></span><h1>tests.test_grcollect module<a class="headerlink" href="#module-tests.test_grcollect" title="Permalink to this heading"></a></h1>
+<span id="tests-test-grcollect-module"></span><h1>tests.test_grcollect module<a class="headerlink" href="#module-tests.test_grcollect" title="Link to this heading"></a></h1>
 <section id="class-inheritance-diagram">
-<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this heading"></a></h2>
-<div class="graphviz"><img src="../_images/inheritance-ff2096597ef4b85b66477d50d7e521b957515c37.png" alt="Inheritance diagram of FloatTestCase, Popen, TestGRCollect, partial" usemap="#inheritance9f176bac36" class="inheritance graphviz" /></div>
+<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Link to this heading"></a></h2>
+<div class="graphviz"><img src="../_images/inheritance-7fbec752c4b4cdd244cc3d918231084f75688230.png" alt="Inheritance diagram of FloatTestCase, Popen, TestGRCollect, partial" usemap="#inheritance9f176bac36" class="inheritance graphviz" /></div>
 <map id="inheritance9f176bac36" name="inheritance9f176bac36">
-<area shape="rect" id="node1" href="../_implementation/astrowisp.tests.utilities.html#astrowisp.tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="5,80,250,107"/>
-<area shape="rect" id="node5" href="#tests.test_grcollect.TestGRCollect" target="_top" title="Test cases for the grcollect executable." alt="" coords="16,155,239,181"/>
+<area shape="rect" id="node1" href="../_implementation/astrowisp.tests.utilities.html#astrowisp.tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="5,79,275,104"/>
+<area shape="rect" id="node5" href="#tests.test_grcollect.TestGRCollect" target="_top" title="Test cases for the grcollect executable." alt="" coords="20,152,260,177"/>
+<area shape="rect" id="node4" href="https://docs.python.org/3/library/subprocess.html#subprocess.Popen" target="_top" title="Execute a child program in a new process." alt="" coords="400,5,539,31"/>
 </map><p>Test rejection outlier using built-in grcollect executable.</p>
+</section>
 <dl class="py class">
 <dt class="sig sig-object py" id="tests.test_grcollect.TestGRCollect">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tests.test_grcollect.</span></span><span class="sig-name descname"><span class="pre">TestGRCollect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_grcollect.html#TestGRCollect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tests.test_grcollect.TestGRCollect" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tests.test_grcollect.</span></span><span class="sig-name descname"><span class="pre">TestGRCollect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_grcollect.html#TestGRCollect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tests.test_grcollect.TestGRCollect" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="../_implementation/astrowisp.tests.utilities.html#astrowisp.tests.utilities.FloatTestCase" title="astrowisp.tests.utilities.FloatTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">FloatTestCase</span></code></a></p>
 <div class="graphviz"><img src="../_images/inheritance-0494443471ee2f3700ba241bc1fdc03cae26ae0f.png" alt="Inheritance diagram of tests.test_grcollect.TestGRCollect" usemap="#inheritance262da7a9b8" class="inheritance graphviz" /></div>
 <map id="inheritance262da7a9b8" name="inheritance262da7a9b8">
-<area shape="rect" id="node1" href="../_implementation/astrowisp.tests.utilities.html#astrowisp.tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="5,80,250,107"/>
-<area shape="rect" id="node3" href="#tests.test_grcollect.TestGRCollect" target="_top" title="Test cases for the grcollect executable." alt="" coords="16,155,239,181"/>
+<area shape="rect" id="node1" href="../_implementation/astrowisp.tests.utilities.html#astrowisp.tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="5,79,275,104"/>
+<area shape="rect" id="node3" href="#tests.test_grcollect.TestGRCollect" target="_top" title="Test cases for the grcollect executable." alt="" coords="20,152,260,177"/>
 </map><p>Test cases for the grcollect executable.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="tests.test_grcollect.TestGRCollect.test_dataset">
-<span class="sig-name descname"><span class="pre">test_dataset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_grcollect.html#TestGRCollect.test_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tests.test_grcollect.TestGRCollect.test_dataset" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">test_dataset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tests/test_grcollect.html#TestGRCollect.test_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tests.test_grcollect.TestGRCollect.test_dataset" title="Link to this definition"></a></dt>
 <dd><p>Create dataset to test rejection outlier</p>
 </dd></dl>
 
 </dd></dl>
 
-</section>
 </section>
 
 

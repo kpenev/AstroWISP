@@ -1,6 +1,11 @@
 <map id="FitPSF::OverlapSource&lt; FIT_SOURCE_TYPE, PSF_TYPE &gt;" name="FitPSF::OverlapSource&lt; FIT_SOURCE_TYPE, PSF_TYPE &gt;">
-<area shape="rect" id="node1" title="PSF fitting source which handles overlaps with other sources." alt="" coords="7,649,236,1260"/>
-<area shape="rect" id="node3" href="$classFitPSF_1_1OverlapSource.xhtml" title=" " alt="" coords="11,1342,232,1954"/>
-<area shape="rect" id="node2" href="$classFitPSF_1_1Source.xhtml" title="An abstract base class for sources which participate in PSF fitting." alt="" coords="5,5,238,600"/>
-<area shape="rect" id="node4" href="$classFitPSF_1_1LinearSource.xhtml" title="A class for PSF fitting sources whose flux distribution depends linearly on the PSF paramaters (for a..." alt="" coords="11,2003,232,2495"/>
+<area shape="rect" id="node1" title="PSF fitting source which handles overlaps with other sources." alt="" coords="7,1887,237,2527"/>
+<area shape="rect" id="node8" href="$classFitPSF_1_1OverlapSource.xhtml" title=" " alt="" coords="11,2609,233,3249"/>
+<area shape="rect" id="node2" href="$classFitPSF_1_1Source.xhtml" title="An abstract base class for sources which participate in PSF fitting." alt="" coords="5,1232,239,1837"/>
+<area shape="rect" id="node3" href="$classPSF_1_1MapSource.xhtml" title="Class for evaluating a collection of smooth dependencies for a collection of sources." alt="" coords="37,1045,207,1183"/>
+<area shape="rect" id="node4" href="$classCore_1_1Source.xhtml" title="A base class for all sources in AstroWISP." alt="" coords="31,685,213,996"/>
+<area shape="rect" id="node5" href="$classCore_1_1SourceLocation.xhtml" title="The minimum requirements for objects specifying where a source is." alt="" coords="33,481,211,636"/>
+<area shape="rect" id="node6" href="$classCore_1_1Point.xhtml" title=" " alt="" coords="33,260,211,432"/>
+<area shape="rect" id="node7" href="$classCore_1_1Point.xhtml" title="Representing a 2D point with real valued cartesian coordinates." alt="" coords="35,5,209,195"/>
+<area shape="rect" id="node9" href="$classFitPSF_1_1LinearSource.xhtml" title="A class for PSF fitting sources whose flux distribution depends linearly on the PSF paramaters (for a..." alt="" coords="11,3299,233,3800"/>
 </map>

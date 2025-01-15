@@ -1,25 +1,23 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>astrowisp.fake_image.image &mdash; AstroWISP Python Interface  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/unlimited_width.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/unlimited_width.css?v=eea1f72d" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../../_static/doctools.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -87,10 +85,14 @@
 <span class="c1">#This inherits a whole lot of methods from numpy.ndarray, adding 2 extra</span>
 <span class="c1">#justifies the inherited class.</span>
 <span class="c1">#pylint: disable=too-few-public-methods</span>
-<div class="viewcode-block" id="Image"><a class="viewcode-back" href="../../../_implementation/astrowisp.fake_image.image.html#astrowisp.fake_image.image.Image">[docs]</a><span class="k">class</span> <span class="nc">Image</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+<div class="viewcode-block" id="Image">
+<a class="viewcode-back" href="../../../_implementation/astrowisp.fake_image.image.html#astrowisp.fake_image.image.Image">[docs]</a>
+<span class="k">class</span> <span class="nc">Image</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;A base class for fake images.&quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="Image.__new__"><a class="viewcode-back" href="../../../_implementation/astrowisp.fake_image.image.html#astrowisp.fake_image.image.Image.__new__">[docs]</a>    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">x_resolution</span><span class="p">,</span> <span class="n">y_resolution</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
+<div class="viewcode-block" id="Image.__new__">
+<a class="viewcode-back" href="../../../_implementation/astrowisp.fake_image.image.html#astrowisp.fake_image.image.Image.__new__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">x_resolution</span><span class="p">,</span> <span class="n">y_resolution</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Create an image with the given resolution and background.&quot;&quot;&quot;</span>
 
         <span class="n">result</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span>
@@ -98,6 +100,7 @@
                                  <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
         <span class="n">result</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">background</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">result</span></div>
+
 
     <span class="c1">#x and y are perfectly reasonable names for 2-D position coordinates.</span>
     <span class="c1">#pylint: disable=invalid-name</span>
@@ -108,7 +111,9 @@
     <span class="c1">#</span>
     <span class="c1">#Removing local variables makes the function less readable</span>
     <span class="c1">#pylint: disable=too-many-locals</span>
-<div class="viewcode-block" id="Image.add_source"><a class="viewcode-back" href="../../../_implementation/astrowisp.fake_image.image.html#astrowisp.fake_image.image.Image.add_source">[docs]</a>    <span class="k">def</span> <span class="nf">add_source</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="Image.add_source">
+<a class="viewcode-back" href="../../../_implementation/astrowisp.fake_image.image.html#astrowisp.fake_image.image.Image.add_source">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_source</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                    <span class="n">x</span><span class="p">,</span>
                    <span class="n">y</span><span class="p">,</span>
                    <span class="n">amplitude</span><span class="p">,</span>
@@ -166,7 +171,9 @@
                 <span class="k">else</span><span class="p">:</span>
                     <span class="k">assert</span> <span class="n">psf</span> <span class="ow">is</span> <span class="kc">None</span>
                     <span class="bp">self</span><span class="p">[</span><span class="n">pix_y</span><span class="p">,</span> <span class="n">pix_x</span><span class="p">]</span> <span class="o">+=</span> <span class="n">amplitude</span> <span class="o">*</span> <span class="n">prf</span><span class="p">(</span><span class="n">pix_x</span> <span class="o">-</span> <span class="n">x</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">,</span>
-                                                          <span class="n">pix_y</span> <span class="o">-</span> <span class="n">y</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span></div></div>
+                                                          <span class="n">pix_y</span> <span class="o">-</span> <span class="n">y</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span></div>
+</div>
+
     <span class="c1">#pylint: enable=invalid-name</span>
     <span class="c1">#pylint: enable=too-many-arguments</span>
     <span class="c1">#pylint: enable=too-many-locals</span>

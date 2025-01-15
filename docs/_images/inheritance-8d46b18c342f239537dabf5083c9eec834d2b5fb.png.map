@@ -1,6 +1,6 @@
 <map id="inheritance0c0bad10a6" name="inheritance0c0bad10a6">
-<area shape="rect" id="node1" href="astrowisp.background.html#astrowisp.background.BackgroundExtractor" target="_top" title="Measure the background level for each source in an image." alt="" coords="5,5,280,32"/>
-<area shape="rect" id="node2" href="#astrowisp.tests.test_background.TestAnnulusBackground" target="_top" title="Test background extraction based on annuli around sources." alt="" coords="205,155,560,181"/>
-<area shape="rect" id="node3" href="astrowisp.tests.utilities.html#astrowisp.tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="260,80,505,107"/>
-<area shape="rect" id="node4" title="A class whose instances are single test cases." alt="" coords="304,5,461,32"/>
+<area shape="rect" id="node1" href="astrowisp.background.html#astrowisp.background.BackgroundExtractor" target="_top" title="Measure the background level for each source in an image." alt="" coords="5,5,311,31"/>
+<area shape="rect" id="node2" href="#astrowisp.tests.test_background.TestAnnulusBackground" target="_top" title="Test background extraction based on annuli around sources." alt="" coords="223,152,615,177"/>
+<area shape="rect" id="node3" href="astrowisp.tests.utilities.html#astrowisp.tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="285,79,554,104"/>
+<area shape="rect" id="node4" title="A class whose instances are single test cases." alt="" coords="335,5,503,31"/>
 </map>

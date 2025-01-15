@@ -1,5 +1,0 @@
-<map id="inheritancee2739705f6" name="inheritancee2739705f6">
-<area shape="rect" id="node1" href="#astrowisp.fit_star_shape.FitStarShape" target="_top" title="Fit for the PSF/PRF of stars and their flux." alt="" coords="5,5,249,32"/>
-<area shape="rect" id="node2" href="astrowisp.io_tree.html#astrowisp.io_tree.IOTree" target="_top" title="Interface for extracting entries from an IO::H5IODataTree." alt="" coords="273,5,437,32"/>
-<area shape="rect" id="node9" title="All numbers inherit from this class." alt="" coords="1248,5,1369,32"/>
-</map>

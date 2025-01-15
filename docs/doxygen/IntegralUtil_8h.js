@@ -1,5 +1,5 @@
 var IntegralUtil_8h =
 [
-    [ "fill_powers", "IntegralUtil_8h.xhtml#ad7858c7f7d58338b683ab2fcfd17f617", null ],
-    [ "initialize_powers", "IntegralUtil_8h.xhtml#af205e1f3e8c5134af9edd693f91f59b3", null ]
+    [ "fill_powers", "IntegralUtil_8h.xhtml#a9bf6e11c7423b72f118dafb8d7efd4b8", null ],
+    [ "initialize_powers", "IntegralUtil_8h.xhtml#a3b6fb8c547eca013d8daedb3f3d6c6e8", null ]
 ];

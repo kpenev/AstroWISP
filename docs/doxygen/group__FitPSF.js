@@ -26,8 +26,6 @@ var group__FitPSF =
     [ "Source.h", "FitPSF_2Source_8h.xhtml", null ],
     [ "IntegralUtil.h", "IntegralUtil_8h.xhtml", null ],
     [ "MapSource.h", "MapSource_8h.xhtml", null ],
-    [ "Error", "namespaceError.xhtml", null ],
-    [ "Phot", "namespacePhot.xhtml", null ],
     [ "General", "classError_1_1General.xhtml", [
       [ "General", "classError_1_1General.xhtml#aef3db2581226ded5704214d8826f63fb", null ],
       [ "~General", "classError_1_1General.xhtml#a78eab72f4e3b5b513b9a0e8bb7449829", null ],

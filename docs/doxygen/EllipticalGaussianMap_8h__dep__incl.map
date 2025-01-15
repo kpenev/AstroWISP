@@ -1,6 +1,6 @@
-<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/EllipticalGaussianMap.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/EllipticalGaussianMap.h">
-<area shape="rect" id="node1" title="Declares a smoothly varying over an image elliptical Gaussian PSF map class." alt="" coords="143,5,378,68"/>
-<area shape="rect" id="node2" href="$DataTreeCalculations_8h.xhtml" title="Declare functions that calculate some entries of I/O data trees from others." alt="" coords="14,116,243,179"/>
-<area shape="rect" id="node4" href="$EllipticalGaussianMap_8cpp.xhtml" title="Definitions of some methods of the EllipticalGaussianMap class." alt="" coords="267,116,518,179"/>
-<area shape="rect" id="node3" href="$DataTreeCalculations_8cpp.xhtml" title="The definitions of the functions declared in DataTreeCalculations.h." alt="" coords="5,227,252,290"/>
+<map id="/home/kpenev/projects/git/AstroWISP/doc_src/PSF/EllipticalGaussianMap.h" name="/home/kpenev/projects/git/AstroWISP/doc_src/PSF/EllipticalGaussianMap.h">
+<area shape="rect" id="node1" title="Declares a smoothly varying over an image elliptical Gaussian PSF map class." alt="" coords="143,5,378,69"/>
+<area shape="rect" id="node2" href="$DataTreeCalculations_8h.xhtml" title="Declare functions that calculate some entries of I/O data trees from others." alt="" coords="13,117,244,181"/>
+<area shape="rect" id="node4" href="$EllipticalGaussianMap_8cpp.xhtml" title="Definitions of some methods of the EllipticalGaussianMap class." alt="" coords="268,117,520,181"/>
+<area shape="rect" id="node3" href="$DataTreeCalculations_8cpp.xhtml" title="The definitions of the functions declared in DataTreeCalculations.h." alt="" coords="5,229,252,293"/>
 </map>

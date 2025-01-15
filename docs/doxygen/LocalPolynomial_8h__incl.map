@@ -1,10 +1,10 @@
-<map id="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/LocalPolynomial.h" name="/Users/kpenev/projects/git/AstroWISP/doc_src/PSF/LocalPolynomial.h">
-<area shape="rect" id="node1" title="Defines a basic PSF based on local second order expansion." alt="" coords="92,5,285,68"/>
-<area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="5,270,225,316"/>
-<area shape="rect" id="node3" href="$PSF_8h.xhtml" title="Defines the base class of all PSF models." alt="" coords="230,116,296,145"/>
-<area shape="rect" id="node4" href="$Error_8h.xhtml" title="The hierarchy of exceptions for this project." alt="" coords="203,193,323,222"/>
-<area shape="rect" id="node7" title=" " alt="" coords="348,193,426,222"/>
-<area shape="rect" id="node8" title=" " alt="" coords="451,193,515,222"/>
-<area shape="rect" id="node5" title=" " alt="" coords="248,279,326,308"/>
-<area shape="rect" id="node6" title=" " alt="" coords="350,279,432,308"/>
+<map id="/home/kpenev/projects/git/AstroWISP/doc_src/PSF/LocalPolynomial.h" name="/home/kpenev/projects/git/AstroWISP/doc_src/PSF/LocalPolynomial.h">
+<area shape="rect" id="node1" title="Defines a basic PSF based on local second order expansion." alt="" coords="93,5,287,69"/>
+<area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="5,272,225,319"/>
+<area shape="rect" id="node3" href="$PSF_8h.xhtml" title="Defines the base class of all PSF models." alt="" coords="231,117,298,147"/>
+<area shape="rect" id="node4" href="$Error_8h.xhtml" title="The hierarchy of exceptions for this project." alt="" coords="204,195,325,224"/>
+<area shape="rect" id="node7" title=" " alt="" coords="349,195,428,224"/>
+<area shape="rect" id="node8" title=" " alt="" coords="452,195,517,224"/>
+<area shape="rect" id="node5" title=" " alt="" coords="249,281,328,310"/>
+<area shape="rect" id="node6" title=" " alt="" coords="353,281,435,310"/>
 </map>

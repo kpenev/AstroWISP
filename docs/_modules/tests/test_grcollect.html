@@ -1,25 +1,23 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>tests.test_grcollect &mdash; AstroWISP Python Interface  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/unlimited_width.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../_static/unlimited_width.css?v=eea1f72d" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -104,10 +102,14 @@
 <span class="n">_test_data_dir</span><span class="o">=</span><span class="s1">&#39;B:/Github/AstroWISP/PythonPackage/astrowisp/tests/test_data/&#39;</span>
 <span class="n">grcollect_path</span><span class="o">=</span><span class="s1">&#39;B:/fitsh-0.9.4-minimum/builddir/src/grcollect.exe&#39;</span>
 
-<div class="viewcode-block" id="TestGRCollect"><a class="viewcode-back" href="../../_unit_tests/tests.test_grcollect.html#tests.test_grcollect.TestGRCollect">[docs]</a><span class="k">class</span> <span class="nc">TestGRCollect</span><span class="p">(</span><span class="n">FloatTestCase</span><span class="p">):</span>
+<div class="viewcode-block" id="TestGRCollect">
+<a class="viewcode-back" href="../../_unit_tests/tests.test_grcollect.html#tests.test_grcollect.TestGRCollect">[docs]</a>
+<span class="k">class</span> <span class="nc">TestGRCollect</span><span class="p">(</span><span class="n">FloatTestCase</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Test cases for the grcollect executable.&quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="TestGRCollect.test_dataset"><a class="viewcode-back" href="../../_unit_tests/tests.test_grcollect.html#tests.test_grcollect.TestGRCollect.test_dataset">[docs]</a>    <span class="k">def</span> <span class="nf">test_dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="TestGRCollect.test_dataset">
+<a class="viewcode-back" href="../../_unit_tests/tests.test_grcollect.html#tests.test_grcollect.TestGRCollect.test_dataset">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Create dataset to test rejection outlier&quot;&quot;&quot;</span>
         <span class="c1"># parse_result = partial(read_csv, sep=r&#39;\s+&#39;, comment=&#39;#&#39;, header=None)</span>
 
@@ -319,7 +321,9 @@
         <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="mi">18</span><span class="o">-</span><span class="mi">8</span><span class="o">+</span><span class="mi">4</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="mi">18</span><span class="o">+</span><span class="mi">4</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="mi">18</span><span class="o">-</span><span class="mi">8</span><span class="o">+</span><span class="mi">4</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="mi">18</span><span class="o">+</span><span class="mi">4</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span></div></div>
+        <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="mi">18</span><span class="o">+</span><span class="mi">4</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="o">+</span><span class="mi">24</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span></div>
+</div>
+
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>

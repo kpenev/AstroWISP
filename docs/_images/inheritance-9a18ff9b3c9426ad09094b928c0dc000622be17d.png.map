@@ -1,5 +1,5 @@
 <map id="inheritance1030d2edc6" name="inheritance1030d2edc6">
-<area shape="rect" id="node1" href="#astrowisp.tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless" target="_top" title="Test piecewise bicubic PSF fitting on noiseless images." alt="" coords="5,155,489,181"/>
-<area shape="rect" id="node2" href="astrowisp.tests.utilities.html#astrowisp.tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="125,80,369,107"/>
-<area shape="rect" id="node3" title="A class whose instances are single test cases." alt="" coords="169,5,325,32"/>
+<area shape="rect" id="node1" href="#astrowisp.tests.test_fit_star_shape.noiseless_tests.TestFitStarShapeNoiseless" target="_top" title="Test piecewise bicubic PSF fitting on noiseless images." alt="" coords="5,152,532,177"/>
+<area shape="rect" id="node2" href="astrowisp.tests.utilities.html#astrowisp.tests.utilities.FloatTestCase" target="_top" title="Test case involving floating point comparisons." alt="" coords="134,79,403,104"/>
+<area shape="rect" id="node3" title="A class whose instances are single test cases." alt="" coords="185,5,353,31"/>
 </map>
