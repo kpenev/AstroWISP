@@ -1,12 +1,12 @@
 <map id="/home/kpenev/projects/git/AstroWISP/doc_src/Core/Flux.h" name="/home/kpenev/projects/git/AstroWISP/doc_src/Core/Flux.h">
 <area shape="rect" id="node1" title="Declare a class for flux measurements." alt="" coords="69,5,255,69"/>
-<area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="5,272,225,319"/>
-<area shape="rect" id="node3" href="$Core_2Typedefs_8h.xhtml" title="Some useful typedef statements." alt="" coords="269,117,369,147"/>
+<area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.html" title=" " alt="" coords="5,272,225,319"/>
+<area shape="rect" id="node3" href="$Core_2Typedefs_8h.html" title="Some useful typedef statements." alt="" coords="269,117,369,147"/>
 <area shape="rect" id="node4" title=" " alt="" coords="449,281,515,310"/>
 <area shape="rect" id="node5" title=" " alt="" coords="153,195,195,224"/>
 <area shape="rect" id="node6" title=" " alt="" coords="645,281,706,310"/>
 <area shape="rect" id="node7" title=" " alt="" coords="220,195,299,224"/>
-<area shape="rect" id="node8" href="$PhotColumns_8h.xhtml" title="Defines constants to denote the various columns that can be input or output by the various tools and ..." alt="" coords="513,195,645,224"/>
+<area shape="rect" id="node8" href="$PhotColumns_8h.html" title="Defines constants to denote the various columns that can be input or output by the various tools and ..." alt="" coords="513,195,645,224"/>
 <area shape="rect" id="node10" title=" " alt="" coords="323,195,438,224"/>
 <area shape="rect" id="node9" title=" " alt="" coords="547,281,612,310"/>
 </map>

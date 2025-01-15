@@ -1,10 +1,10 @@
 <map id="/home/kpenev/projects/git/AstroWISP/doc_src/IO/CommandLineUtil.cpp" name="/home/kpenev/projects/git/AstroWISP/doc_src/IO/CommandLineUtil.cpp">
 <area shape="rect" id="node1" title="Implementation of tilities for command line parsing common to all tools." alt="" coords="403,5,609,69"/>
-<area shape="rect" id="node2" href="$IO_2CommandLineUtil_8h.xhtml" title="Declarations of utilities for command line parsing of IO related options." alt="" coords="424,117,588,147"/>
-<area shape="rect" id="node3" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="216,272,436,319"/>
-<area shape="rect" id="node4" href="$Error_8h.xhtml" title="The hierarchy of exceptions for this project." alt="" coords="128,195,249,224"/>
+<area shape="rect" id="node2" href="$IO_2CommandLineUtil_8h.html" title="Declarations of utilities for command line parsing of IO related options." alt="" coords="424,117,588,147"/>
+<area shape="rect" id="node3" href="$SharedLibraryExportMacros_8h_source.html" title=" " alt="" coords="216,272,436,319"/>
+<area shape="rect" id="node4" href="$Error_8h.html" title="The hierarchy of exceptions for this project." alt="" coords="128,195,249,224"/>
 <area shape="rect" id="node5" title=" " alt="" coords="5,281,84,310"/>
-<area shape="rect" id="node7" href="$PhotColumns_8h.xhtml" title="Defines constants to denote the various columns that can be input or output by the various tools and ..." alt="" coords="415,195,597,224"/>
+<area shape="rect" id="node7" href="$PhotColumns_8h.html" title="Defines constants to denote the various columns that can be input or output by the various tools and ..." alt="" coords="415,195,597,224"/>
 <area shape="rect" id="node8" title=" " alt="" coords="460,281,525,310"/>
 <area shape="rect" id="node10" title=" " alt="" coords="639,281,701,310"/>
 <area shape="rect" id="node11" title=" " alt="" coords="673,195,889,224"/>

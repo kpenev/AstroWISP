@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['verbatim_964',['verbatim',['../namespaceverbatim.xhtml',1,'']]]
+  ['verbatim_964',['verbatim',['../namespaceverbatim.html',1,'']]]
 ];

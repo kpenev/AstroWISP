@@ -1,18 +1,18 @@
 <map id="FitPSF::LinearSource" name="FitPSF::LinearSource">
-<area shape="rect" id="node1" title="A class for PSF fitting sources whose flux distribution depends linearly on the PSF paramaters (for a..." alt="" coords="35,4333,256,4817"/>
-<area shape="rect" id="node2" href="$classFitPSF_1_1OverlapSource.xhtml" title=" " alt="" coords="137,3644,359,4284"/>
-<area shape="rect" id="node3" href="$classFitPSF_1_1Source.xhtml" title="An abstract base class for sources which participate in PSF fitting." alt="" coords="239,2301,473,2872"/>
-<area shape="rect" id="node14" href="$classFitPSF_1_1OverlapSource.xhtml" title="PSF fitting source which handles overlaps with other sources." alt="" coords="263,2921,494,3561"/>
-<area shape="rect" id="node4" href="$classPSF_1_1MapSource.xhtml" title="Class for evaluating a collection of smooth dependencies for a collection of sources." alt="" coords="461,1866,632,2003"/>
-<area shape="rect" id="node5" href="$classCore_1_1Source.xhtml" title="A base class for all sources in AstroWISP." alt="" coords="441,1272,623,1548"/>
-<area shape="rect" id="node6" href="$classCore_1_1SourceLocation.xhtml" title="The minimum requirements for objects specifying where a source is." alt="" coords="633,792,810,947"/>
-<area shape="rect" id="node7" href="$classCore_1_1Point.xhtml" title=" " alt="" coords="498,364,675,536"/>
-<area shape="rect" id="node8" href="$classCore_1_1Point.xhtml" title="Representing a 2D point with real valued cartesian coordinates." alt="" coords="499,5,674,195"/>
-<area shape="rect" id="node9" href="$classCore_1_1SourceID.xhtml" title="The two components of the HAT i.d. (primary filed and source number)" alt="" coords="699,260,861,640"/>
-<area shape="rect" id="node10" href="$classPSF_1_1PSF.xhtml" title="An abstract parent class for all PSF models." alt="" coords="162,740,406,999"/>
-<area shape="rect" id="node16" href="$classPSF_1_1Piecewise.xhtml" title="A PSF model consisting of a grid of rectangles each with a separate intensity function." alt="" coords="106,1099,313,1721"/>
-<area shape="rect" id="node11" href="$classBackground_1_1Source.xhtml" title="The base class for the backgnound under a source." alt="" coords="442,705,609,1033"/>
-<area shape="rect" id="node12" href="$classCore_1_1Flux.xhtml" title="A class representing the flux measurement for a source, including an error estimate and a flag." alt="" coords="155,1823,251,2047"/>
-<area shape="rect" id="node13" href="$classCore_1_1SubPixelMap.xhtml" title="The base class for all sub&#45;pixel maps." alt="" coords="275,1771,437,2099"/>
-<area shape="rect" id="node15" href="$classPSF_1_1PiecewiseBicubic.xhtml" title="A Piecewise defined as a bicubic interpolation over a grid, where at each grid point the value,..." alt="" coords="5,2123,195,2277"/>
+<area shape="rect" id="node1" title="A class for PSF fitting sources whose flux distribution depends linearly on the PSF paramaters (for a..." alt="" coords="91,9655,419,11335"/>
+<area shape="rect" id="node2" href="$classFitPSF_1_1OverlapSource.html" title=" " alt="" coords="235,7960,554,9605"/>
+<area shape="rect" id="node3" href="$classFitPSF_1_1Source.html" title="An abstract base class for sources which participate in PSF fitting." alt="" coords="445,5057,725,6131"/>
+<area shape="rect" id="node14" href="$classFitPSF_1_1OverlapSource.html" title="PSF fitting source which handles overlaps with other sources." alt="" coords="431,6180,740,7877"/>
+<area shape="rect" id="node4" href="$classPSF_1_1MapSource.html" title="Class for evaluating a collection of smooth dependencies for a collection of sources." alt="" coords="728,4258,971,4517"/>
+<area shape="rect" id="node5" href="$classCore_1_1Source.html" title="A base class for all sources in AstroWISP." alt="" coords="639,2667,897,3221"/>
+<area shape="rect" id="node6" href="$classCore_1_1SourceLocation.html" title="The minimum requirements for objects specifying where a source is." alt="" coords="831,1243,1033,1501"/>
+<area shape="rect" id="node7" href="$classCore_1_1Point.html" title=" " alt="" coords="675,494,853,683"/>
+<area shape="rect" id="node8" href="$classCore_1_1Point.html" title="Representing a 2D point with real valued cartesian coordinates." alt="" coords="659,5,869,212"/>
+<area shape="rect" id="node9" href="$classCore_1_1SourceID.html" title="The two components of the HAT i.d. (primary filed and source number)" alt="" coords="877,277,1128,900"/>
+<area shape="rect" id="node10" href="$classPSF_1_1PSF.html" title="An abstract parent class for all PSF models." alt="" coords="265,965,525,1779"/>
+<area shape="rect" id="node16" href="$classPSF_1_1Piecewise.html" title="A PSF model consisting of a grid of rectangles each with a separate intensity function." alt="" coords="181,1844,534,4044"/>
+<area shape="rect" id="node11" href="$classBackground_1_1Source.html" title="The base class for the backgnound under a source." alt="" coords="556,1191,807,1553"/>
+<area shape="rect" id="node12" href="$classCore_1_1Flux.html" title="A class representing the flux measurement for a source, including an error estimate and a flag." alt="" coords="238,4223,442,4551"/>
+<area shape="rect" id="node13" href="$classCore_1_1SubPixelMap.html" title="The base class for all sub&#45;pixel maps." alt="" coords="467,4093,704,4681"/>
+<area shape="rect" id="node15" href="$classPSF_1_1PiecewiseBicubic.html" title="A Piecewise defined as a bicubic interpolation over a grid, where at each grid point the value,..." alt="" coords="5,4705,389,5033"/>
 </map>

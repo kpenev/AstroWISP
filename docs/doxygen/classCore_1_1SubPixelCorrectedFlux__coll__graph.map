@@ -1,5 +1,5 @@
 <map id="Core::SubPixelCorrectedFlux&lt; SUBPIX_TYPE &gt;" name="Core::SubPixelCorrectedFlux&lt; SUBPIX_TYPE &gt;">
-<area shape="rect" id="node1" title="A class to do fixed aperture photometry, corrected for variable sensitivity of different parts of a p..." alt="" coords="5,896,236,1363"/>
-<area shape="rect" id="node2" href="$classCore_1_1Image.xhtml" title=" " alt="" coords="29,451,213,831"/>
-<area shape="rect" id="node3" href="$classCore_1_1Image.xhtml" title="Declare the minimum functionality expected from input images." alt="" coords="7,5,235,385"/>
+<area shape="rect" id="node1" title="A class to do fixed aperture photometry, corrected for variable sensitivity of different parts of a p..." alt="" coords="12,1745,311,3027"/>
+<area shape="rect" id="node2" href="$classCore_1_1Image.html" title=" " alt="" coords="5,884,317,1680"/>
+<area shape="rect" id="node3" href="$classCore_1_1Image.html" title="Declare the minimum functionality expected from input images." alt="" coords="24,5,299,819"/>
 </map>

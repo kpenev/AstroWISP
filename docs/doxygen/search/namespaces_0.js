@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['error_962',['Error',['../namespaceError.xhtml',1,'']]]
+  ['error_962',['Error',['../namespaceError.html',1,'']]]
 ];

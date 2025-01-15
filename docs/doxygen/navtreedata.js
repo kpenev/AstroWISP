@@ -24,47 +24,48 @@
 */
 var NAVTREE =
 [
-  [ "Sub-Pixel Photometry", "index.xhtml", [
-    [ "SubPixPhot", "SubPixPhot_main_page.xhtml", null ],
-    [ "FitSubpix", "FitSubpix_main_page.xhtml", null ],
-    [ "Outpu File Formats", "hdf5fileformat_main_page.xhtml", null ],
-    [ "FitPSF", "FitPSF_main_page.xhtml", [
-      [ "Piecewise Bicubic PSF model", "PiecewiseBicubicFitPSF_main_page.xhtml", null ]
+  [ "My Project", "index.html", [
+    [ "Sub-Pixel Photometry", "index.html", null ],
+    [ "SubPixPhot", "SubPixPhot_main_page.html", null ],
+    [ "FitSubpix", "FitSubpix_main_page.html", null ],
+    [ "Outpu File Formats", "hdf5fileformat_main_page.html", null ],
+    [ "FitPSF", "FitPSF_main_page.html", [
+      [ "Piecewise Bicubic PSF model", "PiecewiseBicubicFitPSF_main_page.html", null ]
     ] ],
-    [ "Implementation Documentation", "usergroup0.xhtml", [
-      [ "PSF integrals", "usergroup1.xhtml", [
-        [ "Analytical expressions", "PSF_integrals_page.xhtml", null ],
-        [ "Implementation", "PSF_integrals_implementation_page.xhtml", null ]
+    [ "Implementation Documentation", "usergroup0.html", [
+      [ "PSF integrals", "usergroup1.html", [
+        [ "Analytical expressions", "PSF_integrals_page.html", null ],
+        [ "Implementation", "PSF_integrals_implementation_page.html", null ]
       ] ],
-      [ "Tools", "modules.xhtml", "modules" ],
-      [ "Namespace List", "namespaces.xhtml", [
-        [ "Namespace List", "namespaces.xhtml", "namespaces_dup" ],
-        [ "Namespace Members", "namespacemembers.xhtml", [
-          [ "All", "namespacemembers.xhtml", null ],
-          [ "Variables", "namespacemembers_vars.xhtml", null ],
-          [ "Enumerations", "namespacemembers_enum.xhtml", null ],
-          [ "Enumerator", "namespacemembers_eval.xhtml", null ]
+      [ "Tools", "modules.html", "modules" ],
+      [ "Namespace List", "namespaces.html", [
+        [ "Namespace List", "namespaces.html", "namespaces_dup" ],
+        [ "Namespace Members", "namespacemembers.html", [
+          [ "All", "namespacemembers.html", null ],
+          [ "Variables", "namespacemembers_vars.html", null ],
+          [ "Enumerations", "namespacemembers_enum.html", null ],
+          [ "Enumerator", "namespacemembers_eval.html", null ]
         ] ]
       ] ],
-      [ "Class List", "annotated.xhtml", [
-        [ "Class List", "annotated.xhtml", "annotated_dup" ],
-        [ "Class Index", "classes.xhtml", null ],
-        [ "Class Hierarchy", "hierarchy.xhtml", "hierarchy" ],
-        [ "Class Members", "functions.xhtml", [
-          [ "All", "functions.xhtml", "functions_dup" ],
-          [ "Functions", "functions_func.xhtml", "functions_func" ],
-          [ "Variables", "functions_vars.xhtml", "functions_vars" ],
-          [ "Typedefs", "functions_type.xhtml", null ],
-          [ "Enumerations", "functions_enum.xhtml", null ],
-          [ "Related Functions", "functions_rela.xhtml", null ]
+      [ "Class List", "annotated.html", [
+        [ "Class List", "annotated.html", "annotated_dup" ],
+        [ "Class Index", "classes.html", null ],
+        [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
+        [ "Class Members", "functions.html", [
+          [ "All", "functions.html", "functions_dup" ],
+          [ "Functions", "functions_func.html", "functions_func" ],
+          [ "Variables", "functions_vars.html", "functions_vars" ],
+          [ "Typedefs", "functions_type.html", null ],
+          [ "Enumerations", "functions_enum.html", null ],
+          [ "Related Functions", "functions_rela.html", null ]
         ] ]
       ] ],
-      [ "File List", "files.xhtml", [
-        [ "File List", "files.xhtml", "files_dup" ],
-        [ "File Members", "globals.xhtml", [
-          [ "All", "globals.xhtml", null ],
-          [ "Functions", "globals_func.xhtml", null ],
-          [ "Variables", "globals_vars.xhtml", null ]
+      [ "File List", "files.html", [
+        [ "File List", "files.html", "files_dup" ],
+        [ "File Members", "globals.html", [
+          [ "All", "globals.html", null ],
+          [ "Functions", "globals_func.html", null ],
+          [ "Variables", "globals_vars.html", null ]
         ] ]
       ] ]
     ] ]
@@ -73,14 +74,14 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"AmplitudeSaturatedPixel_8h.xhtml",
-"FitPSF_2PiecewiseBicubic_8h.xhtml#a9d074040a6210284336f76232fa5526c",
-"PiecewiseBicubicCell_8h.xhtml",
-"classCore_1_1FluxPair.xhtml#ad906d877f22aa31744b9f1081fc7a290",
-"classError_1_1InvalidArgument.xhtml#a5626ee6ca7eea675fd840d0c418afe03",
-"classFitPSF_1_1Pixel.xhtml#afa57db75c4fae27060e120c3a3ab1c47",
-"classPSF_1_1EllipticalGaussianIntegralByOrder.xhtml#ade8981af1dcfe24d5b85a69fc8c5b01f",
-"classSubPixPhot_1_1SourceInput.xhtml#a3e6eed2a9893ac8e85a8c4a49e52bd2f"
+"AmplitudeSaturatedPixel_8h.html",
+"FitPSF_2PiecewiseBicubic_8h.html#a9d074040a6210284336f76232fa5526c",
+"PiecewiseBicubicCell_8h.html",
+"classCore_1_1FluxPair.html#ad906d877f22aa31744b9f1081fc7a290",
+"classError_1_1InvalidArgument.html#a5626ee6ca7eea675fd840d0c418afe03",
+"classFitPSF_1_1Pixel.html#afa57db75c4fae27060e120c3a3ab1c47",
+"classPSF_1_1EllipticalGaussianIntegralByOrder.html#ade8981af1dcfe24d5b85a69fc8c5b01f",
+"classSubPixPhot_1_1SourceInput.html#a3e6eed2a9893ac8e85a8c4a49e52bd2f"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -1,12 +1,12 @@
 <map id="Error::Runtime" name="Error::Runtime">
-<area shape="rect" id="node1" title="The parent of all run&#45;time errors." alt="" coords="468,341,593,444"/>
-<area shape="rect" id="node4" href="$classError_1_1CommandLine.xhtml" title="Error while parsing the command line." alt="" coords="5,501,176,603"/>
-<area shape="rect" id="node5" href="$classError_1_1Fitting.xhtml" title=" " alt="" coords="200,501,309,603"/>
-<area shape="rect" id="node6" href="$classError_1_1GSLError.xhtml" title="Error in a GNU Scientific Library function." alt="" coords="334,501,466,603"/>
-<area shape="rect" id="node7" href="$classError_1_1IO.xhtml" title="Input/Output error." alt="" coords="490,501,571,603"/>
-<area shape="rect" id="node8" href="$classError_1_1InvalidArgument.xhtml" title="A function (or method) received an argument with an invalid value." alt="" coords="596,492,777,612"/>
-<area shape="rect" id="node9" href="$classError_1_1ParsingError.xhtml" title="Error while parsing the configuration." alt="" coords="801,501,956,603"/>
-<area shape="rect" id="node10" href="$classError_1_1Type.xhtml" title="The type of something was not what was expected." alt="" coords="981,501,1081,603"/>
-<area shape="rect" id="node2" href="$classError_1_1General.xhtml" title="The parent of all errors raised anywhere in the code." alt="" coords="460,139,601,293"/>
-<area shape="rect" id="node3" title=" " alt="" coords="471,5,591,91"/>
+<area shape="rect" id="node1" title="The parent of all run&#45;time errors." alt="" coords="672,428,889,565"/>
+<area shape="rect" id="node4" href="$classError_1_1CommandLine.html" title="Error while parsing the command line." alt="" coords="5,639,188,794"/>
+<area shape="rect" id="node5" href="$classError_1_1Fitting.html" title=" " alt="" coords="212,648,429,785"/>
+<area shape="rect" id="node6" href="$classError_1_1GSLError.html" title="Error in a GNU Scientific Library function." alt="" coords="453,648,671,785"/>
+<area shape="rect" id="node7" href="$classError_1_1IO.html" title="Input/Output error." alt="" coords="695,648,866,785"/>
+<area shape="rect" id="node8" href="$classError_1_1InvalidArgument.html" title="A function (or method) received an argument with an invalid value." alt="" coords="890,613,1109,820"/>
+<area shape="rect" id="node9" href="$classError_1_1ParsingError.html" title="Error while parsing the configuration." alt="" coords="1133,639,1301,794"/>
+<area shape="rect" id="node10" href="$classError_1_1Type.html" title="The type of something was not what was expected." alt="" coords="1325,648,1511,785"/>
+<area shape="rect" id="node2" href="$classError_1_1General.html" title="The parent of all errors raised anywhere in the code." alt="" coords="672,139,889,380"/>
+<area shape="rect" id="node3" title=" " alt="" coords="721,5,841,91"/>
 </map>

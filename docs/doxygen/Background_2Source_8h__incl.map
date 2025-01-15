@@ -1,13 +1,13 @@
 <map id="/home/kpenev/projects/git/AstroWISP/doc_src/Background/Source.h" name="/home/kpenev/projects/git/AstroWISP/doc_src/Background/Source.h">
 <area shape="rect" id="node1" title="Declares the base class for background extract(ion/ed) from an astronomical image." alt="" coords="335,5,520,69"/>
-<area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="203,349,423,396"/>
-<area shape="rect" id="node3" href="$Core_2Image_8h.xhtml" title="Declares a base class for images to be processed." alt="" coords="277,117,408,147"/>
+<area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.html" title=" " alt="" coords="203,349,423,396"/>
+<area shape="rect" id="node3" href="$Core_2Image_8h.html" title="Declares a base class for images to be processed." alt="" coords="277,117,408,147"/>
 <area shape="rect" id="node6" title=" " alt="" coords="928,272,970,301"/>
-<area shape="rect" id="node18" href="$Point_8h.xhtml" title="Defines a point class in two dimensions." alt="" coords="70,117,193,147"/>
-<area shape="rect" id="node19" href="$NaN_8h.xhtml" title="Defines not&#45;a&#45;number and infinity." alt="" coords="455,117,574,147"/>
+<area shape="rect" id="node18" href="$Point_8h.html" title="Defines a point class in two dimensions." alt="" coords="70,117,193,147"/>
+<area shape="rect" id="node19" href="$NaN_8h.html" title="Defines not&#45;a&#45;number and infinity." alt="" coords="455,117,574,147"/>
 <area shape="rect" id="node20" title=" " alt="" coords="677,195,736,224"/>
-<area shape="rect" id="node4" href="$Core_2Typedefs_8h.xhtml" title="Some useful typedef statements." alt="" coords="554,195,654,224"/>
-<area shape="rect" id="node12" href="$Error_8h.xhtml" title="The hierarchy of exceptions for this project." alt="" coords="116,195,187,224"/>
+<area shape="rect" id="node4" href="$Core_2Typedefs_8h.html" title="Some useful typedef statements." alt="" coords="554,195,654,224"/>
+<area shape="rect" id="node12" href="$Error_8h.html" title="The hierarchy of exceptions for this project." alt="" coords="116,195,187,224"/>
 <area shape="rect" id="node14" title=" " alt="" coords="64,272,146,301"/>
 <area shape="rect" id="node15" title=" " alt="" coords="403,195,476,224"/>
 <area shape="rect" id="node16" title=" " alt="" coords="212,195,281,224"/>
@@ -15,7 +15,7 @@
 <area shape="rect" id="node5" title=" " alt="" coords="656,358,722,387"/>
 <area shape="rect" id="node7" title=" " alt="" coords="852,358,913,387"/>
 <area shape="rect" id="node8" title=" " alt="" coords="566,272,644,301"/>
-<area shape="rect" id="node9" href="$PhotColumns_8h.xhtml" title="Defines constants to denote the various columns that can be input or output by the various tools and ..." alt="" coords="720,272,852,301"/>
+<area shape="rect" id="node9" href="$PhotColumns_8h.html" title="Defines constants to denote the various columns that can be input or output by the various tools and ..." alt="" coords="720,272,852,301"/>
 <area shape="rect" id="node11" title=" " alt="" coords="426,272,541,301"/>
 <area shape="rect" id="node10" title=" " alt="" coords="754,358,819,387"/>
 <area shape="rect" id="node13" title=" " alt="" coords="171,272,250,301"/>

@@ -1,4 +1,4 @@
 <map id="PSF::Piecewise" name="PSF::Piecewise">
-<area shape="rect" id="node1" title="A PSF model consisting of a grid of rectangles each with a separate intensity function." alt="" coords="24,312,231,935"/>
-<area shape="rect" id="node2" href="$classPSF_1_1PSF.xhtml" title="An abstract parent class for all PSF models." alt="" coords="5,5,249,264"/>
+<area shape="rect" id="node1" title="A PSF model consisting of a grid of rectangles each with a separate intensity function." alt="" coords="5,867,359,3067"/>
+<area shape="rect" id="node2" href="$classPSF_1_1PSF.html" title="An abstract parent class for all PSF models." alt="" coords="52,5,312,819"/>
 </map>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['visualizepsfmapconfig_959',['VisualizePSFMapConfig',['../classVisualizePSFMapConfig.xhtml',1,'']]]
+  ['visualizepsfmapconfig_959',['VisualizePSFMapConfig',['../classVisualizePSFMapConfig.html',1,'']]]
 ];

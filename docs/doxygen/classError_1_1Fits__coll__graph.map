@@ -1,5 +1,5 @@
 <map id="Error::Fits" name="Error::Fits">
-<area shape="rect" id="node1" title="The parent of all fits library related errors." alt="" coords="31,341,121,444"/>
-<area shape="rect" id="node2" href="$classError_1_1General.xhtml" title="The parent of all errors raised anywhere in the code." alt="" coords="5,139,147,293"/>
-<area shape="rect" id="node3" title=" " alt="" coords="16,5,136,91"/>
+<area shape="rect" id="node1" title="The parent of all fits library related errors." alt="" coords="26,428,202,565"/>
+<area shape="rect" id="node2" href="$classError_1_1General.html" title="The parent of all errors raised anywhere in the code." alt="" coords="5,139,223,380"/>
+<area shape="rect" id="node3" title=" " alt="" coords="54,5,174,91"/>
 </map>

@@ -1,7 +1,7 @@
 <map id="/home/kpenev/projects/git/AstroWISP/doc_src/FitPSF/LinearSource.h" name="/home/kpenev/projects/git/AstroWISP/doc_src/FitPSF/LinearSource.h">
 <area shape="rect" id="node1" title="Declares a class used for PSF fitting where pixel responses are linear functions of the shape paramet..." alt="" coords="113,5,302,69"/>
-<area shape="rect" id="node2" href="$FitPSF_2CInterface_8cpp.xhtml" title="Define the C&#45;interface functions for the FitPSF library." alt="" coords="44,341,230,405"/>
-<area shape="rect" id="node3" href="$LinearSource_8cpp.xhtml" title="Define some of the methods of LinearSource class." alt="" coords="34,117,240,181"/>
-<area shape="rect" id="node4" href="$FitPSF_2PiecewiseBicubic_8h.xhtml" title="The declarations of the functions related to fitting piecewise bicubic PSFs." alt="" coords="168,229,388,293"/>
-<area shape="rect" id="node5" href="$PiecewiseBicubicPSFSmoothing_8h_source.xhtml" title=" " alt="" coords="316,117,646,181"/>
+<area shape="rect" id="node2" href="$FitPSF_2CInterface_8cpp.html" title="Define the C&#45;interface functions for the FitPSF library." alt="" coords="44,341,230,405"/>
+<area shape="rect" id="node3" href="$LinearSource_8cpp.html" title="Define some of the methods of LinearSource class." alt="" coords="34,117,240,181"/>
+<area shape="rect" id="node4" href="$FitPSF_2PiecewiseBicubic_8h.html" title="The declarations of the functions related to fitting piecewise bicubic PSFs." alt="" coords="168,229,388,293"/>
+<area shape="rect" id="node5" href="$PiecewiseBicubicPSFSmoothing_8h_source.html" title=" " alt="" coords="316,117,646,181"/>
 </map>

@@ -1,4 +1,4 @@
 <map id="PSF::EllipticalGaussianIntegralWedge" name="PSF::EllipticalGaussianIntegralWedge">
-<area shape="rect" id="node1" title="Calculates integrals of an elliptical gaussion over a wedge of a circle." alt="" coords="5,589,249,796"/>
-<area shape="rect" id="node2" href="$classPSF_1_1EllipticalGaussianIntegralByOrder.xhtml" title="Elliptical gaussian integrals refined by incrementing the expansion order." alt="" coords="5,5,249,541"/>
+<area shape="rect" id="node1" title="Calculates integrals of an elliptical gaussion over a wedge of a circle." alt="" coords="6,1023,250,1403"/>
+<area shape="rect" id="node2" href="$classPSF_1_1EllipticalGaussianIntegralByOrder.html" title="Elliptical gaussian integrals refined by incrementing the expansion order." alt="" coords="5,5,251,975"/>
 </map>

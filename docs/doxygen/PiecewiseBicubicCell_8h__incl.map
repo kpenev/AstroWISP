@@ -1,18 +1,18 @@
 <map id="/home/kpenev/projects/git/AstroWISP/doc_src/PSF/PiecewiseBicubicCell.h" name="/home/kpenev/projects/git/AstroWISP/doc_src/PSF/PiecewiseBicubicCell.h">
 <area shape="rect" id="node1" title="Defines a PSF cell with intensity given by a bi&#45;cubic polynomial." alt="" coords="285,5,515,69"/>
-<area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="198,427,418,473"/>
-<area shape="rect" id="node3" href="$PiecewiseCell_8h.xhtml" title="Defines a base class for the cells comprising a Piecewise." alt="" coords="93,272,232,301"/>
+<area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.html" title=" " alt="" coords="198,427,418,473"/>
+<area shape="rect" id="node3" href="$PiecewiseCell_8h.html" title="Defines a base class for the cells comprising a Piecewise." alt="" coords="93,272,232,301"/>
 <area shape="rect" id="node5" title=" " alt="" coords="123,349,202,379"/>
-<area shape="rect" id="node6" href="$CirclePieceIntegral_8h.xhtml" title="Declares a class that calculates x^my^n integrals over circle pieces." alt="" coords="521,117,692,147"/>
-<area shape="rect" id="node8" href="$Core_2Typedefs_8h.xhtml" title="Some useful typedef statements." alt="" coords="670,272,821,301"/>
+<area shape="rect" id="node6" href="$CirclePieceIntegral_8h.html" title="Declares a class that calculates x^my^n integrals over circle pieces." alt="" coords="521,117,692,147"/>
+<area shape="rect" id="node8" href="$Core_2Typedefs_8h.html" title="Some useful typedef statements." alt="" coords="670,272,821,301"/>
 <area shape="rect" id="node17" title=" " alt="" coords="857,195,930,224"/>
 <area shape="rect" id="node4" title=" " alt="" coords="442,435,507,465"/>
-<area shape="rect" id="node7" href="$IntegralUtil_8h.xhtml" title="Useful functions for calculating PSF integrals." alt="" coords="669,195,781,224"/>
+<area shape="rect" id="node7" href="$IntegralUtil_8h.html" title="Useful functions for calculating PSF integrals." alt="" coords="669,195,781,224"/>
 <area shape="rect" id="node9" title=" " alt="" coords="950,435,1015,465"/>
-<area shape="rect" id="node14" href="$Error_8h.xhtml" title="The hierarchy of exceptions for this project." alt="" coords="379,195,501,224"/>
+<area shape="rect" id="node14" href="$Error_8h.html" title="The hierarchy of exceptions for this project." alt="" coords="379,195,501,224"/>
 <area shape="rect" id="node10" title=" " alt="" coords="877,349,920,379"/>
 <area shape="rect" id="node11" title=" " alt="" coords="688,435,749,465"/>
-<area shape="rect" id="node12" href="$PhotColumns_8h.xhtml" title="Defines constants to denote the various columns that can be input or output by the various tools and ..." alt="" coords="531,349,663,379"/>
+<area shape="rect" id="node12" href="$PhotColumns_8h.html" title="Defines constants to denote the various columns that can be input or output by the various tools and ..." alt="" coords="531,349,663,379"/>
 <area shape="rect" id="node13" title=" " alt="" coords="688,349,803,379"/>
 <area shape="rect" id="node15" title=" " alt="" coords="358,272,437,301"/>
 <area shape="rect" id="node16" title=" " alt="" coords="461,272,544,301"/>

@@ -1,17 +1,17 @@
 <map id="/home/kpenev/projects/git/AstroWISP/doc_src/Core/Image.h" name="/home/kpenev/projects/git/AstroWISP/doc_src/Core/Image.h">
 <area shape="rect" id="node1" title="Declares a base class for images to be processed." alt="" coords="485,5,670,69"/>
-<area shape="rect" id="node2" href="$Core_2Typedefs_8h.xhtml" title="Some useful typedef statements." alt="" coords="473,117,573,147"/>
-<area shape="rect" id="node11" href="$Error_8h.xhtml" title="The hierarchy of exceptions for this project." alt="" coords="147,117,218,147"/>
+<area shape="rect" id="node2" href="$Core_2Typedefs_8h.html" title="Some useful typedef statements." alt="" coords="473,117,573,147"/>
+<area shape="rect" id="node11" href="$Error_8h.html" title="The hierarchy of exceptions for this project." alt="" coords="147,117,218,147"/>
 <area shape="rect" id="node13" title=" " alt="" coords="5,195,88,224"/>
 <area shape="rect" id="node14" title=" " alt="" coords="597,117,670,147"/>
 <area shape="rect" id="node15" title=" " alt="" coords="695,117,764,147"/>
 <area shape="rect" id="node16" title=" " alt="" coords="789,117,862,147"/>
-<area shape="rect" id="node3" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="251,272,471,319"/>
+<area shape="rect" id="node3" href="$SharedLibraryExportMacros_8h_source.html" title=" " alt="" coords="251,272,471,319"/>
 <area shape="rect" id="node4" title=" " alt="" coords="705,281,770,310"/>
 <area shape="rect" id="node5" title=" " alt="" coords="613,195,656,224"/>
 <area shape="rect" id="node6" title=" " alt="" coords="608,281,669,310"/>
 <area shape="rect" id="node7" title=" " alt="" coords="782,195,861,224"/>
-<area shape="rect" id="node8" href="$PhotColumns_8h.xhtml" title="Defines constants to denote the various columns that can be input or output by the various tools and ..." alt="" coords="457,195,589,224"/>
+<area shape="rect" id="node8" href="$PhotColumns_8h.html" title="Defines constants to denote the various columns that can be input or output by the various tools and ..." alt="" coords="457,195,589,224"/>
 <area shape="rect" id="node10" title=" " alt="" coords="267,195,381,224"/>
 <area shape="rect" id="node9" title=" " alt="" coords="495,281,561,310"/>
 <area shape="rect" id="node12" title=" " alt="" coords="163,195,242,224"/>

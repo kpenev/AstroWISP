@@ -1,14 +1,14 @@
 <map id="PSF::MapSource" name="PSF::MapSource">
-<area shape="rect" id="node1" title="Class for evaluating a collection of smooth dependencies for a collection of sources." alt="" coords="19,1045,190,1183"/>
-<area shape="rect" id="node6" href="$classFitPSF_1_1Source.xhtml" title=" " alt="" coords="5,1920,239,2525"/>
-<area shape="rect" id="node9" href="$classFitPSF_1_1Source.xhtml" title="An abstract base class for sources which participate in PSF fitting." alt="" coords="181,1232,415,1837"/>
-<area shape="rect" id="node2" href="$classCore_1_1Source.xhtml" title="A base class for all sources in AstroWISP." alt="" coords="13,685,196,996"/>
-<area shape="rect" id="node3" href="$classCore_1_1SourceLocation.xhtml" title="The minimum requirements for objects specifying where a source is." alt="" coords="16,481,193,636"/>
-<area shape="rect" id="node4" href="$classCore_1_1Point.xhtml" title=" " alt="" coords="16,260,193,432"/>
-<area shape="rect" id="node5" href="$classCore_1_1Point.xhtml" title="Representing a 2D point with real valued cartesian coordinates." alt="" coords="17,5,192,195"/>
-<area shape="rect" id="node7" href="$classFitPSF_1_1SDKSourceBase.xhtml" title="An abstract class that defines the minimum requirements of a source to participate in the fitting for..." alt="" coords="15,2755,229,3135"/>
-<area shape="rect" id="node8" href="$classFitPSF_1_1SDKSource.xhtml" title="A PSF fitting source class based on a LocalPolynomialPSF." alt="" coords="23,3462,221,3669"/>
-<area shape="rect" id="node10" href="$classFitPSF_1_1OverlapSource.xhtml" title=" " alt="" coords="270,2625,491,3265"/>
-<area shape="rect" id="node12" href="$classFitPSF_1_1OverlapSource.xhtml" title="PSF fitting source which handles overlaps with other sources." alt="" coords="391,1903,621,2543"/>
-<area shape="rect" id="node11" href="$classFitPSF_1_1LinearSource.xhtml" title="A class for PSF fitting sources whose flux distribution depends linearly on the PSF paramaters (for a..." alt="" coords="270,3315,491,3816"/>
+<area shape="rect" id="node1" title="Class for evaluating a collection of smooth dependencies for a collection of sources." alt="" coords="58,1479,301,1737"/>
+<area shape="rect" id="node6" href="$classFitPSF_1_1Source.html" title=" " alt="" coords="45,3263,325,4389"/>
+<area shape="rect" id="node9" href="$classFitPSF_1_1Source.html" title="An abstract base class for sources which participate in PSF fitting." alt="" coords="243,1787,523,2912"/>
+<area shape="rect" id="node2" href="$classCore_1_1Source.html" title="A base class for all sources in AstroWISP." alt="" coords="50,824,309,1429"/>
+<area shape="rect" id="node3" href="$classCore_1_1SourceLocation.html" title="The minimum requirements for objects specifying where a source is." alt="" coords="79,516,280,775"/>
+<area shape="rect" id="node4" href="$classCore_1_1Point.html" title=" " alt="" coords="91,277,268,467"/>
+<area shape="rect" id="node5" href="$classCore_1_1Point.html" title="Representing a 2D point with real valued cartesian coordinates." alt="" coords="74,5,285,212"/>
+<area shape="rect" id="node7" href="$classFitPSF_1_1SDKSourceBase.html" title="An abstract class that defines the minimum requirements of a source to participate in the fitting for..." alt="" coords="9,5104,361,6056"/>
+<area shape="rect" id="node8" href="$classFitPSF_1_1SDKSource.html" title="A PSF fitting source class based on a LocalPolynomialPSF." alt="" coords="5,6998,364,7621"/>
+<area shape="rect" id="node10" href="$classFitPSF_1_1OverlapSource.html" title=" " alt="" coords="427,4757,745,6403"/>
+<area shape="rect" id="node12" href="$classFitPSF_1_1OverlapSource.html" title="PSF fitting source which handles overlaps with other sources." alt="" coords="465,2977,774,4675"/>
+<area shape="rect" id="node11" href="$classFitPSF_1_1LinearSource.html" title="A class for PSF fitting sources whose flux distribution depends linearly on the PSF paramaters (for a..." alt="" coords="422,6452,750,8167"/>
 </map>

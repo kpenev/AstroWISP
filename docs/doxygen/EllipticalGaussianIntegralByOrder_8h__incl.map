@@ -1,15 +1,15 @@
 <map id="/home/kpenev/projects/git/AstroWISP/doc_src/PSF/EllipticalGaussianIntegralByOrder.h" name="/home/kpenev/projects/git/AstroWISP/doc_src/PSF/EllipticalGaussianIntegralByOrder.h">
 <area shape="rect" id="node1" title="Class approximating integrals of ellptical Gaussians by incremental expansion order." alt="" coords="239,5,483,87"/>
-<area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="5,444,225,491"/>
-<area shape="rect" id="node3" href="$WedgeIntegral_8h.xhtml" title="Declares a class that calculates integrals of x^my^n over circle wedges." alt="" coords="291,135,430,164"/>
+<area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.html" title=" " alt="" coords="5,444,225,491"/>
+<area shape="rect" id="node3" href="$WedgeIntegral_8h.html" title="Declares a class that calculates integrals of x^my^n over circle wedges." alt="" coords="291,135,430,164"/>
 <area shape="rect" id="node9" title=" " alt="" coords="820,367,899,396"/>
-<area shape="rect" id="node4" href="$IntegralUtil_8h.xhtml" title="Useful functions for calculating PSF integrals." alt="" coords="102,212,214,241"/>
-<area shape="rect" id="node5" href="$Core_2Typedefs_8h.xhtml" title="Some useful typedef statements." alt="" coords="381,289,532,319"/>
+<area shape="rect" id="node4" href="$IntegralUtil_8h.html" title="Useful functions for calculating PSF integrals." alt="" coords="102,212,214,241"/>
+<area shape="rect" id="node5" href="$Core_2Typedefs_8h.html" title="Some useful typedef statements." alt="" coords="381,289,532,319"/>
 <area shape="rect" id="node6" title=" " alt="" coords="337,453,403,482"/>
 <area shape="rect" id="node7" title=" " alt="" coords="702,367,745,396"/>
 <area shape="rect" id="node11" title=" " alt="" coords="716,453,781,482"/>
 <area shape="rect" id="node13" title=" " alt="" coords="399,212,472,241"/>
 <area shape="rect" id="node8" title=" " alt="" coords="563,453,625,482"/>
-<area shape="rect" id="node10" href="$PhotColumns_8h.xhtml" title="Defines constants to denote the various columns that can be input or output by the various tools and ..." alt="" coords="495,367,627,396"/>
+<area shape="rect" id="node10" href="$PhotColumns_8h.html" title="Defines constants to denote the various columns that can be input or output by the various tools and ..." alt="" coords="495,367,627,396"/>
 <area shape="rect" id="node12" title=" " alt="" coords="305,367,419,396"/>
 </map>

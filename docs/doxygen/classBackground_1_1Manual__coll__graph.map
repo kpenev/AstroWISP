@@ -1,4 +1,4 @@
 <map id="Background::Manual" name="Background::Manual">
-<area shape="rect" id="node1" title="The background is manually specified for a list of sources." alt="" coords="5,243,199,449"/>
-<area shape="rect" id="node2" href="$classBackground_1_1Measure.xhtml" title="The minimum requirements for a Background extractor class." alt="" coords="5,5,199,195"/>
+<area shape="rect" id="node1" title="The background is manually specified for a list of sources." alt="" coords="5,347,249,744"/>
+<area shape="rect" id="node2" href="$classBackground_1_1Measure.html" title="The minimum requirements for a Background extractor class." alt="" coords="11,5,243,299"/>
 </map>

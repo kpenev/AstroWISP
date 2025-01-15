@@ -1,7 +1,7 @@
 <map id="Error::Fits" name="Error::Fits">
-<area shape="rect" id="node1" title="The parent of all fits library related errors." alt="" coords="42,341,133,444"/>
-<area shape="rect" id="node4" href="$classError_1_1FitsImage.xhtml" title="Errors related an the actual fits image." alt="" coords="20,492,155,595"/>
-<area shape="rect" id="node2" href="$classError_1_1General.xhtml" title="The parent of all errors raised anywhere in the code." alt="" coords="17,139,158,293"/>
-<area shape="rect" id="node3" title=" " alt="" coords="27,5,147,91"/>
-<area shape="rect" id="node5" href="$classError_1_1ImageOutside.xhtml" title="An attempt was made to access a pixel outside the image area." alt="" coords="5,643,169,745"/>
+<area shape="rect" id="node1" title="The parent of all fits library related errors." alt="" coords="26,428,202,565"/>
+<area shape="rect" id="node4" href="$classError_1_1FitsImage.html" title="Errors related an the actual fits image." alt="" coords="5,613,223,751"/>
+<area shape="rect" id="node2" href="$classError_1_1General.html" title="The parent of all errors raised anywhere in the code." alt="" coords="5,139,223,380"/>
+<area shape="rect" id="node3" title=" " alt="" coords="54,5,174,91"/>
+<area shape="rect" id="node5" href="$classError_1_1ImageOutside.html" title="An attempt was made to access a pixel outside the image area." alt="" coords="11,799,217,971"/>
 </map>

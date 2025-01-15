@@ -1,7 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classBackground_1_1Measure.xhtml" title="The minimum requirements for a Background extractor class." alt="" coords="5,68,184,97"/>
-<area shape="rect" id="node2" href="$classBackground_1_1Manual.xhtml" title="The background is manually specified for a list of sources." alt="" coords="272,5,441,35"/>
-<area shape="rect" id="node3" href="$classBackground_1_1MeasureExcludingSources.xhtml" title="Avoid pixels close to sources when extracting a background." alt="" coords="232,59,481,106"/>
-<area shape="rect" id="node5" href="$classBackground_1_1Zero.xhtml" title="The background is assumed already subtracted from the input image." alt="" coords="282,131,431,160"/>
-<area shape="rect" id="node4" href="$classBackground_1_1MeasureAnnulus.xhtml" title="Measure the background in an annulus around each source." alt="" coords="529,68,767,97"/>
+<area shape="rect" id="node1" href="$classBackground_1_1Measure.html" title="The minimum requirements for a Background extractor class." alt="" coords="5,68,184,97"/>
+<area shape="rect" id="node2" href="$classBackground_1_1Manual.html" title="The background is manually specified for a list of sources." alt="" coords="272,5,441,35"/>
+<area shape="rect" id="node3" href="$classBackground_1_1MeasureExcludingSources.html" title="Avoid pixels close to sources when extracting a background." alt="" coords="232,59,481,106"/>
+<area shape="rect" id="node5" href="$classBackground_1_1Zero.html" title="The background is assumed already subtracted from the input image." alt="" coords="282,131,431,160"/>
+<area shape="rect" id="node4" href="$classBackground_1_1MeasureAnnulus.html" title="Measure the background in an annulus around each source." alt="" coords="529,68,767,97"/>
 </map>

@@ -1,8 +1,8 @@
 <map id="/home/kpenev/projects/git/AstroWISP/doc_src/PSF/LocalPolynomial.h" name="/home/kpenev/projects/git/AstroWISP/doc_src/PSF/LocalPolynomial.h">
 <area shape="rect" id="node1" title="Defines a basic PSF based on local second order expansion." alt="" coords="93,5,287,69"/>
-<area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.xhtml" title=" " alt="" coords="5,272,225,319"/>
-<area shape="rect" id="node3" href="$PSF_8h.xhtml" title="Defines the base class of all PSF models." alt="" coords="231,117,298,147"/>
-<area shape="rect" id="node4" href="$Error_8h.xhtml" title="The hierarchy of exceptions for this project." alt="" coords="204,195,325,224"/>
+<area shape="rect" id="node2" href="$SharedLibraryExportMacros_8h_source.html" title=" " alt="" coords="5,272,225,319"/>
+<area shape="rect" id="node3" href="$PSF_8h.html" title="Defines the base class of all PSF models." alt="" coords="231,117,298,147"/>
+<area shape="rect" id="node4" href="$Error_8h.html" title="The hierarchy of exceptions for this project." alt="" coords="204,195,325,224"/>
 <area shape="rect" id="node7" title=" " alt="" coords="349,195,428,224"/>
 <area shape="rect" id="node8" title=" " alt="" coords="452,195,517,224"/>
 <area shape="rect" id="node5" title=" " alt="" coords="249,281,328,310"/>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['wedgeintegral_2eh_1055',['WedgeIntegral.h',['../WedgeIntegral_8h.xhtml',1,'']]]
+  ['wedgeintegral_2eh_1055',['WedgeIntegral.h',['../WedgeIntegral_8h.html',1,'']]]
 ];
