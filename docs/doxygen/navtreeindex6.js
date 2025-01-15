@@ -1,12 +1,5 @@
 var NAVTREEINDEX6 =
 {
-"classPSF_1_1EllipticalGaussianIntegralByOrder.xhtml#a8f6739fa41d18cc07cc3eef4f8e8c38b":[4,3,0,6,1,12],
-"classPSF_1_1EllipticalGaussianIntegralByOrder.xhtml#a95455bdbd64654dca612105fb4413666":[4,3,0,6,1,20],
-"classPSF_1_1EllipticalGaussianIntegralByOrder.xhtml#aad48afd0ea1f6a73784f4dc22868f8bb":[4,3,0,6,1,15],
-"classPSF_1_1EllipticalGaussianIntegralByOrder.xhtml#ab6bc5d168e7b5814cdd03ffa04cb8b62":[4,3,0,6,1,18],
-"classPSF_1_1EllipticalGaussianIntegralByOrder.xhtml#abcb597d3b0d4987760b75c3595489d89":[4,3,0,6,1,4],
-"classPSF_1_1EllipticalGaussianIntegralByOrder.xhtml#abecfd9659bec9db962c945d80f5169bf":[4,3,0,6,1,3],
-"classPSF_1_1EllipticalGaussianIntegralByOrder.xhtml#ac87e13639db535bb3b896f6b790bc054":[4,3,0,6,1,8],
 "classPSF_1_1EllipticalGaussianIntegralByOrder.xhtml#ade8981af1dcfe24d5b85a69fc8c5b01f":[4,3,0,6,1,24],
 "classPSF_1_1EllipticalGaussianIntegralByOrder.xhtml#adfb40782e1021cce7fe482e7e22b0a09":[4,3,0,6,1,9],
 "classPSF_1_1EllipticalGaussianIntegralByOrder.xhtml#ae0944288fa55a7f8650b3b966c7c9ddc":[4,3,0,6,1,17],
@@ -249,5 +242,12 @@ var NAVTREEINDEX6 =
 "classSubPixPhot_1_1Config.xhtml#a8e948e2584ce8ae242fe9536cbb9d7a6":[4,3,0,7,0,1],
 "classSubPixPhot_1_1Config.xhtml#a92f14c8fcc5bd66b80c386207da39af7":[4,3,0,7,0,0],
 "classSubPixPhot_1_1Config.xhtml#a9d1113e5ac3aada0d8f9bb3dc720b1a8":[4,3,0,7,0,4],
-"classSubPixPhot_1_1SourceInput.xhtml":[4,3,0,7,1]
+"classSubPixPhot_1_1SourceInput.xhtml":[4,3,0,7,1],
+"classSubPixPhot_1_1SourceInput.xhtml#a00df4323506543424fe593561de3e72f":[4,3,0,7,1,11],
+"classSubPixPhot_1_1SourceInput.xhtml#a1d1f3226f9c3633dd86e2c5ea1ee6a2d":[4,3,0,7,1,9],
+"classSubPixPhot_1_1SourceInput.xhtml#a25fe307badd9eccefac0fd1f3007b0d9":[4,3,0,7,1,8],
+"classSubPixPhot_1_1SourceInput.xhtml#a2924b424e6ce6e423687bd6a7075f82b":[4,3,0,7,1,0],
+"classSubPixPhot_1_1SourceInput.xhtml#a29de47196ec2e400b9300e6a87cea225":[4,3,0,7,1,1],
+"classSubPixPhot_1_1SourceInput.xhtml#a39a5201eec5b702ff178f038e92159e0":[4,3,0,7,1,16],
+"classSubPixPhot_1_1SourceInput.xhtml#a3e0ecd87042430f40589f99b895f4b88":[4,3,0,7,1,14]
 };

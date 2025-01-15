@@ -1,12 +1,5 @@
 var NAVTREEINDEX5 =
 {
-"classFitPSF_1_1Pixel.xhtml#a925a9e39f2830b69fcc83beb994c1872":[4,1,0,42,13],
-"classFitPSF_1_1Pixel.xhtml#a954588eef381dea1c5210d42df4378d6":[4,1,0,42,10],
-"classFitPSF_1_1Pixel.xhtml#a96a98e65dd2fabb7e531c6eb16cf59bc":[4,1,0,42,3],
-"classFitPSF_1_1Pixel.xhtml#aa5dd7a5c6fa86183cf0159018b5cb748":[4,1,0,42,20],
-"classFitPSF_1_1Pixel.xhtml#ab0b5decf668cf68147171dadfcddb19f":[4,1,0,42,7],
-"classFitPSF_1_1Pixel.xhtml#ac24ca5a6a8a8afa9c8027247f3491e08":[4,1,0,42,8],
-"classFitPSF_1_1Pixel.xhtml#af3cdb3442458f4ff293c8bb72bbaac32":[4,1,0,42,16],
 "classFitPSF_1_1Pixel.xhtml#afa57db75c4fae27060e120c3a3ab1c47":[4,1,0,42,18],
 "classFitPSF_1_1PixelOrder.xhtml":[4,3,0,3,10],
 "classFitPSF_1_1PixelOrder.xhtml#a32c0b5a94fe38662cbe7035467586d18":[4,3,0,3,10,0],
@@ -249,5 +242,12 @@ var NAVTREEINDEX5 =
 "classPSF_1_1EllipticalGaussianIntegralByOrder.xhtml#a79ce5d2e2ddfa581a3792ba36499a9c9":[4,3,0,6,1,1],
 "classPSF_1_1EllipticalGaussianIntegralByOrder.xhtml#a82ef359a1049b58df483d4c51e1aa351":[4,3,0,6,1,0],
 "classPSF_1_1EllipticalGaussianIntegralByOrder.xhtml#a85a41710a94eb4a16624ff11cd51a06a":[4,3,0,6,1,22],
-"classPSF_1_1EllipticalGaussianIntegralByOrder.xhtml#a8695006522904768e5f21324f84020a9":[4,3,0,6,1,6]
+"classPSF_1_1EllipticalGaussianIntegralByOrder.xhtml#a8695006522904768e5f21324f84020a9":[4,3,0,6,1,6],
+"classPSF_1_1EllipticalGaussianIntegralByOrder.xhtml#a8f6739fa41d18cc07cc3eef4f8e8c38b":[4,3,0,6,1,12],
+"classPSF_1_1EllipticalGaussianIntegralByOrder.xhtml#a95455bdbd64654dca612105fb4413666":[4,3,0,6,1,20],
+"classPSF_1_1EllipticalGaussianIntegralByOrder.xhtml#aad48afd0ea1f6a73784f4dc22868f8bb":[4,3,0,6,1,15],
+"classPSF_1_1EllipticalGaussianIntegralByOrder.xhtml#ab6bc5d168e7b5814cdd03ffa04cb8b62":[4,3,0,6,1,18],
+"classPSF_1_1EllipticalGaussianIntegralByOrder.xhtml#abcb597d3b0d4987760b75c3595489d89":[4,3,0,6,1,4],
+"classPSF_1_1EllipticalGaussianIntegralByOrder.xhtml#abecfd9659bec9db962c945d80f5169bf":[4,3,0,6,1,3],
+"classPSF_1_1EllipticalGaussianIntegralByOrder.xhtml#ac87e13639db535bb3b896f6b790bc054":[4,3,0,6,1,8]
 };
