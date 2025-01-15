@@ -73,14 +73,14 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"AmplitudeSaturatedPixel_8h.xhtml",
-"FitPSF_2PiecewiseBicubic_8h.xhtml#a9d074040a6210284336f76232fa5526c",
-"PiecewiseBicubicCell_8h.xhtml",
-"classCore_1_1FluxPair.xhtml#ad906d877f22aa31744b9f1081fc7a290",
-"classError_1_1InvalidArgument.xhtml#a5626ee6ca7eea675fd840d0c418afe03",
-"classFitPSF_1_1Pixel.xhtml#afa57db75c4fae27060e120c3a3ab1c47",
-"classPSF_1_1EllipticalGaussianIntegralByOrder.xhtml#ade8981af1dcfe24d5b85a69fc8c5b01f",
-"classSubPixPhot_1_1SourceInput.xhtml#a3e6eed2a9893ac8e85a8c4a49e52bd2f"
+"",
+"FitPSF_2PiecewiseBicubic_8h.xhtml#a5d34489edbac7dedfcb5254149160f4d",
+"PhotColumns_8h.xhtml#afd335f0316f5f0113818bf99d5f6d6b5abad215413118dd7d206c6b244061b24f",
+"classCore_1_1Flux.xhtml#a78ab11b09ba4096bb374f8dc54328612",
+"classError_1_1ImageOutside.xhtml#aa7426e26536cce6f21b515233a13209e",
+"classFitPSF_1_1Pixel.xhtml#a925a9e39f2830b69fcc83beb994c1872",
+"classPSF_1_1EllipticalGaussianIntegralByOrder.xhtml#a8f6739fa41d18cc07cc3eef4f8e8c38b",
+"classSubPixPhot_1_1SourceInput.xhtml#a00df4323506543424fe593561de3e72f"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -1,5 +1,12 @@
 var NAVTREEINDEX4 =
 {
+"classError_1_1ImageOutside.xhtml#aa7426e26536cce6f21b515233a13209e":[4,1,2,19,1],
+"classError_1_1ImageOutside.xhtml#aa7426e26536cce6f21b515233a13209e":[4,1,1,10,1],
+"classError_1_1InvalidArgument.xhtml":[4,1,2,22],
+"classError_1_1InvalidArgument.xhtml":[4,1,0,33],
+"classError_1_1InvalidArgument.xhtml":[4,1,1,13],
+"classError_1_1InvalidArgument.xhtml#a5626ee6ca7eea675fd840d0c418afe03":[4,1,2,22,1],
+"classError_1_1InvalidArgument.xhtml#a5626ee6ca7eea675fd840d0c418afe03":[4,1,0,33,1],
 "classError_1_1InvalidArgument.xhtml#a5626ee6ca7eea675fd840d0c418afe03":[4,1,1,13,1],
 "classError_1_1InvalidArgument.xhtml#acde3a5b30bec92843669e2cc0a6c8186":[4,1,2,22,0],
 "classError_1_1InvalidArgument.xhtml#acde3a5b30bec92843669e2cc0a6c8186":[4,1,0,33,0],
@@ -242,12 +249,5 @@ var NAVTREEINDEX4 =
 "classFitPSF_1_1Pixel.xhtml#a80a562e478b8714c7f62a28df8dcbf36":[4,1,0,42,19],
 "classFitPSF_1_1Pixel.xhtml#a88b4230a2cc15a7547be145f3da530cd":[4,1,0,42,14],
 "classFitPSF_1_1Pixel.xhtml#a8abade9a1f34fc06e65777f5ff3c64dd":[4,1,0,42,6],
-"classFitPSF_1_1Pixel.xhtml#a8f4f99340c0fb3aa384493b78285757a":[4,1,0,42,2],
-"classFitPSF_1_1Pixel.xhtml#a925a9e39f2830b69fcc83beb994c1872":[4,1,0,42,13],
-"classFitPSF_1_1Pixel.xhtml#a954588eef381dea1c5210d42df4378d6":[4,1,0,42,10],
-"classFitPSF_1_1Pixel.xhtml#a96a98e65dd2fabb7e531c6eb16cf59bc":[4,1,0,42,3],
-"classFitPSF_1_1Pixel.xhtml#aa5dd7a5c6fa86183cf0159018b5cb748":[4,1,0,42,20],
-"classFitPSF_1_1Pixel.xhtml#ab0b5decf668cf68147171dadfcddb19f":[4,1,0,42,7],
-"classFitPSF_1_1Pixel.xhtml#ac24ca5a6a8a8afa9c8027247f3491e08":[4,1,0,42,8],
-"classFitPSF_1_1Pixel.xhtml#af3cdb3442458f4ff293c8bb72bbaac32":[4,1,0,42,16]
+"classFitPSF_1_1Pixel.xhtml#a8f4f99340c0fb3aa384493b78285757a":[4,1,0,42,2]
 };
