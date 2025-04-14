@@ -50,10 +50,11 @@ def get_unpacked_fits(fits_fname):
 
     if packed:
         with NamedTemporaryFile(buffering=0, dir='/dev/shm') as unpacked_frame:
-            assert call(
-                ['funpack', '-C', '-S', fits_fname],
-                stdout=unpacked_frame
-            ) == 0
+            hdu_list = fits.HDUList()
+            for hdu in fits_file:
+                if hdu.data is not None:
+                    hdu_list.append(hdu)
+            hdu_list.writeto(unpacked_frame.name, overwrite=True)
             yield unpacked_frame.name
     else:
         yield fits_fname
