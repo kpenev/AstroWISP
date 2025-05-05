@@ -5,6 +5,7 @@
 from os import path
 from subprocess import Popen, PIPE
 from functools import partial
+import platform
 
 import unittest
 from pandas import read_csv
@@ -25,9 +26,15 @@ class TestFistar(FloatTestCase):
         parse_result = partial(read_csv, sep=r"\s+", comment="#", header=None)
 
         expected = parse_result(
-            path.join(_test_data_dir, "XO1_test_img.fistar")
+            path.join(
+                _test_data_dir,
+                (
+                    "XO1_test_img_applechip.fistar"
+                    if platform.machine() == "arm64"
+                    else "XO1_test_img.fistar"
+                ),
+            )
         )
-        print(f"Expected:\n{expected!r}")
         with get_unpacked_fits(
             path.join(_test_data_dir, "XO1_test_img.fits")
         ) as unpacked_fname:
@@ -46,7 +53,6 @@ class TestFistar(FloatTestCase):
                 stdout=PIPE,
             ) as fistar:
                 extracted = parse_result(fistar.stdout)
-        print(f"Got:\n{extracted!r}")
 
         self.assertApproxPandas(
             expected, extracted, "Source extraction of XO-1 image"
