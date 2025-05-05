@@ -20,7 +20,7 @@ class FloatTestCase(unittest.TestCase):
             + self.absolute_tolerance
         )
 
-    def set_tolerance(self, relative, absolute):
+    def set_tolerance(self, relative, absolute=0.0):
         """
         Set the tolerance for floating point comparisons.
 

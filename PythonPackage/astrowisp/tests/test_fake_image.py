@@ -39,7 +39,7 @@ class TestImage(FloatTestCase):
     def setUp(self):
         """Set tolerance to 100 x epsilon."""
 
-        self.tolerance = 100.0
+        self.set_tolerance(100.0)
     #pylint: enable=invalid-name
 
     def test_no_source(self):
