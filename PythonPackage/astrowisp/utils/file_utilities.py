@@ -48,7 +48,10 @@ def get_unpacked_fits(fits_fname):
         # pylint: enable=no-member
 
     if packed:
-        with NamedTemporaryFile(buffering=0, dir="/dev/shm") as unpacked_frame:
+        with NamedTemporaryFile(
+            buffering=0,
+            dir=("/dev/shm" if os.path.exists("/dev/shm") else None),
+        ) as unpacked_frame:
             with fits.open(fits_fname, "readonly") as fits_file:
                 hdu_list = fits.HDUList(
                     [
