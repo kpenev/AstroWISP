@@ -6,8 +6,9 @@ import numpy
 
 from astrowisp._initialize_library import get_astrowisp_library
 
-#This only makes sense as a class.
-#pylint: disable=too-few-public-methods
+
+# This only makes sense as a class.
+# pylint: disable=too-few-public-methods
 class SubPixPhot:
     """
     Use sub-pixel aware aperture photomotre to measure fluxes of sources.
@@ -58,11 +59,13 @@ class SubPixPhot:
                     pixels.
     """
 
-    _default_configuration = {'subpixmap': numpy.ones((1, 1), dtype=c_double),
-                              'apertures': numpy.arange(1.0, 5.5),
-                              'gain': 1.0,
-                              'magnitude_1adu': 10.0,
-                              'const_error': 0.0}
+    _default_configuration = {
+        "subpixmap": numpy.ones((1, 1), dtype=c_double),
+        "apertures": numpy.arange(1.0, 5.5),
+        "gain": 1.0,
+        "magnitude_1adu": 10.0,
+        "const_error": 0.0,
+    }
 
     @staticmethod
     def _format_config(param_value):
@@ -82,21 +85,21 @@ class SubPixPhot:
                   subpixphot tool.
         """
 
-        if param_value[0] == 'subpixmap':
+        if param_value[0] == "subpixmap":
             return ()
 
-        if param_value[0] == 'apertures':
+        if param_value[0] == "apertures":
             return (
-                b'ap.aperture',
-                b','.join([repr(ap).encode('ascii') for ap in param_value[1]])
+                b"ap.aperture",
+                b",".join([repr(ap).encode("ascii") for ap in param_value[1]]),
             )
 
-        if param_value[0] == 'const_error':
-            param_name = b'ap.const-error'
+        if param_value[0] == "const_error":
+            param_name = b"ap.const-error"
         else:
-            param_name = param_value[0].replace('_', '-').encode('ascii')
+            param_name = param_value[0].replace("_", "-").encode("ascii")
 
-        return (param_name, repr(param_value[1]).encode('ascii'))
+        return (param_name, repr(param_value[1]).encode("ascii"))
 
     def __init__(self, **configuration):
         r"""
@@ -135,39 +138,33 @@ class SubPixPhot:
 
         for k, value in configuration.items():
             if k not in self.configuration:
-                raise KeyError('Unrecognized configuration parameter: '
-                               +
-                               repr(k))
-            if k == 'subpixmap':
+                raise KeyError(
+                    "Unrecognized configuration parameter: " + repr(k)
+                )
+            if k == "subpixmap":
                 if self._library_subpix_map is not None:
                     self._astrowisp_library.destroy_core_subpixel_map(
                         self._library_subpix_map
                     )
                 self._library_subpix_map = (
                     self._astrowisp_library.create_core_subpixel_map(
-                        *value.shape,
-                        value
+                        *value.shape, value
                     )
                 )
 
         self.configuration.update(configuration)
 
         config_arguments = sum(
-            map(self._format_config, self.configuration.items()),
-            ()
-        ) + (b'',)
+            map(self._format_config, self.configuration.items()), ()
+        ) + (b"",)
 
         self._astrowisp_library.update_subpixphot_configuration(
-            self._library_configuration,
-            *config_arguments
+            self._library_configuration, *config_arguments
         )
 
-    #No clean way to reduce the number of argumets.
-    #pylint: disable=too-many-arguments
-    def __call__(self,
-                 image,
-                 fitpsf_io_tree,
-                 image_index=0):
+    # No clean way to reduce the number of argumets.
+    # pylint: disable=too-many-arguments
+    def __call__(self, image, fitpsf_io_tree, image_index=0):
         r"""
         Measure the fluxes of all sources in an image using aperture photometry.
 
@@ -200,10 +197,7 @@ class SubPixPhot:
         self.image = image
 
         library_image = self._astrowisp_library.create_core_image(
-            image[0].shape[1],
-            image[0].shape[0],
-            *image,
-            True
+            image[0].shape[1], image[0].shape[0], *image, True
         )
 
         self._astrowisp_library.subpixphot(
@@ -211,12 +205,12 @@ class SubPixPhot:
             self._library_subpix_map,
             self._library_configuration,
             fitpsf_io_tree.library_tree,
-            c_uint(image_index)
+            c_uint(image_index),
         )
 
         self._astrowisp_library.destroy_core_image(library_image)
 
-    #pylint: enable=too-many-arguments
+    # pylint: enable=too-many-arguments
 
     def __del__(self):
         r"""Destroy any library objects created by this object."""
@@ -225,8 +219,7 @@ class SubPixPhot:
             self._library_configuration
         )
         if self._library_subpix_map is not None:
-            self._astrowisp_library.destroy_core_subpixel_map(
-                self._library_subpix_map
-            )
+            self._astrowisp_library.destroy_core_subpixel_map(self._library_subpix_map)
 
-#pylint: enable=too-few-public-methods
+
+# pylint: enable=too-few-public-methods

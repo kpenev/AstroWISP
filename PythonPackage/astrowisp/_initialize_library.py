@@ -355,6 +355,9 @@ def _setup_subpixphot_interface(library):
     ]
     library.destroy_subpixphot_configuration.restype = None
 
+    library.update_subpixphot_configuration.argtypes = [
+        library.create_subpixphot_configuration.restype
+    ]
     library.update_subpixphot_configuration.restype = None
 
     library.subpixphot.argtypes = [
