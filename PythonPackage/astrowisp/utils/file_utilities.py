@@ -4,6 +4,7 @@ import os
 import os.path
 from contextlib import contextmanager
 from tempfile import NamedTemporaryFile
+from tempfile import TemporaryDirectory
 import logging
 
 from astropy.io import fits
@@ -48,10 +49,8 @@ def get_unpacked_fits(fits_fname):
         # pylint: enable=no-member
 
     if packed:
-        with NamedTemporaryFile(
-            buffering=0,
-            dir=("/dev/shm" if os.path.exists("/dev/shm") else None),
-        ) as unpacked_frame:
+        with TemporaryDirectory(dir=("/dev/shm" if os.path.exists("/dev/shm") else None)) as temp_dir:
+            unpacked_frame=os.path.join(temp_dir, "unpacked.fits")
             with fits.open(fits_fname, "readonly") as fits_file:
                 hdu_list = fits.HDUList(
                     [
@@ -61,8 +60,8 @@ def get_unpacked_fits(fits_fname):
                         for hdu_ind, hdu in enumerate(fits_file[1:])
                     ]
                 )
-            hdu_list.writeto(unpacked_frame.name, overwrite=True)
-            yield unpacked_frame.name
+                hdu_list.writeto(unpacked_frame, overwrite=True)
+            yield unpacked_frame
     else:
         yield fits_fname
 
@@ -94,3 +93,4 @@ def get_fname_pattern_substitutions(fits_fname, fits_header=None):
         FITS_ROOT=get_fits_fname_root(fits_fname),
         FITS_DIR=os.path.dirname(fits_fname),
     )
+
