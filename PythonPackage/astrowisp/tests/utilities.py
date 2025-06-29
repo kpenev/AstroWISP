@@ -2,6 +2,7 @@
 
 import unittest
 from sys import float_info
+import numpy
 
 
 class FloatTestCase(unittest.TestCase):
@@ -18,7 +19,7 @@ class FloatTestCase(unittest.TestCase):
             * abs(value_1 + value_2)
             * float_info.epsilon
             + self.absolute_tolerance
-        )
+        ) or (numpy.isnan(value_1) and numpy.isnan(value_2))
 
     def set_tolerance(self, relative, absolute=0.0):
         """
@@ -66,7 +67,7 @@ class FloatTestCase(unittest.TestCase):
     def assertApproxPandas(self, expected, testing, testing_what=""):
         """Assert that the two dataframes match columns, types and values."""
 
-        if hasattr(self, '_logger'):
+        if hasattr(self, "_logger"):
             self._logger.debug("Expected :\n%s", repr(expected))
             self._logger.debug("Got :\n%s", repr(testing))
 

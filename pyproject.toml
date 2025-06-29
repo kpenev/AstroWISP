@@ -66,6 +66,9 @@ visualize = [
     'xalglib'
 ]
 
+[tool.black]
+line-length = 80
+
 [tool.setuptools.packages.find]
 where = ["build/fitsh-0.9.4-minimum/src",
          "astrowisp/tests/test_data",

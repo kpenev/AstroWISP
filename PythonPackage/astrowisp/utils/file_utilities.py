@@ -3,7 +3,6 @@
 import os
 import os.path
 from contextlib import contextmanager
-from tempfile import NamedTemporaryFile
 from tempfile import TemporaryDirectory
 import logging
 
@@ -49,8 +48,10 @@ def get_unpacked_fits(fits_fname):
         # pylint: enable=no-member
 
     if packed:
-        with TemporaryDirectory(dir=("/dev/shm" if os.path.exists("/dev/shm") else None)) as temp_dir:
-            unpacked_frame=os.path.join(temp_dir, "unpacked.fits")
+        with TemporaryDirectory(
+            dir=("/dev/shm" if os.path.exists("/dev/shm") else None)
+        ) as temp_dir:
+            unpacked_frame = os.path.join(temp_dir, "unpacked.fits")
             with fits.open(fits_fname, "readonly") as fits_file:
                 hdu_list = fits.HDUList(
                     [
@@ -93,4 +94,3 @@ def get_fname_pattern_substitutions(fits_fname, fits_header=None):
         FITS_ROOT=get_fits_fname_root(fits_fname),
         FITS_DIR=os.path.dirname(fits_fname),
     )
-
