@@ -32,12 +32,12 @@ class IOTree:
                    c_double: 'double',
                    c_int: 'int',
                    c_short: 'short',
-                   c_long: 'long',
+                   #c_long: 'long',
                    c_byte: 'char',
                    c_ubyte: 'uchar',
                    c_char: 'char',
                    c_uint: 'uint',
-                   c_ulong: 'ulong',
+                   #c_ulong: 'ulong',
                    c_ushort: 'ushort',
                    c_ubyte: 'uchar'}
 
