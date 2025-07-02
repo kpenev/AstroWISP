@@ -54,6 +54,7 @@ jobs:
               sed -i s/mirror.centos.org/vault.centos.org/g /etc/yum.repos.d/CentOS-*.repo &&
               sed -i s/^#.*baseurl=http/baseurl=http/g /etc/yum.repos.d/CentOS-*.repo &&
               sed -i s/^mirrorlist=http/#mirrorlist=http/g /etc/yum.repos.d/CentOS-*.repo &&
+              yum --disablerepo=epel -y update  ca-certificates &&
               yum -y -v install boost boost-thread boost-devel
             CIBW_BEFORE_BUILD_WINDOWS: pip install wheel delvewheel
             CIBW_REPAIR_WHEEL_COMMAND_MACOS: >
