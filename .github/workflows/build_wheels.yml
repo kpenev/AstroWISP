@@ -13,7 +13,8 @@ jobs:
         #   * ubuntu-latest, 
         #   * macos-13,
         #   * windows-2019
-        os: [ubuntu-latest, windows-2022, macos-13, macos-14]
+        #os: [ubuntu-latest, windows-2022, macos-13, macos-14]
+        os: [windows-2022, macos-13]
 
     steps:
       - uses: actions/checkout@v4
