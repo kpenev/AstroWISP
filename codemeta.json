@@ -1,0 +1,43 @@
+{
+    "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
+    "@type": "SoftwareSourceCode",
+    "name": "AstroWISP: Astronomical Widefield Images Stellar Photometry",
+    "description": "AstroWISP provides image processing tools for source extraction, background determination, point spread function/pixel response function fitting, and aperture photometry. The package is particularly well-suited for working with detectors featuring a Bayer mask (an array of microfilters applied to each detector pixel to allow color photography), such as consumer DSLR cameras. Such detectors pose significant challenges for existing tools while offering a much cheaper alternative to specialized devices. As a result, consumer DSLR cameras with Bayer masks are often underutilized for precision photometry. AstroWISP produces high-precision photometry from such images, enabling the use of such devices for detecting exoplanet transits, and is available for all major operating systems to ensure accessibility for amateur astronomers.",
+    "identifier": "ascl:2508.002",
+    "author": [
+        {
+            "@type": "Person",
+            "givenName": "Kaloyan",
+            "familyName": "Penev",
+            "@id": "https://orcid.org/0000-0003-4464-1371"
+        },
+        {
+            "@type": "Person",
+            "givenName": "Angel",
+            "familyName": "Romero",
+            "@id": "https://orcid.org/0000-0001-9436-6027"
+        },
+        {
+            "@type": "Person",
+            "givenName": "S. Javad",
+            "familyName": "Jafarzadeh",
+            "@id": "https://orcid.org/0000-0002-9490-2093"
+        }
+    ],
+    "citation": "https://ui.adsabs.harvard.edu/abs/2025ascl.soft08002P",
+    "relatedLink": [
+        "https://pypi.org/project/astrowisp/"
+    ],
+    "codeRepository": [
+        "https://github.com/kpenev/AstroWISP"
+    ],
+    "referencePublication": [
+        {
+            "@type": "ScholarlyArticle",
+            "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..191P/abstract",
+            "@id": "https://doi.org/10.3847/1538-3881/adf640"
+        }
+    ],
+    "version": "PLACEHOLDER: Add version here",
+    "license": "https://spdx.org/licenses/AGPL-3.0-only.html"
+}
