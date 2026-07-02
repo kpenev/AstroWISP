@@ -1,96 +1,170 @@
-name: Build
+name: Test wheels
 
+# Full OS x Python x numpy matrix from numpy2_ci_plan.md, implemented as the
+# plan's "split build from test" design:
+#
+#   * build - one numpy-agnostic cibuildwheel run per OS produces the
+#     cp311..cp314 wheels: 4 OS x 4 Python = 16 wheels. AstroWISP talks to its
+#     C++ library through ctypes, not the numpy C-API, so a single wheel per
+#     (OS, Python) runs under numpy 1 *or* numpy 2 - the numpy axis lives only
+#     in the test job. Per-OS Boost handling is carried over from
+#     build_wheels.yml (yum in the manylinux container on Linux,
+#     MarkusJx/install-boost on macOS/Windows).
+#
+#   * test - fans those 16 wheels across the six valid (Python, numpy) cells on
+#     each of the 4 runner OSes = 24 environments:
+#
+#         Python | numpy 1 | numpy 2
+#         -------|---------|--------
+#         3.11   |   yes   |   yes
+#         3.12   |   yes   |   yes
+#         3.13   |    -    |   yes
+#         3.14   |    -    |   yes
+#
+#     The numpy-1 x {3.13, 3.14} cells are excluded: numpy 1.26 (the last 1.x)
+#     ships no cp313/cp314 wheels.
+#
+# Intel macOS runs on macos-15-intel: macos-13 (the old Intel image) was retired
+# in Dec 2025. MarkusJx/install-boost has no x86_64 Boost for macOS 15 (15 is
+# arm64-only), so the Intel runner installs the macOS-13-target x86_64 Boost
+# (platform_version 13, the newest x86 prebuilt), which loads fine on a macOS 15
+# Intel host.
+#
+# Tests run on the *host* runner, not inside cibuildwheel's build container:
+# modern scipy (a transitive AstroWISP dependency) ships cp313+ wheels only for
+# manylinux_2_28, which cannot install in the glibc-2.17 manylinux2014 image
+# (pip would fall back to building scipy from source and fail on the missing
+# OpenBLAS). The runner hosts are new enough to install those wheels directly,
+# and the wheels bundle their native deps (Boost) via delocate/delvewheel/
+# auditwheel, so no Boost install is needed in the test job. Manual-only, like
+# build_wheels.yml.
 on: [workflow_dispatch]
 
 jobs:
-  build_wheels_mac:
+  build:
     name: Build wheels on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
-        # macos-13 is an intel runner, macos-14 is apple silicon
-        # So far has succeeded on: 
-        #   * ubuntu-latest, 
-        #   * macos-13,
-        #   * windows-2019
-        #os: [ubuntu-latest, windows-2022, macos-13, macos-14]
-        os: [ubuntu-latest]
+        # macos-15-intel is Intel (x86_64), macos-14 is Apple silicon (arm64).
+        os: [ubuntu-latest, windows-2022, macos-15-intel, macos-14]
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Detect Boost Platform
-        if: ${{ matrix.os == 'macos-13' }}
-        run: echo "BOOST_PLATFORM=10.15" >> "$GITHUB_ENV"
+      - name: Detect Boost platform (Intel macOS)
+        if: ${{ matrix.os == 'macos-15-intel' }}
+        # Newest x86_64 Boost prebuilt targets macOS 13; it runs on macOS 15.
+        run: echo "BOOST_PLATFORM=13" >> "$GITHUB_ENV"
 
-      - name: Detect Boost Platform
+      - name: Detect Boost platform (Apple-silicon macOS)
         if: ${{ matrix.os == 'macos-14' }}
         run: echo "BOOST_PLATFORM=14" >> "$GITHUB_ENV"
 
-      - name: Install Boost Mac/Windows
+      - name: Install Boost (macOS/Windows)
         if: ${{ startsWith(matrix.os, 'mac') || startsWith(matrix.os, 'windows') }}
         id: install-boost
         uses: MarkusJx/install-boost@v2
         with:
-            # REQUIRED: Specify the required boost version
-            # A list of supported versions can be found here:
-            # https://github.com/MarkusJx/prebuilt-boost/blob/main/versions-manifest.json
-            boost_version: ${{ matrix.os == 'macos-13' && '1.79.0' || '1.81.0' }}
-            # OPTIONAL: Specify a platform version
+            boost_version: ${{ matrix.os == 'macos-15-intel' && '1.89.0' || '1.81.0' }}
             platform_version: ${{ startsWith(matrix.os, 'windows') && '2022' || env.BOOST_PLATFORM }}
             toolset: ${{ startsWith(matrix.os, 'mac') && 'clang' || 'mingw' }}
             arch: ${{ matrix.os == 'macos-14' && 'aarch64' || 'x86' }}
-            boost_install_dir: ${{github.workspace}}/external
-            # NOTE: If a boost version matching all requirements cannot be found,
-            # this build step will fail
-    
+            boost_install_dir: ${{ github.workspace }}/external
+
       - name: Build wheels
-        uses: pypa/cibuildwheel@v2.18.0
+        # 4.x is post-3.14-stable, so cp314-* is a normal build target (no
+        # cpython-prerelease enable) and the manylinux image ships stable 3.14.
+        uses: pypa/cibuildwheel@v4.1.0
         env:
-            MACOSX_DEPLOYMENT_TARGET: ${{ matrix.os == 'macos-14' && '14.0' || '10.15' }}
+            # One wheel per Python; numpy is not a build dependency (ctypes).
+            CIBW_BUILD: cp311-* cp312-* cp313-* cp314-*
+
+            # Skip cibuildwheel's in-container test (configured via
+            # [tool.cibuildwheel] test-command in pyproject.toml). The test job
+            # below runs the suite on the host so scipy's cp313+ wheels resolve.
+            CIBW_TEST_SKIP: "*"
+
+            # macos-14 -> 14.0, macos-15-intel -> 13.0 (matches the x86 Boost
+            # target), everything else -> 10.15.
+            MACOSX_DEPLOYMENT_TARGET: ${{ matrix.os == 'macos-14' && '14.0' || matrix.os == 'macos-15-intel' && '13.0' || '10.15' }}
             BOOST_ROOT: ${{ steps.install-boost.outputs.BOOST_ROOT }}
-            CIBW_DEBUG_KEEP_CONTAINER: True
-            #Work around MacOS idiocy per https://github.com/pypa/cibuildwheel/issues/816
+
+            # Linux: reuse the manylinux2014 + CentOS-vault Boost install path
+            # from build_wheels.yml (CentOS 7 repos moved to vault after EOL).
+            CIBW_MANYLINUX_X86_64_IMAGE: manylinux2014
             CIBW_BEFORE_BUILD_LINUX: >
               sed -i s/mirror.centos.org/vault.centos.org/g /etc/yum.repos.d/CentOS-*.repo &&
               sed -i s/^#.*baseurl=http/baseurl=http/g /etc/yum.repos.d/CentOS-*.repo &&
               sed -i s/^mirrorlist=http/#mirrorlist=http/g /etc/yum.repos.d/CentOS-*.repo &&
               yum -y -v install boost boost-thread boost-devel
+
+            # Windows: the wheel-repair recipe lives in pyproject.toml
+            # ([tool.cibuildwheel.windows] repair-wheel-command: strip ->
+            # copy .dll to .pyd -> delvewheel repair -> rename back) - the recipe
+            # that shipped working Windows wheels at the last release. Do NOT set
+            # CIBW_REPAIR_WHEEL_COMMAND_WINDOWS here: an override replaces that
+            # recipe with a broken one. This before-build install just provides
+            # the `wheel` and `delvewheel` CLIs the pyproject recipe invokes.
             CIBW_BEFORE_BUILD_WINDOWS: pip install wheel delvewheel
+
+            # macOS: delocate bundles the Boost dylibs into the wheel.
             CIBW_REPAIR_WHEEL_COMMAND_MACOS: >
               DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:$BOOST_ROOT/lib delocate-listdeps {wheel} &&
               DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:$BOOST_ROOT/lib delocate-wheel --require-archs {delocate_archs} -w {dest_dir} {wheel}
-            #CIBW_REPAIR_WHEEL_COMMAND_WINDOWS: 
-            #  ls ${{ steps.install-boost.outputs.BOOST_ROOT }}/lib &&
-            #  delvewheel show --add-path=$BOOST_ROOT/lib {wheel} &&
-            #  delvewheel repair 
-            #  -v 
-            #  --add-path=${{ steps.install-boost.outputs.BOOST_ROOT }}/lib 
-            #  --wheel-dir={dest_dir} 
-            #  {wheel}
-        #   CIBW_SOME_OPTION: value
-        #    ...
-        # with:
-        #   package-dir: .
-        #   output-dir: wheelhouse
-        #   config-file: "{package}/pyproject.toml"
-
-              #- name: Manual build
-              #  if: ${{ !cancelled() }}
-              #  env:
-              #      BOOST_ROOT: ${{ steps.install-boost.outputs.BOOST_ROOT }}
-              #  run: |
-              #    python -m pip wheel ${{github.workspace}} -w dist -vvv --config-settings builddir=${{github.workspace}}\build
-
-              #- name: Upload meson-python install plan
-              #  if: ${{ !cancelled() }}
-              #  uses: actions/upload-artifact@v4
-              #  with:
-              #    name: install-plan-${{ matrix.os }}-${{ strategy.job-index }}
-              #    path: ${{github.workspace}}\build\meson-info\intro-install_plan.json
 
       - name: Upload wheels
         uses: actions/upload-artifact@v4
         with:
-          name: cibw-wheels-${{ matrix.os }}-${{ strategy.job-index }}
+          name: wheels-${{ matrix.os }}
           path: ./wheelhouse/*.whl
+
+  test:
+    name: Test ${{ matrix.os }} py${{ matrix.python-version }} numpy${{ matrix.numpy }}
+    needs: build
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-2022, macos-15-intel, macos-14]
+        python-version: ['3.11', '3.12', '3.13', '3.14']
+        numpy: ['1', '2']
+        exclude:
+          # numpy 1.26 has no cp313/cp314 wheels.
+          - python-version: '3.13'
+            numpy: '1'
+          - python-version: '3.14'
+            numpy: '1'
+
+    steps:
+      - name: Download wheels
+        uses: actions/download-artifact@v4
+        with:
+          name: wheels-${{ matrix.os }}
+          path: wheelhouse
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install wheel + numpy ${{ matrix.numpy }} and run the test suite
+        shell: bash  # git-bash on Windows, so the glob + tr work on every OS.
+        run: |
+          # cp313 <- '3.13', etc. - picks this cell's wheel out of the artifact.
+          pytag=cp$(echo '${{ matrix.python-version }}' | tr -d .)
+          python -m pip install --upgrade pip
+          python -m pip install \
+            "numpy${{ matrix.numpy == '1' && '<2' || '>=2' }}" \
+            asteval pandas wheelhouse/*${pytag}*.whl
+          python -c "import numpy; print('numpy', numpy.__version__)"
+          # Mirror the [tool.cibuildwheel] test-command in pyproject.toml.
+          # pytest --pyargs astrowisp.tests is NOT equivalent: it collects only
+          # files matching test_*.py, so it silently skips the fit-star-shape
+          # tests, which live in test_fit_star_shape/noiseless_tests.py.
+          python -m astrowisp.tests.test_fake_image
+          python -m astrowisp.tests.test_piecewise_bicubic_psf
+          python -m astrowisp.tests.test_background
+          python -m astrowisp.tests.test_fit_star_shape.noiseless_tests
+          python -m astrowisp.tests.test_fistar
