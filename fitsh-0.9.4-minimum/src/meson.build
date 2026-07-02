@@ -48,12 +48,6 @@ fistar_src = [
   'magnitude.c'
 ]
 
-grcollect_src = [
-  'grcollect.c',
-  'cache.c',
-  'str.c'
-]
-
 math_dependence = meson.get_compiler('c').find_library('m', required : false)
 
 executable(
@@ -61,16 +55,6 @@ executable(
   fistar_src + common_src,
   include_directories: includedir,
   link_with: [psf_lib, fits_lib],
-  dependencies: math_dependence,
-  install: true,
-  install_dir: py.get_install_dir() / 'astrowisp'
-)
-
-executable (
-  'grcollect',
-  grcollect_src + common_src,
-  include_directories: includedir,
-  link_with: fits_lib,
   dependencies: math_dependence,
   install: true,
   install_dir: py.get_install_dir() / 'astrowisp'
