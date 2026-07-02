@@ -1,9 +1,17 @@
 name: Test wheels
 
-# Build and test an AstroWISP wheel, then run the installed test suite against
-# numpy 2. Starts with a single cell (ubuntu-latest, Python 3.13, numpy 2) as
-# the first step toward the full OS x Python x numpy matrix described in
-# numpy2_ci_plan.md. Manual-only, like build_wheels.yml.
+# Build an AstroWISP wheel, then install it on the runner host and run the
+# installed test suite against numpy 2. Starts with a single cell
+# (ubuntu-latest, Python 3.13, numpy 2) as the first step toward the full
+# OS x Python x numpy matrix described in numpy2_ci_plan.md. Manual-only,
+# like build_wheels.yml.
+#
+# The test runs on the *host* runner, not inside cibuildwheel's manylinux2014
+# container: modern scipy (a transitive AstroWISP dependency) ships cp313
+# wheels only for manylinux_2_28, which cannot install in the glibc-2.17
+# manylinux2014 image (pip would fall back to building scipy from source and
+# fail on the missing OpenBLAS). ubuntu-latest is new enough to install those
+# wheels directly. This is the "split build from test" design of the plan.
 on: [workflow_dispatch]
 
 jobs:
@@ -18,7 +26,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build & test wheels
+      - name: Build wheel
         uses: pypa/cibuildwheel@v3.0.0
         env:
             # cp313 only, for this first cell.
@@ -33,10 +41,21 @@ jobs:
               sed -i s/^mirrorlist=http/#mirrorlist=http/g /etc/yum.repos.d/CentOS-*.repo &&
               yum -y -v install boost boost-thread boost-devel
 
-            # Install numpy 2 + pytest into the per-wheel test venv and run the
-            # installed suite (import-based, so independent of the source tree).
-            CIBW_TEST_REQUIRES: pytest asteval pandas "numpy>=2"
-            CIBW_TEST_COMMAND: python -m pytest --pyargs astrowisp.tests
+            # No CIBW_TEST_*: testing happens on the host (see steps below) so
+            # transitive-dependency wheels (scipy) resolve against the runner's
+            # newer glibc instead of the manylinux2014 container.
+
+      - name: Set up Python 3.13 for testing
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install wheel + numpy 2 and run the test suite
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "numpy>=2" pytest asteval pandas wheelhouse/*.whl
+          python -c "import numpy; print('numpy', numpy.__version__)"
+          python -m pytest --pyargs astrowisp.tests
 
       - name: Upload wheels
         uses: actions/upload-artifact@v4
