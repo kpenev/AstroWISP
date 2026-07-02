@@ -1,40 +1,70 @@
 name: Test wheels
 
-# Linux slice of the OS x Python x numpy matrix from numpy2_ci_plan.md,
-# implemented as the plan's "split build from test" design:
+# Full OS x Python x numpy matrix from numpy2_ci_plan.md, implemented as the
+# plan's "split build from test" design:
 #
-#   * build  - one numpy-agnostic cibuildwheel run on ubuntu-latest produces
-#              the cp311..cp314 wheels (4 wheels) and uploads them as an
-#              artifact. AstroWISP talks to its C++ library through ctypes, not
-#              the numpy C-API, so a single wheel per Python runs under numpy 1
-#              *or* numpy 2 - the numpy axis lives only in the test job.
+#   * build - one numpy-agnostic cibuildwheel run per OS produces the
+#     cp311..cp314 wheels: 4 OS x 4 Python = 16 wheels. AstroWISP talks to its
+#     C++ library through ctypes, not the numpy C-API, so a single wheel per
+#     (OS, Python) runs under numpy 1 *or* numpy 2 - the numpy axis lives only
+#     in the test job. Per-OS Boost handling is carried over from
+#     build_wheels.yml (yum in the manylinux container on Linux,
+#     MarkusJx/install-boost on macOS/Windows).
 #
-#   * test   - fans those wheels out to the six valid (Python, numpy) cells:
+#   * test - fans those 16 wheels across the six valid (Python, numpy) cells on
+#     each of the 4 runner OSes = 24 environments:
 #
-#                Python | numpy 1 | numpy 2
-#                -------|---------|--------
-#                3.11   |   yes   |   yes
-#                3.12   |   yes   |   yes
-#                3.13   |    -    |   yes
-#                3.14   |    -    |   yes
+#         Python | numpy 1 | numpy 2
+#         -------|---------|--------
+#         3.11   |   yes   |   yes
+#         3.12   |   yes   |   yes
+#         3.13   |    -    |   yes
+#         3.14   |    -    |   yes
 #
-#              The numpy-1 x {3.13, 3.14} cells are excluded: numpy 1.26 (the
-#              last 1.x) ships no cp313/cp314 wheels.
+#     The numpy-1 x {3.13, 3.14} cells are excluded: numpy 1.26 (the last 1.x)
+#     ships no cp313/cp314 wheels.
 #
-# Tests run on the *host* runner, not inside cibuildwheel's manylinux2014
-# container: modern scipy (a transitive AstroWISP dependency) ships cp313+
-# wheels only for manylinux_2_28, which cannot install in the glibc-2.17
-# manylinux2014 image (pip would fall back to building scipy from source and
-# fail on the missing OpenBLAS). ubuntu-latest is new enough to install those
-# wheels directly. Manual-only, like build_wheels.yml.
+# Tests run on the *host* runner, not inside cibuildwheel's build container:
+# modern scipy (a transitive AstroWISP dependency) ships cp313+ wheels only for
+# manylinux_2_28, which cannot install in the glibc-2.17 manylinux2014 image
+# (pip would fall back to building scipy from source and fail on the missing
+# OpenBLAS). The runner hosts are new enough to install those wheels directly,
+# and the wheels bundle their native deps (Boost) via delocate/delvewheel/
+# auditwheel, so no Boost install is needed in the test job. Manual-only, like
+# build_wheels.yml.
 on: [workflow_dispatch]
 
 jobs:
   build:
-    name: Build Linux wheels (cp311-cp314)
-    runs-on: ubuntu-latest
+    name: Build wheels on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        # macos-13 is Intel (x86_64), macos-14 is Apple silicon (arm64).
+        os: [ubuntu-latest, windows-2022, macos-13, macos-14]
+
     steps:
       - uses: actions/checkout@v4
+
+      - name: Detect Boost platform (macos-13)
+        if: ${{ matrix.os == 'macos-13' }}
+        run: echo "BOOST_PLATFORM=10.15" >> "$GITHUB_ENV"
+
+      - name: Detect Boost platform (macos-14)
+        if: ${{ matrix.os == 'macos-14' }}
+        run: echo "BOOST_PLATFORM=14" >> "$GITHUB_ENV"
+
+      - name: Install Boost (macOS/Windows)
+        if: ${{ startsWith(matrix.os, 'mac') || startsWith(matrix.os, 'windows') }}
+        id: install-boost
+        uses: MarkusJx/install-boost@v2
+        with:
+            boost_version: ${{ matrix.os == 'macos-13' && '1.79.0' || '1.81.0' }}
+            platform_version: ${{ startsWith(matrix.os, 'windows') && '2022' || env.BOOST_PLATFORM }}
+            toolset: ${{ startsWith(matrix.os, 'mac') && 'clang' || 'mingw' }}
+            arch: ${{ matrix.os == 'macos-14' && 'aarch64' || 'x86' }}
+            boost_install_dir: ${{ github.workspace }}/external
 
       - name: Build wheels
         # 4.x is post-3.14-stable, so cp314-* is a normal build target (no
@@ -45,12 +75,14 @@ jobs:
             CIBW_BUILD: cp311-* cp312-* cp313-* cp314-*
 
             # Skip cibuildwheel's in-container test (configured via
-            # [tool.cibuildwheel] test-command in pyproject.toml). That test
-            # installs the wheel inside the manylinux2014 image, where scipy
-            # has no cp313+ wheel; the test job below runs on the host instead.
+            # [tool.cibuildwheel] test-command in pyproject.toml). The test job
+            # below runs the suite on the host so scipy's cp313+ wheels resolve.
             CIBW_TEST_SKIP: "*"
 
-            # Reuse the proven manylinux2014 + CentOS-vault Boost install path
+            MACOSX_DEPLOYMENT_TARGET: ${{ matrix.os == 'macos-14' && '14.0' || '10.15' }}
+            BOOST_ROOT: ${{ steps.install-boost.outputs.BOOST_ROOT }}
+
+            # Linux: reuse the manylinux2014 + CentOS-vault Boost install path
             # from build_wheels.yml (CentOS 7 repos moved to vault after EOL).
             CIBW_MANYLINUX_X86_64_IMAGE: manylinux2014
             CIBW_BEFORE_BUILD_LINUX: >
@@ -59,19 +91,32 @@ jobs:
               sed -i s/^mirrorlist=http/#mirrorlist=http/g /etc/yum.repos.d/CentOS-*.repo &&
               yum -y -v install boost boost-thread boost-devel
 
+            # Windows: delvewheel bundles the Boost DLLs into the wheel so the
+            # host test job can import the extension without Boost installed.
+            CIBW_BEFORE_BUILD_WINDOWS: pip install wheel delvewheel
+            CIBW_REPAIR_WHEEL_COMMAND_WINDOWS: >
+              delvewheel repair --add-path "$BOOST_ROOT/lib"
+              --wheel-dir {dest_dir} {wheel}
+
+            # macOS: delocate bundles the Boost dylibs into the wheel.
+            CIBW_REPAIR_WHEEL_COMMAND_MACOS: >
+              DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:$BOOST_ROOT/lib delocate-listdeps {wheel} &&
+              DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:$BOOST_ROOT/lib delocate-wheel --require-archs {delocate_archs} -w {dest_dir} {wheel}
+
       - name: Upload wheels
         uses: actions/upload-artifact@v4
         with:
-          name: linux-wheels
+          name: wheels-${{ matrix.os }}
           path: ./wheelhouse/*.whl
 
   test:
-    name: Test py${{ matrix.python-version }} numpy${{ matrix.numpy }}
+    name: Test ${{ matrix.os }} py${{ matrix.python-version }} numpy${{ matrix.numpy }}
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
+        os: [ubuntu-latest, windows-2022, macos-13, macos-14]
         python-version: ['3.11', '3.12', '3.13', '3.14']
         numpy: ['1', '2']
         exclude:
@@ -85,7 +130,7 @@ jobs:
       - name: Download wheels
         uses: actions/download-artifact@v4
         with:
-          name: linux-wheels
+          name: wheels-${{ matrix.os }}
           path: wheelhouse
 
       - name: Set up Python ${{ matrix.python-version }}
@@ -94,6 +139,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Install wheel + numpy ${{ matrix.numpy }} and run the test suite
+        shell: bash  # git-bash on Windows, so the glob + tr work on every OS.
         run: |
           # cp313 <- '3.13', etc. - picks this cell's wheel out of the artifact.
           pytag=cp$(echo '${{ matrix.python-version }}' | tr -d .)
