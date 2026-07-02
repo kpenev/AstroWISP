@@ -59,9 +59,17 @@ jobs:
       - name: Install wheel + numpy 2 and run the test suite
         run: |
           python -m pip install --upgrade pip
-          python -m pip install "numpy>=2" pytest asteval pandas wheelhouse/*.whl
+          python -m pip install "numpy>=2" asteval pandas wheelhouse/*.whl
           python -c "import numpy; print('numpy', numpy.__version__)"
-          python -m pytest --pyargs astrowisp.tests
+          # Mirror the [tool.cibuildwheel] test-command in pyproject.toml.
+          # pytest --pyargs astrowisp.tests is NOT equivalent: it collects only
+          # files matching test_*.py, so it silently skips the fit-star-shape
+          # tests, which live in test_fit_star_shape/noiseless_tests.py.
+          python -m astrowisp.tests.test_fake_image
+          python -m astrowisp.tests.test_piecewise_bicubic_psf
+          python -m astrowisp.tests.test_background
+          python -m astrowisp.tests.test_fit_star_shape.noiseless_tests
+          python -m astrowisp.tests.test_fistar
 
       - name: Upload wheels
         uses: actions/upload-artifact@v4
