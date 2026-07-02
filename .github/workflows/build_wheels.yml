@@ -1,4 +1,4 @@
-name: Test wheels
+name: Build wheels
 
 # Full OS x Python x numpy matrix from numpy2_ci_plan.md, implemented as the
 # plan's "split build from test" design:
