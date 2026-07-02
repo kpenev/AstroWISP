@@ -48,9 +48,7 @@ jobs:
       fail-fast: false
       matrix:
         # macos-15-intel is Intel (x86_64), macos-14 is Apple silicon (arm64).
-        # Full grid (restore after the Windows smoke test):
-        # os: [ubuntu-latest, windows-2022, macos-15-intel, macos-14]
-        os: [windows-2022]
+        os: [ubuntu-latest, windows-2022, macos-15-intel, macos-14]
 
     steps:
       - uses: actions/checkout@v4
@@ -81,9 +79,7 @@ jobs:
         uses: pypa/cibuildwheel@v4.1.0
         env:
             # One wheel per Python; numpy is not a build dependency (ctypes).
-            # Full build (restore after the Windows smoke test):
-            # CIBW_BUILD: cp311-* cp312-* cp313-* cp314-*
-            CIBW_BUILD: cp313-*
+            CIBW_BUILD: cp311-* cp312-* cp313-* cp314-*
 
             # Skip cibuildwheel's in-container test (configured via
             # [tool.cibuildwheel] test-command in pyproject.toml). The test job
@@ -131,13 +127,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # Full grid (restore after the Windows smoke test):
-        # os: [ubuntu-latest, windows-2022, macos-15-intel, macos-14]
-        # python-version: ['3.11', '3.12', '3.13', '3.14']
-        # numpy: ['1', '2']
-        os: [windows-2022]
-        python-version: ['3.13']
-        numpy: ['2']
+        os: [ubuntu-latest, windows-2022, macos-15-intel, macos-14]
+        python-version: ['3.11', '3.12', '3.13', '3.14']
+        numpy: ['1', '2']
         exclude:
           # numpy 1.26 has no cp313/cp314 wheels.
           - python-version: '3.13'
