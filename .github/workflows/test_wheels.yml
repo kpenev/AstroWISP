@@ -104,13 +104,14 @@ jobs:
               sed -i s/^mirrorlist=http/#mirrorlist=http/g /etc/yum.repos.d/CentOS-*.repo &&
               yum -y -v install boost boost-thread boost-devel
 
-            # Windows: no wheel repair. meson links the extension statically
-            # (prefer_static=true plus -static-libgcc/-static-libstdc++ in
-            # meson.build), so libastrowisp.dll is self-contained - this is the
-            # recipe that shipped working Windows wheels at the last release.
-            # Running delvewheel here actually breaks that wheel (its DLL
-            # name-mangling), so leave CIBW_REPAIR_WHEEL_COMMAND_WINDOWS unset
-            # (cibuildwheel does no Windows repair by default).
+            # Windows: the wheel-repair recipe lives in pyproject.toml
+            # ([tool.cibuildwheel.windows] repair-wheel-command: strip ->
+            # copy .dll to .pyd -> delvewheel repair -> rename back) - the recipe
+            # that shipped working Windows wheels at the last release. Do NOT set
+            # CIBW_REPAIR_WHEEL_COMMAND_WINDOWS here: an override replaces that
+            # recipe with a broken one. This before-build install just provides
+            # the `wheel` and `delvewheel` CLIs the pyproject recipe invokes.
+            CIBW_BEFORE_BUILD_WINDOWS: pip install wheel delvewheel
 
             # macOS: delocate bundles the Boost dylibs into the wheel.
             CIBW_REPAIR_WHEEL_COMMAND_MACOS: >
