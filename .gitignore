@@ -14,3 +14,4 @@ doc_src
 *.whl
 PythonPackage/astrowisp/tests/test_data/test_stat_grcollect.csv
 .idea
+.DS_Store
