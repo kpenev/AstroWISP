@@ -48,7 +48,9 @@ jobs:
       fail-fast: false
       matrix:
         # macos-15-intel is Intel (x86_64), macos-14 is Apple silicon (arm64).
-        os: [ubuntu-latest, windows-2022, macos-15-intel, macos-14]
+        # Full grid (restore after the Windows smoke test):
+        # os: [ubuntu-latest, windows-2022, macos-15-intel, macos-14]
+        os: [windows-2022]
 
     steps:
       - uses: actions/checkout@v4
@@ -79,7 +81,9 @@ jobs:
         uses: pypa/cibuildwheel@v4.1.0
         env:
             # One wheel per Python; numpy is not a build dependency (ctypes).
-            CIBW_BUILD: cp311-* cp312-* cp313-* cp314-*
+            # Full build (restore after the Windows smoke test):
+            # CIBW_BUILD: cp311-* cp312-* cp313-* cp314-*
+            CIBW_BUILD: cp313-*
 
             # Skip cibuildwheel's in-container test (configured via
             # [tool.cibuildwheel] test-command in pyproject.toml). The test job
@@ -100,12 +104,13 @@ jobs:
               sed -i s/^mirrorlist=http/#mirrorlist=http/g /etc/yum.repos.d/CentOS-*.repo &&
               yum -y -v install boost boost-thread boost-devel
 
-            # Windows: delvewheel bundles the Boost DLLs into the wheel so the
-            # host test job can import the extension without Boost installed.
-            CIBW_BEFORE_BUILD_WINDOWS: pip install wheel delvewheel
-            CIBW_REPAIR_WHEEL_COMMAND_WINDOWS: >
-              delvewheel repair --add-path "$BOOST_ROOT/lib"
-              --wheel-dir {dest_dir} {wheel}
+            # Windows: no wheel repair. meson links the extension statically
+            # (prefer_static=true plus -static-libgcc/-static-libstdc++ in
+            # meson.build), so libastrowisp.dll is self-contained - this is the
+            # recipe that shipped working Windows wheels at the last release.
+            # Running delvewheel here actually breaks that wheel (its DLL
+            # name-mangling), so leave CIBW_REPAIR_WHEEL_COMMAND_WINDOWS unset
+            # (cibuildwheel does no Windows repair by default).
 
             # macOS: delocate bundles the Boost dylibs into the wheel.
             CIBW_REPAIR_WHEEL_COMMAND_MACOS: >
@@ -125,9 +130,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-2022, macos-15-intel, macos-14]
-        python-version: ['3.11', '3.12', '3.13', '3.14']
-        numpy: ['1', '2']
+        # Full grid (restore after the Windows smoke test):
+        # os: [ubuntu-latest, windows-2022, macos-15-intel, macos-14]
+        # python-version: ['3.11', '3.12', '3.13', '3.14']
+        # numpy: ['1', '2']
+        os: [windows-2022]
+        python-version: ['3.13']
+        numpy: ['2']
         exclude:
           # numpy 1.26 has no cp313/cp314 wheels.
           - python-version: '3.13'
