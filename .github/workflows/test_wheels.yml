@@ -1,0 +1,45 @@
+name: Test wheels
+
+# Build and test an AstroWISP wheel, then run the installed test suite against
+# numpy 2. Starts with a single cell (ubuntu-latest, Python 3.13, numpy 2) as
+# the first step toward the full OS x Python x numpy matrix described in
+# numpy2_ci_plan.md. Manual-only, like build_wheels.yml.
+on: [workflow_dispatch]
+
+jobs:
+  build_and_test:
+    name: Build & test on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build & test wheels
+        uses: pypa/cibuildwheel@v3.0.0
+        env:
+            # cp313 only, for this first cell.
+            CIBW_BUILD: cp313-*
+
+            # Reuse the proven manylinux2014 + CentOS-vault Boost install path
+            # from build_wheels.yml (CentOS 7 repos moved to vault after EOL).
+            CIBW_MANYLINUX_X86_64_IMAGE: manylinux2014
+            CIBW_BEFORE_BUILD_LINUX: >
+              sed -i s/mirror.centos.org/vault.centos.org/g /etc/yum.repos.d/CentOS-*.repo &&
+              sed -i s/^#.*baseurl=http/baseurl=http/g /etc/yum.repos.d/CentOS-*.repo &&
+              sed -i s/^mirrorlist=http/#mirrorlist=http/g /etc/yum.repos.d/CentOS-*.repo &&
+              yum -y -v install boost boost-thread boost-devel
+
+            # Install numpy 2 + pytest into the per-wheel test venv and run the
+            # installed suite (import-based, so independent of the source tree).
+            CIBW_TEST_REQUIRES: pytest asteval pandas "numpy>=2"
+            CIBW_TEST_COMMAND: python -m pytest --pyargs astrowisp.tests
+
+      - name: Upload wheels
+        uses: actions/upload-artifact@v4
+        with:
+          name: cibw-wheels-${{ matrix.os }}-cp313
+          path: ./wheelhouse/*.whl
