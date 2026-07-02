@@ -32,6 +32,12 @@ jobs:
             # cp313 only, for this first cell.
             CIBW_BUILD: cp313-*
 
+            # Skip cibuildwheel's in-container test (configured via
+            # [tool.cibuildwheel] test-command in pyproject.toml). That test
+            # installs the wheel inside the manylinux2014 image, where scipy
+            # has no cp313 wheel; we test on the host instead (steps below).
+            CIBW_TEST_SKIP: "*"
+
             # Reuse the proven manylinux2014 + CentOS-vault Boost install path
             # from build_wheels.yml (CentOS 7 repos moved to vault after EOL).
             CIBW_MANYLINUX_X86_64_IMAGE: manylinux2014
