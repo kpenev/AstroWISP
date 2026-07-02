@@ -37,7 +37,9 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Build wheels
-        uses: pypa/cibuildwheel@v3.0.0
+        # 4.x is post-3.14-stable, so cp314-* is a normal build target (no
+        # cpython-prerelease enable) and the manylinux image ships stable 3.14.
+        uses: pypa/cibuildwheel@v4.1.0
         env:
             # One wheel per Python; numpy is not a build dependency (ctypes).
             CIBW_BUILD: cp311-* cp312-* cp313-* cp314-*
