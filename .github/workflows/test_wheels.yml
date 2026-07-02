@@ -24,6 +24,12 @@ name: Test wheels
 #     The numpy-1 x {3.13, 3.14} cells are excluded: numpy 1.26 (the last 1.x)
 #     ships no cp313/cp314 wheels.
 #
+# Intel macOS runs on macos-15-intel: macos-13 (the old Intel image) was retired
+# in Dec 2025. MarkusJx/install-boost has no x86_64 Boost for macOS 15 (15 is
+# arm64-only), so the Intel runner installs the macOS-13-target x86_64 Boost
+# (platform_version 13, the newest x86 prebuilt), which loads fine on a macOS 15
+# Intel host.
+#
 # Tests run on the *host* runner, not inside cibuildwheel's build container:
 # modern scipy (a transitive AstroWISP dependency) ships cp313+ wheels only for
 # manylinux_2_28, which cannot install in the glibc-2.17 manylinux2014 image
@@ -32,6 +38,11 @@ name: Test wheels
 # and the wheels bundle their native deps (Boost) via delocate/delvewheel/
 # auditwheel, so no Boost install is needed in the test job. Manual-only, like
 # build_wheels.yml.
+#
+# NOTE: the matrices below are temporarily reduced to a single smoke-test cell
+# (macos-15-intel, Python 3.13, numpy 2) to validate the new Intel-mac Boost
+# path before spending the full grid. The full lists are kept in adjacent
+# comments - restore them once this cell is green.
 on: [workflow_dispatch]
 
 jobs:
@@ -41,17 +52,20 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # macos-13 is Intel (x86_64), macos-14 is Apple silicon (arm64).
-        os: [ubuntu-latest, windows-2022, macos-13, macos-14]
+        # macos-15-intel is Intel (x86_64), macos-14 is Apple silicon (arm64).
+        # Full grid (restore after the Intel-mac smoke test):
+        # os: [ubuntu-latest, windows-2022, macos-15-intel, macos-14]
+        os: [macos-15-intel]
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Detect Boost platform (macos-13)
-        if: ${{ matrix.os == 'macos-13' }}
-        run: echo "BOOST_PLATFORM=10.15" >> "$GITHUB_ENV"
+      - name: Detect Boost platform (Intel macOS)
+        if: ${{ matrix.os == 'macos-15-intel' }}
+        # Newest x86_64 Boost prebuilt targets macOS 13; it runs on macOS 15.
+        run: echo "BOOST_PLATFORM=13" >> "$GITHUB_ENV"
 
-      - name: Detect Boost platform (macos-14)
+      - name: Detect Boost platform (Apple-silicon macOS)
         if: ${{ matrix.os == 'macos-14' }}
         run: echo "BOOST_PLATFORM=14" >> "$GITHUB_ENV"
 
@@ -60,7 +74,7 @@ jobs:
         id: install-boost
         uses: MarkusJx/install-boost@v2
         with:
-            boost_version: ${{ matrix.os == 'macos-13' && '1.79.0' || '1.81.0' }}
+            boost_version: ${{ matrix.os == 'macos-15-intel' && '1.89.0' || '1.81.0' }}
             platform_version: ${{ startsWith(matrix.os, 'windows') && '2022' || env.BOOST_PLATFORM }}
             toolset: ${{ startsWith(matrix.os, 'mac') && 'clang' || 'mingw' }}
             arch: ${{ matrix.os == 'macos-14' && 'aarch64' || 'x86' }}
@@ -72,14 +86,18 @@ jobs:
         uses: pypa/cibuildwheel@v4.1.0
         env:
             # One wheel per Python; numpy is not a build dependency (ctypes).
-            CIBW_BUILD: cp311-* cp312-* cp313-* cp314-*
+            # Full build (restore after the Intel-mac smoke test):
+            # CIBW_BUILD: cp311-* cp312-* cp313-* cp314-*
+            CIBW_BUILD: cp313-*
 
             # Skip cibuildwheel's in-container test (configured via
             # [tool.cibuildwheel] test-command in pyproject.toml). The test job
             # below runs the suite on the host so scipy's cp313+ wheels resolve.
             CIBW_TEST_SKIP: "*"
 
-            MACOSX_DEPLOYMENT_TARGET: ${{ matrix.os == 'macos-14' && '14.0' || '10.15' }}
+            # macos-14 -> 14.0, macos-15-intel -> 13.0 (matches the x86 Boost
+            # target), everything else -> 10.15.
+            MACOSX_DEPLOYMENT_TARGET: ${{ matrix.os == 'macos-14' && '14.0' || matrix.os == 'macos-15-intel' && '13.0' || '10.15' }}
             BOOST_ROOT: ${{ steps.install-boost.outputs.BOOST_ROOT }}
 
             # Linux: reuse the manylinux2014 + CentOS-vault Boost install path
@@ -116,9 +134,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-2022, macos-13, macos-14]
-        python-version: ['3.11', '3.12', '3.13', '3.14']
-        numpy: ['1', '2']
+        # Full grid (restore after the Intel-mac smoke test):
+        # os: [ubuntu-latest, windows-2022, macos-15-intel, macos-14]
+        # python-version: ['3.11', '3.12', '3.13', '3.14']
+        # numpy: ['1', '2']
+        os: [macos-15-intel]
+        python-version: ['3.13']
+        numpy: ['2']
         exclude:
           # numpy 1.26 has no cp313/cp314 wheels.
           - python-version: '3.13'
