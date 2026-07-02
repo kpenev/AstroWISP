@@ -237,7 +237,8 @@ class FitStarShape:
                 b'psf.bicubic.grid',
                 (
                     ','.join(map(str, grid)) if isinstance(grid[0], Number)
-                    else ';'.join([','.join(map(repr, grid_part))
+                    else ';'.join([','.join(repr(float(value))
+                                            for value in grid_part)
                                    for grid_part in grid])
                 ).encode('ascii')
             )
