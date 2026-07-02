@@ -1,41 +1,51 @@
 name: Test wheels
 
-# Build an AstroWISP wheel, then install it on the runner host and run the
-# installed test suite against numpy 2. Starts with a single cell
-# (ubuntu-latest, Python 3.13, numpy 2) as the first step toward the full
-# OS x Python x numpy matrix described in numpy2_ci_plan.md. Manual-only,
-# like build_wheels.yml.
+# Linux slice of the OS x Python x numpy matrix from numpy2_ci_plan.md,
+# implemented as the plan's "split build from test" design:
 #
-# The test runs on the *host* runner, not inside cibuildwheel's manylinux2014
-# container: modern scipy (a transitive AstroWISP dependency) ships cp313
+#   * build  - one numpy-agnostic cibuildwheel run on ubuntu-latest produces
+#              the cp311..cp314 wheels (4 wheels) and uploads them as an
+#              artifact. AstroWISP talks to its C++ library through ctypes, not
+#              the numpy C-API, so a single wheel per Python runs under numpy 1
+#              *or* numpy 2 - the numpy axis lives only in the test job.
+#
+#   * test   - fans those wheels out to the six valid (Python, numpy) cells:
+#
+#                Python | numpy 1 | numpy 2
+#                -------|---------|--------
+#                3.11   |   yes   |   yes
+#                3.12   |   yes   |   yes
+#                3.13   |    -    |   yes
+#                3.14   |    -    |   yes
+#
+#              The numpy-1 x {3.13, 3.14} cells are excluded: numpy 1.26 (the
+#              last 1.x) ships no cp313/cp314 wheels.
+#
+# Tests run on the *host* runner, not inside cibuildwheel's manylinux2014
+# container: modern scipy (a transitive AstroWISP dependency) ships cp313+
 # wheels only for manylinux_2_28, which cannot install in the glibc-2.17
 # manylinux2014 image (pip would fall back to building scipy from source and
 # fail on the missing OpenBLAS). ubuntu-latest is new enough to install those
-# wheels directly. This is the "split build from test" design of the plan.
+# wheels directly. Manual-only, like build_wheels.yml.
 on: [workflow_dispatch]
 
 jobs:
-  build_and_test:
-    name: Build & test on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest]
-
+  build:
+    name: Build Linux wheels (cp311-cp314)
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build wheel
+      - name: Build wheels
         uses: pypa/cibuildwheel@v3.0.0
         env:
-            # cp313 only, for this first cell.
-            CIBW_BUILD: cp313-*
+            # One wheel per Python; numpy is not a build dependency (ctypes).
+            CIBW_BUILD: cp311-* cp312-* cp313-* cp314-*
 
             # Skip cibuildwheel's in-container test (configured via
             # [tool.cibuildwheel] test-command in pyproject.toml). That test
             # installs the wheel inside the manylinux2014 image, where scipy
-            # has no cp313 wheel; we test on the host instead (steps below).
+            # has no cp313+ wheel; the test job below runs on the host instead.
             CIBW_TEST_SKIP: "*"
 
             # Reuse the proven manylinux2014 + CentOS-vault Boost install path
@@ -47,19 +57,48 @@ jobs:
               sed -i s/^mirrorlist=http/#mirrorlist=http/g /etc/yum.repos.d/CentOS-*.repo &&
               yum -y -v install boost boost-thread boost-devel
 
-            # No CIBW_TEST_*: testing happens on the host (see steps below) so
-            # transitive-dependency wheels (scipy) resolve against the runner's
-            # newer glibc instead of the manylinux2014 container.
+      - name: Upload wheels
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-wheels
+          path: ./wheelhouse/*.whl
 
-      - name: Set up Python 3.13 for testing
+  test:
+    name: Test py${{ matrix.python-version }} numpy${{ matrix.numpy }}
+    needs: build
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.11', '3.12', '3.13', '3.14']
+        numpy: ['1', '2']
+        exclude:
+          # numpy 1.26 has no cp313/cp314 wheels.
+          - python-version: '3.13'
+            numpy: '1'
+          - python-version: '3.14'
+            numpy: '1'
+
+    steps:
+      - name: Download wheels
+        uses: actions/download-artifact@v4
+        with:
+          name: linux-wheels
+          path: wheelhouse
+
+      - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
-          python-version: '3.13'
+          python-version: ${{ matrix.python-version }}
 
-      - name: Install wheel + numpy 2 and run the test suite
+      - name: Install wheel + numpy ${{ matrix.numpy }} and run the test suite
         run: |
+          # cp313 <- '3.13', etc. - picks this cell's wheel out of the artifact.
+          pytag=cp$(echo '${{ matrix.python-version }}' | tr -d .)
           python -m pip install --upgrade pip
-          python -m pip install "numpy>=2" asteval pandas wheelhouse/*.whl
+          python -m pip install \
+            "numpy${{ matrix.numpy == '1' && '<2' || '>=2' }}" \
+            asteval pandas wheelhouse/*${pytag}*.whl
           python -c "import numpy; print('numpy', numpy.__version__)"
           # Mirror the [tool.cibuildwheel] test-command in pyproject.toml.
           # pytest --pyargs astrowisp.tests is NOT equivalent: it collects only
@@ -70,9 +109,3 @@ jobs:
           python -m astrowisp.tests.test_background
           python -m astrowisp.tests.test_fit_star_shape.noiseless_tests
           python -m astrowisp.tests.test_fistar
-
-      - name: Upload wheels
-        uses: actions/upload-artifact@v4
-        with:
-          name: cibw-wheels-${{ matrix.os }}-cp313
-          path: ./wheelhouse/*.whl
