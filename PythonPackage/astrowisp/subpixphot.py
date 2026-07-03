@@ -5,6 +5,7 @@ from ctypes import c_double, c_uint
 import numpy
 
 from astrowisp._initialize_library import get_astrowisp_library
+from astrowisp.utils import option_repr
 
 
 # This only makes sense as a class.
@@ -91,7 +92,9 @@ class SubPixPhot:
         if param_value[0] == "apertures":
             return (
                 b"ap.aperture",
-                b",".join([repr(ap).encode("ascii") for ap in param_value[1]]),
+                b",".join(
+                    [option_repr(ap).encode("ascii") for ap in param_value[1]]
+                ),
             )
 
         if param_value[0] == "const_error":
@@ -99,7 +102,7 @@ class SubPixPhot:
         else:
             param_name = param_value[0].replace("_", "-").encode("ascii")
 
-        return (param_name, repr(param_value[1]).encode("ascii"))
+        return (param_name, option_repr(param_value[1]).encode("ascii"))
 
     def __init__(self, **configuration):
         r"""

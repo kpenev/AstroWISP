@@ -14,6 +14,7 @@ import numpy
 
 from astrowisp._initialize_library import get_astrowisp_library
 from astrowisp.io_tree import IOTree
+from astrowisp.utils import option_repr
 
 class FitStarShape:
     #TODO fix this documentation
@@ -230,14 +231,14 @@ class FitStarShape:
 
         elif param_value[0] == 'cover_grid':
             return (b'src.cover-bicubic-grid',
-                    repr(param_value[1]).encode('ascii'))
+                    option_repr(param_value[1]).encode('ascii'))
         elif param_value[0] == 'grid':
             grid = param_value[1]
             return (
                 b'psf.bicubic.grid',
                 (
                     ','.join(map(str, grid)) if isinstance(grid[0], Number)
-                    else ';'.join([','.join(repr(float(value))
+                    else ';'.join([','.join(option_repr(value)
                                             for value in grid_part)
                                    for grid_part in grid])
                 ).encode('ascii')
@@ -248,7 +249,7 @@ class FitStarShape:
             return ()
         elif param_value[0] == 'pixel_rejection_threshold':
             return (b'psf.bicubic.pixrej',
-                    repr(param_value[1]).encode('ascii'))
+                    option_repr(param_value[1]).encode('ascii'))
         elif param_value[0] in ['max_iterations',
                                 'max_chi2',
                                 'min_convergence_rate']:
@@ -263,7 +264,7 @@ class FitStarShape:
             prefix + param_value[0].replace('_', '-').encode('ascii'),
             (
                 param_value[1] if isinstance(param_value[1], str)
-                else repr(param_value[1])
+                else option_repr(param_value[1])
             ).encode('ascii')
         )
     #pylint: enable=too-many-return-statements
