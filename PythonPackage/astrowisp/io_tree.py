@@ -22,6 +22,7 @@ from ctypes import\
 import numpy
 
 from astrowisp._initialize_library import get_astrowisp_library
+from astrowisp.utils import option_repr
 
 #Sufficient functionality to justify a class.
 #pylint: disable=too-few-public-methods
@@ -130,7 +131,12 @@ class IOTree:
                 result = result.decode()
             self._astrowisp_library.export_free(library_result.contents)
         else:
-            result = numpy.empty(shape=shape, dtype=dtype)
+            # shape=None denotes a scalar quantity (see docstring). NumPy 2
+            # rejects numpy.empty(shape=None) that NumPy 1 accepted, so map it
+            # to the equivalent 0-d shape ().
+            result = numpy.empty(
+                shape=() if shape is None else shape, dtype=dtype
+            )
 
             if dtype in self.type_string:
                 type_string_arg = self.type_string[dtype]
@@ -201,7 +207,7 @@ class IOTree:
 
             return ';'.join(
                 [
-                    ', '.join([repr(boundary) for boundary in sub_grid])
+                    ', '.join([option_repr(boundary) for boundary in sub_grid])
                     for sub_grid in grid
                 ]
             ).encode('ascii')
